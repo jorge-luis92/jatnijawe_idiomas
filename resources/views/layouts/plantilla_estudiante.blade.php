@@ -82,19 +82,36 @@
             <img src="logo.ico" width="30" height="30" class="d-inline-block align-top" alt="">
             Facultad de Idiomas
           </a>
+          <ul class="navbar-nav mr-auto">
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span style="color: #000000">Mi Perfil &nbsp;</span>
+                <img class="img-profile rounded-circle" style="width:30px; height: 30px;" src="image/foto.png">
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                  <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
+                  Configuración
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-black-400"></i>
+                  Cerrar Sesión
+                </a>
+              </div>
+            </li>
+
+          </ul>
   </nav>
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="opacity: 0.7;filter:alpha(opacity=5);background-color: #819FF7;">
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
+
           <!-- Topbar Navbar -->
           <ul class="navbar-nav mr-auto">
-            <a style="color: #000000">
-            </br>
-                <img src="logo.ico" width="40" height="40" class="d-inline-block align-top" alt="">
-                Facultad de Idiomas
-            </a>
 
             <div class="topbar-divider d-none d-sm-block"></div>
 
