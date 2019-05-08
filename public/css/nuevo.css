@@ -1,0 +1,67 @@
+#font2{
+  /*border:2px solid #827BE1;*/
+  border:2px solid #819FF7;
+  border-radius:40px 0 40px 0;
+  text-align: left;
+  box-shadow: 10px 10px 6px -5px rgba(11,23,59,1);
+  /*box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);*/
+}
+
+#font3{
+  /*border:2px solid #827BE1;*/
+  width: auto;
+  background: #F6CEF5;
+  border:1px solid #819FF7;
+  border-radius:40px 0 40px 0;
+  text-align: left;
+  box-shadow: 10px 10px 6px -5px rgba(11,23,59,1);
+  /*box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);*/
+
+}
+#labels{
+  color: #000000;
+}
+
+div#banner{
+	width:auto%;
+
+}
+
+img#img_banner{
+	position:relative;
+	display: block;
+	margin:auto;
+  min-width: 100px;
+	max-width: 300px;
+}
+
+
+.nota {
+  align: left;
+  background: #F6CEF5;
+  max-width: 440px;
+  margin: 0 auto 30px;
+  padding: 4px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+
+.nota_alumno {
+  align: center;
+  background: #F6CEF5;
+  max-width: 450px;
+  margin: 0 auto 30px;
+  padding: 6px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #0B173B;
+    color: #fff;
+    transition: all 0.3s;
+}
