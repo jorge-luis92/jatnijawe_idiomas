@@ -70,6 +70,7 @@
 
     </ul> <!-- End of Sidebar -->
     <!-- Content Wrapper -->
+
     <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos.png'); background-color: #FFFFFF;"> <!-- Main Content -->
       <div id="content" style="padding: 2.2rem;" > <!-- Topbar -->
         <div class="container">
@@ -107,6 +108,7 @@
             </li>
 
           </ul>
+
   </nav>
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="opacity: 0.7;filter:alpha(opacity=5);background-color: #819FF7;">
 
@@ -150,6 +152,7 @@
       <!-- End of Footer -->
 
     </div>
+
     <!-- End of Content Wrapper -->
 
   </div>
