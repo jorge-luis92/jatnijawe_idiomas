@@ -46,6 +46,21 @@ img#img_banner{
 }
 
 
+#centrador{
+  position: relative;
+  width: 400px;
+  height: 400px;
+  background-color: red;
+}
+
+#imagen{
+   position: absolute;
+   top: 0;
+   left: 0s;
+   right: 0;
+   bottom: 0;
+   margin: auto;
+}
 .nota_alumno {
   align: center;
   background: #F6CEF5;

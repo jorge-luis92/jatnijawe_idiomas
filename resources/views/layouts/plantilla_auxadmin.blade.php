@@ -14,7 +14,7 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/nuevo.css">
-  <title>Estudiante @yield('title')</title>
+  <title>Auxiliar Administrativo @yield('title')</title>
 
 </head>
 
@@ -24,83 +24,38 @@
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
         <a class="nav-link" href={{ route('home_estudiante')}}>
-          <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.9em">Jat Nijawe</span></a></li><!-- Divider -->
+          <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.5em">Jat Nijawe</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
-      <div class="sidebar-heading" style="color: blue">
-        Servicios
+      <div class="sidebar-heading" style="color: #FFFFFF">
+        Gestión
       </div><!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#datos_estudiante" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-upload"></i><span style="font-size: 0.8em;">&nbsp;Actualización de Datos</span>
+          <i class="fas fa-upload"></i><span style="font-size: 0.9em;">&nbsp;Estudiantes</span>
         </a>
         <div id="datos_estudiante" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" data-toggle="modal" href="#datos_generales_uno"  aria-haspopup="true" aria-expanded="false">Datos Generales</a>
-            <a class="collapse-item" data-toggle="modal" href="#datos_personales_dos" aria-haspopup="true" aria-expanded="false">Datos Personales</a>
-            <a class="collapse-item" data-toggle="modal" href="#datos_laborales_tres" aria-haspopup="true" aria-expanded="false">Datos Laborales</a>
-            <a class="collapse-item" data-toggle="modal" href="#datos_medicos_cuatro" aria-haspopup="true" aria-expanded="false">Datos Médicos</a>
-            <a class="collapse-item" data-toggle="modal" href="#des_hoja" aria-haspopup="true" aria-expanded="false">Descargar Hoja de Datos </br> Personales</a>
-
+            <a class="collapse-item" data-toggle="modal" href="#datos_generales_uno"  aria-haspopup="true" aria-expanded="false">Carga de datos</a>
+            <a class="collapse-item" data-toggle="modal" href="#datos_personales_dos" aria-haspopup="true" aria-expanded="false">Registro de Estudiantes</a>
           </div>
         </div>
       </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#activid_extra" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fa fa-list"></i><span style="font-size: 0.8em;">&nbsp;Formación Integral</span>
-        </a>
-        <div id="activid_extra" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item" href="#">Convocatoria</a>
-            <a  class="collapse-item" href="#">Mis Actividades </br> Extraescolares</a>
-            <a  class="collapse-item" href="#">Avance de Horas</a>
-            <a  class="collapse-item" href="#">Solicitud Actividades </br> Extraescolares</a>
-          </div>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#prac_prof" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fa fa-book fa-1x fa-fw"></i><span style="font-size: 0.8em;">&nbsp;Prácticas Profesionales</span>
-        </a>
-        <div id="prac_prof" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item" href="#">Requisitos Previos</a>
-            <a  class="collapse-item" href="#">Solicitud de Prácticas</br>Profesionales</a>
-            </div>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#serv_social" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fa fa-blind fa-1x fa-fw"></i><span style="font-size: 0.8em;">&nbsp;Servicio Social</span>
-        </a>
-        <div id="serv_social" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item" href="#">Requisitos Previos</a>
-            <a  class="collapse-item" href="#">Solicitud de Servicio Social</a>
-          </div>
-        </div>
-      </li>
-      <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
-      <!-- Sidebar Toggler (Sidebar) -->
-      <!-- Heading -->
-      <div class="sidebar-heading" style="color: #FFFFFF">
+        <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
+<!-- Sidebar Toggler (Sidebar) -->
+    <!-- Heading -->
+    <div class="sidebar-heading" style="color: #FFFFFF">
       Utilidades
-      </div>
+    </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
       <a class="nav-link" href="#" aria-expanded="true">
-      <i class="fas fa-fw fa-archive"></i>
-      <span style="font-size: 0.9em;">Manual de Usuario</span>
+        <i class="fas fa-fw fa-archive"></i>
+        <span style="font-size: 0.9em;">Manual de Usuario</span>
       </a>
-      </li>     <!-- Sidebar Toggler (Sidebar) -->
+    </li>
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
 
@@ -129,7 +84,7 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small">Jorge Luis</span>
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small">Aux Admin</span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->
