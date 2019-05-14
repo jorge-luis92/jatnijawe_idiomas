@@ -6,6 +6,16 @@ use Illuminate\Http\Request;
 
 class EstudianteController extends Controller
 {
+    /*public function index(){
+      return view('estudiante.home_estudiante');
+    }*/
+
+    public function Index(){
+    
+       return view::make('estudiante.home_estudiante');
+    }
+
+
     public function inicio_estudiante(){
       return view('estudiante.home_estudiante');
     }

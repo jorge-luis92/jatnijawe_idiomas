@@ -6,7 +6,7 @@ Route::get('prueba', 'Homepag@pruebas')->name('prueba');
 /* Rutas de Estudiante---*/
 Route::get('login_studiante', 'Estudiante_Con\EstudianteController@loginestudiantes')->name('login_studiante');
 Route::get('estudiante_perfil', 'Estudiante_Con\EstudianteController@homes_estudiante')->name('estudiante_perfil');
-Route::get('home_estudiante', 'Estudiante_Con\EstudianteController@inicio_estudiante')->name('home_estudiante');
+//Route::get('home_estudiante', 'Estudiante_Con\EstudianteController@inicio_estudiante')->name('home_estudiante');
 Route::get('homedos', 'Estudiante_Con\EstudianteController@home_estudiante_dos')->name('homedos');
 Route::get('hoja_datos_personales', 'Estudiante_Con\EstudianteController@datos')->name('hoja_datos_personales');
 /* endroutes Estudiante---*/
@@ -31,4 +31,18 @@ Route::get('login_tallerista', 'Tallerista_Con\TalleristaController@logintalleri
 /* Rutas de Coordinadores---*/
 /* endroutes Coordinadores---*/
 
-Route::get('base', 'Homepag@bases')->name('base');
+Route::get('home_estudiante', 'Estudiante_Con\EstudianteController@inicio_estudiante')->name('home_estudiante');
+
+// Registration routes...
+Route::get('register', 'Auth\AuthController@getRegister');
+Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);
+//Route::get('home_estudiante', 'HomeController@index');
+Route::get('login', 'HomeController@index');
+
+
+Route::get('home', 'HomeController@index')->name('home_estudiante');
+Route::get('home_estudiante', function () {
+})->middleware('auth');
+
+Route::get('generate-pdf','HomeController@generatePDF');
+Auth::routes();

@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -26,7 +27,7 @@
         <a class="nav-link" href={{ route('home_estudiante')}}>
           <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.9em">Jat Nijawe</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
-      <div class="sidebar-heading" style="color: blue">
+      <div class="sidebar-heading" style="color: #000000: blue">
         Servicios
       </div><!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item" >
@@ -129,7 +130,7 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small">Jorge Luis</span>
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} </span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->
@@ -185,7 +186,11 @@
         <div class="modal-body">Presione "Finalizar Sesión" para confirmar.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="login.html">Finalizar Sesión</a>
+          <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form>
         </div>
       </div>
     </div>
