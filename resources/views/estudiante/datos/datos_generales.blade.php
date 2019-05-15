@@ -15,6 +15,7 @@
       <div class="form-row">
 
         <div class="form-group col-md-3" style="width: 4rem;" >
+          <span>* </span>
           <img class="card-img-top" src="image/foto.png" alt="Card image cap">
              <input type="file" accept="image/png, .jpeg, .jpg" required>
         </div>

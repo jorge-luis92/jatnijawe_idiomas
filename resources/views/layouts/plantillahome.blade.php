@@ -19,7 +19,7 @@
     <title>Home: @yield('title')</title>
 
   </head>
-  <body style="background-image: url('image/logos.png'); background-color: #FFFFFF  ;">
+  <body style="background-image: url('image/logos_idiomas/logo_fon.png'); background-color: #FFFFFF  ;">
    <div class="container">
    <div class="row">
      <div  class="col-5 col-sm-2" align="left">
@@ -32,7 +32,7 @@
        <h4>Facultad de Idiomas</h4>
      </div>
      <div  class="col-7 col-sm-2" align="right">
-         <img src="image/nuevo.png" width="150" height="150" alt=""/>
+         <img src="image/logos_idiomas/logo_uabjo.png" width="150" height="150" alt=""/>
      </div>
    </div>
 
@@ -90,8 +90,7 @@
   </div>
 
     @yield('seccion')
-
-
+  </br>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

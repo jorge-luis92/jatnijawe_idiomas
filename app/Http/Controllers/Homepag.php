@@ -21,4 +21,10 @@ class Homepag extends Controller
     public function pruebas(){
       return view('pages.prueba');
     }
+
+    public function sino(){
+      return view('myPDF');
+    }
+
+
 }

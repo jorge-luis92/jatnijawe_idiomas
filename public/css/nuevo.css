@@ -7,6 +7,10 @@
   /*box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);*/
 }
 
+img#img_banner{
+	opacity: 0.7;filter:alpha(opacity=5);
+}
+
 #font3{
   /*border:2px solid #827BE1;*/
   width: auto;
@@ -63,7 +67,7 @@ img#img_banner{
 }
 .nota_alumno {
   align: center;
-  background: #F6CEF5;
+  background: #58ACFA;
   max-width: 450px;
   margin: 0 auto 30px;
   padding: 6px;

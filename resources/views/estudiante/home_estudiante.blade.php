@@ -4,6 +4,8 @@
 @include('estudiante\datos.datos_personales')
 @include('estudiante\datos.datos_laborales')
 @include('estudiante\datos.datos_medicos')
+@include('estudiante\mis_actividades.gestion_mi_taller')
+@include('estudiante\mis_actividades.detalles')
 
 @section('title')
 : Perfil

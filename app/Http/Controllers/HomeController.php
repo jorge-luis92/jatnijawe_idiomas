@@ -30,9 +30,9 @@ class HomeController extends Controller
 
     public function generatePDF()
     {
-        $data = ['title' => 'Welcome to HDTuto.com'];
-        $pdf = PDF::loadView('myPDF', $data);
+        $data = ['title' => 'listado'];
+        $pdf = PDF::loadView('estudiante\mis_actividades.listado', $data);
 
-        return $pdf->download('itsolutionstuff.pdf');
+        return $pdf->download('listado_estudiantes.pdf');
     }
 }

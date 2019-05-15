@@ -9,6 +9,8 @@ Route::get('estudiante_perfil', 'Estudiante_Con\EstudianteController@homes_estud
 //Route::get('home_estudiante', 'Estudiante_Con\EstudianteController@inicio_estudiante')->name('home_estudiante');
 Route::get('homedos', 'Estudiante_Con\EstudianteController@home_estudiante_dos')->name('homedos');
 Route::get('hoja_datos_personales', 'Estudiante_Con\EstudianteController@datos')->name('hoja_datos_personales');
+Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');
+Route::get('mis_talleres_act', 'Estudiante_Con\EstudianteController@talleres_act')->name('mis_talleres_act');
 /* endroutes Estudiante---*/
 
 /* Rutas de Administrativo---*/
@@ -31,7 +33,7 @@ Route::get('login_tallerista', 'Tallerista_Con\TalleristaController@logintalleri
 /* Rutas de Coordinadores---*/
 /* endroutes Coordinadores---*/
 
-Route::get('home_estudiante', 'Estudiante_Con\EstudianteController@inicio_estudiante')->name('home_estudiante');
+//Route::get('home_estudiante', 'Estudiante_Con\EstudianteController@inicio_estudiante')->name('home_estudiante');
 
 // Registration routes...
 Route::get('register', 'Auth\AuthController@getRegister');
@@ -44,5 +46,8 @@ Route::get('home', 'HomeController@index')->name('home_estudiante');
 Route::get('home_estudiante', function () {
 })->middleware('auth');
 
-Route::get('generate-pdf','HomeController@generatePDF');
+Route::get('pdfs','HomeController@generatePDF');
+Route::get('sisi','Homepag@sino');
+Route::get('notes', 'Estudiante_Con\EstudianteController@index');
+Route::get('pdf', 'Estudiante_Con\EstudianteController@pdf_g');
 Auth::routes();

@@ -21,13 +21,13 @@
 
 <body id="page-top">
   <div id="wrapper" ><!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
+    <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
         <a class="nav-link" href={{ route('home_estudiante')}}>
-          <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.9em">Jat Nijawe</span></a></li><!-- Divider -->
+          <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.9em">JATWEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
-      <div class="sidebar-heading" style="color: #000000: blue">
+      <div class="sidebar-heading" style="color: #FFFFFF">
         Servicios
       </div><!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item" >
@@ -55,11 +55,10 @@
         <div id="activid_extra" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item" href="#">Convocatoria</a>
-            <a  class="collapse-item" href="#">Mis Actividades </br> Extraescolares</a>
-            <a  class="collapse-item" href="#">Avance de Horas</a>
+            <a  class="collapse-item" href="#">Catalógo de Actividades</a>
+            <a  class="collapse-item" href={{ route('mis_actividades')}}>Mis Actividades </br> Extraescolares</a>
             <a  class="collapse-item" href="#">Solicitud Actividades </br> Extraescolares</a>
-          </div>
+            <a  class="collapse-item" href="#">Generar Constancia </br>Parcial</a>
         </div>
       </li>
 
@@ -97,6 +96,14 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
+      <a class="nav-link" href={{ route('mis_talleres_act')}} aria-expanded="true">
+      <i class="fas fa-fw fa-heart"></i>
+      <span style="font-size: 0.9em;">Mis Talleres</span>
+      </a>
+      </li>
+
+
+      <li class="nav-item">
       <a class="nav-link" href="#" aria-expanded="true">
       <i class="fas fa-fw fa-archive"></i>
       <span style="font-size: 0.9em;">Manual de Usuario</span>
@@ -110,7 +117,7 @@
     </ul> <!-- End of Sidebar -->
     <!-- Content Wrapper -->
 
-    <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos.png'); background-color: #FFFFFF;">
+    <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos_idiomas/logo_fon.png'); background-color: #FFFFFF;">
           <div id="content">
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5);background-color: #819FF7;">
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
