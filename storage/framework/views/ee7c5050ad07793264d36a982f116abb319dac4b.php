@@ -12,15 +12,49 @@
             <div class="card" >
       <div class="card-body">
         <h5 class="card-title">Nombre del Taller: RUGBY</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Tutor: {{ Auth::user()->name }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Tutor:</h6>
         <p class="card-text">Area: Cultural</p>
         <p>Fecha de Inicio: 02/03/2019</p>
         <p>Fecha de Terminación: 11/07/2019 </p>
       </div>
     </div>
-   </div>
+
+           </div>
+
 </div>
       </div>
     </div>
   </div>
 </div>
+
+<script language="JavaScript">
+    function sitrabaja(){
+        $(".form-control").removeAttr("disabled");
+    }
+
+    function notrabaja(){
+        $(".form-control").attr("disabled","disabled");
+    }
+</script>
+
+
+<script>
+function numeros(e){
+ key = e.keyCode || e.which;
+ tecla = String.fromCharCode(key).toLowerCase();
+ letras = " 0123456789";
+ especiales = [8,37,39,46];
+
+ tecla_especial = false
+ for(var i in especiales){
+if(key == especiales[i]){
+  tecla_especial = true;
+  break;
+     }
+ }
+
+ if(letras.indexOf(tecla)==-1 && !tecla_especial)
+     return false;
+}
+</script>
+<?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/estudiante\mis_actividades/detalles.blade.php ENDPATH**/ ?>

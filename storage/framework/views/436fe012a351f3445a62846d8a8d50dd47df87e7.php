@@ -1,17 +1,12 @@
-<link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_estudiante')
-@include('estudiante\datos.datos_generales')
-@include('estudiante\datos.datos_personales')
-@include('estudiante\datos.datos_laborales')
-@include('estudiante\datos.datos_medicos')
-@include('estudiante\mis_actividades.detalles')
-@include('estudiante\mis_actividades.gestion_mi_taller')
+<link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
-@section('title')
+
+
+<?php $__env->startSection('title'); ?>
 : Mis Actividades
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('seccion')
+<?php $__env->startSection('seccion'); ?>
 <!--<h1 style="font-size: 3.5em; color: #000000; font-family: Medium;" align="center">"JATWEB"</h1>-->
   <h2 style="font-size: 1.7em; color: #000000;" align="center">TALLERES</h2>
 
@@ -35,15 +30,19 @@
         <th scope="row">1</th>
         <td>RUGBY</td>
         <td>ACTIVO</td>
-        <td>  <a data-toggle="modal" href="#detalles_taller">DETALLES</a></td>
-        <td><a href="pdfs">DESCARGAR LISTA</a></td>
+        <td><a data-toggle="modal" href="#detalles_taller">DETALLES</a></td>
+        <td><a href="pdfs" target="_blank">DESCARGAR LISTA</a></td>
       </tr>
 
     </tbody>
   </table>
 
 </div>
+
+
 </div>
 
 
-  @endsection
+  <?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/estudiante\mis_actividades/mis_talleres.blade.php ENDPATH**/ ?>

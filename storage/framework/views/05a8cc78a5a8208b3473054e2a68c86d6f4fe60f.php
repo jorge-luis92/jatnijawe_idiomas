@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-    <link rel="shortcut icon" href="{{asset('logo.ico')}}">
+    <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
   <!-- Custom fonts for this template-->
   <link href="requisitos/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -15,7 +15,7 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/nuevo.css">
-  <title>Estudiante @yield('title')</title>
+  <title>Estudiante <?php echo $__env->yieldContent('title'); ?></title>
 
 </head>
 
@@ -24,7 +24,7 @@
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href={{ route('home_estudiante')}}>
+        <a class="nav-link" href=<?php echo e(route('home_estudiante')); ?>>
           <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.9em">JATWEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
@@ -37,7 +37,7 @@
         <div id="datos_estudiante" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href={{ route('datos_general')}}>Datos Generales</a>
+            <a class="collapse-item" href=<?php echo e(route('datos_general')); ?>>Datos Generales</a>
             <a class="collapse-item" data-toggle="modal" href="#datos_personales_dos" aria-haspopup="true" aria-expanded="false">Datos Personales</a>
             <a class="collapse-item" data-toggle="modal" href="#datos_laborales_tres" aria-haspopup="true" aria-expanded="false">Datos Laborales</a>
             <a class="collapse-item" data-toggle="modal" href="#datos_medicos_cuatro" aria-haspopup="true" aria-expanded="false">Datos Médicos</a>
@@ -56,7 +56,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a  class="collapse-item" href="#">Catalógo de Actividades</a>
-            <a  class="collapse-item" href={{ route('mis_actividades')}}>Mis Actividades </br> Extraescolares</a>
+            <a  class="collapse-item" href=<?php echo e(route('mis_actividades')); ?>>Mis Actividades </br> Extraescolares</a>
             <a  class="collapse-item" href="#">Solicitud Actividades </br> Extraescolares</a>
             <a  class="collapse-item" href="#">Generar Constancia </br>Parcial</a>
         </div>
@@ -95,7 +95,7 @@
         <div id="mis_talleres_menu" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item"  href={{ route('mi_taller')}}>Listado de Talleres</a>
+            <a  class="collapse-item"  href=<?php echo e(route('mi_taller')); ?>>Listado de Talleres</a>
             <a  class="collapse-item" href="#">Gestión de Taller</a>
           </div>
         </div>
@@ -144,7 +144,7 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} </span>
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo e(Auth::user()->name); ?> </span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->
@@ -165,7 +165,7 @@
         </nav>
 
         <!-- End of Topbar -->
-@yield('seccion')
+<?php echo $__env->yieldContent('seccion'); ?>
       </div>
 
       <!-- Footer -->
@@ -200,10 +200,10 @@
         <div class="modal-body">Presione "Finalizar Sesión" para confirmar.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
+          <a class="btn btn-primary" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
 
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
+          <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+              <?php echo csrf_field(); ?>
           </form>
         </div>
       </div>
@@ -225,7 +225,7 @@
               <div class="card" >
         <div class="card-body">
           <h5 class="card-title">Nombre del Taller: RUGBY</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Tutor: {{ Auth::user()->name }}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Tutor: <?php echo e(Auth::user()->name); ?></h6>
           <p class="card-text">Area: Cultural</p>
           <p>Fecha de Inicio: 02/03/2019</p>
           <p>Fecha de Terminación: 11/07/2019 </p>
@@ -260,3 +260,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/layouts/plantilla_estudiante.blade.php ENDPATH**/ ?>

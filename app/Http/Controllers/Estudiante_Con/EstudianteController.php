@@ -7,13 +7,14 @@ use PDF;
 
 class EstudianteController extends Controller
 {
-    /*public function index(){
-      return view('estudiante.home_estudiante');
-    }*/
 
       public function inicio_estudiante(){
       return view('estudiante.home_estudiante');
     }
+
+    public function dato_general(){
+    return view('estudiante\datos.datos_generales');
+  }
 
 
     public function activities(){
@@ -21,21 +22,14 @@ class EstudianteController extends Controller
       return  view ('estudiante\mis_actividades.misActividades');
     }
 
-    public function talleres_act(){
+    public function talleres_activos(){
 
       return  view ('estudiante\mis_actividades.mis_talleres');
     }
 
-    public function home_estudiante_dos(){
-      return view('estudiante.homedos');
-    }
 
     public function homes_estudiante(){
       return view('estudiante.estudiante_perfil');
-    }
-
-    public function datos(){
-      return view('estudiante.hoja_datos_personales');
     }
 
     public function loginestudiantes(){

@@ -28,3 +28,4 @@
   </div>
 
 </body>
+<?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/estudiante\mis_actividades/listado.blade.php ENDPATH**/ ?>

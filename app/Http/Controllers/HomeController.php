@@ -22,7 +22,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+   public function index()
     {
 
         return view('estudiante.home_estudiante');
@@ -32,7 +32,10 @@ class HomeController extends Controller
     {
         $data = ['title' => 'listado'];
         $pdf = PDF::loadView('estudiante\mis_actividades.listado', $data);
+      //  $pdf = PDF::loadView('estudiante\mis_actividades.listado', $data);
+        //return $pdf->download('listado_estudiantes.pdf');
+        return $pdf->stream('listado_estudiantes.pdf');
 
-        return $pdf->download('listado_estudiantes.pdf');
+
     }
 }

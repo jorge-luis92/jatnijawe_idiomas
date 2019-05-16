@@ -1,13 +1,13 @@
-<link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_estudiante')
-@include('estudiante\datos.datos_personales')
-@include('estudiante\datos.datos_laborales')
-@include('estudiante\datos.datos_medicos')
-@section('title')
-: Datos Generales
-@endsection
+<link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
-@section('seccion')
+<?php echo $__env->make('estudiante\datos.datos_personales', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('estudiante\datos.datos_laborales', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('estudiante\datos.datos_medicos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->startSection('title'); ?>
+: Datos Generales
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('seccion'); ?>
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos Generales</h1>
 <div class="container" id="font3">
   <form  validate enctype="multipart/form-data" data-toggle="validator">
@@ -115,7 +115,7 @@
 </div>
 </br>
 
-  @endsection
+  <?php $__env->stopSection(); ?>
 
 
 
@@ -141,3 +141,5 @@
         $(".inputBeca").attr("disabled","disabled");
     }
 </script>
+
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/estudiante\datos/datos_generales.blade.php ENDPATH**/ ?>

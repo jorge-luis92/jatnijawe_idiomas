@@ -1,15 +1,15 @@
-<link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_estudiante')
+<link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
 
-@section('title')
+
+<?php $__env->startSection('title'); ?>
 : Mis Actividades
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('seccion')
+<?php $__env->startSection('seccion'); ?>
 <!--<h1 style="font-size: 3.5em; color: #000000; font-family: Medium;" align="center">"JATWEB"</h1>-->
   <h2 style="font-size: 1.7em; color: #000000;" align="center">Actividades Extracurriculares </h2>
-    <h2 style="font-size: 1.3em; color: #000000;" align="center"><em>Estudiante: </em>{{ Auth::user()->name }}  </h2>
+    <h2 style="font-size: 1.3em; color: #000000;" align="center"><em>Estudiante: </em><?php echo e(Auth::user()->name); ?>  </h2>
 
 <div class="container" id="font2">
   </br>
@@ -44,4 +44,6 @@
 </div>
 
 
-  @endsection
+  <?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/estudiante\mis_actividades/misActividades.blade.php ENDPATH**/ ?>

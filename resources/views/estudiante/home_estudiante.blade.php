@@ -1,19 +1,18 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_estudiante')
-@include('estudiante\datos.datos_generales')
+
 @include('estudiante\datos.datos_personales')
 @include('estudiante\datos.datos_laborales')
 @include('estudiante\datos.datos_medicos')
-@include('estudiante\mis_actividades.gestion_mi_taller')
-@include('estudiante\mis_actividades.detalles')
+
 
 @section('title')
 : Perfil
 @endsection
 
 @section('seccion')
-</br>
 <div class="container" id="font2">
+  </br>
   <h1 style="font-size: 2.0em; color: #000000;" align="center">Perfil del Estudiante</h1>
 </br>
 </br>
