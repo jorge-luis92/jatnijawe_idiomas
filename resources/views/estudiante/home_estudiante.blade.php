@@ -1,11 +1,5 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_estudiante')
-
-@include('estudiante\datos.datos_personales')
-@include('estudiante\datos.datos_laborales')
-@include('estudiante\datos.datos_medicos')
-
-
 @section('title')
 : Perfil
 @endsection
@@ -27,7 +21,7 @@
   <span style="color: red;">NOTA: </span>
    Recuerda actualizar tus
    <span style="color: #190707">Datos</span> cada inicio de semestre</p>
-   <p style="color: #000000"align="center">* Consulta el <a style="text-decoration: underline;" href="">Manual de Usuario</a> </p>
+   <p style="color: #000000"align="center">* Consulta el <a style="text-decoration: underline; color: #FFFFFF;"  href="">Manual de Usuario</a> </p>
 </div>
 </div>
 

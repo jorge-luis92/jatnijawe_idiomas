@@ -1,11 +1,5 @@
 <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
-
-<?php echo $__env->make('estudiante\datos.datos_personales', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php echo $__env->make('estudiante\datos.datos_laborales', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php echo $__env->make('estudiante\datos.datos_medicos', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
-
 <?php $__env->startSection('title'); ?>
 : Perfil
 <?php $__env->stopSection(); ?>
@@ -27,7 +21,7 @@
   <span style="color: red;">NOTA: </span>
    Recuerda actualizar tus
    <span style="color: #190707">Datos</span> cada inicio de semestre</p>
-   <p style="color: #000000"align="center">* Consulta el <a style="text-decoration: underline;" href="">Manual de Usuario</a> </p>
+   <p style="color: #000000"align="center">* Consulta el <a style="text-decoration: underline; color: #FFFFFF;"  href="">Manual de Usuario</a> </p>
 </div>
 </div>
 

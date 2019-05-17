@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
     }
 
     /**
@@ -31,9 +32,10 @@ class HomeController extends Controller
     public function generatePDF()
     {
         $data = ['title' => 'listado'];
-        $pdf = PDF::loadView('estudiante\mis_actividades.listado', $data);
+        $pdf = PDF::loadView('pruebapdf', $data);
       //  $pdf = PDF::loadView('estudiante\mis_actividades.listado', $data);
         //return $pdf->download('listado_estudiantes.pdf');
+
         return $pdf->stream('listado_estudiantes.pdf');
 
 

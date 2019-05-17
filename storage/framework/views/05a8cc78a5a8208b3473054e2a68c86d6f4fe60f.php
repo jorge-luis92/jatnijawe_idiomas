@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+
+
     <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
   <!-- Custom fonts for this template-->
   <link href="requisitos/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -38,10 +40,10 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href=<?php echo e(route('datos_general')); ?>>Datos Generales</a>
-            <a class="collapse-item" data-toggle="modal" href="#datos_personales_dos" aria-haspopup="true" aria-expanded="false">Datos Personales</a>
-            <a class="collapse-item" data-toggle="modal" href="#datos_laborales_tres" aria-haspopup="true" aria-expanded="false">Datos Laborales</a>
-            <a class="collapse-item" data-toggle="modal" href="#datos_medicos_cuatro" aria-haspopup="true" aria-expanded="false">Datos Médicos</a>
-            <a class="collapse-item" data-toggle="modal" href="#des_hoja" aria-haspopup="true" aria-expanded="false">Descargar Hoja de Datos </br> Personales</a>
+            <a class="collapse-item" href=<?php echo e(route('datos_personal')); ?>>Datos Personales</a>
+            <a class="collapse-item" href=<?php echo e(route('datos_laboral')); ?>>Datos Laborales</a>
+            <a class="collapse-item" href=<?php echo e(route('datos_medico')); ?>>Datos Médicos</a>
+            <a class="collapse-item" href="#">Descargar Hoja de Datos </br> Personales</a>
 
           </div>
         </div>
@@ -111,10 +113,10 @@
 
 
       <li class="nav-item">
-      <a class="nav-link" href="#" aria-expanded="true">
+      <a class="nav-link"  href=<?php echo e(route('ma_estudiante')); ?> aria-expanded="true">
       <i class="fas fa-fw fa-archive"></i>
       <span style="font-size: 0.9em;">Manual de Usuario</span>
-      </a>
+    </a>
       </li>     <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -126,7 +128,7 @@
 
     <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos_idiomas/logo_fon.png'); background-position:center; background-repeat: no-repeat; position: relative; background-color: #FFFFFF;">
           <div id="content">
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5);background-color: #819FF7;">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5); background-color: #819FF7;">
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>

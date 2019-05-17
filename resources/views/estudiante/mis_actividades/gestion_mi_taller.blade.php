@@ -1,14 +1,7 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_estudiante')
-@include('estudiante\datos.datos_generales')
-@include('estudiante\datos.datos_personales')
-@include('estudiante\datos.datos_laborales')
-@include('estudiante\datos.datos_medicos')
-@include('estudiante\mis_actividades.detalles')
-@include('estudiante\mis_actividades.gestion_mi_taller')
-
 @section('title')
-: Mis Actividades
+: Gestión de Taller
 @endsection
 
 @section('seccion')

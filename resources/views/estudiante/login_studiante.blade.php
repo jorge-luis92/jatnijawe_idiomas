@@ -33,6 +33,9 @@
                 </br>
                   <div class="opcioncontra" ><a href="../recuperar/recuperar.php" style="color: black">¿Olvidaste tu contraseña?</a>
                     </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
 
        </form>
 </div>

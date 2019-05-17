@@ -1,7 +1,5 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_estudiante')
-
-
 @section('title')
 : Mis Actividades
 @endsection

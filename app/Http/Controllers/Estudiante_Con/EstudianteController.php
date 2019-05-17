@@ -12,10 +12,22 @@ class EstudianteController extends Controller
       return view('estudiante.home_estudiante');
     }
 
+
     public function dato_general(){
     return view('estudiante\datos.datos_generales');
   }
 
+  public function dato_laboral(){
+  return view('estudiante\datos.datos_laborales');
+}
+
+public function dato_medico(){
+return view('estudiante\datos.datos_medicos');
+}
+
+public function dato_personal(){
+return view('estudiante\datos.datos_personales');
+}
 
     public function activities(){
 
@@ -28,14 +40,13 @@ class EstudianteController extends Controller
     }
 
 
-    public function homes_estudiante(){
-      return view('estudiante.estudiante_perfil');
-    }
-
     public function loginestudiantes(){
       return view('estudiante.login_studiante');
     }
 
+    public function m_estudiantes(){
+    return view('m_usuario\m_estudiante');
+  }
     public function generatePDF()
     {
         $data = ['title' => 'prueba'];

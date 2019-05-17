@@ -19,7 +19,7 @@ class Homepag extends Controller
     }
 
     public function pruebas(){
-      return view('pages.prueba');
+      return view('logi');
     }
 
     public function sino(){

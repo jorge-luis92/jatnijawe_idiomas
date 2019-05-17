@@ -21,7 +21,7 @@
     <title>Usuario <?php echo $__env->yieldContent('title'); ?></title>
 
   </head>
-  <body style="background-image: url('image/logos.png'); background-color: #FFFFFF;">
+  <body style="background-image: url('image/logos_idiomas/logo_fon.png'); background-size: 600px; background-position:center; background-repeat: no-repeat; background-color: #FFFFFF;">
     </br>
    <div class="container" align="center">
 

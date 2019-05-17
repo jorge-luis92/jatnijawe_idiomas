@@ -39,6 +39,27 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group row">
+
+                            <label for="tipo_usuario" class="col-md-4 col-form-label text-md-right">Tipo de Usuario</label>
+                              <div class="col-md-6">
+                              <select name="tipo_usuario" required class="form-control">
+                            <option value="">Seleccione una opción</option>
+                            <option value="admin">Administrador Sistema</option>
+                            <option value="form_integral">Coordinador Formacion Integral</option>
+                            <option value="servicio_social">Coordinador Servicio Social</option>
+                            <option value="">Coordinador Planeación</option>
+                            <option value="">Auxiliar Administrativo</option>
+                      </select>
+                      @error('tipo_usuario')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                    </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 

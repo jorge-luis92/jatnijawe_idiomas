@@ -1,15 +1,13 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_estudiante')
-@include('estudiante\datos.datos_personales')
-@include('estudiante\datos.datos_laborales')
-@include('estudiante\datos.datos_medicos')
 @section('title')
 : Datos Generales
 @endsection
 
 @section('seccion')
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos Generales</h1>
-<div class="container" id="font3">
+<div class="container" id="font4">
+</br>
   <form  validate enctype="multipart/form-data" data-toggle="validator">
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
     <div class="form-row">
@@ -21,7 +19,7 @@
       </div>
       <div class="form-group col-md-3" id="labels">
         <label  for="matricula">Matricula</label>
-        <input type="text" class="form-control" id="matricula" placeholder="Matricula"  disabled>
+        <input type="text" class="form-control" id="matricula" placeholder="Matricula" value="{{ Auth::user()->id }}" disabled>
       </div>
       <div class="form-group col-md-2" id="labels">
         <label for="semestre">Semestre</label>
@@ -40,7 +38,7 @@
     <div class="form-row">
       <div class="form-group col-md-3" id="labels">
         <label for="nombre">Nombre(s)</label>
-        <input type="text" class="form-control" id="nombre" placeholder="Nombre(s)" disabled>
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre(s)"  value="{{ Auth::user()->name }}" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="ap_pat">Apellido Paterno</label>
