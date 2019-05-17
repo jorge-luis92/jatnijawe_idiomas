@@ -1,7 +1,5 @@
 <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
-
-
 <?php $__env->startSection('title'); ?>
 : Mis Actividades
 <?php $__env->stopSection(); ?>

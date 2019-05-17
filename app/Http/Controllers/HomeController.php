@@ -25,19 +25,14 @@ class HomeController extends Controller
      */
    public function index()
     {
-
-        return view('estudiante.home_estudiante');
+      $usuario_actual=\Auth::user();
+       if($usuario_actual->tipo_usuario=='estudiante'){
+         return view('estudiante.home_estudiante');
+       }
+  elseif ($usuario_actual->tipo_usuario=='form_integral') {
+    return view('personal_administrativo\auxiliar_administrativo.gestion_estudiante');
+  }
     }
 
-    public function generatePDF()
-    {
-        $data = ['title' => 'listado'];
-        $pdf = PDF::loadView('pruebapdf', $data);
-      //  $pdf = PDF::loadView('estudiante\mis_actividades.listado', $data);
-        //return $pdf->download('listado_estudiantes.pdf');
-
-        return $pdf->stream('listado_estudiantes.pdf');
-
-
-    }
+  
 }

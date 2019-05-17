@@ -17,7 +17,7 @@ class MDusuarioadmin
     {
 
         $usuario_actual=\Auth::user();
-        if($usuario_actual->tipo_usuario='form_integral'){
+        if($usuario_actual->tipo_usuario=='form_integral'){
            return $next($request);
         }
 

@@ -17,6 +17,10 @@ class AdministrativoController extends Controller
     }
 
     public function auxiliar_carga(){
-      return view('personal_administrativo\auxiliar_administrativo.carga_datos_estudiantes');
+      return view('personal_administrativo\auxiliar_administrativo.carga_de_datos');
+    }
+
+    public function formacion_busqueda(){
+      return view('personal_administrativo\form_integral.busqueda');
     }
 }

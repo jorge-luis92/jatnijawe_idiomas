@@ -14,7 +14,7 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/nuevo.css">
-  <title>Auxiliar Administrativo @yield('title')</title>
+  <title>Coordinadora Formación Integral @yield('title')</title>
 
 </head>
 
@@ -23,7 +23,7 @@
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href={{ route('home_auxiliar')}}>
+        <a class="nav-link" href={{ route('home_formacion')}}>
           <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.5em">Jat Nijawe</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
@@ -36,8 +36,8 @@
         <div id="datos_estudiante" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" data-toggle="modal" href="#datos_generales_uno"  aria-haspopup="true" aria-expanded="false">Carga de datos</a>
-            <a class="collapse-item" data-toggle="modal" href="#datos_personales_dos" aria-haspopup="true" aria-expanded="false">Registro de Estudiantes</a>
+            <a class="collapse-item" href="#datos_generales_uno">Busqueda</a>
+
           </div>
         </div>
       </li>

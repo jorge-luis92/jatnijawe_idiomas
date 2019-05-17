@@ -22,6 +22,10 @@ class Homepag extends Controller
       return view('logi');
     }
 
+    public function restringdo(){
+      return view('errores.intentosfallidos');
+    }
+
     public function sino(){
       return view('myPDF');
     }

@@ -6,9 +6,8 @@
 
 @section('seccion')
 </br>
-<h1 style="font-size: 2.0em; color: #000000;" align="center" align="center"> Bienvenido(a)</h1>
 <div class="container" id="font2">
-  <h2 style="font-size: 1.5em; color: #000000;" align="center">Perfil: Auxiliar Administrativo</h2>
+  <h2 style="font-size: 1.8em; color: #000000;" align="center">Busqueda de estudiantes</h2>
 </br>
 </br>
 </br>

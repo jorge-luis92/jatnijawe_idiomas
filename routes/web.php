@@ -4,6 +4,8 @@
 Route::get('/', 'Homepag@homepage')->name('welcome');
 
 Route::get('prueba', 'Homepag@pruebas')->name('prueba');
+Route::get('denegado', 'Homepag@restringdo')->name('denegado');
+
 
 /* Rutas de logueo---*/
 Route::get('login', 'HomeController@index');
@@ -13,12 +15,20 @@ Route::get('login_personal', 'Administrativo_Con\AdministrativoController@login_
 Route::get('login_tallerista', 'Tallerista_Con\TalleristaController@logintallerista')->name('login_tallerista');
 
 /* Rutas de Estudiante---*/
-Route::group(['middleware' => 'usuarioAdmin'], function () {
+Route::group(['middleware' => 'auth'], function () {
+Route::get('home_auxiliar', 'HomeController@index')->name('home_auxiliar');
 Route::get('gestion_estudiante', 'Administrativo_Con\AdministrativoController@auxiliar')->name('gestion_estudiante');
 });
 
+Route::group(['middleware' => 'auth'], function () {
+Route::get('home_formacion', 'HomeController@index')->name('home_formacion');
+Route::get('busqueda', 'Administrativo_Con\AdministrativoController@formacion_busqueda')->name('busqueda');
+});
 
-Route::group(['middleware' => 'usuarioStandard'], function () {
+
+
+Route::group(['middleware' => 'auth'], function () {
+  Route::get('home', 'HomeController@index')->name('home_estudiante');
   //Route::get('home_estudiante', 'Estudiante_Con\EstudianteController@inicio_estudiante')->name('home_estudiante');
   Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');
   Route::get('datos_general', 'Estudiante_Con\EstudianteController@dato_general')->name('datos_general');
@@ -26,11 +36,11 @@ Route::group(['middleware' => 'usuarioStandard'], function () {
   Route::get('datos_medico', 'Estudiante_Con\EstudianteController@dato_medico')->name('datos_medico');
   Route::get('datos_personal', 'Estudiante_Con\EstudianteController@dato_personal')->name('datos_personal');
   //Route::get('home_estudiante', 'HomeController@index');
-  Route::get('home', 'HomeController@index')->name('home_estudiante');
+
   Route::get('ma_estudiante', 'Estudiante_Con\EstudianteController@m_estudiantes')->name('ma_estudiante');
   Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');
   Route::get('mi_taller', 'Estudiante_Con\EstudianteController@talleres_activos')->name('mi_taller');
-  Route::get('pdfs','HomeController@generatePDF');
+  Route::get('pdfs','Estudiante_Con\EstudianteController@generatePDF');
 });
 
 
@@ -41,8 +51,8 @@ Route::group(['middleware' => 'usuarioStandard'], function () {
 /* endroutes admin---*/
 
 /* Rutas de auxiliar---*/
-Route::get('gestion_estudiante', 'Administrativo_Con\AdministrativoController@auxiliar')->name('gestion_estudiante');
-Route::get('carga_datos_estudiantes', 'Administrativo_Con\AdministrativoController@auxiliar_carga')->name('carga_datos_estudiantes');
+
+
 /* endroutes auxiliar---*/
 
 

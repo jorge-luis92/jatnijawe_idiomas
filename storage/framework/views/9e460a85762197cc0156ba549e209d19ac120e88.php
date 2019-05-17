@@ -23,7 +23,7 @@
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href=<?php echo e(route('home_estudiante')); ?>>
+        <a class="nav-link" href=<?php echo e(route('home_auxiliar')); ?>>
           <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.5em">Jat Nijawe</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
@@ -36,8 +36,7 @@
         <div id="datos_estudiante" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" data-toggle="modal" href="#datos_generales_uno"  aria-haspopup="true" aria-expanded="false">Carga de datos</a>
-            <a class="collapse-item" data-toggle="modal" href="#datos_personales_dos" aria-haspopup="true" aria-expanded="false">Registro de Estudiantes</a>
+            <a class="collapse-item" data-toggle="modal" href="#datos_generales_uno"  aria-haspopup="true" aria-expanded="false">Busqueda</a>
           </div>
         </div>
       </li>
@@ -84,7 +83,7 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small">Aux Admin</span>
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo e(Auth::user()->name); ?></span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->
