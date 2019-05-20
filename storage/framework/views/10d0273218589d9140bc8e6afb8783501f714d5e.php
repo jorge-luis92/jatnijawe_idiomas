@@ -50,7 +50,7 @@
     </div>
     <div class="form-group col-md-4">
       <label for="email">* Correo Electrónico</label>
-      <input type="email" class="form-control"  id="email" placeholder="Correo Electrónico" required>
+      <input type="email" class="form-control"  id="email" value="<?php echo e(Auth::user()->email); ?>" placeholder="Correo Electrónico" required>
     </div>
  </div>
  <div class="form-group">

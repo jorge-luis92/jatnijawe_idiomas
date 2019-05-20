@@ -34,6 +34,13 @@
 
         <form action="register" method="post">
       <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+      <div class="form-group has-feedback">
+        <label>Matricula</label>
+        <input type="text" class="form-control" name="id" >
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+
+
 
           <div class="form-group has-feedback">
             <label>nombre</label>
@@ -48,6 +55,23 @@
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
 
+
+            <div class="form-group has-feedback">
+
+              <label for="tipo_usuario" class="col-md-4 col-form-label text-md-right">Tipo de Usuario</label>
+                <div class="col-md-6">
+                <select name="tipo_usuario" required class="form-control">
+              <option value="">Seleccione una opción</option>
+              <option value="admin">Administrador Sistema</option>
+              <option value="form_integral">Coordinador Formacion Integral</option>
+              <option value="servicio_social">Coordinador Servicio Social</option>
+              <option value="Planeacion">Coordinador Planeación</option>
+              <option value="auxiliar">Auxiliar Administrativo</option>
+              <option value="estudiante">Estudiante</option>
+        </select>
+
+      </div>
+          </div>
           <div class="form-group has-feedback">
                 <label>password</label>
             <input type="password" class="form-control" name="password" >

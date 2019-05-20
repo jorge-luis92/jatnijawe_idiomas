@@ -12,10 +12,24 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Matricula') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="id" type="text" class="form-control @error('id') is-invalid @enderror" name="id" value="{{ old('name') }}" required autocomplete="id" autofocus>
+
+                                @error('id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="Usuario-estudiante" disabled >
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -24,6 +38,8 @@
                                 @enderror
                             </div>
                         </div>
+
+
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -45,12 +61,7 @@
                             <label for="tipo_usuario" class="col-md-4 col-form-label text-md-right">Tipo de Usuario</label>
                               <div class="col-md-6">
                               <select name="tipo_usuario" required class="form-control">
-                            <option value="">Seleccione una opción</option>
-                            <option value="admin">Administrador Sistema</option>
-                            <option value="form_integral">Coordinador Formacion Integral</option>
-                            <option value="servicio_social">Coordinador Servicio Social</option>
-                            <option value="">Coordinador Planeación</option>
-                            <option value="">Auxiliar Administrativo</option>
+                              <option value="estudiante">Estudiante</option>
                       </select>
                       @error('tipo_usuario')
                           <span class="invalid-feedback" role="alert">
@@ -61,7 +72,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -75,7 +86,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">

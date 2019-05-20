@@ -10,14 +10,36 @@
                         <?php echo csrf_field(); ?>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Name')); ?></label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Matricula')); ?></label>
+
+                            <div class="col-md-6">
+                                <input id="id" type="text" class="form-control <?php if ($errors->has('id')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('id'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="id" value="<?php echo e(old('name')); ?>" required autocomplete="id" autofocus>
+
+                                <?php if ($errors->has('id')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('id'); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Usuario')); ?></label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control <?php if ($errors->has('name')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('name'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="name" value="<?php echo e(old('name')); ?>" required autocomplete="name" autofocus>
+endif; ?>" name="name" value="Usuario-estudiante"  >
 
                                 <?php if ($errors->has('name')) :
 if (isset($message)) { $messageCache = $message; }
@@ -30,6 +52,8 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                             </div>
                         </div>
+
+
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right"><?php echo e(__('E-Mail Address')); ?></label>
@@ -59,12 +83,7 @@ endif; ?>
                             <label for="tipo_usuario" class="col-md-4 col-form-label text-md-right">Tipo de Usuario</label>
                               <div class="col-md-6">
                               <select name="tipo_usuario" required class="form-control">
-                            <option value="">Seleccione una opción</option>
-                            <option value="admin">Administrador Sistema</option>
-                            <option value="form_integral">Coordinador Formacion Integral</option>
-                            <option value="servicio_social">Coordinador Servicio Social</option>
-                            <option value="">Coordinador Planeación</option>
-                            <option value="">Auxiliar Administrativo</option>
+                              <option value="estudiante">Estudiante</option>
                       </select>
                       <?php if ($errors->has('tipo_usuario')) :
 if (isset($message)) { $messageCache = $message; }
@@ -79,7 +98,7 @@ endif; ?>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Password')); ?></label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Contraseña')); ?></label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control <?php if ($errors->has('password')) :
@@ -101,7 +120,7 @@ endif; ?>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Confirm Password')); ?></label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Confirmar Contraseña')); ?></label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">

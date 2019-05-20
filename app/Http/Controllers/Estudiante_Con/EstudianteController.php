@@ -12,7 +12,7 @@ class EstudianteController extends Controller
     public function dato_general(){
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='estudiante'){
-         return view('errores.intentosfallidos');
+        return redirect()->back();
         }
     return view('estudiante\datos.datos_generales');
   }
@@ -20,7 +20,7 @@ class EstudianteController extends Controller
   public function dato_laboral(){
     $usuario_actual=\Auth::user();
      if($usuario_actual->tipo_usuario!='estudiante'){
-       return view('errores.intentosfallidos');
+       return redirect()->back();
       }
   return view('estudiante\datos.datos_laborales');
 }
@@ -28,7 +28,7 @@ class EstudianteController extends Controller
 public function dato_medico(){
   $usuario_actual=\Auth::user();
    if($usuario_actual->tipo_usuario!='estudiante'){
-     return view('errores.intentosfallidos');
+     return redirect()->back();
     }
 return view('estudiante\datos.datos_medicos');
 }
@@ -44,7 +44,7 @@ return view('estudiante\datos.datos_personales');
     public function activities(){
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='estudiante'){
-         return view('errores.intentosfallidos');
+         return redirect()->back();
         }
       return  view ('estudiante\mis_actividades.misActividades');
     }
@@ -52,7 +52,7 @@ return view('estudiante\datos.datos_personales');
     public function talleres_activos(){
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='estudiante'){
-         return view('errores.intentosfallidos');
+         return redirect()->back();
         }
       return  view ('estudiante\mis_actividades.mis_talleres');
     }
@@ -61,7 +61,7 @@ return view('estudiante\datos.datos_personales');
     public function loginestudiantes(){
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='estudiante'){
-         return view('errores.intentosfallidos');
+         return redirect()->back();
         }
       return view('estudiante.login_studiante');
     }
@@ -69,7 +69,7 @@ return view('estudiante\datos.datos_personales');
     public function m_estudiantes(){
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='estudiante'){
-         return view('errores.intentosfallidos');
+         return redirect()->back();
         }
     return view('m_usuario\m_estudiante');
   }
@@ -79,7 +79,7 @@ return view('estudiante\datos.datos_personales');
 
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='estudiante'){
-         return view('errores.intentosfallidos');
+         return redirect()->back();
         }
         $data = ['title' => 'listado'];
         $pdf = PDF::loadView('pruebapdf', $data);

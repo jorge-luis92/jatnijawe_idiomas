@@ -1,7 +1,7 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_formacion_integral')
 @section('title')
-: Home
+: Busqueda
 @endsection
 
 @section('seccion')

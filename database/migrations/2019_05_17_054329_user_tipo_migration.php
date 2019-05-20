@@ -21,7 +21,7 @@ class UserTipoMigration extends Migration
 
  public function down()
  {
-     // Elimino el campo last_name
+     
      Schema::table('users', function ($table) {
          $table->dropColumn('tipo_usuario');
      });

@@ -21,6 +21,6 @@ class AdministrativoController extends Controller
     }
 
     public function formacion_busqueda(){
-      return view('personal_administrativo\form_integral.busqueda');
+      return view('personal_administrativo\formacion_integral.busqueda');
     }
 }
