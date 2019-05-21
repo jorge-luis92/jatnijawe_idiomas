@@ -14,27 +14,27 @@ Route::get('perfiles', 'Homepag@perfil')->name('perfiles');
 //Route::get('login_personal', 'Administrativo_Con\AdministrativoController@login_admin')->name('login_personal');
 Route::get('login_tallerista', 'Tallerista_Con\TalleristaController@logintallerista')->name('login_tallerista');
 
-Route::get('login_admin', 'Administrativo_Con\LoginAdministrativo@getLogin');
+Route::get('admin', 'Administrativo_Con\LoginAdministrativo@getLogin');
 //Route::post('login_admin', ['as' =>'login_admin', 'uses' => 'Administrativo_Con\AdministrativoController@index']);
-Route::post('login_admin', ['as' =>'login_admin', 'uses' => 'Administrativo_Con\LoginAdministrativo@postLogin']);
+Route::post('admin', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdministrativo@postLogin']);
 //Route::get('logout_admin', ['as' => 'logout', 'uses' => 'Administrativo_Con\LoginAdministrativo@getLogout']);
 //Route::get('/', 'HomeController@index');
 
 
 /* Rutas de Estudiante---*/
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('home_admin', 'Administrativo_Con\AdministrativoController@index');
+
 Route::get('home_auxiliar', 'HomeController@index')->name('home_auxiliar');
 Route::get('gestion_estudiante', 'Administrativo_Con\AdministrativoController@auxiliar')->name('gestion_estudiante');
 });
 
+Route::group(['middleware' => 'checar','auth'], function () {
+Route::get('home_admin', 'Administrativo_Con\AdministrativoController@admin_inicio')->name('home_admin');
+});
 Route::group(['middleware' => 'auth'], function () {
 Route::get('home_formacion', 'HomeController@index')->name('home_formacion');
 Route::get('busqueda', 'Administrativo_Con\AdministrativoController@formacion_busqueda')->name('busqueda');
-
 });
-
-
 
 Route::group(['middleware' => 'auth'], function () {
   Route::get('home', 'HomeController@index')->name('home_estudiante');

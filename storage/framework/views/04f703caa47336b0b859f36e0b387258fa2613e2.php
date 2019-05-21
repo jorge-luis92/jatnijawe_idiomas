@@ -8,7 +8,7 @@
 <!--<h1 style="font-size: 3.5em; color: #000000; font-family: Medium;" align="center">"JATWEB"</h1>-->
   <h2 style="font-size: 1.7em; color: #000000;" align="center">Catálogo de Actividades</h2>
 
-<div class="container" id="font4">
+<div class="container" id="font5">
   </br>
 <div class="table-responsive">
   <table class="table table-bordered table-info" style="color: #000000;" >
@@ -26,7 +26,7 @@
         <td>CONFERENCIA</td>
         <td >2</td>
         <td><a data-toggle="modal" href="#catalogo_act">  <i class="fa fa-info-circle fa-1x fa-fw"></i><span>&nbsp;DETALLES</span></a></td>
-        <td><a href="#" data-toggle="collapse" aria-expanded="true" aria-controls="collapseUtilities">
+        <td><a href="#" >
             <i class="fa fa-plus fa-1x fa-fw"></i><span>&nbsp;INSCRIBIRSE</span>
         </a></td>
       </tr>

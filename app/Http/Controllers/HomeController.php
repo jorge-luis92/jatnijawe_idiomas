@@ -56,14 +56,9 @@ class HomeController extends Controller
 
       //   return $this->loggedOut($request) ?: redirect('perfiles');
        }
-
-
-
-
-      elseif ($usuario_actual->tipo_usuario=='admin') {
-          return view('personal_administrativo\formacion_integral.home_formacion');
-      }
-
+      elseif ($usuario_actual->tipo_usuario=='admin'){
+         return view('personal_administrativo.admin_sistema');
+        }
 
       }
-}
+    }

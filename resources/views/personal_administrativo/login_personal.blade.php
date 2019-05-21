@@ -17,7 +17,7 @@
                     </ul>
                   </div>
                   @endif
-                    <form method="POST" action="{{ route('login_admin')}} ">
+                    <form method="POST" action="{{ route('admin')}} ">
                       @csrf
 
                       <div class="form-group row">

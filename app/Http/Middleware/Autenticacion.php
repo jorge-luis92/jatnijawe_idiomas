@@ -31,7 +31,7 @@ class Autenticacion
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+  /*  public function handle($request, Closure $next)
     {
         if ($this->auth->guest()) {
             if ($request->ajax()) {
@@ -42,5 +42,17 @@ class Autenticacion
         }
 
         return $next($request);
+    }*/
+
+    public function handle($request, Closure $next)
+    {
+
+        $usuario_actual=\Auth::user();
+        if($usuario_actual->tipo_usuario=='admin'){
+           return $next($request);
+        }
+        else{
+          return redirect()->back();
+        }
     }
 }

@@ -20,7 +20,7 @@ class EstudianteController extends Controller
   public function dato_laboral(){
     $usuario_actual=\Auth::user();
      if($usuario_actual->tipo_usuario!='estudiante'){
-       return redirect()->back();
+       return redirect('home');
       }
   return view('estudiante\datos.datos_laborales');
 }

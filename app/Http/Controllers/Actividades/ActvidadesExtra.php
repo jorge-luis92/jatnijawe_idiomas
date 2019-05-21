@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 class ActvidadesExtra extends Controller
 {
     public function catalogos(){
-      return view("estudiante\mis_actividades.catalogo_actividades");
+
+      $usuario_actual=\Auth::user();
+       if($usuario_actual->tipo_usuario!='estudiante'){
+        return redirect()->back();
+        }
+    return view("estudiante\mis_actividades.catalogo_actividades");
     }
+
+
 }

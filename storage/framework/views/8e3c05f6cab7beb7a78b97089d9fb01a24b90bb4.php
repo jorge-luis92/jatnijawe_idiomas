@@ -3,8 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="{{asset('logo.ico')}}">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+
+    <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
   <!-- Custom fonts for this template-->
   <link href="requisitos/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -12,58 +17,60 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/nuevo.css">
-  <script src="{{ asset('js/app.js') }}" defer></script>
-
-  <!-- Fonts -->
-  <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
-  <!-- Styles -->
-
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Auxiliar Administrativo @yield('title')</title>
+  <title>Administrador del Sistema <?php echo $__env->yieldContent('title'); ?></title>
 
 </head>
 
 <body id="page-top">
   <div id="wrapper" ><!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
+    <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href={{ route('home_auxiliar')}}>
-          <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.5em">Jat Nijawe</span></a></li><!-- Divider -->
+        <a class="nav-link" href=<?php echo e(route('home_admin')); ?>>
+          <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.9em">JATWEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
-        Gestión
+        Servicios
       </div><!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#datos_estudiante" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-upload"></i><span style="font-size: 0.9em;">&nbsp;Estudiantes</span>
+          <i class="fas fa-upload"></i><span style="font-size: 0.8em;">&nbsp;Gestión de Estudiantes</span>
         </a>
         <div id="datos_estudiante" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" data-toggle="modal" href="#datos_generales_uno"  aria-haspopup="true" aria-expanded="false">Carga de datos</a>
-            <a class="collapse-item" data-toggle="modal" href="#datos_personales_dos" aria-haspopup="true" aria-expanded="false">Registro de Estudiantes</a>
+            <a class="collapse-item" href=<?php echo e(route('datos_general')); ?>>Altas</a>
           </div>
         </div>
       </li>
 
-        <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
-<!-- Sidebar Toggler (Sidebar) -->
-    <!-- Heading -->
-    <div class="sidebar-heading" style="color: #FFFFFF">
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#activid_extra" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-list"></i><span style="font-size: 0.8em;">&nbsp;Gestión de Coordinadores</span>
+        </a>
+        <div id="activid_extra" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
+            <a  class="collapse-item" href=<?php echo e(route('catalogo')); ?>>Altas</a>
+        </div>
+      </li>
+      <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
+      <!-- Sidebar Toggler (Sidebar) -->
+      <!-- Heading -->
+      <div class="sidebar-heading" style="color: #FFFFFF">
       Utilidades
-    </div>
+      </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-      <a class="nav-link" href="#" aria-expanded="true">
-        <i class="fas fa-fw fa-archive"></i>
-        <span style="font-size: 0.9em;">Manual de Usuario</span>
-      </a>
-    </li>
+      <!-- Nav Item - Pages Collapse Menu -->
+
+
+      <li class="nav-item">
+      <a class="nav-link"  href=<?php echo e(route('ma_estudiante')); ?> aria-expanded="true">
+      <i class="fas fa-fw fa-archive"></i>
+      <span style="font-size: 0.9em;">Manual de Usuario</span>
+    </a>
+      </li>     <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
 
@@ -74,7 +81,7 @@
 
     <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos_idiomas/logo_fon.png'); background-position:center; background-repeat: no-repeat; position: relative; background-color: #FFFFFF;">
           <div id="content">
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5);background-color: #819FF7;">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5); background-color: #819FF7;">
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
@@ -92,17 +99,17 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo e(Auth::user()->name); ?> </span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href=<?php echo e(route('cuenta')); ?> >
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
                     Configuración
                   </a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logout_admin">
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-black-400"></i>
                     Cerrar Sesión
                   </a>
@@ -113,7 +120,7 @@
         </nav>
 
         <!-- End of Topbar -->
-@yield('seccion')
+<?php echo $__env->yieldContent('seccion'); ?>
       </div>
 
       <!-- Footer -->
@@ -136,11 +143,11 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logout_admin" tabindex="-1" role="dialog" aria-labelledby="admin_sis" aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="admin_sis">¿Desea cerrar Sesión?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">¿Desea cerrar Sesión?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -148,16 +155,19 @@
         <div class="modal-body">Presione "Finalizar Sesión" para confirmar.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
+          <a class="btn btn-primary" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
 
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
+          <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+              <?php echo csrf_field(); ?>
           </form>
         </div>
       </div>
     </div>
   </div>
 
+
+
+  </div>
 
 
   <!-- Bootstrap core JavaScript-->
@@ -181,3 +191,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/layouts/plantilla_admin.blade.php ENDPATH**/ ?>

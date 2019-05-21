@@ -15,7 +15,7 @@
                     </ul>
                   </div>
                   <?php endif; ?>
-                    <form method="POST" action="<?php echo e(route('login_admin')); ?> ">
+                    <form method="POST" action="<?php echo e(route('admin')); ?> ">
                       <?php echo csrf_field(); ?>
 
                       <div class="form-group row">

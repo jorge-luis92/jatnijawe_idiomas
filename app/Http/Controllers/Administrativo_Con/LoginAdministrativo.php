@@ -35,10 +35,9 @@ class LoginAdministrativo extends Controller
    public function __construct(Guard $auth)
      {
          $this->auth = $auth;
-         $this->middleware('guest', ['except' => 'getLogout']);
+         //$this->middleware('guest', ['except' => 'getLogout']);
 
      }
-
      /**
       * Get a validator for an incoming registration request.
       *
@@ -46,7 +45,10 @@ class LoginAdministrativo extends Controller
       * @return \Illuminate\Contracts\Validation\Validator
       */
 
-
+      protected function redirectTo()
+   {
+       return view ('personal_administrativo.admin_sistema');
+   }
 
  //login
 
@@ -65,24 +67,18 @@ class LoginAdministrativo extends Controller
          ]);
 
          $credentials = $request->only('name', 'password');
-
+      
          if ($this->auth->attempt($credentials, $request->has('remember')))
          {
-             return view("personal_administrativo.admin_sistema");
-         }
+             return view('personal_administrativo.admin_sistema');
+
+       }
 else{
-
-
          return view("personal_administrativo.login_personal");
-
        }
      }
 
-  public function username()
-  {
 
-      return 'name';
-  }
   public function getLogout(Request $request)
 {
     $this->guard()->logout();

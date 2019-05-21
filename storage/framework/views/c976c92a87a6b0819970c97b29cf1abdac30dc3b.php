@@ -14,8 +14,13 @@
   </br>
   </br>
     <h1>En preparación...</h1>
+    </br>
+    </br>
+    </br>
+    </br>
 </div>
 </br>
+
 </div>
 
   <?php $__env->stopSection(); ?>

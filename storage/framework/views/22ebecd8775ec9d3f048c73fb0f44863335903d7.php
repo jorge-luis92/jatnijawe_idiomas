@@ -21,7 +21,7 @@
   <span style="color: red;">NOTA: </span>
    Recuerda actualizar tus
    <span style="color: #190707">Datos</span> cada inicio de semestre</p>
-   <p style="color: #000000"align="center">* Consulta el <a style="text-decoration: underline; color: #FFFFFF;"  href="">Manual de Usuario</a> </p>
+   <p style="color: #000000"align="center">* Consulta el <a style="text-decoration: underline; color: #FFFFFF;"  href=<?php echo e(route('ma_estudiante')); ?>>Manual de Usuario</a> </p>
 </div>
 </div>
 

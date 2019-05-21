@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -102,7 +102,7 @@
                     Configuración
                   </a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logout_admin">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-black-400"></i>
                     Cerrar Sesión
                   </a>
@@ -136,11 +136,11 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="logout_admin" tabindex="-1" role="dialog" aria-labelledby="admin_sis" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">¿Desea cerrar Sesión?</h5>
+          <h5 class="modal-title" id="admin_sis">¿Desea cerrar Sesión?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>

@@ -9,7 +9,7 @@
   <h2 style="font-size: 1.7em; color: #000000;" align="center">TALLERES</h2>
 
 
-<div class="container" id="font2">
+<div class="container" id="font5">
   </br>
 
 <div class="table-responsive">

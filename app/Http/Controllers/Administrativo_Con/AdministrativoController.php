@@ -18,11 +18,6 @@ class AdministrativoController extends Controller
 
    }
 
-   protected function redirectTo()
-   {
-   return 'admin_sistema';
-   }
-
    public function username()
    {
        return 'name';
@@ -36,23 +31,13 @@ class AdministrativoController extends Controller
      return $this->loggedOut($request) ?: redirect('perfiles');
    }
 
-
-
- public function index( Request $request)
-  {
-    $usuario_actual=\Auth::user();
-     if($usuario_actual->tipo_usuario!='admin'){
-       $this->guard()->logout();
-
-      $request->session()->invalidate();
-
-       return $this->loggedOut($request) ?: redirect('perfiles');
-     }
-    else{
-          return view('personal_administrativo.admin_sistema');
-    }
-    }
-
+   public function admin_inicio(){
+     $usuario_actual=\Auth::user();
+      if($usuario_actual->tipo_usuario!='admin'){
+       return redirect()->back();
+       }
+        return view('personal_administrativo.admin_sistema');
+   }
     public function login_admin(){
         return view('personal_administrativo.login_personal');
     }
