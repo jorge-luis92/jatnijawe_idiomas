@@ -49,6 +49,15 @@ class LoginController extends Controller
 
     }
 
+    protected function redirectTo()
+{
+    return 'home';
+}
+
+    public function username()
+    {
+        return 'id';
+    }
     public function logout(Request $request)
   {
       $this->guard()->logout();

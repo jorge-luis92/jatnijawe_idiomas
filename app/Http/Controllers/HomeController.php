@@ -48,16 +48,20 @@ class HomeController extends Controller
    public function index( Request $request)
     {
       $usuario_actual=\Auth::user();
-       if($usuario_actual->tipo_usuario!='estudiante'){
+       if($usuario_actual->tipo_usuario=='estudiante'){
+      return view('estudiante.home_estudiante');
+        // $this->guard()->logout();
 
-         $this->guard()->logout();
+         //$request->session()->invalidate();
 
-         $request->session()->invalidate();
-
-         return $this->loggedOut($request) ?: redirect('perfiles');
+      //   return $this->loggedOut($request) ?: redirect('perfiles');
        }
-      else {
-        return view('estudiante.home_estudiante');
+
+
+
+
+      elseif ($usuario_actual->tipo_usuario=='admin') {
+          return view('personal_administrativo\formacion_integral.home_formacion');
       }
 
 

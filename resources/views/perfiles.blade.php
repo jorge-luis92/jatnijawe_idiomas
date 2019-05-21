@@ -8,7 +8,7 @@
     </br>
     <div class="form-row">
       <div class="form-group  col-md-12">
-            <a href={{ route('login_personal')}} class="btn btn-primary" role="button" aria-pressed="true">ADMINISTRATIVOS</a>
+            <a href={{ route('login_admin')}} class="btn btn-primary" role="button" aria-pressed="true">ADMINISTRATIVOS</a>
       </div>
 
  </br>

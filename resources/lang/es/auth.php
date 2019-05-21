@@ -10,6 +10,6 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'failed' => 'Correo y/o nombre de usuario incorrectos',
+    'failed' => 'Datos incorrectos',
     'throttle' => 'Demasiados intentos de acceso. Por favor intente nuevamente en :seconds segundos.',
 ];

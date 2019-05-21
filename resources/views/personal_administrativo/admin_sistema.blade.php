@@ -1,4 +1,4 @@
-@extends('layouts.plantillauxiliar')
+@extends('layouts.plantilla_auxadmin')
 
 @section('title')
 Inicio

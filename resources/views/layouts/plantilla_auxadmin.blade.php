@@ -4,8 +4,6 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
     <link rel="shortcut icon" href="{{asset('logo.ico')}}">
   <!-- Custom fonts for this template-->
   <link href="requisitos/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -14,6 +12,16 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/nuevo.css">
+  <script src="{{ asset('js/app.js') }}" defer></script>
+
+  <!-- Fonts -->
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+  <!-- Styles -->
+
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Auxiliar Administrativo @yield('title')</title>
 
 </head>
@@ -64,7 +72,7 @@
     </ul> <!-- End of Sidebar -->
     <!-- Content Wrapper -->
 
-    <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos.png'); background-color: #FFFFFF;">
+    <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos_idiomas/logo_fon.png'); background-position:center; background-repeat: no-repeat; position: relative; background-color: #FFFFFF;">
           <div id="content">
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5);background-color: #819FF7;">
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">

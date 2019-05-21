@@ -8,16 +8,16 @@
                 <div class="card-header" align="center">{{ __('Inicio de Sesión') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{route('login')}}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('email') }}</label>
+                            <label for="id" class="col-md-4 col-form-label text-md-right" >{{ __('Matrícula') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="id" type="tel" onkeypress="return numeros (event)" class="form-control @error('id') is-invalid @enderror" name="id" value="{{ old('id') }}" required autocomplete="id" autofocus>
 
-                                @error('email')
+                                @error('id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -59,4 +59,26 @@
         </div>
     </div>
 </div>
+
+
 @endsection
+
+<script>
+function numeros(e){
+ key = e.keyCode || e.which;
+ tecla = String.fromCharCode(key).toLowerCase();
+ letras = " 0123456789";
+ especiales = [8,37,39,46];
+
+ tecla_especial = false
+ for(var i in especiales){
+if(key == especiales[i]){
+  tecla_especial = true;
+  break;
+     }
+ }
+
+ if(letras.indexOf(tecla)==-1 && !tecla_especial)
+     return false;
+}
+</script>

@@ -57,7 +57,7 @@
         <div id="activid_extra" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item" href="#">Catalógo de Actividades</a>
+            <a  class="collapse-item" href={{ route('catalogo')}}>Catálogo de Actividades</a>
             <a  class="collapse-item" href={{ route('mis_actividades')}}>Mis Actividades </br> Extraescolares</a>
             <a  class="collapse-item" href="#">Solicitud Actividades </br> Extraescolares</a>
             <a  class="collapse-item" href="#">Generar Constancia </br>Parcial</a>
@@ -129,7 +129,7 @@
     <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos_idiomas/logo_fon.png'); background-position:center; background-repeat: no-repeat; position: relative; background-color: #FFFFFF;">
           <div id="content">
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5); background-color: #819FF7;">
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+          <button  class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
           <ul class="navbar-nav ml-auto">
@@ -151,7 +151,7 @@
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href={{ route('cuenta')}} >
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
                     Configuración
                   </a>
@@ -212,32 +212,6 @@
     </div>
   </div>
 
-
-  <div class="modal fade"  tabindex="-1" role="dialog"  id="detalles_taller"  aria-labelledby="detalles_mi" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content" style="width: 26rem; background-color: #cda434;">
-        <div class="modal-header">
-          <h5 class="modal-title" id="detalles_mi" style="color: #FFFFFF">Info de Taller</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div class="container" align="left">
-              <div class="card" >
-        <div class="card-body">
-          <h5 class="card-title">Nombre del Taller: RUGBY</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Tutor: {{ Auth::user()->name }}</h6>
-          <p class="card-text">Area: Cultural</p>
-          <p>Fecha de Inicio: 02/03/2019</p>
-          <p>Fecha de Terminación: 11/07/2019 </p>
-        </div>
-      </div>
-     </div>
-  </div>
-        </div>
-      </div>
-    </div>
   </div>
 
 

@@ -76,8 +76,7 @@ return view('estudiante\datos.datos_personales');
 
     public function generatePDF()
     {
-
-      $usuario_actual=\Auth::user();
+       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='estudiante'){
          return redirect()->back();
         }
@@ -85,10 +84,13 @@ return view('estudiante\datos.datos_personales');
         $pdf = PDF::loadView('pruebapdf', $data);
       //  $pdf = PDF::loadView('estudiante\mis_actividades.listado', $data);
         //return $pdf->download('listado_estudiantes.pdf');
-
         return $pdf->stream('listado_estudiantes.pdf');
-
-
     }
-
+    public function cuenta_estudiante(){
+      $usuario_actual=\Auth::user();
+       if($usuario_actual->tipo_usuario!='estudiante'){
+         return redirect()->back();
+        }
+    return view('estudiante.configuracion_cuenta');
+    }
 }

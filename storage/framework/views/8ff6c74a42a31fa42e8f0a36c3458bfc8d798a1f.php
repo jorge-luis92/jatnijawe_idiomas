@@ -12,24 +12,24 @@
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
     <div class="form-row">
 
-      <div class="form-group col-md-3" style="width: 2rem;" >
+  <!--    <div class="form-group col-md-3" style="width: 2rem;" >
         <span style="color: #000000">* </span>
         <img class="image" src="image/foto.png" width="100px">
            <input type="file" accept="image/png, .jpeg, .jpg" required>
-      </div>
+      </div>-->
       <div class="form-group col-md-3" id="labels">
         <label  for="matricula">Matricula</label>
         <input type="text" class="form-control" id="matricula" placeholder="Matricula" value="<?php echo e(Auth::user()->id); ?>" disabled>
       </div>
-      <div class="form-group col-md-2" id="labels">
+      <div class="form-group col-md-3" id="labels">
         <label for="semestre">Semestre</label>
         <input type="number" class="form-control" id="semestre" placeholder="Semestre" disabled>
       </div>
-      <div class="form-group col-md-2" id="labels">
+      <div class="form-group col-md-3" id="labels">
         <label for="modalidad">Modalidad</label>
         <input type="text" class="form-control" id="modalidad" placeholder="Modalidad" disabled>
       </div>
-      <div class="form-group col-md-2" id="labels">
+      <div class="form-group col-md-3" id="labels">
         <label for="estatus">Estatus</label>
         <input type="text" class="form-control" id="estatus" placeholder="Estatus" disabled>
       </div>
