@@ -1,16 +1,16 @@
-<?php $__env->startSection('content'); ?>
+<?php $__env->startSection('seccion'); ?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header"><?php echo e(__('Register')); ?></div>
+            <div class="container"  id="font5">
+                <div class="card-header" style="opacity: 0.7;filter:alpha(opacity=5); color: #000000;"><?php echo e(__('Alta Tallerista')); ?></div>
 
                 <div class="card-body">
-                    <form method="POST" action="<?php echo e(route('register')); ?>">
+                    <form method="POST" action="<?php echo e(route('register_tallerista')); ?>">
                         <?php echo csrf_field(); ?>
 
                         <div class="form-group row">
-                            <label for="id" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Matricula')); ?></label>
+                            <label for="id" class="col-md-4 col-form-label text-md-right"><?php echo e(__('RFC')); ?></label>
 
                             <div class="col-md-6">
                                 <input id="id" type="text" class="form-control <?php if ($errors->has('id')) :
@@ -39,7 +39,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('name'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="name" value="Usuario-estudiante"  >
+endif; ?>" name="name">
 
                                 <?php if ($errors->has('name')) :
 if (isset($message)) { $messageCache = $message; }
@@ -83,7 +83,8 @@ endif; ?>
                             <label for="tipo_usuario" class="col-md-4 col-form-label text-md-right">Tipo de Usuario</label>
                               <div class="col-md-6">
                               <select name="tipo_usuario" required class="form-control">
-                              <option value="estudiante">Estudiante</option>
+                              <option value="tallerista">Tallerista</option>
+                              <option value="conferencista">Conferencista</option>
                       </select>
                       <?php if ($errors->has('tipo_usuario')) :
 if (isset($message)) { $messageCache = $message; }
@@ -140,7 +141,8 @@ endif; ?>
             </div>
         </div>
     </div>
+  </br>
 </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/auth/register.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/personal_administrativo\formacion_integral\gestion_tallerista/create.blade.php ENDPATH**/ ?>

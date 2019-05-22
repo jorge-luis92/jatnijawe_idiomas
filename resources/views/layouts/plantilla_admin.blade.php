@@ -39,7 +39,7 @@
         <div id="datos_estudiante" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href={{ route('datos_general')}}>Altas</a>
+            <a class="collapse-item" href={{ route('form_nuevo_usuario')}}>Altas</a>
           </div>
         </div>
       </li>
@@ -52,7 +52,7 @@
         <div id="activid_extra" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item" href={{ route('catalogo')}}>Altas</a>
+            <a  class="collapse-item" href={{ route('registros_talleristas')}}>Altas</a>
         </div>
       </li>
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;">

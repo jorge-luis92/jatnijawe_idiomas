@@ -1,18 +1,18 @@
-@extends('layouts.app')
+@extends('layouts.plantilla_formacion_integral')
 
-@section('content')
+@section('seccion')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+            <div class="container"  id="font5">
+                <div class="card-header" style="opacity: 0.7;filter:alpha(opacity=5); color: #000000;">{{ __('Alta Tallerista') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register_tallerista') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('Matricula') }}</label>
+                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('RFC') }}</label>
 
                             <div class="col-md-6">
                                 <input id="id" type="text" class="form-control @error('id') is-invalid @enderror" name="id" value="{{ old('name') }}" required autocomplete="id" autofocus>
@@ -29,7 +29,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="Usuario-estudiante"  >
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -61,7 +61,8 @@
                             <label for="tipo_usuario" class="col-md-4 col-form-label text-md-right">Tipo de Usuario</label>
                               <div class="col-md-6">
                               <select name="tipo_usuario" required class="form-control">
-                              <option value="estudiante">Estudiante</option>
+                              <option value="tallerista">Tallerista</option>
+                              <option value="conferencista">Conferencista</option>
                       </select>
                       @error('tipo_usuario')
                           <span class="invalid-feedback" role="alert">
@@ -105,5 +106,6 @@
             </div>
         </div>
     </div>
+  </br>
 </div>
 @endsection

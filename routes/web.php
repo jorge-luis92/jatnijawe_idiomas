@@ -27,9 +27,14 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('home_auxiliar', 'HomeController@index')->name('home_auxiliar');
 Route::get('gestion_estudiante', 'Administrativo_Con\AdministrativoController@auxiliar')->name('gestion_estudiante');
 });
-
+Route::get('registros_talleristas', 'UserSystemController@index')->name('registros_talleristas');
 Route::group(['middleware' => 'checar','auth'], function () {
 Route::get('home_admin', 'Administrativo_Con\AdministrativoController@admin_inicio')->name('home_admin');
+Route::get('register_tallerista', 'FormacionIntegralController@getRegister');
+//Route::post('register_tallerista', ['as' => 'register_tallerista', 'uses' => 'FormacionIntegralController@postRegister']);
+
+Route::get('form_nuevo_usuario', 'UserSystemController@form_nuevo_usuario')->name('form_nuevo_usuario');
+Route::post('agregar_nuevo_usuario', 'UserSystemController@agregar_nuevo_usuario')->name('agregar_nuevo_usuario');
 });
 Route::group(['middleware' => 'auth'], function () {
 Route::get('home_formacion', 'HomeController@index')->name('home_formacion');
@@ -56,10 +61,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-/* Rutas de Administrativo---*/
+/* Routes of formacion_integral---*/
+Route::get('register_tallerista', 'Auth\RegisterController@getRegister');
+Route::post('register_tallerista', ['as' => 'register_tallerista', 'uses' => 'Auth\RegisterController@postRegister']);
+Route::get('registros_talleristas', 'UserSystemController@index')->name('registros_talleristas');
 
 
-/* endroutes admin---*/
+
+/* endroutes formacion_integral---*/
 
 /* Rutas de auxiliar---*/
 

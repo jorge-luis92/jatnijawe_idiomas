@@ -2,6 +2,7 @@
 
 @section('seccion')
 <div class="container">
+     @include('flash-message')
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card" style="opacity: 0.7;filter:alpha(opacity=5);">

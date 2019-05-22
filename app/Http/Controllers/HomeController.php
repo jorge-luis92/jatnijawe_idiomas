@@ -49,7 +49,16 @@ class HomeController extends Controller
     {
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario=='estudiante'){
+         if($usuario_actual->bandera=='1'){
       return view('estudiante.home_estudiante');
+      }
+      else {
+         $this->guard()->logout();
+
+         $request->session()->invalidate();
+
+      return $this->loggedOut($request) ?: redirect('perfiles');
+      }
         // $this->guard()->logout();
 
          //$request->session()->invalidate();
@@ -57,7 +66,28 @@ class HomeController extends Controller
       //   return $this->loggedOut($request) ?: redirect('perfiles');
        }
       elseif ($usuario_actual->tipo_usuario=='admin'){
+         if($usuario_actual->bandera=='1'){
          return view('personal_administrativo.admin_sistema');
+       }
+       else {
+          $this->guard()->logout();
+
+          $request->session()->invalidate();
+
+       return $this->loggedOut($request) ?: redirect('perfiles');
+       }
+        }
+        elseif ($usuario_actual->tipo_usuario=='formacion'){
+           if($usuario_actual->bandera=='1'){
+           return view('personal_administrativo\formacion_integral.home_formacion');
+         }
+         else {
+            $this->guard()->logout();
+
+            $request->session()->invalidate();
+
+         return $this->loggedOut($request) ?: redirect('perfiles');
+         }
         }
 
       }

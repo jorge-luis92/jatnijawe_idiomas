@@ -1,5 +1,6 @@
 <?php $__env->startSection('seccion'); ?>
 <div class="container">
+     <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card" style="opacity: 0.7;filter:alpha(opacity=5);">

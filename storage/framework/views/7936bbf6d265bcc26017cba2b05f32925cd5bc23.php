@@ -19,7 +19,9 @@
 </head>
 
 <body id="page-top">
-  <div id="wrapper" ><!-- Sidebar -->
+   <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+  <div id="wrapper" >
+    <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
@@ -80,11 +82,12 @@
             </li>
 
 <div class="topbar-divider d-none d-sm-block"></div>
-            <!-- Nav Item - User Information -->
+            <!-- Nav Item - User Information
+          -->
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo e(Auth::user()->name); ?></span>
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuario</span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->

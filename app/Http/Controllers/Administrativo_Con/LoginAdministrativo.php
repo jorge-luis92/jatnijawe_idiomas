@@ -67,14 +67,16 @@ class LoginAdministrativo extends Controller
          ]);
 
          $credentials = $request->only('name', 'password');
-      
+
          if ($this->auth->attempt($credentials, $request->has('remember')))
          {
              return view('personal_administrativo.admin_sistema');
 
        }
 else{
-         return view("personal_administrativo.login_personal");
+
+    return redirect()->route('admin')->with('error','Usuario invalido: !Verifique sus datos!');
+        /* return view("personal_administrativo.login_personal");*/
        }
      }
 
