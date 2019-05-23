@@ -55,19 +55,20 @@ endif; ?>
 
 
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb-0" >
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     <?php echo e(__('Ingresar')); ?>
 
                                 </button>
+                                    </div>
 
-                            </div>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
+                            <li class="nav-item" >
+                                <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Registrar')); ?></a>
                             </li>
                         </div>
+
+                      </div>
                     </form>
                 </div>
             </div>

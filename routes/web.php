@@ -6,6 +6,8 @@ Route::get('/', 'Homepag@homepage')->name('welcome');
 Route::get('prueba', 'Homepag@pruebas')->name('prueba');
 Route::get('denegado', 'Homepag@restringdo')->name('denegado');
 
+Route::get('cargar_datos_usuario_estudiante', 'UserSystemController@cargar_datos_usuario_estudiante');
+Route::post('cargar_datos_usuarios', 'UserSystemController@import');
 
 /* Rutas de logueo---*/
 Route::get('login', 'HomeController@index');
@@ -27,19 +29,19 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('home_auxiliar', 'HomeController@index')->name('home_auxiliar');
 Route::get('gestion_estudiante', 'Administrativo_Con\AdministrativoController@auxiliar')->name('gestion_estudiante');
 });
-Route::get('registros_talleristas', 'UserSystemController@index')->name('registros_talleristas');
-Route::group(['middleware' => 'checar','auth'], function () {
+Route::group(['middleware' => 'auth','checar'], function () {
 Route::get('home_admin', 'Administrativo_Con\AdministrativoController@admin_inicio')->name('home_admin');
 Route::get('register_tallerista', 'FormacionIntegralController@getRegister');
 //Route::post('register_tallerista', ['as' => 'register_tallerista', 'uses' => 'FormacionIntegralController@postRegister']);
-
+Route::get('registros_talleristas', 'UserSystemController@index')->name('registros_talleristas');
 Route::get('form_nuevo_usuario', 'UserSystemController@form_nuevo_usuario')->name('form_nuevo_usuario');
 Route::post('agregar_nuevo_usuario', 'UserSystemController@agregar_nuevo_usuario')->name('agregar_nuevo_usuario');
 });
 Route::group(['middleware' => 'auth'], function () {
 Route::get('home_formacion', 'HomeController@index')->name('home_formacion');
-Route::get('busqueda', 'Administrativo_Con\AdministrativoController@formacion_busqueda')->name('busqueda');
+//Route::get('busqueda', 'Administrativo_Con\AdministrativoController@formacion_busqueda')->name('busqueda');
 });
+Route::get('busqueda', 'Administrativo_Con\AdministrativoController@formacion_busqueda')->name('busqueda');
 
 Route::group(['middleware' => 'auth'], function () {
   Route::get('home', 'HomeController@index')->name('home_estudiante');
@@ -50,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('datos_medico', 'Estudiante_Con\EstudianteController@dato_medico')->name('datos_medico');
   Route::get('datos_personal', 'Estudiante_Con\EstudianteController@dato_personal')->name('datos_personal');
   Route::get('catalogo', 'Actividades\ActvidadesExtra@catalogos')->name('catalogo');
+  Route::post('changePassword','HomeController@changePassword')->name('changePassword');
   //Route::get('home_estudiante', 'HomeController@index');
 
   Route::get('ma_estudiante', 'Estudiante_Con\EstudianteController@m_estudiantes')->name('ma_estudiante');

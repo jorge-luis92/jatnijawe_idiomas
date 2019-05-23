@@ -5,6 +5,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('seccion'); ?>
+ <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <div class="container" id="font5">
   </br>
 <div class="table-responsive">

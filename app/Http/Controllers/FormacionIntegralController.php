@@ -39,7 +39,7 @@ class FormacionIntegralController extends Controller
   $user->tipo_usuario=$data['tipo_usuario'];
 
   if($user->save()){
-    return redirect()->route('registros_talleristas')->with('success','Usuario Creado Correctamente');
+    return redirect()->route('registros_talleristas')->with('success','Usuario Registrado Correctamente');
   }
 
 }

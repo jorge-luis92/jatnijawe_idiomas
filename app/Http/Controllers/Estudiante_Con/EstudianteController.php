@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Estudiante_Con;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
 use PDF;
 
 class EstudianteController extends Controller

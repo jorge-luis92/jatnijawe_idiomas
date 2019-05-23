@@ -1,59 +1,76 @@
 <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
 <?php $__env->startSection('title'); ?>
-: Cuenta
+: Configuración de Cuenta
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('seccion'); ?>
-<h1 style="font-size: 2.0em; color: #000000;" align="center">Configuración de Cuenta</h1>
-<div class="container" id="font4">
-  <form  validate enctype="multipart/form-data" data-toggle="validator">
-  <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
-    <div class="form-row">
+      <div class="row justify-content-center">
 
-      <div class="form-group col-md-5" style="width: 2rem;" >
-        <span style="color: #000000">* </span>
-        <img class="image" src="image/foto.png" width="100px">
-           <input type="file" accept="image/png, .jpeg, .jpg" required>
-      </div>
-
-      <div class="form-group  col-md-3">
-          <label for="password" ><?php echo e(__('Contraseña')); ?></label>
-
-              <input id="password" class="form-control" type="password" name="password">
-
-              <?php if ($errors->has('password')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('password'); ?>
-                  <span class="invalid-feedback" role="alert">
-                      <strong><?php echo e($message); ?></strong>
-                  </span>
-              <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>
-
-      </div>
-
-      <div class="form-group  col-md-3">
-          <label for="password-confirm" ><?php echo e(__('Confirmar Contraseña')); ?></label>
-              <input id="password-confirm" class="form-control"  type="password" name="password_confirmation">
-
-      </div>
+          <div class="col-md-8">
+              <div class="container"  id="font5">
+                  <div class="card-header" style="opacity: 0.7;filter:alpha(opacity=5); color: #000000;"><?php echo e(__('Actualizar Cuenta')); ?></div>
+<?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                  <div class="card-body">
+                          <form class="form-horizontal" method="POST" action="<?php echo e(route('changePassword')); ?>" validate enctype="multipart/form-data" data-toggle="validator">
+                              <?php echo e(csrf_field()); ?>
 
 
-</div>
-<div class="form-group" id="labels">
- <br>
- <div class="col-xs-offset-2 col-xs-9" align="center">
-     <input type="submit" class="btn btn-primary" name="agregar" value="Actualizar">
-    <button type="button"  class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
- </div>
-</div>
-</form>
+                              <div class="form-group col-md-5" style="width: 2rem;" >
+                                <span style="color: #000000"> </span>
+                                <img class="image" src="image/foto.png" width="100px">
+                                   <input type="file" accept="image/png, .jpeg, .jpg">
+                              </div>
 
+                              <div class="form-group<?php echo e($errors->has('current-password') ? ' has-error' : ''); ?>">
+                                  <label for="current-password" class="col-md-4 control-label">Contraseña Actual</label>
 
-</div>
+                                  <div class="col-md-6">
+                                      <input id="current-password" type="password" class="form-control" name="current-password" required>
 
+                                      <?php if($errors->has('current-password')): ?>
+                                          <span class="help-block">
+                                              <strong><?php echo e($errors->first('current-password')); ?></strong>
+                                          </span>
+                                      <?php endif; ?>
+                                  </div>
+                              </div>
+
+                              <div class="form-group<?php echo e($errors->has('new-password') ? ' has-error' : ''); ?>">
+                                  <label for="new-password" class="col-md-4 control-label">Nueva Contraseña</label>
+
+                                  <div class="col-md-6">
+                                      <input id="new-password" type="password" class="form-control" name="new-password" required>
+
+                                      <?php if($errors->has('new-password')): ?>
+                                          <span class="help-block">
+                                              <strong><?php echo e($errors->first('new-password')); ?></strong>
+                                          </span>
+                                      <?php endif; ?>
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="new-password-confirm" class="col-md-4 control-label">Confirmar Contraseña</label>
+
+                                  <div class="col-md-6">
+                                      <input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required>
+                                  </div>
+                              </div>
+
+                              <div class="form-group" align="center">
+                                  <div class="col-md-6 col-md-offset-4">
+                                      <button type="submit" class="btn btn-primary">
+                                          Actualizar Datos
+                                      </button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+</br>
   <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/estudiante/configuracion_cuenta.blade.php ENDPATH**/ ?>

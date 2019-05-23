@@ -64,6 +64,11 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        'archivos' => [
+            'driver' => 'local',
+            'root'   => storage_path('archivos'),
+        ],
+
     ],
 
 ];

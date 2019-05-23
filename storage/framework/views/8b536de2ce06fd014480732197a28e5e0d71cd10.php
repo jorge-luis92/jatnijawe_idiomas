@@ -8,6 +8,7 @@
 </br>
 <div class="container" id="font2">
   <h2 style="font-size: 1.8em; color: #000000;" align="center">Perfil: Coordinadora Formación Integral</h2>
+   <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </br>
 </br>
 </br>

@@ -6,18 +6,18 @@
                 <div class="card-header" style="opacity: 0.7;filter:alpha(opacity=5); color: #000000;"><?php echo e(__('Alta Tallerista')); ?></div>
 
                 <div class="card-body">
-                    <form method="POST" action="<?php echo e(route('register_tallerista')); ?>">
+                    <form method="POST" action="<?php echo e(route('agregar_nuevo_usuario')); ?>">
                         <?php echo csrf_field(); ?>
 
                         <div class="form-group row">
                             <label for="id" class="col-md-4 col-form-label text-md-right"><?php echo e(__('RFC')); ?></label>
 
                             <div class="col-md-6">
-                                <input id="id" type="text" class="form-control <?php if ($errors->has('id')) :
+                                <input  id="id" type="id" class="form-control <?php if ($errors->has('id')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('id'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="id" value="<?php echo e(old('name')); ?>" required autocomplete="id" autofocus>
+endif; ?>" name="id" value="<?php echo e(old('id')); ?>" required autocomplete="id" onKeyUp="this.value = this.value.toUpperCase();" >
 
                                 <?php if ($errors->has('id')) :
 if (isset($message)) { $messageCache = $message; }
@@ -39,7 +39,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('name'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="name">
+endif; ?>" name="name" >
 
                                 <?php if ($errors->has('name')) :
 if (isset($message)) { $messageCache = $message; }
@@ -131,7 +131,7 @@ endif; ?>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    <?php echo e(__('Register')); ?>
+                                    <?php echo e(__('Registrar')); ?>
 
                                 </button>
                             </div>

@@ -19,7 +19,6 @@
 </head>
 
 <body id="page-top">
-   @include('flash-message')
   <div id="wrapper" >
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->

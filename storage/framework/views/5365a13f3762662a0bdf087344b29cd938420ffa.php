@@ -17,7 +17,7 @@
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('id'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="id" value="<?php echo e(old('name')); ?>" required autocomplete="id" autofocus>
+endif; ?>" onkeypress="return numeros (event)" name="id" value="<?php echo e(old('name')); ?>" required autocomplete="id" autofocus>
 
                                 <?php if ($errors->has('id')) :
 if (isset($message)) { $messageCache = $message; }
@@ -31,7 +31,7 @@ endif; ?>
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <!--<div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Usuario')); ?></label>
 
                             <div class="col-md-6">
@@ -39,7 +39,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('name'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="name" value="Usuario-estudiante"  >
+endif; ?>" name="name">
 
                                 <?php if ($errors->has('name')) :
 if (isset($message)) { $messageCache = $message; }
@@ -51,10 +51,7 @@ $message = $errors->first('name'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                             </div>
-                        </div>
-
-
-
+                        </div>-->
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right"><?php echo e(__('E-Mail Address')); ?></label>
 
@@ -142,5 +139,25 @@ endif; ?>
     </div>
 </div>
 <?php $__env->stopSection(); ?>
+
+<script>
+function numeros(e){
+ key = e.keyCode || e.which;
+ tecla = String.fromCharCode(key).toLowerCase();
+ letras = " 0123456789";
+ especiales = [8,37,39,46];
+
+ tecla_especial = false
+ for(var i in especiales){
+if(key == especiales[i]){
+  tecla_especial = true;
+  break;
+     }
+ }
+
+ if(letras.indexOf(tecla)==-1 && !tecla_especial)
+     return false;
+}
+</script>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/auth/register.blade.php ENDPATH**/ ?>

@@ -35,6 +35,16 @@ img#img_banner{
 
 #font5{
   border:2px solid #819FF7;
+    max-width: 1070;
+/*  border-radius:40px 0 40px 0;-->*/
+  text-align: left;
+  box-shadow: 10px 10px 6px -5px rgba(11,23,59,1);
+
+}
+
+#font6{
+  border:2px solid #819FF7;
+    max-width: 650;
 /*  border-radius:40px 0 40px 0;-->*/
   text-align: left;
   box-shadow: 10px 10px 6px -5px rgba(11,23,59,1);

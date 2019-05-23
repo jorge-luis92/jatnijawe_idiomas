@@ -8,6 +8,7 @@
 </br>
 <div class="container" id="font2">
   <h2 style="font-size: 1.8em; color: #000000;" align="center">Perfil: Coordinadora Formación Integral</h2>
+   @include('flash-message')
 </br>
 </br>
 </br>

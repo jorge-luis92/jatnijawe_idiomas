@@ -5,6 +5,7 @@
 @endsection
 
 @section('seccion')
+ @include('flash-message')
 <div class="container" id="font5">
   </br>
 <div class="table-responsive">

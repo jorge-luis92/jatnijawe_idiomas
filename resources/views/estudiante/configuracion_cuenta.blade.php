@@ -1,53 +1,73 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_estudiante')
 @section('title')
-: Cuenta
+: Configuración de Cuenta
 @endsection
 
 @section('seccion')
-<h1 style="font-size: 2.0em; color: #000000;" align="center">Configuración de Cuenta</h1>
-<div class="container" id="font4">
-  <form  validate enctype="multipart/form-data" data-toggle="validator">
-  <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
-    <div class="form-row">
+      <div class="row justify-content-center">
 
-      <div class="form-group col-md-5" style="width: 2rem;" >
-        <span style="color: #000000">* </span>
-        <img class="image" src="image/foto.png" width="100px">
-           <input type="file" accept="image/png, .jpeg, .jpg" required>
-      </div>
+          <div class="col-md-8">
+              <div class="container"  id="font6">
+                  <div class="card-header" style="opacity: 0.7;filter:alpha(opacity=5); color: #000000;">{{ __('Actualizar Cuenta') }}</div>
+@include('flash-message')
+                  <div class="card-body">
+                          <form class="form-horizontal" method="POST" action="{{ route('changePassword') }}" validate enctype="multipart/form-data" data-toggle="validator">
+                              {{ csrf_field() }}
 
-      <div class="form-group  col-md-3">
-          <label for="password" >{{ __('Contraseña') }}</label>
+                              <div class="form-group col-md-5" style="width: 2rem;" >
+                                <span style="color: #000000"> </span>
+                                <img class="image" src="image/foto.png" width="100px">
+                                   <input type="file" accept="image/png, .jpeg, .jpg">
+                              </div>
 
-              <input id="password" class="form-control" type="password" name="password">
+                              <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
+                                  <label for="current-password" class="col-md-4 control-label">Contraseña Actual</label>
 
-              @error('password')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-              @enderror
+                                  <div class="col-md-6">
+                                      <input id="current-password" type="password" class="form-control" name="current-password" required>
 
-      </div>
+                                      @if ($errors->has('current-password'))
+                                          <span class="help-block">
+                                              <strong>{{ $errors->first('current-password') }}</strong>
+                                          </span>
+                                      @endif
+                                  </div>
+                              </div>
 
-      <div class="form-group  col-md-3">
-          <label for="password-confirm" >{{ __('Confirmar Contraseña') }}</label>
-              <input id="password-confirm" class="form-control"  type="password" name="password_confirmation">
+                              <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
+                                  <label for="new-password" class="col-md-4 control-label">Nueva Contraseña</label>
 
-      </div>
+                                  <div class="col-md-6">
+                                      <input id="new-password" type="password" class="form-control" name="new-password" required>
 
+                                      @if ($errors->has('new-password'))
+                                          <span class="help-block">
+                                              <strong>{{ $errors->first('new-password') }}</strong>
+                                          </span>
+                                      @endif
+                                  </div>
+                              </div>
 
-</div>
-<div class="form-group" id="labels">
- <br>
- <div class="col-xs-offset-2 col-xs-9" align="center">
-     <input type="submit" class="btn btn-primary" name="agregar" value="Actualizar">
-    <button type="button"  class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
- </div>
-</div>
-</form>
+                              <div class="form-group">
+                                  <label for="new-password-confirm" class="col-md-4 control-label">Confirmar Contraseña</label>
 
+                                  <div class="col-md-6">
+                                      <input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required>
+                                  </div>
+                              </div>
 
-</div>
-
+                              <div class="form-group" align="center">
+                                  <div class="col-md-6 col-md-offset-4">
+                                      <button type="submit" class="btn btn-primary">
+                                          Actualizar Datos
+                                      </button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+</br>
   @endsection
