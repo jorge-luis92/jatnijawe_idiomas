@@ -15,8 +15,8 @@
 
 
 
-                      <form  method="post"  action="cargar_datos_usuarios"  enctype="multipart/form-data" >                
-
+                    <form method="post"  action="cargar_datos_usuarios"  enctype="multipart/form-data" >
+                     <?php echo e(csrf_field()); ?>
 
 
        <input type="hidden" name="_token" id="_token"  value="<?= csrf_token(); ?>">

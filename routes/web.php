@@ -3,11 +3,11 @@
 /* Página principal---*/
 Route::get('/', 'Homepag@homepage')->name('welcome');
 
-Route::get('prueba', 'Homepag@pruebas')->name('prueba');
+Route::get('prueba', 'UserSystemController@checando')->name('prueba');
 Route::get('denegado', 'Homepag@restringdo')->name('denegado');
 
 Route::get('cargar_datos_usuario_estudiante', 'UserSystemController@cargar_datos_usuario_estudiante');
-Route::post('cargar_datos_usuarios', 'UserSystemController@import');
+Route::post('cargar_datos_usuarios', 'UserSystemController@importPersona');
 
 /* Rutas de logueo---*/
 Route::get('login', 'HomeController@index');
@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('home', 'HomeController@index')->name('home_estudiante');
   //Route::get('home_estudiante', 'Estudiante_Con\EstudianteController@inicio_estudiante')->name('home_estudiante');
   Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');
-  Route::get('datos_general', 'Estudiante_Con\EstudianteController@dato_general')->name('datos_general');
+  Route::get('datos_general', 'ConsultasController@carga_datos_general')->name('datos_general');
   Route::get('datos_laboral', 'Estudiante_Con\EstudianteController@dato_laboral')->name('datos_laboral');
   Route::get('datos_medico', 'Estudiante_Con\EstudianteController@dato_medico')->name('datos_medico');
   Route::get('datos_personal', 'Estudiante_Con\EstudianteController@dato_personal')->name('datos_personal');

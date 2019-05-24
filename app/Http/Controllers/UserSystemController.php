@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use App\Estudiante;
+use App\Persona;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use Illuminate\Http\Request;
@@ -21,7 +23,7 @@ class UserSystemController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->simplePaginate(7);
+        //$users = DB::table('users')->simplePaginate(7);
         $users = DB::table('users')->where([
       ['tipo_usuario', '=', 'tallerista'],
       ['bandera', '=', '1'],
@@ -73,15 +75,92 @@ class UserSystemController extends Controller
 
 }
 
-public function import()
-    {
-        Excel::import(new UsersImport, 'archivodatos.xlsx');
+      public function importEstudiante(Request $request)
+{
+    Excel::load('public/insertardatos.xlsx',function($reader){
 
-        $usuario=new User;
-        $usuario->save();
+    $reader->get();
 
-        return redirect('busqueda')->with('success', 'Perfecto!');
-    }
+      // iteracción
+      $reader->each(function($row) {
+
+          $user = new Estudiante;
+          $user->matricula = $row->matricula;
+          $user->modalidad = $row->modalidad;
+          $user->fecha_ingreso = $row->fecha_ingreso;
+          $user->semestre = $row->semestre;
+          $user->grupo = $row->grupo;
+          $user->estatus = $row->estatus;
+          $user->bachillerato_origen = $row->bachillerato_origen;
+          $user->save();
+
+      });
+
+  });
+
+  return "Terminado";
+}
+
+
+
+      public function importPersona(Request $request)
+{
+    Excel::load('public/carga_persona.xlsx',function($reader){
+
+    $reader->get();
+
+      // iteracción
+      $reader->each(function($row) {
+          $user = new Persona;
+          $user->id_persona = $row->id_persona;
+          $user->nombre = $row->nombre;
+          $user->apellido_paterno = $row->apellido_paterno;
+          $user->apellido_materno = $row->apellido_materno;
+          $user->curp = $row->curp;
+          $user->fecha_nacimiento = $row->fecha_nacimiento;
+          $user->lugar_nacimiento = $row->lugar_nacimiento;
+          $user->tipo_sangre = $row->tipo_sangre;
+          $user->edad = $row->edad;
+          $user->genero = $row->genero;
+          $user->save();
+
+      });
+
+  });
+
+  return "Terminado";
+}
+
+
+
+public function importUsers(Request $request)
+{
+Excel::load('public/insertardatos.xlsx',function($reader){
+
+$reader->get();
+
+// iteracción
+$reader->each(function($row) {
+
+    $user = new User;
+    $user->id = $row->id;
+    $user->name = $row->nombre;
+    $user->email = $row->email;
+    $user->password = Hash::make($row->password);
+    $user->tipo_usuario = $row->tipo_usuario;
+    $user->save();
+
+});
+
+});
+
+return "Terminado";
+}
+
+
+
+
+
 
 
   public function cargar_datos_usuarios(Request $request)

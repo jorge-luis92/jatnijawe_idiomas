@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Estudiante extends Model
 {
-     protected $table = 'estudiantes';
-     protected $primaryKey = 'id'; // or null
-    public $incrementing = false;
-    const created_at = 'fecha_alta';
-    const updated_at = 'fecha_actualizacion';
-   $table = App\Estudiante::all();
+  protected $table = 'estudiantes';
+  protected $primaryKey = 'matricula'; // or null
+ public $incrementing = false;
+ protected $fillable = [
+     'matricula', 'modalidad','fecha_ingreso', 'semestre','grupo','estatus','bachillerato_origen',
+ ];
+
 
 
    public function store(Request $request)

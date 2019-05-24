@@ -163,6 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+
+
         /*
          * Package Service Providers...
          */
@@ -206,7 +208,6 @@ return [
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
         'DB' => Illuminate\Support\Facades\DB::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
@@ -231,6 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Flash' => Laracasts\Flash\Flash::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

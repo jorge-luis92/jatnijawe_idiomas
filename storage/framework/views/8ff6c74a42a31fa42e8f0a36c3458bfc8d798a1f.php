@@ -23,7 +23,7 @@
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="semestre">Semestre</label>
-        <input type="number" class="form-control" id="semestre" placeholder="Semestre" disabled>
+        <input type="number" class="form-control" id="semestre" placeholder="Semestre" value="input(semestre)" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="modalidad">Modalidad</label>
