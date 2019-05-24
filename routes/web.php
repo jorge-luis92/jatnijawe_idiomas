@@ -94,5 +94,7 @@ Route::get('registros_talleristas', 'UserSystemController@index')->name('registr
 Route::get('sisi','Homepag@sino');
 Route::get('notes', 'Estudiante_Con\EstudianteController@index');
 Route::get('pdf', 'Estudiante_Con\EstudianteController@pdf_g');
+Route::get('consultitas', 'ConsultasController@carga_datos_general');
+
 
 Auth::routes();

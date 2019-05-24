@@ -22,16 +22,15 @@ class ConsultasController extends Controller
 
     public function carga_datos_general()
     {
-      $usuario_actual=\Auth::user();
-       if($usuario_actual->tipo_usuario!='estudiante'){
-        return redirect()->back();
-        }
-        else {
+
       $users = DB::table('users')
             ->join('estudiantes', 'users.id', '=', 'estudiantes.matricula')
-            ->select('users.*', 'estudiantes.matricula')
+            ->select('users.id', 'users.email', 'estudiantes.matricula', 'estudiantes.semestre')
             ->get();
-            return view('estudiante\datos.datos_generales', ['users' => $users]);
-    }
+
+            return view('consultitas', ['users' => $users]);
+
 }
+
+
 }

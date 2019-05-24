@@ -8,7 +8,7 @@
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos Generales</h1>
 <div class="container" id="font4">
 </br>
-  <form  validate enctype="multipart/form-data" data-toggle="validator">
+  <form  action="<?php echo e(route('datos_general')); ?>" validate enctype="multipart/form-data" data-toggle="validator" method="GET">
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
     <div class="form-row">
 
@@ -23,7 +23,7 @@
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="semestre">Semestre</label>
-        <input type="number" class="form-control" id="semestre" placeholder="Semestre" value="input(semestre)" disabled>
+        <input type="number" class="form-control" id="semestre" placeholder="Semestre" value="" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="modalidad">Modalidad</label>
