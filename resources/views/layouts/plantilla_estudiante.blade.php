@@ -22,6 +22,7 @@
 </head>
 
 <body id="page-top">
+  <?php $uso = $u->nombre." ".$u->apellido_paterno." ".$u->apellido_materno ?>
   <div id="wrapper" ><!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
@@ -146,7 +147,7 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} </span>
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$uso}}</span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->

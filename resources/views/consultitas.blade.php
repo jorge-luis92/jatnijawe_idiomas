@@ -7,14 +7,13 @@
 
 <body >
 <ul>
-  @foreach($users  as $user)
 
-  <li>{{$user->id}}</li>
-    <li>{{$user->email}}</li>
-    <h1> spe</h1>
-    <li>{{$user->matricula}}</li>
-      <li>{{$user->semestre}}</li>
-  @endforeach
+  <li>{{$u->email}}</li>
+  <li>{{$u->nombre}}</li>
+  <li>{{$u->apellido_paterno}}</li>
+  <li>{{$u->modalidad}}</li>
+    <li>{{$u->fecha_nacimiento}}</li>
+
 </ul>
 </body>
 

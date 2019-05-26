@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Extracurricular;
+use Illuminate\Support\Facades\DB;
+use Storage;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class FormacionIntegralController extends Controller
 {
@@ -46,5 +50,7 @@ class FormacionIntegralController extends Controller
   public function read(){
     return view('personal_administrativo\formacion_integral\gestion_tallerista.read');
   }
+
+
 
 }

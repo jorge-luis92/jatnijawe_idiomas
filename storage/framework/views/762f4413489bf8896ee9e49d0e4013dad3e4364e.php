@@ -20,20 +20,20 @@
       </div>-->
       <div class="form-group col-md-3" id="labels">
         <label  for="matricula">Matricula</label>
-        <input type="text" class="form-control" id="matricula"  value="<?php echo e($u->matricula); ?>" disabled>
+        <input type="text" class="form-control" id="matricula" placeholder="Matricula" value="<?php echo e(Auth::user()->id); ?>" disabled>
       </div>
 
       <div class="form-group col-md-3" id="labels">
-        <label for="semestre">Semestre</label>
-        <input type="number" class="form-control" id="semestre" value="<?php echo e($u->semestre); ?>" disabled>
+        <label for="semestr">Semestre</label>
+        <input type="number" class="form-control" id="semestre" placeholder="Semestre" value="{!! u->semestre!! }" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="modalidad">Modalidad</label>
-        <input type="text" class="form-control" id="modalidad" value="<?php echo e($u->modalidad); ?>" disabled>
+        <input type="text" class="form-control" id="modalidad" placeholder="Modalidad" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="estatus">Estatus</label>
-        <input type="text" class="form-control" id="estatus" value="<?php echo e($u->estatus); ?>"disabled>
+        <input type="text" class="form-control" id="estatus" placeholder="Estatus" disabled>
       </div>
     </div>
 
@@ -41,30 +41,30 @@
 
       <div class="form-group col-md-3" id="labels">
         <label for="nombre">Nombre(s)</label>
-        <input type="text" class="form-control" id="nombre" value="<?php echo e($u->nombre); ?>" disabled>
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre(s)"  value="<?php echo e(Auth::user()->name); ?>" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="ap_pat">Apellido Paterno</label>
-        <input type="text" class="form-control" id="ap_pat"  value="<?php echo e($u->apellido_paterno); ?>" disabled>
+        <input type="text" class="form-control" id="ap_pat" placeholder="Apellido Paterno" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="ap_mat">Apellido Materno</label>
-        <input type="text" class="form-control" id="ap_mat" value="<?php echo e($u->apellido_materno); ?>" disabled>
+        <input type="text" class="form-control" id="ap_mat" placeholder="Apellido Materno" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="fecha_nac">Fecha de Nacimiento</label>
-        <input type="date" class="form-control" id="fecha_nac" value="<?php echo e($u->fecha_nacimiento); ?>" disabled>
+        <input type="date" class="form-control" id="fecha_nac" placeholder="Fecha de Nacimiento" disabled>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-3" id="labels">
         <label for="ap_pat">CURP</label>
-        <input type="text" class="form-control" id="curp" value="<?php echo e($u->curp); ?>" disabled>
+        <input type="text" class="form-control" id="curp" placeholder="CURP" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="genero">Género</label>
-        <input type="text" class="form-control" id="genero" value="<?php echo e($u->genero); ?>" disabled>
+        <input type="text" class="form-control" id="genero" placeholder="Género" disabled>
       </div>
       <div class="radio col-md-3" id="labels">
         <label>* ¿Hablante de alguna Lengua?</label>
@@ -144,4 +144,4 @@
     }
 </script>
 
-<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/estudiante\datos/datos_generales.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/estudiante\datos\datos_generales.blade.php ENDPATH**/ ?>

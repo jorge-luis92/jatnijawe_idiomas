@@ -7,14 +7,13 @@
 
 <body >
 <ul>
-  <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-  <li><?php echo e($user->id); ?></li>
-    <li><?php echo e($user->email); ?></li>
-    <h1> spe</h1>
-    <li><?php echo e($user->matricula); ?></li>
-      <li><?php echo e($user->semestre); ?></li>
-  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+  <li><?php echo e($u->email); ?></li>
+  <li><?php echo e($u->nombre); ?></li>
+  <li><?php echo e($u->apellido_paterno); ?></li>
+  <li><?php echo e($u->modalidad); ?></li>
+    <li><?php echo e($u->fecha_nacimiento); ?></li>
+
 </ul>
 </body>
 

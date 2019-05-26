@@ -7,8 +7,9 @@
 @section('seccion')
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos Generales</h1>
 <div class="container" id="font4">
+
 </br>
-  <form  action="{{ route('datos_general')}}" validate enctype="multipart/form-data" data-toggle="validator" method="GET">
+  <form  validate enctype="multipart/form-data" data-toggle="validator" >
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
     <div class="form-row">
 
@@ -19,49 +20,51 @@
       </div>-->
       <div class="form-group col-md-3" id="labels">
         <label  for="matricula">Matricula</label>
-        <input type="text" class="form-control" id="matricula" placeholder="Matricula" value="{{ Auth::user()->id }}" disabled>
+        <input type="text" class="form-control" id="matricula"  value="{{$u->matricula}}" disabled>
       </div>
+
       <div class="form-group col-md-3" id="labels">
         <label for="semestre">Semestre</label>
-        <input type="number" class="form-control" id="semestre" placeholder="Semestre" value="" disabled>
+        <input type="number" class="form-control" id="semestre" value="{{$u->semestre}}" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="modalidad">Modalidad</label>
-        <input type="text" class="form-control" id="modalidad" placeholder="Modalidad" disabled>
+        <input type="text" class="form-control" id="modalidad" value="{{$u->modalidad}}" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="estatus">Estatus</label>
-        <input type="text" class="form-control" id="estatus" placeholder="Estatus" disabled>
+        <input type="text" class="form-control" id="estatus" value="{{$u->estatus}}"disabled>
       </div>
     </div>
 
     <div class="form-row">
+
       <div class="form-group col-md-3" id="labels">
         <label for="nombre">Nombre(s)</label>
-        <input type="text" class="form-control" id="nombre" placeholder="Nombre(s)"  value="{{ Auth::user()->name }}" disabled>
+        <input type="text" class="form-control" id="nombre" value="{{$u->nombre}}" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="ap_pat">Apellido Paterno</label>
-        <input type="text" class="form-control" id="ap_pat" placeholder="Apellido Paterno" disabled>
+        <input type="text" class="form-control" id="ap_pat"  value="{{$u->apellido_paterno}}" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="ap_mat">Apellido Materno</label>
-        <input type="text" class="form-control" id="ap_mat" placeholder="Apellido Materno" disabled>
+        <input type="text" class="form-control" id="ap_mat" value="{{$u->apellido_materno}}" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="fecha_nac">Fecha de Nacimiento</label>
-        <input type="date" class="form-control" id="fecha_nac" placeholder="Fecha de Nacimiento" disabled>
+        <input type="date" class="form-control" id="fecha_nac" value="{{$u->fecha_nacimiento}}" disabled>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-3" id="labels">
         <label for="ap_pat">CURP</label>
-        <input type="text" class="form-control" id="curp" placeholder="CURP" disabled>
+        <input type="text" class="form-control" id="curp" value="{{$u->curp}}" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="genero">Género</label>
-        <input type="text" class="form-control" id="genero" placeholder="Género" disabled>
+        <input type="text" class="form-control" id="genero" value="{{$u->genero}}" disabled>
       </div>
       <div class="radio col-md-3" id="labels">
         <label>* ¿Hablante de alguna Lengua?</label>
@@ -108,6 +111,7 @@
       </div>
   </div>
     <br>
+
   </form>
 
 </div>
