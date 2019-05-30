@@ -4,7 +4,9 @@
 @endsection
 
 @section('seccion')
+
   <div class="container" id="font2" >
+    @include('flash-message')
     </br>
     <div class="form-row">
       <div class="form-group  col-md-12">

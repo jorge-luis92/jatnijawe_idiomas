@@ -35,10 +35,10 @@ class UserSystemController extends Controller
 
     public function form_nuevo_usuario()
 	{
-    $usuario_actual=\Auth::user();
-     if($usuario_actual->tipo_usuario!='admin'){
-       return redirect()->back();
-      }
+  //  $usuario_actual=\Auth::user();
+    // if($usuario_actual->tipo_usuario!='admin'){
+     //return redirect()->back();
+    //}
 		return view('personal_administrativo\formacion_integral\gestion_tallerista.create');
 	}
 
@@ -50,6 +50,8 @@ class UserSystemController extends Controller
       'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
       'password' => ['required', 'string', 'min:8', 'confirmed'],
       'tipo_usuario' => ['required', 'string', 'max:255'],
+      'id_persona' => ['required', 'string', 'max:255'],
+
     ]);
 
     $data = $request;
@@ -61,6 +63,8 @@ class UserSystemController extends Controller
     $user->email=$data['email'];
     $user->password=Hash::make($data['password']);
     $user->tipo_usuario=$data['tipo_usuario'];
+    $user->id_persona=$data['id_persona'];
+
 
     if($user->save()){
       return redirect()->route('registros_talleristas')->with('success','Usuario Creado Correctamente');
@@ -77,7 +81,7 @@ class UserSystemController extends Controller
 
       public function importEstudiante(Request $request)
 {
-    Excel::load('public/insertardatos.xlsx',function($reader){
+    Excel::load('public/usernueva5.xlsx',function($reader){
 
     $reader->get();
 
@@ -92,6 +96,7 @@ class UserSystemController extends Controller
           $user->grupo = $row->grupo;
           $user->estatus = $row->estatus;
           $user->bachillerato_origen = $row->bachillerato_origen;
+          $user->id_persona = $row->id_persona;
           $user->save();
 
       });
@@ -135,7 +140,8 @@ class UserSystemController extends Controller
 
 public function importUsers(Request $request)
 {
-Excel::load('public/insertardatos.xlsx',function($reader){
+
+Excel::load('public/usersnueva5.xlsx',function($reader){
 
 $reader->get();
 
@@ -143,18 +149,20 @@ $reader->get();
 $reader->each(function($row) {
 
     $user = new User;
-    $user->id = $row->id;
-    $user->name = $row->nombre;
+    $user->id_user = $row->id_user;
+    $user->username = $row->username;
     $user->email = $row->email;
     $user->password = Hash::make($row->password);
     $user->tipo_usuario = $row->tipo_usuario;
+    $user->id_persona = $row->id_persona;
     $user->save();
 
 });
 
 });
-
-return "Terminado";
+if($user->save()){
+  return redirect()->route('cargar_datos_usuario_estudiante')->with('success','Datos actualizados correctamente');
+}
 }
 
 

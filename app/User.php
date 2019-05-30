@@ -18,10 +18,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
      protected $table = 'users';
-     protected $primaryKey = 'id'; // or null
+     protected $primaryKey = 'id_user'; // or null
     public $incrementing = false;
     protected $fillable = [
-        'id', 'name','email', 'password','tipo_usuario',
+        'id_user', 'username','email', 'password','tipo_usuario','id_persona',
     ];
 
     /**

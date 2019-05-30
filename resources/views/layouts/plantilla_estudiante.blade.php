@@ -22,7 +22,7 @@
 </head>
 
 <body id="page-top">
-  <?php $uso = $u->nombre." ".$u->apellido_paterno." ".$u->apellido_materno ?>
+
   <div id="wrapper" ><!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
@@ -42,8 +42,8 @@
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href={{ route('datos_general')}}>Datos Generales</a>
             <a class="collapse-item" href={{ route('datos_personal')}}>Datos Personales</a>
-            <a class="collapse-item" href={{ route('datos_laboral')}}>Datos Laborales</a>
             <a class="collapse-item" href={{ route('datos_medico')}}>Datos Médicos</a>
+            <a class="collapse-item" href={{ route('otras_actividades')}}>Otras Actividades</a>
             <a class="collapse-item" href="#">Descargar Hoja de Datos </br> Personales</a>
 
           </div>
@@ -147,7 +147,7 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$uso}}</span>
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->

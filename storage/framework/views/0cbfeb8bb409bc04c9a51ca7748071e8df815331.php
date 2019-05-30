@@ -51,7 +51,7 @@ $arrayMeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
             <td>
 				</br>
 
-				A el/la C.   {{ Auth::user()->id_user }} <strong style="font-size:14px"> </strong></br>
+				A el/la C.   <?php echo e(Auth::user()->id_user); ?> <strong style="font-size:14px"> </strong></br>
                 Alumno(a) de la <strong style="font-size:14px">LICENCIATURA EN ENSE&Ntilde;ANZA DE IDIOMAS .........................<BR /></strong>Por haber cumplido satisfactoriamente con las Horas Extracurriculares en el:
 
 
@@ -143,3 +143,4 @@ $arrayMeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
             </table>
 
 </body>
+<?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/pruebapdf.blade.php ENDPATH**/ ?>

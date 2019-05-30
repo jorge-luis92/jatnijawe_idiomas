@@ -1,10 +1,10 @@
-<link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_estudiante')
-@section('title')
-: Datos Médicos
-@endsection
+<link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
-@section('seccion')
+<?php $__env->startSection('title'); ?>
+: Datos Médicos
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('seccion'); ?>
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos Médicos</h1>
 <div class="container" id="font4">
 </br>
@@ -100,7 +100,7 @@
 </div>
 </br>
 
-  @endsection
+  <?php $__env->stopSection(); ?>
 
 
 
@@ -148,3 +148,5 @@ if(key == especiales[i]){
      return false;
 }
 </script>
+
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/estudiante\datos/datos_medicos.blade.php ENDPATH**/ ?>

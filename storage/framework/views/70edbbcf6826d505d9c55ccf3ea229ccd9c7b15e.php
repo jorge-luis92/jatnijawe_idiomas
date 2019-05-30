@@ -3,7 +3,7 @@
   <head>
     <meta name="google-site-verification">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8 , shrink-to-fit=no" />
-    <link rel="shortcut icon" href="{{ asset('logo.ico') }}">
+    <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <link href="css/animate.min.css" rel="stylesheet">
@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Home: @yield('title')</title>
+    <title>Home: <?php echo $__env->yieldContent('title'); ?></title>
 
   </head>
   <body style="background-image: url('image/logos_idiomas/logo_fon.png'); background-size: 1000px; background-position:center; background-repeat: no-repeat; background-color: #FFFFFF  ;">
@@ -40,7 +40,7 @@
     <div class="container" align="center" id="font2">
 
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #58ACFA; border-radius: 14px 14px 14px 14px;-moz-border-radius: 14px 14px 14px 14px;-webkit-border-radius: 14px 14px 14px 14px;border: 0px solid #000000;" >
-      <a class="navbar-brand" href={{ route('welcome')}}>
+      <a class="navbar-brand" href=<?php echo e(route('welcome')); ?>>
         <img src="logo.ico" width="30" height="30" class="d-inline-block align-top" alt="">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
@@ -80,7 +80,7 @@
 
               <ul class="nav navbar-nav navbar-right ">
                 <li>
-                  <a href={{ route('perfiles')}}  class="btn btn-outline-primary active" role="button" aria-pressed="true">JATWEB</a>
+                  <a href=<?php echo e(route('perfiles')); ?>  class="btn btn-outline-primary active" role="button" aria-pressed="true">JATWEB</a>
                 </li>
 
               </ul>
@@ -89,7 +89,7 @@
          </nav>
   </div>
 
-    @yield('seccion')
+    <?php echo $__env->yieldContent('seccion'); ?>
   </br>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -106,3 +106,4 @@
   </div>
   </body>
 </html>
+<?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/layouts/plantillahome.blade.php ENDPATH**/ ?>

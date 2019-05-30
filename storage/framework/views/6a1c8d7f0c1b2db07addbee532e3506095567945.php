@@ -1,10 +1,10 @@
-<link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_estudiante')
-@section('title')
-: Datos Generales
-@endsection
+<link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
-@section('seccion')
+<?php $__env->startSection('title'); ?>
+: Datos Generales
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('seccion'); ?>
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos Generales</h1>
 <div class="container" id="font4">
 
@@ -20,20 +20,20 @@
       </div>-->
       <div class="form-group col-md-3" id="labels">
         <label  for="matricula">Matricula</label>
-        <input type="text" class="form-control" id="matricula"  value="{{$u->matricula}}" disabled>
+        <input type="text" class="form-control" id="matricula"  value="<?php echo e($u->matricula); ?>" disabled>
       </div>
 
       <div class="form-group col-md-3" id="labels">
         <label for="semestre">Semestre</label>
-        <input type="number" class="form-control" id="semestre" value="{{$u->semestre}}" disabled>
+        <input type="number" class="form-control" id="semestre" value="<?php echo e($u->semestre); ?>" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="modalidad">Modalidad</label>
-        <input type="text" class="form-control" id="modalidad" value="{{$u->modalidad}}" disabled>
+        <input type="text" class="form-control" id="modalidad" value="<?php echo e($u->modalidad); ?>" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="estatus">Estatus</label>
-        <input type="text" class="form-control" id="estatus" value="{{$u->estatus}}"disabled>
+        <input type="text" class="form-control" id="estatus" value="<?php echo e($u->estatus); ?>"disabled>
       </div>
     </div>
 
@@ -41,30 +41,30 @@
 
       <div class="form-group col-md-3" id="labels">
         <label for="nombre">Nombre(s)</label>
-        <input type="text" class="form-control" id="nombre" value="{{ $u->nombre}}" disabled>
+        <input type="text" class="form-control" id="nombre" value="<?php echo e($u->nombre); ?>" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="ap_pat">Apellido Paterno</label>
-        <input type="text" class="form-control" id="ap_pat"  value="{{ $u->apellido_paterno}}" disabled>
+        <input type="text" class="form-control" id="ap_pat"  value="<?php echo e($u->apellido_paterno); ?>" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="ap_mat">Apellido Materno</label>
-        <input type="text" class="form-control" id="ap_mat" value="{{ $u->apellido_materno}}" disabled>
+        <input type="text" class="form-control" id="ap_mat" value="<?php echo e($u->apellido_materno); ?>" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="fecha_nac">Fecha de Nacimiento</label>
-        <input type="date" class="form-control" id="fecha_nac" value="{{ $u->fecha_nacimiento}}" disabled>
+        <input type="date" class="form-control" id="fecha_nac" value="<?php echo e($u->fecha_nacimiento); ?>" disabled>
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-3" id="labels">
         <label for="ap_pat">CURP</label>
-        <input type="text" class="form-control" id="curp" value="{{ $u->curp}}" disabled>
+        <input type="text" class="form-control" id="curp" value="<?php echo e($u->curp); ?>" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="genero">Género</label>
-        <input type="text" class="form-control" id="genero" value="{{ $u->genero}}" disabled>
+        <input type="text" class="form-control" id="genero" value="<?php echo e($u->genero); ?>" disabled>
       </div>
       <div class="radio col-md-3" id="labels">
         <label>* ¿Hablante de alguna Lengua?</label>
@@ -117,7 +117,7 @@
 </div>
 </br>
 
-  @endsection
+  <?php $__env->stopSection(); ?>
 
 
 
@@ -143,3 +143,5 @@
         $(".inputBeca").attr("disabled","disabled");
     }
 </script>
+
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/estudiante\datos/datos_generales.blade.php ENDPATH**/ ?>

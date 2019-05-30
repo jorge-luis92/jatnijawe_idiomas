@@ -3,12 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-
     <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
   <!-- Custom fonts for this template-->
   <link href="requisitos/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,108 +12,59 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/nuevo.css">
-  <title>Estudiante <?php echo $__env->yieldContent('title'); ?></title>
+
+  <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
+
+  <!-- Fonts -->
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+  <!-- Styles -->
+
+  <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
+  <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+  <title>Auxiliar Administrativo <?php echo $__env->yieldContent('title'); ?></title>
 
 </head>
 
 <body id="page-top">
-
   <div id="wrapper" ><!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
+    <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href=<?php echo e(route('home_estudiante')); ?>>
-          <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.9em">JATWEB</span></a></li><!-- Divider -->
+        <a class="nav-link" href=<?php echo e(route('home_auxiliar')); ?>>
+          <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.5em">Jat Nijawe</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
-        Servicios
+        Gestión
       </div><!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#datos_estudiante" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-upload"></i><span style="font-size: 0.8em;">&nbsp;Actualización de Datos</span>
+          <i class="fas fa-upload"></i><span style="font-size: 0.9em;">&nbsp;Estudiantes</span>
         </a>
         <div id="datos_estudiante" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('datos_general')); ?>>Datos Generales</a>
-            <a class="collapse-item" href=<?php echo e(route('datos_personal')); ?>>Datos Personales</a>
-            <a class="collapse-item" href=<?php echo e(route('datos_laboral')); ?>>Datos Laborales</a>
-            <a class="collapse-item" href=<?php echo e(route('datos_medico')); ?>>Datos Médicos</a>
-            <a class="collapse-item" href="#">Descargar Hoja de Datos </br> Personales</a>
-
+            <a class="collapse-item" data-toggle="modal" href="#datos_generales_uno"  aria-haspopup="true" aria-expanded="false">Carga de datos</a>
+            <a class="collapse-item" data-toggle="modal" href="#datos_personales_dos" aria-haspopup="true" aria-expanded="false">Registro de Estudiantes</a>
           </div>
         </div>
       </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#activid_extra" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fa fa-list"></i><span style="font-size: 0.8em;">&nbsp;Formación Integral</span>
-        </a>
-        <div id="activid_extra" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item" href=<?php echo e(route('catalogo')); ?>>Catálogo de Actividades</a>
-            <a  class="collapse-item" href=<?php echo e(route('mis_actividades')); ?>>Mis Actividades </br> Extraescolares</a>
-            <a  class="collapse-item" href="#">Solicitud Actividades </br> Extraescolares</a>
-            <a  class="collapse-item" href="#">Generar Constancia </br>Parcial</a>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#prac_prof" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fa fa-book fa-1x fa-fw"></i><span style="font-size: 0.8em;">&nbsp;Prácticas Profesionales</span>
-        </a>
-        <div id="prac_prof" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item" href="#">Requisitos Previos</a>
-            <a  class="collapse-item" href="#">Solicitud de Prácticas</br>Profesionales</a>
-            </div>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#serv_social" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fa fa-blind fa-1x fa-fw"></i><span style="font-size: 0.8em;">&nbsp;Servicio Social</span>
-        </a>
-        <div id="serv_social" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item" href="#">Requisitos Previos</a>
-            <a  class="collapse-item" href="#">Solicitud de Servicio Social</a>
-          </div>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mis_talleres_menu" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fa fa-heart fa-1x fa-fw"></i><span style="font-size: 0.8em;">&nbsp;Mis Talleres</span>
-        </a>
-        <div id="mis_talleres_menu" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item"  href=<?php echo e(route('mi_taller')); ?>>Listado de Talleres</a>
-            <a  class="collapse-item" href="#">Gestión de Taller</a>
-          </div>
-        </div>
-      </li>
-      <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
-      <!-- Sidebar Toggler (Sidebar) -->
-      <!-- Heading -->
-      <div class="sidebar-heading" style="color: #FFFFFF">
+        <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
+<!-- Sidebar Toggler (Sidebar) -->
+    <!-- Heading -->
+    <div class="sidebar-heading" style="color: #FFFFFF">
       Utilidades
-      </div>
+    </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-
-
-      <li class="nav-item">
-      <a class="nav-link"  href=<?php echo e(route('ma_estudiante')); ?> aria-expanded="true">
-      <i class="fas fa-fw fa-archive"></i>
-      <span style="font-size: 0.9em;">Manual de Usuario</span>
-    </a>
-      </li>     <!-- Sidebar Toggler (Sidebar) -->
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+      <a class="nav-link" href="#" aria-expanded="true">
+        <i class="fas fa-fw fa-archive"></i>
+        <span style="font-size: 0.9em;">Manual de Usuario</span>
+      </a>
+    </li>
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
 
@@ -129,7 +75,7 @@
 
     <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos_idiomas/logo_fon.png'); background-position:center; background-repeat: no-repeat; position: relative; background-color: #FFFFFF;">
           <div id="content">
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5); background-color: #819FF7;">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5);background-color: #819FF7;">
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
@@ -152,12 +98,12 @@
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href=<?php echo e(route('cuenta')); ?> >
+                    <a class="dropdown-item" href="#">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
                     Configuración
                   </a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logout_admin">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-black-400"></i>
                     Cerrar Sesión
                   </a>
@@ -191,11 +137,11 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="logout_admin" tabindex="-1" role="dialog" aria-labelledby="admin_sis" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">¿Desea cerrar Sesión?</h5>
+          <h5 class="modal-title" id="admin_sis">¿Desea cerrar Sesión?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -215,9 +161,6 @@
 
 
 
-  </div>
-
-
   <!-- Bootstrap core JavaScript-->
   <script src="requisitos/jquery/jquery.min.js"></script>
   <script src="requisitos/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -227,6 +170,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+  <script src="js/sistemalaravel.js"></script>
 
   <!-- Page level plugins -->
   <script src="requisitos/chart.js/Chart.min.js"></script>
@@ -239,4 +183,4 @@
 </body>
 
 </html>
-<?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/layouts/plantilla_estudiante.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/layouts/plantilla_auxadmin.blade.php ENDPATH**/ ?>

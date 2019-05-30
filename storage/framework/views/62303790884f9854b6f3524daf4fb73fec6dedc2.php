@@ -42,8 +42,8 @@
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href=<?php echo e(route('datos_general')); ?>>Datos Generales</a>
             <a class="collapse-item" href=<?php echo e(route('datos_personal')); ?>>Datos Personales</a>
-            <a class="collapse-item" href=<?php echo e(route('datos_laboral')); ?>>Datos Laborales</a>
             <a class="collapse-item" href=<?php echo e(route('datos_medico')); ?>>Datos Médicos</a>
+            <a class="collapse-item" href=<?php echo e(route('otras_actividades')); ?>>Otras Actividades</a>
             <a class="collapse-item" href="#">Descargar Hoja de Datos </br> Personales</a>
 
           </div>
@@ -239,4 +239,4 @@
 </body>
 
 </html>
-<?php /**PATH C:\xampp\htdocs\jatnijawe\resources\views/layouts/plantilla_estudiante.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/layouts/plantilla_estudiante.blade.php ENDPATH**/ ?>
