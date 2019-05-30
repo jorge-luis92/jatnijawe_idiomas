@@ -33,14 +33,16 @@ class ConsultasController extends Controller
       ->where('estudiantes.matricula',$id)
       ->take(1)
       ->first();
-         $id_persona= json_decode( json_encode($id_persona), true);
-      $lengua = DB::table('personas')
-      ->select('lenguas.nombre_lengua')
-      ->join('personas', 'personas.id_persona', '=', 'lenguas.id_persona')
-      ->where('personas.id_persona',$id_persona)
-      ->take(1)
-      ->first();
-
+        $id_persona= json_decode( json_encode($id_persona), true);
+        //  $id_persona= '28851488';
+         $lengua = DB::table('personas')
+         ->select('lenguas.id_lengua', 'lenguas.nombre_lengua', 'lenguas.tipo')
+         ->join('lenguas', 'lenguas.persona', '=', 'personas.id_persona')
+         ->where('personas.id_persona',$id_persona)
+         ->take(1)
+         ->first();
+          //$lengua= json_decode( json_encode($lengua), true);
+        //  $lengua = Lengua::find($id_persona);
       if(empty($lengua)){
     $users = DB::table('estudiantes')
     ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus',
@@ -52,7 +54,7 @@ class ConsultasController extends Controller
     ->take(1)
     ->first();
 
-    return view('estudiante\datos.datos_generales')->with('u',$users);
+    return view('estudiante\datos.datos_generales')->with('u',$users)->with('l', $lengua);
   }
     else{
         $users = DB::table('estudiantes')
@@ -63,27 +65,28 @@ class ConsultasController extends Controller
       //  ->join('detalle_extracurriculares', 'estudiantes.matricula', '=', 'detalle_extracurriculares.matricula')
         ->where('estudiantes.matricula',$id)
         ->take(1)
-        ->union($lengua)
+      //  ->union($lengua)
         ->first();
 
-        return view('estudiante\datos.datos_generales')->with('u',$users);}
+        return view('estudiante\datos.datos_generales')->with('u',$users)->with('l',$lengua);}
       }
 
 
 public function datos_nombre()
 {
   $usuario_actual=auth()->user();
-  $id=$usuario_actual->id;
+  $id=$usuario_actual->id_user;
 
    $users = DB::table('users')
-  ->select('personas.nombre', 'personas.apellido_paterno', 'apellido_materno')
+  ->select('personas.nombre', 'personas.apellido_patersno', 'apellido_materno')
   ->join('personas', 'users.id', '=', 'users.id_persona')
-  ->where('users.id',$id)
+  ->where('users.id_user',$id)
   ->take(1)
   ->first();
 
   //return view('consultitas',['users'=> $users]);
-  return view('layouts\plantilla_estudiante')->with('u',$users);
+  return view('layouts\plantilla_estudiante')->with('us',$users);
+  //return route('home_estudiante ')->with('usuario',$users);
 }
 
 

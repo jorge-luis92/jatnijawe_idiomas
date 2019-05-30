@@ -5,23 +5,26 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use PDF;
+use Illuminate\Support\Facades\DB;
+use Storage;
 
 class EstudianteController extends Controller
 {
-
-
-    public function dato_general(){
+    public function dato_general()
+    {
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='estudiante'){
         return redirect()->back();
-        }
-    return view('estudiante\datos.datos_generales');
+      }
+      else{
+        return view('estudiante\datos.datos_generales');
+          }
   }
 
   public function dato_laboral(){
-    $usuario_actual=\Auth::user();
+    $usuario_actual=auth()->user();
      if($usuario_actual->tipo_usuario!='estudiante'){
-       return redirect('home');
+      return redirect()->back();
       }
   return view('estudiante\datos.datos_laborales');
 }
@@ -93,5 +96,10 @@ return view('estudiante\datos.datos_personales');
          return redirect()->back();
         }
     return view('estudiante.configuracion_cuenta');
+    }
+
+
+    public function actualizar(){
+      updateOrInsert();
     }
 }

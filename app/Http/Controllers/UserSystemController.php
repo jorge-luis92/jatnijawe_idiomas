@@ -45,8 +45,8 @@ class UserSystemController extends Controller
     public function agregar_nuevo_usuario(Request $request)
 	{
     $this->validate($request, [
-      'id' => ['required', 'string', 'max:60', 'unique:users'],
-      'name' => ['required', 'string', 'max:255', 'unique:users'],
+      'id_user' => ['required', 'string', 'max:13', 'unique:users'],
+      'username' => ['required', 'string', 'max:255', 'unique:users'],
       'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
       'password' => ['required', 'string', 'min:8', 'confirmed'],
       'tipo_usuario' => ['required', 'string', 'max:255'],
@@ -58,8 +58,8 @@ class UserSystemController extends Controller
 
 
     $user=new User;
-    $user->id=$data['id'];
-    $user->name=$data['name'];
+    $user->id_user=$data['id'];
+    $user->username=$data['name'];
     $user->email=$data['email'];
     $user->password=Hash::make($data['password']);
     $user->tipo_usuario=$data['tipo_usuario'];

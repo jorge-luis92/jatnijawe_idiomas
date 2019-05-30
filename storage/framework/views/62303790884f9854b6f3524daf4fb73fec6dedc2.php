@@ -147,7 +147,14 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=auth()->user();
+               $id=$usuario_actual->id_user;
+               $users = DB::table('estudiantes')
+               ->select('personas.nombre', 'apellido_paterno', 'apellido_materno')
+               ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+               ->where('estudiantes.matricula',$id)
+               ->take(1)
+               ->first();  echo $users->nombre." ";  echo $users->apellido_paterno." "; echo $users->apellido_materno;?></span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->

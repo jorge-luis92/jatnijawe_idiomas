@@ -24,6 +24,7 @@ Route::post('admin', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdminis
 //Route::get('/', 'HomeController@index');
 
 Route::get('form_nuevo_usuario', 'UserSystemController@form_nuevo_usuario')->name('form_nuevo_usuario');
+Route::post('agregar_nuevo_usuario', 'UserSystemController@agregar_nuevo_usuario')->name('agregar_nuevo_usuario');
 /* Rutas de Estudiante---*/
 Route::group(['middleware' => 'auth'], function () {
 
@@ -36,7 +37,7 @@ Route::get('register_tallerista', 'FormacionIntegralController@getRegister');
 //Route::post('register_tallerista', ['as' => 'register_tallerista', 'uses' => 'FormacionIntegralController@postRegister']);
 Route::get('registros_talleristas', 'UserSystemController@index')->name('registros_talleristas');
 //Route::get('form_nuevo_usuario', 'UserSystemController@form_nuevo_usuario')->name('form_nuevo_usuario');
-Route::post('agregar_nuevo_usuario', 'UserSystemController@agregar_nuevo_usuario')->name('agregar_nuevo_usuario');
+//Route::post('agregar_nuevo_usuario', 'UserSystemController@agregar_nuevo_usuario')->name('agregar_nuevo_usuario');
 Route::get('form_nuevo_taller', 'FormacionIntegralController@form_nuevo_taller')->name('form_nuevo_taller');
 Route::post('agregar_nuevo_taller', 'FormacionIntegralController@agregar_nuevo_taller')->name('agregar_nuevo_taller');
 });
@@ -52,6 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');
 //  Route::get('datos_general', 'Estudiante_Con\EstudianteController@dato_general')->name('datos_general');
    Route::get('datos_general', 'ConsultasController@carga_datos_general')->name('datos_general');
+    Route::get('perfil_estudiante', 'ConsultasController@datos_nombre')->name('perfil_estudiante');
   Route::get('otras_actividades', 'Estudiante_Con\EstudianteController@dato_laboral')->name('otras_actividades');
   Route::get('datos_medico', 'Estudiante_Con\EstudianteController@dato_medico')->name('datos_medico');
   Route::get('datos_personal', 'Estudiante_Con\EstudianteController@dato_personal')->name('datos_personal');

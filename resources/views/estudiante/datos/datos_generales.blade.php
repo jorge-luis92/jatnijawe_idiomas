@@ -81,7 +81,7 @@
     <div class="form-group col-md-2" id="labels">
       <label for="especifica">Especifica</label>
     </br>
-      <input type="text"  id="especifica" placeholder="Especifica" disabled class='inputText' required>
+      <input type="text"  id="especifica" placeholder="Especifica" value="<?php if(empty($l->nombre_lengua)){} else{ echo $l->nombre_lengua;} ?>"disabled class='inputText' required>
     </div>
 
     <div class="radio col-md-3" id="labels">
@@ -99,7 +99,7 @@
   <div class="form-group col-md-3" id="labels">
     <label for="especifica">Especifica</label>
   </br>
-    <input type="text"  id="especifica_beca" value="<?php if(empty($u->nombre_lengua)){} else{ echo $u->nombre_lengua;} ?>" disabled class='inputBeca' required>
+    <input type="text"  id="especifica_beca" value="" disabled class='inputBeca' required>
   </div>
     </div>
 
