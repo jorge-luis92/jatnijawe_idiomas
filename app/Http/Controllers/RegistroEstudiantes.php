@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\User;
 use App\Estudiante;
 use App\Persona;
+use App\Lengua;
+use App\Beca;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 
 class RegistroEstudiantes extends Controller
 {
-  public function create_persona(Request $request)
+  public function create_estudiante(Request $request)
 {
   $this->validate($request, [
     //'id_persona' => ['required', 'string', 'max:60', 'unique:personas'],
@@ -82,6 +83,87 @@ class RegistroEstudiantes extends Controller
 else{
  return redirect()->route('register')->with('error','error en la creacion');
 }
+
+}
+
+public function actualizacion_estudiante(Request $request)
+{
+  $data=$request;
+$usuario_actual=auth()->user();
+$id=$usuario_actual->id_user;
+
+$id_persona = DB::table('becas')
+->select('becas.id_beca')
+->join('estudiantes', 'estudiantes.matricula', '=', 'becas.matricula')
+->where('estudiantes.matricula',$id)
+->take(1)
+->first();
+$id_persona= json_decode( json_encode($id_persona), true);
+
+if(empty($id_persona)){
+DB::table('lenguas')
+    ->where('lenguas.id_lengua', $id_persona)
+    ->updateOrInsert(
+        ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'matricula' => $id],
+    );
+    return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');}
+
+    else {
+      DB::table('becas')
+          ->where('becas.id_beca', $buscar)
+          ->update(
+              ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca']],
+          );
+          return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');}
+
+$buscar = DB::table('becas')
+->select('becas.id_beca')
+->join('estudiantes', 'estudiantes.matricula', '=', 'becas.matricula')
+->where('estudiantes.matricula',$id)
+->take(1)
+->first();
+$buscar= json_decode( json_encode($buscar), true);
+if(empty($buscar)){
+DB::table('becas')
+    ->where('becas.id_beca', $buscar)
+    ->updateOrInsert(
+        ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'matricula' => $id],
+    );
+    return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');}
+
+    else {
+      DB::table('becas')
+          ->where('becas.id_beca', $buscar)
+          ->update(
+              ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca']],
+          );
+          return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');}
+
+/*  $id_persona= json_decode( json_encode($id_persona), true);
+  $buscar = DB::table('becas')
+  ->select('becas.matricula')
+  ->where('becas.matricula',$id)
+  ->take(1)
+  ->first();
+if(empty($buscar)){
+  $beca=new Beca;
+  $beca->nombre=$data['nombre_beca'];
+  $beca->tipo_beca=$data['tipo_beca'];
+  $beca->matricula=$id;
+  $beca->save();
+  if($beca->save()){
+     return redirect()->route('datos_general')->with('success','¡Datos registrados correctamente!');
+   }
+}
+else{
+    $beca->nombre=$data['nombre_beca'];
+    $beca->nombre=$data['tipo_beca'];
+    $beca->nombre=$data['matricula'];
+    $beca->save();
+  if($beca->save()){
+     return redirect()->route('datos_general')->with('success','¡Datos registrados correctamente!');
+   }
+}*/
 
 }
 }

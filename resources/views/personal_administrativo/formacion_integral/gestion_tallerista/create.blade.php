@@ -1,15 +1,9 @@
 @extends('layouts.plantilla_formacion_integral')
 
 @section('seccion')
-<div class="container">
-    <div class="row justify-content-center" >
-        <div class="col-md-12">
-            <div class="card">
-              @include('flash-message')
-                <div class="card-header">{{ __('Registro Estudiante') }}</div>
-                 <p align="center"> Los campos con un * son obligatorios </p>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('registro_persona') }}">
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Agregar Nuevo Usuario</h1>
+<div class="container" id="font4">
+</br>                    <form method="POST" action="{{ route('registro_estudiante') }}">
                         @csrf
 
                          <div class="form-row">
@@ -221,10 +215,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection
 
 <script>

@@ -5,13 +5,10 @@
 @endsection
 
 @section('seccion')
-      <div class="row justify-content-center">
 
-          <div class="col-md-8">
               <div class="container"  id="font6">
-                  <div class="card-header" style="opacity: 0.7;filter:alpha(opacity=5); color: #000000;">{{ __('Actualizar Cuenta') }}</div>
-@include('flash-message')
-                  <div class="card-body">
+              </br>
+          @include('flash-message')
                           <form class="form-horizontal" method="POST" action="{{ route('changePassword') }}" validate enctype="multipart/form-data" data-toggle="validator">
                               {{ csrf_field() }}
 
@@ -65,9 +62,6 @@
                                   </div>
                               </div>
                           </form>
-                      </div>
-                  </div>
-              </div>
-          </div>
+
 </br>
   @endsection

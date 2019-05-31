@@ -1,10 +1,9 @@
-@extends('layouts.plantilla_formacion_integral')
+@extends('layouts.plantilla_admin')
 
 @section('seccion')
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Estudiantes</h1>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Usuarios</h1>
 <div class="container" id="font4">
-  @include('flash-message')
-</br>                    <form method="POST" action="{{ route('registro_estudiante') }}">
+</br>                    <form method="POST" action="{{ route('registro_persona') }}">
                         @csrf
 
                          <div class="form-row">

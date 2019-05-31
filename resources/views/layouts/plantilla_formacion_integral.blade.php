@@ -23,9 +23,10 @@
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
+
       <li class="nav-item active">
         <a class="nav-link" href={{ route('home_formacion')}}>
-          <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.5em">Jat Nijawe</span></a></li><!-- Divider -->
+           <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
         Gestión
@@ -75,8 +76,8 @@
 
 			<li >
 				 <a class="navbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt="">
-           <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;">&nbsp;Facultad de Idiomas</h1>
+             <!--<img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt="">-->
+           <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;">&nbsp;Portal de Servicios Educativos "Jat Nijawe"</h1>
 			              </a>
             </li>
 

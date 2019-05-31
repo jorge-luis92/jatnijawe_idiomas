@@ -5,6 +5,7 @@ use App\User;
 use App\Estudiante;
 use App\Persona;
 use App\Lengua;
+use App\Beca;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use Illuminate\Http\Request;
@@ -25,8 +26,6 @@ class ConsultasController extends Controller
     {
       $usuario_actual=auth()->user();
       $id=$usuario_actual->id_user;
-
-
       $id_persona = DB::table('estudiantes')
       ->select('estudiantes.id_persona')
       ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
@@ -43,7 +42,7 @@ class ConsultasController extends Controller
          ->first();
           //$lengua= json_decode( json_encode($lengua), true);
         //  $lengua = Lengua::find($id_persona);
-      if(empty($lengua)){
+    /*  if(empty($lengua)){
     $users = DB::table('estudiantes')
     ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus',
              'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
@@ -55,8 +54,8 @@ class ConsultasController extends Controller
     ->first();
 
     return view('estudiante\datos.datos_generales')->with('u',$users)->with('l', $lengua);
-  }
-    else{
+  }*/
+    /*else{*/
         $users = DB::table('estudiantes')
         ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus',
                  'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
@@ -68,8 +67,16 @@ class ConsultasController extends Controller
       //  ->union($lengua)
         ->first();
 
-        return view('estudiante\datos.datos_generales')->with('u',$users)->with('l',$lengua);}
+        $beca = DB::table('estudiantes')
+        ->select('becas.nombre', 'becas.tipo_beca')
+        ->join('becas', 'estudiantes.matricula', '=', 'becas.matricula')
+        ->where('estudiantes.matricula',$id)
+        ->take(1)
+        ->first();
+
+        return view('estudiante\datos.datos_generales')->with('u',$users)->with('l',$lengua)->with('b',$beca);
       }
+      //}
 
 
 public function datos_nombre()

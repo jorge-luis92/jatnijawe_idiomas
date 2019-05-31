@@ -63,7 +63,7 @@ class UserSystemController extends Controller
     $user->email=$data['email'];
     $user->password=Hash::make($data['password']);
     $user->tipo_usuario=$data['tipo_usuario'];
-    $user->id_persona=$data['id_persona'];
+    $user->id_persona='';
 
 
     if($user->save()){

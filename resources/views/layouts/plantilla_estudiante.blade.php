@@ -28,7 +28,7 @@
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
         <a class="nav-link" href={{ route('home_estudiante')}}>
-          <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.9em">JATWEB</span></a></li><!-- Divider -->
+          <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em">&nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
         Servicios
@@ -137,8 +137,8 @@
 
 			<li >
 				 <a class="navbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt="">
-           <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;">&nbsp;Facultad de Idiomas</h1>
+             <!--<img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt="">-->
+           <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;font-size;2px;">&nbsp;Portal de Servicios Educativos "Jat Nijawe"</h1>
 			              </a>
             </li>
 
@@ -154,7 +154,8 @@
                ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
                ->where('estudiantes.matricula',$id)
                ->take(1)
-               ->first();  echo $users->nombre." ";  echo $users->apellido_paterno." "; echo $users->apellido_materno;?></span>
+               ->first();  echo $users->nombre." ";  //echo $users->apellido_paterno." "; echo $users->apellido_materno;
+               ?></span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->

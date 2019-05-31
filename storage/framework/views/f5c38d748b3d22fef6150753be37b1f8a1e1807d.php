@@ -1,13 +1,7 @@
-<?php $__env->startSection('content'); ?>
-<div class="container">
-    <div class="row justify-content-center" >
-        <div class="col-md-12">
-            <div class="card">
-              <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                <div class="card-header"><?php echo e(__('Registro Estudiante')); ?></div>
-                 <p align="center"> Los campos con un * son obligatorios </p>
-                <div class="card-body">
-                    <form method="POST" action="<?php echo e(route('registro_persona')); ?>">
+<?php $__env->startSection('seccion'); ?>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Estudiantes</h1>
+<div class="container" id="font4">
+</br>                    <form method="POST" action="<?php echo e(route('registro_estudiante')); ?>">
                         <?php echo csrf_field(); ?>
 
                          <div class="form-row">
@@ -316,10 +310,7 @@ endif; ?>
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <?php $__env->stopSection(); ?>
 
 <script>
@@ -342,4 +333,4 @@ if(key == especiales[i]){
 }
 </script>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/auth/register.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/auth/register.blade.php ENDPATH**/ ?>

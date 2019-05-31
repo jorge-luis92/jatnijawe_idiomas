@@ -7,9 +7,10 @@
 @section('seccion')
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos Generales</h1>
 <div class="container" id="font4">
-
+    @include('flash-message')
 </br>
-  <form  validate enctype="multipart/form-data" data-toggle="validator" >
+  <form method="POST" action="{{ route('datos_general_actualizar') }}">
+    @csrf
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
     <div class="form-row">
 
@@ -41,10 +42,10 @@
 
       <div class="form-group col-md-3" id="labels">
         <label for="nombre">Nombre(s)</label>
-        <input type="text" class="form-control" id="nombre" value="{{ $u->nombre}}" disabled>
+        <input type="text" class="form-control" value="{{ $u->nombre}}" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
-        <label for="ap_pat">Apellido Paterno</label>
+        <label for="apellido_paterno">Apellido Paterno</label>
         <input type="text" class="form-control" id="ap_pat"  value="{{ $u->apellido_paterno}}" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
@@ -79,9 +80,18 @@
 
        </div>
     <div class="form-group col-md-2" id="labels">
-      <label for="especifica">Especifica</label>
+      <label for="nombre_lengua">Nombre de Lengua</label>
     </br>
-      <input type="text"  id="especifica" placeholder="Especifica" value="<?php if(empty($l->nombre_lengua)){} else{ echo $l->nombre_lengua;} ?>"disabled class='inputText' required>
+      <input type="text"  name="nombre_lengua" id="nombre_lengua" required disabled class='inputText'  placeholder="Especifica" value="<?php if(empty($l->nombre_lengua)){ $vacio=null; echo $vacio;} else{ echo $l->nombre_lengua;} ?>" >
+    </div>
+
+    <div class="form-group col-md-3">
+      <label for="tipo_lengua">Tipo de Lengua</label>
+        <select name="tipo_lengua" id="tipo_lengua" required disabled class='inputText'>
+        <option value="">Seleccione una opción</option>
+        <option value="materna">Materna</option>
+        <option value="extranjera">Extranjera</option>
+            </select>
     </div>
 
     <div class="radio col-md-3" id="labels">
@@ -97,22 +107,31 @@
 
      </div>
   <div class="form-group col-md-3" id="labels">
-    <label for="especifica">Especifica</label>
+    <label for="nombre_beca">Nombre Beca</label>
   </br>
-    <input type="text"  id="especifica_beca" value="" disabled class='inputBeca' required>
+    <input type="text"  name="nombre_beca" id="nombre_beca" placeholder="Especifica" value="<?php if(empty($b->nombre)){ $vacio=null; echo $vacio;} else{ echo $b->nombre;} ?>" disabled class='inputBeca' required>
+  </div>
+
+  <div class="form-group col-md-3" id="labels">
+    <label for="tipo_beca">Tipo de Beca</label>
+  </br>
+    <input type="text"  name="tipo_beca" id="tipo_beca" placeholder="Especifica" value="<?php if(empty($b->tipo_beca)){ $vacio=null; echo $vacio;} else{ echo $b->tipo_beca;} ?>" disabled class='inputBeca' required>
   </div>
     </div>
 
      <div class="form-group" id="labels">
       <br>
-      <div class="col-xs-offset-2 col-xs-9" align="center">
-          <input type="submit" class="btn btn-primary" name="agregar" value="Actualizar">
-         <button type="button"  class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      </div>
+        <div class="form-group">
+            <div class="col-xs-offset-2 col-xs-9" align="center">
+                <button type="submit" class="btn btn-primary">
+                    {{ __('Actualizar') }}
+                </button>
+              <!--  <button type="button"  class="btn btn-secondary" data-dismiss="modal">Cancelar</button>-->
+            </div>
+        </div>
   </div>
-    <br>
-
   </form>
+    <br>
 
 </div>
 </br>
@@ -141,5 +160,6 @@
 
     function nochecar_beca(){
         $(".inputBeca").attr("disabled","disabled");
+      
     }
 </script>
