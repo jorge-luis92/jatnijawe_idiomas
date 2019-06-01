@@ -10,6 +10,6 @@ class Lengua extends Model
   protected $primaryKey = 'id_lengua'; // or null
  //public $incrementing = false;
  protected $fillable = [
-     'nombre_lengua','tipo', 'persona',
+     'nombre_lengua','tipo','id_persona',
  ];
 }

@@ -82,7 +82,7 @@
     <div class="form-group col-md-2" id="labels">
       <label for="nombre_lengua">Nombre de Lengua</label>
     </br>
-      <input type="text"  name="nombre_lengua" id="nombre_lengua" required disabled class='inputText'  placeholder="Especifica" value="<?php if(empty($l->nombre_lengua)){ $vacio=null; echo $vacio;} else{ echo $l->nombre_lengua;} ?>" >
+      <input type="text"  name="nombre_lengua" id="nombre_lengua" required disabled class='inputText'  placeholder="Especifica"  >
     </div>
 
     <div class="form-group col-md-3">
@@ -92,6 +92,8 @@
         <option value="materna">Materna</option>
         <option value="extranjera">Extranjera</option>
             </select>
+          </br>
+            <a data-toggle="modal" href="#lenguas_detalle">Lenguas Registradas</a>
     </div>
 
     <div class="radio col-md-3" id="labels">
@@ -109,13 +111,15 @@
   <div class="form-group col-md-3" id="labels">
     <label for="nombre_beca">Nombre Beca</label>
   </br>
-    <input type="text"  name="nombre_beca" id="nombre_beca" placeholder="Especifica" value="<?php if(empty($b->nombre)){ $vacio=null; echo $vacio;} else{ echo $b->nombre;} ?>" disabled class='inputBeca' required>
+    <input type="text"  name="nombre_beca" id="nombre_beca" placeholder="Especifica"  disabled class='inputBeca' required>
+  </br>
+  <a data-toggle="modal" href="#becas_detalle">Becas Registradas</a>
   </div>
 
   <div class="form-group col-md-3" id="labels">
     <label for="tipo_beca">Tipo de Beca</label>
   </br>
-    <input type="text"  name="tipo_beca" id="tipo_beca" placeholder="Especifica" value="<?php if(empty($b->tipo_beca)){ $vacio=null; echo $vacio;} else{ echo $b->tipo_beca;} ?>" disabled class='inputBeca' required>
+    <input type="text"  name="tipo_beca" id="tipo_beca" placeholder="Especifica"  disabled class='inputBeca' required>
   </div>
     </div>
 
@@ -133,16 +137,70 @@
   </div>
   </form>
     <br>
-
 </div>
 </br>
+</div>
+      </div>
+    </div>
+  </div>
 
+  <div class="modal fade" tabindex="-1" role="dialog" id="lenguas_detalle" aria-labelledby="#lenguas_detalles " aria-hidden="true">
+    <div class="modal-dialog modal-none">
+      <div class="modal-content">
+        <div class="container" id="font5">
+          </br>
+        <div class="table-responsive">
+          <table class="table table-bordered table-info" style="color: #000000;" >
+            <thead>
+              <tr>
+                <th scope="col">Nombre Lengua</th>
+                <th scope="col">Tipo de Lengua</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $__currentLoopData = $l; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $le): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <tr>
+                <td><?php echo $le->nombre_lengua; ?></td>
+                <td><?php echo $le->tipo; ?></td>
+              </tr>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" tabindex="-1" role="dialog" id="becas_detalle" aria-labelledby="#becas_detalles " aria-hidden="true">
+    <div class="modal-dialog modal-none">
+      <div class="modal-content">
+        <div class="container" id="font5">
+          </br>
+        <div class="table-responsive">
+          <table class="table table-bordered table-info" style="color: #000000;" >
+            <thead>
+              <tr>
+                <th scope="col">Nombre Beca</th>
+                <th scope="col">Tipo de Beca</th>
+                <th colspan="1" >ACCIONES</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $__currentLoopData = $b; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $be): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <tr>
+                <td><?php echo $be->nombre; ?></td>
+                <td><?php echo $be->tipo_beca; ?></td>
+                <td><a url="<?php echo e(route ('cambiar_estatus_beca/{$be->id_beca}')); ?>">Quitar</a></td>
+              </tr>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <?php $__env->stopSection(); ?>
-
-
-
-
-
 
 <script language="JavaScript">
     function checar(){
@@ -161,7 +219,7 @@
 
     function nochecar_beca(){
         $(".inputBeca").attr("disabled","disabled");
-        empty(value());
+
     }
 </script>
 

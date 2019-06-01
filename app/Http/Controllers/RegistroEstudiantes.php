@@ -92,78 +92,82 @@ public function actualizacion_estudiante(Request $request)
 $usuario_actual=auth()->user();
 $id=$usuario_actual->id_user;
 
-$id_persona = DB::table('becas')
-->select('becas.id_beca')
-->join('estudiantes', 'estudiantes.matricula', '=', 'becas.matricula')
+ $id_persona = DB::table('estudiantes')
+->select('estudiantes.id_persona')
+->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
 ->where('estudiantes.matricula',$id)
 ->take(1)
 ->first();
-$id_persona= json_decode( json_encode($id_persona), true);
+$id_persona = $id_persona->id_persona;
 
-if(empty($id_persona)){
-DB::table('lenguas')
-    ->where('lenguas.id_lengua', $id_persona)
-    ->updateOrInsert(
-        ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'matricula' => $id],
-    );
-    return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');}
-
-    else {
-      DB::table('becas')
-          ->where('becas.id_beca', $buscar)
-          ->update(
-              ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca']],
-          );
-          return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');}
-
-$buscar = DB::table('becas')
-->select('becas.id_beca')
-->join('estudiantes', 'estudiantes.matricula', '=', 'becas.matricula')
-->where('estudiantes.matricula',$id)
+$lengua = DB::table('lenguas')
+->select('lenguas.id_lengua')
+->join('personas', 'lenguas.id_persona', '=', 'personas.id_persona')
+->where('personas.id_persona',$id_persona)
 ->take(1)
 ->first();
-$buscar= json_decode( json_encode($buscar), true);
-if(empty($buscar)){
-DB::table('becas')
-    ->where('becas.id_beca', $buscar)
-    ->updateOrInsert(
-        ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'matricula' => $id],
-    );
-    return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');}
 
-    else {
-      DB::table('becas')
-          ->where('becas.id_beca', $buscar)
-          ->update(
-              ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca']],
-          );
-          return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');}
-
-/*  $id_persona= json_decode( json_encode($id_persona), true);
+if(($data['nombre_lengua'] == null) && ($data['tipo_lengua'] == null)){
+  if(($data['nombre_beca'] == null) && ($data['tipo_beca'] == null)){
+      return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
+  }
+  else{
   $buscar = DB::table('becas')
-  ->select('becas.matricula')
-  ->where('becas.matricula',$id)
+  ->select('becas.id_beca')
+  ->join('estudiantes', 'estudiantes.matricula', '=', 'becas.matricula')
+  ->where('estudiantes.matricula',$id)
   ->take(1)
   ->first();
-if(empty($buscar)){
-  $beca=new Beca;
-  $beca->nombre=$data['nombre_beca'];
-  $beca->tipo_beca=$data['tipo_beca'];
-  $beca->matricula=$id;
-  $beca->save();
-  if($beca->save()){
-     return redirect()->route('datos_general')->with('success','¡Datos registrados correctamente!');
-   }
+  $buscar= json_decode( json_encode($buscar), true);
+
+  DB::table('becas')
+      //->where('becas.id_beca', $buscar)
+      ->updateOrInsert(
+          ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'matricula' => $id],
+      );
+      return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
+
+  }
 }
-else{
-    $beca->nombre=$data['nombre_beca'];
-    $beca->nombre=$data['tipo_beca'];
-    $beca->nombre=$data['matricula'];
-    $beca->save();
-  if($beca->save()){
-     return redirect()->route('datos_general')->with('success','¡Datos registrados correctamente!');
-   }
-}*/
+else {
+DB::table('lenguas')
+
+    // ->where('lenguas.id_lengua', $lengua)
+    ->updateOrInsert(
+        ['nombre_lengua' => $data['nombre_lengua'], 'tipo' => $data['tipo_lengua'], 'id_persona'=> $id_persona],
+    );
+    if(($data['nombre_beca'] == null) && ($data['tipo_beca'] == null)){
+        return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
+    }
+    else{
+    $buscar = DB::table('becas')
+    ->select('becas.id_beca')
+    ->join('estudiantes', 'estudiantes.matricula', '=', 'becas.matricula')
+    ->where('estudiantes.matricula',$id)
+    ->take(1)
+    ->first();
+    $buscar= json_decode( json_encode($buscar), true);
+
+    DB::table('becas')
+        //->where('becas.id_beca', $buscar)
+        ->updateOrInsert(
+            ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'matricula' => $id],
+        );
+        return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
+
+    }
 
 }
+}
+
+public function desactivar_lengua($id_beca){
+  DB::table('becas')
+      ->where('becas.id_beca', $id_beca)
+      ->updateOrInsert(
+          ['nombre' => '0'],
+      );
+      return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
+
+}
+
 }

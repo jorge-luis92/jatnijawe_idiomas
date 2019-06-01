@@ -62,6 +62,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('mi_taller', 'Estudiante_Con\EstudianteController@talleres_activos')->name('mi_taller');
   Route::get('pdfs','Estudiante_Con\EstudianteController@generatePDF');
   Route::get('cuenta', 'Estudiante_Con\EstudianteController@cuenta_estudiante')->name('cuenta');
+  url::get('cambiar_estatus_beca', 'RegistroEstudiantes@desactivar_lengua/{$id_beca}')->name('cambiar_estatus_beca');
+  Route::get('/usuarios/{id}', 'RegistroEstudiantes@desactivar_lengua')->name('cambiar_estatus_beca');
 });
 
 

@@ -8,7 +8,6 @@
                 <div class="card-body">
                     <form method="POST" action="<?php echo e(route('login')); ?>">
                         <?php echo csrf_field(); ?>
-
                         <div class="form-group row">
                             <label for="id_user" class="col-md-4 col-form-label text-md-right" ><?php echo e(__('Matrícula')); ?></label>
 
@@ -39,7 +38,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('password'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="password" required >
+endif; ?>"  name="password" required >
 
                                 <?php if ($errors->has('password')) :
 if (isset($message)) { $messageCache = $message; }
