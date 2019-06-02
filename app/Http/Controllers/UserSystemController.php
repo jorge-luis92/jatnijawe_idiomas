@@ -24,10 +24,9 @@ class UserSystemController extends Controller
     public function index()
     {
         //$users = DB::table('users')->simplePaginate(7);
-        $users = DB::table('users')->where([
-      ['tipo_usuario', '=', 'tallerista'],
-      ['bandera', '=', '1'],
-      ])->simplePaginate(7 );
+        $users = DB::table('users')
+        ->where([['tipo_usuario', '=', 'tallerista'], ['bandera', '=', '1'],])
+        ->simplePaginate(7 );
 
         return view('personal_administrativo\formacion_integral\gestion_tallerista.read', ['users' => $users]);
 

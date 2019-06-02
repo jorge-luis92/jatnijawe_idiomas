@@ -51,32 +51,30 @@ class ConsultasController extends Controller
         ->first();
 
         $becas_r = DB::table('estudiantes')
-        ->select('becas.nombre', 'becas.tipo_beca')
+        ->select('becas.nombre', 'becas.tipo_beca', 'becas.id_beca')
         ->join('becas', 'estudiantes.matricula', '=', 'becas.matricula')
-        ->where('estudiantes.matricula',$id)
+        //->where('estudiantes.matricula',$id)
+        ->where([['estudiantes.matricula',$id], ['becas.bandera', '=', '1'],])
         ->simplePaginate(7);
 
         return view('estudiante\datos.datos_generales')->with('u',$users)->with('l',$lenguas_r)->with('b',$becas_r);
       }
-      //}
 
 
-public function datos_nombre()
-{
-  $usuario_actual=auth()->user();
-  $id=$usuario_actual->id_user;
+      public function carga_otras_actividades()
+      {
+        $usuario_actual=auth()->user();
+        $id=$usuario_actual->id_user;
 
-   $users = DB::table('users')
-  ->select('personas.nombre', 'personas.apellido_paterno', 'apellido_materno')
-  ->join('personas', 'users.id', '=', 'users.id_persona')
-  ->where('users.id_user',$id)
-  ->take(1)
-  ->first();
-
-  //return view('consultitas',['users'=> $users]);
-  return view('layouts\plantilla_estudiante')->with('us',$users);
-  //return route('home_estudiante ')->with('usuario',$users);
-}
+          $users = DB::table('estudiantes')
+          ->select('datos_externos.nombre_actividadexterna', 'datos_externos.tipo_actividadexterna',
+                   'datos_externos.dias_sem', 'datos_externos.hora_entrada',
+                   'datos_externos.hora_salida', 'datos_externos.lugar',  'datos_externos.id_externos')
+          ->join('datos_externos', 'estudiantes.matricula', '=', 'datos_externos.matricula')
+          ->where([['estudiantes.matricula',$id], ['datos_externos.bandera', '=', '1'],])
+          ->simplePaginate(7);
+          return view('estudiante\datos.datos_laborales')->with('u',$users);
+        }
 
 
 }

@@ -47,23 +47,23 @@ Route::group(['middleware' => 'auth'], function () {
   //Route::get('home_estudiante', 'Estudiante_Con\EstudianteController@inicio_estudiante')->name('home_estudiante');
   Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');
 //  Route::get('datos_general', 'Estudiante_Con\EstudianteController@dato_general')->name('datos_general');
-   Route::get('datos_general', 'ConsultasController@carga_datos_general')->name('datos_general');
-    Route::post('datos_general_actualizar', 'RegistroEstudiantes@actualizacion_estudiante')->name('datos_general_actualizar');
-    Route::get('perfil_estudiante', 'ConsultasController@datos_nombre')->name('perfil_estudiante');
-  Route::get('otras_actividades', 'Estudiante_Con\EstudianteController@dato_laboral')->name('otras_actividades');
+  Route::get('perfil_estudiante', 'ConsultasController@datos_nombre')->name('perfil_estudiante');
+  Route::get('datos_general', 'ConsultasController@carga_datos_general')->name('datos_general');
+  Route::post('datos_general_actualizar', 'RegistroEstudiantes@actualizacion_estudiante')->name('datos_general_actualizar');
+
+  Route::get('otras_actividades', 'ConsultasController@carga_otras_actividades')->name('otras_actividades');
+  Route::post('otras_actividades_actualizar', 'ActualizacionesEstudiante@actualizacion_actividades')->name('otras_actividades_actualizar');
+
   Route::get('datos_medico', 'Estudiante_Con\EstudianteController@dato_medico')->name('datos_medico');
   Route::get('datos_personal', 'Estudiante_Con\EstudianteController@dato_personal')->name('datos_personal');
   Route::get('catalogo', 'Actividades\ActvidadesExtra@catalogos')->name('catalogo');
   Route::post('changePassword','HomeController@changePassword')->name('changePassword');
-  //Route::get('home_estudiante', 'HomeController@index');
-
   Route::get('ma_estudiante', 'Estudiante_Con\EstudianteController@m_estudiantes')->name('ma_estudiante');
   Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');
   Route::get('mi_taller', 'Estudiante_Con\EstudianteController@talleres_activos')->name('mi_taller');
   Route::get('pdfs','Estudiante_Con\EstudianteController@generatePDF');
   Route::get('cuenta', 'Estudiante_Con\EstudianteController@cuenta_estudiante')->name('cuenta');
-  url::get('cambiar_estatus_beca', 'RegistroEstudiantes@desactivar_lengua/{$id_beca}')->name('cambiar_estatus_beca');
-  Route::get('/usuarios/{id}', 'RegistroEstudiantes@desactivar_lengua')->name('cambiar_estatus_beca');
+  Route::get('cambiar_estatus_beca/{id_beca}', 'RegistroEstudiantes@desactivar_lengua');
 });
 
 

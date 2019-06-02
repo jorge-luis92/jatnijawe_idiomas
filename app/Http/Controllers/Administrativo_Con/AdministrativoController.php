@@ -35,7 +35,7 @@ class AdministrativoController extends Controller
      $usuario_actual=auth()->user();
       if($usuario_actual->tipo_usuario!='admin'){
        return redirect()->back();
-       }
+     }
         return view('personal_administrativo\admin_sistema.admin_sistema');
    }
     public function login_admin(){

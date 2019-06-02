@@ -82,7 +82,7 @@
     <div class="form-group col-md-2" id="labels">
       <label for="nombre_lengua">Nombre de Lengua</label>
     </br>
-      <input type="text"  name="nombre_lengua" id="nombre_lengua" required disabled class='inputText'  placeholder="Especifica"  >
+      <input type="text"  name="nombre_lengua" id="nombre_lengua" required disabled class='inputText'  onKeyUp="this.value = this.value.toUpperCase()" placeholder="Especifica"  >
     </div>
 
     <div class="form-group col-md-3">
@@ -111,7 +111,7 @@
   <div class="form-group col-md-3" id="labels">
     <label for="nombre_beca">Nombre Beca</label>
   </br>
-    <input type="text"  name="nombre_beca" id="nombre_beca" placeholder="Especifica"  disabled class='inputBeca' required>
+    <input type="text"  name="nombre_beca" id="nombre_beca" placeholder="Especifica"  onKeyUp="this.value = this.value.toUpperCase()" disabled class='inputBeca' required>
   </br>
   <a data-toggle="modal" href="#becas_detalle">Becas Registradas</a>
   </div>
@@ -119,7 +119,7 @@
   <div class="form-group col-md-3" id="labels">
     <label for="tipo_beca">Tipo de Beca</label>
   </br>
-    <input type="text"  name="tipo_beca" id="tipo_beca" placeholder="Especifica"  disabled class='inputBeca' required>
+    <input type="text"  name="tipo_beca" id="tipo_beca" placeholder="Especifica"  onKeyUp="this.value = this.value.toUpperCase()" disabled class='inputBeca' required>
   </div>
     </div>
 
@@ -189,17 +189,10 @@
               <tr>
                 <td>{!! $be->nombre !!}</td>
                 <td>{!! $be->tipo_beca !!}</td>
-                <td><a url="{{route ('cambiar_estatus_beca/{$be->id_beca}')}}">Quitar</a></td>
+                <td><a href="cambiar_estatus_beca/{{ $be->id_beca }}">Quitar</a></td>
               </tr>
         @endforeach
-        <!--
-        @foreach($posts as $post)
-                       <tr>
-                           <td><a href="{{ route('get', [$post->slug]) }}"> desactivar_lengua</a></td>
-                           <td>{{ $post->slug }}</td>
-                       </tr>
-                    @endforeach
-        -->
+
             </tbody>
           </table>
         </div>

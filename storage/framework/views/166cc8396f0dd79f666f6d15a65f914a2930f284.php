@@ -7,10 +7,12 @@
 <?php $__env->startSection('seccion'); ?>
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Otras Actividades</h1>
 <div class="container" id="font4">
+  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </br>
-<form  validate enctype="multipart/form-data" data-toggle="validator">
+<form method="POST" action="<?php echo e(route('otras_actividades_actualizar')); ?>">
+    <?php echo csrf_field(); ?>
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
-  <div class="form-row">
+
   <div class="radio col-md-12">
     <label >* ¿Realizas alguna actividad durante la semana?</label>
 
@@ -23,55 +25,53 @@
    <div class="form-group col-md-12">
      <h6 style="color: #000000;">Horario</h6>
        </div>
+         <div class="form-row">
        <div class="form-group col-md-4">
          <label for="nombre_actividadexterna">Nombre Actividad</label>
-         <input type="text"class="form-control" id="nombre_actividadexterna" disabled  required>
+         <input type="text"class="form-control" onKeyUp="this.value = this.value.toUpperCase()" placeholder="Nombre" id="nombre_actividadexterna" disabled  required>
        </div>
 
        <div class="form-group col-md-4" >
          <label for="tipo_actividadexterna">* Tipo de Actividad</label>
            <select class="form-control" name="comunidad" id="tipo_actividadexterna" disabled required >
          <option value="">Seleccione una opción</option>
-         <option value="1">LABORAL</option>
-         <option value="2">ESCOLAR</option>
+         <option value="Laboral">LABORAL</option>
+         <option value="Escolar">ESCOLAR</option>
    </select>
        </div>
-       <div class="form-group col-md-4">
-         <label for="días">Días</label>
-         <input type="checkbox"class="form-control" id="días" disabled  required>
-       </div>
-      <!-- <div class="form-group col-md-4">
-         <label for="jornada">Días: </label>
-           <select name="comunidad" required disabled class="form-control">
-         <option value="">Seleccione una opción</option>
-         <option value="5">LUNES A VIERNES</option>
-         <option value="6">LUNES A SÁBADO</option>
-         <option value="7">LUNES A DOMINGO</option>
-         <option value="2">FINES DE SEMANA</option>
-         <option value="3">ENTRE SEMANA</option>
-   </select>
- </div>-->
 
+      <div class="form-group col-md-4">
+         <label for="dias_sem">Días de la semana: </label>
+            <input type="text"class="form-control" onKeyUp="this.value = this.value.toUpperCase()" placeholder="Ejemplo: Lunes a Viernes" id="dias_sem" disabled  required>
+ </div>
+</div>
+<div class="form-row">
     <div class="form-group col-md-2">
-      <label for="tel_celular">Entrada</label>
-      <input type="time"class="form-control" id="entrada" disabled  required>
+      <label for="hora_entrada">Entrada</label>
+      <input type="time"class="form-control" id="hora_entrada" disabled  required>
     </div>
     <div class="form-group col-md-2">
-      <label for="salida">Salida</label>
-      <input type="time" class="form-control"  id="salida" disabled  required >
+      <label for="hora_salida">Salida</label>
+      <input type="time" class="form-control"  id="hora_salida" disabled  required >
     </div>
     <div class="form-group col-md-4">
-      <label for="lugar_trabajo">Nombre del lugar</label>
-      <input type="text" class="form-control" placeholder="Nombre" id="lugar_trabajo" onKeyUp="this.value = this.value.toUpperCase();" disabled  required>
+      <label for="lugar">Nombre del lugar</label>
+      <input type="text" class="form-control" onKeyUp="this.value = this.value.toUpperCase()" placeholder="Nombre" id="lugar" onKeyUp="this.value = this.value.toUpperCase();" disabled  required>
     </div>
-  </div>
+
+    <div class="form-group col-md-4">
+      <label for="lugar_trabajo">Actividades Registradas</label>
+    </br>
+         <a data-toggle="modal" href="#act_externas">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ver Actividades</a>
+    </div>
+</div>
 
 
  <div class="form-group">
   <br>
   <div class="col-xs-offset-2 col-xs-9" align="center">
       <input type="submit" class="btn btn-primary" name="agregar" value="Actualizar">
-     <button type="button"  class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
   </div>
 </div>
 </form>
@@ -79,6 +79,39 @@
 </div>
 </br>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="act_externas" aria-labelledby="#act_externa " aria-hidden="true">
+  <div class="modal-dialog modal-none">
+    <div class="modal-content">
+      <div class="container" id="font5">
+        </br>
+      <div class="table-responsive">
+        <table class="table table-bordered table-info" style="color: #000000;" >
+          <thead>
+            <tr>
+              <th scope="col">Nombre Actividad</th>
+              <th scope="col">Tipo de Actividad</th>
+              <th scope="col">Días de actividad</th>
+              <th colspan="1" >ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php $__currentLoopData = $u; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $us): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <tr>
+              <td><?php echo $us->nombre_actividadexterna; ?></td>
+              <td><?php echo $us->tipo_actividadexterna; ?></td>
+              <td><?php echo $us->dias_sem; ?></td>
+              <td><a href="cambiar_estatus_beca/<?php echo e($us->id_externos); ?>">Quitar</a></td>
+            </tr>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
   <?php $__env->stopSection(); ?>
 
 
