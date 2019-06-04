@@ -55,7 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('otras_actividades_actualizar', 'ActualizacionesEstudiante@actualizacion_actividades')->name('otras_actividades_actualizar');
   Route::post('act_actividades', 'ActualizacionesEstudiante@act_mis_actividades')->name('act_actividades');
 
-  Route::get('datos_medico', 'Estudiante_Con\EstudianteController@dato_medico')->name('datos_medico');
+  Route::get('datos_medico', 'ConsultasController@carga_datos_medicos')->name('datos_medico');
   Route::get('datos_personal', 'ConsultasController@carga_datos_personales')->name('datos_personal');
   Route::get('catalogo', 'Actividades\ActvidadesExtra@catalogos')->name('catalogo');
   Route::post('changePassword','HomeController@changePassword')->name('changePassword');
@@ -69,6 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('quitar_act/{id_externos}', 'ActualizacionesEstudiante@desactivar_act');
   Route::post('act_actividades', 'ActualizacionesEstudiante@act_actividades')->name('act_actividades');
   Route::post('act_datos_personales', 'ActualizacionesEstudiante@act_datos_personales')->name('act_datos_personales');
+  Route::post('act_datos_medicos', 'ActualizacionesEstudiante@act_datos_medicos')->name('act_datos_medicos');
 });
 
 

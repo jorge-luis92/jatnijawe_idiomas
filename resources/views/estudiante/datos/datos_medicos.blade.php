@@ -7,41 +7,33 @@
 @section('seccion')
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos Médicos</h1>
 <div class="container" id="font4">
+    @include('flash-message')
 </br>
-<form  validate enctype="multipart/form-data" data-toggle="validator">
+<form method="POST" action="{{ route('act_datos_medicos') }}">
+    @csrf
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
   <div class="form-row">
     <div class="form-group col-md-4">
-      <label for="jornada">* Tipo de Sangre</label>
-        <select name="comunidad" required class="form-control">
-      <option value="">Seleccione una opción</option>
-      <option value="1">0 +(Positivo) u ORh +(Positivo) </option>
-      <option value="2">0 -(Negativo) u ORh -(Negativo)</option>
-      <option value="3">A +(Positivo) ó ARh +(Positivo)</option>
-      <option value="4">A -(Negativo) ó ARh -(Negativo)</option>
-      <option value="5">B +(Positivo) ó BRh +(Positivo)</option>
-      <option value="6">B -(Negativo) u BRh -(Negativo)</option>
-      <option value="7">AB +(Positivo) ó ABRh +(Positivo)</option>
-      <option value="8">AB -(Negativo) ó ABRh -(Negativo)</option>
-</select>
+      <label for="tipo_sangre">* Tipo de Sangre</label>
+      <input type="text" class="form-control" name="tipo_sangre" value="<?php if(empty($s->tipo_sangre)){ $vacio=null; echo $vacio;} else{ echo $s->tipo_sangre;} ?>" id="tipo_sangre" placeholder="Tipo de Sangre"  onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
     <div class="form-group col-md-4">
-      <label for="tutor">* En caso de emergencia llamar a: </label>
-      <input type="text" class="form-control" id="tutor" placeholder="Nombre"  onKeyUp="this.value = this.value.toUpperCase();" required>
+      <label for="nombre_responsable">* En caso de emergencia llamar a: </label>
+      <input type="text" class="form-control" name="nombre_responsable" value="<?php if(empty($e->nombre_responsable)){ $vacio=null; echo $vacio;} else{ echo $e->nombre_responsable;} ?>" id="nombre_responsable" placeholder="Nombre"  onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
     <div class="form-group col-md-4">
       <label for="parentesco">* Parentesco</label>
-      <input type="text" class="form-control" id="parentesco" placeholder="Parentesco"  onKeyUp="this.value = this.value.toUpperCase();" required>
+      <input type="text" class="form-control" name="parentesco" value="<?php if(empty($e->parentesco)){ $vacio=null; echo $vacio;} else{ echo $e->parentesco;} ?>"id="parentesco" placeholder="Parentesco"  onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
   </div>
     <div class="form-row">
     <div class="form-group col-md-5">
       <label for="tel_emergencia">* Teléfono</label>
-      <input type="tel" maxlength="10" class="form-control" onkeypress="return numeros (event)" id="tel_emergencia" placeholder="Teléfono de Emergencia a 10 dígitos" pattern="([0-9]{3})([0-9]{7})" required>
+      <input type="tel" maxlength="10" name="tel_emergencia" value="<?php if(empty($ne->numero)){ $vacio=null; echo $vacio;} else{ echo $ne->numero;} ?>" class="form-control" onkeypress="return numeros (event)" id="tel_emergencia" placeholder="Teléfono de Emergencia a 10 dígitos" pattern="([0-9]{3})([0-9]{7})" required>
     </div>
   </div>
     <div class="radio col-md-12">
-      <label>* ¿Sufres alguna Alergia?</label>
+      <label>* ¿Sufres alguna Alergia o Enfermedad?</label>
 
      <input type="radio" id="si_alergia" name="alergias" value="si_alergia" onclick="habilita_alergia()" required >
      <label for="si_actividad">Si</label>
@@ -51,23 +43,33 @@
      </div>
 
       <div class="form-row">
-     <div class="form-group col-md-4">
-       <label for="nombre_alergia">Nombre Alergia</label>
-       <input type="text" class="inputAlergia" id="nombre_alergia" placeholder="Nombre de Alergia" disabled required>
+         <div class="form-group col-md-3">
+        <label for="tipo_enfer">Tipo</label></br>
+          <select class="inputA" name="tipo_enfer" id="tipo_enfer" disabled required >
+        <option value="">Seleccione una opción</option>
+        <option value="alergia">Alergia</option>
+        <option value="enfermedad">Enfermedad</option>
+  </select>
+</br>
+  <a data-toggle="modal" href="#act_externas">Registro de Enfermedades - Alergias</a>
+        </div>
+     <div class="form-group col-md-3">
+       <label for="nombre_enf_ale">Nombre</label></br>
+       <input type="text" name="nombre_enf_ale" class="inputA" id="nombre_enf_ale" placeholder="Nombre" disabled required>
      </div>
-     <div class="form-group col-md-4">
-       <label for="descripcion_alergia">Descripción</label>
-        <textarea class="inputAlergia" id="descripcion_alergia" placeholder="Descripción Alergia" disabled required></textarea>
+     <div class="form-group col-md-3">
+       <label for="des_enf_ale">Descripción</label>
+        <textarea type="text" class="inputA" name="des_enf_ale" id="des_enf_ale" placeholder="Descripción" disabled required></textarea>
      </div>
-     <div class="form-group col-md-4">
-       <label for="indicacion_alergia">Indicaciones</label>
-       <textarea class="inputAlergia" id="indicacion_alergia" placeholder="Indicaciones Alergia" disabled required></textarea>
+     <div class="form-group col-md-3">
+       <label for="ind_enf_ale">Indicaciones</label>
+       <textarea type="text" class="inputA" name="ind_enf_ale" id="ind_enf_ale" placeholder="Indicaciones " disabled required></textarea>
      </div>
      </div>
 
      <div class="radio col-md-12">
-       <label>* ¿Sufres alguna Enfermedad?</label>
-      <input type="radio" id="si_enfermedad" name="enfermedades" value="si_enfermedad" onclick="habilita_enfermedad()" required>
+       <label>* ¿Sufres alguna Discapacidad?</label>
+      <input type="radio" id="tipo_discapacidad" name="enfermedades" value="si_enfermedad" onclick="habilita_enfermedad()" required>
       <label for="si_enfermedad">Si</label>
 
       <input type="radio" id="no_enfermedad" name="enfermedades" value="no_enfermedad" onclick="deshabilita_enfermedad()" required>
@@ -76,23 +78,14 @@
 
       <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="nombre_enfermedad">Nombre Enfermedad</label>
-        <input type="text" class="inputEnfermedad" id="nombre_enfermedad" placeholder="Nombre Enfermedad" disabled required>
-      </div>
-      <div class="form-group col-md-4">
-        <label for="descripcion_enfermedad">Descripción</label>
-        <textarea class="inputEnfermedad" id="descripción" placeholder="Descripción Enfermedad" disabled required ></textarea>
-              </div>
-      <div class="form-group col-md-4">
-        <label for="indicacion_enfermedad">Indicaciones</label>
-        <textarea class="inputEnfermedad" id="indicacion_enfermedad" placeholder="Indicaciones Enfermedad" disabled required></textarea>
+        <label for="tipo_discapacidad">Tipo de Discapacidad</label>
+        <input type="text" class="inputEnfermedad" name="tipo_discapacidad" value="<?php if(empty($dis->tipo)){ $vacio=null; echo $vacio;} else{ echo $dis->tipo;} ?>"id="tipo_discapacidad" placeholder="Tipo de Discapacidad" disabled required>
       </div>
   </div>
   <div class="form-group">
    <br>
    <div class="col-xs-offset-2 col-xs-9" align="center">
        <input type="submit" class="btn btn-primary" name="agregar" value="Actualizar">
-      <button type="button"  class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
    </div>
 </div>
 </form>
@@ -100,21 +93,52 @@
 </div>
 </br>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="act_externas" aria-labelledby="act_externa " aria-hidden="true">
+  <div class="modal-dialog modal-xl" >
+    <div class="modal-content" a>
+      <div class="modal-header" >
+        <h5 class="modal-title" id="act_externa" style="color: #000000">Registro de Enfermedades Y/O Alergías</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container" id="font7">
+        </br>
+      <div class="table-responsive">
+        <table class="table table-bordered table-info" style="color: #000000;" >
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Indicaciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($ea as $eas)
+            <tr>
+              <td>{!! $eas->nombre_enfermedadalergia !!}</td>
+              <td>{!! $eas->tipo_enfermedadalergia !!}</td>
+              <td>{!! $eas->descripcion !!}</td>
+              <td>{!! $eas->indicaciones !!}</td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
   @endsection
-
-
-
-
-
-
 
 <script language="JavaScript">
     function habilita_alergia(){
-        $(".inputAlergia").removeAttr("disabled");
+        $(".inputA").removeAttr("disabled");
     }
 
     function deshabilita_alergia(){
-        $(".inputAlergia").attr("disabled","disabled");
+        $(".inputA").attr("disabled","disabled");
     }
 </script>
 

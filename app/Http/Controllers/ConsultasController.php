@@ -7,6 +7,9 @@ use App\Persona;
 use App\Lengua;
 use App\Beca;
 use App\Telefono;
+use App\Datos_emergencia;
+use App\Discapacidad;
+use App\Enfermedad_Alergia;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use Illuminate\Http\Request;
@@ -112,6 +115,62 @@ class ConsultasController extends Controller
 
             return view('estudiante\datos.datos_personales')->with('d',$direccion)->with('nl',$num_local)->with('nc',$num_cel);
           }
+
+          public function carga_datos_medicos(Request $request)
+          {
+            $usuario_actual=auth()->user();
+            $id=$usuario_actual->id_user;
+            $data = $request;
+            $id_persona = DB::table('estudiantes')
+            ->select('estudiantes.id_persona')
+            ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+            ->where('estudiantes.matricula',$id)
+            ->take(1)
+            ->first();
+              $id_persona= json_decode( json_encode($id_persona), true);
+
+              $sangre = DB::table('personas')
+              ->select('personas.tipo_sangre')
+              ->where('personas.id_persona',$id_persona)
+              ->take(1)
+              ->first();
+
+              $emergencia = DB::table('datos_emergencias')
+              ->select('datos_emergencias.nombre_responsable', 'datos_emergencias.parentesco')
+              ->join('estudiantes', 'estudiantes.matricula', '=', 'datos_emergencias.matricula')
+              ->where('estudiantes.matricula', $id)
+              ->take(1)
+              ->first();
+
+              $num_emergencia = DB::table('personas')
+              ->select('telefonos.numero')
+              ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+              ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
+              ->take(1)
+              ->first();
+
+              $enf_ale = DB::table('estudiantes')
+              ->select('enfermedades_alergias.nombre_enfermedadalergia', 'enfermedades_alergias.tipo_enfermedadalergia',
+              'enfermedades_alergias.descripcion', 'enfermedades_alergias.indicaciones')
+              ->join('enfermedades_alergias', 'estudiantes.matricula', '=', 'enfermedades_alergias.matricula')
+              ->where('estudiantes.matricula',$id)
+              //->where([['estudiantes.matricula',$id], ['becas.bandera', '=', '1'],])
+              ->simplePaginate(7);
+
+              $disca= DB::table('personas')
+              ->select('discapacidades.tipo')
+              ->join('discapacidades', 'discapacidades.id_persona', '=', 'personas.id_persona')
+              ->where('personas.id_persona',$id_persona)
+              ->take(1)
+              ->first();
+
+              return view('estudiante\datos.datos_medicos')
+              ->with('s',$sangre)
+              ->with('e',$emergencia)
+              ->with('ne',$num_emergencia)
+              ->with('ea', $enf_ale)
+              ->with('dis', $disca);
+            }
 
 
 }

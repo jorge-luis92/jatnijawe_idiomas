@@ -7,6 +7,9 @@ use App\Lengua;
 use App\Beca;
 use App\Direccion;
 use App\Datos_externo;
+use App\Enfermedad_Alergia;
+use App\Datos_emergencia;
+use App\Discapacidad;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use Illuminate\Http\Request;
@@ -79,8 +82,8 @@ public function act_datos_personales(Request $request)
 {
   $this->validate($request, [
     //'id_persona' => ['required', 'string', 'max:60', 'unique:personas'],
-    'tel_local' => ['string', 'min:10', 'max:10'],
-    'tel_celular' => ['required', 'string', 'min:10', 'max:105'],
+    //'tel_local' => ['string', 'min:10', 'max:10'],
+    'tel_celular' => ['required', 'string', 'min:10', 'max:10'],
   ]);
   $usuario_actual=auth()->user();
   $id=$usuario_actual->id_user;
@@ -123,8 +126,11 @@ if(empty($direccion) or empty($tels)){
       DB::table('telefonos')
           ->updateOrInsert(
               ['numero' => $data['tel_local'], 'tipo' => 'local', 'id_persona' => $id_persona],
-              ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona],
-          );
+                      );
+          DB::table('telefonos')
+              ->updateOrInsert(
+                  ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona],
+              );
     }
 
           return redirect()->route('datos_personal')->with('success','¡Datos actualizados correctamente!');
@@ -141,8 +147,147 @@ else {
         $user = auth()->user();
         $user->email = $data['email'];
         $user->save();
+        if($data['tel_local'] == null){
+             DB::table('telefonos')
+                 ->updateOrInsert(
+                       ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona],
+                 );
+               }
+       else {
+         DB::table('telefonos')
+             ->updateOrInsert(
+                 ['numero' => $data['tel_local'], 'tipo' => 'local', 'id_persona' => $id_persona],
+                         );
+             DB::table('telefonos')
+                 ->updateOrInsert(
+                     ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona],
+                 );
+       }
+        DB::table('telefonos')
+            ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'local'],])
+            ->update(
+              ['numero' => $data['tel_local']],
+              );
+              DB::table('telefonos')
+                  ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular'],])
+                  ->update(
+                    ['numero' => $data['tel_celular']],
+                    );
 
       return redirect()->route('datos_personal')->with('success','¡Datos actualizados correctamente!');
 }
   }
+
+  public function act_datos_medicos(Request $request)
+  {
+    $usuario_actual=auth()->user();
+    $id=$usuario_actual->id_user;
+    $data = $request;
+    $id_persona = DB::table('estudiantes')
+    ->select('estudiantes.id_persona')
+    ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+    ->where('estudiantes.matricula',$id)
+    ->take(1)
+    ->first();
+    $id_persona = $id_persona->id_persona;
+      $direccion = DB::table('personas')
+      ->select('direcciones.id_persona')
+      ->join('direcciones', 'direcciones.id_persona', '=', 'personas.id_persona')
+      ->where('personas.id_persona',$id_persona)
+      ->take(1)
+      ->first();
+
+      DB::table('personas')
+          ->where('personas.id_persona',$id_persona)
+          ->update(
+            ['tipo_sangre' => $data['tipo_sangre']],
+            );
+
+        $emergencia_a = DB::table('estudiantes')
+        ->select('datos_emergencias.matricula')
+        ->join('datos_emergencias', 'datos_emergencias.matricula', '=', 'estudiantes.matricula')
+        ->where('estudiantes.matricula',$id)
+        ->take(1)
+        ->first();
+
+      if(empty($emergencia_a)){
+      DB::table('datos_emergencias')
+          ->where('datos_emergencias.matricula',$id)
+          ->Insert(
+            ['nombre_responsable' => $data['nombre_responsable'], 'parentesco' => $data['parentesco'], 'matricula' => $id],
+          );
+        }
+        else{
+          DB::table('datos_emergencias')
+              ->where('datos_emergencias.matricula',$id)
+              ->update(
+                ['nombre_responsable' => $data['nombre_responsable'], 'parentesco' => $data['parentesco']],
+              );
+        }
+
+      $emer = DB::table('personas')
+      ->select('telefonos.numero')
+      ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+      ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
+      ->take(1)
+      ->first();
+
+      if(empty($emer)){
+          DB::table('telefonos')
+          //    ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
+              ->Insert(
+                ['tipo' => 'emergencia', 'numero' => $data['tel_emergencia'], 'id_persona' => $id_persona],
+                );
+        }
+        else {
+          DB::table('telefonos')
+              ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
+              ->update(
+                ['numero' => $data['tel_emergencia']],
+                );
+        }
+
+          if($data['nombre_enf_ale'] == null){
+            return redirect()->route('datos_medico')->with('success','¡Datos actualizados correctamente!');
+          }
+        else {
+        DB::table('enfermedades_alergias')
+        //    ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
+            ->Insert(
+              ['nombre_enfermedadalergia' => $data['nombre_enf_ale'], 'tipo_enfermedadalergia' => $data['tipo_enfer'],
+              'descripcion' => $data['des_enf_ale'], 'indicaciones' => $data['ind_enf_ale'], 'matricula' => $id],
+            );}
+            if($data['tipo_discapacidad'] == null){
+            return redirect()->route('datos_medico')->with('success','¡Datos actualizados correctamente!');
+            }
+            else{
+
+        $dis = DB::table('personas')
+        ->select('discapacidades.id_persona')
+        ->join('discapacidades', 'discapacidades.id_persona', '=', 'personas.id_persona')
+        ->where('discapacidades.id_persona',$id_persona)
+        ->take(1)
+        ->first();
+
+        if(empty($dis)){
+            DB::table('discapacidades')
+            //    ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
+                ->Insert(
+                  ['tipo' => $data['tipo_discapacidad'], 'id_persona' => $id_persona],
+                  );
+          }
+          else {
+            DB::table('discapacidades')
+            //    ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
+                ->update(
+                  ['tipo' => $data['tipo_discapacidad']],
+                  );
+          }
+        }
+
+
+
+        return redirect()->route('datos_medico')->with('success','¡Datos actualizados correctamente!');
+
+    }
 }
