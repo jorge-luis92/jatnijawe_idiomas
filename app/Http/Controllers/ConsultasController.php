@@ -6,6 +6,7 @@ use App\Estudiante;
 use App\Persona;
 use App\Lengua;
 use App\Beca;
+use App\Telefono;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use Illuminate\Http\Request;
@@ -44,10 +45,8 @@ class ConsultasController extends Controller
                  'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
                  'personas.curp', 'personas.genero')
         ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
-      //  ->join('detalle_extracurriculares', 'estudiantes.matricula', '=', 'detalle_extracurriculares.matricula')
         ->where('estudiantes.matricula',$id)
         ->take(1)
-      //  ->union($lengua)
         ->first();
 
         $becas_r = DB::table('estudiantes')
@@ -75,6 +74,44 @@ class ConsultasController extends Controller
           ->simplePaginate(7);
           return view('estudiante\datos.datos_laborales')->with('u',$users);
         }
+
+        public function carga_datos_personales(Request $request)
+        {
+          $usuario_actual=auth()->user();
+          $id=$usuario_actual->id_user;
+          $data = $request;
+          $id_persona = DB::table('estudiantes')
+          ->select('estudiantes.id_persona')
+          ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+          ->where('estudiantes.matricula',$id)
+          ->take(1)
+          ->first();
+            $id_persona= json_decode( json_encode($id_persona), true);
+
+            $direccion = DB::table('personas')
+            ->select('direcciones.vialidad_principal', 'direcciones.num_exterior', 'direcciones.cp', 'direcciones.localidad',
+            'direcciones.municipio', 'direcciones.entidad_federativa')
+            ->join('direcciones', 'direcciones.id_persona', '=', 'personas.id_persona')
+            ->where('personas.id_persona',$id_persona)
+            ->take(1)
+            ->first();
+
+            $num_local = DB::table('personas')
+            ->select('telefonos.numero')
+            ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+            ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'local'],])
+            ->take(1)
+            ->first();
+
+            $num_cel = DB::table('personas')
+            ->select('telefonos.numero')
+            ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+            ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular'],])
+            ->take(1)
+            ->first();
+
+            return view('estudiante\datos.datos_personales')->with('d',$direccion)->with('nl',$num_local)->with('nc',$num_cel);
+          }
 
 
 }

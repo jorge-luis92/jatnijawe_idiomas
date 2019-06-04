@@ -89,7 +89,7 @@
       <label for="tipo_lengua">Tipo de Lengua</label>
         <select name="tipo_lengua" id="tipo_lengua" required disabled class='inputText'>
         <option value="">Seleccione una opción</option>
-        <option value="materna">Materna</option>
+        <option value="indigena">Indigena</option>
         <option value="extranjera">Extranjera</option>
             </select>
           </br>

@@ -7,13 +7,15 @@ use App\User;
 use PDF;
 use Illuminate\Support\Facades\DB;
 use Storage;
+use Illuminate\Support\Facades\Auth;
 
 class EstudianteController extends Controller
 {
     public function dato_general()
     {
-      $usuario_actual=\Auth::user();
-       if($usuario_actual->tipo_usuario!='estudiante'){
+      $usuario_actual=auth()->user();
+      $id=$usuario_actual->id_user;
+       if($id->tipo_usuario!='estudiante'){
         return redirect()->back();
       }
       else{
@@ -23,7 +25,8 @@ class EstudianteController extends Controller
 
   public function dato_laboral(){
     $usuario_actual=auth()->user();
-     if($usuario_actual->tipo_usuario!='estudiante'){
+    $id=$usuario_actual->id_user;
+     if($id->tipo_usuario!='estudiante'){
       return redirect()->back();
       }
   return view('estudiante\datos.datos_laborales');
@@ -98,8 +101,16 @@ return view('estudiante\datos.datos_personales');
     return view('estudiante.configuracion_cuenta');
     }
 
+    public function editar_actividades($id_externos)
+    {
+      $usuario_actual=\Auth::user();
+      $externo= $id_externos;
+       if($usuario_actual->tipo_usuario!='estudiante'){
+        return redirect()->back();
+      }
+      else{
+        return view('estudiante\datos.editar_externas')->with('e',$externo);
+          }
+  }
 
-    public function actualizar(){
-      updateOrInsert();
-    }
 }

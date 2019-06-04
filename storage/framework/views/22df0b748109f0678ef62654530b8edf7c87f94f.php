@@ -27,32 +27,55 @@
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
         <a class="nav-link" href=<?php echo e(route('home_admin')); ?>>
-          <i class="fas fa-home" style="font-size: 30px"></i><span style="font-size: 1.9em">JATWEB</span></a></li><!-- Divider -->
+            <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
-        Servicios
+        Gestión de Usuarios
       </div><!-- Nav Item - Pages Collapse Menu -->
+
       <li class="nav-item" >
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#datos_estudiante" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-upload"></i><span style="font-size: 0.8em;">&nbsp;Gestión de Estudiantes</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#usuario" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa fa-user-plus" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Estudiantes</span>
         </a>
-        <div id="datos_estudiante" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="usuario" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('form_nuevo_usuario')); ?>>Altas</a>
+            <a class="collapse-item" href=<?php echo e(route('registro_estudiante')); ?>>Registrar</a>
+            <a class="collapse-item" href=<?php echo e(route('usuario_estudiante')); ?>> Buscar</a>
+            <a class="collapse-item" href=<?php echo e(route('estudiante_activo')); ?>> Estudiantes Activos</a>
+            <a class="collapse-item" href=<?php echo e(route('estudiante_inactivo')); ?>> Estudiantes Inactivos</a>
+          </div>
+        </div>
+      </li>
+
+
+      <li class="nav-item" >
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#usuario_cordinador" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fa fa-user-plus" aria-hidden="true"></i><span style="font-size: 0.8em;">&nbsp;Cordinadores</span>
+        </a>
+        <div id="usuario_cordinador" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
+            <a class="collapse-item" href=<?php echo e(route('registro_cordinador')); ?>>Registrar</a>
+            <a class="collapse-item" href=<?php echo e(route('usuario_cordinador')); ?>> Buscar</a>
+            <a class="collapse-item" href=<?php echo e(route('cordinador_activo')); ?>> Cordinadores Activos</a>
+            <a class="collapse-item" href=<?php echo e(route('cordinador_inactivo')); ?>> Cordinadores Inactivos</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#activid_extra" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fa fa-list"></i><span style="font-size: 0.8em;">&nbsp;Gestión de Coordinadores</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user_tallerista" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-user-plus" aria-hidden="true"></i><span style="font-size: 0.8em;">&nbsp;Talleristas</span>
         </a>
-        <div id="activid_extra" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="user_tallerista" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item" href=<?php echo e(route('registros_talleristas')); ?>>Altas</a>
+            <a class="collapse-item" href=<?php echo e(route('registro_tallerista')); ?>>Registrar</a>
+            <a class="collapse-item" href=<?php echo e(route('usuario_tallerista')); ?>> Buscar</a>
+            <a class="collapse-item" href=<?php echo e(route('tallerista_activo')); ?>> Talleristas Activos</a>
+            <a class="collapse-item" href=<?php echo e(route('tallerista_inactivo')); ?>> Talleristas Inactivos</a>
         </div>
       </li>
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
@@ -99,7 +122,7 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo e(Auth::user()->name); ?> </span>
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small"> </span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->

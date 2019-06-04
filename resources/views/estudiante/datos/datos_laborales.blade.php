@@ -9,6 +9,7 @@
 <div class="container" id="font4">
   @include('flash-message')
 </br>
+
 <form method="POST" action="{{ route('otras_actividades_actualizar') }}">
     @csrf
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
@@ -28,12 +29,12 @@
          <div class="form-row">
        <div class="form-group col-md-4">
          <label for="nombre_actividadexterna">Nombre Actividad</label>
-         <input type="text" class="form-control" onKeyUp="this.value = this.value.toUpperCase()" placeholder="Nombre" id="nombre_actividadexterna" disabled  required>
+         <input type="text" name="nombre_actividadexterna" class="form-control" onKeyUp="this.value = this.value.toUpperCase()" placeholder="Nombre" id="nombre_actividadexterna" disabled  required>
        </div>
 
        <div class="form-group col-md-4" >
          <label for="tipo_actividadexterna">* Tipo de Actividad</label>
-           <select class="form-control" name="comunidad" id="tipo_actividadexterna" disabled required >
+           <select class="form-control" name="tipo_actividadexterna" id="tipo_actividadexterna" disabled required >
          <option value="">Seleccione una opción</option>
          <option value="Laboral">LABORAL</option>
          <option value="Escolar">ESCOLAR</option>
@@ -42,21 +43,21 @@
 
       <div class="form-group col-md-4">
          <label for="dias_sem">Días de la semana: </label>
-            <input type="text"class="form-control" onKeyUp="this.value = this.value.toUpperCase()" placeholder="Ejemplo: Lunes a Viernes" id="dias_sem" disabled  required>
+            <input type="text"class="form-control" name="dias_sem" onKeyUp="this.value = this.value.toUpperCase()" placeholder="Ejemplo: Lunes a Viernes" id="dias_sem" disabled  required>
  </div>
 </div>
 <div class="form-row">
     <div class="form-group col-md-2">
       <label for="hora_entrada">Entrada</label>
-      <input type="time"class="form-control" id="hora_entrada" disabled  required>
+      <input type="time"class="form-control" name="hora_entrada" id="hora_entrada" disabled  required>
     </div>
     <div class="form-group col-md-2">
       <label for="hora_salida">Salida</label>
-      <input type="time" class="form-control"  id="hora_salida" disabled  required >
+      <input type="time" class="form-control" name="hora_salida" id="hora_salida" disabled  required >
     </div>
     <div class="form-group col-md-4">
       <label for="lugar">Nombre del lugar</label>
-      <input type="text" class="form-control" onKeyUp="this.value = this.value.toUpperCase()" placeholder="Nombre" id="lugar" onKeyUp="this.value = this.value.toUpperCase();" disabled  required>
+      <input type="text" class="form-control" name="lugar" onKeyUp="this.value = this.value.toUpperCase()" placeholder="Nombre" id="lugar" onKeyUp="this.value = this.value.toUpperCase();" disabled  required>
     </div>
 
     <div class="form-group col-md-4">
@@ -70,7 +71,7 @@
  <div class="form-group">
   <br>
   <div class="col-xs-offset-2 col-xs-9" align="center">
-      <input type="submit" class="btn btn-primary" name="agregar" value="Actualizar">
+      <input type="submit" class="btn btn-primary" name="agregar" value="Registrar Actividad">
 
   </div>
 </div>
@@ -79,39 +80,54 @@
 </div>
 </br>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="act_externas" aria-labelledby="#act_externa " aria-hidden="true">
-  <div class="modal-dialog modal-none">
-    <div class="modal-content">
-      <div class="container" id="font5">
+<div class="modal fade" tabindex="-1" role="dialog" id="act_externas" aria-labelledby="act_externa " aria-hidden="true">
+  <div class="modal-dialog modal-xl" >
+    <div class="modal-content" a>
+      <div class="modal-header" >
+        <h5 class="modal-title" id="act_externa" style="color: #000000">Registro de Actividades</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container" id="font7">
         </br>
+        <form method="POST" action="{{ route('act_actividades')}}">
+            @csrf
       <div class="table-responsive">
         <table class="table table-bordered table-info" style="color: #000000;" >
           <thead>
             <tr>
+              <!--<th hidden scope="col">Id</th>-->
               <th scope="col">Nombre Actividad</th>
               <th scope="col">Tipo de Actividad</th>
               <th scope="col">Días de actividad</th>
-              <th colspan="1" >ACCIONES</th>
+              <th scope="col">Hora Entrada</th>
+              <th scope="col">Hora Salida</th>
+              <th colspan="2" >ACCIONES</th>
             </tr>
           </thead>
           <tbody>
             @foreach ($u as $us)
             <tr>
+              <input hidden type="text" name="id_externos" value="{!! $us->id_externos !!}">
               <td>{!! $us->nombre_actividadexterna !!}</td>
               <td>{!! $us->tipo_actividadexterna !!}</td>
-              <td>{!! $us->dias_sem !!}</td>
-              <td><a href="cambiar_estatus_beca/{{ $us->id_externos }}">Quitar</a></td>
+              <td><input type="text" onKeyUp="this.value = this.value.toUpperCase()" name="dias_sem" value="{!! $us->dias_sem !!}"</td></td>
+              <td><input type="time" name="hora_entrada" value="{!! $us->hora_entrada !!}"</td></td>
+              <td><input type="time" name="hora_salida" value="{!! $us->hora_salida !!}"</td></td>
+              <!--<td><button href="editar_actividad/{{ $us->id_externos }}">Editar</td>-->
+                <td><input type="submit" class="btn btn-primary" name="agregar" value="Actualizar"></td>
+              <td><a href="quitar_act/{{ $us->id_externos }}">Quitar</a></td>
             </tr>
       @endforeach
-
-
           </tbody>
         </table>
       </div>
+    </form>
       </div>
     </div>
   </div>
-</div>
+  </div>
   @endsection
 
 

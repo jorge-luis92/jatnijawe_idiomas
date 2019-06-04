@@ -34,7 +34,7 @@ class FormacionIntegralController extends Controller
 
 
   $user=new User;
-  $user->id=$data['id'];
+  $user->id_user=$data['id'];
   $user->name=$data['name'];
   $user->email=$data['email'];
   $user->password=Hash::make($data['password']);
@@ -49,6 +49,18 @@ class FormacionIntegralController extends Controller
     return view('personal_administrativo\formacion_integral\gestion_tallerista.read');
   }
 
+  public function busqueda_estudiante()
+  {
+      return view('personal_administrativo.busqueda_estudiante');
+        }
 
+  public function registrar_tutor()
+  {
+    return view('personal_administrativo\formacion_integral\gestion_tutores.registrar_tutor');
+  }
 
+  public function inicio_formacion()
+  {
+    return view('personal_administrativo\formacion_integral\home_formacion');
+    }
 }

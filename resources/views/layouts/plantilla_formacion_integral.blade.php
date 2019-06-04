@@ -33,16 +33,47 @@
       </div><!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#datos_estudiante" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-upload"></i><span style="font-size: 0.9em;">&nbsp;Estudiantes</span>
+         <i class="fa fa-user-circle" aria-hidden="true"></i><span style="font-size: 0.9em;">&nbsp;Estudiantes</span>
         </a>
         <div id="datos_estudiante" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href={{ route('busqueda')}}>Busqueda</a>
+            <a class="collapse-item" href={{ route('busqueda_estudiante')}}>Busqueda</a>
 
           </div>
         </div>
       </li>
+
+
+<li class="nav-item" >
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#registar_tutores" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fa fa-users" aria-hidden="true"></i></i><span style="font-size: 0.9em;">&nbsp;Tutores</span>
+        </a>
+        <div id="registar_tutores" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
+            <a class="collapse-item" href={{ route('registrar_tutor')}}>Registrar</a>
+             <a class="collapse-item" href={{ route('busqueda')}}>Tutores Registrados</a>
+          </div>
+        </div>
+      </li>
+
+<li class="nav-item" >
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#registar_talleres" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fa fa-cubes" aria-hidden="true"></i></i><span style="font-size: 0.9em;">&nbsp;Talleres</span>
+        </a>
+        <div id="registar_talleres" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
+            <a class="collapse-item" href={{ route('busqueda')}}>Agregar Taller</a>
+             <a class="collapse-item" href={{ route('busqueda')}}>Talleres Registrados</a>
+              <a class="collapse-item" href={{ route('busqueda')}}>Solicitudes</a>
+              <a class="collapse-item" href={{ route('busqueda')}}> Asignar Talleres</a>
+                <a class="collapse-item" href={{ route('busqueda')}}>Talleres Asignados</a>
+          </div>
+        </div>
+      </li>
+
 
         <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
 <!-- Sidebar Toggler (Sidebar) -->
