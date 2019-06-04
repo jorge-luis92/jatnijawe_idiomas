@@ -59,7 +59,7 @@
 
                         <div class="form-group col-md-2">
                             <label for="fecha_nacimiento" >{{ __('* Fecha nacimiento') }}</label>
-                                  <input id="fecha_nacimiento" type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror" name="fecha_nacimiento" required>
+                                  <input id="fecha_nacimiento" onblur="calcular_edades()" type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror" name="fecha_nacimiento" required>
                                 @error('fecha_nacimiento')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -95,7 +95,7 @@
                          <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="edad" >{{ __('* Edad') }}</label>
-                                <input id="edad" type="tel" maxlength="2" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
+                                <input id="edad"  type="tel" maxlength="2" onKeyUp="calcularEdad(#fechaNacimiento)" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
                                 @error('edad')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -218,7 +218,57 @@
                 </div>
 
 @endsection
+<script>
+function calcularEdad(fecha) {
+    var hoy = new Date();
+    var cumpleanos = new Date(fecha);
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var m = hoy.getMonth() - cumpleanos.getMonth();
 
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+        edad--;
+    }
+  document.querySelector("#edad").textContent = calcularEdad(fecha);
+    return edad;
+}
+</script>
+
+<script>
+function calculateAge(birthday) {
+    var birthday_arr = birthday.split("/");
+    var birthday_date = new Date(birthday_arr[2], birthday_arr[1] - 1, birthday_arr[0]);
+    var ageDifMs = Date.now() - birthday_date.getTime();
+    var ageDate = new Date(ageDifMs);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+</script>
+<script>
+function calcular_edades() {
+var form = document.getElementById('fecha_nacimiento').value; //fecha de nacimiento en el formulario
+var fechaNacimiento = form.split("-");
+var annoNac = fechaNacimiento[0];
+var mesNac = fechaNacimiento[1];
+var diaNac = fechaNacimiento[2];
+
+var fechaHoy = new Date(); // detecto la fecha actual y asigno el dia, mes y anno a variables distintas
+var annoActual = fechaHoy.getFullYear();
+var mesActual = fechaHoy.getMonth()+1;
+var diaActual = fechaHoy.getDate();
+
+var edad = annoActual - annoNac;
+if(mesNac > mesActual){
+//alert('mes de nacimiento mayor');
+edad--;
+}
+if(mesNac == mesActual){
+//alert('mes igual');
+if(diaNac > diaActual){
+//alert('dia de nacimiento mayor');
+edad--;
+}
+}
+document.getElementById('#edad').value = edad;
+</script>
 <script>
 function numeros(e){
  key = e.keyCode || e.which;

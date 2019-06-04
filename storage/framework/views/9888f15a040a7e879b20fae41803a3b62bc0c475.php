@@ -5,13 +5,6 @@
                         <?php echo csrf_field(); ?>
 
                          <div class="form-row">
-<!--
-                        <div class="form-group col-md-2">
-                          <label for="tipo_usuario">Identificador</label>
-                            <select  id="id_persona" required class="form-control">
-                            <option value=""><ID</option>
-                                </select>
-                        </div>-->
 
                         <div class="form-group col-md-4">
                             <label for="nombre" ><?php echo e(__('* Nombre(s)')); ?></label>
@@ -68,7 +61,7 @@ endif; ?>
                         </div>
 </div>
                                 <div class="form-row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="curp" ><?php echo e(__('* CURP')); ?></label>
                                   <input id="curp" type="text" minlength="18" maxlength="18"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('curp')) :
 if (isset($message)) { $messageCache = $message; }
@@ -87,7 +80,7 @@ endif; ?>
                         </div>
 
                         <div class="form-group col-md-2">
-                            <label for="fecha_nacimiento" ><?php echo e(__('* Fecha nacimiento')); ?></label>
+                            <label for="fecha_nacimiento" ><?php echo e(__('* Fecha de nacimiento')); ?></label>
                                   <input id="fecha_nacimiento" type="date" class="form-control <?php if ($errors->has('fecha_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_nacimiento'); ?> is-invalid <?php unset($message);
@@ -104,7 +97,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="lugar_nacimiento" ><?php echo e(__('* Lugar de Nacimiento')); ?></label>
                                   <input id="lugar_nacimiento"  onKeyUp="this.value = this.value.toUpperCase()" type="text" class="form-control <?php if ($errors->has('lugar_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
@@ -122,21 +115,9 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
 
-                        <div class="form-group col-md-3">
-                          <label for="tipo_sangre">* Tipo de Sangre</label>
-                            <select name="tipo_sangre" id="tipo_sangre" required class="form-control" autocomplete="tipo_sangre" autofocus>
-                          <option value="">Seleccione una opción</option>
-                          <option value="O RH+">0 +(Positivo) u ORh +(Positivo) </option>
-                          <option value="O RH-">0 -(Negativo) u ORh -(Negativo)</option>
-                          <option value="A RH+">A +(Positivo) ó ARh +(Positivo)</option>
-                          <option value="A RH-">A -(Negativo) ó ARh -(Negativo)</option>
-                          <option value="B RH+">B +(Positivo) ó BRh +(Positivo)</option>
-                          <option value="B RH-">B -(Negativo) u BRh -(Negativo)</option>
-                          <option value="AB RH+">AB +(Positivo) ó ABRh +(Positivo)</option>
-                          <option value="AB RH-">AB -(Negativo) ó ABRh -(Negativo)</option>
-                    </select>
-                        </div>
+
                       </div>
+
                          <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="edad" ><?php echo e(__('* Edad')); ?></label>
@@ -155,6 +136,9 @@ $message = $errors->first('edad'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
+                        <div class="form-group col-md-1">
+
+                        </div>
 
                         <div class="form-group col-md-3">
                           <label for="genero">* Género</label>
@@ -162,6 +146,24 @@ endif; ?>
                           <option value="">Seleccione una opción</option>
                           <option value="MASCULINO">MASCULINO</option>
                           <option value="FEMEMINO">FEMEMINO</option>
+                    </select>
+                        </div>
+                        <div class="form-group col-md-2">
+
+                        </div>
+
+                        <div class="form-group col-md-4">
+                          <label for="tipo_sangre">* Tipo de Sangre</label>
+                            <select name="tipo_sangre" id="tipo_sangre" required class="form-control" autocomplete="tipo_sangre" autofocus>
+                          <option value="">Seleccione una opción</option>
+                          <option value="O RH+">0 +(Positivo) u ORh +(Positivo) </option>
+                          <option value="O RH-">0 -(Negativo) u ORh -(Negativo)</option>
+                          <option value="A RH+">A +(Positivo) ó ARh +(Positivo)</option>
+                          <option value="A RH-">A -(Negativo) ó ARh -(Negativo)</option>
+                          <option value="B RH+">B +(Positivo) ó BRh +(Positivo)</option>
+                          <option value="B RH-">B -(Negativo) u BRh -(Negativo)</option>
+                          <option value="AB RH+">AB +(Positivo) ó ABRh +(Positivo)</option>
+                          <option value="AB RH-">AB -(Negativo) ó ABRh -(Negativo)</option>
                     </select>
                         </div>
 </div>
@@ -263,7 +265,7 @@ endif; ?>
                         </div>
 
                         <div class="form-group col-md-5">
-                            <label for="bachillerato_origen" ><?php echo e(__('* Bachillerato Origen')); ?></label>
+                            <label for="bachillerato_origen" ><?php echo e(__('* Bachillerato de Origen')); ?></label>
                                 <input id="bachillerato_origen" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('bachillerato_origen')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('bachillerato_origen'); ?> is-invalid <?php unset($message);
@@ -282,7 +284,7 @@ endif; ?>
 
 
                         <div class="form-group col-md-3">
-                            <label for="email" ><?php echo e(__('E-Mail Address')); ?></label>
+                            <label for="email" ><?php echo e(__('Correo')); ?></label>
                                 <input id="email" type="email" class="form-control <?php if ($errors->has('email')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('email'); ?> is-invalid <?php unset($message);

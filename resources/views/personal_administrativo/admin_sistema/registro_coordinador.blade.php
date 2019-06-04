@@ -1,12 +1,12 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_admin')
 @section('title')
-: Registro Cordinador
+: Registro Coordinador
 @endsection
 
 @section('seccion')
  @include('flash-message')
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de cordinadores</h1>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Coordinadores</h1>
 <div class="container" id="font4">
 </br>                    <form method="POST" action="">
                         @csrf
@@ -44,6 +44,7 @@
                         </div>
 </div>
                                 <div class="form-row">
+
                         <div class="form-group col-md-3">
                             <label for="curp" >{{ __('* CURP') }}</label>
                                   <input id="curp" type="text" minlength="18" maxlength="18"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('curp') is-invalid @enderror" name="curp" value="{{ old('curp') }}" required autocomplete="curp">
@@ -52,10 +53,11 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+
                         </div>
 
-                        <div class="form-group col-md-2">
-                            <label for="fecha_nacimiento" >{{ __('* Fecha nacimiento') }}</label>
+                        <div class="form-group col-md-3">
+                            <label for="fecha_nacimiento" >{{ __('* Fecha de nacimiento') }}</label>
                                   <input id="fecha_nacimiento" type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror" name="fecha_nacimiento" required>
                                 @error('fecha_nacimiento')
                                     <span class="invalid-feedback" role="alert">
@@ -64,7 +66,7 @@
                                 @enderror
                         </div>
 
-                         <div class="form-row">
+
                         <div class="form-group col-md-2">
                             <label for="edad" >{{ __('* Edad') }}</label>
                                 <input id="edad" type="tel" maxlength="2" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
@@ -83,36 +85,32 @@
                           <option value="FEMEMINO">FEMEMINO</option>
                     </select>
                         </div>
+
 </div>
 
 <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
 
 <div class="form-row">
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-4">
+    <label for="grado_estudios">Grado de Estudios</label>
+      <select name="grado_estudios" id="grado_estudios" required class="form-control">
+      <option value="">Seleccione una opción</option>
+      <option value="licenciatura">LICENCIATURA</option>
+      <option value="maestria">MAESTRÍA</option>
+      <option value="doctorado">DOCTORADO</option>
+      <option value="doctorado">OTRO</option>
+          </select>
+        </div>
+
+  <div class="form-group col-md-5">
       <label for="puesto" >{{ __('Puesto') }}</label>
-          <input id="puesto" maxlength="12" type="tel" class="form-control @error('puesto') is-invalid @enderror" onkeypress="return numeros (event)" name="puesto"  autocomplete="puesto" autofocus required>
+          <input id="puesto" type="text" class="form-control @error('puesto') is-invalid @enderror"  name="puesto"  autocomplete="puesto" autofocus required>
           @error('puesto')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
               </span>
           @enderror
   </div>
-
-
-  <div class="form-group col-md-4">
-    <label for="grado_estudios">Grado de Estudios</label>
-      <select name="grado_estudios" id="grado_estudios" required class="form-control">
-      <option value="">Seleccione una opción</option>
-      <option value="escolarizada">LICENCIATURA</option>
-      <option value="semiescolarizada">MAESTRÍA</option>
-      <option value="semiescolarizada">DOCTORADO</option>
-
-          </select>
-  </div>
-
-
-</div>
-
 
   <div class="form-group col-md-3">
       <label for="email" >{{ __('Correo Electrónico') }}</label>
@@ -123,7 +121,7 @@
               </span>
           @enderror
   </div>
-  </div>
+</div>
 
 
 

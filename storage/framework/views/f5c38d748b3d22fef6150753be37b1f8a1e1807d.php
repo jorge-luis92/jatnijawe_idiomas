@@ -1,6 +1,7 @@
 <?php $__env->startSection('seccion'); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Estudiantes</h1>
 <div class="container" id="font4">
+  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </br>                    <form method="POST" action="<?php echo e(route('registro_estudiante')); ?>">
                         <?php echo csrf_field(); ?>
 
@@ -88,7 +89,7 @@ endif; ?>
 
                         <div class="form-group col-md-2">
                             <label for="fecha_nacimiento" ><?php echo e(__('* Fecha nacimiento')); ?></label>
-                                  <input id="fecha_nacimiento" type="date" class="form-control <?php if ($errors->has('fecha_nacimiento')) :
+                                  <input id="fecha_nacimiento" onblur="calcular_edades()" type="date" class="form-control <?php if ($errors->has('fecha_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_nacimiento'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -140,7 +141,7 @@ endif; ?>
                          <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="edad" ><?php echo e(__('* Edad')); ?></label>
-                                <input id="edad" type="tel" maxlength="2" class="form-control <?php if ($errors->has('edad')) :
+                                <input id="edad"  type="tel" maxlength="2" onKeyUp="calcularEdad(#fechaNacimiento)" class="form-control <?php if ($errors->has('edad')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('edad'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -312,7 +313,57 @@ endif; ?>
                 </div>
 
 <?php $__env->stopSection(); ?>
+<script>
+function calcularEdad(fecha) {
+    var hoy = new Date();
+    var cumpleanos = new Date(fecha);
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var m = hoy.getMonth() - cumpleanos.getMonth();
 
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+        edad--;
+    }
+  document.querySelector("#edad").textContent = calcularEdad(fecha);
+    return edad;
+}
+</script>
+
+<script>
+function calculateAge(birthday) {
+    var birthday_arr = birthday.split("/");
+    var birthday_date = new Date(birthday_arr[2], birthday_arr[1] - 1, birthday_arr[0]);
+    var ageDifMs = Date.now() - birthday_date.getTime();
+    var ageDate = new Date(ageDifMs);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+</script>
+<script>
+function calcular_edades() {
+var form = document.getElementById('fecha_nacimiento').value; //fecha de nacimiento en el formulario
+var fechaNacimiento = form.split("-");
+var annoNac = fechaNacimiento[0];
+var mesNac = fechaNacimiento[1];
+var diaNac = fechaNacimiento[2];
+
+var fechaHoy = new Date(); // detecto la fecha actual y asigno el dia, mes y anno a variables distintas
+var annoActual = fechaHoy.getFullYear();
+var mesActual = fechaHoy.getMonth()+1;
+var diaActual = fechaHoy.getDate();
+
+var edad = annoActual - annoNac;
+if(mesNac > mesActual){
+//alert('mes de nacimiento mayor');
+edad--;
+}
+if(mesNac == mesActual){
+//alert('mes igual');
+if(diaNac > diaActual){
+//alert('dia de nacimiento mayor');
+edad--;
+}
+}
+document.getElementById('#edad').value = edad;
+</script>
 <script>
 function numeros(e){
  key = e.keyCode || e.which;

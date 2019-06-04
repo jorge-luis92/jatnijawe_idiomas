@@ -7,13 +7,6 @@
                         @csrf
 
                          <div class="form-row">
-<!--
-                        <div class="form-group col-md-2">
-                          <label for="tipo_usuario">Identificador</label>
-                            <select  id="id_persona" required class="form-control">
-                            <option value=""><ID</option>
-                                </select>
-                        </div>-->
 
                         <div class="form-group col-md-4">
                             <label for="nombre" >{{ __('* Nombre(s)') }}</label>
@@ -46,7 +39,7 @@
                         </div>
 </div>
                                 <div class="form-row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="curp" >{{ __('* CURP') }}</label>
                                   <input id="curp" type="text" minlength="18" maxlength="18"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('curp') is-invalid @enderror" name="curp" value="{{ old('curp') }}" required autocomplete="curp">
                                 @error('curp')
@@ -57,7 +50,7 @@
                         </div>
 
                         <div class="form-group col-md-2">
-                            <label for="fecha_nacimiento" >{{ __('* Fecha nacimiento') }}</label>
+                            <label for="fecha_nacimiento" >{{ __('* Fecha de nacimiento') }}</label>
                                   <input id="fecha_nacimiento" type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror" name="fecha_nacimiento" required>
                                 @error('fecha_nacimiento')
                                     <span class="invalid-feedback" role="alert">
@@ -66,7 +59,7 @@
                                 @enderror
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="lugar_nacimiento" >{{ __('* Lugar de Nacimiento') }}</label>
                                   <input id="lugar_nacimiento"  onKeyUp="this.value = this.value.toUpperCase()" type="text" class="form-control @error('lugar_nacimiento') is-invalid @enderror" name="lugar_nacimiento" value="{{ old('lugar_nacimiento') }}" required autocomplete="lugar_nacimiento">
                                 @error('lugar_nacimiento')
@@ -76,7 +69,36 @@
                                 @enderror
                         </div>
 
+
+                      </div>
+
+                         <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="edad" >{{ __('* Edad') }}</label>
+                                <input id="edad" type="tel" maxlength="2" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
+                                @error('edad')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        </div>
+                        <div class="form-group col-md-1">
+
+                        </div>
+
                         <div class="form-group col-md-3">
+                          <label for="genero">* Género</label>
+                            <select name="genero" id="genero" required class="form-control">
+                          <option value="">Seleccione una opción</option>
+                          <option value="MASCULINO">MASCULINO</option>
+                          <option value="FEMEMINO">FEMEMINO</option>
+                    </select>
+                        </div>
+                        <div class="form-group col-md-2">
+
+                        </div>
+
+                        <div class="form-group col-md-4">
                           <label for="tipo_sangre">* Tipo de Sangre</label>
                             <select name="tipo_sangre" id="tipo_sangre" required class="form-control" autocomplete="tipo_sangre" autofocus>
                           <option value="">Seleccione una opción</option>
@@ -88,26 +110,6 @@
                           <option value="B RH-">B -(Negativo) u BRh -(Negativo)</option>
                           <option value="AB RH+">AB +(Positivo) ó ABRh +(Positivo)</option>
                           <option value="AB RH-">AB -(Negativo) ó ABRh -(Negativo)</option>
-                    </select>
-                        </div>
-                      </div>
-                         <div class="form-row">
-                        <div class="form-group col-md-2">
-                            <label for="edad" >{{ __('* Edad') }}</label>
-                                <input id="edad" type="tel" maxlength="2" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
-                                @error('edad')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                        </div>
-
-                        <div class="form-group col-md-3">
-                          <label for="genero">* Género</label>
-                            <select name="genero" id="genero" required class="form-control">
-                          <option value="">Seleccione una opción</option>
-                          <option value="MASCULINO">MASCULINO</option>
-                          <option value="FEMEMINO">FEMEMINO</option>
                     </select>
                         </div>
 </div>
@@ -185,7 +187,7 @@
                         </div>
 
                         <div class="form-group col-md-5">
-                            <label for="bachillerato_origen" >{{ __('* Bachillerato Origen') }}</label>
+                            <label for="bachillerato_origen" >{{ __('* Bachillerato de Origen') }}</label>
                                 <input id="bachillerato_origen" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('bachillerato_origen') is-invalid @enderror"  name="bachillerato_origen" autocomplete="bachillerato_origen" autofocus>
                                 @error('bachillerato_origen')
                                     <span class="invalid-feedback" role="alert">
@@ -196,7 +198,7 @@
 
 
                         <div class="form-group col-md-3">
-                            <label for="email" >{{ __('E-Mail Address') }}</label>
+                            <label for="email" >{{ __('Correo') }}</label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">

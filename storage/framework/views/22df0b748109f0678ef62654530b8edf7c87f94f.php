@@ -41,7 +41,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href=<?php echo e(route('registro_estudiante')); ?>>Registrar</a>
-            <a class="collapse-item" href=<?php echo e(route('usuario_estudiante')); ?>> Buscar</a>
+            <a class="collapse-item" href=<?php echo e(route('busqueda_estudiante')); ?>> Buscar</a>
             <a class="collapse-item" href=<?php echo e(route('estudiante_activo')); ?>> Estudiantes Activos</a>
             <a class="collapse-item" href=<?php echo e(route('estudiante_inactivo')); ?>> Estudiantes Inactivos</a>
           </div>
@@ -50,34 +50,22 @@
 
 
       <li class="nav-item" >
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#usuario_cordinador" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fa fa-user-plus" aria-hidden="true"></i><span style="font-size: 0.8em;">&nbsp;Cordinadores</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#busqueda_coordinador" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fa fa-users" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Coordinadores</span>
         </a>
-        <div id="usuario_cordinador" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="busqueda_coordinador" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('registro_cordinador')); ?>>Registrar</a>
-            <a class="collapse-item" href=<?php echo e(route('usuario_cordinador')); ?>> Buscar</a>
-            <a class="collapse-item" href=<?php echo e(route('cordinador_activo')); ?>> Cordinadores Activos</a>
-            <a class="collapse-item" href=<?php echo e(route('cordinador_inactivo')); ?>> Cordinadores Inactivos</a>
+            <a class="collapse-item" href=<?php echo e(route('registro_coordinador')); ?>>Registrar</a>
+            <a class="collapse-item" href=<?php echo e(route('busqueda_coordinador')); ?>> Buscar</a>
+            <a class="collapse-item" href=<?php echo e(route('coordinador_activo')); ?>> Coordinadores Activos</a>
+            <a class="collapse-item" href=<?php echo e(route('coordinador_inactivo')); ?>> Coordinadores Inactivos</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user_tallerista" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fa fa-user-plus" aria-hidden="true"></i><span style="font-size: 0.8em;">&nbsp;Talleristas</span>
-        </a>
-        <div id="user_tallerista" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('registro_tallerista')); ?>>Registrar</a>
-            <a class="collapse-item" href=<?php echo e(route('usuario_tallerista')); ?>> Buscar</a>
-            <a class="collapse-item" href=<?php echo e(route('tallerista_activo')); ?>> Talleristas Activos</a>
-            <a class="collapse-item" href=<?php echo e(route('tallerista_inactivo')); ?>> Talleristas Inactivos</a>
-        </div>
-      </li>
+
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
       <!-- Sidebar Toggler (Sidebar) -->
       <!-- Heading -->
@@ -122,7 +110,6 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small"> </span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->
