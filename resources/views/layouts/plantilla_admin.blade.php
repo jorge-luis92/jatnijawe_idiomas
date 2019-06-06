@@ -8,8 +8,12 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
+  <!-- Latest compiled and minified CSS -->
 
-    <link rel="shortcut icon" href="{{asset('logo.ico')}}">
+  <!-- Optional theme -->
+
+  <!-- Latest compiled and minified JavaScript -->
+  <link rel="shortcut icon" href="{{asset('logo.ico')}}">
   <!-- Custom fonts for this template-->
   <link href="requisitos/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -35,15 +39,15 @@
 
       <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#usuario" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa fa-user-plus" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Estudiantes</span>
+        <i class="fa fa-user-plus" aria-hidden="true"></i><span style="font-size: 0.8em;">&nbsp;Estudiantes</span>
         </a>
         <div id="usuario" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('registro_estudiante')); ?>>Registrar</a>
-            <a class="collapse-item" href=<?php echo e(route('busqueda_estudiante')); ?>> Buscar</a>
-            <a class="collapse-item" href=<?php echo e(route('estudiante_activo')); ?>> Estudiantes Activos</a>
-            <a class="collapse-item" href=<?php echo e(route('estudiante_inactivo')); ?>> Estudiantes Inactivos</a>
+            <a class="collapse-item" href={{ route('registro_estudiante')}} >Registrar</a>
+            <a class="collapse-item" href={{ route('busqueda_estudiante')}} > Buscar</a>
+            <a class="collapse-item" href={{ route('estudiante_activo')}}   > Estudiantes Activos</a>
+            <a class="collapse-item" href={{ route('estudiante_inactivo')}} > Estudiantes Inactivos</a>
           </div>
         </div>
       </li>
@@ -56,10 +60,10 @@
         <div id="busqueda_coordinador" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('registro_coordinador')); ?>>Registrar</a>
-            <a class="collapse-item" href=<?php echo e(route('busqueda_coordinador')); ?>> Buscar</a>
-            <a class="collapse-item" href=<?php echo e(route('coordinador_activo')); ?>> Coordinadores Activos</a>
-            <a class="collapse-item" href=<?php echo e(route('coordinador_inactivo')); ?>> Coordinadores Inactivos</a>
+            <a class="collapse-item" href={{ route('registro_coordinador') }}>Registrar</a>
+            <a class="collapse-item" href={{ route('busqueda_coordinador') }}> Buscar</a>
+            <a class="collapse-item" href={{ route('coordinador_activo') }}> Coordinadores Activos</a>
+            <a class="collapse-item" href={{ route('coordinador_inactivo') }}> Coordinadores Inactivos</a>
           </div>
         </div>
       </li>

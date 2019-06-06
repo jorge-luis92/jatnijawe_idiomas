@@ -58,17 +58,12 @@ class HomeController extends Controller
 
          $request->session()->invalidate();
 
-      return $this->loggedOut($request) ?: redirect('perfiles');
+      return $this->loggedOut($request) ?: redirect('login')->with('error', 'Usuario Incorrecto, ¡Favor de Verificar Datos!');
       }
-        // $this->guard()->logout();
-
-         //$request->session()->invalidate();
-
-      //   return $this->loggedOut($request) ?: redirect('perfiles');
        }
-      elseif ($usuario_actual->tipo_usuario=='admin'){
+      elseif ($usuario_actual->tipo_usuario=='5'){
          if($usuario_actual->bandera=='1'){
-         return view('personal_administrativo.admin_sistema');
+         return view('personal_administrativo.home_admin');
        }
        else {
           $this->guard()->logout();
@@ -78,7 +73,7 @@ class HomeController extends Controller
        return $this->loggedOut($request) ?: redirect('perfiles');
        }
         }
-        elseif ($usuario_actual->tipo_usuario=='formacion'){
+        elseif ($usuario_actual->tipo_usuario=='1'){
            if($usuario_actual->bandera=='1'){
            return view('personal_administrativo\formacion_integral.home_formacion');
          }

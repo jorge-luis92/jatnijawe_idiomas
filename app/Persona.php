@@ -13,5 +13,12 @@ class Persona extends Model
      'id_persona', 'nombre','apellido_paterno', 'apellido_materno','curp','fecha_nacimiento','lugar_nacimiento','tipo_sangre','edad','genero',
  ];
 
-  
+ public function scopeBusqueda($jquery, $nombre){
+
+   if($nombre)
+   return $jquery->where( 'estudiantes.matricula', 'LIKE', '%' . $q . '%' );
+ }
+
+ 
+
 }

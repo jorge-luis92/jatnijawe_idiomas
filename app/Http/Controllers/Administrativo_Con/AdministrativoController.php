@@ -20,7 +20,7 @@ class AdministrativoController extends Controller
 
    public function username()
    {
-       return 'name';
+       return 'username';
    }
    public function logout(Request $request)
    {
@@ -33,10 +33,10 @@ class AdministrativoController extends Controller
 
    public function admin_inicio(){
      $usuario_actual=auth()->user();
-      if($usuario_actual->tipo_usuario!='admin'){
+      if($usuario_actual->tipo_usuario!='5'){
        return redirect()->back();
      }
-        return view('personal_administrativo\admin_sistema.admin_sistema');
+        return view('personal_administrativo\admin_sistema.home_admin');
    }
     public function login_admin(){
         return view('personal_administrativo.login_personal');

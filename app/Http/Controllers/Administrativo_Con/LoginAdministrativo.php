@@ -45,11 +45,11 @@ class LoginAdministrativo extends Controller
       * @return \Illuminate\Contracts\Validation\Validator
       */
 
-      protected function redirectTo()
+/*      protected function redirectTo()
    {
-       return view ('personal_administrativo.admin_sistema');
+      // return view ('personal_administrativo.home_admin');
    }
-
+*/
  //login
 
         protected function getLogin()
@@ -59,26 +59,23 @@ class LoginAdministrativo extends Controller
 
      public function postLogin(Request $request)
         {
-
-
          $this->validate($request, [
-             'name' => 'required',
+             'username' => 'required',
              'password' => 'required',
          ]);
 
-         $credentials = $request->only('name', 'password');
-
+         $credentials = $request->only('username', 'password');
          if ($this->auth->attempt($credentials, $request->has('remember')))
-         {
-             return view('personal_administrativo.admin_sistema');
+   {;
+    if(Auth::user()->tipo_usuario == '5'){
+      return view('personal_administrativo\admin_sistema.home_admin');
+    }
+   }
 
-       }
-else{
-
-    return redirect()->route('admin')->with('error','Usuario invalido: !Verifique sus datos!');
+   return redirect()->route('admin')->with('error','Usuario invalido: !Verifique sus datos!');
         /* return view("personal_administrativo.login_personal");*/
-       }
-     }
+    //   }
+  }x
 
 
   public function getLogout(Request $request)

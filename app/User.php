@@ -41,4 +41,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+public function scopeBusqueda($jquery, $nombre){
+
+  if($nombre)
+  return $jquery->where( 'estudiantes.matricula', 'LIKE', '%' . $q . '%' );
+}
+
 }

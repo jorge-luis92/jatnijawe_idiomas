@@ -1,14 +1,14 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_admin')
 @section('title')
-: Registro Coordinador
+: Registro Usuarios
 @endsection
 
 @section('seccion')
  @include('flash-message')
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Coordinadores</h1>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Usuarios</h1>
 <div class="container" id="font4">
-</br>                    <form method="POST" action="">
+</br>                    <form method="POST" action="{{ route('registrar_coordinador') }}">
                         @csrf
 
                          <div class="form-row">
@@ -92,17 +92,6 @@
 
 <div class="form-row">
   <div class="form-group col-md-4">
-    <label for="grado_estudios">Grado de Estudios</label>
-      <select name="grado_estudios" id="grado_estudios" required class="form-control">
-      <option value="">Seleccione una opción</option>
-      <option value="licenciatura">LICENCIATURA</option>
-      <option value="maestria">MAESTRÍA</option>
-      <option value="doctorado">DOCTORADO</option>
-      <option value="doctorado">OTRO</option>
-          </select>
-        </div>
-
-  <div class="form-group col-md-5">
       <label for="puesto" >{{ __('Puesto') }}</label>
           <input id="puesto" type="text" class="form-control @error('puesto') is-invalid @enderror"  name="puesto"  autocomplete="puesto" autofocus required>
           @error('puesto')
@@ -112,17 +101,60 @@
           @enderror
   </div>
 
-  <div class="form-group col-md-3">
-      <label for="email" >{{ __('Correo Electrónico') }}</label>
-          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-          @error('email')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-          @enderror
-  </div>
+  <div class="form-group col-md-4">
+    <label for="grado_estudios">Departamento</label>
+      <select name="departamento" id="departamento" required class="form-control">
+      <option value="">Seleccione una opción</option>
+      @foreach ($de as $des)
+      <option value="{!! $des->id_departamento !!}">{!! $des->departamento !!}</option>
+      @endforeach
+          </select>
+        </div>
+
+  <div class="form-group col-md-4">
+    <label for="grado_estudios">Grado de Estudios</label>
+      <select name="grado_estudios" id="grado_estudios" required class="form-control">
+      <option value="">Seleccione una opción</option>
+      <option value="licenciatura">LICENCIATURA</option>
+      <option value="maestria">MAESTRÍA</option>
+      <option value="doctorado">DOCTORADO</option>
+      <option value="doctorado">OTRO</option>
+          </select>
+        </div>
 </div>
 
+<div class="form-row">
+  <div class="form-group col-md-4">
+    <label for="username" >{{ __('Nombre de Usuario') }}</label>
+        <input id="username" type="text"  class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+        @error('username')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+</div>
+
+<div class="form-group col-md-4">
+    <label for="password" >{{ __('Contraseña') }}</label>
+        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+        @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+</div>
+
+<div class="form-group col-md-4">
+    <label for="email" >{{ __('Correo Electrónico') }}</label>
+        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+        @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+</div>
+</div>
 
 
                         <div class="form-group">

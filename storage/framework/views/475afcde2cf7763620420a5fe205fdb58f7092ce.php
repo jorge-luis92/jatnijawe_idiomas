@@ -1,14 +1,14 @@
 <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
 <?php $__env->startSection('title'); ?>
-: Registro Coordinador
+: Registro Usuarios
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('seccion'); ?>
  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Coordinadores</h1>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Usuarios</h1>
 <div class="container" id="font4">
-</br>                    <form method="POST" action="">
+</br>                    <form method="POST" action="<?php echo e(route('registrar_coordinador')); ?>">
                         <?php echo csrf_field(); ?>
 
                          <div class="form-row">
@@ -140,17 +140,6 @@ endif; ?>
 
 <div class="form-row">
   <div class="form-group col-md-4">
-    <label for="grado_estudios">Grado de Estudios</label>
-      <select name="grado_estudios" id="grado_estudios" required class="form-control">
-      <option value="">Seleccione una opción</option>
-      <option value="licenciatura">LICENCIATURA</option>
-      <option value="maestria">MAESTRÍA</option>
-      <option value="doctorado">DOCTORADO</option>
-      <option value="doctorado">OTRO</option>
-          </select>
-        </div>
-
-  <div class="form-group col-md-5">
       <label for="puesto" ><?php echo e(__('Puesto')); ?></label>
           <input id="puesto" type="text" class="form-control <?php if ($errors->has('puesto')) :
 if (isset($message)) { $messageCache = $message; }
@@ -168,25 +157,84 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
 
-  <div class="form-group col-md-3">
-      <label for="email" ><?php echo e(__('Correo Electrónico')); ?></label>
-          <input id="email" type="email" class="form-control <?php if ($errors->has('email')) :
+  <div class="form-group col-md-4">
+    <label for="grado_estudios">Departamento</label>
+      <select name="departamento" id="departamento" required class="form-control">
+      <option value="">Seleccione una opción</option>
+      <?php $__currentLoopData = $de; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $des): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <option value="<?php echo $des->id_departamento; ?>"><?php echo $des->departamento; ?></option>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+          </select>
+        </div>
+
+  <div class="form-group col-md-4">
+    <label for="grado_estudios">Grado de Estudios</label>
+      <select name="grado_estudios" id="grado_estudios" required class="form-control">
+      <option value="">Seleccione una opción</option>
+      <option value="licenciatura">LICENCIATURA</option>
+      <option value="maestria">MAESTRÍA</option>
+      <option value="doctorado">DOCTORADO</option>
+      <option value="doctorado">OTRO</option>
+          </select>
+        </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-4">
+    <label for="username" ><?php echo e(__('Nombre de Usuario')); ?></label>
+        <input id="username" type="text"  class="form-control <?php if ($errors->has('username')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('username'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="username" value="<?php echo e(old('username')); ?>" required autocomplete="username" autofocus>
+        <?php if ($errors->has('username')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('username'); ?>
+            <span class="invalid-feedback" role="alert">
+                <strong><?php echo e($message); ?></strong>
+            </span>
+        <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+</div>
+
+<div class="form-group col-md-4">
+    <label for="password" ><?php echo e(__('Contraseña')); ?></label>
+        <input id="password" type="password" class="form-control <?php if ($errors->has('password')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('password'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="password" required autocomplete="current-password">
+
+        <?php if ($errors->has('password')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('password'); ?>
+            <span class="invalid-feedback" role="alert">
+                <strong><?php echo e($message); ?></strong>
+            </span>
+        <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+</div>
+
+<div class="form-group col-md-4">
+    <label for="email" ><?php echo e(__('Correo Electrónico')); ?></label>
+        <input id="email" type="email" class="form-control <?php if ($errors->has('email')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('email'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>" name="email" value="<?php echo e(old('email')); ?>" required autocomplete="email">
-          <?php if ($errors->has('email')) :
+        <?php if ($errors->has('email')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('email'); ?>
-              <span class="invalid-feedback" role="alert">
-                  <strong><?php echo e($message); ?></strong>
-              </span>
-          <?php unset($message);
+            <span class="invalid-feedback" role="alert">
+                <strong><?php echo e($message); ?></strong>
+            </span>
+        <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
-  </div>
 </div>
-
+</div>
 
 
                         <div class="form-group">

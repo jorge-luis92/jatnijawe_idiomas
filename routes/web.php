@@ -1,5 +1,8 @@
 <?php
-
+use Illuminate\Support\Facades\Input;
+use App\User;
+use App\Estudiante;
+use App\Persona;
 /* Página principal---*/
 Route::get('/', 'Homepag@homepage')->name('welcome');
 
@@ -83,8 +86,26 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('agregar_nuevo_usuario', 'UserSystemController@agregar_nuevo_usuario')->name('agregar_nuevo_usuario');
   Route::get('gestion_estudiante', 'Administrativo_Con\AdministrativoController@auxiliar')->name('gestion_estudiante');
   Route::get('busqueda', 'Administrativo_Con\AdministrativoController@formacion_busqueda')->name('busqueda');
+  Route::get('home_admin', 'AdminController@home_admin')->name('home_admin');
+  Route::get('registro_estudiante', 'AdminController@registro_estudiante')->name('registro_estudiante');
+  Route::get('busqueda_estudiante', 'AdminController@busqueda_estudiante')->name('busqueda_estudiante');
+  Route::get('estudiante_activo', 'AdminController@estudiante_activo')->name('estudiante_activo');
+  Route::get('estudiante_inactivo', 'AdminController@estudiante_inactivo')->name('estudiante_inactivo');
+
+  Route::get('registro_coordinador', 'AdminController@registro_coordinador')->name('registro_coordinador');
+  Route::post('registro_estudiante', 'RegistroEstudiantes@create_estudiante')->name('registro_estudiante');
+  Route::post('registrar_coordinador', 'AdminController@registrar_coordinador')->name('registrar_coordinador');
+  Route::get('busqueda_coordinador', 'AdminController@busqueda_coordinador')->name('busqueda_coordinador');
+  Route::get('coordinador_activo', 'AdminController@coordinador_activo')->name('coordinador_activo');
+  Route::get('coordinador_inactivo', 'AdminController@coordinador_inactivo')->name('coordinador_inactivo');
+  Route::any('busqueda_estudiantes', 'AdminController@Busqueda')->name('busqueda_estudiantes');
+  Route::get('desactivar_estudiante/{id_user}', 'AdminController@desactivar_estudiante');
+
+
   //Route::get('home_admin', 'Administrativo_Con\AdministrativoController@admin_inicio')->name('home_admin');
 });
+
+
 
 /*Controller ADMIN DEL SISTEMA
 ***********************************************************
@@ -97,19 +118,8 @@ Route::get('consultitas', 'ConsultasController@carga_datos_general');
 Route::get('busqueda_estudiante_fi', 'FormacionIntegralController@busqueda_estudiante_fi')->name('busqueda_estudiante_fi');
 Route::get('registrar_tutor', 'FormacionIntegralController@registrar_tutor')->name('registrar_tutor');
 
-Route::get('home_admin', 'AdminController@home_admin')->name('home_admin');
 
-Route::get('registro_estudiante', 'AdminController@registro_estudiante')->name('registro_estudiante');
-Route::get('busqueda_estudiante', 'AdminController@busqueda_estudiante')->name('busqueda_estudiante');
-Route::get('estudiante_activo', 'AdminController@estudiante_activo')->name('estudiante_activo');
-Route::get('estudiante_inactivo', 'AdminController@estudiante_inactivo')->name('estudiante_inactivo');
 
-Route::get('registro_coordinador', 'AdminController@registro_coordinador')->name('registro_coordinador');
-Route::post('registro_estudiante', 'RegistroEstudiantes@create_estudiante')->name('registro_estudiante');
-Route::post('registrar_coordinador', 'AdminController@registrar_coordinador')->name('registrar_coordinador');
-Route::get('busqueda_coordinador', 'AdminController@busqueda_coordinador')->name('busqueda_coordinador');
-Route::get('coordinador_activo', 'AdminController@coordinador_activo')->name('coordinador_activo');
-Route::get('coordinador_inactivo', 'AdminController@coordinador_inactivo')->name('coordinador_inactivo');
 
 
 

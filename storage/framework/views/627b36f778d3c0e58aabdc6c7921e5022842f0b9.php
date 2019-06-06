@@ -9,7 +9,7 @@
 <div class="container" id="font2">
   <h2 style="font-size: 1.8em; color: #000000;" align="center">Perfil: Administrador del Sistema</h2>
    <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-   <h1> <?php echo e($prueba); ?></h1>
+   
 </br>
 </br>
 </br>

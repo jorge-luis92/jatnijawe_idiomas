@@ -68,7 +68,7 @@
         <input type="text" class="form-control" id="genero" value="{{ $u->genero}}" disabled>
       </div>
       <div class="radio col-md-3" id="labels">
-        <label>* ¿Hablante de alguna Lengua?</label>
+        <label>* ¿Hablante de Lengua Indígena?</label>
       <div align="left">
 
        <input type="radio" id="si_lengua" name="lengua" value="si_lengua" onclick="checar()" required >
@@ -86,11 +86,12 @@
     </div>
 
     <div class="form-group col-md-3">
-      <label for="tipo_lengua">Tipo de Lengua</label>
+      <label for="tipo_lengua">Nivel de Comprensión</label>
         <select name="tipo_lengua" id="tipo_lengua" required disabled class='inputText'>
         <option value="">Seleccione una opción</option>
-        <option value="indigena">Indigena</option>
-        <option value="extranjera">Extranjera</option>
+        <option value="comprende">Comprende</option>
+        <option value="comprende-habla">Comprende y Habla</option>
+        <option value="comprende-habla-escribe">Comprende, Habla y Escribe</option>
             </select>
           </br>
             <a data-toggle="modal" href="#lenguas_detalle">Lenguas Registradas</a>
