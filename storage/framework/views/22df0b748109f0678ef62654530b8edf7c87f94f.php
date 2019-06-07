@@ -104,8 +104,7 @@
 
 			<li >
 				 <a class="navbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt="">
-           <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;">&nbsp;Facultad de Idiomas</h1>
+          <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;font-size;2px;">&nbsp;Portal de Servicios Educativos "Jat Nijawe"</h1>
 			              </a>
             </li>
 
@@ -114,6 +113,15 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=auth()->user();
+                  $id=$usuario_actual->id_user;
+                  $users = DB::table('personas')
+                  ->select('personas.nombre')
+                  ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+                  ->where('users.id_persona',$id)
+                  ->take(1)
+                  ->first();  echo $users->nombre." ";  //echo $users->apellido_paterno." "; echo $users->apellido_materno;
+                  ?></span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->

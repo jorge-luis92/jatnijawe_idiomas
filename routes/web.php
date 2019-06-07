@@ -65,6 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('mi_taller', 'Estudiante_Con\EstudianteController@talleres_activos')->name('mi_taller');
   Route::get('pdfs','Estudiante_Con\EstudianteController@generatePDF');
   Route::get('cuenta', 'Estudiante_Con\EstudianteController@cuenta_estudiante')->name('cuenta');
+  Route::get('cuenta_form', 'FormacionIntegralController@cuenta_formacion')->name('cuenta_form');
   Route::get('cambiar_estatus_beca/{id_beca}', 'ActualizacionesEstudiante@desactivar_lengua');
   //Route::get('editar_actividad/{id_externos}', 'Estudiante_Con\EstudianteController@editar_actividades');
   Route::get('quitar_act/{id_externos}', 'ActualizacionesEstudiante@desactivar_act');
@@ -100,6 +101,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('coordinador_inactivo', 'AdminController@coordinador_inactivo')->name('coordinador_inactivo');
   Route::any('busqueda_estudiantes', 'AdminController@Busqueda')->name('busqueda_estudiantes');
   Route::get('desactivar_estudiante/{id_user}', 'AdminController@desactivar_estudiante');
+  Route::get('activar_estudiante/{id_user}', 'AdminController@activar_estudiante');
 
 
   //Route::get('home_admin', 'Administrativo_Con\AdministrativoController@admin_inicio')->name('home_admin');

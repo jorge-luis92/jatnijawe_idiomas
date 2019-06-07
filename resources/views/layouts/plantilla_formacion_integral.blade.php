@@ -19,7 +19,7 @@
 </head>
 
 <body id="page-top">
-  <div id="wrapper" >
+  <div id="wrapper" style=" font-family: 'Century Gothic';">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
@@ -118,12 +118,20 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuario</span>
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=auth()->user();
+                  $id=$usuario_actual->id_user;
+                  $users = DB::table('personas')
+                  ->select('personas.nombre')
+                  ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+                  ->where('users.id_persona',$id)
+                  ->take(1)
+                  ->first();  echo $users->nombre." ";  //echo $users->apellido_paterno." "; echo $users->apellido_materno;
+                  ?></span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href={{ route('cuenta_form')}}>
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
                     Configuración
                   </a>

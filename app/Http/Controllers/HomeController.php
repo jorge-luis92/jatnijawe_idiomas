@@ -63,7 +63,7 @@ class HomeController extends Controller
        }
       elseif ($usuario_actual->tipo_usuario=='5'){
          if($usuario_actual->bandera=='1'){
-         return view('personal_administrativo.home_admin');
+         return view('personal_administrativo\admin_sistema.home_admin');
        }
        else {
           $this->guard()->logout();

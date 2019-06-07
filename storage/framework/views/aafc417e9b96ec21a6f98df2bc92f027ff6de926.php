@@ -7,33 +7,36 @@
 <?php $__env->startSection('seccion'); ?>
  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Estudiantes Inactivos</h1>
-<div class="container" id="font5">
-  </br>
-<div class="table-responsive">
-  <table class="table table-bordered table-info" style="color: #000000;" >
-    <thead>
-      <tr>
-        <th scope="col">MATRICULA</th>
-        <th scope="col">NOMBRE</th>
-        <th colspan="1" >ACCIONES</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-             <th scope="row"> </th>
-             <td> </td>
-             <td>  <a data-toggle="modal" href="#"> ACTIVAR</a></td>
+  <div class="container" id="font7">
+    </br>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped" style="color: #000000;" >
+      <thead>
+        <tr>
+          <th scope="col">MATRICULA</th>
+            <th scope="col">SEMESTRE</th>
+          <th scope="col">NOMBRE</th>
+          <th style="text-align: center;" colspan="2" >ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+          <?php $__currentLoopData = $estudiante; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $estudiantes): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <tr>
+               <th scope="row"><?php echo $estudiantes->matricula; ?></th>
+                <th scope="row"><?php echo $estudiantes->semestre; ?></th>
+               <td><?php echo $estudiantes->nombre; ?> <?php echo $estudiantes->apellido_paterno; ?> <?php echo $estudiantes->apellido_materno; ?></td>
+               <td><a data-toggle="modal" href="#">DETALLES</a></td>
+                <td><a href="activar_estudiante/<?php echo e($estudiantes->id_user); ?>">ACTIVAR</a></td>
+             </tr>
+         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      </tbody>
+    </table>
+  </div>
+  <?php if(count($estudiante)): ?>
+    <?php echo e($estudiante->links()); ?>
 
-           </tr>
-
-    </tbody>
-  </table>
-</div>
-
-
-</div>
-
-
+  <?php endif; ?>
+  </div>
   <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.plantilla_admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\admin_sistema/estudiante_inactivo.blade.php ENDPATH**/ ?>

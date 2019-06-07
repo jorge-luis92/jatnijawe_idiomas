@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\User;
 use App\Estudiante;
@@ -21,40 +20,66 @@ class AdminController extends Controller
 {
     //
     public function home_admin(){
-      $usuario_actual=auth()->user();
-      $id=$usuario_actual->id_user;
-       if($id->tipo_usuario!='5'){
-        return redirect()->with('error', 'Favor de iniciar sesión')->back();
-      }
+      $usuario_actual=\Auth::user();
+       if($usuario_actual->tipo_usuario!='5'){
+         return redirect('register');
+        }
         return view('personal_administrativo\admin_sistema.home_admin');
       }
 
       public function registro_estudiante(){
+        $usuario_actual=\Auth::user();
+         if($usuario_actual->tipo_usuario!='5'){
+           return redirect('register');
+          }
         return view('personal_administrativo\admin_sistema.registro_estudiante');
       }
 
       public function busqueda_estudiante(){
+        $usuario_actual=\Auth::user();
+         if($usuario_actual->tipo_usuario!='5'){
+           return redirect('register');
+          }
         return view('personal_administrativo\admin_sistema.busqueda_estudiante');
       }
 
       public function estudiante_activo(){
-
+        $usuario_actual=\Auth::user();
+         if($usuario_actual->tipo_usuario!='5'){
+           return redirect('register');
+          }
         $est = DB::table('estudiantes')
-        ->select('estudiantes.matricula', 'estudiantes.semestre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'users.bandera')
+        ->select('estudiantes.matricula', 'estudiantes.semestre', 'users.updated_at', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'users.bandera')
         ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
         ->join('users', 'users.id_persona', '=', 'personas.id_persona')
         ->where('users.bandera', '=', '1')
-         ->orderBy('estudiantes.semestre', 'asc')
+         ->orderBy('users.updated_at', 'asc')
         ->simplePaginate(10);
 
         return view('personal_administrativo\admin_sistema.estudiante_activo')->with('estudiante', $est);
       }
 
       public function estudiante_inactivo(){
-        return view('personal_administrativo\admin_sistema.estudiante_inactivo');
+        $usuario_actual=\Auth::user();
+         if($usuario_actual->tipo_usuario!='5'){
+           return redirect('register');
+          }
+        $est = DB::table('estudiantes')
+        ->select('estudiantes.matricula', 'estudiantes.semestre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'users.id_user', 'users.bandera')
+        ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+        ->join('users', 'users.id_persona', '=', 'personas.id_persona')
+        ->where('users.bandera', '=', '0')
+         ->orderBy('estudiantes.semestre', 'asc')
+        ->simplePaginate(10);
+
+        return view('personal_administrativo\admin_sistema.estudiante_inactivo')->with('estudiante', $est);
       }
 
       public function registro_coordinador(){
+        $usuario_actual=\Auth::user();
+         if($usuario_actual->tipo_usuario!='5'){
+           return redirect('register');
+          }
         $dep = DB::table('departamentos')
         ->select('departamentos.id_departamento', 'departamentos.departamento')
         ->get();
@@ -62,6 +87,10 @@ class AdminController extends Controller
     }
 
       public function registrar_coordinador(Request $request){
+        $usuario_actuales=\Auth::user();
+         if($usuario_actuales->tipo_usuario!='5'){
+           return redirect('register');
+          }
 
         $this->validate($request, [
           'nombre' => ['required', 'string', 'max:25'],
@@ -122,14 +151,18 @@ class AdminController extends Controller
             $user->id_persona=$id_prueba;
             $user->save();
               if($user->save()){
-            return redirect()->route('perfiles')->with('success','¡Datos registrados correctamente!');
+            return redirect()->route('home_admin')->with('success','¡Datos registrados correctamente!');
           }}}}}
       else{
-       return redirect()->route('register')->with('error','error en la creacion');
+       return redirect()->route('home_admin')->with('error','error en la creacion');
       }
       }
 
       public function Busqueda(Request $request){
+        $usuario_actual=\Auth::user();
+         if($usuario_actual->tipo_usuario!='5'){
+           return redirect('register');
+          }
         $est = DB::table('users')
         ->where('users.bandera', '=', '1')
         ->get();
@@ -156,6 +189,18 @@ class AdminController extends Controller
           return redirect()->route('busqueda_estudiante')->with('error','¡Sin resultados!');
       }}
 
+      public function activar_estudiante($id_user){
+
+        $valor=$id_user;
+        DB::table('users')
+            ->where('users.id_user', $valor)
+            ->update(
+                ['bandera' => '1'],
+            );
+            return redirect()->route('estudiante_activo')->with('success','¡El estudiante ha sido Activado!');
+
+      }
+
       public function desactivar_estudiante($id_user){
         $valor=$id_user;
         DB::table('users')
@@ -163,18 +208,30 @@ class AdminController extends Controller
             ->update(
                 ['bandera' => '0'],
             );
-            return redirect()->route('busqueda_estudiantes')->with('success','¡El estudiante ha sido desactivado!');
+            return redirect()->route('estudiante_inactivo')->with('success','¡El estudiante ha sido desactivado!');
 
       }
       public function busqueda_coordinador(){
+        $usuario_actual=\Auth::user();
+         if($usuario_actual->tipo_usuario!='5'){
+           return redirect('register');
+          }
         return view('personal_administrativo\admin_sistema.busqueda_coordinador');
       }
 
       public function coordinador_activo(){
+        $usuario_actual=\Auth::user();
+         if($usuario_actual->tipo_usuario!='5'){
+           return redirect('register');
+          }
         return view('personal_administrativo\admin_sistema.coordinador_activo');
       }
 
       public function coordinador_inactivo(){
+        $usuario_actual=\Auth::user();
+         if($usuario_actual->tipo_usuario!='5'){
+           return redirect('register');
+          }
         return view('personal_administrativo\admin_sistema.coordinador_inactivo');
       }
 

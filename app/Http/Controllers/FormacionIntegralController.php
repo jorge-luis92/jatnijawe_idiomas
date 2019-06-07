@@ -63,4 +63,13 @@ class FormacionIntegralController extends Controller
   {
     return view('personal_administrativo\formacion_integral\home_formacion');
     }
+
+    public function cuenta_formacion(){
+      $usuario_actual=\Auth::user();
+       if($usuario_actual->tipo_usuario!='1'){
+         return redirect()->back();
+        }
+    return view('personal_administrativo\formacion_integral.configuracion_cuenta');
+    }
+
 }

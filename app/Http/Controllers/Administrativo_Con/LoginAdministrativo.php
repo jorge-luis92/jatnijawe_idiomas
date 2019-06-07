@@ -70,12 +70,16 @@ class LoginAdministrativo extends Controller
     if(Auth::user()->tipo_usuario == '5'){
       return view('personal_administrativo\admin_sistema.home_admin');
     }
+    elseif (Auth::user()->tipo_usuario == '1') {
+        return view('personal_administrativo\formacion_integral.home_formacion');
+    }
+
    }
 
    return redirect()->route('admin')->with('error','Usuario invalido: !Verifique sus datos!');
         /* return view("personal_administrativo.login_personal");*/
     //   }
-  }x
+  }
 
 
   public function getLogout(Request $request)
