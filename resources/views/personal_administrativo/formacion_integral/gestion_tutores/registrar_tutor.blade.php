@@ -44,8 +44,8 @@
                         </div>
 </div>
                                 <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <label for="curp" >{{ __('* CURP') }}</label>
+                        <div class="form-group col-md-4">
+                            <label for="curp" >{{ __('* RFC') }}</label>
                                   <input id="curp" type="text" minlength="18" maxlength="18"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('curp') is-invalid @enderror" name="curp" value="{{ old('curp') }}" required autocomplete="curp">
                                 @error('curp')
                                     <span class="invalid-feedback" role="alert">
@@ -54,7 +54,7 @@
                                 @enderror
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="fecha_nacimiento" >{{ __('* Fecha nacimiento') }}</label>
                                   <input id="fecha_nacimiento" type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror" name="fecha_nacimiento" required>
                                 @error('fecha_nacimiento')
@@ -64,7 +64,7 @@
                                 @enderror
                         </div>
 
-                         <div class="form-row">
+
                         <div class="form-group col-md-2">
                             <label for="edad" >{{ __('* Edad') }}</label>
                                 <input id="edad" type="tel" maxlength="2" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
@@ -75,7 +75,7 @@
                                 @enderror
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                           <label for="genero">* Género</label>
                             <select name="genero" id="genero" required class="form-control">
                           <option value="">Seleccione una opción</option>
@@ -88,18 +88,18 @@
 <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
 
 <div class="form-row">
-  <div class="form-group col-md-3">
-      <label for="procedencia_interna" >{{ __('Procedencia Interna') }}</label>
-          <input id="procedencia_interna" maxlength="12" type="tel" class="form-control @error('procedencia_interna') is-invalid @enderror" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required>
+  <div class="form-group col-md-4">
+      <label for="procendencia_interna" >{{ __('* Procendencia Interna') }}</label>
+            <input id="procendencia_interna" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('procendencia_interna') is-invalid @enderror" name="procedencia_interna" value="{{ old('procedencia_interna') }}" required autocomplete="procedencia_interna">
           @error('procedencia_interna')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
               </span>
           @enderror
   </div>
-  <div class="form-group col-md-3">
-      <label for="procedencia_interna" >{{ __('Procedencia Externa') }}</label>
-          <input id="procedencia_externa" maxlength="12" type="tel" class="form-control @error('procedencia_externa') is-invalid @enderror" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required>
+  <div class="form-group col-md-4">
+      <label for="procedencia_externa" >{{ __('* Procendencia Externa') }}</label>
+            <input id="procedencia_externa" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('procedencia_externa') is-invalid @enderror" name="procedencia_externa" value="{{ old('procedencia_externa') }}" required autocomplete="procedencia_externa">
           @error('procedencia_externa')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -107,32 +107,21 @@
           @enderror
   </div>
 
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-4">
     <label for="grado_estudios">Grado de Estudios</label>
       <select name="grado_estudios" id="grado_estudios" required class="form-control">
       <option value="">Seleccione una opción</option>
       <option value="escolarizada">LICENCIATURA</option>
       <option value="semiescolarizada">MAESTRÍA</option>
       <option value="semiescolarizada">DOCTORADO</option>
-
+      <option value="semiescolarizada">OTRO</option>
           </select>
   </div>
-
-
 </div>
 
-  <div class="form-group col-md-3">
-    <label for="estatus">* Tipo</label>
-      <select name="estatus" id="estatus" required class="form-control">
-    <option value="">Seleccione una opción</option>
-    <option value="regular">TALLERSITA</option>
-    <option value="irregular">CONFERENCISTA</option>
-</select>
-  </div>
+   <div class="form-row">
 
-
-
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-4">
       <label for="email" >{{ __('Correo Electrónico') }}</label>
           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
           @error('email')
@@ -154,7 +143,8 @@
                         </div>
                     </form>
                 </div>
-
+                </div>
+</div>
 @endsection
 
 <script>

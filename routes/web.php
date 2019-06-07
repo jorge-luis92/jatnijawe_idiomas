@@ -107,6 +107,22 @@ Route::group(['middleware' => 'auth'], function () {
   //Route::get('home_admin', 'Administrativo_Con\AdministrativoController@admin_inicio')->name('home_admin');
 });
 
+Route::get('home_formacion', 'AdminController@home_formacion')->name('home_formacion');
+Route::get('busqueda_estudiante_fi', 'FormacionIntegralController@busqueda_estudiante_fi')->name('busqueda_estudiante_fi');
+Route::get('registrar_tutor', 'FormacionIntegralController@registrar_tutor')->name('registrar_tutor');
+Route::get('busqueda_tutor', 'FormacionIntegralController@busqueda_tutor')->name('busqueda_tutor');
+Route::get('tutor_activo', 'FormacionIntegralController@tutor_activo')->name('tutor_activo');
+Route::get('tutor_inactivo', 'FormacionIntegralController@tutor_inactivo')->name('tutor_inactivo');
+Route::get('registro_extracurricular', 'FormacionIntegralController@registro_extracurricular')->name('registro_extracurricular');
+Route::get('registro_taller', 'FormacionIntegralController@registro_taller')->name('registro_taller');
+Route::get('registro_conferencia', 'FormacionIntegralController@registro_conferencia')->name('registro_conferencia');
+
+
+Route::get('actividades_registradas', 'FormacionIntegralController@actividades_registradas')->name('actividades_registradas');
+Route::get('solictudes', 'FormacionIntegralController@solicitudes')->name('solicitudes');
+Route::get('asignar_taller', 'FormacionIntegralController@asignar_taller')->name('asignar_taller');
+Route::get('actividades_asignadas', 'FormacionIntegralController@actividades_asignadas')->name('actividades_asignadas');
+
 
 
 /*Controller ADMIN DEL SISTEMA

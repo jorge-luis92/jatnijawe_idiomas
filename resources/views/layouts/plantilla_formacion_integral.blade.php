@@ -19,7 +19,7 @@
 </head>
 
 <body id="page-top">
-  <div id="wrapper" style=" font-family: 'Century Gothic';">
+  <div id="wrapper" >
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
@@ -38,7 +38,7 @@
         <div id="datos_estudiante" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href={{ route('busqueda_estudiante')}}>Busqueda</a>
+            <a class="collapse-item" href={{ route('busqueda_estudiante_fi')}}>Busqueda</a>
 
           </div>
         </div>
@@ -53,23 +53,27 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href={{ route('registrar_tutor')}}>Registrar</a>
-             <a class="collapse-item" href={{ route('busqueda')}}>Tutores Registrados</a>
+             <a class="collapse-item" href={{ route('busqueda_tutor')}}>Tutores Registrados</a>
+             <a class="collapse-item" href={{ route('tutor_activo')}}>Tutores Activos</a>
+             <a class="collapse-item" href={{ route('tutor_inactivo')}}>Tutores Inactivos</a>
           </div>
         </div>
       </li>
 
 <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#registar_talleres" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fa fa-cubes" aria-hidden="true"></i></i><span style="font-size: 0.9em;">&nbsp;Talleres</span>
+          <i class="fa fa-cubes" aria-hidden="true"></i></i><span style="font-size: 0.9em;">&nbsp;Actividades</span>
         </a>
         <div id="registar_talleres" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href={{ route('busqueda')}}>Agregar Taller</a>
-             <a class="collapse-item" href={{ route('busqueda')}}>Talleres Registrados</a>
-              <a class="collapse-item" href={{ route('busqueda')}}>Solicitudes</a>
-              <a class="collapse-item" href={{ route('busqueda')}}> Asignar Talleres</a>
-                <a class="collapse-item" href={{ route('busqueda')}}>Talleres Asignados</a>
+          <!--  <a class="collapse-item" href={{ route('registro_extracurricular')}}>Agregar Actividad</a>-->
+            <a class="collapse-item" href={{ route('registro_taller')}}>Registrar Taller</a>
+              <a class="collapse-item" href={{ route('registro_conferencia')}}>Registrar Conferencia</a>
+             <a class="collapse-item" href={{ route('actividades_registradas')}}>Actividades Registradas</a>
+             <a class="collapse-item" href={{ route('actividades_asignadas')}}>Actividades Asignadas</a>
+              <a class="collapse-item" href={{ route('solicitudes')}}>Solicitudes</a>
+
           </div>
         </div>
       </li>
@@ -118,7 +122,7 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=auth()->user();
+                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=auth()->user();
                   $id=$usuario_actual->id_user;
                   $users = DB::table('personas')
                   ->select('personas.nombre')
@@ -131,7 +135,7 @@
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href={{ route('cuenta_form')}}>
+                    <a class="dropdown-item" href="#">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
                     Configuración
                   </a>

@@ -68,8 +68,8 @@ endif; ?>
                         </div>
 </div>
                                 <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <label for="curp" ><?php echo e(__('* CURP')); ?></label>
+                        <div class="form-group col-md-4">
+                            <label for="curp" ><?php echo e(__('* RFC')); ?></label>
                                   <input id="curp" type="text" minlength="18" maxlength="18"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('curp')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('curp'); ?> is-invalid <?php unset($message);
@@ -86,7 +86,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="fecha_nacimiento" ><?php echo e(__('* Fecha nacimiento')); ?></label>
                                   <input id="fecha_nacimiento" type="date" class="form-control <?php if ($errors->has('fecha_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
@@ -104,7 +104,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
 
-                         <div class="form-row">
+
                         <div class="form-group col-md-2">
                             <label for="edad" ><?php echo e(__('* Edad')); ?></label>
                                 <input id="edad" type="tel" maxlength="2" class="form-control <?php if ($errors->has('edad')) :
@@ -123,7 +123,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                           <label for="genero">* Género</label>
                             <select name="genero" id="genero" required class="form-control">
                           <option value="">Seleccione una opción</option>
@@ -136,13 +136,13 @@ endif; ?>
 <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
 
 <div class="form-row">
-  <div class="form-group col-md-3">
-      <label for="procedencia_interna" ><?php echo e(__('Procedencia Interna')); ?></label>
-          <input id="procedencia_interna" maxlength="12" type="tel" class="form-control <?php if ($errors->has('procedencia_interna')) :
+  <div class="form-group col-md-4">
+      <label for="procendencia_interna" ><?php echo e(__('* Procendencia Interna')); ?></label>
+            <input id="procendencia_interna" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('procendencia_interna')) :
 if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('procedencia_interna'); ?> is-invalid <?php unset($message);
+$message = $errors->first('procendencia_interna'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required>
+endif; ?>" name="procedencia_interna" value="<?php echo e(old('procedencia_interna')); ?>" required autocomplete="procedencia_interna">
           <?php if ($errors->has('procedencia_interna')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('procedencia_interna'); ?>
@@ -153,13 +153,13 @@ $message = $errors->first('procedencia_interna'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
-  <div class="form-group col-md-3">
-      <label for="procedencia_interna" ><?php echo e(__('Procedencia Externa')); ?></label>
-          <input id="procedencia_externa" maxlength="12" type="tel" class="form-control <?php if ($errors->has('procedencia_externa')) :
+  <div class="form-group col-md-4">
+      <label for="procedencia_externa" ><?php echo e(__('* Procendencia Externa')); ?></label>
+            <input id="procedencia_externa" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('procedencia_externa')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('procedencia_externa'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required>
+endif; ?>" name="procedencia_externa" value="<?php echo e(old('procedencia_externa')); ?>" required autocomplete="procedencia_externa">
           <?php if ($errors->has('procedencia_externa')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('procedencia_externa'); ?>
@@ -171,32 +171,21 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
 
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-4">
     <label for="grado_estudios">Grado de Estudios</label>
       <select name="grado_estudios" id="grado_estudios" required class="form-control">
       <option value="">Seleccione una opción</option>
       <option value="escolarizada">LICENCIATURA</option>
       <option value="semiescolarizada">MAESTRÍA</option>
       <option value="semiescolarizada">DOCTORADO</option>
-
+      <option value="semiescolarizada">OTRO</option>
           </select>
   </div>
-
-
 </div>
 
-  <div class="form-group col-md-3">
-    <label for="estatus">* Tipo</label>
-      <select name="estatus" id="estatus" required class="form-control">
-    <option value="">Seleccione una opción</option>
-    <option value="regular">TALLERSITA</option>
-    <option value="irregular">CONFERENCISTA</option>
-</select>
-  </div>
+   <div class="form-row">
 
-
-
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-4">
       <label for="email" ><?php echo e(__('Correo Electrónico')); ?></label>
           <input id="email" type="email" class="form-control <?php if ($errors->has('email')) :
 if (isset($message)) { $messageCache = $message; }
@@ -227,7 +216,8 @@ endif; ?>
                         </div>
                     </form>
                 </div>
-
+                </div>
+</div>
 <?php $__env->stopSection(); ?>
 
 <script>

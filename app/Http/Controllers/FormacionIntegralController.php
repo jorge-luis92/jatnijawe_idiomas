@@ -45,19 +45,6 @@ class FormacionIntegralController extends Controller
   }
 
 }
-  public function read(){
-    return view('personal_administrativo\formacion_integral\gestion_tallerista.read');
-  }
-
-  public function busqueda_estudiante()
-  {
-      return view('personal_administrativo.busqueda_estudiante');
-        }
-
-  public function registrar_tutor()
-  {
-    return view('personal_administrativo\formacion_integral\gestion_tutores.registrar_tutor');
-  }
 
   public function inicio_formacion()
   {
@@ -71,5 +58,67 @@ class FormacionIntegralController extends Controller
         }
     return view('personal_administrativo\formacion_integral.configuracion_cuenta');
     }
+    public function read(){
+    return view('personal_administrativo\formacion_integral\gestion_tallerista.read');
+    }
 
+    public function busqueda_estudiante_fi()
+    {
+    return view('personal_administrativo\formacion_integral.busqueda_estudiante_fi');
+    }
+
+    public function registrar_tutor()
+    {
+    return view('personal_administrativo\formacion_integral\gestion_tutores.registrar_tutor');
+    }
+
+    public function busqueda_tutor()
+    {
+    return view('personal_administrativo\formacion_integral\gestion_tutores.busqueda_tutor');
+    }
+
+    public function tutor_activo()
+    {
+    return view('personal_administrativo\formacion_integral\gestion_tutores.tutor_activo');
+    }
+
+    public function tutor_inactivo()
+    {
+    return view('personal_administrativo\formacion_integral\gestion_tutores.tutor_inactivo');
+    }
+
+    public function registro_extracurricular()
+    {
+    return view('personal_administrativo\formacion_integral\gestion_talleres.registro_extracurricular');
+    }
+
+    public function registro_taller()
+    {
+    return view('personal_administrativo\formacion_integral\gestion_talleres.registro_taller');
+    }
+
+    public function registro_conferencia()
+    {
+    return view('personal_administrativo\formacion_integral\gestion_talleres.registro_conferencia');
+    }
+
+    public function actividades_registradas()
+    {
+    return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_registradas');
+    }
+
+    public function solicitudes()
+    {
+    return view('personal_administrativo\formacion_integral\gestion_talleres.solicitudes');
+    }
+
+    public function asignar_taller()
+    {
+    return view('personal_administrativo\formacion_integral\gestion_talleres.asignar_taller');
+    }
+
+    public function actividades_asignadas()
+    {
+    return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_asignadas');
+    }
 }
