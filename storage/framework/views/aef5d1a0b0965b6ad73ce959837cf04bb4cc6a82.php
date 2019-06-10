@@ -1,8 +1,8 @@
-<link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_formacion_integral')
-@section('title')
+<link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
+
+<?php $__env->startSection('title'); ?>
 : Búsqueda Tutores
- @section('seccion')
+ <?php $__env->startSection('seccion'); ?>
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Tutores Registrados</h1>
  <div class="container" id="font4">
  </br>
@@ -17,25 +17,26 @@
                                    </tr>
                                  </thead>
                                  <tbody>
-                                   @foreach($re as $res)
+                                   <?php $__currentLoopData = $re; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $res): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                    <tr>
-                                          <th scope="row">{{$res->rfc}}</th>
-                                          <td>{{$res->nombre}} {{$res->apellido_paterno}} {{$res->apellido_materno}}</td>
-                                          <td>{{$res->grado_estudios}}</td>
+                                          <th scope="row"><?php echo e($res->rfc); ?></th>
+                                          <td><?php echo e($res->nombre); ?> <?php echo e($res->apellido_paterno); ?> <?php echo e($res->apellido_materno); ?></td>
+                                          <td><?php echo e($res->grado_estudios); ?></td>
                                           <td>  <a data-toggle="modal" href="#">DETALLES</a></td>
                                           <td>  <a data-toggle="modal" href="#">DESACTIVAR</a></td>
                                         </tr>
 
-                                              @endforeach
+                                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                  </tbody>
                                </table>
                              </div>
-                             @if (count($re))
-                               {{ $re->links() }}
-                             @endif
+                             <?php if(count($re)): ?>
+                               <?php echo e($re->links()); ?>
+
+                             <?php endif; ?>
                  </div>
 
- @endsection
+ <?php $__env->stopSection(); ?>
 
  <script>
  function numeros(e){
@@ -59,4 +60,6 @@
 
 
 
-  @endsection
+  <?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\formacion_integral\gestion_tutores/busqueda_tutor.blade.php ENDPATH**/ ?>

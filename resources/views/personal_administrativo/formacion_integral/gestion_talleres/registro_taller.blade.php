@@ -111,29 +111,36 @@
 </div>
 </div>
 
-<div class="form-row">
+<div  class="form-row">
+  <div class="form-group col-md-3">
+   <label for="tutor">* Días de la semana</label>
+    <div class="multiselect">
+         <div class="selectBox" onclick="showCheckboxes()">
+             <select name="dias_sem" id="dias_sem" class="form-control"  required>
+                 <option>Selecciona una opcion</option>
+             </select>
+             <div class="overSelect"></div>
+         </div>
+         <div id="checkboxes" class="hide"  required>
+             <label for="lunes"><input type="checkbox" name="dias_sem" value="Lunes" >Lunes</label>
+             <label for="martes"><input type="checkbox" name="dias_sem" value="Martes">Martes</label>
+             <label for="miercoles"><input type="checkbox" name="dias_sem" value="Miercoles">Miércoles</label>
+             <label for="jueves"><input type="checkbox" name="dias_sem" value="Jueves">Jueves</label>
+             <label for="viernes"><input type="checkbox" name="dias_sem" value="Viernes">Viernes</label>
+             <label for="sabado"><input type="checkbox" name="dias_sem" value="Sábado"Sábado</label>
 
-  <div class="form-group col-md-4">
-    <label for="dias_sem">* Días de la semana</label>
-      <select name="dias_sem" id="dias_sem" required class="form-control">
-     <option value="">Seleccione una opción</option>
-     <option value="1">LUNES A VIERNES</option>
-     <option value="2">SÁBADO</option>
-     <option value="3">LUNES</option>
-     <option value="4">MARTES </option>
-     <option value="5">MIERCOLES</option>
-     <option value="6">MIERCOLES</option>
-     <option value="7">JUEVES</option>
-     <option value="8">VIERENES</option>
-</select>
-</div>
+         </div>
+     </div>
+  </div>
 
 
 <div class="form-group col-md-3">
     <label for="tutor">* Tutor</label>
     <select name="tutor" id="tutor" required class="form-control">
     <option value="">Seleccione una opción</option>
-    <option value="">Tutor</option>
+    @foreach ($taller as $talleres)
+    <option value="{!! $talleres->id_tutor !!}">{!! $talleres->nombre !!} {!! $talleres->apellido_paterno !!} {!! $talleres->apellido_materno !!}</option>
+      @endforeach
     </select>
 </div>
 
@@ -161,6 +168,17 @@
 
 @endsection
 
+
+<script>
+function showCheckboxes() {
+    var checkboxes = document.getElementById("checkboxes");
+    if(checkboxes.classList.contains("hide")) {
+        checkboxes.classList.remove("hide");
+    } else {
+        checkboxes.classList.add("hide");
+    }
+}
+</script>
 <script>
 function numeros(e){
  key = e.keyCode || e.which;

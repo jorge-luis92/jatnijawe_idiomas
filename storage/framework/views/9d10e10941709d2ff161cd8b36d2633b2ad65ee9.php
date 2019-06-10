@@ -79,7 +79,6 @@ endif; ?>
         </select>
     </div>
 
-
     <div class="form-group col-md-4">
         <label for="modalidad">* Modalidad</label>
         <select name="modalidad" id="modalidad" required class="form-control">
@@ -129,26 +128,18 @@ endif; ?>
 
   <div class="form-group col-md-3">
         <label for="hora_inicio">Hora de Inicio</label>
-        <input type="time" class="form-control"  id="hora_inicio" required class="form-control" >
+        <input type="time" class="form-control"  id="hora_inicio" required >
   </div>
 
-  <div class="form-group col-md-6">
-      <label for="tutor" ><?php echo e(__(' Tutor')); ?></label>
-      <input id="tutor" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('tutor')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('tutor'); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="tutor" value="<?php echo e(old('tutor')); ?>" required autocomplete="tutor">
-       <?php if ($errors->has('tutor')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('tutor'); ?>
-      <span class="invalid-feedback" role="alert">
-      <strong><?php echo e($message); ?></strong>
-      </span>
-      <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>
-  </div>
+  <div class="form-group col-md-3">
+      <label for="tutor">* Tutor</label>
+          <select name="tutor" id="tutor" required class="form-control">
+      <option value="">Seleccione una opción</option>
+      <?php $__currentLoopData = $taller; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $talleres): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <option value="<?php echo $talleres->id_tutor; ?>"><?php echo $talleres->nombre; ?> <?php echo $talleres->apellido_paterno; ?> <?php echo $talleres->apellido_materno; ?></option>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      </select>
+  </div>>
 
 </div>
 

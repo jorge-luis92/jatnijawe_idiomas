@@ -14,6 +14,7 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/nuevo.css">
+  <script src="js/funciones.min.js"></script>
   <title>Coordinadora Formación Integral <?php echo $__env->yieldContent('title'); ?></title>
 
 </head>
@@ -54,11 +55,25 @@
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href=<?php echo e(route('registrar_tutor')); ?>>Registrar</a>
              <a class="collapse-item" href=<?php echo e(route('busqueda_tutor')); ?>>Tutores Registrados</a>
-             <a class="collapse-item" href=<?php echo e(route('tutor_activo')); ?>>Tutores Activos</a>
-             <a class="collapse-item" href=<?php echo e(route('tutor_inactivo')); ?>>Tutores Inactivos</a>
+          <!--   <a class="collapse-item" href=<?php echo e(route('tutor_activo')); ?>>Tutores Activos</a>
+             <a class="collapse-item" href=<?php echo e(route('tutor_inactivo')); ?>>Tutores Inactivos</a>-->
           </div>
         </div>
       </li>
+
+      <li class="nav-item" >
+              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#registar_talleritas" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-users" aria-hidden="true"></i></i><span style="font-size: 0.9em;">&nbsp;Talleristas</span>
+              </a>
+              <div id="registar_talleritas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                  <h6 class="collapse-header" style="color: blue">Opciones:</h6>
+                   <a class="collapse-item" href=<?php echo e(route('tallerista_activo')); ?>>Talleristas Activos</a>
+                   <a class="collapse-item" href=<?php echo e(route('tallerista_inactivo')); ?>>Talleristas Inactivos</a>
+                </div>
+              </div>
+            </li>
+
 
 <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#registar_talleres" aria-expanded="true" aria-controls="collapseTwo">
@@ -77,6 +92,7 @@
           </div>
         </div>
       </li>
+
 
 
         <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
@@ -157,18 +173,9 @@
       <!-- Footer -->
       <footer class="container-fluid text-center" style="background-color: #58ACFA; border-radius: 14px 14px 14px 14px;-moz-border-radius: 14px 14px 14px 14px;-webkit-border-radius: 14px 14px 14px 14px;border: 0px solid #000000;" >
   <p style="color: black">Av. Universidad S/N. Ex-Hacienda 5 Señores, Oaxaca, Méx. C.P. 68120 </br>Copyright &copy; <a style="color: white">Facultad de Idiomas</a> <?php $anio= date("Y"); echo $anio?>. Todos los derechos reservados.</p>
-
-  </footer>
-      <!-- End of Footer -->
-
+</footer>
     </div>
-
-    <!-- End of Content Wrapper -->
-
   </div>
-  <!-- End of Page Wrapper -->
-
-  <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>

@@ -107,17 +107,22 @@ Route::group(['middleware' => 'auth'], function () {
   //Route::get('home_admin', 'Administrativo_Con\AdministrativoController@admin_inicio')->name('home_admin');
 });
 
-Route::get('home_formacion', 'AdminController@home_formacion')->name('home_formacion');
+Route::get('inicio_formacion', 'FormacionIntegralController@inicio_formacion')->name('inicio_formacion');
 Route::get('busqueda_estudiante_fi', 'FormacionIntegralController@busqueda_estudiante_fi')->name('busqueda_estudiante_fi');
+Route::any('busqueda_estudiante_fi', 'FormacionIntegralController@busqueda_fi')->name('busqueda_estudiante_fi');
 Route::get('registrar_tutor', 'FormacionIntegralController@registrar_tutor')->name('registrar_tutor');
+Route::post('registrar_tutor_fi', 'FormacionIntegralController@registrar_tutor_fi')->name('registrar_tutor_fi');
 Route::get('busqueda_tutor', 'FormacionIntegralController@busqueda_tutor')->name('busqueda_tutor');
 Route::get('tutor_activo', 'FormacionIntegralController@tutor_activo')->name('tutor_activo');
 Route::get('tutor_inactivo', 'FormacionIntegralController@tutor_inactivo')->name('tutor_inactivo');
 Route::get('registro_extracurricular', 'FormacionIntegralController@registro_extracurricular')->name('registro_extracurricular');
 Route::get('registro_taller', 'FormacionIntegralController@registro_taller')->name('registro_taller');
 Route::get('registro_conferencia', 'FormacionIntegralController@registro_conferencia')->name('registro_conferencia');
-
-
+//
+Route::get('registro_tallerista', 'FormacionIntegralController@registrar_tallerista')->name('registro_tallerista');
+Route::get('tallerista_activo', 'FormacionIntegralController@tallerista_activo')->name('tallerista_activo');
+Route::get('tallerista_inactivo', 'FormacionIntegralController@tallerista_inactivo')->name('tallerista_inactivo');
+//
 Route::get('actividades_registradas', 'FormacionIntegralController@actividades_registradas')->name('actividades_registradas');
 Route::get('solictudes', 'FormacionIntegralController@solicitudes')->name('solicitudes');
 Route::get('asignar_taller', 'FormacionIntegralController@asignar_taller')->name('asignar_taller');

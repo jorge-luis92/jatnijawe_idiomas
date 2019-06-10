@@ -7,7 +7,7 @@
 <?php $__env->startSection('seccion'); ?>
  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Actividades Extracurriculares: Talleres</h1>
-<div class="container" id="font7">
+<div class="container" id="font5">
 </br>
 <form method="POST" action="">
 <?php echo csrf_field(); ?>
@@ -159,29 +159,36 @@ endif; ?>
 </div>
 </div>
 
-<div class="form-row">
+<div  class="form-row">
+  <div class="form-group col-md-3">
+   <label for="tutor">* Días de la semana</label>
+    <div class="multiselect">
+         <div class="selectBox" onclick="showCheckboxes()">
+             <select name="dias_sem" id="dias_sem" class="form-control"  required>
+                 <option>Selecciona una opcion</option>
+             </select>
+             <div class="overSelect"></div>
+         </div>
+         <div id="checkboxes" class="hide"  required>
+             <label for="lunes"><input type="checkbox" name="dias_sem" value="Lunes" >Lunes</label>
+             <label for="martes"><input type="checkbox" name="dias_sem" value="Martes">Martes</label>
+             <label for="miercoles"><input type="checkbox" name="dias_sem" value="Miercoles">Miércoles</label>
+             <label for="jueves"><input type="checkbox" name="dias_sem" value="Jueves">Jueves</label>
+             <label for="viernes"><input type="checkbox" name="dias_sem" value="Viernes">Viernes</label>
+             <label for="sabado"><input type="checkbox" name="dias_sem" value="Sábado"Sábado</label>
 
-  <div class="form-group col-md-4">
-    <label for="dias_sem">* Días de la semana</label>
-      <select name="dias_sem" id="dias_sem" required class="form-control">
-     <option value="">Seleccione una opción</option>
-     <option value="1">LUNES A VIERNES</option>
-     <option value="2">SÁBADO</option>
-     <option value="3">LUNES</option>
-     <option value="4">MARTES </option>
-     <option value="5">MIERCOLES</option>
-     <option value="6">MIERCOLES</option>
-     <option value="7">JUEVES</option>
-     <option value="8">VIERENES</option>
-</select>
-</div>
+         </div>
+     </div>
+  </div>
 
 
 <div class="form-group col-md-3">
     <label for="tutor">* Tutor</label>
     <select name="tutor" id="tutor" required class="form-control">
     <option value="">Seleccione una opción</option>
-    <option value="">Tutor</option>
+    <?php $__currentLoopData = $taller; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $talleres): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <option value="<?php echo $talleres->id_tutor; ?>"><?php echo $talleres->nombre; ?> <?php echo $talleres->apellido_paterno; ?> <?php echo $talleres->apellido_materno; ?></option>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </select>
 </div>
 
@@ -218,6 +225,17 @@ endif; ?>
 
 <?php $__env->stopSection(); ?>
 
+
+<script>
+function showCheckboxes() {
+    var checkboxes = document.getElementById("checkboxes");
+    if(checkboxes.classList.contains("hide")) {
+        checkboxes.classList.remove("hide");
+    } else {
+        checkboxes.classList.add("hide");
+    }
+}
+</script>
 <script>
 function numeros(e){
  key = e.keyCode || e.which;

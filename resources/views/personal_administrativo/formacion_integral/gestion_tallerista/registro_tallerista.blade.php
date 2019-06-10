@@ -1,14 +1,14 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_formacion_integral')
 @section('title')
-: Registro Tutor
+: Registro Tallerista
 @endsection
 
 @section('seccion')
  @include('flash-message')
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Tutores</h1>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Talleristas</h1>
 <div class="container" id="font4">
-</br>                    <form method="POST" action="{{ route('registrar_tutor_fi')}}">
+</br>                    <form method="POST" action="">
                         @csrf
 
                          <div class="form-row">
@@ -44,7 +44,7 @@
                         </div>
 </div>
                                 <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="curp" >{{ __('* CURP') }}</label>
                                   <input id="curp" type="text" minlength="18" maxlength="18"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('curp') is-invalid @enderror" name="curp" value="{{ old('curp') }}" required autocomplete="curp">
                                 @error('curp')
@@ -54,7 +54,7 @@
                                 @enderror
                         </div>
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="fecha_nacimiento" >{{ __('* Fecha nacimiento') }}</label>
                                   <input id="fecha_nacimiento" type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror" name="fecha_nacimiento" required>
                                 @error('fecha_nacimiento')
@@ -64,7 +64,7 @@
                                 @enderror
                         </div>
 
-
+                         <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="edad" >{{ __('* Edad') }}</label>
                                 <input id="edad" type="tel" maxlength="2" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
@@ -75,7 +75,7 @@
                                 @enderror
                         </div>
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                           <label for="genero">* Género</label>
                             <select name="genero" id="genero" required class="form-control">
                           <option value="">Seleccione una opción</option>
@@ -85,56 +85,66 @@
                         </div>
 </div>
 
-<!--<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">-->
+<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
 
 <div class="form-row">
-  <div class="form-group col-md-4">
-    <label for="grado_estudios">Grado de Estudios</label>
-      <select name="grado_estudios" id="grado_estudios" required class="form-control">
-      <option value="">Seleccione una opción</option>
-      <option value="licenciatura">LICENCIATURA</option>
-      <option value="maestria">MAESTRÍA</option>
-      <option value="doctorado">DOCTORADO</option>
-      <option value="otro">OTRO</option>
-          </select>
-  </div>
-  <div class="form-group col-md-4">
-      <label for="procendencia_interna" >{{ __('* Procedencia Interna') }}</label>
-            <input id="procedencia_interna" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('procendencia_interna') is-invalid @enderror" name="procedencia_interna" value="{{ old('procedencia_interna') }}" required autocomplete="procedencia_interna">
+  <div class="form-group col-md-3">
+      <label for="procedencia_interna" >{{ __('Procedencia Interna') }}</label>
+          <input id="procedencia_interna" maxlength="12" type="tel" class="form-control @error('procedencia_interna') is-invalid @enderror" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required>
           @error('procedencia_interna')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
               </span>
           @enderror
   </div>
-  <div class="form-group col-md-4">
-      <label for="procedencia_externa" >{{ __('* Procedencia Externa') }}</label>
-            <input id="procedencia_externa" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('procedencia_externa') is-invalid @enderror" name="procedencia_externa" value="{{ old('procedencia_externa') }}" required autocomplete="procedencia_externa">
+  <div class="form-group col-md-3">
+      <label for="procedencia_interna" >{{ __('Procedencia Externa') }}</label>
+          <input id="procedencia_externa" maxlength="12" type="tel" class="form-control @error('procedencia_externa') is-invalid @enderror" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required>
           @error('procedencia_externa')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
               </span>
           @enderror
   </div>
+
+  <div class="form-group col-md-3">
+    <label for="grado_estudios">Grado de Estudios</label>
+      <select name="grado_estudios" id="grado_estudios" required class="form-control">
+      <option value="">Seleccione una opción</option>
+      <option value="escolarizada">LICENCIATURA</option>
+      <option value="semiescolarizada">MAESTRÍA</option>
+      <option value="semiescolarizada">DOCTORADO</option>
+
+          </select>
+  </div>
+
+
 </div>
 
-   <div class="form-row">
+  <div class="form-group col-md-3">
+    <label for="estatus">* Tipo</label>
+      <select name="estatus" id="estatus" required class="form-control">
+    <option value="">Seleccione una opción</option>
+    <option value="regular">TALLERISTA</option>
+    <option value="irregular">CONFERENCISTA</option>
+</select>
+  </div>
 
-     <div class="form-group col-md-5">
-       <label for="tel_celular">* Teléfono Celular</label>
-       <input type="tel"  class="form-control" name="tel_celular" id="tel_celular"  maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos--Ejemplo: 9511234567"  pattern="([0-9]{3})([0-9]{7})" required>
-     </div>
 
-  <div class="form-group col-md-4">
-        <label for="email" >{{ __('E-Mail Address') }}</label>
+
+  <div class="form-group col-md-3">
+      <label for="email" >{{ __('Correo Electrónico') }}</label>
           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
           @error('email')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
               </span>
           @enderror
-      </div>
-</div>
+  </div>
+  </div>
+
+
+
                         <div class="form-group">
                             <div class="col-xs-offset-2 col-xs-9" align="center">
                                 <button type="submit" class="btn btn-primary">
@@ -144,8 +154,7 @@
                         </div>
                     </form>
                 </div>
-                </div>
-</div>
+
 @endsection
 
 <script>

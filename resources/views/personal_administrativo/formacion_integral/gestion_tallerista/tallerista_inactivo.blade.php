@@ -1,9 +1,12 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_formacion_integral')
 @section('title')
-: Búsqueda Tutores
- @section('seccion')
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Tutores Registrados</h1>
+: Talleristas Inactivos
+@endsection
+
+@section('seccion')
+ @include('flash-message')
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Talleristas Activos</h1>
  <div class="container" id="font4">
  </br>
                              <div class="table-responsive">
@@ -12,8 +15,7 @@
                                    <tr>
                                      <th scope="col">RFC</th>
                                      <th scope="col">NOMBRE</th>
-                                     <th scope="col">GRADO DE ESTUDIOS</th>
-                                     <th colspan="2" >ACCIONES</th>
+                                     <th scope="col">ACCIONES</th>
                                    </tr>
                                  </thead>
                                  <tbody>
@@ -21,10 +23,8 @@
                                    <tr>
                                           <th scope="row">{{$res->rfc}}</th>
                                           <td>{{$res->nombre}} {{$res->apellido_paterno}} {{$res->apellido_materno}}</td>
-                                          <td>{{$res->grado_estudios}}</td>
-                                          <td>  <a data-toggle="modal" href="#">DETALLES</a></td>
-                                          <td>  <a data-toggle="modal" href="#">DESACTIVAR</a></td>
-                                        </tr>
+                                          <td>  <a data-toggle="modal" href="#">ACTIVAR</a></td>
+                                            </tr>
 
                                               @endforeach
                                  </tbody>
@@ -33,30 +33,6 @@
                              @if (count($re))
                                {{ $re->links() }}
                              @endif
-                 </div>
+                           </div>
 
- @endsection
-
- <script>
- function numeros(e){
-  key = e.keyCode || e.which;
-  tecla = String.fromCharCode(key).toLowerCase();
-  letras = " 0123456789";
-  especiales = [8,37,39,46];
-
-  tecla_especial = false
-  for(var i in especiales){
- if(key == especiales[i]){
-   tecla_especial = true;
-   break;
-      }
-  }
-
-  if(letras.indexOf(tecla)==-1 && !tecla_especial)
-      return false;
- }
- </script>
-
-
-
-  @endsection
+            @endsection

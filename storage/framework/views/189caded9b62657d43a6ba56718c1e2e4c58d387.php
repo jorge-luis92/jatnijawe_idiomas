@@ -1,14 +1,14 @@
 <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
 <?php $__env->startSection('title'); ?>
-: Registro Tutor
+: Registro Tallerista
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('seccion'); ?>
  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Tutores</h1>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Talleristas</h1>
 <div class="container" id="font4">
-</br>                    <form method="POST" action="<?php echo e(route('registrar_tutor_fi')); ?>">
+</br>                    <form method="POST" action="">
                         <?php echo csrf_field(); ?>
 
                          <div class="form-row">
@@ -68,7 +68,7 @@ endif; ?>
                         </div>
 </div>
                                 <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="curp" ><?php echo e(__('* CURP')); ?></label>
                                   <input id="curp" type="text" minlength="18" maxlength="18"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('curp')) :
 if (isset($message)) { $messageCache = $message; }
@@ -86,7 +86,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="fecha_nacimiento" ><?php echo e(__('* Fecha nacimiento')); ?></label>
                                   <input id="fecha_nacimiento" type="date" class="form-control <?php if ($errors->has('fecha_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
@@ -104,7 +104,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
 
-
+                         <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="edad" ><?php echo e(__('* Edad')); ?></label>
                                 <input id="edad" type="tel" maxlength="2" class="form-control <?php if ($errors->has('edad')) :
@@ -123,7 +123,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                           <label for="genero">* Género</label>
                             <select name="genero" id="genero" required class="form-control">
                           <option value="">Seleccione una opción</option>
@@ -133,26 +133,16 @@ endif; ?>
                         </div>
 </div>
 
-<!--<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">-->
+<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
 
 <div class="form-row">
-  <div class="form-group col-md-4">
-    <label for="grado_estudios">Grado de Estudios</label>
-      <select name="grado_estudios" id="grado_estudios" required class="form-control">
-      <option value="">Seleccione una opción</option>
-      <option value="licenciatura">LICENCIATURA</option>
-      <option value="maestria">MAESTRÍA</option>
-      <option value="doctorado">DOCTORADO</option>
-      <option value="otro">OTRO</option>
-          </select>
-  </div>
-  <div class="form-group col-md-4">
-      <label for="procendencia_interna" ><?php echo e(__('* Procedencia Interna')); ?></label>
-            <input id="procedencia_interna" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('procendencia_interna')) :
+  <div class="form-group col-md-3">
+      <label for="procedencia_interna" ><?php echo e(__('Procedencia Interna')); ?></label>
+          <input id="procedencia_interna" maxlength="12" type="tel" class="form-control <?php if ($errors->has('procedencia_interna')) :
 if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('procendencia_interna'); ?> is-invalid <?php unset($message);
+$message = $errors->first('procedencia_interna'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="procedencia_interna" value="<?php echo e(old('procedencia_interna')); ?>" required autocomplete="procedencia_interna">
+endif; ?>" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required>
           <?php if ($errors->has('procedencia_interna')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('procedencia_interna'); ?>
@@ -163,13 +153,13 @@ $message = $errors->first('procedencia_interna'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
-  <div class="form-group col-md-4">
-      <label for="procedencia_externa" ><?php echo e(__('* Procedencia Externa')); ?></label>
-            <input id="procedencia_externa" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('procedencia_externa')) :
+  <div class="form-group col-md-3">
+      <label for="procedencia_interna" ><?php echo e(__('Procedencia Externa')); ?></label>
+          <input id="procedencia_externa" maxlength="12" type="tel" class="form-control <?php if ($errors->has('procedencia_externa')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('procedencia_externa'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="procedencia_externa" value="<?php echo e(old('procedencia_externa')); ?>" required autocomplete="procedencia_externa">
+endif; ?>" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required>
           <?php if ($errors->has('procedencia_externa')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('procedencia_externa'); ?>
@@ -180,17 +170,34 @@ $message = $errors->first('procedencia_externa'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
+
+  <div class="form-group col-md-3">
+    <label for="grado_estudios">Grado de Estudios</label>
+      <select name="grado_estudios" id="grado_estudios" required class="form-control">
+      <option value="">Seleccione una opción</option>
+      <option value="escolarizada">LICENCIATURA</option>
+      <option value="semiescolarizada">MAESTRÍA</option>
+      <option value="semiescolarizada">DOCTORADO</option>
+
+          </select>
+  </div>
+
+
 </div>
 
-   <div class="form-row">
+  <div class="form-group col-md-3">
+    <label for="estatus">* Tipo</label>
+      <select name="estatus" id="estatus" required class="form-control">
+    <option value="">Seleccione una opción</option>
+    <option value="regular">TALLERISTA</option>
+    <option value="irregular">CONFERENCISTA</option>
+</select>
+  </div>
 
-     <div class="form-group col-md-5">
-       <label for="tel_celular">* Teléfono Celular</label>
-       <input type="tel"  class="form-control" name="tel_celular" id="tel_celular"  maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos--Ejemplo: 9511234567"  pattern="([0-9]{3})([0-9]{7})" required>
-     </div>
 
-  <div class="form-group col-md-4">
-        <label for="email" ><?php echo e(__('E-Mail Address')); ?></label>
+
+  <div class="form-group col-md-3">
+      <label for="email" ><?php echo e(__('Correo Electrónico')); ?></label>
           <input id="email" type="email" class="form-control <?php if ($errors->has('email')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('email'); ?> is-invalid <?php unset($message);
@@ -205,8 +212,11 @@ $message = $errors->first('email'); ?>
           <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
-      </div>
-</div>
+  </div>
+  </div>
+
+
+
                         <div class="form-group">
                             <div class="col-xs-offset-2 col-xs-9" align="center">
                                 <button type="submit" class="btn btn-primary">
@@ -217,8 +227,7 @@ endif; ?>
                         </div>
                     </form>
                 </div>
-                </div>
-</div>
+
 <?php $__env->stopSection(); ?>
 
 <script>
@@ -241,4 +250,4 @@ if(key == especiales[i]){
 }
 </script>
 
-<?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\formacion_integral\gestion_tutores/registrar_tutor.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\formacion_integral\gestion_tallerista/registro_tallerista.blade.php ENDPATH**/ ?>

@@ -55,7 +55,6 @@
         </select>
     </div>
 
-
     <div class="form-group col-md-4">
         <label for="modalidad">* Modalidad</label>
         <select name="modalidad" id="modalidad" required class="form-control">
@@ -92,15 +91,15 @@
         <input type="time" class="form-control"  id="hora_inicio" required >
   </div>
 
-  <div class="form-group col-md-6">
-      <label for="tutor" >{{ __(' Tutor') }}</label>
-      <input id="tutor" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('tutor') is-invalid @enderror" name="tutor" value="{{ old('tutor') }}" required autocomplete="tutor">
-       @error('tutor')
-      <span class="invalid-feedback" role="alert">
-      <strong>{{ $message }}</strong>
-      </span>
-      @enderror
-  </div>
+  <div class="form-group col-md-3">
+      <label for="tutor">* Tutor</label>
+          <select name="tutor" id="tutor" required class="form-control">
+      <option value="">Seleccione una opción</option>
+      @foreach ($taller as $talleres)
+      <option value="{!! $talleres->id_tutor !!}">{!! $talleres->nombre !!} {!! $talleres->apellido_paterno !!} {!! $talleres->apellido_materno !!}</option>
+        @endforeach
+      </select>
+  </div>>
 
 </div>
 
