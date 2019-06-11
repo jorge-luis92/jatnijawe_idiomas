@@ -1,14 +1,14 @@
-<link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_estudiante')
-@section('title')
-: Mis Actividades
-@endsection
+<link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
-@section('seccion')
+<?php $__env->startSection('title'); ?>
+: Mis Actividades
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('seccion'); ?>
 <!--<h1 style="font-size: 3.5em; color: #000000; font-family: Medium;" align="center">"JATWEB"</h1>-->
   <h2 style="font-size: 1.7em; color: #000000;" align="center">Actividades Extracurriculares </h2>
 <div class="container" id="font2">
-    @include('flash-message')
+    <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   </br>
   <h2 style="font-size: 1.0em; color: #0A122A;   max-width: 280px; text-decoration: underline;" align="left">AVANCE DE ACTIVIDADES:&nbsp; 2 horas</h2>
 
@@ -16,7 +16,8 @@
   <table class="table table-bordered table-info" style="color: #000000;" >
     <thead>
       <tr>
-        <th scope="col">ACTIVIDAD</th>
+        <th scope="col">ID</th>
+        <th scope="col">CURSO</th>
         <th scope="col">CREDITOS</th>
         <th scope="col">AREA</th>
         <th scope="col">FECHA INICIO</th>
@@ -26,6 +27,7 @@
     </thead>
     <tbody>
       <tr>
+        <th scope="row">1</th>
         <td>Relaciones Tóxicas</td>
         <td>2</td>
         <td>Cultural</td>
@@ -39,4 +41,6 @@
 </div>
 
 
-  @endsection
+  <?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/estudiante\mis_actividades/misactividades.blade.php ENDPATH**/ ?>

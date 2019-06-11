@@ -23,7 +23,7 @@ class ActvidadesExtra extends Controller
 {
     public function catalogos(){
       $result = DB::table('extracurriculares')
-      ->select('extracurriculares.id_extracurricular', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+      ->select('extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
       'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
       'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
       'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
@@ -37,6 +37,21 @@ class ActvidadesExtra extends Controller
         return redirect()->back();
         }
     return view("estudiante\mis_actividades.catalogo_actividades")->with('dato', $result);
+    }
+
+    public function inscripcion_extra($id_extracurricular, $creditos){
+      $extra= $id_extracurricular;
+      $credito= $creditos;
+      $usuario_actual=auth()->user();
+      $id=$usuario_actual->id_user;
+
+      DB::table('detalle_extracurriculares')
+          //->where('becas.id_beca', $valor)
+          ->Insert(
+              ['matricula' => $id, 'actividad' => $extra, 'creditos' => $credito, 'estado' => 'Cursando'],
+          );
+
+      return redirect()->route('mis_actividades')->with('success','¡Inscripción Realizada correctamente!');
     }
 
 

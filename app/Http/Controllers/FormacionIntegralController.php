@@ -158,7 +158,7 @@ class FormacionIntegralController extends Controller
     public function actividades_registradas()
     {
       $result = DB::table('extracurriculares')
-      ->select('extracurriculares.id_extracurricular', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+      ->select('extracurriculares.id_extracurricular', 'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
       'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
       'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
       'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')

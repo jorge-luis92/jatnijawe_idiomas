@@ -49,11 +49,11 @@
                @endforeach
            </tbody>
        </table>
-     </div>
        @if (count($details))
          {{ $details->links() }}
-       @endif
-       @endif
+         @endif
+         @endif
+     </div>
    </div>
    </div>
    </div>

@@ -1,13 +1,25 @@
 <?php
-
 namespace App\Http\Controllers\Estudiante_Con;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use PDF;
-use Illuminate\Support\Facades\DB;
 use Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Extracurricular;
+use App\Detalle_extracurricular;
+use App\Estudiante;
+use App\Persona;
+use App\Administrativo;
+use App\Nivel;
+use App\Departamento;
+use App\Dpto_Administrativo;
+use App\Telefono;
+use App\Tutor;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
 
 class EstudianteController extends Controller
 {
@@ -53,6 +65,9 @@ return view('estudiante\datos.datos_personales');
        if($usuario_actual->tipo_usuario!='estudiante'){
          return redirect()->back();
         }
+
+      
+
       return  view ('estudiante\mis_actividades.misActividades');
     }
 

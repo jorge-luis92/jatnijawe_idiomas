@@ -4,7 +4,7 @@
 :Talleres
  @section('seccion')
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Talleres Registrados</h1>
- <div class="container" id="font4">
+ <div class="container" id="font7">
  </br>                    <form method="POST" action="{{ route('actividades_registradas') }}">
                          @csrf
                           <div class="form-row">
@@ -47,7 +47,7 @@
                  <div class="modal fade" tabindex="-1" role="dialog" id="actividad_detalle" aria-labelledby="#actividad_detalles " aria-hidden="true">
                    <div class="modal-dialog modal-lg">
                      <div class="modal-content">
-                       <div class="container" id="font5">
+                       <div class="container" id="font7">
                          </br>
                        <div class="table-responsive">
                          <table class="table table-bordered table-info" style="color: #000000;" >

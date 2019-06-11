@@ -50,12 +50,12 @@
                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
            </tbody>
        </table>
-     </div>
        <?php if(count($details)): ?>
          <?php echo e($details->links()); ?>
 
-       <?php endif; ?>
-       <?php endif; ?>
+         <?php endif; ?>
+         <?php endif; ?>
+     </div>
    </div>
    </div>
    </div>

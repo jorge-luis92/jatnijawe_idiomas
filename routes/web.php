@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('datos_medico', 'ConsultasController@carga_datos_medicos')->name('datos_medico');
   Route::get('datos_personal', 'ConsultasController@carga_datos_personales')->name('datos_personal');
   Route::get('catalogo', 'Actividades\ActvidadesExtra@catalogos')->name('catalogo');
+  Route::get('inscripcion_extracurricular/{id_extracurricular}/{creditos}', 'Actividades\ActvidadesExtra@inscripcion_extra');
   Route::post('changePassword','HomeController@changePassword')->name('changePassword');
   Route::get('ma_estudiante', 'Estudiante_Con\EstudianteController@m_estudiantes')->name('ma_estudiante');
   Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');
