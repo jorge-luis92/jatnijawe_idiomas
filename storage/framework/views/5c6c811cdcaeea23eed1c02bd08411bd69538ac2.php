@@ -9,10 +9,10 @@
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Actividades Extracurriculares: Talleres</h1>
 <div class="container" id="font5">
 </br>
-<form method="POST" action="">
+<form method="POST" action="registrar_taller">
 <?php echo csrf_field(); ?>
 <div class="form-row">
-    <div class="form-group col-md-8">
+    <div class="form-group col-md-7">
           <label for="nombre_ec" ><?php echo e(__('* Nombre del Taller')); ?></label>
           <input id="nombre_ec" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre_ec')) :
 if (isset($message)) { $messageCache = $message; }
@@ -30,9 +30,9 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
     </div>
 
-    <div class="form-group col-md-1">
+    <div class="form-group col-md-2">
         <label for="creditos" ><?php echo e(__('* Créditos')); ?></label>
-        <input id="creditos" type="creditos" maxlength="1" class="form-control <?php if ($errors->has('creditos')) :
+        <input id="creditos" type="creditos" maxlength="2" class="form-control <?php if ($errors->has('creditos')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('creditos'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -52,9 +52,9 @@ endif; ?>
         <label for="area">* Área</label>
         <select name="area" id="area" required class="form-control">
               <option value="">Seleccione una opción</option>
-              <option value="MASCULINO">ACADÉMICA</option>
-              <option value="FEMEMINO">CULTURAL</option>
-              <option value="FEMEMINO">DEPORTIVA</option>
+              <option value="ACADEMICA">ACADÉMICA</option>
+              <option value="CULTURAL">CULTURAL</option>
+              <option value="DEPORTIVA">DEPORTIVA</option>
         </select>
     </div>
 
@@ -150,18 +150,18 @@ endif; ?>
 
   <div class="form-group col-md-3">
         <label for="hora_inicio">* Hora de entrada</label>
-        <input type="time" class="form-control"  id="hora_inicio" required class="form-control" >
+        <input type="time" class="form-control"  name="hora_inicio" id="hora_inicio" required class="form-control" >
   </div>
 
 <div class="form-group col-md-3">
     <label for="hora_fin">* Hora de salida</label>
-    <input type="time" class="form-control"  id="hora_fin" required class="form-control" >
+    <input type="time" class="form-control"  name="hora_fin" id="hora_fin" required class="form-control" >
 </div>
 </div>
 
 <div  class="form-row">
-  <div class="form-group col-md-3">
-   <label for="tutor">* Días de la semana</label>
+  <!--<div class="form-group col-md-3">
+   <label for="dias_sem">* Días de la semana</label>
     <div class="multiselect">
          <div class="selectBox" onclick="showCheckboxes()">
              <select name="dias_sem" id="dias_sem" class="form-control"  required>
@@ -179,7 +179,24 @@ endif; ?>
 
          </div>
      </div>
-  </div>
+  </div>-->
+  <div class="form-group col-md-3">
+   <label for="dias_sem">* Días de la semana</label>
+   <input id="dias_sem" type="text" name="dias_sem" onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('dias_sem')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('dias_sem'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"  value="<?php echo e(old('dias_sem')); ?>" required autocomplete="dias_sem">
+     <?php if ($errors->has('dias_sem')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('dias_sem'); ?>
+   <span class="invalid-feedback" role="alert">
+   <strong><?php echo e($message); ?></strong>
+   </span>
+     <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+   </div>
 
 
 <div class="form-group col-md-3">

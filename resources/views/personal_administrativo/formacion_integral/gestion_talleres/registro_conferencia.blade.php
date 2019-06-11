@@ -99,7 +99,7 @@
       <option value="{!! $talleres->id_tutor !!}">{!! $talleres->nombre !!} {!! $talleres->apellido_paterno !!} {!! $talleres->apellido_materno !!}</option>
         @endforeach
       </select>
-  </div>>
+  </div>
 
 </div>
 

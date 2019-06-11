@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Extracurricular;
+use App\Detalle_extracurricular;
 use App\Estudiante;
 use App\Persona;
 use App\Administrativo;
@@ -91,9 +92,9 @@ class FormacionIntegralController extends Controller
       ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.bandera', 'tutores.procedencia_interna', 'nivel.rfc', 'nivel.grado_estudios')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
       ->join('nivel', 'tutores.id_nivel', '=', 'nivel.id_nivel')
-      ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+      //->join('users', 'personas.id_persona', '=', 'users.id_persona')
       ->where('tutores.bandera', '=', '1')
-      ->orderBy('tutores.created_at', 'asc')
+      //->orderBy('personas.apellido_paterno', 'asc')
       ->simplePaginate(7);
     return view('personal_administrativo\formacion_integral\gestion_tutores.busqueda_tutor')->with('re', $result);
     }
@@ -118,8 +119,31 @@ class FormacionIntegralController extends Controller
       $result = DB::table('personas')
       ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.id_tutor')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->orderBy('personas.nombre', 'asc')
       ->get();
     return view('personal_administrativo\formacion_integral\gestion_talleres.registro_taller')->with('taller', $result);
+    }
+
+    public function registrar_taller(Request $request)
+    {
+      $this->validate($request, [
+        'nombre_ec' => ['required', 'string', 'max:100'],
+        'creditos' => ['required', 'string', 'max:100'],
+        'area' => ['required', 'string', 'max:25'],
+        'modalidad' => ['required', 'string', 'max:30'],
+        'cupo' => ['required', 'string', 'max:200'],
+        'lugar' => ['required', 'string', 'max:100'],
+      ]);
+
+      $data = $request;
+      DB::table('extracurriculares')
+          ->Insert(
+              ['nombre_ec' => $data['nombre_ec'], 'tipo' => 'Taller', 'creditos' => $data['creditos'], 'area'=> $data['area'],
+               'modalidad'=> $data['modalidad'],  'cupo'=> $data['cupo'], 'lugar'=> $data['lugar'], 'fecha_inicio'=> $data['fecha_inicio'],
+               'fecha_fin'=> $data['fecha_fin'],  'hora_inicio'=> $data['hora_inicio'],  'hora_fin'=> $data['hora_fin'],
+               'dias_sem'=> $data['dias_sem'],  'materiales'=> $data['materiales'],  'tutor'=> $data['tutor']],
+          );
+      return redirect()->route('actividades_registradas')->with('sucess','Taller Registrado Correctamente');
     }
 
     public function registro_conferencia()
@@ -133,7 +157,16 @@ class FormacionIntegralController extends Controller
 
     public function actividades_registradas()
     {
-    return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_registradas');
+      $result = DB::table('extracurriculares')
+      ->select('extracurriculares.id_extracurricular', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+      'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+      'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+      'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+      ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+      ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->orderBy('personas.nombre', 'asc')
+      ->simplePaginate(10);
+    return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_registradas')->with('dato', $result);
     }
 
     public function solicitudes()
@@ -151,15 +184,47 @@ class FormacionIntegralController extends Controller
     return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_asignadas');
     }
 
-    public function registrar_tallerista()
+    public function registro_tallerista()
     {
-    return view('personal_administrativo\formacion_integral\gestion_tallerista.registro_tallerista');
+      $result = DB::table('personas')
+      ->select('personas.id_persona', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.id_tutor')
+      ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->orderBy('personas.nombre', 'asc')
+      ->get();
+    return view('personal_administrativo\formacion_integral\gestion_tallerista.registro_tallerista')->with('taller', $result);
+    }
+
+    public function registrar_talleristas(Request $request)
+    {
+      $this->validate($request, [
+        'id_persona' => ['required', 'string', 'max:60', 'unique:users'],
+        'username' => ['required', 'string', 'max:25'],
+        'password' => ['required', 'string', 'max:25'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+      ]);
+
+      $data = $request;
+
+      $user=new User;
+      $user->id_user=$data['id_persona'];
+      $user->username=$data['username'];
+      $user->email=$data['email'];
+      $user->password = Hash::make($data['password']);
+      $user->tipo_usuario='tallerista';
+      $user->id_persona=$data['id_persona'];
+      $user->save();
+      if($user->save()){
+    return redirect()->route('tallerista_activo')->with('success','¡Datos registrados correctamente!');
+  }
+else{
+return redirect()->route('registro_tallerista')->with('error','error en la creacion');
+}
     }
 
     public function tallerista_activo()
     {
       $result = DB::table('personas')
-      ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'nivel.rfc')
+      ->select('users.id_user', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'nivel.rfc')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
       ->join('nivel', 'tutores.id_nivel', '=', 'nivel.id_nivel')
       ->join('users', 'personas.id_persona', '=', 'users.id_persona')
@@ -172,7 +237,7 @@ class FormacionIntegralController extends Controller
     public function tallerista_inactivo()
     {
       $result = DB::table('personas')
-      ->select('users.bandera', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'nivel.rfc')
+      ->select('users.id_user', 'users.bandera', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'nivel.rfc')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
       ->join('nivel', 'tutores.id_nivel', '=', 'nivel.id_nivel')
       ->join('users', 'personas.id_persona', '=', 'users.id_persona')
@@ -182,6 +247,28 @@ class FormacionIntegralController extends Controller
     return view('personal_administrativo\formacion_integral\gestion_tallerista.tallerista_inactivo')->with('re', $result);
     }
 
+    public function activar_tallerista($id_user){
+
+      $valor=$id_user;
+      DB::table('users')
+          ->where('users.id_user', $valor)
+          ->update(
+              ['bandera' => '1'],
+          );
+          return redirect()->route('tallerista_activo')->with('success','¡El Usuario ha sido Activado!');
+
+    }
+
+    public function desactivar_tallerista($id_user){
+      $valor=$id_user;
+      DB::table('users')
+          ->where('users.id_user', $valor)
+          ->update(
+              ['bandera' => '0'],
+          );
+          return redirect()->route('tallerista_inactivo')->with('success','¡El Usuario ha sido desactivado!');
+
+    }
 
     public function busqueda_fi(Request $request){
       $usuario_actual=\Auth::user();
@@ -229,7 +316,7 @@ class FormacionIntegralController extends Controller
         'curp' => ['required', 'string', 'min:18','max:18'],
         'edad' => ['required', 'string', 'max:100'],
         'genero' => ['required', 'string'],
-       'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+//       'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
       ]);
 
       $data = $request;
@@ -283,7 +370,7 @@ class FormacionIntegralController extends Controller
               $tel->numero=$data['tel_celular'];
               $tel->id_persona=$data['curp'];
                 if($tel->save()){
-          $user=new User;
+        /*  $user=new User;
           $user->id_user=$data['curp'];
           $user->username=$data['nombre'];
           $user->email=$data['email'];
@@ -292,9 +379,10 @@ class FormacionIntegralController extends Controller
           $user->id_persona=$data['curp'];
           $user->bandera='0';
           $user->save();
-            if($user->save()){
+            if($user->save()){*/
           return redirect()->route('inicio_formacion')->with('success','¡Datos registrados correctamente!');
-        }}}}}}
+        }}}}}
+      //}
     else{
      return redirect()->route('inicio_formacion')->with('error','error en la creacion');
     }

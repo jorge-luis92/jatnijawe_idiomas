@@ -10,7 +10,8 @@ class Extracurricular extends Model
   protected $primaryKey = 'id_extracurricular'; // or null
  //public $incrementing = false;
  protected $fillable = [
-     'matricula', 'modalidad','fecha_ingreso', 'semestre','grupo','estatus','bachillerato_origen',
+     'id_extracurricular', 'nombre_ec','creditos', 'area','modalidad','cupo','lugar', 'fecha_inicio', 'fecha_fin',
+     'hora_inicio', 'hora_fin', 'dias_sem', 'materiales', 'tutor',
  ];
 
 

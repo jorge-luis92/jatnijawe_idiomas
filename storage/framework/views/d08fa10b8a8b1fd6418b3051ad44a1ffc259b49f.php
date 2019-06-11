@@ -12,7 +12,7 @@
                         <?php echo csrf_field(); ?>
 
                          <div class="form-row">
-
+                           
                         <div class="form-group col-md-4">
                             <label for="nombre" ><?php echo e(__('* Nombre(s)')); ?></label>
                                 <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
@@ -136,7 +136,7 @@ endif; ?>
 <!--<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">-->
 
 <div class="form-row">
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
     <label for="grado_estudios">Grado de Estudios</label>
       <select name="grado_estudios" id="grado_estudios" required class="form-control">
       <option value="">Seleccione una opción</option>
@@ -146,7 +146,7 @@ endif; ?>
       <option value="otro">OTRO</option>
           </select>
   </div>
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
       <label for="procendencia_interna" ><?php echo e(__('* Procedencia Interna')); ?></label>
             <input id="procedencia_interna" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('procendencia_interna')) :
 if (isset($message)) { $messageCache = $message; }
@@ -163,7 +163,7 @@ $message = $errors->first('procedencia_interna'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
       <label for="procedencia_externa" ><?php echo e(__('* Procedencia Externa')); ?></label>
             <input id="procedencia_externa" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('procedencia_externa')) :
 if (isset($message)) { $messageCache = $message; }
@@ -180,16 +180,13 @@ $message = $errors->first('procedencia_externa'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
-</div>
 
-   <div class="form-row">
-
-     <div class="form-group col-md-5">
+     <div class="form-group col-md-3">
        <label for="tel_celular">* Teléfono Celular</label>
-       <input type="tel"  class="form-control" name="tel_celular" id="tel_celular"  maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos--Ejemplo: 9511234567"  pattern="([0-9]{3})([0-9]{7})" required>
+       <input type="tel"  class="form-control" name="tel_celular" id="tel_celular"  maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos"  pattern="([0-9]{3})([0-9]{7})" required>
      </div>
 
-  <div class="form-group col-md-4">
+  <!--<div class="form-group col-md-4">
         <label for="email" ><?php echo e(__('E-Mail Address')); ?></label>
           <input id="email" type="email" class="form-control <?php if ($errors->has('email')) :
 if (isset($message)) { $messageCache = $message; }
@@ -205,7 +202,7 @@ $message = $errors->first('email'); ?>
           <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
-      </div>
+      </div>-->
 </div>
                         <div class="form-group">
                             <div class="col-xs-offset-2 col-xs-9" align="center">

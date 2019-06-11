@@ -1,5 +1,6 @@
 #font2{
   /*border:2px solid #827BE1;*/
+  font-family: 'Century Gothic';
   border:2px solid #819FF7;
   border-radius:40px 0 40px 0;
   text-align: left;
@@ -9,11 +10,13 @@
 
 img#img_banner{
 	opacity: 0.7;filter:alpha(opacity=5);
+  font-family: 'Century Gothic';
 }
 
 .blue{
    color:yellow;
     background-color:red;
+    font-family: 'Century Gothic';
 }
 
 .multiselect-container>li>a>label {
@@ -22,6 +25,7 @@ img#img_banner{
 
 #font3{
   /*border:2px solid #827BE1;*/
+  font-family: 'Century Gothic';
   max-width: 1070;
   background: #819FF7;
   border:1px solid #819FF7;
@@ -33,6 +37,7 @@ img#img_banner{
 }
 
 #font4{
+  font-family: 'Century Gothic';
   border:2px solid #827BE1;
   max-width: 1070;
   border:1px solid #819FF7;
@@ -43,6 +48,7 @@ img#img_banner{
 }
 
 #font5{
+  font-family: 'Century Gothic';
   border:2px solid #819FF7;
     max-width: 1070;
 /*  border-radius:40px 0 40px 0;-->*/
@@ -52,8 +58,9 @@ img#img_banner{
 }
 
 #font6{
+  font-family: 'Century Gothic';
   border:2px solid #819FF7;
-    max-width: 650;
+  max-width: 650;
 /*  border-radius:40px 0 40px 0;-->*/
   text-align: left;
   box-shadow: 10px 10px 6px -5px rgba(11,23,59,1);
@@ -61,8 +68,9 @@ img#img_banner{
 }
 
 #font7{
+  font-family: 'Century Gothic';
   border:2px solid #819FF7;
-    max-width: auto;
+  max-width: auto;
 /*  border-radius:40px 0 40px 0;-->*/
   text-align: left;
   box-shadow: 10px 10px 6px -5px rgba(11,23,59,1);
@@ -110,6 +118,7 @@ img#img_banner{
 
 
 .nota {
+  font-family: 'Century Gothic';
   align: left;
   background: #F6CEF5;
   max-width: 440px;
@@ -135,6 +144,7 @@ img#img_banner{
    margin: auto;
 }
 .nota_alumno {
+  font-family: 'Century Gothic';
   align: center;
   background: #58ACFA;
   opacity: 0.75;filter:alpha(opacity=5);

@@ -26,7 +26,7 @@
 </head>
 
 <body id="page-top">
-  <div id="wrapper" ><!-- Sidebar -->
+  <div id="wrapper" style="font-family: 'Century Gothic';"><!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">

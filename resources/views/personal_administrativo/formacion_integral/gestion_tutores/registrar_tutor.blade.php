@@ -12,7 +12,7 @@
                         @csrf
 
                          <div class="form-row">
-
+                           
                         <div class="form-group col-md-4">
                             <label for="nombre" >{{ __('* Nombre(s)') }}</label>
                                 <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre">
@@ -88,7 +88,7 @@
 <!--<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">-->
 
 <div class="form-row">
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
     <label for="grado_estudios">Grado de Estudios</label>
       <select name="grado_estudios" id="grado_estudios" required class="form-control">
       <option value="">Seleccione una opción</option>
@@ -98,7 +98,7 @@
       <option value="otro">OTRO</option>
           </select>
   </div>
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
       <label for="procendencia_interna" >{{ __('* Procedencia Interna') }}</label>
             <input id="procedencia_interna" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('procendencia_interna') is-invalid @enderror" name="procedencia_interna" value="{{ old('procedencia_interna') }}" required autocomplete="procedencia_interna">
           @error('procedencia_interna')
@@ -107,7 +107,7 @@
               </span>
           @enderror
   </div>
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
       <label for="procedencia_externa" >{{ __('* Procedencia Externa') }}</label>
             <input id="procedencia_externa" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('procedencia_externa') is-invalid @enderror" name="procedencia_externa" value="{{ old('procedencia_externa') }}" required autocomplete="procedencia_externa">
           @error('procedencia_externa')
@@ -116,16 +116,13 @@
               </span>
           @enderror
   </div>
-</div>
 
-   <div class="form-row">
-
-     <div class="form-group col-md-5">
+     <div class="form-group col-md-3">
        <label for="tel_celular">* Teléfono Celular</label>
-       <input type="tel"  class="form-control" name="tel_celular" id="tel_celular"  maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos--Ejemplo: 9511234567"  pattern="([0-9]{3})([0-9]{7})" required>
+       <input type="tel"  class="form-control" name="tel_celular" id="tel_celular"  maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos"  pattern="([0-9]{3})([0-9]{7})" required>
      </div>
 
-  <div class="form-group col-md-4">
+  <!--<div class="form-group col-md-4">
         <label for="email" >{{ __('E-Mail Address') }}</label>
           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
           @error('email')
@@ -133,7 +130,7 @@
                   <strong>{{ $message }}</strong>
               </span>
           @enderror
-      </div>
+      </div>-->
 </div>
                         <div class="form-group">
                             <div class="col-xs-offset-2 col-xs-9" align="center">

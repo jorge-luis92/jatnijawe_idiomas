@@ -21,7 +21,7 @@
     <title>Usuario @yield('title')</title>
 
   </head>
-  <body style="background-image: url('image/logos_idiomas/logo_fon.png'); background-size: 600px; background-position:center; background-repeat: no-repeat; background-color: #FFFFFF;">
+  <body style="background-image: url('image/logos_idiomas/logo_fon.png'); background-size: 600px; background-position:center; background-repeat: no-repeat; background-color: #FFFFFF; font-family: 'Century Gothic';">
 
     </br>
    <div class="container" align="center">
@@ -32,8 +32,8 @@
      </div>
      <div  class="col-6 col-sm-7" class="mr-2 d-none d-lg-inline text-gray-600 small" >
 
-       <h2  style="color: #000000">Facultad de Idiomas</h2>
-      <h3 style="color: #000000"> Portal de Servicios Educativos </br>"JAT NIJAWE"</h3>
+       <h2  style="color: #000000; font-family: 'Century Gothic';">Facultad de Idiomas</h2>
+      <h3 style="color: #000000; font-family: 'Century Gothic';"> Portal de Servicios Educativos </br>"JAT NIJAWE"</h3>
      </div>
      <div  class="col-6 col-sm-2">
          <img src="image/nuevo.png" width="150" height="150" alt=""/>

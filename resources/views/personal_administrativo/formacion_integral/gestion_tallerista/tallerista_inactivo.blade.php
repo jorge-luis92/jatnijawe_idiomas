@@ -23,7 +23,7 @@
                                    <tr>
                                           <th scope="row">{{$res->rfc}}</th>
                                           <td>{{$res->nombre}} {{$res->apellido_paterno}} {{$res->apellido_materno}}</td>
-                                          <td>  <a data-toggle="modal" href="#">ACTIVAR</a></td>
+                                            <td><a href="activar_tallerista/{{ $res->id_user }}">ACTIVAR</a></td>
                                             </tr>
 
                                               @endforeach

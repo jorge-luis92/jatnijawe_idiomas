@@ -117,11 +117,15 @@ Route::get('tutor_activo', 'FormacionIntegralController@tutor_activo')->name('tu
 Route::get('tutor_inactivo', 'FormacionIntegralController@tutor_inactivo')->name('tutor_inactivo');
 Route::get('registro_extracurricular', 'FormacionIntegralController@registro_extracurricular')->name('registro_extracurricular');
 Route::get('registro_taller', 'FormacionIntegralController@registro_taller')->name('registro_taller');
+Route::post('registrar_taller', 'FormacionIntegralController@registrar_taller')->name('registrar_taller');
 Route::get('registro_conferencia', 'FormacionIntegralController@registro_conferencia')->name('registro_conferencia');
 //
-Route::get('registro_tallerista', 'FormacionIntegralController@registrar_tallerista')->name('registro_tallerista');
+Route::get('registro_tallerista', 'FormacionIntegralController@registro_tallerista')->name('registro_tallerista');
+Route::post('registrar_talleristas', 'FormacionIntegralController@registrar_talleristas')->name('registrar_talleristas');
 Route::get('tallerista_activo', 'FormacionIntegralController@tallerista_activo')->name('tallerista_activo');
 Route::get('tallerista_inactivo', 'FormacionIntegralController@tallerista_inactivo')->name('tallerista_inactivo');
+Route::get('desactivar_tallerista/{id_user}', 'FormacionIntegralController@desactivar_tallerista');
+Route::get('activar_tallerista/{id_user}', 'FormacionIntegralController@activar_tallerista');
 //
 Route::get('actividades_registradas', 'FormacionIntegralController@actividades_registradas')->name('actividades_registradas');
 Route::get('solictudes', 'FormacionIntegralController@solicitudes')->name('solicitudes');

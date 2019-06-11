@@ -19,7 +19,7 @@
     <title>Home: <?php echo $__env->yieldContent('title'); ?></title>
 
   </head>
-  <body style="background-image: url('image/logos_idiomas/logo_fon.png'); background-size: 1000px; background-position:center; background-repeat: no-repeat; background-color: #FFFFFF  ;">
+  <body style="font-family: 'Century Gothic'; background-image: url('image/logos_idiomas/logo_fon.png'); background-size: 1000px; background-position:center; background-repeat: no-repeat; background-color: #FFFFFF  ;">
    <div class="container">
    <div class="row">
      <div  class="col-5 col-sm-2" align="left">

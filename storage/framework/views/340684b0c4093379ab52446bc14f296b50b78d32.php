@@ -23,7 +23,7 @@
                                    <tr>
                                           <th scope="row"><?php echo e($res->rfc); ?></th>
                                           <td><?php echo e($res->nombre); ?> <?php echo e($res->apellido_paterno); ?> <?php echo e($res->apellido_materno); ?></td>
-                                          <td>  <a data-toggle="modal" href="#">DESACTIVAR</a></td>
+                                            <td><a href="desactivar_tallerista/<?php echo e($res->id_user); ?>">DESACTIVAR</a></td>
                                             </tr>
 
                                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

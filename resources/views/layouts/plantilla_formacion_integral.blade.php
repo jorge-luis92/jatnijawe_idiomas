@@ -20,7 +20,7 @@
 </head>
 
 <body id="page-top">
-  <div id="wrapper" >
+  <div id="wrapper" style="font-family: 'Century Gothic';" >
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
@@ -68,6 +68,7 @@
               <div id="registar_talleritas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                   <h6 class="collapse-header" style="color: blue">Opciones:</h6>
+                  <a class="collapse-item" href={{ route('registro_tallerista')}}>Alta de Tallerista</a>
                    <a class="collapse-item" href={{ route('tallerista_activo')}}>Talleristas Activos</a>
                    <a class="collapse-item" href={{ route('tallerista_inactivo')}}>Talleristas Inactivos</a>
                 </div>

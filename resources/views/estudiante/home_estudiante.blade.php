@@ -17,7 +17,7 @@
 </br>
 </br>
 <div class="nota_alumno">
-<p style="Times New Roman, Times, serif, cursive; color: blue;">
+<p style="font-family: 'Times New Roman, Times, serif, cursive'; color: blue;">
   <span style="color: red;">NOTA: </span>
    Recuerda actualizar tus
    <span style="color: #190707">Datos</span> cada inicio de semestre</p>
