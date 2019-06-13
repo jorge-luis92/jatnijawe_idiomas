@@ -17,7 +17,7 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/nuevo.css">
-  <title>Auxiliar Administrativo <?php echo $__env->yieldContent('title'); ?></title>
+  <title>Coordinación de Servicio Social y Prácticas Profesionales <?php echo $__env->yieldContent('title'); ?></title>
 
 </head>
 
@@ -26,53 +26,42 @@
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href=<?php echo e(route('home_auxiliar_adm')); ?>>
+        <a class="nav-link" href=<?php echo e(route('home_admin')); ?>>
             <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
-        Gestión de Usuarios
+        Servicios
       </div><!-- Nav Item - Pages Collapse Menu -->
 
-
       <li class="nav-item" >
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#carga_de_datos" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i><span style="font-size: 0.8em;">&nbsp;Carga de Datos</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#busqueda_coordinador" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fa fa-users" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Prácticas Profesionales</span>
         </a>
-        <div id="carga_de_datos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="busqueda_coordinador" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('carga_de_datos')); ?>>Subir Archivo</a>
+            <a class="collapse-item" href=<?php echo e(route('solicitudes_practicas')); ?>>Solicitudes</a>
+              <a class="collapse-item" href=<?php echo e(route('estudiantes_activosPP')); ?>>Estudiantes Activos</a>
+                <a class="collapse-item" href=<?php echo e(route('solicitudes_practicas')); ?>>Expedientes</a>
           </div>
         </div>
       </li>
 
       <li class="nav-item" >
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#grupos" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa fa-users" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Grupos</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#usuario" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa fa-user-plus" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Servicio Social</span>
         </a>
-        <div id="grupos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="usuario" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('gestion_estudiante')); ?>>Ver Grupos</a>
-
+          <a class="collapse-item" href=<?php echo e(route('solicitudes_serviciosocial')); ?>>Solicitudes</a>
+          <a class="collapse-item" href=<?php echo e(route('estudiantes_activosSS')); ?>>Estudiantes Activos</a>
+            <a class="collapse-item" href=<?php echo e(route('solicitudes_practicas')); ?>>Expedientes</a>
           </div>
         </div>
       </li>
 
-      <li class="nav-item" >
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#estudiantes" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa fa-user-circle" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Estudiantes</span>
-        </a>
-        <div id="estudiantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('registro_estudiante_aux')); ?>>Registrar Estudiantes</a>
-            <a class="collapse-item" href=<?php echo e(route('busqueda_estudiante_aux')); ?>>Búsqueda de Estudiantes</a>
-            <a class="collapse-item" href=<?php echo e(route('estudiante_activo_aux')); ?>>Estudiantes Activos</a>
-            <a class="collapse-item" href=<?php echo e(route('estudiante_inactivo_aux')); ?>>Estudiantes Inactivos</a>
-          </div>
-        </div>
-      </li>
+
 
 
       <!-- Nav Item - Utilities Collapse Menu -->
@@ -111,7 +100,7 @@
 
 			<li >
 				 <a class="navbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt="">
+
            <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;">&nbsp;Portal de Servicios Educativos "Jat Nijawe"</h1>
 			              </a>
             </li>
@@ -212,4 +201,4 @@
 </body>
 
 </html>
-<?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/layouts/plantilla_auxadmin.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/layouts/plantilla_servicios.blade.php ENDPATH**/ ?>

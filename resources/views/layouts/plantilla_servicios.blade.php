@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
 
-    <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
+    <link rel="shortcut icon" href="{{asset('logo.ico')}}">
   <!-- Custom fonts for this template-->
   <link href="requisitos/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -17,7 +17,7 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/nuevo.css">
-  <title>Auxiliar Administrativo <?php echo $__env->yieldContent('title'); ?></title>
+  <title>Coordinación de Servicio Social y Prácticas Profesionales @yield('title')</title>
 
 </head>
 
@@ -26,53 +26,42 @@
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href=<?php echo e(route('home_auxiliar_adm')); ?>>
+        <a class="nav-link" href={{ route('home_admin')}}>
             <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
-        Gestión de Usuarios
+        Servicios
       </div><!-- Nav Item - Pages Collapse Menu -->
 
-
       <li class="nav-item" >
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#carga_de_datos" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i><span style="font-size: 0.8em;">&nbsp;Carga de Datos</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#busqueda_coordinador" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fa fa-users" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Prácticas Profesionales</span>
         </a>
-        <div id="carga_de_datos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="busqueda_coordinador" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('carga_de_datos')); ?>>Subir Archivo</a>
+            <a class="collapse-item" href=<?php echo e(route('solicitudes_practicas')); ?>>Solicitudes</a>
+              <a class="collapse-item" href=<?php echo e(route('estudiantes_activosPP')); ?>>Estudiantes Activos</a>
+                <a class="collapse-item" href=<?php echo e(route('solicitudes_practicas')); ?>>Expedientes</a>
           </div>
         </div>
       </li>
 
       <li class="nav-item" >
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#grupos" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa fa-users" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Grupos</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#usuario" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa fa-user-plus" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Servicio Social</span>
         </a>
-        <div id="grupos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="usuario" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('gestion_estudiante')); ?>>Ver Grupos</a>
-
+          <a class="collapse-item" href=<?php echo e(route('solicitudes_serviciosocial')); ?>>Solicitudes</a>
+          <a class="collapse-item" href=<?php echo e(route('estudiantes_activosSS')); ?>>Estudiantes Activos</a>
+            <a class="collapse-item" href=<?php echo e(route('solicitudes_practicas')); ?>>Expedientes</a>
           </div>
         </div>
       </li>
 
-      <li class="nav-item" >
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#estudiantes" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa fa-user-circle" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Estudiantes</span>
-        </a>
-        <div id="estudiantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('registro_estudiante_aux')); ?>>Registrar Estudiantes</a>
-            <a class="collapse-item" href=<?php echo e(route('busqueda_estudiante_aux')); ?>>Búsqueda de Estudiantes</a>
-            <a class="collapse-item" href=<?php echo e(route('estudiante_activo_aux')); ?>>Estudiantes Activos</a>
-            <a class="collapse-item" href=<?php echo e(route('estudiante_inactivo_aux')); ?>>Estudiantes Inactivos</a>
-          </div>
-        </div>
-      </li>
+
 
 
       <!-- Nav Item - Utilities Collapse Menu -->
@@ -88,7 +77,7 @@
 
 
       <li class="nav-item">
-      <a class="nav-link"  href=<?php echo e(route('ma_estudiante')); ?> aria-expanded="true">
+      <a class="nav-link"  href={{ route('ma_estudiante')}} aria-expanded="true">
       <i class="fas fa-fw fa-archive"></i>
       <span style="font-size: 0.9em;">Manual de Usuario</span>
     </a>
@@ -111,7 +100,7 @@
 
 			<li >
 				 <a class="navbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt="">
+
            <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;">&nbsp;Portal de Servicios Educativos "Jat Nijawe"</h1>
 			              </a>
             </li>
@@ -125,7 +114,7 @@
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href=<?php echo e(route('cuenta')); ?> >
+                    <a class="dropdown-item" href={{ route('cuenta')}} >
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
                     Configuración
                   </a>
@@ -141,7 +130,7 @@
         </nav>
 
         <!-- End of Topbar -->
-<?php echo $__env->yieldContent('seccion'); ?>
+@yield('seccion')
       </div>
 
       <!-- Footer -->
@@ -176,10 +165,10 @@
         <div class="modal-body">Presione "Finalizar Sesión" para confirmar.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
+          <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
 
-          <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
-              <?php echo csrf_field(); ?>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
           </form>
         </div>
       </div>
@@ -212,4 +201,3 @@
 </body>
 
 </html>
-<?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/layouts/plantilla_auxadmin.blade.php ENDPATH**/ ?>

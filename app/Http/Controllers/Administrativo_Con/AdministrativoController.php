@@ -53,4 +53,41 @@ class AdministrativoController extends Controller
     public function formacion_busqueda(){
       return view('personal_administrativo\formacion_integral.home_formacion');
     }
+
+    public function home_auxiliar_adm(){
+    return view('personal_administrativo\auxiliar_administrativo.home_auxiliar_adm');
+  }
+
+  public function carga_de_datos(){
+    return view('personal_administrativo\auxiliar_administrativo.carga_de_datos');
+  }
+
+  public function gestion_estudiante(){
+    return view('personal_administrativo\auxiliar_administrativo.gestion_estudiante');
+    }
+
+  public function grupo_auxadm(){
+  return view('personal_administrativo\auxiliar_administrativo.grupo_auxadm');
+      }
+
+  public function datos_estudiantes(){
+  return view('personal_administrativo\auxiliar_administrativo.datos_estudiantes');
+        }
+
+        public function registro_estudiante_aux(){
+  return view('personal_administrativo\auxiliar_administrativo.registro_estudiante_aux');
+    }
+
+  public function busqueda_estudiante_aux(){
+  return view('personal_administrativo\auxiliar_administrativo.busqueda_estudiante_aux');
+    }
+
+  public function estudiante_activo_aux(){
+  return view('personal_administrativo\auxiliar_administrativo.estudiante_activo_aux');
+    }
+
+
+  public function estudiante_inactivo_aux(){
+  return view('personal_administrativo\auxiliar_administrativo.estudiante_inactivo_aux');
+    }
 }

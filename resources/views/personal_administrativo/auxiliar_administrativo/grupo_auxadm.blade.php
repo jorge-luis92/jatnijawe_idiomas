@@ -1,12 +1,12 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_tallerista')
+@extends('layouts.plantilla_auxadmin')
 @section('title')
 : Mis Grupos
 @endsection
 @section('seccion')
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Estudiantes cursando Taller actualmente</h1>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Estudiantes Asignados </h1>
 <div class="container" id="font4">
-</br>  <form  method="post" action="{{ route('grupo_tallerista') }}">
+</br>  <form  method="post" action="{{ route('grupo_auxadm') }}">
                         @csrf
 <div class="form-row">
 
@@ -38,7 +38,8 @@
     <th scope="col">NOMBRE</th>
     <th scope="col">SEMESTRE</th>
     <th scope="col">GRUPO</th>
-    <th colspan="2" >ESTATUS</th>
+    <th scope="col">ESTATUS</th>
+    <th colspan="2" >ACCIONES</th>
     </tr>
     </thead>
     <tbody>
@@ -47,8 +48,8 @@
     <th scope="row">KAREN CRUZ NUÑEZ</th>
     <th scope="row">8</th>
     <th scope="row">D</th>
-    <td>  <a data-toggle="modal" href="#">ACREDITADO</a></td>
-    <td>  <a data-toggle="modal" href="#">NO ACREDITADO</a></td>
+    <th scope="row">REGULAR</th>
+    <td>  <a  href="{{ route ('datos_estudiantes')}}">VER DATOS</a></td>
     </tr>
 
     </tbody>

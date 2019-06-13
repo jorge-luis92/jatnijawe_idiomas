@@ -137,8 +137,15 @@ return view('estudiante\datos.datos_personales');
       if($usuario_actuales->tipo_usuario!='estudiante'){
         return redirect('register');
        }
+
      $usuario_actual=auth()->user();
      $id=$usuario_actual->id_user;
+     $validar = DB::table('estudiantes')
+     ->select('estudiantes.id_persona', 'estudiantes.semestre')
+     ->where('estudiantes.matricula',$id)
+     ->take(1)
+     ->first();
+     
      $id_persona = DB::table('estudiantes')
      ->select('estudiantes.id_persona')
      ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')

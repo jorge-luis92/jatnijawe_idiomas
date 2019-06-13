@@ -51,7 +51,8 @@ class HomeController extends Controller
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario=='estudiante'){
          if($usuario_actual->bandera=='1'){
-      return view('estudiante.home_estudiante');
+      return view('estudiante.home_estudiante')->with('sucess', 'Inicio de sesión correctamente');
+  //  return redirect()->route('home_estudiante')->with('sucess', 'Inicio de sesión correctamente');
       }
       else {
          $this->guard()->logout();

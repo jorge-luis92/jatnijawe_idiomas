@@ -1,7 +1,7 @@
 <link rel="shortcut icon" href="{{asset('/logo.ico')}}">
 @extends('layouts.plantilla_auxadmin')
 @section('title')
-: Gestión
+: Carga de Datos
 @endsection
 
 @section('seccion')

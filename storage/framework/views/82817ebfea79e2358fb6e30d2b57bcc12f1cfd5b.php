@@ -76,9 +76,7 @@ endif; ?>
 
                             </div>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
-                            </li>
+                        
                         </div>
                     </form>
                 </div>
