@@ -5,18 +5,70 @@
 @endsection
 
 @section('seccion')
+<div class="container">
+     @include('flash-message')
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card" style="opacity: 0.7;filter:alpha(opacity=5);">
+                <div class="card-header" align="center">{{ __('Inicio de Sesión') }}</div>
 
-<div class="container" align="center">
-  <h1 style="font-size: 33px; color: #000000">Bienvenido</h1>
-  <h2 style="font-size: 15px; color: #000000" align="center">Ingresa tus datos para acceder al sistema</h2>
-      <div class="form">
-        <form action= "user.php" method="POST">
-          <input type="text" name="user" placeholder="Usuario" required>
-          <input type="password" name="password" placeholder="Contraseña" required>
-          <button class="btn btn-outline-primary" name="ingresar" type="submit">Ingresar</button>
-            <div class="opcioncontra" ><a style="color: black" href="../recuperar/recuperar.php">¿Olvidaste tu contraseña?</a>
+                <div class="card-body">
+                  @if(count($errors) > 0)
+                  <div class="alert alert-danger">
+                    <ul>
+                      @foreach($errors->all() as $error)
+                      <li>{{$error}}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                  @endif
+                    <form method="POST" action="{{ route('tallerista')}} ">
+                      @csrf
+
+                      <div class="form-group row">
+                          <label for="username" class="col-md-4 col-form-label text-md-right" >{{ __('Nombre de Usuario') }}</label>
+
+                          <div class="col-md-6">
+                              <input id="username" type="text"  class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+
+                              @error('username')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                              @enderror
+                          </div>
+                      </div>
+
+                      <div class="form-group row">
+                          <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+
+                          <div class="col-md-6">
+                              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                              @error('password')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                              @enderror
+                          </div>
+                      </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Ingresar') }}
+                                </button>
+
+                            </div>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        </div>
+                    </form>
+                </div>
             </div>
-      </form>
+        </div>
+    </div>
 </div>
-</div>
-  @endsection
+@endsection

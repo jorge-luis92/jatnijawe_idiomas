@@ -15,15 +15,22 @@ Route::post('cargar_datos_usuarios', 'UserSystemController@importUsers');
 Route::get('login', 'HomeController@index');
 Route::get('login_studiante', 'Estudiante_Con\EstudianteController@loginestudiantes')->name('login_studiante');
 Route::get('perfiles', 'Homepag@perfil')->name('perfiles');
+Route::group(['middleware' => 'auth','talleristamiddleware'], function () {
 //Route::get('login_personal', 'Administrativo_Con\AdministrativoController@login_admin')->name('login_personal');
 Route::get('login_tallerista', 'Tallerista_Con\TalleristaController@logintallerista')->name('login_tallerista');
+Route::get('home_tallerista', 'Tallerista_Con\TalleristaController@home_tallerista')->name('home_tallerista');
+Route::get('talleres_tallerista', 'Tallerista_Con\TalleristaController@talleres_tallerista')->name('talleres_tallerista');
+Route::get('grupo_tallerista', 'Tallerista_Con\TalleristaController@grupo_tallerista')->name('grupo_tallerista');
 
+
+});
+Route::get('tallerista', 'Tallerista_Con\LoginTallerista@getLoginTallerista');
+Route::post('tallerista', ['as' =>'tallerista', 'uses' => 'Tallerista_Con\LoginTallerista@postLoginTallerista']);
 Route::get('admin', 'Administrativo_Con\LoginAdministrativo@getLogin');
 //Route::post('login_admin', ['as' =>'login_admin', 'uses' => 'Administrativo_Con\AdministrativoController@index']);
 Route::post('admin', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdministrativo@postLogin']);
 //Route::get('logout_admin', ['as' => 'logout', 'uses' => 'Administrativo_Con\LoginAdministrativo@getLogout']);
 //Route::get('/', 'HomeController@index');
-
 
 /* Rutas de Estudiante---*/
 
@@ -73,6 +80,10 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('act_actividades', 'ActualizacionesEstudiante@act_actividades')->name('act_actividades');
   Route::post('act_datos_personales', 'ActualizacionesEstudiante@act_datos_personales')->name('act_datos_personales');
   Route::post('act_datos_medicos', 'ActualizacionesEstudiante@act_datos_medicos')->name('act_datos_medicos');
+
+  Route::get('solicitud_taller', 'Estudiante_Con\EstudianteController@solicitud_taller')->name('solicitud_taller');
+  Route::get('solicitud_practicasP', 'Estudiante_Con\EstudianteController@solicitud_practicasP')->name('solicitud_practicasP');
+  Route::get('solicitud_servicioSocial', 'Estudiante_Con\EstudianteController@solicitud_servicioSocial')->name('solicitud_servicioSocial');
 });
 
 

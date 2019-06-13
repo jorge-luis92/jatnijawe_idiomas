@@ -68,10 +68,12 @@ class LoginAdministrativo extends Controller
          if ($this->auth->attempt($credentials, $request->has('remember')))
    {;
     if(Auth::user()->tipo_usuario == '5'){
-      return view('personal_administrativo\admin_sistema.home_admin');
+    //  return view('personal_administrativo\admin_sistema.home_admin');
+        return redirect()->route('home_admin')->with('sucess', 'Inicio de sesión correctamente');
     }
     elseif (Auth::user()->tipo_usuario == '1') {
-        return view('personal_administrativo\formacion_integral.home_formacion');
+      //  return view('personal_administrativo\formacion_integral.home_formacion');
+          return redirect()->route('home_formacion')->with('sucess', 'Inicio de sesión correctamente');
     }
 
    }

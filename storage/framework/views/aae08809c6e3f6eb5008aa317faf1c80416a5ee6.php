@@ -1,3 +1,7 @@
+<?php $__env->startSection('title'); ?>
+: Estudiantes
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('seccion'); ?>
 <div class="container">
   <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

@@ -1,5 +1,9 @@
 @extends('layouts.plantillaperfil')
 
+@section('title')
+: Administrativos
+@endsection
+
 @section('seccion')
 <div class="container">
      @include('flash-message')

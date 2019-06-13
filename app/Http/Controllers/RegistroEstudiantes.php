@@ -83,6 +83,12 @@ public function actualizacion_estudiante(Request $request)
 $usuario_actual=auth()->user();
 $id=$usuario_actual->id_user;
 
+DB::table('estudiantes')
+->where('estudiantes.matricula', $id)
+->update(
+        ['grupo' => $data['grupo']],
+    );
+
  $id_persona = DB::table('estudiantes')
 ->select('estudiantes.id_persona')
 ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')

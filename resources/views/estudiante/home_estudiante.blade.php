@@ -17,11 +17,8 @@
 </br>
 </br>
 <div class="nota_alumno">
-<p >
-  <span style="color: red;">NOTA: </span>
-   Recuerda actualizar tus
-   <span style="color: #190707">Datos</span> cada inicio de semestre</p>
-   <p style="color: #000000"align="center">* Consulta el <a style="text-decoration: underline; color: #FFFFFF;"  href={{route('ma_estudiante')}}>Manual de Usuario</a> </p>
+<p style="color: #000000; align: justify;"><span style="color: #000000;">NOTA: </span>Recuerda actualizar tus <span style="color: red;">Datos</span> cada inicio de semestre</br>
+* Consulta el <a style="text-decoration: underline; color: #FFFFFF;"  href={{route('ma_estudiante')}}>Manual de Usuario</a></p>
 </div>
 </div>
 

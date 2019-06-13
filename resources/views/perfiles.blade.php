@@ -19,7 +19,7 @@
         <a href={{ route('login')}} class="btn btn-primary" role="button" aria-pressed="true">ESTUDIANTES</a>
       </div>
       <div class="form-group col-md-6" align="center">
-    <a href={{ route('login_tallerista')}} class="btn btn-primary" role="button" aria-pressed="true">TALLERISTAS</a>
+    <a href={{ route('tallerista')}} class="btn btn-primary" role="button" aria-pressed="true">TALLERISTAS</a>
     </div>
 
 </br>

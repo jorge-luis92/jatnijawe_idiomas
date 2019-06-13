@@ -24,9 +24,14 @@
         <input type="text" class="form-control" id="matricula"  value="{{$u->matricula}}" disabled>
       </div>
 
-      <div class="form-group col-md-3" id="labels">
+      <div class="form-group col-md-2" id="labels">
         <label for="semestre">Semestre</label>
         <input type="number" class="form-control" id="semestre" value="{{$u->semestre}}" disabled>
+      </div>
+
+      <div class="form-group col-md-1" id="labels">
+        <label for="grupo">Grupo</label>
+        <input type="text" class="form-control" max="2"  onKeyUp="this.value = this.value.toUpperCase()" name="grupo" id="grupo" value="{{$u->grupo}}" >
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="modalidad">Modalidad</label>

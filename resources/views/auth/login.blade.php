@@ -1,4 +1,7 @@
 @extends('layouts.plantillaperfil')
+@section('title')
+: Estudiantes
+@endsection
 
 @section('seccion')
 <div class="container">

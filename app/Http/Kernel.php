@@ -64,6 +64,8 @@ class Kernel extends HttpKernel
         'usuarioAdmin'=> \App\Http\Middleware\MDusuarioadmin::class,
         'usuarioStandard'=> \App\Http\Middleware\MDusuariostandard::class,
           'checar'=> \App\Http\Middleware\Autenticacion::class,
+          'talleristamiddleware'=> \App\Http\Middleware\TalleristaM::class,
+
     ];
 
     /**

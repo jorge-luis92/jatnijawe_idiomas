@@ -66,7 +66,7 @@ return view('estudiante\datos.datos_personales');
          return redirect()->back();
         }
 
-      
+
 
       return  view ('estudiante\mis_actividades.misActividades');
     }
@@ -127,5 +127,40 @@ return view('estudiante\datos.datos_personales');
         return view('estudiante\datos.editar_externas')->with('e',$externo);
           }
   }
+
+  public function solicitud_taller(){
+   return view('estudiante\mis_actividades.solicitud_taller');
+   }
+
+   public function solicitud_practicasP(){
+     $usuario_actuales=\Auth::user();
+      if($usuario_actuales->tipo_usuario!='estudiante'){
+        return redirect('register');
+       }
+     $usuario_actual=auth()->user();
+     $id=$usuario_actual->id_user;
+     $id_persona = DB::table('estudiantes')
+     ->select('estudiantes.id_persona')
+     ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+     ->where('estudiantes.matricula',$id)
+     ->take(1)
+     ->first();
+       $id_persona= json_decode( json_encode($id_persona), true);
+
+       $users = DB::table('estudiantes')
+       ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
+                'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
+                'personas.curp', 'personas.genero')
+       ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+       ->where('estudiantes.matricula',$id)
+       ->take(1)
+       ->first();
+
+   return view('estudiante\servicios.solicitud_practicas')->with('u',$users);
+   }
+   public function solicitud_servicioSocial(){
+   return view('estudiante\servicios.solicitud_servicioSocial');
+   }
+
 
 }

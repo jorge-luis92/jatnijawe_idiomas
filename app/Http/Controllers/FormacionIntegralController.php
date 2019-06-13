@@ -198,7 +198,7 @@ class FormacionIntegralController extends Controller
     {
       $this->validate($request, [
         'id_persona' => ['required', 'string', 'max:60', 'unique:users'],
-        'username' => ['required', 'string', 'max:25'],
+        'username' => ['required', 'string', 'max:25', 'unique:users'],
         'password' => ['required', 'string', 'max:25'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
       ]);
@@ -224,12 +224,13 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
     public function tallerista_activo()
     {
       $result = DB::table('personas')
-      ->select('users.id_user', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'nivel.rfc')
+      ->select('users.id_user', 'users.username', 'users.email',  'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'nivel.rfc')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
       ->join('nivel', 'tutores.id_nivel', '=', 'nivel.id_nivel')
       ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-      ->where('users.bandera', '=', '1')
-      ->orderBy('users.created_at', 'asc')
+      //->where(['users.bandera', '=', '1'])
+      ->where([['users.bandera','=', '1'], ['users.tipo_usuario', '=', 'tallerista'],])
+      ->orderBy('personas.nombre', 'asc')
       ->simplePaginate(7);
     return view('personal_administrativo\formacion_integral\gestion_tallerista.tallerista_activo')->with('re', $result);
     }
@@ -237,12 +238,13 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
     public function tallerista_inactivo()
     {
       $result = DB::table('personas')
-      ->select('users.id_user', 'users.bandera', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'nivel.rfc')
+      ->select('users.id_user', 'users.bandera', 'users.username', 'users.email', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'nivel.rfc')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
       ->join('nivel', 'tutores.id_nivel', '=', 'nivel.id_nivel')
       ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-      ->where('users.bandera', '=', '0')
-      ->orderBy('users.created_at', 'asc')
+      //->where('users.bandera', '=', '0')
+      ->where([['users.bandera','=', '0'], ['users.tipo_usuario', '=', 'tallerista'],])
+      ->orderBy('personas.nombre', 'asc')
       ->simplePaginate(7);
     return view('personal_administrativo\formacion_integral\gestion_tallerista.tallerista_inactivo')->with('re', $result);
     }

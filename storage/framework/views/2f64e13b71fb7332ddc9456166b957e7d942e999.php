@@ -1,5 +1,5 @@
 <?php $__env->startSection('title'); ?>
-: Administrativos
+: Tallerista
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('seccion'); ?>
@@ -20,7 +20,7 @@
                     </ul>
                   </div>
                   <?php endif; ?>
-                    <form method="POST" action="<?php echo e(route('admin')); ?> ">
+                    <form method="POST" action="<?php echo e(route('tallerista')); ?> ">
                       <?php echo csrf_field(); ?>
 
                       <div class="form-group row">
@@ -88,4 +88,4 @@ endif; ?>
 </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.plantillaperfil', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo/login_personal.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.plantillaperfil', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/tallerista/login_tallerista.blade.php ENDPATH**/ ?>

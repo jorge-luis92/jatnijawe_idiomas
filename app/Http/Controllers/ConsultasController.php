@@ -48,7 +48,7 @@ class ConsultasController extends Controller
         ->simplePaginate(7 );
 
         $users = DB::table('estudiantes')
-        ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus',
+        ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
                  'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
                  'personas.curp', 'personas.genero')
         ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')

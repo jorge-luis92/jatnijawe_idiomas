@@ -60,7 +60,7 @@
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a  class="collapse-item" href=<?php echo e(route('catalogo')); ?>>Catálogo de Actividades</a>
             <a  class="collapse-item" href=<?php echo e(route('mis_actividades')); ?>>Mis Actividades </br> Extraescolares</a>
-            <a  class="collapse-item" href="#">Solicitud Actividades </br> Extraescolares</a>
+          <a  class="collapse-item" href=<?php echo e(route('solicitud_taller')); ?>>Solicitud Actividades </br> Extraescolares</a>
             <a  class="collapse-item" href="#">Generar Constancia </br>Parcial</a>
         </div>
       </li>
@@ -73,7 +73,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a  class="collapse-item" href="#">Requisitos Previos</a>
-            <a  class="collapse-item" href="#">Solicitud de Prácticas</br>Profesionales</a>
+            <a  class="collapse-item" href=<?php echo e(route('solicitud_practicasP')); ?>>Solicitud de Prácticas</br>Profesionales</a>
             </div>
         </div>
       </li>
@@ -86,8 +86,8 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a  class="collapse-item" href="#">Requisitos Previos</a>
-            <a  class="collapse-item" href="#">Solicitud de Servicio Social</a>
-          </div>
+            <a  class="collapse-item" href=<?php echo e(route('solicitud_servicioSocial')); ?>>Solicitud de Servicio Social</a>
+           </div>
         </div>
       </li>
 
