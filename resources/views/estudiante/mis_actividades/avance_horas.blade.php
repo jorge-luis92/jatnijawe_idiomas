@@ -1,7 +1,7 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_estudiante')
 @section('title')
-: Mis Actividades
+: Avance de Horas
 @endsection
 
 @section('seccion')
@@ -9,7 +9,7 @@
   <h2 style="font-size: 1.7em; color: #000000;" align="center">Actividades Extracurriculares </h2>
 <div class="container" id="font2">
     @include('flash-message') </br>
-<!--  <h2 style="font-size: 1.0em; color: #0A122A;   max-width: 280px; text-decoration: underline;" align="left">AVANCE DE ACTIVIDADES:&nbsp;</h2>-->
+  <h2 style="font-size: 1.0em; color: #0A122A;   max-width: 280px; text-decoration: underline;" align="left">Avance de Horas:&nbsp; {{$av}}</h2>
   <div class="table-responsive">
     <table class="table table-bordered table-info" style="color: #000000; font-size: 12px;" >
       <thead>

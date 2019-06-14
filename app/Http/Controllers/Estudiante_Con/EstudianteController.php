@@ -61,18 +61,56 @@ return view('estudiante\datos.datos_personales');
 }
 
     public function activities(){
-      $result = DB::table('detalle_extracurriculares')
-      ->select('detalle_extracurriculares.nombre_ec', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.id_tutor')
-      ->join('extracurriculares', 'personas.id_persona', '=', 'tutores.id_persona')
-      ->get();
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='estudiante'){
          return redirect()->back();
         }
+        $id=$usuario_actual->id_user;
+        $result = DB::table('detalle_extracurriculares')
+        ->select('detalle_extracurriculares.estado','extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+        'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+        'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+        'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+        ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+        ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+        ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+        //->where('estudiantes.matricula',$id)
+        ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'cursando'],])
+        //->where([['users.bandera','=', '1'], ['users.tipo_usuario', '=', 'tallerista'],])
+      //  ->orderBy('personas.nombre', 'asc')
+        ->simplePaginate(10);
 
-
-      return  view ('estudiante\mis_actividades.misActividades');
+      return  view ('estudiante\mis_actividades.misActividades')->with('dato', $result);
     }
+
+
+        public function avance_horas(){
+          $usuario_actual=\Auth::user();
+           if($usuario_actual->tipo_usuario!='estudiante'){
+             return redirect()->back();
+            }
+            $id=$usuario_actual->id_user;
+            $result = DB::table('detalle_extracurriculares')
+            ->select('detalle_extracurriculares.estado','extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+            'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+            'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+            'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+            ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+            ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+            ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+            //->where('estudiantes.matricula',$id)
+            ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'],])
+            //->where([['users.bandera','=', '1'], ['users.tipo_usuario', '=', 'tallerista'],])
+          //  ->orderBy('personas.nombre', 'asc')
+            ->simplePaginate(10);
+
+            $avance = DB::table('detalle_extracurriculares')
+             //->join('categories', 'transactions.category_id', '=', 'categories.id')
+             ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Cursando'],])
+             ->sum('detalle_extracurriculares.creditos');
+
+          return  view ('estudiante\mis_actividades.avance_horas')->with('dato', $result)->with('av',$avance);
+        }
 
     public function talleres_activos(){
       $usuario_actual=\Auth::user();
@@ -148,7 +186,7 @@ return view('estudiante\datos.datos_personales');
      ->where('estudiantes.matricula',$id)
      ->take(1)
      ->first();
-     $s="5";
+     $s="4";
   //  $validar= var_dump($validar);
         //$validar= json_decode( json_encode($validar), true);
      if($validar <= $s){

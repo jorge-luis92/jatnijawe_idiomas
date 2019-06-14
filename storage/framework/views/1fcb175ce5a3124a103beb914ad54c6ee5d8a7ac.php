@@ -1,7 +1,7 @@
 <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
 <?php $__env->startSection('title'); ?>
-: Mis Actividades
+: Avance de Horas
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('seccion'); ?>
@@ -9,7 +9,7 @@
   <h2 style="font-size: 1.7em; color: #000000;" align="center">Actividades Extracurriculares </h2>
 <div class="container" id="font2">
     <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?> </br>
-<!--  <h2 style="font-size: 1.0em; color: #0A122A;   max-width: 280px; text-decoration: underline;" align="left">AVANCE DE ACTIVIDADES:&nbsp;</h2>-->
+  <h2 style="font-size: 1.0em; color: #0A122A;   max-width: 280px; text-decoration: underline;" align="left">Avance de Horas:&nbsp; <?php echo e($av); ?></h2>
   <div class="table-responsive">
     <table class="table table-bordered table-info" style="color: #000000; font-size: 12px;" >
       <thead>
@@ -56,4 +56,4 @@
 
   <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/estudiante\mis_actividades/misActividades.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/estudiante\mis_actividades/avance_horas.blade.php ENDPATH**/ ?>

@@ -12,7 +12,7 @@
   <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   </br>
 <div class="table-responsive">
-  <table class="table table-bordered table-info" style="color: #000000; " >
+  <table class="table table-bordered table-info" style="color: #000000; font-size: 12px;" >
     <thead>
       <tr>
         <th scope="col">NOMBRE</th>
@@ -39,8 +39,8 @@
           <td><?php echo e($datos->nombre); ?> <?php echo e($datos->apellido_paterno); ?> <?php echo e($datos->apellido_materno); ?></td>
           <td><?php echo e(date('d-m-Y', strtotime($datos->fecha_inicio))); ?>
 
-           <?php if(empty($datos->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo $datos->fecha_fin;} ?></td>
-          <td><?php if(empty($datos->dias_sem) && empty($datos->hora_fin)){ echo $datos->hora_inicio;} else{ echo $datos->dias_sem; echo "\n"; echo $datos->hora_inicio;echo " a "; echo $datos->hora_fin;} ?>
+           <?php if(empty($datos->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo date('d-m-Y', strtotime($datos->fecha_inicio));}?></td>
+          <td><?php if(empty($datos->dias_sem) && empty($datos->hora_fin)){ echo $datos->hora_inicio;} else{ echo $datos->dias_sem; echo "\n\n"; echo $datos->hora_inicio;echo " a "; echo $datos->hora_fin;} ?>
             </td>
           <td><a href="inscripcion_extracurricular/<?php echo e($datos->id_extracurricular); ?>/<?php echo e($datos->creditos); ?>">INSCRIBIRSE</a></td>
          </tr>

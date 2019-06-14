@@ -159,7 +159,7 @@
             <thead>
               <tr>
                 <th scope="col">Nombre Lengua</th>
-                <th scope="col">Tipo de Lengua</th>
+                <th scope="col">Nivel de Entendimiento</th>
               </tr>
             </thead>
             <tbody>

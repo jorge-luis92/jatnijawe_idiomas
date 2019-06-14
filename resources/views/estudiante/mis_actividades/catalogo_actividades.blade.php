@@ -12,7 +12,7 @@
   @include('flash-message')
   </br>
 <div class="table-responsive">
-  <table class="table table-bordered table-info" style="color: #000000; " >
+  <table class="table table-bordered table-info" style="color: #000000; font-size: 12px;" >
     <thead>
       <tr>
         <th scope="col">NOMBRE</th>
@@ -26,7 +26,6 @@
         <th colspan="1" >ACCIONES</th>
       </tr>
     </thead>
-
     <tbody>
       @foreach($dato as $datos)
       <tr style="color: #000000;">
@@ -38,8 +37,8 @@
           <td>{{$datos->modalidad}}</td>
           <td>{{$datos->nombre}} {{$datos->apellido_paterno}} {{$datos->apellido_materno}}</td>
           <td>{{ date('d-m-Y', strtotime($datos->fecha_inicio)) }}
-           <?php if(empty($datos->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo $datos->fecha_fin;} ?></td>
-          <td><?php if(empty($datos->dias_sem) && empty($datos->hora_fin)){ echo $datos->hora_inicio;} else{ echo $datos->dias_sem; echo "\n"; echo $datos->hora_inicio;echo " a "; echo $datos->hora_fin;} ?>
+           <?php if(empty($datos->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo date('d-m-Y', strtotime($datos->fecha_inicio));}?></td>
+          <td><?php if(empty($datos->dias_sem) && empty($datos->hora_fin)){ echo $datos->hora_inicio;} else{ echo $datos->dias_sem; echo "\n\n"; echo $datos->hora_inicio;echo " a "; echo $datos->hora_fin;} ?>
             </td>
           <td><a href="inscripcion_extracurricular/{{ $datos->id_extracurricular}}/{{ $datos->creditos}}">INSCRIBIRSE</a></td>
          </tr>

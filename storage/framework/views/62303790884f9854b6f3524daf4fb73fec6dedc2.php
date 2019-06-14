@@ -60,6 +60,7 @@
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a  class="collapse-item" href=<?php echo e(route('catalogo')); ?>>Catálogo de Actividades</a>
             <a  class="collapse-item" href=<?php echo e(route('mis_actividades')); ?>>Mis Actividades </br> Extraescolares</a>
+            <a  class="collapse-item" href=<?php echo e(route('avance')); ?>>Avance de Horas</a>
           <a  class="collapse-item" href=<?php echo e(route('solicitud_taller')); ?>>Solicitud Actividades </br> Extraescolares</a>
             <a  class="collapse-item" href="#">Generar Constancia </br>Parcial</a>
         </div>
@@ -138,7 +139,7 @@
 			<li >
 				 <a class="navbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              <!--<img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt="">-->
-           <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;font-size;2px;">&nbsp;Portal de Servicios Educativos "Jat Nijawe"</h1>
+           <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;font-size: 35px;">&nbsp;Portal de Servicios Educativos "Jat Nijawe"</h1>
 			              </a>
             </li>
 

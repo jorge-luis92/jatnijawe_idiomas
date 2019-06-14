@@ -71,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('changePassword','HomeController@changePassword')->name('changePassword');
   Route::get('ma_estudiante', 'Estudiante_Con\EstudianteController@m_estudiantes')->name('ma_estudiante');
   Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');
+  Route::get('avance', 'Estudiante_Con\EstudianteController@avance_horas')->name('avance');
   Route::get('mi_taller', 'Estudiante_Con\EstudianteController@talleres_activos')->name('mi_taller');
   Route::get('pdfs','Estudiante_Con\EstudianteController@generatePDF');
   Route::get('cuenta', 'Estudiante_Con\EstudianteController@cuenta_estudiante')->name('cuenta');
