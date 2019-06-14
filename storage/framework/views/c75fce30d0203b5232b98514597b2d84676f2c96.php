@@ -9,6 +9,7 @@
   <h2 style="font-size: 1.7em; color: #000000;" align="center">Catálogo de Actividades</h2>
 
 <div class="container" id="font7">
+  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   </br>
 <div class="table-responsive">
   <table class="table table-bordered table-info" style="color: #000000; " >
@@ -22,7 +23,7 @@
         <th scope="col">TUTOR</th>
         <th scope="col">DURACION</th>
         <th scope="col">HORARIO</th>
-        <th colspan="2" >ACCIONES</th>
+        <th colspan="1" >ACCIONES</th>
       </tr>
     </thead>
 
@@ -36,10 +37,14 @@
           <td><?php echo e($datos->area); ?></td>
           <td><?php echo e($datos->modalidad); ?></td>
           <td><?php echo e($datos->nombre); ?> <?php echo e($datos->apellido_paterno); ?> <?php echo e($datos->apellido_materno); ?></td>
-          <td><?php echo e($datos->fecha_inicio); ?> <?php echo e($datos->fecha_fin); ?></td>
-          <td><?php echo e($datos->dias_sem); ?> <?php echo e($datos->hora_inicio); ?> <?php echo e($datos->hora_fin); ?></td>
+          <td><?php echo e(date('d-m-Y', strtotime($datos->fecha_inicio))); ?>
+
+           <?php if(empty($datos->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo $datos->fecha_fin;} ?></td>
+          <td><?php if(empty($datos->dias_sem) && empty($datos->hora_fin)){ echo $datos->hora_inicio;} else{ echo $datos->dias_sem; echo "\n"; echo $datos->hora_inicio;echo " a "; echo $datos->hora_fin;} ?>
+            </td>
           <td><a href="inscripcion_extracurricular/<?php echo e($datos->id_extracurricular); ?>/<?php echo e($datos->creditos); ?>">INSCRIBIRSE</a></td>
          </tr>
+
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
      </tbody>
      </table>

@@ -3,8 +3,9 @@
 <?php $__env->startSection('title'); ?>
 :Talleres
  <?php $__env->startSection('seccion'); ?>
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Talleres Registrados</h1>
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Actividades Registradas</h1>
  <div class="container" id="font7">
+   <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
  </br>                    <form method="POST" action="<?php echo e(route('actividades_registradas')); ?>">
                          <?php echo csrf_field(); ?>
                           <div class="form-row">
@@ -18,7 +19,7 @@
                                        <th scope="col">MODALIDAD</th>
                                      <th scope="col">CREDITOS</th>
                                      <th scope="col">TUTOR</th>
-                                     <th colspan="2" >ACCIONES</th>
+                                     <th colspan="1" >ACCIONES</th>
                                    </tr>
                                  </thead>
                                  <tbody>
@@ -30,7 +31,7 @@
                                        <td><?php echo e($datos->modalidad); ?></td>
                                        <td><?php echo e($datos->creditos); ?></td>
                                        <td><?php echo e($datos->nombre); ?> <?php echo e($datos->apellido_paterno); ?> <?php echo e($datos->apellido_materno); ?></td>
-                                       <td><a data-toggle="modal" href="#actividad_detalle">Detalles</a></td>
+                                    <!--   <td><a data-toggle="modal" href="#actividad_detalle">Detalles</a></td>-->
                                         <td><a href="">Desactivar</a></td>
                                       </tr>
                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

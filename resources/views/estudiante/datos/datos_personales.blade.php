@@ -24,11 +24,11 @@
       <label for="num_exterior"  >* Número</label>
       <input type="tel"  class="form-control" name="num_exterior" value="<?php if(empty($d->num_exterior)){ $vacio=null; echo $vacio;} else{ echo $d->num_exterior;} ?>" id="num_exterior" placeholder="Número" onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-3">
       <label for="cp">* Código Postal</label>
       <input type="tel" class="form-control" name="cp" id="cp" value="<?php if(empty($d->cp)){ $vacio=null; echo $vacio;} else{ echo $d->cp;} ?>" maxlength="5"  onkeypress="return numeros (event)" placeholder="Código Postal" onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
       <label for="localidad" >*Colonia</label>
       <input type="text" class="form-control" name="localidad" value="<?php if(empty($d->localidad)){ $vacio=null; echo $vacio;} else{ echo $d->localidad;} ?>" id="localidad" placeholder="Colonia" onKeyUp="this.value = this.value.toUpperCase();" required >
     </div>
@@ -48,7 +48,7 @@
       <h6 align="left">* Contacto</h6>
         </div>
     <div class="form-group col-md-4">
-      <label for="tel_local">Teléfono Local</label>
+      <label for="tel_local">Teléfono de Casa</label>
         <input type="tel"  class="form-control" name="tel_local" id="tel_local" value="<?php if(empty($nl->numero)){ $vacio=null; echo $vacio;} else{ echo $nl->numero;} ?>" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos -- Ejemplo: 9515115090"  pattern="([0-9]{3})([0-9]{7})">
     </div>
     <div class="form-group col-md-4">

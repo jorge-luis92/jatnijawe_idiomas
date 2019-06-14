@@ -9,7 +9,7 @@
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Actividades Extracurriculares: Conferencias</h1>
 <div class="container" id="font7">
 </br>
-<form method="POST" action="">
+<form method="POST" action="registrar_conferencia">
 <?php echo csrf_field(); ?>
 <div class="form-row">
     <div class="form-group col-md-6">
@@ -32,7 +32,7 @@ endif; ?>
 
     <div class="form-group col-md-6">
           <label for="lugar" ><?php echo e(__('* Lugar')); ?></label>
-          <input id="lugar" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('lugar')) :
+          <input id="lugar" type="text" onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('lugar')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('lugar'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -53,7 +53,7 @@ endif; ?>
 <div class="form-row">
     <div class="form-group col-md-2">
         <label for="creditos" ><?php echo e(__('* Créditos')); ?></label>
-        <input id="creditos" type="creditos" maxlength="1" class="form-control <?php if ($errors->has('creditos')) :
+        <input id="creditos" type="creditos" maxlength="2" class="form-control <?php if ($errors->has('creditos')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('creditos'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -73,9 +73,9 @@ endif; ?>
         <label for="area">* Área</label>
         <select name="area" id="area" required class="form-control">
               <option value="">Seleccione una opción</option>
-              <option value="MASCULINO">ACADÉMICA</option>
-              <option value="FEMEMINO">CULTURAL</option>
-              <option value="FEMEMINO">DEPORTIVA</option>
+              <option value="ACADEMICA">ACADÉMICA</option>
+              <option value="CULTURAL">CULTURAL</option>
+              <option value="DEPORTIVA">DEPORTIVA</option>
         </select>
     </div>
 
@@ -128,13 +128,13 @@ endif; ?>
 
   <div class="form-group col-md-3">
         <label for="hora_inicio">Hora de Inicio</label>
-        <input type="time" class="form-control"  id="hora_inicio" required >
+        <input type="time" name="hora_inicio" class="form-control"  id="hora_inicio" required >
   </div>
 
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-4">
       <label for="tutor">* Tutor</label>
           <select name="tutor" id="tutor" required class="form-control">
-      <option value="">Seleccione una opción</option>
+      <option value="">Seleccione un Tutor</option>
       <?php $__currentLoopData = $taller; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $talleres): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
       <option value="<?php echo $talleres->id_tutor; ?>"><?php echo $talleres->nombre; ?> <?php echo $talleres->apellido_paterno; ?> <?php echo $talleres->apellido_materno; ?></option>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -156,7 +156,7 @@ endif; ?>
 
 <div class="form-group col-md-3">
   <label for="tel_celular">* Teléfono Celular</label>
-  <input type="tel"  class="form-control" disabled  id="tel_celular" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos"  pattern="([0-9]{3})([0-9]{7})" required>
+  <input type="tel"  class="form-control" disabled value="<?php echo e($ss->semestre); ?>" id="tel_celular" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos"  pattern="([0-9]{3})([0-9]{7})" required>
 </div>
 
 <div class="form-group col-md-3">

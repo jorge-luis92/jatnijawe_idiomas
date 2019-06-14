@@ -131,7 +131,7 @@ endif; ?>
         </div>
 
   <div class="form-group col-md-3">
-       <label for="fecha_fin" ><?php echo e(__('* Fecha de Terminación')); ?></label>
+       <label for="fecha_fin" ><?php echo e(__('* Fecha Terminación')); ?></label>
        <input id="fecha_fin" type="date" class="form-control <?php if ($errors->has('fecha_fin')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_fin'); ?> is-invalid <?php unset($message);
@@ -199,7 +199,7 @@ endif; ?>
    </div>
 
 
-<div class="form-group col-md-3">
+<div class="form-group col-md-4">
     <label for="tutor">* Tutor</label>
     <select name="tutor" id="tutor" required class="form-control">
     <option value="">Seleccione una opción</option>

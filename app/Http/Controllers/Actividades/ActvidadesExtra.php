@@ -22,20 +22,21 @@ use Illuminate\Support\Facades\Input;
 class ActvidadesExtra extends Controller
 {
     public function catalogos(){
-      $result = DB::table('extracurriculares')
-      ->select('extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
-      'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
-      'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
-      'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
-      ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
-      ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-      ->orderBy('personas.nombre', 'asc')
-      ->simplePaginate(10);
 
       $usuario_actual=\Auth::user();
+        $id=$usuario_actual->id_user;
        if($usuario_actual->tipo_usuario!='estudiante'){
         return redirect()->back();
         }
+        $result = DB::table('extracurriculares')
+        ->select('extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+        'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+        'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+        'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+        ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+        ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+        ->orderBy('personas.nombre', 'asc')
+        ->simplePaginate(10);
     return view("estudiante\mis_actividades.catalogo_actividades")->with('dato', $result);
     }
 
@@ -44,7 +45,13 @@ class ActvidadesExtra extends Controller
       $credito= $creditos;
       $usuario_actual=auth()->user();
       $id=$usuario_actual->id_user;
-
+       $aa = DB::table('detalle_extracurriculares')
+      ->select('detalle_extracurriculares.actividad')
+      ->join('estudiantes', 'estudiantes.matricula', '=', 'detalle_extracurriculares.matricula')
+        ->where([['estudiantes.matricula',$id], ['detalle_extracurriculares.actividad', $extra],])
+      ->take(1)
+      ->first();
+if(empty($aa)){
       DB::table('detalle_extracurriculares')
           //->where('becas.id_beca', $valor)
           ->Insert(
@@ -53,6 +60,11 @@ class ActvidadesExtra extends Controller
 
       return redirect()->route('mis_actividades')->with('success','¡Inscripción Realizada correctamente!');
     }
+    else {
+        return redirect()->route('catalogo')->with('error','Ya estás inscrito en esta actividad!');
+    }
+
+  }
 
 
 }

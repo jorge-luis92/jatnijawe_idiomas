@@ -61,11 +61,14 @@ return view('estudiante\datos.datos_personales');
 }
 
     public function activities(){
+      $result = DB::table('detalle_extracurriculares')
+      ->select('detalle_extracurriculares.nombre_ec', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.id_tutor')
+      ->join('extracurriculares', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->get();
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='estudiante'){
          return redirect()->back();
         }
-
 
 
       return  view ('estudiante\mis_actividades.misActividades');
@@ -103,10 +106,10 @@ return view('estudiante\datos.datos_personales');
          return redirect()->back();
         }
         $data = ['title' => 'listado'];
-        $pdf = PDF::loadView('pruebapdf', $data);
+        $pdf = PDF::loadView('estudiante\datos.hoja_datos', $data);
       //  $pdf = PDF::loadView('estudiante\mis_actividades.listado', $data);
         //return $pdf->download('listado_estudiantes.pdf');
-        return $pdf->stream('listado_estudiantes.pdf');
+        return $pdf->stream('hoja_datos_personales.pdf');
     }
     public function cuenta_estudiante(){
       $usuario_actual=\Auth::user();
@@ -140,12 +143,15 @@ return view('estudiante\datos.datos_personales');
 
      $usuario_actual=auth()->user();
      $id=$usuario_actual->id_user;
-     $validar = DB::table('estudiantes')
-     ->select('estudiantes.id_persona', 'estudiantes.semestre')
+  $validar = DB::table('estudiantes')
+     ->select('estudiantes.semestre')
      ->where('estudiantes.matricula',$id)
      ->take(1)
      ->first();
-     
+     $s="5";
+  //  $validar= var_dump($validar);
+        //$validar= json_decode( json_encode($validar), true);
+     if($validar <= $s){
      $id_persona = DB::table('estudiantes')
      ->select('estudiantes.id_persona')
      ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
@@ -163,8 +169,11 @@ return view('estudiante\datos.datos_personales');
        ->take(1)
        ->first();
 
-   return view('estudiante\servicios.solicitud_practicas')->with('u',$users);
-   }
+   return view('estudiante\servicios.solicitud_practicas')->with('u',$users)->with('ss', $validar);
+ }else{
+  return redirect()->route('home_estudiante')->with('error','Revisa los requisitos previos para poder
+   solicitar Prácticas PROFESIONALES');}
+ }
    public function solicitud_servicioSocial(){
    return view('estudiante\servicios.solicitud_servicioSocial');
    }

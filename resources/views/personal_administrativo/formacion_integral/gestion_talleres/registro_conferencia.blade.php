@@ -9,7 +9,7 @@
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Actividades Extracurriculares: Conferencias</h1>
 <div class="container" id="font7">
 </br>
-<form method="POST" action="">
+<form method="POST" action="registrar_conferencia">
 @csrf
 <div class="form-row">
     <div class="form-group col-md-6">
@@ -24,7 +24,7 @@
 
     <div class="form-group col-md-6">
           <label for="lugar" >{{ __('* Lugar') }}</label>
-          <input id="lugar" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('lugar') is-invalid @enderror" name="lugar" value="{{ old('lugar') }}" required autocomplete="lugar">
+          <input id="lugar" type="text" onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('lugar') is-invalid @enderror" name="lugar" value="{{ old('lugar') }}" required autocomplete="lugar">
             @error('lugar')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -37,7 +37,7 @@
 <div class="form-row">
     <div class="form-group col-md-2">
         <label for="creditos" >{{ __('* Créditos') }}</label>
-        <input id="creditos" type="creditos" maxlength="1" class="form-control @error('creditos') is-invalid @enderror" onkeypress="return numeros (event)" name="creditos" autocomplete="creditos" required autofocus>
+        <input id="creditos" type="creditos" maxlength="2" class="form-control @error('creditos') is-invalid @enderror" onkeypress="return numeros (event)" name="creditos" autocomplete="creditos" required autofocus>
         @error('creditos')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -49,9 +49,9 @@
         <label for="area">* Área</label>
         <select name="area" id="area" required class="form-control">
               <option value="">Seleccione una opción</option>
-              <option value="MASCULINO">ACADÉMICA</option>
-              <option value="FEMEMINO">CULTURAL</option>
-              <option value="FEMEMINO">DEPORTIVA</option>
+              <option value="ACADEMICA">ACADÉMICA</option>
+              <option value="CULTURAL">CULTURAL</option>
+              <option value="DEPORTIVA">DEPORTIVA</option>
         </select>
     </div>
 
@@ -88,13 +88,13 @@
 
   <div class="form-group col-md-3">
         <label for="hora_inicio">Hora de Inicio</label>
-        <input type="time" class="form-control"  id="hora_inicio" required >
+        <input type="time" name="hora_inicio" class="form-control"  id="hora_inicio" required >
   </div>
 
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-4">
       <label for="tutor">* Tutor</label>
           <select name="tutor" id="tutor" required class="form-control">
-      <option value="">Seleccione una opción</option>
+      <option value="">Seleccione un Tutor</option>
       @foreach ($taller as $talleres)
       <option value="{!! $talleres->id_tutor !!}">{!! $talleres->nombre !!} {!! $talleres->apellido_paterno !!} {!! $talleres->apellido_materno !!}</option>
         @endforeach

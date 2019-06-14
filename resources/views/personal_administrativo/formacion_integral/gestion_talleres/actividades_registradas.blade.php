@@ -3,8 +3,9 @@
 @section('title')
 :Talleres
  @section('seccion')
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Talleres Registrados</h1>
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Actividades Registradas</h1>
  <div class="container" id="font7">
+   @include('flash-message')
  </br>                    <form method="POST" action="{{ route('actividades_registradas') }}">
                          @csrf
                           <div class="form-row">
@@ -18,7 +19,7 @@
                                        <th scope="col">MODALIDAD</th>
                                      <th scope="col">CREDITOS</th>
                                      <th scope="col">TUTOR</th>
-                                     <th colspan="2" >ACCIONES</th>
+                                     <th colspan="1" >ACCIONES</th>
                                    </tr>
                                  </thead>
                                  <tbody>
@@ -30,7 +31,7 @@
                                        <td>{{$datos->modalidad}}</td>
                                        <td>{{$datos->creditos}}</td>
                                        <td>{{$datos->nombre}} {{$datos->apellido_paterno}} {{$datos->apellido_materno}}</td>
-                                       <td><a data-toggle="modal" href="#actividad_detalle">Detalles</a></td>
+                                    <!--   <td><a data-toggle="modal" href="#actividad_detalle">Detalles</a></td>-->
                                         <td><a href="">Desactivar</a></td>
                                       </tr>
                                    @endforeach

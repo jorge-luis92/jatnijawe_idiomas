@@ -132,6 +132,7 @@ Route::get('registro_extracurricular', 'FormacionIntegralController@registro_ext
 Route::get('registro_taller', 'FormacionIntegralController@registro_taller')->name('registro_taller');
 Route::post('registrar_taller', 'FormacionIntegralController@registrar_taller')->name('registrar_taller');
 Route::get('registro_conferencia', 'FormacionIntegralController@registro_conferencia')->name('registro_conferencia');
+Route::post('registrar_conferencia', 'FormacionIntegralController@registrar_conferencia')->name('registrar_conferencia');
 //
 Route::get('registro_tallerista', 'FormacionIntegralController@registro_tallerista')->name('registro_tallerista');
 Route::post('registrar_talleristas', 'FormacionIntegralController@registrar_talleristas')->name('registrar_talleristas');

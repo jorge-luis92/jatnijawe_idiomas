@@ -91,7 +91,7 @@
         </div>
 
   <div class="form-group col-md-3">
-       <label for="fecha_fin" >{{ __('* Fecha de Terminación') }}</label>
+       <label for="fecha_fin" >{{ __('* Fecha Terminación') }}</label>
        <input id="fecha_fin" type="date" class="form-control @error('fecha_fin') is-invalid @enderror" name="fecha_fin" required>
        @error('fecha_fin')
        <span class="invalid-feedback" role="alert">
@@ -143,7 +143,7 @@
    </div>
 
 
-<div class="form-group col-md-3">
+<div class="form-group col-md-4">
     <label for="tutor">* Tutor</label>
     <select name="tutor" id="tutor" required class="form-control">
     <option value="">Seleccione una opción</option>

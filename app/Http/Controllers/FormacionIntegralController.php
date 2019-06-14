@@ -146,6 +146,29 @@ class FormacionIntegralController extends Controller
       return redirect()->route('actividades_registradas')->with('sucess','Taller Registrado Correctamente');
     }
 
+
+    public function registrar_conferencia(Request $request)
+    {
+      $this->validate($request, [
+        'nombre_ec' => ['required', 'string', 'max:100'],
+        'lugar' => ['required', 'string', 'max:100'],
+        'creditos' => ['required', 'string', 'max:100'],
+        'area' => ['required', 'string', 'max:25'],
+        'modalidad' => ['required', 'string', 'max:30'],
+        'cupo' => ['required', 'string', 'max:200'],
+        'lugar' => ['required', 'string', 'max:100'],
+      ]);
+
+      $data = $request;
+      DB::table('extracurriculares')
+          ->Insert(
+              ['nombre_ec' => $data['nombre_ec'], 'tipo' => 'Conferencia', 'creditos' => $data['creditos'], 'area'=> $data['area'],
+               'modalidad'=> $data['modalidad'],  'cupo'=> $data['cupo'], 'lugar'=> $data['lugar'], 'fecha_inicio'=> $data['fecha_inicio'],
+               'hora_inicio'=> $data['hora_inicio'],   'tutor'=> $data['tutor']],
+          );
+      return redirect()->route('actividades_registradas')->with('sucess','Conferencia Registrada Correctamente');
+    }
+
     public function registro_conferencia()
     {
       $result = DB::table('personas')
