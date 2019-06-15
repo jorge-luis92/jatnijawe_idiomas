@@ -55,6 +55,16 @@ return [
             'visibility' => 'public',
         ],
 
+        'fotografias' => [
+           'driver' => 'local',
+           'root'   => storage_path('fotografias'),
+       ],
+
+        'archivos' => [
+            'driver' => 'local',
+            'root'   => storage_path('archivos'),
+        ],
+        
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -64,10 +74,7 @@ return [
             'url' => env('AWS_URL'),
         ],
 
-        'archivos' => [
-            'driver' => 'local',
-            'root'   => storage_path('archivos'),
-        ],
+
 
     ],
 

@@ -183,11 +183,17 @@ class AdminController extends Controller
                             ->where('users.bandera', '=', '1')
                             ->get();
 
-        if ((count ($user) > 0 ) && ($est != null)){
+    
+      if ((count ($user) > 0 ) && ($est != null)){
             return view ( 'personal_administrativo\admin_sistema.busqueda_estudiante' )->withDetails ($user )->withQuery ($q);
-      }}  else{
-          return redirect()->route('busqueda_estudiante')->with('error','¡Sin resultados!');
-      }}
+    }
+  else{
+  return redirect()->route('busqueda_estudiante')->with('error','¡Sin resultados!');
+  }}  else{
+        return redirect()->route('busqueda_estudiante')->with('error','¡Sin resultados!');
+    }
+
+    }
 
       public function activar_estudiante($id_user){
 

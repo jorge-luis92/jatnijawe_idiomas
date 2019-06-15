@@ -9,8 +9,8 @@ Route::get('/', 'Homepag@homepage')->name('welcome');
 Route::get('prueba', 'UserSystemController@checando')->name('prueba');
 Route::get('denegado', 'Homepag@restringdo')->name('denegado');
 
-Route::get('cargar_datos_usuario_estudiante', 'UserSystemController@cargar_datos_usuario_estudiante');
-Route::post('cargar_datos_usuarios', 'UserSystemController@importExcel');
+Route::get('cargar_datos_usuario_estudiante', 'UserSystemController@cargar_datos_usuario_estudiante')->name('carga_persona');
+Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar_datos_usuarios');
 /* Rutas de logueo---*/
 Route::get('login', 'HomeController@index');
 Route::get('login_studiante', 'Estudiante_Con\EstudianteController@loginestudiantes')->name('login_studiante');
@@ -32,7 +32,6 @@ Route::get('admin', 'Administrativo_Con\LoginAdministrativo@getLogin');
 Route::post('admin', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdministrativo@postLogin']);
 //Route::get('logout_admin', ['as' => 'logout', 'uses' => 'Administrativo_Con\LoginAdministrativo@getLogout']);
 //Route::get('/', 'HomeController@index');
-
 /* Rutas de Estudiante---*/
 
 Route::group(['middleware' => 'auth','checar'], function () {
@@ -69,12 +68,14 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('catalogo', 'Actividades\ActvidadesExtra@catalogos')->name('catalogo');
   Route::get('inscripcion_extracurricular/{id_extracurricular}/{creditos}', 'Actividades\ActvidadesExtra@inscripcion_extra');
   Route::post('changePassword','HomeController@changePassword')->name('changePassword');
+  //Route::post('subir_imagen_usuario', 'HomeController@changePassword');
   Route::get('ma_estudiante', 'Estudiante_Con\EstudianteController@m_estudiantes')->name('ma_estudiante');
   Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');
   Route::get('avance', 'Estudiante_Con\EstudianteController@avance_horas')->name('avance');
   Route::get('mi_taller', 'Estudiante_Con\EstudianteController@talleres_activos')->name('mi_taller');
   Route::get('pdfs','Estudiante_Con\EstudianteController@generatePDF');
   Route::get('cuenta', 'Estudiante_Con\EstudianteController@cuenta_estudiante')->name('cuenta');
+    Route::get('foto_perfil', 'Estudiante_Con\EstudianteController@foto_perfil')->name('foto_perfil');
   Route::get('cuenta_form', 'FormacionIntegralController@cuenta_formacion')->name('cuenta_form');
   Route::get('cambiar_estatus_beca/{id_beca}', 'ActualizacionesEstudiante@desactivar_lengua');
   //Route::get('editar_actividad/{id_externos}', 'Estudiante_Con\EstudianteController@editar_actividades');

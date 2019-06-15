@@ -12,14 +12,14 @@
                         <?php echo csrf_field(); ?>
 
                          <div class="form-row">
-                           
+
                         <div class="form-group col-md-4">
                             <label for="nombre" ><?php echo e(__('* Nombre(s)')); ?></label>
                                 <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('nombre'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="nombre" value="<?php echo e(old('nombre')); ?>" required autocomplete="nombre">
+endif; ?>" name="nombre" value="<?php echo e(old('nombre')); ?>"  autocomplete="nombre">
                                 <?php if ($errors->has('nombre')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('nombre'); ?>
@@ -37,7 +37,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('apellido_paterno'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="apellido_paterno" value="<?php echo e(old('apellido_paterno')); ?>" required autocomplete="apellido_paterno">
+endif; ?>" name="apellido_paterno" value="<?php echo e(old('apellido_paterno')); ?>"  autocomplete="apellido_paterno">
                                 <?php if ($errors->has('apellido_paterno')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('apellido_paterno'); ?>
@@ -74,7 +74,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('curp'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="curp" value="<?php echo e(old('curp')); ?>" required autocomplete="curp">
+endif; ?>" name="curp" value="<?php echo e(old('curp')); ?>"  autocomplete="curp">
                                 <?php if ($errors->has('curp')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('curp'); ?>
@@ -92,7 +92,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_nacimiento'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="fecha_nacimiento" required>
+endif; ?>" name="fecha_nacimiento" >
                                 <?php if ($errors->has('fecha_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_nacimiento'); ?>
@@ -111,7 +111,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('edad'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
+endif; ?>" onkeypress="return numeros (event)" name="edad" autocomplete="edad"  autofocus>
                                 <?php if ($errors->has('edad')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('edad'); ?>
@@ -125,7 +125,7 @@ endif; ?>
 
                         <div class="form-group col-md-3">
                           <label for="genero">* Género</label>
-                            <select name="genero" id="genero" required class="form-control">
+                            <select name="genero" id="genero" class="form-control">
                           <option value="">Seleccione una opción</option>
                           <option value="MASCULINO">MASCULINO</option>
                           <option value="FEMEMINO">FEMEMINO</option>
@@ -138,7 +138,7 @@ endif; ?>
 <div class="form-row">
   <div class="form-group col-md-3">
     <label for="grado_estudios">Grado de Estudios</label>
-      <select name="grado_estudios" id="grado_estudios" required class="form-control">
+      <select name="grado_estudios" id="grado_estudios"  class="form-control">
       <option value="">Seleccione una opción</option>
       <option value="licenciatura">LICENCIATURA</option>
       <option value="maestria">MAESTRÍA</option>
@@ -152,7 +152,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('procendencia_interna'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="procedencia_interna" value="<?php echo e(old('procedencia_interna')); ?>" required autocomplete="procedencia_interna">
+endif; ?>" name="procedencia_interna" value="<?php echo e(old('procedencia_interna')); ?>" autocomplete="procedencia_interna">
           <?php if ($errors->has('procedencia_interna')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('procedencia_interna'); ?>
@@ -169,7 +169,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('procedencia_externa'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="procedencia_externa" value="<?php echo e(old('procedencia_externa')); ?>" required autocomplete="procedencia_externa">
+endif; ?>" name="procedencia_externa" value="<?php echo e(old('procedencia_externa')); ?>"  autocomplete="procedencia_externa">
           <?php if ($errors->has('procedencia_externa')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('procedencia_externa'); ?>
@@ -183,7 +183,7 @@ endif; ?>
 
      <div class="form-group col-md-3">
        <label for="tel_celular">* Teléfono Celular</label>
-       <input type="tel"  class="form-control" name="tel_celular" id="tel_celular"  maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos"  pattern="([0-9]{3})([0-9]{7})" required>
+       <input type="tel"  class="form-control" name="tel_celular" id="tel_celular"  maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos"  pattern="([0-9]{3})([0-9]{7})" >
      </div>
 
   <!--<div class="form-group col-md-4">

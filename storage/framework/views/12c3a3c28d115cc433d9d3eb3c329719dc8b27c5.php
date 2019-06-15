@@ -43,7 +43,7 @@ $arrayMeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
     <tr>
     	<td align="center">
        <br /><br /> <span style="text-align:center; font-size:14px">Otorga la presente</span> <br /><br /><br />
-                <span style="text-align:center; font-size:22px"><strong>C O N S T A N C I A</strong></span> <br />
+                <span style="text-align:center; font-size:22px"><strong>C O N S T A N C I A  <br/></strong></span> <br />
         </td>
     </tr>
 

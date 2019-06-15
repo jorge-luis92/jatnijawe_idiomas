@@ -73,7 +73,7 @@ class UserSystemController extends Controller
 
 
   public function cargar_datos_usuario_estudiante(){
-
+      //$usu=0;
      return view('personal_administrativo\auxiliar_administrativo.carga_de_datos');
 
 }
@@ -119,8 +119,9 @@ Excel::load($path,function($reader){
 
       // iteracción
       $reader->each(function($row) {
+          $id_prueba= random_int(1, 532986) +232859 * 123 -43 +(random_int(1, 1234));
           $user = new Persona;
-          $user->id_persona = $row->id_persona;
+          $user->id_persona = $row->$id_prueba;
           $user->nombre = $row->nombre;
           $user->apellido_paterno = $row->apellido_paterno;
           $user->apellido_materno = $row->apellido_materno;
@@ -141,30 +142,34 @@ Excel::load($path,function($reader){
 
 public function importExcel(Request $request)
     {
-      $data=$request->excel;
-      Excel::load($data, function($reader) {
-        $excel = $reader->get();
+      $request->validate([
+          'archivo' => 'required'
+      ]);
 
-       // iteracción
-       $reader->each(function($row) {
-         $user = new Persona;
-         $user->id_persona = $row->id_persona;
-         $user->nombre = $row->nombre;
-         $user->apellido_paterno = $row->apellido_paterno;
-         $user->apellido_materno = $row->apellido_materno;
-         $user->curp = $row->curp;
-         $user->fecha_nacimiento = $row->fecha_nacimiento;
-         $user->lugar_nacimiento = $row->lugar_nacimiento;
-         $user->tipo_sangre = $row->tipo_sangre;
-         $user->edad = $row->edad;
-         $user->genero = $row->genero;
-         $user->save();
+      $path = $request->file('archivo')->getRealPath();
+      Excel::load($path,function($reader){
+    //  $reader->get();
+        // iteracción
+          $reader->each(function($row) {
+              $id_prueba= random_int(1, 532986) +232859 * 123 -43 +(random_int(1, 1234));
+              $user = new Persona;
+              $user->id_persona = $row->id_persona;
+              $user->nombre = $row->nombre;
+              $user->apellido_paterno = $row->apellido_paterno;
+              $user->apellido_materno = $row->apellido_materno;
+              $user->curp = $row->curp;
+              $user->fecha_nacimiento = $row->fecha_nacimiento;
+              $user->lugar_nacimiento = $row->lugar_nacimiento;
+              $user->tipo_sangre = $row->tipo_sangre;
+              $user->edad = $row->edad;
+              $user->genero = $row->genero;
+              $user->save();
+        });
+    });
 
-       });
+    return "Terminado";
 
-   });
-   return "Terminado";
-    }
+  }
 
 
 public function importUsers(Request $request)
@@ -198,12 +203,6 @@ if($user->save()){
 }
 }
 
-
-
-
-
-
-
   public function cargar_datos_usuarios(Request $request)
 {
      $archivo = $request->file('archivo');
@@ -230,15 +229,77 @@ if($user->save()){
           });
           });
           if($userio->save()){
-            return redirect()->route('cargar_datos_usuario_estudiante')->with('success','Carga de datos exitosa');
+            return redirect()->route('carga_persona')->with('success','Carga de datos exitosa');
           }
 
 
      }
      else
      {
-          return redirect()->route('carga_de_datos')->with('error','Error al subir el archivo, verifique el archivo');
+          return redirect()->route('carga_persona')->with('error','¡Error!, verifique el archivo');
      }
 
+}
+
+
+public function axcel(Request $request)
+{
+  $request->validate([
+      'archivo' => 'required'
+  ]);
+
+   $archivo = $request->file('archivo');
+   $nombre_original=$archivo->getClientOriginalName();
+ $extension=$archivo->getClientOriginalExtension();
+   $r1=Storage::disk('archivos')->put($nombre_original,  \File::get($archivo) );
+   $ruta  =  storage_path('archivos') ."/". $nombre_original;
+
+    $usuario='';
+   Excel::load($ruta ,function($reader){
+   $reader->get();
+     // iteracción
+     $reader->each(function($row) {
+       if(($row->id_persona)!=null){
+       $usuario=Persona::find($row->id_persona);
+        // $usu=0;
+       if(empty($usuario)){
+       $user = new Persona;
+       $user->id_persona = $row->id_persona;
+       $user->nombre = $row->nombre;
+       $user->apellido_paterno = $row->apellido_paterno;
+       $user->apellido_materno = $row->apellido_materno;
+       $user->curp = $row->curp;
+       $user->fecha_nacimiento = $row->fecha_nacimiento;
+       $user->lugar_nacimiento = $row->lugar_nacimiento;
+       $user->tipo_sangre = $row->tipo_sangre;
+       $user->edad = $row->edad;
+       $user->genero = $row->genero;
+       $user->save();
+
+       $estudiante = new Estudiante;
+       $estudiante->matricula = $row->matricula;
+       $estudiante->modalidad = $row->modalidad;
+       $estudiante->fecha_ingreso = $row->fecha_ingreso;
+       $estudiante->semestre = $row->semestre;
+       $estudiante->grupo = $row->grupo;
+       $estudiante->estatus = $row->estatus;
+       $estudiante->bachillerato_origen = $row->bachillerato_origen;
+       $estudiante->id_persona = $row->id_person;
+       $estudiante->save();
+
+       $usuario=new User;
+       $usuario->id_user= $row->id;
+       $usuario->username= $row->name;
+       $usuario->email= $row->email;
+       $usuario->password= Hash::make($row->password);
+      $usuario->tipo_usuario= $row->tipo_usuario;
+      $usuario->id_persona = $row->id_pers;
+       $usuario->save();
+     }
+
+     }
+     });
+ });
+            return redirect()->route('busqueda_estudiante')->with('success','Carga de datos exitosa');
 }
 }

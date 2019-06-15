@@ -157,14 +157,20 @@
                ->take(1)
                ->first();  echo $users->nombre." ";  //echo $users->apellido_paterno." "; echo $users->apellido_materno;
                ?></span>
-               <img class="img-profile rounded-circle"  src="image/foto.png">
+               <?php   if($usuario_actual->imagenurl==""){ $usuario_actual->imagenurl="image/foto.png"; } ?>
+               <img class="img-profile rounded-circle"  src="<?=  $usuario_actual->imagenurl;  ?>">
+
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href={{ route('cuenta')}} >
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
-                    Configuración
+                    Configuración de Contraseña
                   </a>
+                  <a class="dropdown-item" href={{ route('foto_perfil')}} >
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
+                  Foto de Perfil
+                </a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-black-400"></i>

@@ -26,7 +26,6 @@
         <th colspan="1" >ACCIONES</th>
       </tr>
     </thead>
-
     <tbody>
       <?php $__currentLoopData = $dato; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $datos): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
       <tr style="color: #000000;">

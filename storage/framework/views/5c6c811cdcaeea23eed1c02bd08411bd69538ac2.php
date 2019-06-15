@@ -74,7 +74,7 @@ endif; ?>
 
     <div class="form-group col-md-2">
         <label for="cupo" ><?php echo e(__('* Cupo')); ?></label>
-        <input id="cupo" type="tel" maxlength="3" class="form-control <?php if ($errors->has('cupo')) :
+        <input id="cupo" type="tel" maxlength="4" class="form-control <?php if ($errors->has('cupo')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('cupo'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }

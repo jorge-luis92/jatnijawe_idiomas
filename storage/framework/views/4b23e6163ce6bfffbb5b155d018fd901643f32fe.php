@@ -1,7 +1,7 @@
 <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
 <?php $__env->startSection('title'); ?>
-: Configuración de Cuenta
+: Configuración de Contraseña
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('seccion'); ?>
@@ -15,8 +15,13 @@
 
                               <div class="form-group col-md-5" style="width: 2rem;" >
                                 <span style="color: #000000"> </span>
-                                <img class="image" src="image/foto.png" width="100px">
-                                   <input type="file" accept="image/png, .jpeg, .jpg">
+                                <?php
+                                $usuario_actual=auth()->user();
+                               $id=$usuario_actual->id_user;
+                                if($usuario_actual->imagenurl==""){ $usuario_actual->imagenurl="image/foto.png"; }  ?>
+
+                                <img class="image" src="<?=  $usuario_actual->imagenurl;  ?>" width="100px">
+                                   <input type="file" name="foto" accept="image/png, .jpeg, .jpg" required>
                               </div>
 
                               <div class="form-group<?php echo e($errors->has('current-password') ? ' has-error' : ''); ?>">

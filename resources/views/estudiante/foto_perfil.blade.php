@@ -1,7 +1,7 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_estudiante')
 @section('title')
-: Configuración de Contraseña
+: Foto de Perfil
 @endsection
 
 @section('seccion')

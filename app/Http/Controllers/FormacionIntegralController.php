@@ -335,24 +335,26 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
          return redirect('register');
         }
 
-      $this->validate($request, [
+    /*  $this->validate($request, [
         'nombre' => ['required', 'string', 'max:25'],
         'apellido_paterno' => ['required', 'string', 'max:25'],
         'curp' => ['required', 'string', 'min:18','max:18'],
         'edad' => ['required', 'string', 'max:100'],
         'genero' => ['required', 'string'],
 //       'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-      ]);
+]);*/
 
       $data = $request;
       $id_prueba= random_int(1, 532986) +232859 * 123 -43 +(random_int(1, 1234));
       $password= $data['apellido_paterno'];
       $persona=new Persona;
-      $persona->id_persona=$data['curp'];
+    //  $persona->id_persona=$data['curp'];
+     $persona->id_persona=$id_prueba;
       $persona->nombre=$data['nombre'];
       $persona->apellido_paterno=$data['apellido_paterno'];
       $persona->apellido_materno=$data['apellido_materno'];
-      $persona->curp=$data['curp'];
+    //  $persona->curp=$data['curp'];
+     $persona->curp=$id_prueba;
       $persona->fecha_nacimiento=$data['fecha_nacimiento'];
       $persona->edad=$data['edad'];
       $persona->genero=$data['genero'];
@@ -360,21 +362,24 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
 
       if($persona->save()){
         $administrativo=new Administrativo;
-        $administrativo->id_persona=$data['curp'];
+      //  $administrativo->id_persona=$data['curp'];
+       $administrativo->id_persona=$id_prueba;
         $administrativo->save();
 
         if($administrativo->save()){
           $bus_adm = DB::table('administrativos')
           ->select('administrativos.id_administrativo')
           ->join('personas', 'personas.id_persona', '=', 'administrativos.id_persona')
-          ->where('personas.id_persona',$data['curp'])
+          //->where('personas.id_persona',$data['curp'])
+          ->where('personas.id_persona',$id_prueba)
           ->take(1)
           ->first();
            $bus_adm = $bus_adm->id_administrativo;
               $nivel = new Nivel();
               $nivel ->id_administrativo= $bus_adm;
               $nivel ->grado_estudios=$data['grado_estudios'];
-              $nivel ->rfc=$data['curp'];
+            //  $nivel ->rfc=$data['curp'];
+            $nivel ->rfc=$id_prueba;
               $nivel ->save();
            if($nivel->save()){
              $bus_nivel = DB::table('nivel')
@@ -387,13 +392,15 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
                $tutor = new Tutor();
                 $tutor ->procedencia_interna= $data['procedencia_interna'];
                 $tutor ->procedencia_externa= $data['procedencia_externa'];
-                $tutor ->id_persona= $data['curp'];
+              //  $tutor ->id_persona= $data['curp'];
+              $tutor ->id_persona= $id_prueba;
                 $tutor ->id_nivel= $bus_nivel;
             if($tutor->save()){
               $tel = new Telefono();
               $tel->tipo='celular';
               $tel->numero=$data['tel_celular'];
-              $tel->id_persona=$data['curp'];
+            //  $tel->id_persona=$data['curp'];
+             $tel->id_persona=$id_prueba;
                 if($tel->save()){
         /*  $user=new User;
           $user->id_user=$data['curp'];
