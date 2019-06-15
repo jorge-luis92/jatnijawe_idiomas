@@ -65,9 +65,16 @@ endif; ?>
                                     <?php echo e(__('Ingresar')); ?>
 
                                 </button>
+                                <?php if(Route::has('password.request')): ?>
+                                   <a class="btn btn-link" href="<?php echo e(route('password.request')); ?>">
+                                       <?php echo e(__('¿Olvidaste tu Contraseña?')); ?>
+
+                                   </a>
+                               <?php endif; ?>
                                     </div>
 
-                          
+
+
                         </div>
 
                       </div>

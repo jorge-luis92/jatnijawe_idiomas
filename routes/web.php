@@ -10,7 +10,7 @@ Route::get('prueba', 'UserSystemController@checando')->name('prueba');
 Route::get('denegado', 'Homepag@restringdo')->name('denegado');
 
 Route::get('cargar_datos_usuario_estudiante', 'UserSystemController@cargar_datos_usuario_estudiante');
-Route::post('cargar_datos_usuarios', 'UserSystemController@importUsers');
+Route::post('cargar_datos_usuarios', 'UserSystemController@importExcel');
 /* Rutas de logueo---*/
 Route::get('login', 'HomeController@index');
 Route::get('login_studiante', 'Estudiante_Con\EstudianteController@loginestudiantes')->name('login_studiante');

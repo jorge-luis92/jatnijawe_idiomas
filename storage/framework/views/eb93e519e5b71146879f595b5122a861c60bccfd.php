@@ -42,6 +42,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href=<?php echo e(route('carga_de_datos')); ?>>Subir Archivo</a>
+
           </div>
         </div>
       </li>
@@ -55,6 +56,7 @@
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href=<?php echo e(route('gestion_estudiante')); ?>>Ver Grupos</a>
 
+
           </div>
         </div>
       </li>
@@ -66,7 +68,7 @@
         <div id="estudiantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('registro_estudiante_aux')); ?>>Registrar Estudiantes</a>
+            <a class="collapse-item" href=<?php echo e(route('registro_estudiante_aux')); ?>>Registrar Estudiante</a>
             <a class="collapse-item" href=<?php echo e(route('busqueda_estudiante_aux')); ?>>Búsqueda de Estudiantes</a>
             <a class="collapse-item" href=<?php echo e(route('estudiante_activo_aux')); ?>>Estudiantes Activos</a>
             <a class="collapse-item" href=<?php echo e(route('estudiante_inactivo_aux')); ?>>Estudiantes Inactivos</a>

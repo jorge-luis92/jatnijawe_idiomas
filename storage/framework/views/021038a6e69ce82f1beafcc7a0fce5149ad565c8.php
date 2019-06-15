@@ -1,7 +1,7 @@
 <link rel="shortcut icon" href="<?php echo e(asset('/logo.ico')); ?>">
 
 <?php $__env->startSection('title'); ?>
-: Gestión
+: Carga de Datos
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('seccion'); ?>
@@ -27,7 +27,7 @@
 
       <div class="form-group col-xs-12"  >
              <label>Agregar Archivo de Excel </label>
-              <input name="archivo" id="archivo" type="file" accept=".xlsx, .xls, .csv"   class="archivo form-control" /><br /><br />
+              <input name="excel" id="excel" type="file" accept=".xlsx, .xls, .csv"   class="archivo form-control" /><br /><br />
       </div>
 
 

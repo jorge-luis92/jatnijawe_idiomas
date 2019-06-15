@@ -7,6 +7,11 @@
 
   <div class="container" id="font2" >
     @include('flash-message')
+    @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
     </br>
     <div class="form-row">
       <div class="form-group  col-md-12">

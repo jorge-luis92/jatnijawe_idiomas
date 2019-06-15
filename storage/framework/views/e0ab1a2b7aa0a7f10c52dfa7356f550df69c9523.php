@@ -5,6 +5,12 @@
 
   <div class="container" id="font2" >
     <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php if(session('status')): ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo e(session('status')); ?>
+
+        </div>
+    <?php endif; ?>
     </br>
     <div class="form-row">
       <div class="form-group  col-md-12">

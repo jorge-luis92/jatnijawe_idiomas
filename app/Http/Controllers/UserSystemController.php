@@ -109,7 +109,11 @@ class UserSystemController extends Controller
 
       public function importPersona(Request $request)
 {
-    Excel::load('public/carga_persona.xlsx',function($reader){
+  $path = $request->file('import_file')->getRealPath();
+//         $data = Excel::load($path)->get();
+
+//
+Excel::load($path,function($reader){
 
     $reader->get();
 
@@ -135,12 +139,42 @@ class UserSystemController extends Controller
   return "Terminado";
 }
 
+public function importExcel(Request $request)
+    {
+      $data=$request->excel;
+      Excel::load($data, function($reader) {
+        $excel = $reader->get();
+
+       // iteracción
+       $reader->each(function($row) {
+         $user = new Persona;
+         $user->id_persona = $row->id_persona;
+         $user->nombre = $row->nombre;
+         $user->apellido_paterno = $row->apellido_paterno;
+         $user->apellido_materno = $row->apellido_materno;
+         $user->curp = $row->curp;
+         $user->fecha_nacimiento = $row->fecha_nacimiento;
+         $user->lugar_nacimiento = $row->lugar_nacimiento;
+         $user->tipo_sangre = $row->tipo_sangre;
+         $user->edad = $row->edad;
+         $user->genero = $row->genero;
+         $user->save();
+
+       });
+
+   });
+   return "Terminado";
+    }
 
 
 public function importUsers(Request $request)
 {
 
-Excel::load('public/usersnueva5.xlsx',function($reader){
+  $path = $request->file('import_file')->getRealPath();
+//         $data = Excel::load($path)->get();
+
+//
+Excel::load($path,function($reader){
 
 $reader->get();
 
@@ -193,11 +227,8 @@ if($user->save()){
                 $usuario->tipo_usuario= $fila->tipo_usuario;
               $usuario->save();
                 }
-
           });
-
           });
-
           if($userio->save()){
             return redirect()->route('cargar_datos_usuario_estudiante')->with('success','Carga de datos exitosa');
           }
