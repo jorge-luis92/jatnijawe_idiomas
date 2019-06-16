@@ -1,16 +1,17 @@
-<link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_estudiante')
-@section('title')
-: Foto de Perfil
-@endsection
+<link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
-@section('seccion')
+<?php $__env->startSection('title'); ?>
+: Foto de Perfil
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('seccion'); ?>
 
               <div class="container"  id="font6">
               </br>
-          @include('flash-message')
-                          <form class="form-horizontal" method="POST" action="{{ route('act_foto') }}" validate enctype="multipart/form-data" data-toggle="validator">
-                              {{ csrf_field() }}
+          <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                          <form class="form-horizontal" method="POST" action="<?php echo e(route('act_foto')); ?>" validate enctype="multipart/form-data" data-toggle="validator">
+                              <?php echo e(csrf_field()); ?>
+
 
                               <div class="form-group col-md-8" style="width: 2rem;" >
                                 <span style="color: #000000"> </span>
@@ -26,13 +27,13 @@
 
                      ?>
 <?php if($usuario_actual->imagenurl==""){ $usuario_actual->imagenurl="image/foto.png"; }  ?>
-                                <img class="image"  src="{{ asset("storage/$im")}}"   width="150px">
+                                <img class="image"  src="<?php echo e(asset("storage/$im")); ?>"   width="150px">
 
 
 
                                    <input type="file" name="foto" accept="image/png, .jpeg, .jpg" required>
                               </div>
-<h1 style="font-size: 12px;"> {{$im}}</h1>
+<h1 style="font-size: 12px;"> <?php echo e($im); ?></h1>
                               <div class="form-group" align="center">
                                   <div class="col-md-6 col-md-offset-4">
                                       <button type="submit" class="btn btn-primary">
@@ -44,4 +45,6 @@
                         </div>
 
 </br>
-  @endsection
+  <?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/estudiante/foto_perfil.blade.php ENDPATH**/ ?>

@@ -12,17 +12,6 @@
                           <form class="form-horizontal" method="POST" action="{{ route('changePassword') }}" validate enctype="multipart/form-data" data-toggle="validator">
                               {{ csrf_field() }}
 
-                              <div class="form-group col-md-5" style="width: 2rem;" >
-                                <span style="color: #000000"> </span>
-                                <?php
-                                $usuario_actual=auth()->user();
-                               $id=$usuario_actual->id_user;
-                                if($usuario_actual->imagenurl==""){ $usuario_actual->imagenurl="image/foto.png"; }  ?>
-
-                                <img class="image" src="<?=  $usuario_actual->imagenurl;  ?>" width="100px">
-                                   <input type="file" name="foto" accept="image/png, .jpeg, .jpg" required>
-                              </div>
-
                               <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
                                   <label for="current-password" class="col-md-4 control-label">Contraseña Actual</label>
 
@@ -62,11 +51,12 @@
                               <div class="form-group" align="center">
                                   <div class="col-md-6 col-md-offset-4">
                                       <button type="submit" class="btn btn-primary">
-                                          Actualizar Datos
+                                          Actualizar Contraseña
                                       </button>
                                   </div>
                               </div>
                           </form>
+                        </div>
 
 </br>
   @endsection

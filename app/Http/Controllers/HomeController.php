@@ -19,6 +19,8 @@ use Illuminate\Contracts\Support\MessageProvider;
 use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyUploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse as BaseRedirectResponse;
 use Illuminate\Support\Facades\Validator;
+use Storage;
+use Image;
 use PDF;
 
 
@@ -93,37 +95,6 @@ class HomeController extends Controller
 
       public function changePassword(Request $request){
 
-      //  $id=$request->input('id_usuario_foto');
-		$archivo = $request->file('foto');
-        $input  = array('image' => $archivo) ;
-        $reglas = array('image' => 'required|image|mimes:jpeg,jpg,bmp,png,gif|max:900');
-        $validacion = Validator::make($input,  $reglas);
-        if ($validacion->fails())
-        {
-        //  return view("mensajes.msj_rechazado")->with("msj","El archivo no es una imagen valida");
-            return redirect()->route('cuenta')->with('error','El archivo no es una imagen valida');
-        }
-        else
-        {
-	        $nombre_original=$archivo->getClientOriginalName();
-			$extension=$archivo->getClientOriginalExtension();
-			$nuevo_nombre="userimagen-".$id.".".$extension;
-		    $r1=Storage::disk('fotografias')->put($nuevo_nombre,  \File::get($archivo) );
-		    $rutadelaimagen="../storage/fotografias/".$nuevo_nombre;
-		    //if ($r1){
-			   // $usuario=User::find($id);
-            $usuario = Auth::user();
-			    $usuario->imagenurl=$rutadelaimagen;
-			    $r2=$usuario->save();
-		       /* return view("mensajes.msj_correcto")->with("msj","Imagen agregada correctamente");
-		    }
-		    else
-		    {
-		    	return view("mensajes.msj_rechazado")->with("msj","no se cargo la imagen");
-		    }
-
-      }*/}
-
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
             // The passwords matches
             return redirect()->back()->with("error","Su contraseña actual no coincide con la contraseña que proporcionó. Inténtalo de nuevo.");
@@ -151,25 +122,39 @@ class HomeController extends Controller
     }
 
 
-    public function foto_perfil(Request $request){
+    public function act_foto(Request $request){
 
     //  $id=$request->input('id_usuario_foto');
+    $usuario_actual=auth()->user();
+   $id=$usuario_actual->id_user;
   $archivo = $request->file('foto');
       $input  = array('image' => $archivo) ;
-      $reglas = array('image' => 'required|image|mimes:jpeg,jpg,bmp,png,gif|max:900');
+      $reglas = array('image' => 'required|image|mimes:jpeg,jpg,bmp,png,gif|max:5000');
       $validacion = Validator::make($input,  $reglas);
       if ($validacion->fails())
       {
       //  return view("mensajes.msj_rechazado")->with("msj","El archivo no es una imagen valida");
-          return redirect()->route('foto_perfil')->with('error','El archivo no es una imagen valida');
+          return redirect()->route('foto_perfil')->with('error','El archivo es muy pesado, intente con otra imagen ');
       }
       else
       {
         $nombre_original=$archivo->getClientOriginalName();
     $extension=$archivo->getClientOriginalExtension();
     $nuevo_nombre="userimagen-".$id.".".$extension;
-      $r1=Storage::disk('fotografias')->put($nuevo_nombre,  \File::get($archivo) );
-      $rutadelaimagen="../storage/fotografias/".$nuevo_nombre;
+
+    //  $r1=Storage::disk('fotografias')->put($nuevo_nombre,  \File::get($archivo) );
+      $r1 = Storage::disk('public')->put($nuevo_nombre,  \File::get($archivo) );
+    //  $r1= Storage::move('image', $nuevo_nombre);
+    //  $r1=Image::make('fotografias')->put($nuevo_nombre,  \File::get($archivo) );
+    //  $rutadelaimagen="../storage/fotografias/".$nuevo_nombre;
+
+  //  $r1=  Storage::put($nuevo_nombre,  \File::get($archivo) );
+  //  Storage::move($nuevo_nombre, 'public/image/' . $nuevo_nombre);
+    // Storage::move(public_path('image'), $nuevo_nombre);
+
+
+        $rutadelaimagen=$nuevo_nombre;
+    //$rutadelaimagen=$nuevo_nombre;
     if ($r1){
        // $usuario=User::find($id);
           $usuario = Auth::user();

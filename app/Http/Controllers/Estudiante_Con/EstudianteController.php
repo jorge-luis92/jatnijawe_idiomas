@@ -157,17 +157,27 @@ return view('estudiante\datos.datos_personales');
     return view('estudiante.configuracion_cuenta');
     }
 
-    public function editar_actividades($id_externos)
-    {
+    public function foto_perfil(){
       $usuario_actual=\Auth::user();
-      $externo= $id_externos;
        if($usuario_actual->tipo_usuario!='estudiante'){
-        return redirect()->back();
-      }
-      else{
-        return view('estudiante\datos.editar_externas')->with('e',$externo);
-          }
-  }
+         return redirect()->back();
+        }
+    return view('estudiante.foto_perfil');
+    }
+
+
+
+  public function editar_actividades($id_externos)
+  {
+    $usuario_actual=\Auth::user();
+    $externo= $id_externos;
+     if($usuario_actual->tipo_usuario!='estudiante'){
+      return redirect()->back();
+    }
+    else{
+      return view('estudiante\datos.editar_externas')->with('e',$externo);
+        }
+}
 
   public function solicitud_taller(){
    return view('estudiante\mis_actividades.solicitud_taller');

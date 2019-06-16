@@ -75,7 +75,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('mi_taller', 'Estudiante_Con\EstudianteController@talleres_activos')->name('mi_taller');
   Route::get('pdfs','Estudiante_Con\EstudianteController@generatePDF');
   Route::get('cuenta', 'Estudiante_Con\EstudianteController@cuenta_estudiante')->name('cuenta');
-    Route::get('foto_perfil', 'Estudiante_Con\EstudianteController@foto_perfil')->name('foto_perfil');
+  Route::get('foto_perfil', 'Estudiante_Con\EstudianteController@foto_perfil')->name('foto_perfil');
+  Route::post('act_foto','HomeController@act_foto')->name('act_foto');
   Route::get('cuenta_form', 'FormacionIntegralController@cuenta_formacion')->name('cuenta_form');
   Route::get('cambiar_estatus_beca/{id_beca}', 'ActualizacionesEstudiante@desactivar_lengua');
   //Route::get('editar_actividad/{id_externos}', 'Estudiante_Con\EstudianteController@editar_actividades');
