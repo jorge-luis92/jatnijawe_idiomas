@@ -327,7 +327,8 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
     return redirect()->route('busqueda_estudiante_fi')->with('error','¡Sin resultados!');
   }}  else{
         return redirect()->route('busqueda_estudiante_fi')->with('error','¡Sin resultados!');
-    }}
+    }
+  }
 
     public function registrar_tutor_fi(Request $request){
       $usuario_actuales=\Auth::user();

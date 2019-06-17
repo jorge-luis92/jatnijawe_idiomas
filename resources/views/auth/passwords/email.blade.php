@@ -1,4 +1,4 @@
-@extends('layouts.plantillaperfil')
+@extends('layouts.recuperarpass')
 
 @section('seccion')
 <div class="container">
