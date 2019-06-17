@@ -1,11 +1,12 @@
-@extends('layouts.recuperarpass')
+@extends('layouts.app')
 
-@section('seccion')
-<div class="container">
-    <div class="row justify-content-center">
+@section('content')
+<div class="container" style="text-align: center;">
+  <!--<h1 class="mr-2 d-none d-lg-inline" style="font-family: 'Century Gothic';color: #0B173B;font-size: 35px;">&nbsp;Reestablecimiento de Contraseña</h1>
+  -->  <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Restablecer Contraseña') }}</div>
+            <div class="card" style="font-family: 'Century Gothic';color: #0B173B;">
+                <div class="card-header" style="font-family: 'Century Gothic';color: #0B173B;font-size: 25px;">{{ __('Reestablecimiento de Contraseña') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))

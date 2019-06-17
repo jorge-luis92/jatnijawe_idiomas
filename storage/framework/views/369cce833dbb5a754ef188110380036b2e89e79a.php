@@ -1,9 +1,10 @@
-<?php $__env->startSection('seccion'); ?>
-<div class="container">
-    <div class="row justify-content-center">
+<?php $__env->startSection('content'); ?>
+<div class="container" style="text-align: center;">
+  <!--<h1 class="mr-2 d-none d-lg-inline" style="font-family: 'Century Gothic';color: #0B173B;font-size: 35px;">&nbsp;Reestablecimiento de Contraseña</h1>
+  -->  <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header"><?php echo e(__('Restablecer Contraseña')); ?></div>
+            <div class="card" style="font-family: 'Century Gothic';color: #0B173B;">
+                <div class="card-header" style="font-family: 'Century Gothic';color: #0B173B;font-size: 25px;"><?php echo e(__('Reestablecimiento de Contraseña')); ?></div>
 
                 <div class="card-body">
                     <?php if(session('status')): ?>
@@ -54,4 +55,4 @@ endif; ?>
 </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.recuperarpass', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/auth/passwords/email.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/auth/passwords/email.blade.php ENDPATH**/ ?>

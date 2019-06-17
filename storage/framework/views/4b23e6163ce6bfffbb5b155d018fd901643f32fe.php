@@ -6,7 +6,7 @@
 
 <?php $__env->startSection('seccion'); ?>
 
-              <div class="container"  id="font6">
+              <div class="container"  id="font8">
               </br>
           <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                           <form class="form-horizontal" method="POST" action="<?php echo e(route('changePassword')); ?>" validate enctype="multipart/form-data" data-toggle="validator">
@@ -14,9 +14,9 @@
 
 
                               <div class="form-group<?php echo e($errors->has('current-password') ? ' has-error' : ''); ?>">
-                                  <label for="current-password" class="col-md-4 control-label">Contraseña Actual</label>
+                                  <label for="current-password" >Contraseña Actual</label>
 
-                                  <div class="col-md-6">
+
                                       <input id="current-password" type="password" class="form-control" name="current-password" required>
 
                                       <?php if($errors->has('current-password')): ?>
@@ -24,13 +24,13 @@
                                               <strong><?php echo e($errors->first('current-password')); ?></strong>
                                           </span>
                                       <?php endif; ?>
-                                  </div>
+
                               </div>
 
                               <div class="form-group<?php echo e($errors->has('new-password') ? ' has-error' : ''); ?>">
-                                  <label for="new-password" class="col-md-4 control-label">Nueva Contraseña</label>
+                                  <label for="new-password" >Nueva Contraseña</label>
 
-                                  <div class="col-md-6">
+
                                       <input id="new-password" type="password" class="form-control" name="new-password" required>
 
                                       <?php if($errors->has('new-password')): ?>
@@ -38,15 +38,15 @@
                                               <strong><?php echo e($errors->first('new-password')); ?></strong>
                                           </span>
                                       <?php endif; ?>
-                                  </div>
+
                               </div>
 
                               <div class="form-group">
-                                  <label for="new-password-confirm" class="col-md-4 control-label">Confirmar Contraseña</label>
+                                  <label for="new-password-confirm" >Confirmar Contraseña</label>
 
-                                  <div class="col-md-6">
+
                                       <input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required>
-                                  </div>
+
                               </div>
 
                               <div class="form-group" align="center">

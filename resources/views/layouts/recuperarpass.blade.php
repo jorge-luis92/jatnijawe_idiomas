@@ -10,6 +10,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/estiloinicio.css" rel="stylesheet">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+      <link href="css/nuevo.css" rel="stylesheet">
 
     <link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 
@@ -30,7 +31,8 @@
      </div>
      <div  class="col-6 col-sm-7" class="mr-2 d-none d-lg-inline text-gray-600 small" >
 </br>
-    <h3 style="color: #000000"> Portal de Servicios Educativos </br>"JAT NIJAWE"</h3>
+    <h3 style="font: 'Century Gothic';color: #000000"> Portal de Servicios Educativos </br>"JAT NIJAWE"</h3>
+
      </div>
      <div  class="col-6 col-sm-2">
        <img src="image/nuevo.png" width="100" height="100" alt=""/>
@@ -40,9 +42,9 @@
 
   </div>
 
-  <div class="container" align="center" <div id="font2">
+  <div class="container" align="center" id="font2">
     <nav class="navbar" style="background-color: #58ACFA; border-radius: 14px 14px 14px 14px;-moz-border-radius: 14px 14px 14px 14px;-webkit-border-radius: 14px 14px 14px 14px;border: 0px solid #000000;" >
-
+    <a class="navbar-brand" style="color:black" href={{ route('welcome')}}>
     <img src="logo.ico" width="30" height="30" class="d-inline-block align-top" alt="">&nbsp;Facultad de Idiomas </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -50,9 +52,9 @@
     <ul class="nav navbar-nav navbar-right "></ul>
     </nav>
   </div>
-
 </br>
 </br>
+    </br>
 
   </br>
 </div>

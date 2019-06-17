@@ -1,10 +1,10 @@
-@extends('layouts.recuperarpass')
+@extends('layouts.app')
 
-@section('seccion')
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" style="font-family: 'Century Gothic';color: #0B173B;">
                 <div class="card-header">{{ __('Cambiar contraseña') }}</div>
 
                 <div class="card-body">

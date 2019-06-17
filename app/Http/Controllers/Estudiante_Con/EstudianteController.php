@@ -4,6 +4,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 use Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Extracurricular;
@@ -20,6 +23,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response as FacadeResponse;
+
+//use Excel;
 
 class EstudianteController extends Controller
 {
@@ -137,17 +143,39 @@ return view('estudiante\datos.datos_personales');
     return view('m_usuario\m_estudiante');
   }
 
+  public function verDatos(){
+     $usuario_actual=\Auth::user();
+    return view('estudiantes\datos.hoja_datos')-with('s', $prueba);
+  }
     public function generatePDF()
     {
        $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='estudiante'){
          return redirect()->back();
         }
-        $data = ['title' => 'listado'];
-        $pdf = PDF::loadView('estudiante\datos.hoja_datos', $data);
-      //  $pdf = PDF::loadView('estudiante\mis_actividades.listado', $data);
+
+        $id=$usuario_actual->id_user;
+          $users = DB::table('estudiantes')
+          ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
+                   'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
+                   'personas.curp', 'personas.genero', 'direcciones.vialidad_principal', 'direcciones.num_exterior', 'direcciones.cp',
+                   'direcciones.localidad', 'direcciones.municipio', 'direcciones.entidad_federativa')
+          ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+          ->join('direcciones', 'personas.id_persona', '=', 'direcciones.id_persona')
+          ->where('estudiantes.matricula',$id)
+          ->take(1)
+          ->first();
+
+
+    //   $data = ['title' => 'listado'];
+        $pdf = PDF::loadView('estudiante\datos.hoja_datos',  ['data' =>  $users])->setPaper('letter', 'vertical');
         //return $pdf->download('listado_estudiantes.pdf');
         return $pdf->stream('hoja_datos_personales.pdf');
+//$paper_size = array(0,0,360,360);
+//$dompdf->set_paper($paper_size);
+    //    $pdf=PDF::loadView('print_tests.test_pdf', ['data' => $data]);
+
+
     }
     public function cuenta_estudiante(){
       $usuario_actual=\Auth::user();

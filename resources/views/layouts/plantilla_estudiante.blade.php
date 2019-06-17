@@ -24,11 +24,12 @@
 <body id="page-top">
 
   <div id="wrapper" style="font-family: 'Century Gothic';"><!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
+    <ul class="navbar-nav sidebar sidebar-dark " style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
         <a class="nav-link" href={{ route('home_estudiante')}}>
-          <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em">&nbsp;JAT WEB</span></a></li><!-- Divider -->
+          <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt="">
+          <span style="font-size: 1.5em">&nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
         Servicios
@@ -113,13 +114,14 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
 
-
       <li class="nav-item">
       <a class="nav-link"  href={{ route('ma_estudiante')}} aria-expanded="true">
       <i class="fas fa-fw fa-archive"></i>
       <span style="font-size: 0.9em;">Manual de Usuario</span>
     </a>
       </li>     <!-- Sidebar Toggler (Sidebar) -->
+
+
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
 
@@ -147,6 +149,7 @@
             <!-- Nav Item - User Information -->
 
               <li class="nav-item" >
+
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=auth()->user();
                $id=$usuario_actual->id_user;
@@ -163,21 +166,26 @@
               ->where('users.id_user',$id)
               ->take(1)
               ->first();
-              $im=$usuario_actual->imagenurl;  if(empty($im)){ $im="image/foto.png"; } ?>
-               <img class="img-profile rounded-circle"  src="{{ asset("storage/$im")}}">
+              $im=$usuario_actual->imagenurl;  ?>
+              <?php if($usuario_actual->imagenurl==""){ $im="foto.png"; }  ?>
+               <img class="img-profile rounded-circle"  src="{{ asset("/image/users/$im")}}" >
 
              </a>
-                <!-- Dropdown - User Information -->
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href={{ route('cuenta')}} >
+                <!-- Dropdown - User Information
+                <div class="bg-white py-2 collapse-inner rounded"
+                class="collapse" aria-labelledby="headingUtilities">-->
+                <div class="dropdown-menu dropdown-menu-right animated--grow-in"  style="background-color: #819FF7;" aria-labelledby="userDropdown">
+                 <a class="dropdown-item" href={{ route('cuenta')}} >
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
                     Configuración de Contraseña
                   </a>
+                  <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
                   <a class="dropdown-item" href={{ route('foto_perfil')}} >
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-black-400" ></i>
                   Foto de Perfil
                 </a>
-                  <div class="dropdown-divider"></div>
+                <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
+                <!--  <div class="dropdown-divider"></div>-->
                   <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-black-400"></i>
                     Cerrar Sesión
