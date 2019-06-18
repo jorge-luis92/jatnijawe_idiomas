@@ -57,10 +57,10 @@ class LoginController extends Controller
         * @return \Illuminate\Contracts\Validation\Validator
         */
 
-/*    protected function redirectTo()
+   protected function redirectTo()
 {
-    return 'home';
-}*/
+    return 'home_estudiante';
+}
 
     public function username()
     {
@@ -89,19 +89,13 @@ class LoginController extends Controller
           'password' => 'required',
       ]);
 
-    //  $credentials = $request->only('id_user', 'password');
-    //  if ($this->auth->attempt($credentials, $request->has('remember')))
-//{;
-
-   $this->guard()->attempt(
-          $this->credentials($request), $request->filled('remember')
-      );
-
-    
-
- if(Auth::user()->tipo_usuario == 'estudiante'){
- //  return view('personal_administrativo\admin_sistema.home_admin');
-     return redirect()->route('home_estudiante')->with('sucess', 'Inicio de sesión correctamente');
+      $credentials = $request->only('id_user', 'password');
+      if ($this->auth->attempt($credentials, $request->has('remember')))
+ {;
+   if(Auth::user()->tipo_usuario == 'estudiante'){
+   //  return view('personal_administrativo\admin_sistema.home_admin');
+       return redirect()->route('home_estudiante')->with('sucess', 'Inicio de sesión correctamente');
+   }
  }
 
 return redirect()->route('home_estudiante')->with('error','Usuario invalido: !Verifique sus datos!');

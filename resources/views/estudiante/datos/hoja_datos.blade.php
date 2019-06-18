@@ -112,8 +112,8 @@ else {
                     </tr>
                      <tr>
                       <td>  EMAIL</td>
-                        <td ><input id="email"name="email" type="text" value=""></td>
-                        <td >FACEBOOK</td><td ><input name="face" type="text" required id="face"  value=""/></td>
+                        <td ><input id="email"name="email" type="text" value="{{ Auth::user()->email }}"></td>
+                        <td >FACEBOOK</td><td ><input name="face" type="text" required id="face"  value="{{ Auth::user()->email }}"/></td>
 
                     </tr>
                     <tr>

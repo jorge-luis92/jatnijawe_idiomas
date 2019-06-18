@@ -28,28 +28,16 @@ use PDF;
 class HomeController extends Controller
 {
   use AuthenticatesUsers;
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
+  /**
+   *
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+   public function __construct()
+   {
+       $this->middleware('guest')->except('logout');
 
-    }
-
-    /*elseif ($usuario_actual->tipo_usuario=='form_integral') {
-      return view('personal_administrativo\formacion_integral.home_formacion');
-    }
-    elseif ($usuario_actual->tipo_usuario=='admin') {
-    return view('personal_administrativo\auxiliar_administrativo.gestion_estudiante');
-  }*/
-    /**
-     *
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+   }
    public function index( Request $request)
     {
       $usuario_actual=\Auth::user();

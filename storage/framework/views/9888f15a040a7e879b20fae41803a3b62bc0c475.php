@@ -63,11 +63,13 @@ endif; ?>
                                 <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="curp" ><?php echo e(__('* CURP')); ?></label>
-                                  <input id="curp" type="text" minlength="18" maxlength="18"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('curp')) :
+                                  <input id="curp" type="text" minlength="18" maxlength="18" onfocus="setearGenero();"  onfocus="validarInput(this)"  onblur="setearFecha();" onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('curp')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('curp'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>" name="curp" value="<?php echo e(old('curp')); ?>" required autocomplete="curp">
+                                  <pre id="resultado"></pre>
+
                                 <?php if ($errors->has('curp')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('curp'); ?>
@@ -79,9 +81,10 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
+                      <!--  <input type="text"  hidden size=10  maxlength=10 name="fecha_nac"  onblur="calcular_edad();" id="fecha_nac">-->
                             <label for="fecha_nacimiento" ><?php echo e(__('* Fecha de nacimiento')); ?></label>
-                                  <input id="fecha_nacimiento" type="date" class="form-control <?php if ($errors->has('fecha_nacimiento')) :
+                                  <input id="fecha_nacimiento" onfocus="calcular_edad();"  type="date" class="form-control <?php if ($errors->has('fecha_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_nacimiento'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -97,9 +100,9 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-5">
                             <label for="lugar_nacimiento" ><?php echo e(__('* Lugar de Nacimiento')); ?></label>
-                                  <input id="lugar_nacimiento"  onKeyUp="this.value = this.value.toUpperCase()" type="text" class="form-control <?php if ($errors->has('lugar_nacimiento')) :
+                                  <input id="lugar_nacimiento"   onKeyUp="this.value = this.value.toUpperCase()" type="text" class="form-control <?php if ($errors->has('lugar_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('lugar_nacimiento'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -136,9 +139,6 @@ $message = $errors->first('edad'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
-                        <div class="form-group col-md-1">
-
-                        </div>
 
                         <div class="form-group col-md-3">
                           <label for="genero">* Género</label>
@@ -148,9 +148,7 @@ endif; ?>
                           <option value="FEMEMINO">FEMEMINO</option>
                     </select>
                         </div>
-                        <div class="form-group col-md-2">
 
-                        </div>
 
                         <div class="form-group col-md-4">
                           <label for="tipo_sangre">* Tipo de Sangre</label>
@@ -332,6 +330,127 @@ if(key == especiales[i]){
 
  if(letras.indexOf(tecla)==-1 && !tecla_especial)
      return false;
+}
+</script>
+
+<script>
+function curpValida(curp) {
+    var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
+        validado = curp.match(re);
+
+    if (!validado)  //Coincide con el formato general?
+    	return false;
+
+    //Validar que coincida el dígito verificador
+    function digitoVerificador(curp17) {
+        //Fuente https://consultas.curp.gob.mx/CurpSP/
+        var diccionario  = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
+            lngSuma      = 0.0,
+            lngDigito    = 0.0;
+        for(var i=0; i<17; i++)
+            lngSuma = lngSuma + diccionario.indexOf(curp17.charAt(i)) * (18 - i);
+        lngDigito = 10 - lngSuma % 10;
+        if (lngDigito == 10) return 0;
+        return lngDigito;
+    }
+
+    if (validado[2] != digitoVerificador(validado[1]))
+    	return false;
+
+    return true; //Validado
+}
+
+
+//Handler para el evento cuando cambia el input
+//Lleva la CURP a mayúsculas para validarlo
+function validarInput(input) {
+    var curp = input.value.toUpperCase(),
+        resultado = document.getElementById("resultado"),
+        valido = "No válido";
+
+    if (curpValida(curp)) { // ?? Acá se comprueba
+    	valido = "Válido"
+        resultado.classList.add("ok");
+    } else {
+    	resultado.classList.remove("ok");
+    }
+
+    resultado.innerText =  "Formato: " + valido;
+}
+</script>
+<script>
+function calcular_edad()
+{
+    var form = document.getElementById('fecha_nacimiento').value; //fecha de nacimiento en el formulario
+    var fechaNacimiento = form.split("-");
+    var ano = fechaNacimiento[0];
+    var mes = fechaNacimiento[1];
+    var dia = fechaNacimiento[2];
+    var fechaHoy = new Date(); // detecto la fecha actual y asigno el dia, mes y anno a variables distintas
+    var ahora_ano = fechaHoy.getFullYear();
+    var ahora_mes = fechaHoy.getMonth()+1;
+    var ahora_dia = fechaHoy.getDate();
+
+    var edad = (ahora_ano + 1900) - ano;
+    if(ano < ahora_ano && edad >1899){
+    if ( ahora_mes < mes )
+    {
+        edad--;
+    }
+    if (mes == ahora_mes && ahora_dia < dia)
+    {
+        edad--;
+    }
+    if (edad > 1900)
+    {
+        edad -= 1900;
+    }
+    if (edad == 1900)
+    {
+        edad =0;
+    }
+  }
+  else {
+    edad=0;
+  }
+    var meses=0;
+    if(ahora_mes>mes)
+        meses=ahora_mes-mes;
+    if(ahora_mes<mes)
+        meses=12-(mes-ahora_mes);
+    document.getElementById('edad').value = edad;
+    document.getElementById('mes').value = mes;}
+</script>
+
+<script>
+function setearFecha() {
+    var form = document.getElementById('curp').value;
+var  a = form.substring(16,17);
+//var che= form.substring(4,6);
+if(a == 0){
+var anio =  "19"+form.substring(4,6)+"-"+ form.substring(6,8)+ "-"+  form.substring(8,10);
+
+document.getElementById('fecha_nacimiento').value = anio ;}
+else {
+  var anio ="20"+form.substring(4,6)+"-"+ form.substring(6,8)+ "-"+  form.substring(8,10);
+
+  document.getElementById('fecha_nacimiento').value = anio ;
+}
+//alert(fe);HEVJ920901HOCRLR08
+}
+</script>
+
+<script>
+function setearGenero() {
+    var form = document.getElementById('curp').value;
+var  a = form.substring(10,11);
+if( a == 'H'){
+document.getElementById('lugar_nacimiento').value = "MASCULINO" ;
+//alert(fe);HEVJ920901HOCRLR08
+}
+else {
+  document.getElementById('lugar_nacimiento').value = "FEMEMINO" ;
+}
 }
 </script>
 

@@ -28,6 +28,14 @@
     </thead>
     <tbody>
       <?php $__currentLoopData = $dato; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $datos): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <?php
+      $usuario_actual=auth()->user();
+      $id=$usuario_actual->id_user;
+      $usuario=DB::table('detalle_extracurriculares')
+      ->select('detalle_extracurriculares.actividad')
+    //  ->where('detalle_extracurriculares.actividad', $datos->id_extracurricular)
+      ->where([['detalle_extracurriculares.actividad',$datos->id_extracurricular], ['detalle_extracurriculares.matricula', $id],])
+      ->first(1); ?>
       <tr style="color: #000000;">
 
           <td><?php echo e($datos->nombre_ec); ?></td>
@@ -38,12 +46,11 @@
           <td><?php echo e($datos->nombre); ?> <?php echo e($datos->apellido_paterno); ?> <?php echo e($datos->apellido_materno); ?></td>
           <td><?php echo e(date('d-m-Y', strtotime($datos->fecha_inicio))); ?>
 
-           <?php if(empty($datos->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo date('d-m-Y', strtotime($datos->fecha_inicio));}?></td>
+           <?php if(empty($datos->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo date('d-m-Y', strtotime($datos->fecha_fin));}?></td>
           <td><?php if(empty($datos->dias_sem) && empty($datos->hora_fin)){ echo $datos->hora_inicio;} else{ echo $datos->dias_sem; echo "\n\n"; echo $datos->hora_inicio;echo " a "; echo $datos->hora_fin;} ?>
             </td>
-          <td><a href="inscripcion_extracurricular/<?php echo e($datos->id_extracurricular); ?>/<?php echo e($datos->creditos); ?>">INSCRIBIRSE</a></td>
-         </tr>
-
+              <td><a href="inscripcion_extracurricular/<?php echo e($datos->id_extracurricular); ?>/<?php echo e($datos->creditos); ?>"><?php if(empty($usuario)){echo "INSCRIBIRSE";}?></a></td>
+          </tr>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
      </tbody>
      </table>

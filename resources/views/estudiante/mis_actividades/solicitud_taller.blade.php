@@ -15,7 +15,7 @@
 <div class="form-row">
   <div class="form-group col-md-5">
     <label for="nombre" >{{ __('Nombre del Solicitante') }}</label>
-    <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre">
+    <input id="nombre" type="text" value="{{$u->nombre}} {{$u->apellido_paterno}} {{$u->apellido_materno}}" disabled onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre"  required autocomplete="nombre">
           @error('nombre')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
@@ -23,40 +23,29 @@
         @enderror
 </div>
 
-<div class="form-group col-md-1">
+<div class="form-group col-md-2">
+  <input type="text"  hidden size=10  maxlength=10 name="fecha_nac"  onblur="calcular_edad();" id="fecha_nac">
     <label for="edad" >{{ __('* Edad') }}</label>
-    <input id="edad" type="tel" maxlength="2" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
+    <input id="edad" type="tel" maxlength="2"  value="{{$u->edad}}" disabled class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
         @error('edad')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
     </span>
         @enderror
+
 </div>
 
-<div class="form-group col-md-3">
-  <label for="semestre">* Semestre</label>
-    <select name="semestre" id="semestre" required class="form-control">
-    <option value="">Seleccione una opción</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-    <option value="11">11</option>
-    <option value="12">12</option>
-
-        </select>
+<div class="form-group col-md-2" id="labels">
+  <label for="semestre">Semestre</label>
+  <input type="number" name="semestre" class="form-control" disabled id="semestre" value="{{$u->semestre}}" disabled>
 </div>
 
 <div class="form-group col-md-3">
   <label for="tel_celular">* Teléfono Celular</label>
-  <input type="tel"  class="form-control" id="tel_celular" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos"  pattern="([0-9]{3})([0-9]{7})" required>
+  <input type="tel"  class="form-control" disabled id="tel_celular" maxlength="10" value="<?php if(empty($num_->numero)){ $vacio=null; echo $vacio;} else{ echo $num_->numero;} ?>" onkeypress="return numeros (event)"  placeholder=""  pattern="([0-9]{3})([0-9]{7})" required>
 </div>
+
+
 
 </div>
 
@@ -211,4 +200,60 @@ if(key == especiales[i]){
  if(letras.indexOf(tecla)==-1 && !tecla_especial)
      return false;
 }
+</script>
+
+<script>
+function calcular_edad()
+{
+
+ var form = document.getElementById('fecha_nac').value; //fecha de nacimiento en el formulario
+//var fechaNacimiento = a.split("/");
+  //  var form = document.getElementById('fecha_nac').value; //fecha de nacimiento en el formulario
+
+  var fechaNacimiento = form.split("-");
+
+    /*var dia = fechaNacimiento[0];
+    var mes = fechaNacimiento[1];
+    var ano = fechaNacimiento[2];
+*/
+var ano = fechaNacimiento[0];
+var mes = fechaNacimiento[1];
+var dia = fechaNacimiento[2];
+
+    var fechaHoy = new Date(); // detecto la fecha actual y asigno el dia, mes y anno a variables distintas
+    var ahora_ano = fechaHoy.getFullYear();
+    var ahora_mes = fechaHoy.getMonth()+1;
+    var ahora_dia = fechaHoy.getDate();
+
+    // realizamos el calculo
+    var edad = (ahora_ano + 1900) - ano;
+    if ( ahora_mes < mes )
+    {
+        edad--;
+    }
+    if (mes == ahora_mes && ahora_dia < dia)
+    {
+        edad--;
+    }
+    if (edad > 1900)
+    {
+        edad -= 1900;
+    }
+
+    var meses=0;
+    if(ahora_mes>mes)
+        meses=ahora_mes-mes;
+    if(ahora_mes<mes)
+        meses=12-(mes-ahora_mes);
+
+    //document.write("<br>"+edad);
+    //document.write("<br>"+meses);
+    document.getElementById('edad').value = edad;
+    document.getElementById('mes').value = mes;
+    //alert(edad);
+
+}
+//calcular_edad("01/09/1992");
+
+
 </script>

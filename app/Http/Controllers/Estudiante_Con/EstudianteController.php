@@ -201,12 +201,15 @@ return view('estudiante\datos.datos_personales');
            ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular'],])
            ->take(1)
            ->first();
+           $paper_orientation = 'letter';
+           $customPaper = array(2.5,2.5,600,950);
 
 
     //   $data = ['title' => 'listado'];
         $pdf = PDF::loadView('estudiante\datos.hoja_datos',  ['data' =>  $users, 'di' => $direccion, 'nu_l' => $num_local
         , 'nu_ce' => $num_cel])
-        ->setPaper('letter', 'vertical');
+      //  ->setPaper('letter', 'vertical');
+      ->setPaper($customPaper,$paper_orientation);
         //return $pdf->download('listado_estudiantes.pdf');
         return $pdf->stream('hoja_datos_personales.pdf');
 //$paper_size = array(0,0,360,360);
@@ -246,7 +249,34 @@ return view('estudiante\datos.datos_personales');
 }
 
   public function solicitud_taller(){
-   return view('estudiante\mis_actividades.solicitud_taller');
+    $usuario_actual=\Auth::user();
+     if($usuario_actual->tipo_usuario!='estudiante'){
+       return redirect()->back();
+      }
+        $id=$usuario_actual->id_user;
+
+        $id_persona = DB::table('estudiantes')
+        ->select('estudiantes.id_persona')
+        ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+        ->where('estudiantes.matricula',$id)
+        ->take(1)
+        ->first();
+          $id_persona= json_decode( json_encode($id_persona), true);
+
+          $users = DB::table('estudiantes')
+          ->select('estudiantes.semestre', 'personas.edad', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+          ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+          ->where('estudiantes.matricula',$id)
+          ->take(1)
+          ->first();
+
+          $num_cel = DB::table('personas')
+          ->select('telefonos.numero')
+          ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+          ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular'],])
+          ->take(1)
+          ->first();
+   return view('estudiante\mis_actividades.solicitud_taller')->with('u',$users)->with('num_c', $num_cel);
    }
 
    public function solicitud_practicasP(){
