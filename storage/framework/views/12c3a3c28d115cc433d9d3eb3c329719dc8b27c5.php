@@ -1,7 +1,6 @@
 <style>
 body{
   margin: 2.5;
-
 }
 #datos {border:2px solid; width:50%; text-align:center}
 #datos tr {border:2px solid;}
@@ -46,26 +45,33 @@ body{
 <?php
 $usuario_actual=\Auth::user();
  $id=$usuario_actual->id_user;
+
 $imagen = DB::table('users')
 ->select('users.imagenurl')
 ->where('users.id_user',$id)
 ->take(1)
 ->first();
 $im=$usuario_actual->imagenurl;
-$d='image/users/'.$im?>
-    <tr >
-          <td rowspan="4">
-          <!--  <img width="90" height="90" src="image/users/$im" />-->
-           <img src="<?=  $d;  ?>" width="90" height="90" ></td>
+if(empty($im)){
+  $d='image/users/foto.png';
 
+}
+else {
+  $d='image/users/'.$im;
+}
+?>
+    <tr >
+                <td rowspan="4">
+          <!--  <img width="90" height="90" src="image/users/$im" />-->
+           <img src="<?=  $d;  ?>" width="80" height="100" ></td>
           <td  width="90" align="right">SEMESTRE A CURSAR: </td>
-          <td><input name="semestre" type="text" required id="semestre" value="<?php echo e($data->semestre); ?>"  /></td>
+          <td><input name="semestre" type="text" required id="semestre" value="<?php if(empty($data->semestre)){ $vacio=null; echo $vacio;} else{ echo $data->semestre;} ?>"  /></td>
           <td width="120" align="left">MATR&Iacute;CULA:
-            <input name="matricula"  type="text" required id="matricula" value="<?php echo e($data->matricula); ?>"   /></td>
+            <input name="matricula"  type="text" required id="matricula" value="<?php if(empty($data->matricula)){ $vacio=null; echo $vacio;} else{ echo $data->matricula;} ?>"   /></td>
     </tr>
     <tr>
           <td>ESTATUS: </td>
-          <td colspan="1"><input name="status"  type="text" required id="status" value="<?php echo e($data->estatus); ?>"  />
+          <td colspan="1"><input name="status"  type="text" required id="status" value="<?php if(empty($data->estatus)){ $vacio=null; echo $vacio;} else{ echo $data->estatus;} ?>">
           </td>
 
           <td colspan="4">MATERIA/S PENDIENTE/S:
@@ -76,40 +82,38 @@ $d='image/users/'.$im?>
     </tr>
     <tr>
       <td colspan="1">NOMBRE(S)</td>
-      <td ><input name="nombre" type="text" required id="nombre" value="<?php echo e($data->nombre); ?>" /></td>
+      <td ><input name="nombre" type="text" required id="nombre" value="<?php if(empty($data->nombre)){ $vacio=null; echo $vacio;} else{ echo $data->nombre;} ?>" /></td>
     </tr>
     <tr>
       <td colspan="2">APELLIDO PATERNO</td>
-      <td ><input name="apepat" type="text" required id="apepat" value="<?php echo e($data->apellido_paterno); ?>" /></td>
+      <td ><input name="apepat" type="text" required id="apepat" value="<?php if(empty($data->apellido_paterno)){ $vacio=null; echo $vacio;} else{ echo $data->apellido_paterno;} ?>" /></td>
       <td >APELLIDO MATERNO</td>
-      <td ><input name="apemat" type="text" required id="apemat" value="<?php echo e($data->apellido_materno); ?>" /></td>
+      <td ><input name="apemat" type="text" required id="apemat" value="<?php if(empty($data->apellido_materno)){ $vacio=null; echo $vacio;} else{ echo $data->apellido_materno;} ?>" /></td>
     </tr>
     <tr>
       <td colspan="2">FECHA DE NACIMIENTO (DD/MM/AA) </td>
-      <td ><input name="fec_nac" type="text" required id="fec_nac" value="<?php echo e(date('d-m-Y', strtotime($data->fecha_nacimiento))); ?>" /></td>
+      <td ><input name="fec_nac" type="text" required id="fec_nac" value="<?php if(empty($data->fecha_nacimiento)){ $vacio=null; echo $vacio;} else{ echo date('d-m-Y', strtotime($data->fecha_nacimiento));} ?>" /></td>
+
       <td >G&Eacute;NERO</td>
-      <td ><input name="genero" type="text" required id="genero" value="<?php echo e($data->genero); ?>" /></td>
+      <td ><input name="genero" type="text" required id="genero" value="<?php if(empty($data->genero)){ $vacio=null; echo $vacio;} else{ echo $data->genero;} ?>" /></td>
     </tr>
     <tr>
-    <td colspan="5">DIRECCI&Oacute;N:</td>
+      <td colspan="5">DIRECCI&Oacute;N:</td>
 
-                    </tr>
-                    <tr>
-                        <td colspan="5"><textarea name="direccion"  cols="94" rows="3" required id="direccion"><?php echo e($data->vialidad_principal); ?> #<?php echo e($data->num_exterior); ?>, C.P: <?php echo e($data->cp); ?> Colonia: <?php echo e($data->localidad); ?>, <?php echo e($data->municipio); ?>, <?php echo e($data->entidad_federativa); ?>.</textarea></td>
-
-                    </tr>
-                    <tr>
+                      </tr>
+                      <tr>
+                          <td colspan="5"><textarea name="direccion"  cols="94" rows="3" required id="direccion"><?php if(empty($di->vialidad_principal)){ $vacio=null; echo $vacio;} else{ echo $di->vialidad_principal;} ?></td></textarea>
+                      </tr>
+                      <tr>
                         <td colspan="2">TEL. LOCAL</td>
-                        <td><input name="tellocal" type="text" required id="tellocal" value="" /></td>
+                        <td><input name="tellocal" type="text" required id="tellocal" value="<?php if(empty($nu_l->numero)){ $vacio=null; echo $vacio;} else{ echo $nu_l->numero;} ?>" /></td>
                         <td>TEL. CELULAR</td>
-                        <td><input name="telcel" type="text" required id="telcel" value="" /></td>
-
+                        <td><input name="telcel" type="text" required id="telcel" value="<?php if(empty($nu_ce->numero)){ $vacio=null; echo $vacio;} else{ echo $nu_ce->numero;} ?>" /></td>
                     </tr>
                      <tr>
-                        <td colspan="2">EMAIL</td>
-                        <td ><input name="email" type="text" required id="email" value="" /></td>
-                        <td >FACEBOOK</td>
-                        <td ><input name="face" type="text" required id="face"  value=""/></td>
+                      <td>  EMAIL</td>
+                        <td ><input id="email"name="email" type="text" value=""></td>
+                        <td >FACEBOOK</td><td ><input name="face" type="text" required id="face"  value=""/></td>
 
                     </tr>
                     <tr>

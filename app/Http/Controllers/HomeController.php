@@ -55,8 +55,8 @@ class HomeController extends Controller
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario=='estudiante'){
          if($usuario_actual->bandera=='1'){
-      return view('estudiante.home_estudiante')->with('sucess', 'Inicio de sesión correctamente');
-  //  return redirect()->route('home_estudiante')->with('sucess', 'Inicio de sesión correctamente');
+    //  return view('estudiante.home_estudiante')->with('sucess', 'Inicio de sesión correctamente');
+  return redirect()->route('home_estudiante')->with('sucess', 'Inicio de sesión correctamente');
       }
       else {
          $this->guard()->logout();
@@ -171,7 +171,7 @@ class HomeController extends Controller
   $extension=$archivo->getClientOriginalExtension();
   $nuevo_nombre="userimagen-".$id.".".$extension;
     $r1 = Image::make($archivo)
-    ->resize(250,250)
+    ->resize(200,250)
     ->save('image/users/'.$nuevo_nombre);
       $rutadelaimagen=$nuevo_nombre;
   if ($r1){

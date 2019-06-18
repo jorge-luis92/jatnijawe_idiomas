@@ -1,45 +1,75 @@
 @extends('layouts.plantillaperfil')
 @section('title')
-: Estudiante
+: Estudiantes
 @endsection
 
 @section('seccion')
-  <div class="container" align="center" >
-    <h1 style="font-size: 33px; color: #000000">Bienvenido</h1>
-    <h2 style="font-size: 15px; color: #000000" align="center">Ingresa tus datos para acceder al sistema</h2>
-        <div class="form">
-          <form method="POST" action="{{ route('login_studiante') }}">
-              @csrf
-         <div class="form-group has-feedback">
-           <input id="email" type="email" placeholder="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+<div class="container">
+  @include('flash-message')
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card" style="opacity: 0.7;filter:alpha(opacity=5);">
+                <div class="card-header" align="center">{{ __('Inicio de Sesión') }}</div>
 
-           @error('email')
-               <span class="invalid-feedback" role="alert">
-                   <strong>{{ $message }}</strong>
-               </span>
-           @enderror
-         </div>
-         <div class="form-group has-feedback">
-           <input id="password" type="password" placeholder="Contraseña" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                <div class="card-body">
+                    <form method="POST" action="{{route('login_studiante')}}">
+                        @csrf
+                        <div class="form-group row">
+                            <label for="id_user" class="col-md-4 col-form-label text-md-right" >{{ __('Matrícula') }}</label>
 
-           @error('password')
-               <span class="invalid-feedback" role="alert">
-                   <strong>{{ $message }}</strong>
-               </span>
-           @enderror
-         </div>
-           <button class="btn btn-outline-primary" name="ingresar" type="submit">  {{ __('Ingresar') }}</button>
-                </br>
-                </br>
-                  <div class="opcioncontra" ><a href="../recuperar/recuperar.php" style="color: black">¿Olvidaste tu contraseña?</a>
-                    </div>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
+                            <div class="col-md-6">
+                                <input id="id_user" type="tel" onkeypress="return numeros (event)" class="form-control @error('id_user') is-invalid @enderror" name="id_user" value="{{ old('id_user') }}" required autocomplete="id_user" autofocus>
 
-       </form>
+                                @error('id_user')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"  name="password" required >
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group row mb-0" >
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Ingresar') }}
+                                </button>
+                                @if (Route::has('password.request'))
+                                   <a class="btn btn-link" href="{{ route('password.request') }}">
+                                       {{ __('¿Olvidaste tu Contraseña?') }}
+                                   </a>
+                               @endif
+                                    </div>
+
+
+
+                        </div>
+
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
+
+
+@endsection
 
 <script>
 function numeros(e){
@@ -60,4 +90,3 @@ if(key == especiales[i]){
      return false;
 }
 </script>
-  @endsection

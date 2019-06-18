@@ -9,6 +9,12 @@
 <div class="container" id="font4">
   <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </br>
+<?php
+
+if(isset($_GET['opcion'])){
+      
+}
+?>
 <form method="POST" action="<?php echo e(route('act_datos_personales')); ?>">
   <?php echo csrf_field(); ?>
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
@@ -26,7 +32,7 @@
     </div>
     <div class="form-group col-md-3">
       <label for="cp">* Código Postal</label>
-      <input type="tel" class="form-control" name="cp" id="cp" value="<?php if(empty($d->cp)){ $vacio=null; echo $vacio;} else{ echo $d->cp;} ?>" maxlength="5"  onkeypress="return numeros (event)" placeholder="Código Postal" onKeyUp="this.value = this.value.toUpperCase();" required>
+      <input type="tel" onkeypress="return buscar();" class="form-control" name="cp" id="cp" value="<?php if(empty($d->cp)){ $vacio=null; echo $vacio;} else{ echo $d->cp;} ?>" maxlength="5"  onkeypress="return numeros (event)"  placeholder="Código Postal" onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
     <div class="form-group col-md-3">
       <label for="localidad" >*Colonia</label>
@@ -45,11 +51,11 @@
 
   <div class="form-row">
     <div class="form-group col-md-12">
-      <h6 align="left">* Contacto</h6>
+      <h6 align="left"> Contacto</h6>
         </div>
     <div class="form-group col-md-4">
       <label for="tel_local">Teléfono de Casa</label>
-        <input type="tel"  class="form-control" name="tel_local" id="tel_local" value="<?php if(empty($nl->numero)){ $vacio=null; echo $vacio;} else{ echo $nl->numero;} ?>" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos -- Ejemplo: 9515115090"  pattern="([0-9]{3})([0-9]{7})">
+        <input type="tel"  class="form-control" name="tel_local" id="tel_local" value="<?php if(empty($nl->numero)){ $vacio=null; echo $vacio;} else{ echo $nl->numero;} ?>" maxlength=""  onkeypress="return numeros (event)"  placeholder="Formato a 7 digitos -- Ejemplo: 5115090"  pattern="([0-9]{7})">
     </div>
     <div class="form-group col-md-4">
       <label for="tel_celular">* Teléfono Celular</label>
@@ -70,7 +76,15 @@
 </div>
 </br>
 
+
   <?php $__env->stopSection(); ?>
+
+  <script type="text/javascript">
+      function buscar(){
+          var opcion = document.getElementById('cp').value;
+        //  window.location.href = 'http://localhost:8888/autofillform/index.php?opcion='+opcion;
+      }
+  </script>
 <script>
 function numeros(e){
  key = e.keyCode || e.which;

@@ -12,8 +12,11 @@ Route::get('denegado', 'Homepag@restringdo')->name('denegado');
 Route::get('cargar_datos_usuario_estudiante', 'UserSystemController@cargar_datos_usuario_estudiante')->name('carga_persona');
 Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar_datos_usuarios');
 /* Rutas de logueo---*/
-Route::get('login', 'HomeController@index');
-Route::get('login_studiante', 'Estudiante_Con\EstudianteController@loginestudiantes')->name('login_studiante');
+//Route::get('login', 'HomeController@index');
+Route::get('login_studiante', 'Auth\LoginController@getLogin')->name('login_studiante');
+Route::post('login_studiante', ['as' =>'login_studiante', 'uses' => 'Auth\LoginController@postLogin']);
+//Route::post('login_admin', ['as' =>'login_admin', 'uses' => 'Administrativo_Con\AdministrativoController@index']);
+//Route::post('login_studiante', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdministrativo@postLogin']);
 Route::get('perfiles', 'Homepag@perfil')->name('perfiles');
 Route::group(['middleware' => 'auth','talleristamiddleware'], function () {
 //Route::get('login_personal', 'Administrativo_Con\AdministrativoController@login_admin')->name('login_personal');
@@ -51,8 +54,8 @@ Route::get('home_formacion', 'HomeController@index')->name('home_formacion');
 
 
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('home_estudiante', 'HomeController@index')->name('home_estudiante');
-  //Route::get('home_estudiante', 'Estudiante_Con\EstudianteController@inicio_estudiante')->name('home_estudiante');
+// Route::get('home', 'HomeController@index')->name('home_estudiante');
+  Route::get('home_estudiante', 'Estudiante_Con\EstudianteController@inicio_estudiante')->name('home_estudiante');
   Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');
 //  Route::get('datos_general', 'Estudiante_Con\EstudianteController@dato_general')->name('datos_general');
   Route::get('perfil_estudiante', 'ConsultasController@datos_nombre')->name('perfil_estudiante');

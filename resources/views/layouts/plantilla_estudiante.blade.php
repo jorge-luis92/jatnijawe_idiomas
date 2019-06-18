@@ -45,7 +45,7 @@
             <a class="collapse-item" href={{ route('datos_personal')}}>Datos Personales</a>
             <a class="collapse-item" href={{ route('datos_medico')}}>Datos Médicos</a>
             <a class="collapse-item" href={{ route('otras_actividades')}}>Otras Actividades</a>
-            <a class="collapse-item" href="#">Descargar Hoja de Datos </br> Personales</a>
+            <a class="collapse-item"  href="pdfs" target="_blank">Descargar Hoja de Datos </br> Personales</a>
 
           </div>
         </div>
@@ -63,7 +63,7 @@
             <a  class="collapse-item" href={{ route('mis_actividades')}}>Mis Actividades </br> Extraescolares</a>
             <a  class="collapse-item" href={{ route('avance')}}>Avance de Horas</a>
           <a  class="collapse-item" href={{ route('solicitud_taller')}}>Solicitud Actividades </br> Extraescolares</a>
-            <a  class="collapse-item" href="#">Generar Constancia </br>Parcial</a>
+            <a  class="collapse-item" href="">Generar Constancia </br>Parcial</a>
         </div>
       </li>
 

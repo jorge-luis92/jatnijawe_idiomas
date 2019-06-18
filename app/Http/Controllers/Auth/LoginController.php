@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Str;
 use Illuminate\Support\MessageBag;
@@ -43,16 +44,23 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
+     public function __construct(Guard $auth)
+       {
+           $this->auth = $auth;
+           //$this->middleware('guest', ['except' => 'getLogout']);
 
-    }
+       }
+       /**
+        * Get a validator for an incoming registration request.
+        *
+        * @param  array  $data
+        * @return \Illuminate\Contracts\Validation\Validator
+        */
 
-    protected function redirectTo()
+/*    protected function redirectTo()
 {
-    return 'home_estudiante';
-}
+    return 'home';
+}*/
 
     public function username()
     {
@@ -68,10 +76,38 @@ class LoginController extends Controller
   }
 
 
+          protected function getLogin()
+       {
+           return view("estudiante.login_studiante");
+       }
 
 
+  public function postLogin(Request $request)
+     {
+      $this->validate($request, [
+          'id_user' => 'required',
+          'password' => 'required',
+      ]);
 
+    //  $credentials = $request->only('id_user', 'password');
+    //  if ($this->auth->attempt($credentials, $request->has('remember')))
+//{;
 
+   $this->guard()->attempt(
+          $this->credentials($request), $request->filled('remember')
+      );
+
+    
+
+ if(Auth::user()->tipo_usuario == 'estudiante'){
+ //  return view('personal_administrativo\admin_sistema.home_admin');
+     return redirect()->route('home_estudiante')->with('sucess', 'Inicio de sesión correctamente');
+ }
+
+return redirect()->route('home_estudiante')->with('error','Usuario invalido: !Verifique sus datos!');
+     /* return view("personal_administrativo.login_personal");*/
+ //   }
+}
 
 
 }

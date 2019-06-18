@@ -45,7 +45,7 @@
             <a class="collapse-item" href=<?php echo e(route('datos_personal')); ?>>Datos Personales</a>
             <a class="collapse-item" href=<?php echo e(route('datos_medico')); ?>>Datos Médicos</a>
             <a class="collapse-item" href=<?php echo e(route('otras_actividades')); ?>>Otras Actividades</a>
-            <a class="collapse-item" href="#">Descargar Hoja de Datos </br> Personales</a>
+            <a class="collapse-item"  href="pdfs" target="_blank">Descargar Hoja de Datos </br> Personales</a>
 
           </div>
         </div>
@@ -63,7 +63,7 @@
             <a  class="collapse-item" href=<?php echo e(route('mis_actividades')); ?>>Mis Actividades </br> Extraescolares</a>
             <a  class="collapse-item" href=<?php echo e(route('avance')); ?>>Avance de Horas</a>
           <a  class="collapse-item" href=<?php echo e(route('solicitud_taller')); ?>>Solicitud Actividades </br> Extraescolares</a>
-            <a  class="collapse-item" href="#">Generar Constancia </br>Parcial</a>
+            <a  class="collapse-item" href="">Generar Constancia </br>Parcial</a>
         </div>
       </li>
 
