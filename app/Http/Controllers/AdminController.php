@@ -96,12 +96,15 @@ class AdminController extends Controller
           'nombre' => ['required', 'string', 'max:25'],
           'apellido_paterno' => ['required', 'string', 'max:25'],
           'curp' => ['required', 'string', 'min:18','max:18'],
-          'edad' => ['required', 'string', 'max:100'],
+          'edad' => ['required', 'string', 'max:70'],
           'genero' => ['required', 'string'],
          'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
 
-        $data = $request;
+
+$data = $request;
+if($data['edad'] >17){
+
         $id_prueba= random_int(1, 532986) +232859 * 123 -43 +(random_int(1, 1234));
         $password= $data['apellido_paterno'];
         $persona=new Persona;
@@ -152,10 +155,15 @@ class AdminController extends Controller
             $user->save();
               if($user->save()){
             return redirect()->route('home_admin')->with('success','¡Datos registrados correctamente!');
-          }}}}}
-      else{
-       return redirect()->route('home_admin')->with('error','error en la creacion');
-      }
+          }else{
+           return redirect()->route('home_admin')->with('error','error en la creacion');
+          }
+        }}}}
+              }
+              else{
+                return redirect()->route('home_admin')->with('error','El usuario debe ser mayor de edad');
+              }
+
       }
 
       public function Busqueda(Request $request){

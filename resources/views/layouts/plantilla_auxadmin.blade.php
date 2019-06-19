@@ -26,7 +26,7 @@
           <!-- Nav Item - Dashboard -->
 
       <li class="nav-item active">
-        <a class="nav-link" href={{ route('inicio_formacion')}}>
+        <a class="nav-link" href={{ route('home_auxiliar_adm')}}>
            <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
@@ -47,7 +47,7 @@
         </div>
       </li>
 
-      <li class="nav-item" >
+    <!--  <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#grupos" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fa fa-users" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Grupos</span>
         </a>
@@ -59,7 +59,7 @@
 
           </div>
         </div>
-      </li>
+      </li>-->
 
       <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#estudiantes" aria-expanded="true" aria-controls="collapseTwo">
@@ -70,7 +70,6 @@
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href={{ route('registro_estudiante_aux')}}>Registrar Estudiante</a>
             <a class="collapse-item" href={{ route('busqueda_estudiante_aux')}}>Búsqueda de Estudiantes</a>
-            <a class="collapse-item" href={{ route('estudiante_activo_aux')}}>Estudiantes Activos</a>
             <a class="collapse-item" href={{ route('estudiante_inactivo_aux')}}>Estudiantes Inactivos</a>
           </div>
         </div>

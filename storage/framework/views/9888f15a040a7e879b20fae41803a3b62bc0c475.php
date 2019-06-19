@@ -124,7 +124,7 @@ endif; ?>
                          <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="edad" ><?php echo e(__('* Edad')); ?></label>
-                                <input id="edad" type="tel" maxlength="2" class="form-control <?php if ($errors->has('edad')) :
+                                <input id="edad" type="tel" maxlength="2" onfocus="calcular_edad();" class="form-control <?php if ($errors->has('edad')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('edad'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
