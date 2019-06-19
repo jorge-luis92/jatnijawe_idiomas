@@ -115,7 +115,7 @@ class HomeController extends Controller
   $id=$usuario_actual->id_user;
   $archivo = $request->file('foto');
     $input  = array('image' => $archivo) ;
-    //$reglas = array('image' => 'required|image|mimes:jpeg,jpg,bmp,png,gif|max:5000');
+    $reglas = array('image' => 'required|image|mimes:jpeg,jpg,bmp,png,gif|max:5000');
       $reglas = array('image' => 'required|image|mimes:jpeg,jpg,bmp,png,gif');
     $validacion = Validator::make($input,  $reglas);
     if ($validacion->fails())

@@ -208,10 +208,10 @@ if($data['edad'] >17){
        if($usuario_actual->tipo_usuario!='4'){
          return redirect()->back();
         }
-      $est = DB::table('users')
+      /*$est = DB::table('users')
       ->where('users.bandera', '=', '1')
       ->get();
-
+*/
       $q = $request->get('q');
       if($q != null){
       $user = Estudiante::where( 'estudiantes.matricula', 'LIKE', '%' . $q . '%' )
@@ -229,7 +229,7 @@ if($data['edad'] >17){
                           ->get();
 
 
-    if ((count ($user) > 0 ) && ($est != null)){
+    if ((count ($user) > 0 ) && ($est != null )){
           return view ( 'personal_administrativo\auxiliar_administrativo.busqueda_estudiante_aux' )->withDetails ($user )->withQuery ($q);
   }
   else{
@@ -285,6 +285,29 @@ if($data['edad'] >17){
           }
         return view('personal_administrativo\admin_sistema.coordinador_inactivo');
       }
+
+      public function editar_estudiante($id_user){
+        $valor=$id_user;
+        $id=$valor;
+        $id_persona = DB::table('estudiantes')
+        ->select('estudiantes.id_persona')
+        ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+        ->where('estudiantes.matricula',$id)
+        ->take(1)
+        ->first();
+          $id_persona= json_decode( json_encode($id_persona), true);
+
+          $users = DB::table('estudiantes')
+          ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
+                   'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
+                   'personas.curp', 'personas.genero')
+          ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+          ->where('estudiantes.matricula',$id)
+          ->take(1)
+          ->first();
+
+       return view('personal_administrativo\auxiliar_administrativo.editar_estudiante')->with('u',$users);
+        }
 
 
 }

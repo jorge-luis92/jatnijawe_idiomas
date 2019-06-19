@@ -16,7 +16,7 @@
           <th scope="col">MATRICULA</th>
             <th scope="col">SEMESTRE</th>
           <th scope="col">NOMBRE</th>
-          <th style="text-align: center;" colspan="2" >ACCIONES</th>
+          <th style="text-align: center;" colspan="1" >ACCIONES</th>
         </tr>
       </thead>
       <tbody>
@@ -25,7 +25,7 @@
                <th scope="row"><?php echo $estudiantes->matricula; ?></th>
                 <th scope="row"><?php echo $estudiantes->semestre; ?></th>
                <td><?php echo $estudiantes->nombre; ?> <?php echo $estudiantes->apellido_paterno; ?> <?php echo $estudiantes->apellido_materno; ?></td>
-               <td><a data-toggle="modal" href="#">DETALLES</a></td>
+              
                 <td><a href="activar_estudiante/<?php echo e($estudiantes->id_user); ?>">ACTIVAR</a></td>
              </tr>
          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

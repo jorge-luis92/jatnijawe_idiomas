@@ -124,6 +124,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('estudiante_activo', 'AdminController@estudiante_activo')->name('estudiante_activo');
   Route::get('estudiante_inactivo', 'AdminController@estudiante_inactivo')->name('estudiante_inactivo');
 
+  Route::get('editar_estudiante/{id_user}', 'AdminController@editar_estudiante')->name('editar_estudiante');
+
   Route::get('registro_coordinador', 'AdminController@registro_coordinador')->name('registro_coordinador');
   Route::post('registro_estudiante', 'RegistroEstudiantes@create_estudiante')->name('registro_estudiante');
   Route::post('registro_estudiante_auxa', 'RegistroEstudiantes@create_estudiante_aux')->name('registro_estudiante_auxa');

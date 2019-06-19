@@ -100,12 +100,15 @@ class AdministrativoController extends Controller
     }
 
   public function busqueda_estudiante_aux(){
+
   return view('personal_administrativo\auxiliar_administrativo.busqueda_estudiante_aux');
     }
 
   public function estudiante_activo_aux(){
   return view('personal_administrativo\auxiliar_administrativo.estudiante_activo_aux');
     }
+
+    
 
 
   public function estudiante_inactivo_aux(){

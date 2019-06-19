@@ -46,7 +46,7 @@
                  <td><?php echo e($user->semestre); ?></td>
                  <td><?php echo e($user->modalidad); ?></td>
                  <td><a data-toggle="modal" href="#">EDITAR</a></td>
-                  <td><a href="desactivar_estudiante/<?php echo e($user->id_user); ?>">DESACTIVAR</a></td>
+                  <td><a href="editar_estudiante/<?php echo e($user->id_user); ?>">DESACTIVAR</a></td>
                  </tr>
              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
          </tbody>

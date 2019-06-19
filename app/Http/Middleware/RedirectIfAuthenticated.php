@@ -24,6 +24,9 @@ class RedirectIfAuthenticated
       if($usuario_actual->tipo_usuario=='4'){
          return $next($request);
       }
+      if($usuario_actual->tipo_usuario=='estudiante'){
+         return $next($request);
+      }
 
     }
 }

@@ -47,7 +47,7 @@
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href=<?php echo e(route('registro_estudiante')); ?> >Registrar</a>
             <a class="collapse-item" href=<?php echo e(route('busqueda_estudiante')); ?> > Buscar</a>
-            <a class="collapse-item" href=<?php echo e(route('estudiante_activo')); ?>   > Estudiantes Activos</a>
+          <!--  <a class="collapse-item" href=<?php echo e(route('estudiante_activo')); ?>   > Estudiantes Activos</a>-->
             <a class="collapse-item" href=<?php echo e(route('estudiante_inactivo')); ?> > Estudiantes Inactivos</a>
           </div>
         </div>

@@ -47,7 +47,7 @@
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href={{ route('registro_estudiante')}} >Registrar</a>
             <a class="collapse-item" href={{ route('busqueda_estudiante')}} > Buscar</a>
-            <a class="collapse-item" href={{ route('estudiante_activo')}}   > Estudiantes Activos</a>
+          <!--  <a class="collapse-item" href={{ route('estudiante_activo')}}   > Estudiantes Activos</a>-->
             <a class="collapse-item" href={{ route('estudiante_inactivo')}} > Estudiantes Inactivos</a>
           </div>
         </div>
