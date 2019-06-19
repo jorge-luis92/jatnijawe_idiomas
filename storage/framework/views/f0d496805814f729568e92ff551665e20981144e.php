@@ -56,8 +56,8 @@ endif; ?>
     <th scope="row">KAREN CRUZ NUÑEZ</th>
     <th scope="row">8</th>
     <th scope="row">D</th>
-    <td>  <a data-toggle="modal" href="#">APROBADO</a></td>
-    <td>  <a data-toggle="modal" href="#">NO APROBADO</a></td>
+    <td>  <a data-toggle="modal" href="#">ACREDITADO</a></td>
+    <td>  <a data-toggle="modal" href="#">NO ACREDITADO</a></td>
     </tr>
 
     </tbody>

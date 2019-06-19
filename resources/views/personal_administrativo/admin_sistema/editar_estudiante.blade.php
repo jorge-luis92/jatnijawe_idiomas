@@ -1,6 +1,7 @@
 @extends('layouts.plantilla_admin')
 @section('title')
 : Editar Estudiante
+@endsection
  @section('seccion')
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Editar Estudiante</h1>
 <div class="container" id="font4">
@@ -11,7 +12,7 @@
 
                         <div class="form-group col-md-4">
                             <label for="nombre" >{{ __('* Nombre(s)') }}</label>
-                                <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ $u->nombre }}" required autocomplete="nombre">
+                                <input id="nombre" type="text" value="{{$u}}" onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre"  required autocomplete="nombre">
                                 @error('nombre')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -79,7 +80,7 @@
                          <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="edad" >{{ __('* Edad') }}</label>
-                                <input id="edad" type="tel" maxlength="2" onfocus="calcular_edad();" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
+                                <input id="edad" type="tel" maxlength="2"  class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
                                 @error('edad')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

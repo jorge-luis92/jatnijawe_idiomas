@@ -15,13 +15,13 @@
   <!-- Latest compiled and minified JavaScript -->
   <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
   <!-- Custom fonts for this template-->
-  <link href="requisitos/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link  rel="stylesheet" href="<?php echo e(asset('requisitos/fontawesome-free/css/all.min.css')); ?>" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-3.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/nuevo.css">
-  <script src="js/validaciones.js"></script>
+  <link  rel="stylesheet" href="<?php echo e(asset('css/sb-admin-3.min.css')); ?>">
+  <link rel="stylesheet"  href="<?php echo e(asset('css/nuevo.css')); ?>">
+  <script src="<?php echo e(asset('js/validaciones.js')); ?>"></script>
   <title>Administrador del Sistema <?php echo $__env->yieldContent('title'); ?></title>
 
 </head>
@@ -32,7 +32,7 @@
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
         <a class="nav-link" href=<?php echo e(route('home_admin')); ?>>
-            <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
+            <img class="img-responsive center-block" src="<?php echo e(asset('logo.ico')); ?>" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
         Gestión de Usuarios
@@ -123,7 +123,7 @@
                   ->take(1)
                   ->first();  echo $users->nombre." ";  //echo $users->apellido_paterno." "; echo $users->apellido_materno;
                   ?></span>
-               <img class="img-profile rounded-circle"  src="image/foto.png">
+               <img class="img-profile rounded-circle"  src="<?php echo e(asset('image/foto.png')); ?>">
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -192,23 +192,22 @@
 
   </div>
 
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="requisitos/jquery/jquery.min.js"></script>
-  <script src="requisitos/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo e(asset('requisitos/jquery/jquery.min.js')); ?>"></script>
+  <script src="<?php echo e(asset('requisitos/bootstrap/js/bootstrap.bundle.min.js')); ?>"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="requisitos/jquery-easing/jquery.easing.min.js"></script>
+  <script src="<?php echo e(asset('requisitos/jquery-easing/jquery.easing.min.js')); ?>"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="<?php echo e(asset('js/sb-admin-2.min.js')); ?>"></script>
 
   <!-- Page level plugins -->
-  <script src="requisitos/chart.js/Chart.min.js"></script>
+  <script src="<?php echo e(asset('requisitos/chart.js/Chart.min.js')); ?>"></script>
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
+  <script src="<?php echo e(asset('js/demo/chart-area-demo.js')); ?>"></script>
+  <script src="<?php echo e(asset('js/demo/chart-pie-demo.js')); ?>"></script>
+
 
 
 </body>

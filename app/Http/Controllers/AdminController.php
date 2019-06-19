@@ -286,28 +286,29 @@ if($data['edad'] >17){
         return view('personal_administrativo\admin_sistema.coordinador_inactivo');
       }
 
-      public function editar_estudiante($id_user){
-        $valor=$id_user;
-        $id=$valor;
-        $id_persona = DB::table('estudiantes')
-        ->select('estudiantes.id_persona')
-        ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
-        ->where('estudiantes.matricula',$id)
-        ->take(1)
-        ->first();
-          $id_persona= json_decode( json_encode($id_persona), true);
+      public function editar_estudiantes($id_user){
+        $valor = $id_user;
 
+       return view('personal_administrativo.admin_sistema.editar_estudiante', ['u' => $valor]);
+//       return redirect()->route('editar_estudiante', ['u' => $valor ]);
+        }
+
+        public function editar_estudiante($id_user){
+
+          $ids=$id_user;
           $users = DB::table('estudiantes')
           ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
                    'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
                    'personas.curp', 'personas.genero')
           ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
-          ->where('estudiantes.matricula',$id)
+          ->where('estudiantes.matricula',$ids)
           ->take(1)
           ->first();
+  $users= json_decode( json_encode($users), true);
 
-       return view('personal_administrativo\auxiliar_administrativo.editar_estudiante')->with('u',$users);
-        }
+
+         return view('personal_administrativo\admin_sistema.editar_estudiante',['u' => $ids ]);
+          }
 
 
 }
