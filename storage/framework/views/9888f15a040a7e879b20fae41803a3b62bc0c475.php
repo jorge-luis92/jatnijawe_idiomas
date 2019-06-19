@@ -397,9 +397,21 @@ function validarInput(input) {
     }
     var l = document.getElementById('curp').value;
   var  lug = l.substring(11,13);
+  if(lug == 'AS'){
+    document.getElementById('lugar_nacimiento').value = "AGUASCALIENTES";
+  }
+  if(lug == 'BC'){
+    document.getElementById('lugar_nacimiento').value = "BAJA CALIFORNIA";
+  }
+
+  if(lug == 'BS'){
+    document.getElementById('lugar_nacimiento').value = "BAJA CALIFORNIA SUR";
+  }
+
 if(lug == 'OC'){
   document.getElementById('lugar_nacimiento').value = "OAXACA";
 }
+
     var ed = document.getElementById('fecha_nacimiento').value; //fecha de nacimiento en el formulario
     var fechaNacimiento = ed.split("-");
     var ano = fechaNacimiento[0];
