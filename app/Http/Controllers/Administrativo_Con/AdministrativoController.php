@@ -1,8 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\Administrativo_Con;
-use App\Http\Controllers\Controller;
+use App\User;
+use App\Estudiante;
+use App\Persona;
+use App\Administrativo;
+use App\Nivel;
+use App\Departamento;
+use App\Dpto_Administrativo;
+use Illuminate\Support\Facades\DB;
+use Storage;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class AdministrativoController extends Controller
 {
@@ -96,6 +109,18 @@ class AdministrativoController extends Controller
 
 
   public function estudiante_inactivo_aux(){
-  return view('personal_administrativo\auxiliar_administrativo.estudiante_inactivo_aux');
+    $usuario_actual=\Auth::user();
+     if($usuario_actual->tipo_usuario!='4'){
+       return redirect()->back();
+      }
+    $est = DB::table('estudiantes')
+    ->select('estudiantes.matricula', 'estudiantes.semestre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'users.id_user', 'users.bandera')
+    ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+    ->join('users', 'users.id_persona', '=', 'personas.id_persona')
+    ->where('users.bandera', '=', '0')
+     ->orderBy('estudiantes.semestre', 'asc')
+    ->simplePaginate(10);
+
+  return view('personal_administrativo\auxiliar_administrativo.estudiante_inactivo_aux')->with('estudiante', $est);
     }
 }

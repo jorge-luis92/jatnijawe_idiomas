@@ -203,6 +203,43 @@ if($data['edad'] >17){
 
     }
 
+    public function busqueda_aux(Request $request){
+      $usuario_actual=\Auth::user();
+       if($usuario_actual->tipo_usuario!='4'){
+         return redirect()->back();
+        }
+      $est = DB::table('users')
+      ->where('users.bandera', '=', '1')
+      ->get();
+
+      $q = $request->get('q');
+      if($q != null){
+      $user = Estudiante::where( 'estudiantes.matricula', 'LIKE', '%' . $q . '%' )
+                          ->orWhere ( 'estudiantes.semestre', 'LIKE', '%' . $q . '%' )
+                          ->orWhere ( 'estudiantes.modalidad', 'LIKE', '%' . $q . '%' )
+                          ->orWhere( 'personas.nombre', 'LIKE', '%' . $q . '%' )
+                          ->orWhere ( 'personas.apellido_paterno', 'LIKE', '%' . $q . '%' )
+                          ->orWhere ( 'personas.apellido_materno', 'LIKE', '%' . $q . '%' )
+                          ->orWhere ( 'users.email', 'LIKE', '%' . $q . '%' )
+                          ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+                          ->join('users', 'users.id_persona', '=', 'personas.id_persona')
+                          ->simplePaginate(10);
+                          $est = DB::table('users')
+                          ->where('users.bandera', '=', '1')
+                          ->get();
+
+
+    if ((count ($user) > 0 ) && ($est != null)){
+          return view ( 'personal_administrativo\auxiliar_administrativo.busqueda_estudiante_aux' )->withDetails ($user )->withQuery ($q);
+  }
+  else{
+  return redirect()->route('busqueda_estudiante_aux')->with('error','¡Sin resultados!');
+  }}  else{
+      return redirect()->route('busqueda_estudiante_aux')->with('error','¡Sin resultados!');
+  }
+
+  }
+
       public function activar_estudiante($id_user){
 
         $valor=$id_user;

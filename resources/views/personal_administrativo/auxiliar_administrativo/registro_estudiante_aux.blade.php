@@ -6,7 +6,7 @@
 @section('seccion')
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Estudiantes</h1>
 <div class="container" id="font4">
-</br>                    <form method="POST" action="{{ route('registro_estudiante') }}">
+</br>                    <form method="POST" action="{{ route('registro_estudiante_auxa') }}">
                         @csrf
 
                          <div class="form-row">

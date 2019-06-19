@@ -16,7 +16,7 @@
           <th scope="col">MATRICULA</th>
             <th scope="col">SEMESTRE</th>
           <th scope="col">NOMBRE</th>
-          <th style="text-align: center;" colspan="2" >ACCIONES</th>
+          <th style="text-align: center;" colspan="1" >ACCIONES</th>
         </tr>
       </thead>
       <tbody>
@@ -25,7 +25,7 @@
                <th scope="row">{!! $estudiantes->matricula !!}</th>
                 <th scope="row">{!! $estudiantes->semestre !!}</th>
                <td>{!! $estudiantes->nombre!!} {!! $estudiantes->apellido_paterno!!} {!! $estudiantes->apellido_materno!!}</td>
-               <td><a data-toggle="modal" href="#">DETALLES</a></td>
+              
                 <td><a href="activar_estudiante/{{ $estudiantes->id_user }}">ACTIVAR</a></td>
              </tr>
          @endforeach
