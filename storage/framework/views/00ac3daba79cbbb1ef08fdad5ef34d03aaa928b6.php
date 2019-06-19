@@ -26,7 +26,7 @@
           <!-- Nav Item - Dashboard -->
 
       <li class="nav-item active">
-        <a class="nav-link" href=<?php echo e(route('home_formacion')); ?>>
+        <a class="nav-link" href=<?php echo e(route('inicio_formacion')); ?>>
            <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">

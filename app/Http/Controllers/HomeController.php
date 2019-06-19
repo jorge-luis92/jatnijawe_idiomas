@@ -110,37 +110,6 @@ class HomeController extends Controller
 
     }
 
-    /*public function act_foto(Request $request){
-    $usuario_actual=auth()->user();
-   $id=$usuario_actual->id_user;
-  $archivo = $request->file('foto');
-      $input  = array('image' => $archivo) ;
-      $reglas = array('image' => 'required|image|mimes:jpeg,jpg,bmp,png,gif|max:5000');
-      $validacion = Validator::make($input,  $reglas);
-      if ($validacion->fails())
-      {
-          return redirect()->route('foto_perfil')->with('error','El archivo es muy pesado, intente con otra imagen ');
-      }
-      else
-      {
-        $nombre_original=$archivo->getClientOriginalName();
-    $extension=$archivo->getClientOriginalExtension();
-    $nuevo_nombre="userimagen-".$id.".".$extension;
-      $r1 = Storage::disk('public')->put($nuevo_nombre,  \File::get($archivo) );
-        $rutadelaimagen=$nuevo_nombre;
-    if ($r1){
-       // $usuario=User::find($id);
-          $usuario = Auth::user();
-        $usuario->imagenurl=$rutadelaimagen;
-        $r2=$usuario->save();
-          return redirect()->route('foto_perfil')->with('success','Foto de Perfil Actualizada Correctamente');
-      }
-      else
-      {
-          return redirect()->route('foto_perfil')->with('error','No se pudo Cargar la imagen, Intente con Otra');
-      }
-    }
-  }*/
   public function act_foto(Request $request){
   $usuario_actual=auth()->user();
   $id=$usuario_actual->id_user;

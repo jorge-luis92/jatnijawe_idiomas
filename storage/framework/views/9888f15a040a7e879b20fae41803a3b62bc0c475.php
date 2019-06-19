@@ -63,7 +63,7 @@ endif; ?>
                                 <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="curp" ><?php echo e(__('* CURP')); ?></label>
-                                  <input id="curp" type="text" minlength="18" maxlength="18" onfocus="setearGenero();"  onfocus="validarInput(this)"  onblur="setearFecha();" onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('curp')) :
+                                  <input id="curp" type="text" minlength="18" maxlength="18"  oninput="validarInput(this)"  onblur="setearFecha();"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('curp')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('curp'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -84,7 +84,7 @@ endif; ?>
                         <div class="form-group col-md-3">
                       <!--  <input type="text"  hidden size=10  maxlength=10 name="fecha_nac"  onblur="calcular_edad();" id="fecha_nac">-->
                             <label for="fecha_nacimiento" ><?php echo e(__('* Fecha de nacimiento')); ?></label>
-                                  <input id="fecha_nacimiento" onfocus="calcular_edad();"  type="date" class="form-control <?php if ($errors->has('fecha_nacimiento')) :
+                                  <input id="fecha_nacimiento"  onfocus="calcular_edad();"   type="date" class="form-control <?php if ($errors->has('fecha_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_nacimiento'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -102,7 +102,7 @@ endif; ?>
 
                         <div class="form-group col-md-5">
                             <label for="lugar_nacimiento" ><?php echo e(__('* Lugar de Nacimiento')); ?></label>
-                                  <input id="lugar_nacimiento"   onKeyUp="this.value = this.value.toUpperCase()" type="text" class="form-control <?php if ($errors->has('lugar_nacimiento')) :
+                                  <input id="lugar_nacimiento"  onKeyUp="this.value = this.value.toUpperCase()" type="text" class="form-control <?php if ($errors->has('lugar_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('lugar_nacimiento'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -142,11 +142,7 @@ endif; ?>
 
                         <div class="form-group col-md-3">
                           <label for="genero">* Género</label>
-                            <select name="genero" id="genero" required class="form-control">
-                          <option value="">Seleccione una opción</option>
-                          <option value="MASCULINO">MASCULINO</option>
-                          <option value="FEMEMINO">FEMEMINO</option>
-                    </select>
+                          <input name="genero"  id="genero" type="text" class="form-control" >
                         </div>
 
 
@@ -313,6 +309,7 @@ endif; ?>
 
 <?php $__env->stopSection(); ?>
 
+
 <script>
 function numeros(e){
  key = e.keyCode || e.which;
@@ -376,13 +373,35 @@ function validarInput(input) {
     }
 
     resultado.innerText =  "Formato: " + valido;
+    var form = document.getElementById('curp').value;
+    var  a = form.substring(16,17);
+    //var che= form.substring(4,6);
+    if(a == 0){
+    var anio =  "19"+form.substring(4,6)+"-"+ form.substring(6,8)+ "-"+  form.substring(8,10);
+
+    document.getElementById('fecha_nacimiento').value = anio ;}
+    else {
+    var anio ="20"+form.substring(4,6)+"-"+ form.substring(6,8)+ "-"+  form.substring(8,10);
+
+    document.getElementById('fecha_nacimiento').value = anio ;
+    }
+
+
+    var  as= form.substring(10,11);
+    if( as == 'H'){
+    document.getElementById('genero').value = "MASCULINO" ;
+    //alert(fe);HEVJ920901HOCRLR08
+    }
+    if( as == 'M'){
+    document.getElementById('genero').value = "FEMEMINO" ;
+    }
+    var l = document.getElementById('curp').value;
+  var  lug = l.substring(11,13);
+if(lug == 'OC'){
+  document.getElementById('lugar_nacimiento').value = "OAXACA";
 }
-</script>
-<script>
-function calcular_edad()
-{
-    var form = document.getElementById('fecha_nacimiento').value; //fecha de nacimiento en el formulario
-    var fechaNacimiento = form.split("-");
+    var ed = document.getElementById('fecha_nacimiento').value; //fecha de nacimiento en el formulario
+    var fechaNacimiento = ed.split("-");
     var ano = fechaNacimiento[0];
     var mes = fechaNacimiento[1];
     var dia = fechaNacimiento[2];
@@ -409,49 +428,21 @@ function calcular_edad()
     {
         edad =0;
     }
-  }
-  else {
+    }
+    else {
     edad=0;
-  }
+    }
     var meses=0;
     if(ahora_mes>mes)
         meses=ahora_mes-mes;
     if(ahora_mes<mes)
         meses=12-(mes-ahora_mes);
     document.getElementById('edad').value = edad;
-    document.getElementById('mes').value = mes;}
-</script>
+    document.getElementById('mes').value = mes;
 
-<script>
-function setearFecha() {
-    var form = document.getElementById('curp').value;
-var  a = form.substring(16,17);
-//var che= form.substring(4,6);
-if(a == 0){
-var anio =  "19"+form.substring(4,6)+"-"+ form.substring(6,8)+ "-"+  form.substring(8,10);
 
-document.getElementById('fecha_nacimiento').value = anio ;}
-else {
-  var anio ="20"+form.substring(4,6)+"-"+ form.substring(6,8)+ "-"+  form.substring(8,10);
+}
 
-  document.getElementById('fecha_nacimiento').value = anio ;
-}
-//alert(fe);HEVJ920901HOCRLR08
-}
-</script>
-
-<script>
-function setearGenero() {
-    var form = document.getElementById('curp').value;
-var  a = form.substring(10,11);
-if( a == 'H'){
-document.getElementById('lugar_nacimiento').value = "MASCULINO" ;
-//alert(fe);HEVJ920901HOCRLR08
-}
-else {
-  document.getElementById('lugar_nacimiento').value = "FEMEMINO" ;
-}
-}
 </script>
 
 <?php echo $__env->make('layouts.plantilla_admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\admin_sistema/registro_estudiante.blade.php ENDPATH**/ ?>

@@ -21,6 +21,7 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/nuevo.css">
+  <script src="js/validaciones.js"></script>
   <title>Administrador del Sistema <?php echo $__env->yieldContent('title'); ?></title>
 
 </head>

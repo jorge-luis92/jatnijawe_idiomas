@@ -73,7 +73,7 @@ class LoginAdministrativo extends Controller
     }
     elseif (Auth::user()->tipo_usuario == '1') {
       //  return view('personal_administrativo\formacion_integral.home_formacion');
-          return redirect()->route('home_formacion')->with('sucess', 'Inicio de sesión correctamente');
+          return redirect()->route('inicio_formacion')->with('sucess', 'Inicio de sesión correctamente');
     }
 
    }

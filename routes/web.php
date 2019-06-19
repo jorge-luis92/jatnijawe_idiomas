@@ -36,6 +36,7 @@ Route::post('admin', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdminis
 //Route::get('logout_admin', ['as' => 'logout', 'uses' => 'Administrativo_Con\LoginAdministrativo@getLogout']);
 //Route::get('/', 'HomeController@index');
 /* Rutas de Estudiante---*/
+Route::get('inicio_formacion', 'FormacionIntegralController@inicio_formacion')->name('inicio_formacion');
 
 Route::group(['middleware' => 'auth','checar'], function () {
 Route::get('home_auxiliar', 'HomeController@index')->name('home_auxiliar');
@@ -48,7 +49,6 @@ Route::get('form_nuevo_taller', 'FormacionIntegralController@form_nuevo_taller')
 Route::post('agregar_nuevo_taller', 'FormacionIntegralController@agregar_nuevo_taller')->name('agregar_nuevo_taller');
 });
 Route::group(['middleware' => 'auth'], function () {
-Route::get('home_formacion', 'HomeController@index')->name('home_formacion');
 //Route::get('busqueda', 'Administrativo_Con\AdministrativoController@formacion_busqueda')->name('busqueda');
 });
 

@@ -58,6 +58,10 @@ class AdministrativoController extends Controller
     return view('personal_administrativo\auxiliar_administrativo.home_auxiliar_adm');
   }
 
+  public function home_formacion(){
+  return view('personal_administrativo\formacion_integral.home_formacion');
+}
+
   public function carga_de_datos(){
     return view('personal_administrativo\auxiliar_administrativo.carga_de_datos');
   }
