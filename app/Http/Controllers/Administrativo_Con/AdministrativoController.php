@@ -55,6 +55,10 @@ class AdministrativoController extends Controller
     }
 
     public function home_auxiliar_adm(){
+      $usuario_actual=auth()->user();
+       if($usuario_actual->tipo_usuario!='4'){
+        return redirect()->back();
+      }
     return view('personal_administrativo\auxiliar_administrativo.home_auxiliar_adm');
   }
 

@@ -1,14 +1,11 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
-
     <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
   <!-- Custom fonts for this template-->
   <link href="requisitos/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,17 +14,20 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/nuevo.css">
-  <title>Auxiliar Administrativo <?php echo $__env->yieldContent('title'); ?></title>
+  <script src="js/funciones.min.js"></script>
+  <title>Coordinadora Académica <?php echo $__env->yieldContent('title'); ?></title>
 
 </head>
 
 <body id="page-top">
-  <div id="wrapper" ><!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
+  <div id="wrapper" style="font-family: 'Century Gothic';" >
+    <!-- Sidebar -->
+    <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
+
       <li class="nav-item active">
-        <a class="nav-link" href=<?php echo e(route('home_auxiliar_adm')); ?>>
-            <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
+        <a class="nav-link" href=<?php echo e(route('inicio_formacion')); ?>>
+           <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
         Gestión de Usuarios
@@ -77,24 +77,20 @@
       </li>
 
 
-      <!-- Nav Item - Utilities Collapse Menu -->
-
-      <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
-      <!-- Sidebar Toggler (Sidebar) -->
-      <!-- Heading -->
-      <div class="sidebar-heading" style="color: #FFFFFF">
+        <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
+<!-- Sidebar Toggler (Sidebar) -->
+    <!-- Heading -->
+    <div class="sidebar-heading" style="color: #FFFFFF">
       Utilidades
-      </div>
+    </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-
-
-      <li class="nav-item">
-      <a class="nav-link"  href=<?php echo e(route('ma_estudiante')); ?> aria-expanded="true">
-      <i class="fas fa-fw fa-archive"></i>
-      <span style="font-size: 0.9em;">Manual de Usuario</span>
-    </a>
-      </li>     <!-- Sidebar Toggler (Sidebar) -->
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+      <a class="nav-link" href="#" aria-expanded="true">
+        <i class="fas fa-fw fa-archive"></i>
+        <span style="font-size: 0.9em;">Manual de Usuario</span>
+      </a>
+    </li>
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
 
@@ -105,7 +101,7 @@
 
     <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos_idiomas/logo_fon.png'); background-position:center; background-repeat: no-repeat; position: relative; background-color: #FFFFFF;">
           <div id="content">
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5); background-color: #819FF7;">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5);background-color: #819FF7;">
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
@@ -113,21 +109,31 @@
 
 			<li >
 				 <a class="navbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt="">
+             <!--<img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt="">-->
            <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;">&nbsp;Portal de Servicios Educativos "Jat Nijawe"</h1>
 			              </a>
             </li>
 
 <div class="topbar-divider d-none d-sm-block"></div>
-            <!-- Nav Item - User Information -->
+            <!-- Nav Item - User Information
+          -->
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=auth()->user();
+                  $id=$usuario_actual->id_user;
+                  $users = DB::table('personas')
+                  ->select('personas.nombre')
+                  ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+                  ->where('users.id_persona',$id)
+                  ->take(1)
+                  ->first();  echo $users->nombre." ";  //echo $users->apellido_paterno." "; echo $users->apellido_materno;
+                  ?></span>
                <img class="img-profile rounded-circle"  src="image/foto.png">
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href=<?php echo e(route('cuenta')); ?> >
+                    <a class="dropdown-item" href="#">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
                     Configuración
                   </a>
@@ -149,18 +155,9 @@
       <!-- Footer -->
       <footer class="container-fluid text-center" style="background-color: #58ACFA; border-radius: 14px 14px 14px 14px;-moz-border-radius: 14px 14px 14px 14px;-webkit-border-radius: 14px 14px 14px 14px;border: 0px solid #000000;" >
   <p style="color: black">Av. Universidad S/N. Ex-Hacienda 5 Señores, Oaxaca, Méx. C.P. 68120 </br>Copyright &copy; <a style="color: white">Facultad de Idiomas</a> <?php $anio= date("Y"); echo $anio?>. Todos los derechos reservados.</p>
-
-  </footer>
-      <!-- End of Footer -->
-
+</footer>
     </div>
-
-    <!-- End of Content Wrapper -->
-
   </div>
-  <!-- End of Page Wrapper -->
-
-  <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
@@ -188,9 +185,6 @@
     </div>
   </div>
 
-
-
-  </div>
 
 
   <!-- Bootstrap core JavaScript-->

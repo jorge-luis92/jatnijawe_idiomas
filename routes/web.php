@@ -36,10 +36,21 @@ Route::post('admin', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdminis
 //Route::get('logout_admin', ['as' => 'logout', 'uses' => 'Administrativo_Con\LoginAdministrativo@getLogout']);
 //Route::get('/', 'HomeController@index');
 /* Rutas de Estudiante---*/
+Route::group(['middleware' => 'auth'], function () {
 Route::get('inicio_formacion', 'FormacionIntegralController@inicio_formacion')->name('inicio_formacion');
+Route::get('home_auxiliar_adm', 'Administrativo_Con\AdministrativoController@home_auxiliar_adm')->name('home_auxiliar_adm');
+Route::get('carga_de_datos', 'Administrativo_Con\AdministrativoController@carga_de_datos')->name('carga_de_datos');
+Route::get('gestion_estudiante', 'Administrativo_Con\AdministrativoController@gestion_estudiante')->name('gestion_estudiante');
+Route::get('grupo_auxadm', 'Administrativo_Con\AdministrativoController@grupo_auxadm')->name('grupo_auxadm');
+Route::get('datos_estudiantes', 'Administrativo_Con\AdministrativoController@datos_estudiantes')->name('datos_estudiantes');
+Route::get('registro_estudiante_aux', 'Administrativo_Con\AdministrativoController@registro_estudiante_aux')->name('registro_estudiante_aux');
+Route::get('busqueda_estudiante_aux', 'Administrativo_Con\AdministrativoController@busqueda_estudiante_aux')->name('busqueda_estudiante_aux');
+Route::get('estudiante_activo_aux', 'Administrativo_Con\AdministrativoController@estudiante_activo_aux')->name('estudiante_activo_aux');
+Route::get('estudiante_inactivo_aux', 'Administrativo_Con\AdministrativoController@estudiante_inactivo_aux')->name('estudiante_inactivo_aux');
+});
 
 Route::group(['middleware' => 'auth','checar'], function () {
-Route::get('home_auxiliar', 'HomeController@index')->name('home_auxiliar');
+//Route::get('home_auxiliar', 'HomeController@index')->name('home_auxiliar');
 Route::get('register_tallerista', 'FormacionIntegralController@getRegister');
 //Route::post('register_tallerista', ['as' => 'register_tallerista', 'uses' => 'FormacionIntegralController@postRegister']);
 Route::get('registros_talleristas', 'UserSystemController@index')->name('registros_talleristas');

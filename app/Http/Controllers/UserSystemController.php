@@ -300,6 +300,6 @@ public function axcel(Request $request)
      }
      });
  });
-            return redirect()->route('busqueda_estudiante')->with('success','Carga de datos exitosa');
+            return redirect()->route('carga_persona')->with('success','Carga de datos exitosa');
 }
 }

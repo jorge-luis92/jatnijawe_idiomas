@@ -5,37 +5,32 @@
 @endsection
 
 @section('seccion')
-</br>
-<div class="container" id="font2">
-  @include('flash-message')
-  <div class="col-md-12">
-      <div class="box box-primary">
-                      <div class="box-header">
-                        <h3 class="box-title">Carga de Datos para Cuenta de Usuario(Estudiantes)</h3>
-                      
-                      </div><!-- /.box-header -->
-                    <form method="post"  action="{{route ('cargar_datos_usuarios')}}"  enctype="multipart/form-data" >
-                     {{csrf_field()}}
-       <input type="hidden" name="_token" id="_token"  value="<?= csrf_token(); ?>">
-      <div class="box-body">
-      <div class="form-group col-xs-12"  >
-             <label>Agregar Archivo de Excel </label>
-              <input name="archivo" id="archivo" type="file" accept=".xlsx, .xls, .csv"  class="form-control @error('archivo') is-invalid @enderror" /><br /><br />
-              @error('archivo')
-            <span class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-      </div>
-      <div class="box-footer">
-                          <button type="submit" class="btn btn-primary">Cargar Datos</button>
-      </div>
-      </div>
-      </form>
-      </div>
 
+<div class="container" align="center" id="font7" >
+      <div class="form">
+        @include('flash-message')
+                        <form class="form-horizontal" method="POST" action="{{ route('cargar_datos_usuarios') }}" validate enctype="multipart/form-data" data-toggle="validator">
+                            {{ csrf_field() }}
+
+                            <div class="form-group col-md-8" id="labels">
+                              <label  for="archivo">Agregar Archivo de Excel </label>
+                              <input name="archivo" id="archivo" type="file" accept=".xlsx, .xls, .csv"  class="form-control @error('archivo') is-invalid @enderror" /><br /><br />
+                              @error('archivo')
+                            <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            </div>
+                            <br />
+                            <div class="form-group" align="center">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Cargar Datos
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+      </div>
   </div>
-</div>
-
 
   @endsection

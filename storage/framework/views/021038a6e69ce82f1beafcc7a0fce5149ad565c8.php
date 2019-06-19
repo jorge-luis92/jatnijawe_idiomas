@@ -5,47 +5,42 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('seccion'); ?>
-</br>
-<div class="container" id="font2">
-  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-  <div class="col-md-12">
-      <div class="box box-primary">
-                      <div class="box-header">
-                        <h3 class="box-title">Carga de Datos para Cuenta de Usuario(Estudiantes)</h3>
-                      
-                      </div><!-- /.box-header -->
-                    <form method="post"  action="<?php echo e(route ('cargar_datos_usuarios')); ?>"  enctype="multipart/form-data" >
-                     <?php echo e(csrf_field()); ?>
 
-       <input type="hidden" name="_token" id="_token"  value="<?= csrf_token(); ?>">
-      <div class="box-body">
-      <div class="form-group col-xs-12"  >
-             <label>Agregar Archivo de Excel </label>
-              <input name="archivo" id="archivo" type="file" accept=".xlsx, .xls, .csv"  class="form-control <?php if ($errors->has('archivo')) :
+<div class="container" align="center" id="font7" >
+      <div class="form">
+        <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <form class="form-horizontal" method="POST" action="<?php echo e(route('cargar_datos_usuarios')); ?>" validate enctype="multipart/form-data" data-toggle="validator">
+                            <?php echo e(csrf_field()); ?>
+
+
+                            <div class="form-group col-md-8" id="labels">
+                              <label  for="archivo">Agregar Archivo de Excel </label>
+                              <input name="archivo" id="archivo" type="file" accept=".xlsx, .xls, .csv"  class="form-control <?php if ($errors->has('archivo')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('archivo'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>" /><br /><br />
-              <?php if ($errors->has('archivo')) :
+                              <?php if ($errors->has('archivo')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('archivo'); ?>
-            <span class="invalid-feedback" role="alert">
-              <strong><?php echo e($message); ?></strong>
-            </span>
-            <?php unset($message);
+                            <span class="invalid-feedback" role="alert">
+                              <strong><?php echo e($message); ?></strong>
+                            </span>
+                            <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
+                            </div>
+                            <br />
+                            <div class="form-group" align="center">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Cargar Datos
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
       </div>
-      <div class="box-footer">
-                          <button type="submit" class="btn btn-primary">Cargar Datos</button>
-      </div>
-      </div>
-      </form>
-      </div>
-
   </div>
-</div>
-
 
   <?php $__env->stopSection(); ?>
 
