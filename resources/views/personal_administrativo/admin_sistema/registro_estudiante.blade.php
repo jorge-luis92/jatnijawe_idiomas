@@ -78,7 +78,7 @@
                          <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="edad" >{{ __('* Edad') }}</label>
-                                <input id="edad" type="tel" maxlength="2" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
+                                <input id="edad" type="tel" maxlength="2" onfocus="calcular_edad();" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
                                 @error('edad')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

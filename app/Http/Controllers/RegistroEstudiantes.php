@@ -34,6 +34,7 @@ class RegistroEstudiantes extends Controller
   $id_prueba= random_int(1, 532986) +232859 * 123 -43 +(random_int(1, 1234));
   $password= $data['matricula'];
   $tipo_usuario= 'estudiante';
+
   $persona=new Persona;
   $persona->id_persona=$id_prueba;
   $persona->nombre=$data['nombre'];
@@ -69,10 +70,10 @@ class RegistroEstudiantes extends Controller
       $user->id_persona=$id_prueba;
       $user->save();
         if($user->save()){
-      return redirect()->route('perfiles')->with('success','¡Datos registrados correctamente!');
+      return redirect()->route('home_admin')->with('success','¡Datos registrados correctamente!');
     }}}
 else{
- return redirect()->route('register')->with('error','error en la creacion');
+ return redirect()->route('registro_estudiante')->with('error','error en la creacion');
 }
 
 }

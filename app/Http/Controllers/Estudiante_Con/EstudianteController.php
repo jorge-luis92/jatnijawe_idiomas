@@ -65,7 +65,7 @@ return view('estudiante\datos.datos_medicos');
 public function dato_personal(){
   $usuario_actual=\Auth::user();
    if($usuario_actual->tipo_usuario!='estudiante'){
-     return view('errores.intentosfallidos');
+     return redirect()->back();
     }
 return view('estudiante\datos.datos_personales');
 }

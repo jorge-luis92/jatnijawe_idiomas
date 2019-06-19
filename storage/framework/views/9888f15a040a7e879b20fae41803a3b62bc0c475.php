@@ -484,7 +484,7 @@ function validarInput(input) {
   }
 
   if(lug == 'QR'){
-    document.getElementById('lugar_nacimiento').value = "QUINTANO ROO";
+    document.getElementById('lugar_nacimiento').value = "QUINTANA ROO";
   }
 
   if(lug == 'SP'){
