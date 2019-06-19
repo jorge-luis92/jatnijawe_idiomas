@@ -313,10 +313,128 @@ function validarInput(input) {
     document.getElementById('lugar_nacimiento').value = "BAJA CALIFORNIA SUR";
   }
 
-if(lug == 'OC'){
-  document.getElementById('lugar_nacimiento').value = "OAXACA";
-}
+  if(lug == 'CC'){
+    document.getElementById('lugar_nacimiento').value = "CAMPECHE";
+  }
 
+  if(lug == 'CL'){
+    document.getElementById('lugar_nacimiento').value = "COAHUILA";
+  }
+
+  if(lug == 'CM'){
+    document.getElementById('lugar_nacimiento').value = "COLIMA";
+  }
+
+  if(lug == 'CS'){
+    document.getElementById('lugar_nacimiento').value = "CHIAPAS";
+  }
+
+  if(lug == 'CH'){
+    document.getElementById('lugar_nacimiento').value = "CHIHUAHUA";
+  }
+
+  if(lug == 'DF'){
+    document.getElementById('lugar_nacimiento').value = "DISTRITO FEDERAL";
+  }
+
+  if(lug == 'DG'){
+    document.getElementById('lugar_nacimiento').value = "DURANGO";
+  }
+
+  if(lug == 'GT'){
+    document.getElementById('lugar_nacimiento').value = "GUANAJUATO";
+  }
+
+  if(lug == 'GR'){
+    document.getElementById('lugar_nacimiento').value = "GUERRERO";
+  }
+
+  if(lug == 'HG'){
+    document.getElementById('lugar_nacimiento').value = "HIDALGO";
+  }
+
+  if(lug == 'JC'){
+    document.getElementById('lugar_nacimiento').value = "JALISCO";
+  }
+
+  if(lug == 'MC'){
+    document.getElementById('lugar_nacimiento').value = "MÉXICO";
+  }
+
+  if(lug == 'MN'){
+    document.getElementById('lugar_nacimiento').value = "MICHOACÁN";
+  }
+  if(lug == 'MS'){
+    document.getElementById('lugar_nacimiento').value = "MORELOS";
+  }
+
+  if(lug == 'NT'){
+    document.getElementById('lugar_nacimiento').value = "NAYARIT";
+  }
+
+  if(lug == 'NL'){
+    document.getElementById('lugar_nacimiento').value = "NUEVO LEÓN";
+  }
+
+  if(lug == 'OC'){
+  document.getElementById('lugar_nacimiento').value = "OAXACA";
+  }
+
+  if(lug == 'PL'){
+    document.getElementById('lugar_nacimiento').value = "PUEBLA";
+  }
+
+  if(lug == 'QT'){
+    document.getElementById('lugar_nacimiento').value = "QUERÉTARO";
+  }
+
+  if(lug == 'QR'){
+    document.getElementById('lugar_nacimiento').value = "QUINTANA ROO";
+  }
+
+  if(lug == 'SP'){
+    document.getElementById('lugar_nacimiento').value = "SANTA LUIS POTOSÍ";
+  }
+
+  if(lug == 'SL'){
+    document.getElementById('lugar_nacimiento').value = "SINALOA";
+  }
+
+  if(lug == 'SR'){
+    document.getElementById('lugar_nacimiento').value = "SONORA";
+  }
+
+  if(lug == 'TC'){
+    document.getElementById('lugar_nacimiento').value = "TABASCO";
+  }
+
+  if(lug == 'TS'){
+    document.getElementById('lugar_nacimiento').value = "TAMAULIPAS";
+  }
+
+  if(lug == 'TL'){
+    document.getElementById('lugar_nacimiento').value = "TLAXCALA";
+  }
+
+  if(lug == 'VZ'){
+    document.getElementById('lugar_nacimiento').value = "VERACRUZ";
+  }
+
+  if(lug == 'YN'){
+    document.getElementById('lugar_nacimiento').value = "YUCATÁN";
+  }
+
+  if(lug == 'ZS'){
+    document.getElementById('lugar_nacimiento').value = "ZACATECAS";
+  }
+
+  if(lug == 'NE'){
+    document.getElementById('lugar_nacimiento').value = "NACIDO EN EL EXTRANJERO";
+  }
+
+  if(lug == ''){
+    document.getElementById('lugar_nacimiento').value = "";
+  }
     var ed = document.getElementById('fecha_nacimiento').value; //fecha de nacimiento en el formulario
     var fechaNacimiento = ed.split("-");
     var ano = fechaNacimiento[0];
