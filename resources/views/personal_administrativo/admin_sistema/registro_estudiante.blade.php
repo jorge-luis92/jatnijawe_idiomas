@@ -52,9 +52,9 @@
                         </div>
 
                         <div class="form-group col-md-3">
-                      <!--  <input type="text"  hidden size=10  maxlength=10 name="fecha_nac"  onblur="calcular_edad();" id="fecha_nac">-->
+                      <!--  <input type="text"  hidden size=10  maxlength=10 name="fecha_nac"   id="fecha_nac">-->
                             <label for="fecha_nacimiento" >{{ __('* Fecha de nacimiento') }}</label>
-                                  <input id="fecha_nacimiento"  onfocus="calcular_edad();"   type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror" name="fecha_nacimiento" required>
+                                  <input id="fecha_nacimiento"    type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror" name="fecha_nacimiento" required>
                                 @error('fecha_nacimiento')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -78,7 +78,7 @@
                          <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="edad" >{{ __('* Edad') }}</label>
-                                <input id="edad" type="tel" maxlength="2" onfocus="calcular_edad();" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
+                                <input id="edad" type="tel" maxlength="2"  class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
                                 @error('edad')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

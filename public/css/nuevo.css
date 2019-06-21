@@ -12,6 +12,9 @@ img#img_banner{
 	opacity: 0.7;filter:alpha(opacity=5);
   font-family: 'Century Gothic';
 }
+#d{
+background-image: url('image/logos_idiomas/logo_fon.png');
+}
 
 .blue{
    color:yellow;

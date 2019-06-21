@@ -286,14 +286,14 @@ if($data['edad'] >17){
         return view('personal_administrativo\admin_sistema.coordinador_inactivo');
       }
 
-      public function editar_estudiantes($id_user){
+      public function editar_estudiante($id_user){
         $valor = $id_user;
 
        return view('personal_administrativo.admin_sistema.editar_estudiante', ['u' => $valor]);
 //       return redirect()->route('editar_estudiante', ['u' => $valor ]);
         }
 
-        public function editar_estudiante($id_user){
+        public function editar_estudian($id_user){
 
           $ids=$id_user;
           $users = DB::table('estudiantes')
@@ -307,8 +307,7 @@ if($data['edad'] >17){
   $users= json_decode( json_encode($users), true);
 
 
-         return view('personal_administrativo\admin_sistema.editar_estudiante',['u' => $ids ]);
+         return view('personal_administrativo\admin_sistema.editar_estudiante')->with('u', $users);
           }
-
 
 }

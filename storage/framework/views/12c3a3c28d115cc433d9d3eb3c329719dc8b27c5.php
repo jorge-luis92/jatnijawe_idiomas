@@ -62,8 +62,8 @@ else {
 ?>
     <tr >
                 <td rowspan="4">
-          <!--  <img width="90" height="90" src="image/users/$im" />-->
-           <img src="<?=  $d;  ?>" width="80" height="100" ></td>
+      <!--   <img width="90" height="90" src="<?php echo e(asset($d)); ?>">-->
+          <img src="<?=  $d;  ?>" width="80" height="100" ></td>
           <td  width="90" align="right">SEMESTRE A CURSAR: </td>
           <td><input name="semestre" type="text" required id="semestre" value="<?php if(empty($data->semestre)){ $vacio=null; echo $vacio;} else{ echo $data->semestre;} ?>"  /></td>
           <td width="120" align="left">MATR&Iacute;CULA:

@@ -21,12 +21,12 @@
   <!-- Custom styles for this template-->
   <link  rel="stylesheet" href="{{asset('css/sb-admin-3.min.css')}}">
   <link rel="stylesheet"  href="{{asset('css/nuevo.css')}}">
-  <script src="{{asset('js/validaciones.js')}}"></script>
+
   <title>Administrador del Sistema @yield('title')</title>
 
 </head>
 
-<body id="page-top">
+<body id="page-top" >
   <div id="wrapper" style="font-family: 'Century Gothic';"><!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
@@ -95,7 +95,7 @@
     </ul> <!-- End of Sidebar -->
     <!-- Content Wrapper -->
 
-    <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos_idiomas/logo_fon.png'); background-position:center; background-repeat: no-repeat; position: relative; background-color: #FFFFFF;">
+    <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos_idiomas/logo_fon.png');background-position:center; background-repeat: no-repeat; position: relative; background-color: #FFFFFF;">
           <div id="content">
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5); background-color: #819FF7;">
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -121,7 +121,7 @@
                   ->join('users', 'personas.id_persona', '=', 'users.id_persona')
                   ->where('users.id_persona',$id)
                   ->take(1)
-                  ->first();  echo $users->nombre." ";  //echo $users->apellido_paterno." "; echo $users->apellido_materno;
+                  ->first();  echo $users->nombre." ";  //url('image/logos_idiomas/logo_fon.png')echo $users->apellido_paterno." "; echo $users->apellido_materno;
                   ?></span>
                <img class="img-profile rounded-circle"  src="{{asset('image/foto.png')}}">
              </a>
@@ -201,14 +201,13 @@
   <!-- Custom scripts for all pages-->
   <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
+
   <!-- Page level plugins -->
-  <script src="{{asset('requisitos/chart.js/Chart.min.js')}}"></script>
+<!--  <script src="requisitos/chart.js/Chart.min.js"></script>-->
 
   <!-- Page level custom scripts -->
-  <script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
-  <script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
-
-
+  <!--<script src="js/demo/chart-area-demo.js"></script>
+  <script src="js/demo/chart-pie-demo.js"></script>-->
 
 </body>
 
