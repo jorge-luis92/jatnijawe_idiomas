@@ -28,15 +28,16 @@ class ActvidadesExtra extends Controller
        if($usuario_actual->tipo_usuario!='estudiante'){
         return redirect()->back();
         }
+
         $result = DB::table('extracurriculares')
         ->select('extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
-        'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+        'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.control_cupo', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
         'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
         'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
-        //->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+      //  ->join('detalle_extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
         ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-      //  ->where('detalle_extracurriculares.matricula', $id)
+        ->where('extracurriculares.control_cupo', '>', '0')
         ->orderBy('personas.nombre', 'asc')
         ->simplePaginate(10);
     return view("estudiante\mis_actividades.catalogo_actividades")->with('dato', $result);
@@ -47,6 +48,12 @@ class ActvidadesExtra extends Controller
       $credito= $creditos;
       $usuario_actual=auth()->user();
       $id=$usuario_actual->id_user;
+      $result = DB::table('extracurriculares')
+      ->select('extracurriculares.control_cupo')
+     ->where('extracurriculares.id_extracurricular',$extra )
+    ->take(1)
+    ->first();
+
        $aa = DB::table('detalle_extracurriculares')
       ->select('detalle_extracurriculares.actividad')
       ->join('estudiantes', 'estudiantes.matricula', '=', 'detalle_extracurriculares.matricula')
@@ -59,6 +66,11 @@ if(empty($aa)){
           ->Insert(
               ['matricula' => $id, 'actividad' => $extra, 'creditos' => $credito, 'estado' => 'Cursando'],
           );
+       $reducir=($result->control_cupo)-1;
+          DB::table('extracurriculares')
+              ->where('extracurriculares.id_extracurricular',$extra )
+              ->update(['control_cupo' => $reducir],);
+
 
       return redirect()->route('mis_actividades')->with('success','¡Inscripción Realizada correctamente!');
     }

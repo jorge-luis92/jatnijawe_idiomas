@@ -3,7 +3,8 @@
 @section('seccion')
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Estudiantes</h1>
 <div class="container" id="font4">
-</br>                    <form method="POST" action="{{ route('registro_estudiante') }}">
+    @include('flash-message')
+</br>                    <form method="POST" action="{{ route('registro_estudiantes') }}">
                         @csrf
 
                          <div class="form-row">
@@ -279,13 +280,14 @@ function validarInput(input) {
 
     resultado.innerText =  "Formato: " + valido;
     var form = document.getElementById('curp').value;
-    var  a = form.substring(16,17);
-    //var che= form.substring(4,6);
-    if(a == 0){
+    //var  a = form.substring(16,17);
+    var che= form.substring(4,5);
+
+    if(che <= 9){
     var anio =  "19"+form.substring(4,6)+"-"+ form.substring(6,8)+ "-"+  form.substring(8,10);
 
     document.getElementById('fecha_nacimiento').value = anio ;}
-    else {
+    if(che == 0){
     var anio ="20"+form.substring(4,6)+"-"+ form.substring(6,8)+ "-"+  form.substring(8,10);
 
     document.getElementById('fecha_nacimiento').value = anio ;

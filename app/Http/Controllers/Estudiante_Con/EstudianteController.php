@@ -108,15 +108,11 @@ return view('estudiante\datos.datos_personales');
             ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
             ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
             ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-            //->where('estudiantes.matricula',$id)
             ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'],])
-            //->where([['users.bandera','=', '1'], ['users.tipo_usuario', '=', 'tallerista'],])
-          //  ->orderBy('personas.nombre', 'asc')
             ->simplePaginate(10);
 
             $avance = DB::table('detalle_extracurriculares')
-             //->join('categories', 'transactions.category_id', '=', 'categories.id')
-             ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Cursando'],])
+             ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'],])
              ->sum('detalle_extracurriculares.creditos');
 
           return  view ('estudiante\mis_actividades.avance_horas')->with('dato', $result)->with('av',$avance);
@@ -204,17 +200,10 @@ return view('estudiante\datos.datos_personales');
            $paper_orientation = 'letter';
            $customPaper = array(2.5,2.5,600,950);
 
-
-    //   $data = ['title' => 'listado'];
         $pdf = PDF::loadView('estudiante\datos.hoja_datos',  ['data' =>  $users, 'di' => $direccion, 'nu_l' => $num_local
         , 'nu_ce' => $num_cel])
-      //  ->setPaper('letter', 'vertical');
       ->setPaper($customPaper,$paper_orientation);
-        //return $pdf->download('listado_estudiantes.pdf');
         return $pdf->stream('hoja_datos_personales.pdf');
-//$paper_size = array(0,0,360,360);
-//$dompdf->set_paper($paper_size);
-    //    $pdf=PDF::loadView('print_tests.test_pdf', ['data' => $data]);
 
 
     }

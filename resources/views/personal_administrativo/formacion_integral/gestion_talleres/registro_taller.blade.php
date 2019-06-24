@@ -58,7 +58,7 @@
 
     <div class="form-group col-md-2">
         <label for="cupo" >{{ __('* Cupo') }}</label>
-        <input id="cupo" type="tel" maxlength="4" class="form-control @error('cupo') is-invalid @enderror" onkeypress="return numeros (event)" name="cupo" autocomplete="cupo" required autofocus>
+        <input id="cupo" type="tel" maxlength="3" class="form-control @error('cupo') is-invalid @enderror" onkeypress="return numeros (event)" name="cupo" autocomplete="cupo" required autofocus>
         @error('cupo')
         <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>

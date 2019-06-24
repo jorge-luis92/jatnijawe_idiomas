@@ -34,7 +34,7 @@ class RegistroEstudiantes extends Controller
   $id_prueba= random_int(1, 532986) +232859 * 123 -43 +(random_int(1, 1234));
   $password= $data['matricula'];
   $tipo_usuario= 'estudiante';
-
+  if($data['edad'] > 16){
   $persona=new Persona;
   $persona->id_persona=$id_prueba;
   $persona->nombre=$data['nombre'];
@@ -71,9 +71,9 @@ class RegistroEstudiantes extends Controller
       $user->save();
         if($user->save()){
       return redirect()->route('home_admin')->with('success','¡Datos registrados correctamente!');
-    }}}
+    }}}}
 else{
- return redirect()->route('registro_estudiante')->with('error','error en la creacion');
+ return redirect()->route('registro_estudiante')->with('error','El estudiante debe ser mayor de 16 años');
 }
 
 }
@@ -97,7 +97,7 @@ $data = $request;
 $id_prueba= random_int(1, 532986) +232859 * 123 -43 +(random_int(1, 1234));
 $password= $data['matricula'];
 $tipo_usuario= 'estudiante';
-
+if(($data['edad']) >16){
 $persona=new Persona;
 $persona->id_persona=$id_prueba;
 $persona->nombre=$data['nombre'];
@@ -134,9 +134,9 @@ if($persona->save()){
     $user->save();
       if($user->save()){
     return redirect()->route('home_auxiliar_adm')->with('success','¡Datos registrados correctamente!');
-  }}}
+  }}}}
 else{
-return redirect()->route('registro_estudiante_aux')->with('error','error en la creacion');
+return redirect()->route('registro_estudiante_aux')->with('error','El estudiante debe ser mayor a 16 años');
 }
 
 }

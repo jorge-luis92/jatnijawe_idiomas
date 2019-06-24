@@ -424,4 +424,13 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
      return redirect()->route('inicio_formacion')->with('error','error en la creacion');
     }
     }
+
+    protected function anteriores(){
+      $result = DB::table('personas')
+      ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.id_tutor')
+      ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->where('personas.nombre', '=', 'FACULTAD DE IDIOMAS')
+      ->get();
+      return view('personal_administrativo\formacion_integral.registro_estudiantes')->with('taller', $result);
+    }
 }

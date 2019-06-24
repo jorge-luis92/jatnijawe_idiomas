@@ -23,6 +23,7 @@
         <th scope="col">TUTOR</th>
         <th scope="col">DURACION</th>
         <th scope="col">HORARIO</th>
+        <th scope="col">CUPO</th>
         <th colspan="1" >ACCIONES</th>
       </tr>
     </thead>
@@ -49,7 +50,8 @@
            <?php if(empty($datos->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo date('d-m-Y', strtotime($datos->fecha_fin));}?></td>
           <td><?php if(empty($datos->dias_sem) && empty($datos->hora_fin)){ echo $datos->hora_inicio;} else{ echo $datos->dias_sem; echo "\n\n"; echo $datos->hora_inicio;echo " a "; echo $datos->hora_fin;} ?>
             </td>
-              <td><a href="inscripcion_extracurricular/<?php echo e($datos->id_extracurricular); ?>/<?php echo e($datos->creditos); ?>"><?php if(empty($usuario)){echo "INSCRIBIRSE";}?></a></td>
+            <td><?php echo e($datos->control_cupo); ?></td>
+            <td><a href="inscripcion_extracurricular/<?php echo e($datos->id_extracurricular); ?>/<?php echo e($datos->creditos); ?>"><?php if(empty($usuario)){echo "INSCRIBIRSE";}?></a></td>
           </tr>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
      </tbody>
@@ -74,7 +76,7 @@
           <div class="container" align="left">
             <div class="card" >
       <div class="card-body">
-        <h5 class="card-title">Nombre del Taller: <?php echo e($datos->nombre_ec); ?></h5>
+        <h5 class="card-title">Nombre del Taller: </h5>
         <h6 class="card-subtitle mb-2 text-muted">Tutor: <?php echo e(Auth::user()->email); ?></h6>
         <p class="card-text">Area: Cultural</p>
         <p>Fecha de Inicio: 02/03/2019</p>

@@ -128,7 +128,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('editar_estudiante/{id_user}', 'AdminController@editar_estudiante');
 
   Route::get('registro_coordinador', 'AdminController@registro_coordinador')->name('registro_coordinador');
-  Route::post('registro_estudiante', 'RegistroEstudiantes@create_estudiante')->name('registro_estudiante');
+  Route::post('registro_estudiantes', 'RegistroEstudiantes@create_estudiante')->name('registro_estudiantes');
   Route::post('registro_estudiante_auxa', 'RegistroEstudiantes@create_estudiante_aux')->name('registro_estudiante_auxa');
   Route::post('registrar_coordinador', 'AdminController@registrar_coordinador')->name('registrar_coordinador');
   Route::get('busqueda_coordinador', 'AdminController@busqueda_coordinador')->name('busqueda_coordinador');
@@ -167,6 +167,7 @@ Route::get('actividades_registradas', 'FormacionIntegralController@actividades_r
 Route::get('solictudes', 'FormacionIntegralController@solicitudes')->name('solicitudes');
 Route::get('asignar_taller', 'FormacionIntegralController@asignar_taller')->name('asignar_taller');
 Route::get('actividades_asignadas', 'FormacionIntegralController@actividades_asignadas')->name('actividades_asignadas');
+Route::get('registro_horas', 'FormacionIntegralController@anteriores')->name('registro_horas');
 
 
 

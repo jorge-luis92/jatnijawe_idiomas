@@ -32,6 +32,8 @@ class ConsultasController extends Controller
        if($usuario_actuales->tipo_usuario!='estudiante'){
          return redirect('register');
         }
+      
+
       $usuario_actual=auth()->user();
       $id=$usuario_actual->id_user;
       $id_persona = DB::table('estudiantes')
