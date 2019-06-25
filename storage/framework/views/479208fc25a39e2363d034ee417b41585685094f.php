@@ -8,7 +8,7 @@
  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitud de Taller</h1>
 <div class="container" id="font4">
-</br>                    <form method="POST" action="<?php echo e(route('solicitud_taller')); ?>">
+</br>                    <form method="POST" action="<?php echo e(route('solicitud_taller_enviar')); ?>">
 
                         <?php echo csrf_field(); ?>
 
@@ -58,7 +58,7 @@ endif; ?>
 
 <div class="form-group col-md-3">
   <label for="tel_celular">* Teléfono Celular</label>
-  <input type="tel"  class="form-control" disabled id="tel_celular" maxlength="10" value="<?php if(empty($num_->numero)){ $vacio=null; echo $vacio;} else{ echo $num_->numero;} ?>" onkeypress="return numeros (event)"  placeholder=""  pattern="([0-9]{3})([0-9]{7})" required>
+  <input type="tel" name='tel_celular' class="form-control" disabled id="tel_celular" maxlength="10" value="<?php if(empty($num_c->numero)){ $vacio=null; echo $vacio;} else{ echo $num_c->numero;} ?>" onkeypress="return numeros (event)"  placeholder=""  pattern="([0-9]{3})([0-9]{7})" required>
 </div>
 
 
@@ -150,7 +150,7 @@ endif; ?>
 
   <div class="form-group col-md-4">
     <label for="duracion">Duración</label>
-      <select name="duracion" id="duracion" required class="form-control">
+      <select name="duracion" id="duracion" required class="form-control" oninput="validarTipo(this)" >
     <option value="">Seleccione una opción</option>
     <option value="SEMESTRAL">SEMESTRAL (35 HORAS)</option>
     <option value="4MESES">4 MESES (30 HORAS)</option>
@@ -162,21 +162,27 @@ endif; ?>
   </div>
 
 <div class="form-group col-md-4">
-        <label for="hora_inicio">Hora de entrada (Tentativo)</label>
-        <input type="time" class="form-control"  id="hora_inicio" required class="form-control" >
-  </div>
+    <label for="hora_inicio">Hora de entrada(tentativo)</label>
+        <input class="timepicker form-control" type="text" id="hora_inicio" name="hora_inicio" required>
+    </div>
+
+
 
 <div class="form-group col-md-4">
     <label for="hora_fin">Hora de salida (tentativo)</label>
-    <input type="time" class="form-control"  id="hora_fin" required class="form-control" >
+      <input class="timepicker form-control" type="text" id="hora_fin" name="hora_fin" required>
 </div>
-
+<script type="text/javascript">
+    $('.timepicker').datetimepicker({
+        format: 'HH:mm'
+    });
+</script>
 </div>
 
 <div class="form-row">
   <div class="form-group col-md-2">
       <label for="creditos" ><?php echo e(__('Créditos')); ?></label>
-      <input id="creditos" type="tel" maxlength="2" class="form-control <?php if ($errors->has('creditos')) :
+      <input id="creditos" type="tel" maxlength="2" disabled class="form-control <?php if ($errors->has('creditos')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('creditos'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -193,7 +199,7 @@ endif; ?>
   </div>
   <div class="form-group col-md-2">
       <label for="cupo" ><?php echo e(__('Cupo')); ?></label>
-      <input id="cupo" type="tel" maxlength="2" class="form-control <?php if ($errors->has('cupo')) :
+      <input id="cupo" type="tel" maxlength="3" max="100" min="15" class="form-control <?php if ($errors->has('cupo')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('cupo'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -284,59 +290,40 @@ if(key == especiales[i]){
 </script>
 
 <script>
-function calcular_edad()
-{
-
- var form = document.getElementById('fecha_nac').value; //fecha de nacimiento en el formulario
-//var fechaNacimiento = a.split("/");
-  //  var form = document.getElementById('fecha_nac').value; //fecha de nacimiento en el formulario
-
-  var fechaNacimiento = form.split("-");
-
-    /*var dia = fechaNacimiento[0];
-    var mes = fechaNacimiento[1];
-    var ano = fechaNacimiento[2];
-*/
-var ano = fechaNacimiento[0];
-var mes = fechaNacimiento[1];
-var dia = fechaNacimiento[2];
-
-    var fechaHoy = new Date(); // detecto la fecha actual y asigno el dia, mes y anno a variables distintas
-    var ahora_ano = fechaHoy.getFullYear();
-    var ahora_mes = fechaHoy.getMonth()+1;
-    var ahora_dia = fechaHoy.getDate();
-
-    // realizamos el calculo
-    var edad = (ahora_ano + 1900) - ano;
-    if ( ahora_mes < mes )
-    {
-        edad--;
-    }
-    if (mes == ahora_mes && ahora_dia < dia)
-    {
-        edad--;
-    }
-    if (edad > 1900)
-    {
-        edad -= 1900;
-    }
-
-    var meses=0;
-    if(ahora_mes>mes)
-        meses=ahora_mes-mes;
-    if(ahora_mes<mes)
-        meses=12-(mes-ahora_mes);
-
-    //document.write("<br>"+edad);
-    //document.write("<br>"+meses);
-    document.getElementById('edad').value = edad;
-    document.getElementById('mes').value = mes;
-    //alert(edad);
-
+function validarTipo(input) {
+  var form = document.getElementById('duracion').value;
+  if(form == ''){
+  document.getElementById('creditos').value = 0 ;
 }
-//calcular_edad("01/09/1992");
+  if(form == 'SEMESTRAL'){
+  document.getElementById('creditos').value = 35 ;
+}
+if(form == '4MESES'){
+document.getElementById('creditos').value = 30 ;
+}
+if(form == '3MESES'){
+document.getElementById('creditos').value = 25 ;
+}
+if(form == '2MESES'){
+document.getElementById('creditos').value = 20 ;
+}
+if(form == '1MES'){
+document.getElementById('creditos').value = 15 ;
+}
+if(form == 'CHARLA'){
+document.getElementById('creditos').value = 2+" a " +10;
+}
+}
 
 
 </script>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
 <?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/estudiante\mis_actividades/solicitud_taller.blade.php ENDPATH**/ ?>

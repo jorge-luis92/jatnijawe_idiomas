@@ -2,6 +2,7 @@
 
 <?php $__env->startSection('title'); ?>
 : Búsqueda Estudiantes
+  <?php $__env->stopSection(); ?>
  <?php $__env->startSection('seccion'); ?>
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Búsqueda de Estudiantes</h1>
    <div class="container" id="font7">
@@ -81,9 +82,5 @@
       return false;
  }
  </script>
-
-
-
-  <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\formacion_integral/busqueda_estudiante_fi.blade.php ENDPATH**/ ?>

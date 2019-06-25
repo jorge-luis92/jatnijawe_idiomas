@@ -281,10 +281,8 @@ return view('estudiante\datos.datos_personales');
      ->where('estudiantes.matricula',$id)
      ->take(1)
      ->first();
-     $s="4";
-  //  $validar= var_dump($validar);
-        //$validar= json_decode( json_encode($validar), true);
-     if($validar <= $s){
+
+     if(($validar->semestre) >= 4 ){
      $id_persona = DB::table('estudiantes')
      ->select('estudiantes.id_persona')
      ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')

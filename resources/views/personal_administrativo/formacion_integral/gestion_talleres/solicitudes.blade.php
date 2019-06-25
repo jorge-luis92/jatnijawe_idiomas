@@ -2,12 +2,13 @@
 @extends('layouts.plantilla_formacion_integral')
 @section('title')
 :Solicitudes
+@endsection
  @section('seccion')
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitudes de Talleres </h1>
  <div class="container" id="font7">
  </br>
-                             <div class="table-responsive">
-                               <table class="table table-bordered table-info" style="color: #000000;" >
+                    <div class="table-responsive" style="border:1px solid #819FF7;">
+                     <table class="table table-bordered table-striped" style="color: #000000; font-size: 13px;"  >
                                  <thead>
                                    <tr>
                                      <th scope="col">SOLICITUD</th>
@@ -18,20 +19,20 @@
                                    </tr>
                                  </thead>
                                  <tbody>
-                                   <tr>
-                                          <th scope="row">1</th>
-                                          <th scope="row">JORGE LUIS HNDZ</th>
-                                          <th scope="row">LECTURA Y REDACCIÓN</th>
-                                          <th scope="row">05/06/2019</th>
-                                          <td>  <a data-toggle="modal" href="#">VER SOLICITUD</a></td>
-                                          <td>  <a data-toggle="modal" href="#">ELIMINAR</a></td>
-
+                                    @foreach($data as $detalles)
+                                    <tr style="color: #000000;">
+                                        <td>{{$detalles->num_solicitud}}</td>
+                                        <td>{{$detalles->nombre}} {{$detalles->apellido_paterno}} {{$detalles->apellido_materno}}</td>
+                                        <td>{{$detalles->nombre_taller}}</td>
+                                        <td>{{$detalles->fecha_solicitud}}</td>
+                                        <td>  <a data-toggle="modal" href="#">VER SOLICITUD</a></td>
+                                           <td>  <a data-toggle="modal" href="#">ELIMINAR</a></td>
                                         </tr>
-
-
-                                 </tbody>
-                               </table>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                              </div>
+                             <br />
                          </div>
 
 
@@ -56,7 +57,3 @@
       return false;
  }
  </script>
-
-
-
-  @endsection

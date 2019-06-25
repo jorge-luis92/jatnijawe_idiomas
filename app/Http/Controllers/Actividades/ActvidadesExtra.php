@@ -12,6 +12,7 @@ use App\Departamento;
 use App\Dpto_Administrativo;
 use App\Telefono;
 use App\Tutor;
+use App\SolicitudTaller;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use App\Http\Controllers\Controller;
@@ -81,5 +82,28 @@ if(empty($aa)){
 
   }
 
+protected function envio_taller(Request $request){
+
+$data=$request;
+$usuario_actual=auth()->user();
+$id=$usuario_actual->id_user;
+$now = new \DateTime();
+$taller=new SolicitudTaller;
+$taller->fecha_solicitud=$now;
+$taller->nombre_taller=$data['nombre_taller'];
+$taller->descripcion=$data['descripcion'];
+$taller->objetivos=$data['objetivos'];
+$taller->justificacion=$data['justificacion'];
+$taller->creditos=$data['creditos'];
+$taller->proyecto_final=$data['propuesta'];
+$taller->cupo=$data['cupo'];
+$taller->matricula=$id;
+$taller->departamento='1';
+$taller->estado='Pendiente';
+$taller->save();
+if($taller->save()){
+return redirect()->route('home_estudiante')->with('success','¡Solicitud enviada Correctamente!');
+}
+}
 
 }
