@@ -13,6 +13,7 @@ use App\Departamento;
 use App\Dpto_Administrativo;
 use App\Telefono;
 use App\Tutor;
+use App\SolicitudTaller;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use App\Http\Controllers\Controller;
@@ -202,6 +203,15 @@ class FormacionIntegralController extends Controller
 
     public function solicitudes()
     {
+                                                               'justificacion', 'creditos', 'proyecto_final', 'cupo', 'matricula',
+      'departamento', 'estado',
+      $result = DB::table('solicitud_talleres')
+      ->select('solicitud_talleres.fecha_solicitud', 'solicitud_talleres.nombre_taller', 'solicitud_talleres.descripcion',
+      'solicitud_talleres.objetivos', 'solicitud_talleres.justificacion', 'solicitud_talleres.creditos',
+      'solicitud_talleres')
+      ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->orderBy('personas.nombre', 'asc')
+      ->get();
     return view('personal_administrativo\formacion_integral\gestion_talleres.solicitudes');
     }
 

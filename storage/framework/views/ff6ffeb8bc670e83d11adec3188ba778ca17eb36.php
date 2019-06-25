@@ -4,38 +4,8 @@
 :Solicitudes
  <?php $__env->startSection('seccion'); ?>
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitudes de Talleres </h1>
- <div class="container" id="font4">
- </br>                    <form method="POST" action="<?php echo e(route('solicitudes')); ?>">
-                         <?php echo csrf_field(); ?>
-
-                          <div class="form-row">
-                            <label for="nombre" ><?php echo e(__('Buscar solictudes')); ?></label>
-                         <div class="form-group col-md-4">
-
-                                 <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('nombre'); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="nombre" value="<?php echo e(old('nombre')); ?>" required autocomplete="nombre">
-                                 <?php if ($errors->has('nombre')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('nombre'); ?>
-                                     <span class="invalid-feedback" role="alert">
-                                         <strong><?php echo e($message); ?></strong>
-                                     </span>
-                               <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>
-                         </div>
-
-
-                             <div class="col-xs-offset-2 col-xs-9" align="center">
-                                 <button type="submit" class="btn btn-primary">
-                                     <?php echo e(__('Buscar')); ?>
-
-                                 </button>
-                             </div>
-
+ <div class="container" id="font7">
+ </br>
                              <div class="table-responsive">
                                <table class="table table-bordered table-info" style="color: #000000;" >
                                  <thead>
@@ -62,10 +32,8 @@ endif; ?>
                                  </tbody>
                                </table>
                              </div>
-
                          </div>
-                     </form>
-                 </div>
+
 
  <?php $__env->stopSection(); ?>
 

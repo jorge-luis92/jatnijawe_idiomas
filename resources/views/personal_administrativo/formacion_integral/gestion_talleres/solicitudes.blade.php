@@ -4,29 +4,8 @@
 :Solicitudes
  @section('seccion')
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitudes de Talleres </h1>
- <div class="container" id="font4">
- </br>                    <form method="POST" action="{{ route('solicitudes') }}">
-                         @csrf
-
-                          <div class="form-row">
-                            <label for="nombre" >{{ __('Buscar solictudes') }}</label>
-                         <div class="form-group col-md-4">
-
-                                 <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre">
-                                 @error('nombre')
-                                     <span class="invalid-feedback" role="alert">
-                                         <strong>{{ $message }}</strong>
-                                     </span>
-                               @enderror
-                         </div>
-
-
-                             <div class="col-xs-offset-2 col-xs-9" align="center">
-                                 <button type="submit" class="btn btn-primary">
-                                     {{ __('Buscar') }}
-                                 </button>
-                             </div>
-
+ <div class="container" id="font7">
+ </br>
                              <div class="table-responsive">
                                <table class="table table-bordered table-info" style="color: #000000;" >
                                  <thead>
@@ -53,10 +32,8 @@
                                  </tbody>
                                </table>
                              </div>
-
                          </div>
-                     </form>
-                 </div>
+
 
  @endsection
 
