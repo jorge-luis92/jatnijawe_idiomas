@@ -33,7 +33,8 @@
                    <th>Nombre</th>
                    <th>Semestre</th>
                    <th>Modalidad</th>
-                   <th colspan="3" >ACCIONES</th>
+                   <th>Avance</th>
+                   <th colspan="2" style="text-align: center;" >ACCIONES</th>
                </tr>
            </thead>
            <tbody>
@@ -43,7 +44,7 @@
                    <td><?php echo e($user->nombre); ?> <?php echo e($user->apellido_paterno); ?> <?php echo e($user->apellido_materno); ?></td>
                    <td><?php echo e($user->semestre); ?></td>
                    <td><?php echo e($user->modalidad); ?></td>
-                   <td><a data-toggle="modal" href="#">Detalles</a></td>
+                   <td><a href="avance_estudiante/<?php echo e($user->matricula); ?>">Detalles</a></td>
                     <td><a href="desactivar_estudiante/<?php echo e($user->id_user); ?>">Generar Comprobante</a></td>
                     <td><a href="desactivar_estudiante/<?php echo e($user->id_user); ?>">Generar Constancia</a></td>
                    </tr>

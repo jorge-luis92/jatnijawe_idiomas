@@ -433,4 +433,25 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
       ->get();
       return view('personal_administrativo\formacion_integral.registro_estudiantes')->with('taller', $result);
     }
+
+    protected function ver_avance($matricula){
+
+      $id=$matricula;
+      $result = DB::table('detalle_extracurriculares')
+      ->select('detalle_extracurriculares.estado','extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+      'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+      'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+      'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+      ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+      ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+      ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Cursando'],])
+      ->simplePaginate(10);
+
+      $avance = DB::table('detalle_extracurriculares')
+       ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Cursando'],])
+       ->sum('detalle_extracurriculares.creditos');
+
+    return  view ('personal_administrativo\formacion_integral.avance_estudiante')->with('dato', $result)->with('av',$avance);
+    }
 }

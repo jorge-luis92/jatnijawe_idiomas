@@ -168,7 +168,7 @@ Route::get('solictudes', 'FormacionIntegralController@solicitudes')->name('solic
 Route::get('asignar_taller', 'FormacionIntegralController@asignar_taller')->name('asignar_taller');
 Route::get('actividades_asignadas', 'FormacionIntegralController@actividades_asignadas')->name('actividades_asignadas');
 Route::get('registro_horas', 'FormacionIntegralController@anteriores')->name('registro_horas');
-
+Route::get('avance_estudiante/{matricula}', 'FormacionIntegralController@ver_avance');
 
 
 /*Controller ADMIN DEL SISTEMA

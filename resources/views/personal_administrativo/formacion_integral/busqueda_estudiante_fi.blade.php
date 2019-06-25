@@ -32,7 +32,8 @@
                    <th>Nombre</th>
                    <th>Semestre</th>
                    <th>Modalidad</th>
-                   <th colspan="3" >ACCIONES</th>
+                   <th>Avance</th>
+                   <th colspan="2" style="text-align: center;" >ACCIONES</th>
                </tr>
            </thead>
            <tbody>
@@ -42,7 +43,7 @@
                    <td>{{$user->nombre}} {{$user->apellido_paterno}} {{$user->apellido_materno}}</td>
                    <td>{{$user->semestre}}</td>
                    <td>{{$user->modalidad}}</td>
-                   <td><a data-toggle="modal" href="#">Detalles</a></td>
+                   <td><a href="avance_estudiante/{{ $user->matricula }}">Detalles</a></td>
                     <td><a href="desactivar_estudiante/{{ $user->id_user }}">Generar Comprobante</a></td>
                     <td><a href="desactivar_estudiante/{{ $user->id_user }}">Generar Constancia</a></td>
                    </tr>
