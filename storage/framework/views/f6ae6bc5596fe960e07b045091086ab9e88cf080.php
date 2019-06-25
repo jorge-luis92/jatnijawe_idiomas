@@ -26,8 +26,8 @@
 
        <?php if(isset($details)): ?>
        <div class="table-responsive" style="border:1px solid #819FF7;">
-       <table class="table table-bordered table-striped" >
-           <thead>
+         <table class="table table-bordered table-striped" style="color: #000000; font-size: 13px;"  >
+             <thead>
                <tr style="color: #000000;">
                    <th>Matricula</th>
                    <th>Nombre</th>
@@ -45,8 +45,8 @@
                    <td><?php echo e($user->semestre); ?></td>
                    <td><?php echo e($user->modalidad); ?></td>
                    <td><a href="avance_estudiante/<?php echo e($user->matricula); ?>">Detalles</a></td>
-                    <td><a href="desactivar_estudiante/<?php echo e($user->id_user); ?>">Generar Comprobante</a></td>
-                    <td><a href="desactivar_estudiante/<?php echo e($user->id_user); ?>">Generar Constancia</a></td>
+                    <td><a href="constancia_parcial/<?php echo e($user->matricula); ?>" target="_blank">Generar Comprobante</a></td>
+                    <td><a href="constancia_valida/<?php echo e($user->matricula); ?>" target="_blank">Generar Constancia</a></td>
                    </tr>
                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
            </tbody>

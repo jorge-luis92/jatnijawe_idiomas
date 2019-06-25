@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use PDF;
+use Dompdf\Dompdf;
 
 
 
@@ -191,6 +193,8 @@ class FormacionIntegralController extends Controller
       'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
       ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
       ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->where('extracurriculares.bandera', '=', '1')
+      //->where([['extracurriculares.control_cupo', '>', '0'], ['extracurriculares.control_cupo', '=', '1'],])
       ->orderBy('personas.nombre', 'asc')
       ->simplePaginate(10);
     return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_registradas')->with('dato', $result);
@@ -438,20 +442,136 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
 
       $id=$matricula;
       $result = DB::table('detalle_extracurriculares')
-      ->select('detalle_extracurriculares.estado','extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+      ->select('detalle_extracurriculares.actividad', 'detalle_extracurriculares.estado','extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
       'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
       'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
       'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
       ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
       ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
       ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-      ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Cursando'],])
+      ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'],])
+      ->orderBy('extracurriculares.nombre_ec', 'asc')
       ->simplePaginate(10);
 
-      $avance = DB::table('detalle_extracurriculares')
-       ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Cursando'],])
+      $academicas = DB::table('detalle_extracurriculares')
+       ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+       ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'ACADEMICA'],])
+        ->sum('detalle_extracurriculares.creditos');
+      $culturales = DB::table('detalle_extracurriculares')
+       ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+       ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'CULTURAL'],])
        ->sum('detalle_extracurriculares.creditos');
+      $deportivas = DB::table('detalle_extracurriculares')
+      ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+      ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'DEPORTIVA'],])
+      ->sum('detalle_extracurriculares.creditos');
+      $sumas = $academicas + $culturales + $deportivas;
 
-    return  view ('personal_administrativo\formacion_integral.avance_estudiante')->with('dato', $result)->with('av',$avance);
+    return  view ('personal_administrativo\formacion_integral.avance_estudiante')->with('dato', $result)
+    ->with('aca',$academicas)
+    ->with('cul',$culturales)
+    ->with('dep',$deportivas)
+    ->with('suma',$sumas)
+    ->with('mat',$id);
     }
+
+protected function acreditar_estudiantes($actividad, $matricula){
+$act=$actividad;
+$mat=$matricula;
+
+  DB::table('detalle_extracurriculares')
+        ->where([['detalle_extracurriculares.matricula','=', $mat], ['detalle_extracurriculares.actividad', '=', $act],])
+        ->update(
+          ['estado' => 'Acreditado'],
+      );
+      return redirect()->route('inicio_formacion')->with('success','¡Acreditación Correcta!');
+}
+
+protected function constancia_par($matricula){
+  $id=$matricula;
+  $datos_estudiante = DB::table('estudiantes')
+   ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+  ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+  ->where('estudiantes.matricula',$id)
+  ->take(1)
+  ->first();
+
+  $academicas = DB::table('detalle_extracurriculares')
+  ->select('extracurriculares.nombre_ec')
+   ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+   ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'ACADEMICA'],])
+   ->orderBy('extracurriculares.nombre_ec', 'asc')
+   ->get();
+
+  $culturales = DB::table('detalle_extracurriculares')
+   ->select('extracurriculares.nombre_ec')
+   ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+   ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'CULTURAL'],])
+   ->orderBy('extracurriculares.nombre_ec', 'asc')
+   ->get();
+
+  $deportivas = DB::table('detalle_extracurriculares')
+  ->select('extracurriculares.nombre_ec')
+  ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+  ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'DEPORTIVA'],])
+  ->orderBy('extracurriculares.nombre_ec', 'asc')
+  ->get();
+
+  $paper_orientation = 'letter';
+  $customPaper = array(2.5,2.5,600,950);
+
+  $pdf = PDF::loadView('personal_administrativo\formacion_integral.constanciaParcial', ['data' =>  $datos_estudiante,
+  'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas])
+  ->setPaper($customPaper,$paper_orientation);
+  return $pdf->stream('constancia_oficial.pdf');
+
+}
+
+protected function constancia_val($matricula){
+$id=$matricula;
+  $datos_estudiante = DB::table('estudiantes')
+   ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+  ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+  ->where('estudiantes.matricula',$id)
+  ->take(1)
+  ->first();
+
+$academicas = DB::table('detalle_extracurriculares')
+ ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+ ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'ACADEMICA'],])
+  ->sum('detalle_extracurriculares.creditos');
+$culturales = DB::table('detalle_extracurriculares')
+ ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+ ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'CULTURAL'],])
+ ->sum('detalle_extracurriculares.creditos');
+$deportivas = DB::table('detalle_extracurriculares')
+->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'DEPORTIVA'],])
+->sum('detalle_extracurriculares.creditos');
+$sumas = $academicas + $culturales + $deportivas;
+if($academicas >= 80 && $sumas >= 200){
+    $paper_orientation = 'letter';
+    $customPaper = array(2.5,2.5,600,950);
+
+ $pdf = PDF::loadView('personal_administrativo\formacion_integral.constanciaOficial', ['data' =>  $datos_estudiante,
+ 'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas, 'suma' => $sumas])
+->setPaper($customPaper,$paper_orientation);
+ return $pdf->stream('constancia_oficial.pdf');
+}
+else{
+  return redirect()->route('busqueda_estudiante_fi')->with('error','¡El Estudiante no cumple con los requisitos para generar la constancia!');
+}
+}
+
+protected function desactivar_extracurricular($actividad){
+$id_extra= $actividad;
+  DB::table('extracurriculares')
+      ->where('extracurriculares.id_extracurricular', $id_extra)
+      ->update(
+          ['bandera' => '0'],
+      );
+      return redirect()->route('actividades_registradas')->with('success','¡Actividad Desactivada!');
+
+
+}
 }

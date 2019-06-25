@@ -164,11 +164,16 @@ Route::get('desactivar_tallerista/{id_user}', 'FormacionIntegralController@desac
 Route::get('activar_tallerista/{id_user}', 'FormacionIntegralController@activar_tallerista');
 //
 Route::get('actividades_registradas', 'FormacionIntegralController@actividades_registradas')->name('actividades_registradas');
-Route::get('solictudes', 'FormacionIntegralController@solicitudes')->name('solicitudes');
+Route::get('solicitudes', 'FormacionIntegralController@solicitudes')->name('solicitudes');
 Route::get('asignar_taller', 'FormacionIntegralController@asignar_taller')->name('asignar_taller');
 Route::get('actividades_asignadas', 'FormacionIntegralController@actividades_asignadas')->name('actividades_asignadas');
 Route::get('registro_horas', 'FormacionIntegralController@anteriores')->name('registro_horas');
 Route::get('avance_estudiante/{matricula}', 'FormacionIntegralController@ver_avance');
+Route::get('constancia_parcial/{matricula}', 'FormacionIntegralController@constancia_par');
+Route::get('constancia_valida/{matricula}', 'FormacionIntegralController@constancia_val');
+Route::get('acreditar_estudiantes_formacion/{actividad}/{matricula}', 'FormacionIntegralController@acreditar_estudiantes');
+Route::get('desactivar_extra/{actividad}', 'FormacionIntegralController@desactivar_extracurricular');
+
 
 
 /*Controller ADMIN DEL SISTEMA

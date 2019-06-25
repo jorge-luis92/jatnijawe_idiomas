@@ -9,8 +9,8 @@
  </br>                    <form method="POST" action="{{ route('actividades_registradas') }}">
                          @csrf
                           <div class="form-row">
-                             <div class="table-responsive">
-                               <table class="table table-bordered table-info" style="color: #000000;" >
+                               <div class="table-responsive" style="border:1px solid #819FF7;">
+                                 <table class="table table-bordered table-striped" style="color: #000000; font-size: 13px;"  >
                                  <thead>
                                    <tr>
                                      <th scope="col">ACTIVIDAD</th>
@@ -31,8 +31,7 @@
                                        <td>{{$datos->modalidad}}</td>
                                        <td>{{$datos->creditos}}</td>
                                        <td>{{$datos->nombre}} {{$datos->apellido_paterno}} {{$datos->apellido_materno}}</td>
-                                    <!--   <td><a data-toggle="modal" href="#actividad_detalle">Detalles</a></td>-->
-                                        <td><a href="">Desactivar</a></td>
+                                       <td><a href="desactivar_extra/{{$datos->id_extracurricular}}">Desactivar</a></td>
                                       </tr>
                                    @endforeach
                                </tbody>
@@ -45,40 +44,7 @@
                      </form>
                  </div>
 
-                 <div class="modal fade" tabindex="-1" role="dialog" id="actividad_detalle" aria-labelledby="#actividad_detalles " aria-hidden="true">
-                   <div class="modal-dialog modal-lg">
-                     <div class="modal-content">
-                       <div class="container" id="font7">
-                         </br>
-                       <div class="table-responsive">
-                         <table class="table table-bordered table-info" style="color: #000000;" >
-                           <thead>
-                             <tr>
-                               <th scope="col">Fecha Inicio</th>
-                               <th scope="col">Fecha Terminación</th>
-                               <th scope="col">Hora Inicio</th>
-                               <th scope="col">Hora Fin</th>
-                             </tr>
-                           </thead>
-                           <tbody>
-                             @foreach($dato as $datos)
-                             <tr>
-                               <td>{!! $datos->fecha_inicio !!}</td>
-                               <td>{!! $datos->fecha_fin !!}</td>
-                               <td>{!! $datos->hora_inicio !!}</td>
-                               <td>{!! $datos->hora_fin !!}</td>
-                             </tr>
-                      @endforeach
-                           </tbody>
-                         </table>
-                       </div>
-                       @if (count($dato))
-                         {{ $dato->links() }}
-                       @endif
-                       </div>
-                     </div>
-                   </div>
-                 </div>
+
 
  @endsection
 

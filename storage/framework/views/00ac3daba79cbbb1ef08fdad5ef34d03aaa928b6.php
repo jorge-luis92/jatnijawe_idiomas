@@ -95,8 +95,8 @@
             <a class="collapse-item" href=<?php echo e(route('registro_taller')); ?>>Registrar Taller</a>
               <a class="collapse-item" href=<?php echo e(route('registro_conferencia')); ?>>Registrar Conferencia</a>
              <a class="collapse-item" href=<?php echo e(route('actividades_registradas')); ?>>Actividades Registradas</a>
-             <a class="collapse-item" href=<?php echo e(route('actividades_asignadas')); ?>>Actividades Asignadas</a>
-              <a class="collapse-item" href=<?php echo e(route('solicitudes')); ?>>Solicitudes</a>
+            <!-- <a class="collapse-item" href=<?php echo e(route('actividades_asignadas')); ?>>Actividades Asignadas</a>
+            -->  <a class="collapse-item" href=<?php echo e(route('solicitudes')); ?>>Solicitudes</a>
 
           </div>
         </div>
@@ -111,7 +111,7 @@
       Utilidades
     </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Nav Item - Pages Collapse Menus -->
     <li class="nav-item">
       <a class="nav-link" href="#" aria-expanded="true">
         <i class="fas fa-fw fa-archive"></i>

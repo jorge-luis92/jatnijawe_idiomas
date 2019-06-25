@@ -9,8 +9,8 @@
  </br>                    <form method="POST" action="<?php echo e(route('actividades_registradas')); ?>">
                          <?php echo csrf_field(); ?>
                           <div class="form-row">
-                             <div class="table-responsive">
-                               <table class="table table-bordered table-info" style="color: #000000;" >
+                               <div class="table-responsive" style="border:1px solid #819FF7;">
+                                 <table class="table table-bordered table-striped" style="color: #000000; font-size: 13px;"  >
                                  <thead>
                                    <tr>
                                      <th scope="col">ACTIVIDAD</th>
@@ -31,8 +31,7 @@
                                        <td><?php echo e($datos->modalidad); ?></td>
                                        <td><?php echo e($datos->creditos); ?></td>
                                        <td><?php echo e($datos->nombre); ?> <?php echo e($datos->apellido_paterno); ?> <?php echo e($datos->apellido_materno); ?></td>
-                                    <!--   <td><a data-toggle="modal" href="#actividad_detalle">Detalles</a></td>-->
-                                        <td><a href="">Desactivar</a></td>
+                                       <td><a href="desactivar_extra/<?php echo e($datos->id_extracurricular); ?>">Desactivar</a></td>
                                       </tr>
                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                </tbody>
@@ -46,41 +45,7 @@
                      </form>
                  </div>
 
-                 <div class="modal fade" tabindex="-1" role="dialog" id="actividad_detalle" aria-labelledby="#actividad_detalles " aria-hidden="true">
-                   <div class="modal-dialog modal-lg">
-                     <div class="modal-content">
-                       <div class="container" id="font7">
-                         </br>
-                       <div class="table-responsive">
-                         <table class="table table-bordered table-info" style="color: #000000;" >
-                           <thead>
-                             <tr>
-                               <th scope="col">Fecha Inicio</th>
-                               <th scope="col">Fecha Terminación</th>
-                               <th scope="col">Hora Inicio</th>
-                               <th scope="col">Hora Fin</th>
-                             </tr>
-                           </thead>
-                           <tbody>
-                             <?php $__currentLoopData = $dato; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $datos): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                             <tr>
-                               <td><?php echo $datos->fecha_inicio; ?></td>
-                               <td><?php echo $datos->fecha_fin; ?></td>
-                               <td><?php echo $datos->hora_inicio; ?></td>
-                               <td><?php echo $datos->hora_fin; ?></td>
-                             </tr>
-                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                           </tbody>
-                         </table>
-                       </div>
-                       <?php if(count($dato)): ?>
-                         <?php echo e($dato->links()); ?>
 
-                       <?php endif; ?>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
 
  <?php $__env->stopSection(); ?>
 

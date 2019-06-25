@@ -37,7 +37,8 @@ class ActvidadesExtra extends Controller
       //  ->join('detalle_extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
         ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-        ->where('extracurriculares.control_cupo', '>', '0')
+        //->where('extracurriculares.control_cupo', '>', '0')
+        ->where([['extracurriculares.control_cupo', '>', '0'], ['extracurriculares.bandera', '=', '1'],])
         ->orderBy('personas.nombre', 'asc')
         ->simplePaginate(10);
     return view("estudiante\mis_actividades.catalogo_actividades")->with('dato', $result);
