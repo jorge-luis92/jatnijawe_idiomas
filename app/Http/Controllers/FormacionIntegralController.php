@@ -203,7 +203,7 @@ class FormacionIntegralController extends Controller
 
     public function solicitudes()
     {
-      $result = DB::table('solicitud_talleres')
+        $result = DB::table('solicitud_talleres')
       ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.fecha_solicitud', 'solicitud_talleres.nombre_taller', 'solicitud_talleres.descripcion',
       'solicitud_talleres.objetivos', 'solicitud_talleres.justificacion', 'solicitud_talleres.creditos',
       'solicitud_talleres.proyecto_final', 'solicitud_talleres.cupo', 'solicitud_talleres.matricula', 'solicitud_talleres.departamento',

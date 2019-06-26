@@ -14,7 +14,8 @@
                                      <th scope="col">SOLICITUD</th>
                                       <th scope="col">ESTUDIANTE</th>
                                        <th scope="col">TALLER</th>
-                                     <th scope="col">FECHA</th>
+                                     <th scope="col">FECHA DE SOLICITUD</th>
+                                     <th scope="col">DETALLES</th>
                                      <th colspan="2" >ACCIONES</th>
                                    </tr>
                                  </thead>
@@ -24,9 +25,10 @@
                                         <td><?php echo e($detalles->num_solicitud); ?></td>
                                         <td><?php echo e($detalles->nombre); ?> <?php echo e($detalles->apellido_paterno); ?> <?php echo e($detalles->apellido_materno); ?></td>
                                         <td><?php echo e($detalles->nombre_taller); ?></td>
-                                        <td><?php echo e($detalles->fecha_solicitud); ?></td>
-                                        <td>  <a data-toggle="modal" href="#">VER SOLICITUD</a></td>
-                                           <td>  <a data-toggle="modal" href="#">ELIMINAR</a></td>
+                                        <td><?php echo e(date('d-m-Y', strtotime($detalles->fecha_solicitud))); ?> </td>
+                                        <td><a href="pdf_solicitud_taller/<?php echo e($detalles->matricula); ?>" target="_blank">VER SOLICITUD</a></td>
+                                        <td>  <a data-toggle="modal" href="#">APROBAR</a></td>
+                                        <td>  <a data-toggle="modal" href="#">ELIMINAR</a></td>
                                         </tr>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>

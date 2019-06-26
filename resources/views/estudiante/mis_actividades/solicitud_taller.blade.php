@@ -13,7 +13,7 @@
                         @csrf
 
 <div class="form-row">
-  <div class="form-group col-md-5">
+  <div class="form-group col-md-4">
     <label for="nombre" >{{ __('Nombre del Solicitante') }}</label>
     <input id="nombre" type="text" value="{{$u->nombre}} {{$u->apellido_paterno}} {{$u->apellido_materno}}" disabled onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre"  required autocomplete="nombre">
           @error('nombre')
@@ -21,6 +21,16 @@
     <strong>{{ $message }}</strong>
       </span>
         @enderror
+</div>
+
+<div class="form-group col-md-2" id="labels">
+  <label for="semestre">Semestre</label>
+  <input type="number" name="semestre" class="form-control" disabled id="semestre" value="{{$u->semestre}}" >
+</div>
+
+<div class="form-group col-md-2" id="labels">
+  <label for="modalidad">Modalidad</label>
+  <input type="text" name="modalidad" class="form-control" disabled id="modalidad" value="{{$u->modalidad}}" >
 </div>
 
 <div class="form-group col-md-2">
@@ -32,15 +42,9 @@
     <strong>{{ $message }}</strong>
     </span>
         @enderror
-
 </div>
 
-<div class="form-group col-md-2" id="labels">
-  <label for="semestre">Semestre</label>
-  <input type="number" name="semestre" class="form-control" disabled id="semestre" value="{{$u->semestre}}" disabled>
-</div>
-
-<div class="form-group col-md-3">
+<div class="form-group col-md-2">
   <label for="tel_celular">* Teléfono Celular</label>
   <input type="tel" name='tel_celular' class="form-control" disabled id="tel_celular" maxlength="10" value="<?php if(empty($num_c->numero)){ $vacio=null; echo $vacio;} else{ echo $num_c->numero;} ?>" onkeypress="return numeros (event)"  placeholder=""  pattern="([0-9]{3})([0-9]{7})" required>
 </div>
@@ -51,7 +55,7 @@
 
 <div class="form-row">
 
-<div class="form-group col-md-12">
+<div class="form-group col-md-4">
   <label for="nombre_taller" >{{ __('Nombre del Taller') }}</label>
     <input id="nombre_taller" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre_taller') is-invalid @enderror" name="nombre_taller" value="{{ old('nombre_taller') }}" required autocomplete="nombre_taller">
         @error('nombre_taller')
@@ -60,37 +64,57 @@
     </span>
       @enderror
   </div>
+  <div class="form-group col-md-3">
+      <label for="area">* Área</label>
+      <select name="area" id="area" required class="form-control">
+            <option value="">Seleccione una opción</option>
+            <option value="ACADEMICA">ACADÉMICA</option>
+            <option value="CULTURAL">CULTURAL</option>
+            <option value="DEPORTIVA">DEPORTIVA</option>
+      </select>
+  </div>
+  <div class="form-group col-md-5">
+        <label for="lugar" >{{ __('* Lugar') }}</label>
+        <input id="lugar" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('lugar') is-invalid @enderror" name="lugar" value="{{ old('lugar') }}" required autocomplete="lugar">
+          @error('lugar')
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+  </div>
 </div>
 
 <div class="form-row">
-<div class="form-group col-md-12">
+
+<div class="form-group col-md-6">
   <label for="descripcion" >{{ __('Descripción') }}</label>
-    <input id="descripcion" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('descripcion') is-invalid @enderror" name="descripcion" value="{{ old('descripcion') }}" required autocomplete="descripcion">
-    @error('descripcion')
+    <textarea id="descripcion"   onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('descripcion') is-invalid @enderror" name="descripcion" value="{{ old('descripcion') }}" required autocomplete="descripcion"></textarea>
+      <div>
+      @error('descripcion')
     <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
     </span>
     @enderror
-</div>
-</div>
+</div></div>
 
-<div class="form-row">
-<div class="form-group col-md-12">
+<div class="form-group col-md-6">
     <label for="objetivos" >{{ __('Objetivos') }}</label>
-    <input id="objetivos"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('objetivos') is-invalid @enderror" name="objetivos" value="{{ old('objetivos') }}" autocomplete="objetivos">
-    @error('objetivos')
+    <textarea id="objetivos"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('objetivos') is-invalid @enderror" name="objetivos" value="{{ old('objetivos') }}" autocomplete="objetivos" required></textarea>
+     @error('objetivos')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
     </span>
     @enderror
 </div>
 </div>
+
+
 
 <div class="form-row">
 <div class="form-group col-md-12">
     <label for="justificacion" >{{ __('Justificación') }}</label>
-    <input id="justificacion"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('justificacion') is-invalid @enderror" name="justificacion" value="{{ old('justificacion') }}" autocomplete="justificacion">
-    @error('justificacion')
+    <textarea id="justificacion"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('justificacion') is-invalid @enderror" name="justificacion" value="{{ old('justificacion') }}" autocomplete="justificacion" required></textarea>
+     @error('justificacion')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
     </span>
@@ -100,7 +124,7 @@
 
 <div class="form-row">
 
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
     <label for="duracion">Duración</label>
       <select name="duracion" id="duracion" required class="form-control" oninput="validarTipo(this)" >
     <option value="">Seleccione una opción</option>
@@ -108,33 +132,60 @@
     <option value="4MESES">4 MESES (30 HORAS)</option>
     <option value="3MESES">3 MESES (25 HORAS)</option>
     <option value="2MESES">2 MESES (20 HORAS)</option>
-    <option value="1MESES">1 MES (15 HORAS)</option>
+    <option value="1MES">1 MES (15 HORAS)</option>
     <option value="CHARLA">CHARLA (2-15 HORAS)</option>
   </select>
   </div>
+  <div class="form-group col-md-3">
+   <label for="dias_sem">* Días de la semana</label>
+   <input id="dias_sem" type="text" name="dias_sem" onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('dias_sem') is-invalid @enderror"  value="{{ old('dias_sem') }}" required autocomplete="dias_sem">
+     @error('dias_sem')
+   <span class="invalid-feedback" role="alert">
+   <strong>{{ $message }}</strong>
+   </span>
+     @enderror
+   </div>
+        <div class="form-group col-md-3">
+        <label for="fecha_inicio" >{{ __('* Fecha de Inicio(tentativo)') }}</label>
+        <input id="fecha_inicio" type="date" class="form-control @error('fecha_inicio') is-invalid @enderror" name="fecha_inicio" required>
+        @error('fecha_inicio')
+        <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+        </div>
 
-<div class="form-group col-md-4">
-    <label for="hora_inicio">Hora de entrada(tentativo)</label>
-        <input class="timepicker form-control" type="text" id="hora_inicio" name="hora_inicio" required>
-    </div>
+  <div class="form-group col-md-3">
+       <label for="fecha_fin" >{{ __('* Fecha Terminación(tentativo)') }}</label>
+       <input id="fecha_fin" type="date" class="form-control @error('fecha_fin') is-invalid @enderror" name="fecha_fin" required>
+       @error('fecha_fin')
+       <span class="invalid-feedback" role="alert">
+       <strong>{{ $message }}</strong>
+       </span>
+      @enderror
+   </div>
 
-
-
-<div class="form-group col-md-4">
-    <label for="hora_fin">Hora de salida (tentativo)</label>
-      <input class="timepicker form-control" type="text" id="hora_fin" name="hora_fin" required>
-</div>
-<script type="text/javascript">
-    $('.timepicker').datetimepicker({
-        format: 'HH:mm'
-    });
-</script>
 </div>
 
 <div class="form-row">
+
+<div class="form-group col-md-4">
+   <label for="hora_inicio">Hora de entrada(tentativo)</label>
+       <input class="timepicker form-control" type="text" id="hora_inicio" name="hora_inicio" required>
+   </div>
+
+<div class="form-group col-md-4">
+   <label for="hora_fin">Hora de salida (tentativo)</label>
+     <input class="timepicker form-control" type="text" id="hora_fin" name="hora_fin" required>
+</div>
+<script type="text/javascript">
+   $('.timepicker').datetimepicker({
+       format: 'HH:mm'
+   });
+</script>
   <div class="form-group col-md-2">
       <label for="creditos" >{{ __('Créditos') }}</label>
-      <input id="creditos" type="tel" maxlength="2" disabled class="form-control @error('creditos') is-invalid @enderror" onkeypress="return numeros (event)" name="creditos" autocomplete="creditos" required autofocus>
+      <input id="creditos" type="tel" maxlength="2"  class="form-control @error('creditos') is-invalid @enderror" onkeypress="return numeros (event)" name="creditos" autocomplete="creditos" required autofocus>
           @error('creditos')
       <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -151,22 +202,21 @@
           @enderror
   </div>
 
-  <div class="form-group col-md-8">
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-4">
       <label for="materiales" >{{ __('Materiales') }}</label>
-      <input id="materiales"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('materiales') is-invalid @enderror" name="materiales" value="{{ old('materiales') }}" autocomplete="materiales">
+      <textarea id="materiales"  onKeyUp="this.value = this.value.toUpperCase()" required type="text" class="form-control @error('materiales') is-invalid @enderror" name="materiales" value="{{ old('materiales') }}" autocomplete="materiales"></textarea>
       @error('materiales')
       <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
       </span>
       @enderror
   </div>
-
-</div>
-
-<div class="form-row">
-<div class="form-group col-md-12">
+<div class="form-group col-md-8">
     <label for="propuesta" >{{ __('Propuesta de Proyecto Final') }}</label>
-    <input id="propuesta"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('propuesta') is-invalid @enderror" name="propuesta" value="{{ old('propuesta') }}" autocomplete="propuesta">
+    <textarea id="propuesta"  onKeyUp="this.value = this.value.toUpperCase()" required type="text" class="form-control @error('propuesta') is-invalid @enderror" name="propuesta" value="{{ old('propuesta') }}" autocomplete="propuesta"></textarea>
     @error('propuesta')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
@@ -230,7 +280,7 @@ if(form == '1MES'){
 document.getElementById('creditos').value = 15 ;
 }
 if(form == 'CHARLA'){
-document.getElementById('creditos').value = 2+" a " +10;
+document.getElementById('creditos').value = 2;
 }
 }
 

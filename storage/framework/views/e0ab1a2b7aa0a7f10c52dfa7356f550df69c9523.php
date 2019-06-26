@@ -20,7 +20,7 @@
  </br>
 
  <div class="form-group col-md-6" align="center">
-        <a href=<?php echo e(route('login_studiante')); ?> class="btn btn-primary" role="button" aria-pressed="true">ESTUDIANTES</a>
+        <a href=<?php echo e(route('login_estudiante')); ?> class="btn btn-primary" role="button" aria-pressed="true">ESTUDIANTES</a>
       </div>
       <div class="form-group col-md-6" align="center">
     <a href=<?php echo e(route('tallerista')); ?> class="btn btn-primary" role="button" aria-pressed="true">TALLERISTAS</a>

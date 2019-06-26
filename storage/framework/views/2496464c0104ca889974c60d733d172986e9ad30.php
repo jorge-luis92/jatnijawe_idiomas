@@ -115,3 +115,4 @@ body{
     </tr>
 
        </table>
+<?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/estudiante\mis_actividades/pdf_solicitud.blade.php ENDPATH**/ ?>

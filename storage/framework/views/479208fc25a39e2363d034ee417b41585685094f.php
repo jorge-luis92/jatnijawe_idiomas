@@ -13,7 +13,7 @@
                         <?php echo csrf_field(); ?>
 
 <div class="form-row">
-  <div class="form-group col-md-5">
+  <div class="form-group col-md-4">
     <label for="nombre" ><?php echo e(__('Nombre del Solicitante')); ?></label>
     <input id="nombre" type="text" value="<?php echo e($u->nombre); ?> <?php echo e($u->apellido_paterno); ?> <?php echo e($u->apellido_materno); ?>" disabled onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
 if (isset($message)) { $messageCache = $message; }
@@ -29,6 +29,16 @@ $message = $errors->first('nombre'); ?>
         <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
+</div>
+
+<div class="form-group col-md-2" id="labels">
+  <label for="semestre">Semestre</label>
+  <input type="number" name="semestre" class="form-control" disabled id="semestre" value="<?php echo e($u->semestre); ?>" >
+</div>
+
+<div class="form-group col-md-2" id="labels">
+  <label for="modalidad">Modalidad</label>
+  <input type="text" name="modalidad" class="form-control" disabled id="modalidad" value="<?php echo e($u->modalidad); ?>" >
 </div>
 
 <div class="form-group col-md-2">
@@ -48,15 +58,9 @@ $message = $errors->first('edad'); ?>
         <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
-
 </div>
 
-<div class="form-group col-md-2" id="labels">
-  <label for="semestre">Semestre</label>
-  <input type="number" name="semestre" class="form-control" disabled id="semestre" value="<?php echo e($u->semestre); ?>" disabled>
-</div>
-
-<div class="form-group col-md-3">
+<div class="form-group col-md-2">
   <label for="tel_celular">* Teléfono Celular</label>
   <input type="tel" name='tel_celular' class="form-control" disabled id="tel_celular" maxlength="10" value="<?php if(empty($num_c->numero)){ $vacio=null; echo $vacio;} else{ echo $num_c->numero;} ?>" onkeypress="return numeros (event)"  placeholder=""  pattern="([0-9]{3})([0-9]{7})" required>
 </div>
@@ -67,7 +71,7 @@ endif; ?>
 
 <div class="form-row">
 
-<div class="form-group col-md-12">
+<div class="form-group col-md-4">
   <label for="nombre_taller" ><?php echo e(__('Nombre del Taller')); ?></label>
     <input id="nombre_taller" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre_taller')) :
 if (isset($message)) { $messageCache = $message; }
@@ -84,17 +88,45 @@ $message = $errors->first('nombre_taller'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
+  <div class="form-group col-md-3">
+      <label for="area">* Área</label>
+      <select name="area" id="area" required class="form-control">
+            <option value="">Seleccione una opción</option>
+            <option value="ACADEMICA">ACADÉMICA</option>
+            <option value="CULTURAL">CULTURAL</option>
+            <option value="DEPORTIVA">DEPORTIVA</option>
+      </select>
+  </div>
+  <div class="form-group col-md-5">
+        <label for="lugar" ><?php echo e(__('* Lugar')); ?></label>
+        <input id="lugar" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('lugar')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('lugar'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="lugar" value="<?php echo e(old('lugar')); ?>" required autocomplete="lugar">
+          <?php if ($errors->has('lugar')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('lugar'); ?>
+        <span class="invalid-feedback" role="alert">
+          <strong><?php echo e($message); ?></strong>
+        </span>
+        <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+  </div>
 </div>
 
 <div class="form-row">
-<div class="form-group col-md-12">
+
+<div class="form-group col-md-6">
   <label for="descripcion" ><?php echo e(__('Descripción')); ?></label>
-    <input id="descripcion" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('descripcion')) :
+    <textarea id="descripcion"   onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('descripcion')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('descripcion'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="descripcion" value="<?php echo e(old('descripcion')); ?>" required autocomplete="descripcion">
-    <?php if ($errors->has('descripcion')) :
+endif; ?>" name="descripcion" value="<?php echo e(old('descripcion')); ?>" required autocomplete="descripcion"></textarea>
+      <div>
+      <?php if ($errors->has('descripcion')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('descripcion'); ?>
     <span class="invalid-feedback" role="alert">
@@ -103,18 +135,16 @@ $message = $errors->first('descripcion'); ?>
     <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
-</div>
-</div>
+</div></div>
 
-<div class="form-row">
-<div class="form-group col-md-12">
+<div class="form-group col-md-6">
     <label for="objetivos" ><?php echo e(__('Objetivos')); ?></label>
-    <input id="objetivos"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control <?php if ($errors->has('objetivos')) :
+    <textarea id="objetivos"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control <?php if ($errors->has('objetivos')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('objetivos'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="objetivos" value="<?php echo e(old('objetivos')); ?>" autocomplete="objetivos">
-    <?php if ($errors->has('objetivos')) :
+endif; ?>" name="objetivos" value="<?php echo e(old('objetivos')); ?>" autocomplete="objetivos" required></textarea>
+     <?php if ($errors->has('objetivos')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('objetivos'); ?>
     <span class="invalid-feedback" role="alert">
@@ -126,15 +156,17 @@ endif; ?>
 </div>
 </div>
 
+
+
 <div class="form-row">
 <div class="form-group col-md-12">
     <label for="justificacion" ><?php echo e(__('Justificación')); ?></label>
-    <input id="justificacion"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control <?php if ($errors->has('justificacion')) :
+    <textarea id="justificacion"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control <?php if ($errors->has('justificacion')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('justificacion'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="justificacion" value="<?php echo e(old('justificacion')); ?>" autocomplete="justificacion">
-    <?php if ($errors->has('justificacion')) :
+endif; ?>" name="justificacion" value="<?php echo e(old('justificacion')); ?>" autocomplete="justificacion" required></textarea>
+     <?php if ($errors->has('justificacion')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('justificacion'); ?>
     <span class="invalid-feedback" role="alert">
@@ -148,7 +180,7 @@ endif; ?>
 
 <div class="form-row">
 
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
     <label for="duracion">Duración</label>
       <select name="duracion" id="duracion" required class="form-control" oninput="validarTipo(this)" >
     <option value="">Seleccione una opción</option>
@@ -156,33 +188,84 @@ endif; ?>
     <option value="4MESES">4 MESES (30 HORAS)</option>
     <option value="3MESES">3 MESES (25 HORAS)</option>
     <option value="2MESES">2 MESES (20 HORAS)</option>
-    <option value="1MESES">1 MES (15 HORAS)</option>
+    <option value="1MES">1 MES (15 HORAS)</option>
     <option value="CHARLA">CHARLA (2-15 HORAS)</option>
   </select>
   </div>
+  <div class="form-group col-md-3">
+   <label for="dias_sem">* Días de la semana</label>
+   <input id="dias_sem" type="text" name="dias_sem" onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('dias_sem')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('dias_sem'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"  value="<?php echo e(old('dias_sem')); ?>" required autocomplete="dias_sem">
+     <?php if ($errors->has('dias_sem')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('dias_sem'); ?>
+   <span class="invalid-feedback" role="alert">
+   <strong><?php echo e($message); ?></strong>
+   </span>
+     <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+   </div>
+        <div class="form-group col-md-3">
+        <label for="fecha_inicio" ><?php echo e(__('* Fecha de Inicio(tentativo)')); ?></label>
+        <input id="fecha_inicio" type="date" class="form-control <?php if ($errors->has('fecha_inicio')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('fecha_inicio'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="fecha_inicio" required>
+        <?php if ($errors->has('fecha_inicio')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('fecha_inicio'); ?>
+        <span class="invalid-feedback" role="alert">
+        <strong><?php echo e($message); ?></strong>
+        </span>
+        <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+        </div>
 
-<div class="form-group col-md-4">
-    <label for="hora_inicio">Hora de entrada(tentativo)</label>
-        <input class="timepicker form-control" type="text" id="hora_inicio" name="hora_inicio" required>
-    </div>
+  <div class="form-group col-md-3">
+       <label for="fecha_fin" ><?php echo e(__('* Fecha Terminación(tentativo)')); ?></label>
+       <input id="fecha_fin" type="date" class="form-control <?php if ($errors->has('fecha_fin')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('fecha_fin'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="fecha_fin" required>
+       <?php if ($errors->has('fecha_fin')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('fecha_fin'); ?>
+       <span class="invalid-feedback" role="alert">
+       <strong><?php echo e($message); ?></strong>
+       </span>
+      <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+   </div>
 
-
-
-<div class="form-group col-md-4">
-    <label for="hora_fin">Hora de salida (tentativo)</label>
-      <input class="timepicker form-control" type="text" id="hora_fin" name="hora_fin" required>
-</div>
-<script type="text/javascript">
-    $('.timepicker').datetimepicker({
-        format: 'HH:mm'
-    });
-</script>
 </div>
 
 <div class="form-row">
+
+<div class="form-group col-md-4">
+   <label for="hora_inicio">Hora de entrada(tentativo)</label>
+       <input class="timepicker form-control" type="text" id="hora_inicio" name="hora_inicio" required>
+   </div>
+
+<div class="form-group col-md-4">
+   <label for="hora_fin">Hora de salida (tentativo)</label>
+     <input class="timepicker form-control" type="text" id="hora_fin" name="hora_fin" required>
+</div>
+<script type="text/javascript">
+   $('.timepicker').datetimepicker({
+       format: 'HH:mm'
+   });
+</script>
   <div class="form-group col-md-2">
       <label for="creditos" ><?php echo e(__('Créditos')); ?></label>
-      <input id="creditos" type="tel" maxlength="2" disabled class="form-control <?php if ($errors->has('creditos')) :
+      <input id="creditos" type="tel" maxlength="2"  class="form-control <?php if ($errors->has('creditos')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('creditos'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -199,7 +282,7 @@ endif; ?>
   </div>
   <div class="form-group col-md-2">
       <label for="cupo" ><?php echo e(__('Cupo')); ?></label>
-      <input id="cupo" type="tel" maxlength="3" max="100" min="15" class="form-control <?php if ($errors->has('cupo')) :
+      <input id="cupo" type="tel" maxlength="3"  class="form-control <?php if ($errors->has('cupo')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('cupo'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -215,13 +298,16 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
 
-  <div class="form-group col-md-8">
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-4">
       <label for="materiales" ><?php echo e(__('Materiales')); ?></label>
-      <input id="materiales"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control <?php if ($errors->has('materiales')) :
+      <textarea id="materiales"  onKeyUp="this.value = this.value.toUpperCase()" required type="text" class="form-control <?php if ($errors->has('materiales')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('materiales'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="materiales" value="<?php echo e(old('materiales')); ?>" autocomplete="materiales">
+endif; ?>" name="materiales" value="<?php echo e(old('materiales')); ?>" autocomplete="materiales"></textarea>
       <?php if ($errors->has('materiales')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('materiales'); ?>
@@ -232,17 +318,13 @@ $message = $errors->first('materiales'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
-
-</div>
-
-<div class="form-row">
-<div class="form-group col-md-12">
+<div class="form-group col-md-8">
     <label for="propuesta" ><?php echo e(__('Propuesta de Proyecto Final')); ?></label>
-    <input id="propuesta"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control <?php if ($errors->has('propuesta')) :
+    <textarea id="propuesta"  onKeyUp="this.value = this.value.toUpperCase()" required type="text" class="form-control <?php if ($errors->has('propuesta')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('propuesta'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="propuesta" value="<?php echo e(old('propuesta')); ?>" autocomplete="propuesta">
+endif; ?>" name="propuesta" value="<?php echo e(old('propuesta')); ?>" autocomplete="propuesta"></textarea>
     <?php if ($errors->has('propuesta')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('propuesta'); ?>
@@ -311,7 +393,7 @@ if(form == '1MES'){
 document.getElementById('creditos').value = 15 ;
 }
 if(form == 'CHARLA'){
-document.getElementById('creditos').value = 2+" a " +10;
+document.getElementById('creditos').value = 2;
 }
 }
 

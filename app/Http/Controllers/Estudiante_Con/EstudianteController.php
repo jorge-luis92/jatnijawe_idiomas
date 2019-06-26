@@ -253,7 +253,7 @@ return view('estudiante\datos.datos_personales');
           $id_persona= json_decode( json_encode($id_persona), true);
 
           $users = DB::table('estudiantes')
-          ->select('estudiantes.semestre', 'personas.edad', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+          ->select('estudiantes.semestre', 'estudiantes.modalidad', 'personas.edad', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
           ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
           ->where('estudiantes.matricula',$id)
           ->take(1)

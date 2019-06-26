@@ -10,7 +10,7 @@ class SolicitudTaller extends Model
   protected $primaryKey = 'num_solicitud'; // or null
  //public $incrementing = false;
  protected $fillable = [
-     'fecha_solicitud','nombre_taller', 'descripcion', 'objetivos', 'justificacion', 'creditos', 'proyecto_final', 'cupo', 'matricula',
-     'departamento', 'estado',
+     'fecha_solicitud','nombre_taller', 'area', 'lugar', 'fecha_inicio', 'fecha_fin','hora_inicio', 'hora_fin', 'dias_sem','descripcion',
+      'objetivos', 'justificacion', 'creditos', 'proyecto_final', 'cupo', 'matricula', 'departamento', 'estado',
  ];
 }

@@ -13,7 +13,7 @@ Route::get('cargar_datos_usuario_estudiante', 'UserSystemController@cargar_datos
 Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar_datos_usuarios');
 /* Rutas de logueo---*/
 //Route::get('login', 'HomeController@index');
-Route::get('login_studiante', 'Auth\LoginController@getLogin')->name('login_studiante');
+Route::get('login_estudiante', 'Auth\LoginController@getLogin')->name('login_estudiante');
 Route::post('login_studiante', ['as' =>'login_studiante', 'uses' => 'Auth\LoginController@postLogin']);
 //Route::post('login_admin', ['as' =>'login_admin', 'uses' => 'Administrativo_Con\AdministrativoController@index']);
 //Route::post('login_studiante', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdministrativo@postLogin']);
@@ -101,6 +101,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('act_datos_medicos', 'ActualizacionesEstudiante@act_datos_medicos')->name('act_datos_medicos');
 
   Route::get('solicitud_taller', 'Estudiante_Con\EstudianteController@solicitud_taller')->name('solicitud_taller');
+  Route::get('pdf_solicitud_taller/{matricula}','GenerarPdf@pdf_solicitud_taller_estudiante');
   Route::post('solicitud_taller_enviar', 'Actividades\ActvidadesExtra@envio_taller')->name('solicitud_taller_enviar');
   Route::get('solicitud_practicasP', 'Estudiante_Con\EstudianteController@solicitud_practicasP')->name('solicitud_practicasP');
   Route::get('solicitud_servicioSocial', 'Estudiante_Con\EstudianteController@solicitud_servicioSocial')->name('solicitud_servicioSocial');
