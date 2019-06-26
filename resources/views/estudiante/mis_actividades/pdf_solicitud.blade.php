@@ -38,7 +38,7 @@ body{
 <table style="font-size:15px" >
     <tr>
       <td colspan="3">NOMBRE DEL SOLICITANTE</td>
-      <td ><input name="nombre" type="text" required id="nombre" value="" /></td>
+      <td ><input name="nombre" type="text" required id="nombre" value="{{$data->num_solicitud}}" /></td>
       <td >EDAD</td>
       <td ><input name="edad" type="text" required id="edad" value="" /></td>
     </tr>

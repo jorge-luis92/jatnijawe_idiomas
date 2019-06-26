@@ -112,26 +112,6 @@
 </div>
 
 <div  class="form-row">
-  <!--<div class="form-group col-md-3">
-   <label for="dias_sem">* Días de la semana</label>
-    <div class="multiselect">
-         <div class="selectBox" onclick="showCheckboxes()">
-             <select name="dias_sem" id="dias_sem" class="form-control"  required>
-                 <option>Selecciona una opcion</option>
-             </select>
-             <div class="overSelect"></div>
-         </div>
-         <div id="checkboxes" class="hide"  required>
-             <label for="lunes"><input type="checkbox" name="dias_sem" value="Lunes" >Lunes</label>
-             <label for="martes"><input type="checkbox" name="dias_sem" value="Martes">Martes</label>
-             <label for="miercoles"><input type="checkbox" name="dias_sem" value="Miercoles">Miércoles</label>
-             <label for="jueves"><input type="checkbox" name="dias_sem" value="Jueves">Jueves</label>
-             <label for="viernes"><input type="checkbox" name="dias_sem" value="Viernes">Viernes</label>
-             <label for="sabado"><input type="checkbox" name="dias_sem" value="Sábado"Sábado</label>
-
-         </div>
-     </div>
-  </div>-->
   <div class="form-group col-md-3">
    <label for="dias_sem">* Días de la semana</label>
    <input id="dias_sem" type="text" name="dias_sem" onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('dias_sem') is-invalid @enderror"  value="{{ old('dias_sem') }}" required autocomplete="dias_sem">

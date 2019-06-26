@@ -28,25 +28,23 @@ class GenerarPdf extends Controller
 {
   protected function pdf_solicitud_taller_estudiante($matricula){
   $id=$matricula;
-  $datos_estudiante = DB::table('solicitud_talleres')
+  $detalles = DB::table('solicitud_talleres')
   ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.fecha_solicitud', 'solicitud_talleres.nombre_taller', 'solicitud_talleres.descripcion',
   'solicitud_talleres.objetivos', 'solicitud_talleres.justificacion', 'solicitud_talleres.creditos',
   'solicitud_talleres.proyecto_final', 'solicitud_talleres.cupo', 'solicitud_talleres.matricula', 'solicitud_talleres.departamento',
-  'solicitud_talleres.estado','estudiantes.semestre', 'estudiantes.modalidad','telefonos.numero', 'personas.edad', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
-  ->join('estudiantes', 'solicitud_talleres.matricula', '=', 'estudiantes.matricula')
-  ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
-  ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-  ->where('estudiantes.matricula',$id)
-  ->where([['estudiantes.matricula',$id], ['telefonos.tipo', '=', 'celular'],])
+  'solicitud_talleres.estado')
+  ->where('solicitud_talleres.matricula',$id)
   ->take(1)
   ->first();
 
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('estudiante\mis_actividades.pdf_solicitud', ['data' =>  $datos_estudiante])
+   $pdf = PDF::loadView('estudiante\mis_actividades.pdf_solicitud', ['data' =>  $detalles])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('solicitud_taller.pdf');
+   $paper_orientation = 'letter';
+   $customPaper = array(2.5,2.5,600,950);
 
   }
 }
