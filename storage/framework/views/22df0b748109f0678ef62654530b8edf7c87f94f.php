@@ -64,7 +64,7 @@
             <a class="collapse-item" href=<?php echo e(route('registro_coordinador')); ?>>Registrar</a>
             <a class="collapse-item" href=<?php echo e(route('busqueda_coordinador')); ?>> Buscar</a>
             <a class="collapse-item" href=<?php echo e(route('coordinador_activo')); ?>> Coordinadores Activos</a>
-            <a class="collapse-item" href=<?php echo e(route('coordinador_inactivo')); ?>> Coordinadores Inactivos</a>
+        <!--    <a class="collapse-item" href=<?php echo e(route('coordinador_inactivo')); ?>> Coordinadores Inactivos</a>-->
           </div>
         </div>
       </li>

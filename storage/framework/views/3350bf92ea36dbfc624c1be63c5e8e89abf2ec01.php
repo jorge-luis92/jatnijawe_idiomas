@@ -50,7 +50,7 @@
         </div>
     <div class="form-group col-md-4">
       <label for="tel_local">Teléfono de Casa</label>
-        <input type="tel_local"  class="form-control <?php if ($errors->has('tel_local')) :
+        <input type="tel"  class="form-control <?php if ($errors->has('tel_local')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('tel_local'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
