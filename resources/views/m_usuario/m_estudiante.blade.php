@@ -6,19 +6,10 @@
 
 @section('seccion')
 
-<div class="container" id="font4">
-</br>
-<div class="embed-container" align="center">
-  </br>
-  </br>
-  </br>
-  </br>
-    <h1>En preparación...</h1>
-    </br>
-    </br>
-    </br>
-    </br>
-</div>
+<div class="container" id="font6" >
+
+    <h1 style="font-size: 25px; color: #000000; font-family: 'Century Gothic';" align="center">En preparación</h1>
+
 </br>
 
 </div>

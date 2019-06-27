@@ -6,7 +6,6 @@ use App\User;
 use PDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-
 use Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Extracurricular;
@@ -25,13 +24,22 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response as FacadeResponse;
 
+
 //use Excel;
 
 class EstudianteController extends Controller
 {
 
   public function inicio_estudiante(){
-    return view('estudiante.home_estudiante');
+    $usuario_actual=auth()->user();
+    if($usuario_actual->tipo_usuario=='estudiante'){
+      if($usuario_actual->bandera=='1'){
+   return view('estudiante.home_estudiante');
+//return redirect()->route('home_estudiante')->with('sucess', 'Inicio de sesión correctamente');
+   }
+      }
+      return redirect()->back();
+
   }
     public function dato_general()
     {

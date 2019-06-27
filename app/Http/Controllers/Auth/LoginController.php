@@ -92,13 +92,22 @@ class LoginController extends Controller
       $credentials = $request->only('id_user', 'password');
       if ($this->auth->attempt($credentials, $request->has('remember')))
  {;
-   if(Auth::user()->tipo_usuario == 'estudiante'){
+   if(Auth::user()->tipo_usuario == 'estudiante' &&  Auth::user()->bandera == '1'){
    //  return view('personal_administrativo\admin_sistema.home_admin');
        return redirect()->route('home_estudiante')->with('sucess', 'Inicio de sesión correctamente');
    }
+   else {
+      $this->guard()->logout();
+
+      $request->session()->invalidate();
+
+   return $this->loggedOut($request) ?: redirect('login_estudiante')->with('error', 'Usuario Incorrecto, ¡Favor de Verificar Datos!');
+   }
+
  }
 
-return redirect()->route('home_estudiante')->with('error','Usuario invalido: !Verifique sus datos!');
+
+//return redirect()->route('login_estudiante')->with('error','Usuario invalido: !Verifique sus datos!');
      /* return view("personal_administrativo.login_personal");*/
  //   }
 }

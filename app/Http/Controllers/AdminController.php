@@ -178,6 +178,7 @@ if($data['edad'] >17){
         $q = $request->get('q');
         if($q != null){
         $user = Estudiante::where( 'estudiantes.matricula', 'LIKE', '%' . $q . '%' )
+        ->where('users.bandera', '=', '1')
                             ->orWhere ( 'estudiantes.semestre', 'LIKE', '%' . $q . '%' )
                             ->orWhere ( 'estudiantes.modalidad', 'LIKE', '%' . $q . '%' )
                             ->orWhere( 'personas.nombre', 'LIKE', '%' . $q . '%' )
@@ -248,7 +249,7 @@ if($data['edad'] >17){
             ->update(
                 ['bandera' => '1'],
             );
-            return redirect()->route('estudiante_activo')->with('success','¡El estudiante ha sido Activado!');
+            return redirect()->route('busqueda_estudiante')->with('success','¡El estudiante ha sido Activado!');
 
       }
 
