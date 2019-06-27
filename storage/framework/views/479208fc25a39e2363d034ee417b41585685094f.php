@@ -77,7 +77,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('nombre_taller'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="nombre_taller" value="<?php echo e(old('nombre_taller')); ?>" required autocomplete="nombre_taller">
+endif; ?>" name="nombre_taller" value="<?php if(empty($taller->nombre_taller)){ $vacio=null; echo $vacio;} else{ echo $taller->nombre_taller;} ?>" required autocomplete="nombre_taller">
         <?php if ($errors->has('nombre_taller')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('nombre_taller'); ?>
@@ -103,7 +103,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('lugar'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="lugar" value="<?php echo e(old('lugar')); ?>" required autocomplete="lugar">
+endif; ?>" name="lugar" value="<?php if(empty($taller->lugar)){ $vacio=null; echo $vacio;} else{ echo $taller->lugar;} ?>" >
           <?php if ($errors->has('lugar')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('lugar'); ?>
@@ -124,7 +124,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('descripcion'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="descripcion" value="<?php echo e(old('descripcion')); ?>" required autocomplete="descripcion"></textarea>
+endif; ?>" name="descripcion"  required autocomplete="descripcion"><?php if(empty($taller->descripcion)){ $vacio=null; echo $vacio;} else{ echo $taller->descripcion;} ?></textarea>
       <div>
       <?php if ($errors->has('descripcion')) :
 if (isset($message)) { $messageCache = $message; }
@@ -143,7 +143,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('objetivos'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="objetivos" value="<?php echo e(old('objetivos')); ?>" autocomplete="objetivos" required></textarea>
+endif; ?>" name="objetivos"  autocomplete="objetivos" required><?php if(empty($taller->objetivos)){ $vacio=null; echo $vacio;} else{ echo $taller->objetivos;} ?></textarea>
      <?php if ($errors->has('objetivos')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('objetivos'); ?>
@@ -165,7 +165,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('justificacion'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="justificacion" value="<?php echo e(old('justificacion')); ?>" autocomplete="justificacion" required></textarea>
+endif; ?>" name="justificacion"  autocomplete="justificacion" required><?php if(empty($taller->justificacion)){ $vacio=null; echo $vacio;} else{ echo $taller->justificacion;} ?></textarea>
      <?php if ($errors->has('justificacion')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('justificacion'); ?>
@@ -182,13 +182,13 @@ endif; ?>
 
   <div class="form-group col-md-3">
     <label for="duracion">Duración</label>
-      <select name="duracion" id="duracion" required class="form-control" oninput="validarTipo(this)" >
+      <select name="duracion" id="duracion"  required class="form-control" oninput="validarTipo(this)" >
     <option value="">Seleccione una opción</option>
     <option value="SEMESTRAL">SEMESTRAL (35 HORAS)</option>
-    <option value="4MESES">4 MESES (30 HORAS)</option>
-    <option value="3MESES">3 MESES (25 HORAS)</option>
-    <option value="2MESES">2 MESES (20 HORAS)</option>
-    <option value="1MES">1 MES (15 HORAS)</option>
+    <option value="4 MESES">4 MESES (30 HORAS)</option>
+    <option value="3 MESES">3 MESES (25 HORAS)</option>
+    <option value="2 MESES">2 MESES (20 HORAS)</option>
+    <option value="1 MES">1 MES (15 HORAS)</option>
     <option value="CHARLA">CHARLA (2-15 HORAS)</option>
   </select>
   </div>
@@ -198,7 +198,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('dias_sem'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  value="<?php echo e(old('dias_sem')); ?>" required autocomplete="dias_sem">
+endif; ?>"  value="<?php if(empty($taller->dias_sem)){ $vacio=null; echo $vacio;} else{ echo $taller->dias_sem;} ?>"required autocomplete="dias_sem">
      <?php if ($errors->has('dias_sem')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('dias_sem'); ?>
@@ -211,7 +211,7 @@ endif; ?>
    </div>
         <div class="form-group col-md-3">
         <label for="fecha_inicio" ><?php echo e(__('* Fecha de Inicio(tentativo)')); ?></label>
-        <input id="fecha_inicio" type="date" class="form-control <?php if ($errors->has('fecha_inicio')) :
+        <input id="fecha_inicio" type="date" value="<?php if(empty($taller->fecha_inicio)){ $vacio=null; echo $vacio;} else{ echo $taller->fecha_inicio;} ?>" class="form-control <?php if ($errors->has('fecha_inicio')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_inicio'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -229,7 +229,7 @@ endif; ?>
 
   <div class="form-group col-md-3">
        <label for="fecha_fin" ><?php echo e(__('* Fecha Terminación(tentativo)')); ?></label>
-       <input id="fecha_fin" type="date" class="form-control <?php if ($errors->has('fecha_fin')) :
+       <input id="fecha_fin" type="date" value="<?php if(empty($taller->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo $taller->fecha_fin;} ?>" class="form-control <?php if ($errors->has('fecha_fin')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_fin'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -251,12 +251,12 @@ endif; ?>
 
 <div class="form-group col-md-4">
    <label for="hora_inicio">Hora de entrada(tentativo)</label>
-       <input class="timepicker form-control" type="text" id="hora_inicio" name="hora_inicio" required>
+       <input class="timepicker form-control" type="text" id="hora_inicio" value="<?php if(empty($taller->hora_inicio)){ $vacio=null; echo $vacio;} else{ echo $taller->hora_inicio;} ?>"  name="hora_inicio" required>
    </div>
 
 <div class="form-group col-md-4">
    <label for="hora_fin">Hora de salida (tentativo)</label>
-     <input class="timepicker form-control" type="text" id="hora_fin" name="hora_fin" required>
+     <input class="timepicker form-control" type="text" id="hora_fin" value="<?php if(empty($taller->hora_fin)){ $vacio=null; echo $vacio;} else{ echo $taller->hora_fin;} ?>" name="hora_fin" required>
 </div>
 <script type="text/javascript">
    $('.timepicker').datetimepicker({
@@ -265,7 +265,7 @@ endif; ?>
 </script>
   <div class="form-group col-md-2">
       <label for="creditos" ><?php echo e(__('Créditos')); ?></label>
-      <input id="creditos" type="tel" maxlength="2"  class="form-control <?php if ($errors->has('creditos')) :
+      <input id="creditos" type="tel" maxlength="2"  value="" class="form-control <?php if ($errors->has('creditos')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('creditos'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -282,7 +282,7 @@ endif; ?>
   </div>
   <div class="form-group col-md-2">
       <label for="cupo" ><?php echo e(__('Cupo')); ?></label>
-      <input id="cupo" type="tel" maxlength="3"  class="form-control <?php if ($errors->has('cupo')) :
+      <input id="cupo" type="tel" maxlength="3" value="<?php if(empty($taller->cupo)){ $vacio=null; echo $vacio;} else{ echo $taller->cupo;} ?>"  class="form-control <?php if ($errors->has('cupo')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('cupo'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -307,7 +307,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('materiales'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="materiales" value="<?php echo e(old('materiales')); ?>" autocomplete="materiales"></textarea>
+endif; ?>" name="materiales" autocomplete="materiales"><?php if(empty($taller->materiales)){ $vacio=null; echo $vacio;} else{ echo $taller->materiales;} ?></textarea>
       <?php if ($errors->has('materiales')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('materiales'); ?>
@@ -324,7 +324,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('propuesta'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="propuesta" value="<?php echo e(old('propuesta')); ?>" autocomplete="propuesta"></textarea>
+endif; ?>" name="propuesta"  autocomplete="propuesta"><?php if(empty($taller->proyecto_final)){ $vacio=null; echo $vacio;} else{ echo $taller->proyecto_final;} ?></textarea>
     <?php if ($errors->has('propuesta')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('propuesta'); ?>
@@ -336,6 +336,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
 </div>
 </div>
+<input id="area" value="<?php if(empty($taller->duracion)){ $vacio=null; echo $vacio;} else{ echo $taller->duracion;} ?>" >
 
 
                        <div class="form-group">
@@ -380,16 +381,16 @@ function validarTipo(input) {
   if(form == 'SEMESTRAL'){
   document.getElementById('creditos').value = 35 ;
 }
-if(form == '4MESES'){
+if(form == '4 MESES'){
 document.getElementById('creditos').value = 30 ;
 }
-if(form == '3MESES'){
+if(form == '3 MESES'){
 document.getElementById('creditos').value = 25 ;
 }
-if(form == '2MESES'){
+if(form == '2 MESES'){
 document.getElementById('creditos').value = 20 ;
 }
-if(form == '1MES'){
+if(form == '1 MES'){
 document.getElementById('creditos').value = 15 ;
 }
 if(form == 'CHARLA'){

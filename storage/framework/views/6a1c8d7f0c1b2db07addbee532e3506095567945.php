@@ -13,12 +13,6 @@
     <?php echo csrf_field(); ?>
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
     <div class="form-row">
-
-  <!--    <div class="form-group col-md-3" style="width: 2rem;" >
-        <span style="color: #000000">* </span>
-        <img class="image" src="image/foto.png" width="100px">
-           <input type="file" accept="image/png, .jpeg, .jpg" required>
-      </div>-->
       <div class="form-group col-md-3" id="labels">
         <label  for="matricula">Matricula</label>
         <input type="text" class="form-control" id="matricula"  value="<?php echo e($u->matricula); ?>" disabled>

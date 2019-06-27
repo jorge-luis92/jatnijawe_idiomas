@@ -50,11 +50,37 @@
         </div>
     <div class="form-group col-md-4">
       <label for="tel_local">Teléfono de Casa</label>
-        <input type="tel"  class="form-control" name="tel_local" id="tel_local" value="<?php if(empty($nl->numero)){ $vacio=null; echo $vacio;} else{ echo $nl->numero;} ?>" maxlength=""  onkeypress="return numeros (event)"  placeholder="Formato a 7 digitos -- Ejemplo: 5115090"  pattern="([0-9]{7})">
+        <input type="tel_local"  class="form-control <?php if ($errors->has('tel_local')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('tel_local'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="tel_local" id="tel_local" value="<?php if(empty($nl->numero)){ $vacio=null; echo $vacio;} else{ echo $nl->numero;} ?>" maxlength=""  onkeypress="return numeros (event)"  placeholder="Formato a 7 digitos -- Ejemplo: 5115090"  pattern="([0-9]{7})">
+          <?php if ($errors->has('tel_local')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('tel_local'); ?>
+          <span class="invalid-feedback" role="alert">
+          <strong><?php echo e($message); ?></strong>
+          </span>
+          <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
     </div>
     <div class="form-group col-md-4">
       <label for="tel_celular">* Teléfono Celular</label>
-      <input type="tel"  class="form-control" name="tel_celular" id="tel_celular" value="<?php if(empty($nc->numero)){ $vacio=null; echo $vacio;} else{ echo $nc->numero;} ?>" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos  -- Ejemplo: 9511234567"  pattern="([0-9]{3})([0-9]{7})" required>
+      <input type="tel"  class="form-control <?php if ($errors->has('tel_celular')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('tel_celular'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="tel_celular" id="tel_celular" value="<?php if(empty($nc->numero)){ $vacio=null; echo $vacio;} else{ echo $nc->numero;} ?>" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos  -- Ejemplo: 9511234567"  pattern="([0-9]{3})([0-9]{7})" required>
+        <?php if ($errors->has('tel_celular')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('tel_celular'); ?>
+        <span class="invalid-feedback" role="alert">
+        <strong><?php echo e($message); ?></strong>
+        </span>
+        <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
     </div>
     <div class="form-group col-md-4">
       <label for="email">* Correo Electrónico</label>

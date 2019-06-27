@@ -87,10 +87,18 @@ protected function envio_taller(Request $request){
 $data=$request;
 $usuario_actual=auth()->user();
 $id=$usuario_actual->id_user;
+
+$detalles = DB::table('solicitud_talleres')
+->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.matricula')
+->where('solicitud_talleres.matricula',$id)
+->take(1)
+->first();
+if(empty($detalles->matricula)){
 $now = new \DateTime();
 $taller=new SolicitudTaller;
 $taller->fecha_solicitud=$now;
 $taller->nombre_taller=$data['nombre_taller'];
+$taller->duracion=$data['duracion'];
 $taller->area=$data['area'];
 $taller->lugar=$data['lugar'];
 $taller->fecha_inicio=$data['fecha_inicio'];
@@ -103,14 +111,27 @@ $taller->objetivos=$data['objetivos'];
 $taller->justificacion=$data['justificacion'];
 $taller->creditos=$data['creditos'];
 $taller->proyecto_final=$data['propuesta'];
+$taller->materiales=$data['materiales'];
 $taller->cupo=$data['cupo'];
 $taller->matricula=$id;
 $taller->departamento='1';
 $taller->estado='Pendiente';
 $taller->save();
 if($taller->save()){
-return redirect()->route('home_estudiante')->with('success','¡Solicitud enviada Correctamente!');
+return redirect()->route('solicitud_taller')->with('success','¡Solicitud enviada Correctamente!');}
 }
+else {
+  DB::table('solicitud_talleres')
+      ->where('solicitud_talleres.num_solicitud', $detalles->num_solicitud)
+      ->update(
+          ['nombre_taller' => $data['nombre_taller'], 'duracion' => $data['duracion'], 'area' => $data['area'], 'lugar' => $data['lugar'],
+           'fecha_inicio' => $data['fecha_inicio'], 'fecha_fin' => $data['fecha_fin'], 'hora_inicio' => $data['hora_inicio'],
+           'hora_fin' => $data['hora_fin'], 'dias_sem' => $data['dias_sem'], 'descripcion' => $data['descripcion'],
+           'objetivos' => $data['objetivos'], 'justificacion' => $data['justificacion'], 'creditos' => $data['creditos'],
+           'proyecto_final' => $data['propuesta'], 'materiales' => $data['materiales'], 'cupo' => $data['cupo']],
+      );
+ return redirect()->route('solicitud_taller')->with('success','¡Actualización correcta!');}
 }
+
 
 }

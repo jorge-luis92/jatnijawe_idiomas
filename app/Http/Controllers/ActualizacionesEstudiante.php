@@ -82,8 +82,9 @@ public function act_datos_personales(Request $request)
 {
   $this->validate($request, [
     //'id_persona' => ['required', 'string', 'max:60', 'unique:personas'],
-    //'tel_local' => ['string', 'min:10', 'max:10'],
-    'tel_celular' => ['required', 'string', 'min:10', 'max:10'],
+    //'tel_local' => ['string', 'min:10', 'max:10', 'unique:telefonos'],
+    //'tel_celular' => ['required', 'string', 'min:10', 'max:10', 'unique:telefonos'],
+    'numero' => ['required', 'string', 'min:10', 'max:10', 'unique:telefonos'],
   ]);
   $usuario_actual=auth()->user();
   $id=$usuario_actual->id_user;

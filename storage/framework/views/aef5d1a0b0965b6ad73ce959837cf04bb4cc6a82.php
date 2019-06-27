@@ -10,20 +10,21 @@
                                <table class="table table-bordered table-info" style="color: #000000;" >
                                  <thead>
                                    <tr>
-                                     <th scope="col">RFC</th>
                                      <th scope="col">NOMBRE</th>
+                                      <th scope="col">EDAD</th>
                                      <th scope="col">GRADO DE ESTUDIOS</th>
-                                     <th colspan="2" >ACCIONES</th>
+                                      <th scope="col">TELEFONO CONTACTO</th>
+                                       <th scope="col">PROCEDENCIA INTERNA</th>
+                                        <th scope="col">PROCEDENCIA EXTERNA</th>
+                                     <th colspan="1" >ACCIONES</th>
                                    </tr>
                                  </thead>
                                  <tbody>
                                    <?php $__currentLoopData = $re; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $res): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                    <tr>
-                                          <th scope="row"><?php echo e($res->rfc); ?></th>
                                           <td><?php echo e($res->nombre); ?> <?php echo e($res->apellido_paterno); ?> <?php echo e($res->apellido_materno); ?></td>
                                           <td><?php echo e($res->grado_estudios); ?></td>
-                                          <td>  <a data-toggle="modal" href="#">DETALLES</a></td>
-                                          <td>  <a data-toggle="modal" href="#">DESACTIVAR</a></td>
+                                            <td>  <a data-toggle="modal" href="#">DESACTIVAR</a></td>
                                         </tr>
 
                                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

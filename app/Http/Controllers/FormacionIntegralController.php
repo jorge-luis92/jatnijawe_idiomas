@@ -210,6 +210,7 @@ class FormacionIntegralController extends Controller
       'solicitud_talleres.estado', 'estudiantes.matricula', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
       ->join('estudiantes', 'solicitud_talleres.matricula', '=', 'estudiantes.matricula')
       ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+      ->where('solicitud_talleres.estado', '=', 'pendiente')
       ->orderBy('solicitud_talleres.matricula', 'asc')
       ->get();
     return view('personal_administrativo\formacion_integral\gestion_talleres.solicitudes')->with('data', $result);
@@ -354,14 +355,14 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
          return redirect('register');
         }
 
-    /*  $this->validate($request, [
+      $this->validate($request, [
         'nombre' => ['required', 'string', 'max:25'],
-        'apellido_paterno' => ['required', 'string', 'max:25'],
-        'curp' => ['required', 'string', 'min:18','max:18'],
-        'edad' => ['required', 'string', 'max:100'],
-        'genero' => ['required', 'string'],
+    //    'apellido_paterno' => ['required', 'string', 'max:25'],
+      //  'curp' => ['required', 'string', 'min:18','max:18'],
+      //  'edad' => ['required', 'string', 'max:100'],
+      //  'genero' => ['required', 'string'],
 //       'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-]);*/
+]);
 
       $data = $request;
       $id_prueba= random_int(1, 532986) +232859 * 123 -43 +(random_int(1, 1234));

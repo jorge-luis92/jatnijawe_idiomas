@@ -57,7 +57,7 @@
 
 <div class="form-group col-md-4">
   <label for="nombre_taller" >{{ __('Nombre del Taller') }}</label>
-    <input id="nombre_taller" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre_taller') is-invalid @enderror" name="nombre_taller" value="{{ old('nombre_taller') }}" required autocomplete="nombre_taller">
+    <input id="nombre_taller" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre_taller') is-invalid @enderror" name="nombre_taller" value="<?php if(empty($taller->nombre_taller)){ $vacio=null; echo $vacio;} else{ echo $taller->nombre_taller;} ?>" required autocomplete="nombre_taller">
         @error('nombre_taller')
     <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
@@ -75,7 +75,7 @@
   </div>
   <div class="form-group col-md-5">
         <label for="lugar" >{{ __('* Lugar') }}</label>
-        <input id="lugar" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('lugar') is-invalid @enderror" name="lugar" value="{{ old('lugar') }}" required autocomplete="lugar">
+        <input id="lugar" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('lugar') is-invalid @enderror" name="lugar" value="<?php if(empty($taller->lugar)){ $vacio=null; echo $vacio;} else{ echo $taller->lugar;} ?>" >
           @error('lugar')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -88,7 +88,7 @@
 
 <div class="form-group col-md-6">
   <label for="descripcion" >{{ __('Descripción') }}</label>
-    <textarea id="descripcion"   onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('descripcion') is-invalid @enderror" name="descripcion" value="{{ old('descripcion') }}" required autocomplete="descripcion"></textarea>
+    <textarea id="descripcion"   onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('descripcion') is-invalid @enderror" name="descripcion"  required autocomplete="descripcion"><?php if(empty($taller->descripcion)){ $vacio=null; echo $vacio;} else{ echo $taller->descripcion;} ?></textarea>
       <div>
       @error('descripcion')
     <span class="invalid-feedback" role="alert">
@@ -99,7 +99,7 @@
 
 <div class="form-group col-md-6">
     <label for="objetivos" >{{ __('Objetivos') }}</label>
-    <textarea id="objetivos"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('objetivos') is-invalid @enderror" name="objetivos" value="{{ old('objetivos') }}" autocomplete="objetivos" required></textarea>
+    <textarea id="objetivos"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('objetivos') is-invalid @enderror" name="objetivos"  autocomplete="objetivos" required><?php if(empty($taller->objetivos)){ $vacio=null; echo $vacio;} else{ echo $taller->objetivos;} ?></textarea>
      @error('objetivos')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
@@ -113,7 +113,7 @@
 <div class="form-row">
 <div class="form-group col-md-12">
     <label for="justificacion" >{{ __('Justificación') }}</label>
-    <textarea id="justificacion"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('justificacion') is-invalid @enderror" name="justificacion" value="{{ old('justificacion') }}" autocomplete="justificacion" required></textarea>
+    <textarea id="justificacion"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('justificacion') is-invalid @enderror" name="justificacion"  autocomplete="justificacion" required><?php if(empty($taller->justificacion)){ $vacio=null; echo $vacio;} else{ echo $taller->justificacion;} ?></textarea>
      @error('justificacion')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
@@ -126,19 +126,19 @@
 
   <div class="form-group col-md-3">
     <label for="duracion">Duración</label>
-      <select name="duracion" id="duracion" required class="form-control" oninput="validarTipo(this)" >
+      <select name="duracion" id="duracion"  required class="form-control" oninput="validarTipo(this)" >
     <option value="">Seleccione una opción</option>
     <option value="SEMESTRAL">SEMESTRAL (35 HORAS)</option>
-    <option value="4MESES">4 MESES (30 HORAS)</option>
-    <option value="3MESES">3 MESES (25 HORAS)</option>
-    <option value="2MESES">2 MESES (20 HORAS)</option>
-    <option value="1MES">1 MES (15 HORAS)</option>
+    <option value="4 MESES">4 MESES (30 HORAS)</option>
+    <option value="3 MESES">3 MESES (25 HORAS)</option>
+    <option value="2 MESES">2 MESES (20 HORAS)</option>
+    <option value="1 MES">1 MES (15 HORAS)</option>
     <option value="CHARLA">CHARLA (2-15 HORAS)</option>
   </select>
   </div>
   <div class="form-group col-md-3">
    <label for="dias_sem">* Días de la semana</label>
-   <input id="dias_sem" type="text" name="dias_sem" onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('dias_sem') is-invalid @enderror"  value="{{ old('dias_sem') }}" required autocomplete="dias_sem">
+   <input id="dias_sem" type="text" name="dias_sem" onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('dias_sem') is-invalid @enderror"  value="<?php if(empty($taller->dias_sem)){ $vacio=null; echo $vacio;} else{ echo $taller->dias_sem;} ?>"required autocomplete="dias_sem">
      @error('dias_sem')
    <span class="invalid-feedback" role="alert">
    <strong>{{ $message }}</strong>
@@ -147,7 +147,7 @@
    </div>
         <div class="form-group col-md-3">
         <label for="fecha_inicio" >{{ __('* Fecha de Inicio(tentativo)') }}</label>
-        <input id="fecha_inicio" type="date" class="form-control @error('fecha_inicio') is-invalid @enderror" name="fecha_inicio" required>
+        <input id="fecha_inicio" type="date" value="<?php if(empty($taller->fecha_inicio)){ $vacio=null; echo $vacio;} else{ echo $taller->fecha_inicio;} ?>" class="form-control @error('fecha_inicio') is-invalid @enderror" name="fecha_inicio" required>
         @error('fecha_inicio')
         <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -157,7 +157,7 @@
 
   <div class="form-group col-md-3">
        <label for="fecha_fin" >{{ __('* Fecha Terminación(tentativo)') }}</label>
-       <input id="fecha_fin" type="date" class="form-control @error('fecha_fin') is-invalid @enderror" name="fecha_fin" required>
+       <input id="fecha_fin" type="date" value="<?php if(empty($taller->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo $taller->fecha_fin;} ?>" class="form-control @error('fecha_fin') is-invalid @enderror" name="fecha_fin" required>
        @error('fecha_fin')
        <span class="invalid-feedback" role="alert">
        <strong>{{ $message }}</strong>
@@ -171,12 +171,12 @@
 
 <div class="form-group col-md-4">
    <label for="hora_inicio">Hora de entrada(tentativo)</label>
-       <input class="timepicker form-control" type="text" id="hora_inicio" name="hora_inicio" required>
+       <input class="timepicker form-control" type="text" id="hora_inicio" value="<?php if(empty($taller->hora_inicio)){ $vacio=null; echo $vacio;} else{ echo $taller->hora_inicio;} ?>"  name="hora_inicio" required>
    </div>
 
 <div class="form-group col-md-4">
    <label for="hora_fin">Hora de salida (tentativo)</label>
-     <input class="timepicker form-control" type="text" id="hora_fin" name="hora_fin" required>
+     <input class="timepicker form-control" type="text" id="hora_fin" value="<?php if(empty($taller->hora_fin)){ $vacio=null; echo $vacio;} else{ echo $taller->hora_fin;} ?>" name="hora_fin" required>
 </div>
 <script type="text/javascript">
    $('.timepicker').datetimepicker({
@@ -185,7 +185,7 @@
 </script>
   <div class="form-group col-md-2">
       <label for="creditos" >{{ __('Créditos') }}</label>
-      <input id="creditos" type="tel" maxlength="2"  class="form-control @error('creditos') is-invalid @enderror" onkeypress="return numeros (event)" name="creditos" autocomplete="creditos" required autofocus>
+      <input id="creditos" type="tel" maxlength="2"  value="" class="form-control @error('creditos') is-invalid @enderror" onkeypress="return numeros (event)" name="creditos" autocomplete="creditos" required autofocus>
           @error('creditos')
       <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -194,7 +194,7 @@
   </div>
   <div class="form-group col-md-2">
       <label for="cupo" >{{ __('Cupo') }}</label>
-      <input id="cupo" type="tel" maxlength="3"  class="form-control @error('cupo') is-invalid @enderror" onkeypress="return numeros (event)" name="cupo" autocomplete="cupo" required autofocus>
+      <input id="cupo" type="tel" maxlength="3" value="<?php if(empty($taller->cupo)){ $vacio=null; echo $vacio;} else{ echo $taller->cupo;} ?>"  class="form-control @error('cupo') is-invalid @enderror" onkeypress="return numeros (event)" name="cupo" autocomplete="cupo" required autofocus>
           @error('cupo')
       <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -207,7 +207,7 @@
 <div class="form-row">
   <div class="form-group col-md-4">
       <label for="materiales" >{{ __('Materiales') }}</label>
-      <textarea id="materiales"  onKeyUp="this.value = this.value.toUpperCase()" required type="text" class="form-control @error('materiales') is-invalid @enderror" name="materiales" value="{{ old('materiales') }}" autocomplete="materiales"></textarea>
+      <textarea id="materiales"  onKeyUp="this.value = this.value.toUpperCase()" required type="text" class="form-control @error('materiales') is-invalid @enderror" name="materiales" autocomplete="materiales"><?php if(empty($taller->materiales)){ $vacio=null; echo $vacio;} else{ echo $taller->materiales;} ?></textarea>
       @error('materiales')
       <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
@@ -216,7 +216,7 @@
   </div>
 <div class="form-group col-md-8">
     <label for="propuesta" >{{ __('Propuesta de Proyecto Final') }}</label>
-    <textarea id="propuesta"  onKeyUp="this.value = this.value.toUpperCase()" required type="text" class="form-control @error('propuesta') is-invalid @enderror" name="propuesta" value="{{ old('propuesta') }}" autocomplete="propuesta"></textarea>
+    <textarea id="propuesta"  onKeyUp="this.value = this.value.toUpperCase()" required type="text" class="form-control @error('propuesta') is-invalid @enderror" name="propuesta"  autocomplete="propuesta"><?php if(empty($taller->proyecto_final)){ $vacio=null; echo $vacio;} else{ echo $taller->proyecto_final;} ?></textarea>
     @error('propuesta')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
@@ -224,6 +224,7 @@
     @enderror
 </div>
 </div>
+<input id="area" value="<?php if(empty($taller->duracion)){ $vacio=null; echo $vacio;} else{ echo $taller->duracion;} ?>" >
 
 
                        <div class="form-group">
@@ -267,16 +268,16 @@ function validarTipo(input) {
   if(form == 'SEMESTRAL'){
   document.getElementById('creditos').value = 35 ;
 }
-if(form == '4MESES'){
+if(form == '4 MESES'){
 document.getElementById('creditos').value = 30 ;
 }
-if(form == '3MESES'){
+if(form == '3 MESES'){
 document.getElementById('creditos').value = 25 ;
 }
-if(form == '2MESES'){
+if(form == '2 MESES'){
 document.getElementById('creditos').value = 20 ;
 }
-if(form == '1MES'){
+if(form == '1 MES'){
 document.getElementById('creditos').value = 15 ;
 }
 if(form == 'CHARLA'){

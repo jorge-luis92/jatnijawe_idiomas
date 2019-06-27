@@ -15,7 +15,7 @@
 
                         <div class="form-group col-md-4">
                             <label for="nombre" ><?php echo e(__('* Nombre(s)')); ?></label>
-                                <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
+                                <input id="nombre" type="text"   onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('nombre'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }

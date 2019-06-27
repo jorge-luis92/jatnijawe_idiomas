@@ -265,7 +265,17 @@ return view('estudiante\datos.datos_personales');
           ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular'],])
           ->take(1)
           ->first();
-   return view('estudiante\mis_actividades.solicitud_taller')->with('u',$users)->with('num_c', $num_cel);
+
+          $detalles = DB::table('solicitud_talleres')
+          ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.duracion', 'solicitud_talleres.fecha_solicitud', 'solicitud_talleres.nombre_taller', 'solicitud_talleres.descripcion',
+          'solicitud_talleres.objetivos', 'solicitud_talleres.lugar', 'solicitud_talleres.justificacion', 'solicitud_talleres.creditos', 'solicitud_talleres.area',
+          'solicitud_talleres.proyecto_final', 'solicitud_talleres.cupo', 'solicitud_talleres.matricula', 'solicitud_talleres.departamento',
+          'solicitud_talleres.estado', 'solicitud_talleres.fecha_inicio', 'solicitud_talleres.fecha_fin', 'solicitud_talleres.hora_inicio',
+          'solicitud_talleres.hora_fin', 'solicitud_talleres.dias_sem', 'solicitud_talleres.materiales' )
+          ->where('solicitud_talleres.matricula',$id)
+          ->take(1)
+          ->first();
+  return view('estudiante\mis_actividades.solicitud_taller')->with('u',$users)->with('num_c', $num_cel)->with('taller', $detalles);
    }
 
    public function solicitud_practicasP(){
