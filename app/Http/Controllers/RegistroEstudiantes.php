@@ -184,7 +184,7 @@ if(($data['nombre_lengua'] == null) && ($data['tipo_lengua'] == null)){
   DB::table('becas')
       //->where('becas.id_beca', $buscar)
       ->updateOrInsert(
-          ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'matricula' => $id],
+          ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'monto' => $data['monto'],  'matricula' => $id],
       );
       return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
 
@@ -197,6 +197,12 @@ DB::table('lenguas')
     ->updateOrInsert(
         ['nombre_lengua' => $data['nombre_lengua'], 'tipo' => $data['tipo_lengua'], 'id_persona'=> $id_persona],
     );
+
+    DB::table('personas')
+        ->where('personas.id_persona', $id_persona)
+        ->update(
+            ['lengua' => '1'],
+        );
     if(($data['nombre_beca'] == null) && ($data['tipo_beca'] == null)){
         return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
     }

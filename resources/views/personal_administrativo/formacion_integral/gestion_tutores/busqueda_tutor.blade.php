@@ -28,7 +28,7 @@
                                           <td>{{$res->numero}}</td>
                                           <td>{{$res->procedencia_interna}}</td>
                                           <td>{{$res->procedencia_externa}}</td>
-                                            <td>  <a data-toggle="modal" href="#">DESACTIVAR</a></td>
+                                          <td>  <a data-toggle="modal" href="#">DESACTIVAR</a></td>
                                         </tr>
 
                                               @endforeach

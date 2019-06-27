@@ -47,13 +47,17 @@
         <label for="apellido_paterno">Apellido Paterno</label>
         <input type="text" class="form-control" id="ap_pat"  value="<?php echo e($u->apellido_paterno); ?>" disabled>
       </div>
-      <div class="form-group col-md-3" id="labels">
+      <div class="form-group col-md-2" id="labels">
         <label for="ap_mat">Apellido Materno</label>
         <input type="text" class="form-control" id="ap_mat" value="<?php echo e($u->apellido_materno); ?>" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="fecha_nac">Fecha de Nacimiento</label>
         <input type="date" class="form-control" id="fecha_nac" value="<?php echo e($u->fecha_nacimiento); ?>" disabled>
+      </div>
+      <div class="form-group col-md-1" id="labels">
+        <label for="edad">Edad</label>
+        <input type="text" class="form-control" id="edad"  value="<?php echo e($u->edad); ?>" disabled>
       </div>
     </div>
 
@@ -70,57 +74,64 @@
         <label>* ¿Hablante de Lengua Indígena?</label>
       <div align="left">
 
-       <input type="radio" id="si_lengua" name="lengua" value="si_lengua" onclick="checar()" required >
+       <input type="radio" id="si_lengua" name="lengua" value="si" onclick="checar(this.id)" required >
        <label for="si_actividad">Si</label>
 
-       <input type="radio" id="no_lengua" name="lengua" value="no_lengua" onclick="nochecar()" required>
+       <input type="radio" id="no_lengua" name="lengua" value="no" onclick="nochecar(this.id)" required>
        <label for="no_actividad">No</label>
      </div>
 
        </div>
-    <div class="form-group col-md-2" id="labels">
+    <div class="form-group col-md-3" id="labels">
       <label for="nombre_lengua">Nombre de Lengua</label>
     </br>
-      <input type="text"  name="nombre_lengua" id="nombre_lengua" required disabled class='inputText'  onKeyUp="this.value = this.value.toUpperCase()" placeholder="Especifica"  >
+      <input type="text"  name="nombre_lengua" id="nombre_lengua" required disabled class="form-control"  onKeyUp="this.value = this.value.toUpperCase()" placeholder="Especifica"  >
     </div>
 
     <div class="form-group col-md-3">
       <label for="tipo_lengua">Nivel de Comprensión</label>
-        <select name="tipo_lengua" id="tipo_lengua" required disabled class='inputText'>
+        <select name="tipo_lengua" id="tipo_lengua" required disabled class="form-control">
         <option value="">Seleccione una opción</option>
         <option value="comprende">Comprende</option>
         <option value="comprende-habla">Comprende y Habla</option>
         <option value="comprende-habla-escribe">Comprende, Habla y Escribe</option>
             </select>
-          </br>
             <a data-toggle="modal" href="#lenguas_detalle">Lenguas Registradas</a>
     </div>
 
-    <div class="radio col-md-3" id="labels">
+    <div class="radio col-md-2" id="labels">
       <label>* ¿Cuentas con alguna BECA?</label>
     <div align="left">
 
-     <input type="radio" id="si_beca" name="beca" value="si_beca" onclick="checar_beca()" required >
+     <input type="radio" id="si_beca" name="beca" value="si" onclick="checar_beca(this.id)" required >
      <label for="si_beca">Si</label>
 
-     <input type="radio" id="no_beca" name="beca" value="no_beca" onclick="nochecar_beca()" required>
+     <input type="radio" id="no_beca" name="beca" value="no" onclick="nochecar_beca(this.id)" required>
      <label for="no_beca">No</label>
    </div>
 
      </div>
-  <div class="form-group col-md-3" id="labels">
+  <div class="form-group col-md-2" id="labels">
     <label for="nombre_beca">Nombre Beca</label>
-  </br>
-    <input type="text"  name="nombre_beca" id="nombre_beca" placeholder="Especifica"  onKeyUp="this.value = this.value.toUpperCase()" disabled class='inputBeca' required>
-  </br>
+    <input type="text"  name="nombre_beca" id="nombre_beca" class="form-control" placeholder="Especifica"  onKeyUp="this.value = this.value.toUpperCase()" disabled  required>
   <a data-toggle="modal" href="#becas_detalle">Becas Registradas</a>
   </div>
-
-  <div class="form-group col-md-3" id="labels">
-    <label for="tipo_beca">Tipo de Beca</label>
-  </br>
-    <input type="text"  name="tipo_beca" id="tipo_beca" placeholder="Especifica"  onKeyUp="this.value = this.value.toUpperCase()" disabled class='inputBeca' required>
-  </div>
+<!-- -->
+<div class="form-group col-md-3">
+  <label for="tipo_beca">Tipo de Beca</label>
+    <select name="tipo_beca" id="tipo_beca" required disabled class="form-control">
+    <option value="">Seleccione una opción</option>
+    <option value="FEDERAL">BECA FEDERAL</option>
+    <option value="ESTATAL">BECA ESTATAL</option>
+    <option value="MUNICIPAL">BECA MUNICIPAL</option>
+    <option value="PARTICULAR">BECA PARTICULAR</option>
+    <option value="INTERNACIONAL">BECA INTERNACIONAL</option>
+        </select>
+</div>
+<div class="form-group col-md-2" id="labels">
+  <label for="monto">Monto</label>
+  <input type="tel"  name="monto" id="monto" maxlength="5" onkeypress="return numeros (event)" class="form-control" placeholder="Monto mensual"  disabled  required>
+</div>
     </div>
 
      <div class="form-group" id="labels">
@@ -182,6 +193,7 @@
               <tr>
                 <th scope="col">Nombre Beca</th>
                 <th scope="col">Tipo de Beca</th>
+                <th scope="col">Monto Mensual</th>
                 <th colspan="1" >ACCIONES</th>
               </tr>
             </thead>
@@ -190,6 +202,7 @@
               <tr>
                 <td><?php echo $be->nombre; ?></td>
                 <td><?php echo $be->tipo_beca; ?></td>
+                <td>$ <?php echo $be->monto; ?></td>
                 <td><a href="cambiar_estatus_beca/<?php echo e($be->id_beca); ?>">Quitar</a></td>
               </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -204,23 +217,58 @@
   <?php $__env->stopSection(); ?>
 
 <script language="JavaScript">
-    function checar(){
-        $(".inputText").removeAttr("disabled");
+    function checar(id){
+      // document.getElementById("nombre_lengua").removeAttr("disabled");
+       //$(".inputText").removeAttr("disabled");
+       if ( id == "si_lengua" ) {
+        document.getElementById("nombre_lengua").removeAttribute("disabled");
+        document.getElementById("tipo_lengua").removeAttribute("disabled");
+      }
     }
 
-    function nochecar(){
-        $(".inputText").attr("disabled","disabled");
+    function nochecar(id){
+      if ( id == "no_lengua" ) {
+       document.getElementById("nombre_lengua").setAttribute("disabled","disabled");
+       document.getElementById("tipo_lengua").setAttribute("disabled","disabled");
+         }
+
     }
 </script>
 
 <script language="JavaScript">
-    function checar_beca(){
-        $(".inputBeca").removeAttr("disabled");
+    function checar_beca(id){
+      if ( id == "si_beca" ) {
+       document.getElementById("nombre_beca").removeAttribute("disabled");
+       document.getElementById("tipo_beca").removeAttribute("disabled");
+        document.getElementById("monto").removeAttribute("disabled");
+     }
     }
 
-    function nochecar_beca(){
-        $(".inputBeca").attr("disabled","disabled");
+    function nochecar_beca(id){
+      if ( id == "no_beca" ) {
+       document.getElementById("nombre_beca").setAttribute("disabled","disabled");
+       document.getElementById("tipo_beca").setAttribute("disabled","disabled");
+       document.getElementById("monto").setAttribute("disabled","disabled");
+         }
 
+    }
+
+    function numeros(e){
+     key = e.keyCode || e.which;
+     tecla = String.fromCharCode(key).toLowerCase();
+     letras = " 0123456789";
+     especiales = [8,37,39,46];
+
+     tecla_especial = false
+     for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+         }
+     }
+
+     if(letras.indexOf(tecla)==-1 && !tecla_especial)
+         return false;
     }
 </script>
 

@@ -50,7 +50,7 @@
         </div>
     <div class="form-group col-md-4">
       <label for="tel_local">Teléfono de Casa</label>
-        <input type="tel_local"  class="form-control @error('tel_local') is-invalid @enderror" name="tel_local" id="tel_local" value="<?php if(empty($nl->numero)){ $vacio=null; echo $vacio;} else{ echo $nl->numero;} ?>" maxlength=""  onkeypress="return numeros (event)"  placeholder="Formato a 7 digitos -- Ejemplo: 5115090"  pattern="([0-9]{7})">
+        <input type="tel"  class="form-control @error('tel_local') is-invalid @enderror" name="tel_local" id="tel_local" value="<?php if(empty($nl->numero)){ $vacio=null; echo $vacio;} else{ echo $nl->numero;} ?>" maxlength=""  onkeypress="return numeros (event)"  placeholder="Formato a 7 digitos -- Ejemplo: 5115090"  pattern="([0-9]{7})">
           @error('tel_local')
           <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>

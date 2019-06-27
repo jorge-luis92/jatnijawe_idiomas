@@ -32,7 +32,7 @@ class ConsultasController extends Controller
        if($usuario_actuales->tipo_usuario!='estudiante'){
          return redirect('register');
         }
-      
+
 
       $usuario_actual=auth()->user();
       $id=$usuario_actual->id_user;
@@ -51,7 +51,7 @@ class ConsultasController extends Controller
 
         $users = DB::table('estudiantes')
         ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
-                 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
+                 'personas.nombre', 'personas.apellido_paterno', 'personas.edad',  'personas.apellido_materno', 'personas.fecha_nacimiento',
                  'personas.curp', 'personas.genero')
         ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
         ->where('estudiantes.matricula',$id)
@@ -59,7 +59,7 @@ class ConsultasController extends Controller
         ->first();
 
         $becas_r = DB::table('estudiantes')
-        ->select('becas.nombre', 'becas.tipo_beca', 'becas.id_beca')
+        ->select('becas.nombre', 'becas.tipo_beca', 'becas.id_beca', 'becas.monto')
         ->join('becas', 'estudiantes.matricula', '=', 'becas.matricula')
         //->where('estudiantes.matricula',$id)
         ->where([['estudiantes.matricula',$id], ['becas.bandera', '=', '1'],])
