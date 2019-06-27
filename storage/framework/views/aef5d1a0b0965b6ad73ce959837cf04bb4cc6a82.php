@@ -4,12 +4,12 @@
 : Búsqueda Tutores
  <?php $__env->startSection('seccion'); ?>
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Tutores Registrados</h1>
- <div class="container" id="font4">
+ <div class="container" id="font7">
  </br>
-                             <div class="table-responsive">
-                               <table class="table table-bordered table-info" style="color: #000000;" >
-                                 <thead>
-                                   <tr>
+ <div class="table-responsive" style="border:1px solid #819FF7;">
+  <table class="table table-bordered table-striped" style="color: #000000; font-size: 13px;"  >
+      <thead>
+                                   <tr style="font-size: 12px;" >
                                      <th scope="col">NOMBRE</th>
                                       <th scope="col">EDAD</th>
                                      <th scope="col">GRADO DE ESTUDIOS</th>
@@ -23,7 +23,11 @@
                                    <?php $__currentLoopData = $re; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $res): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                    <tr>
                                           <td><?php echo e($res->nombre); ?> <?php echo e($res->apellido_paterno); ?> <?php echo e($res->apellido_materno); ?></td>
+                                          <td><?php echo e($res->edad); ?></td>
                                           <td><?php echo e($res->grado_estudios); ?></td>
+                                          <td><?php echo e($res->numero); ?></td>
+                                          <td><?php echo e($res->procedencia_interna); ?></td>
+                                          <td><?php echo e($res->procedencia_externa); ?></td>
                                             <td>  <a data-toggle="modal" href="#">DESACTIVAR</a></td>
                                         </tr>
 

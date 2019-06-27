@@ -96,11 +96,12 @@ class FormacionIntegralController extends Controller
     public function busqueda_tutor()
     {
       $result = DB::table('personas')
-      ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.bandera', 'tutores.procedencia_interna', 'nivel.rfc', 'nivel.grado_estudios')
+      ->select('personas.nombre', 'personas.edad', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.bandera',
+      'tutores.procedencia_interna', 'tutores.procedencia_externa','nivel.grado_estudios', 'telefonos.numero')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
       ->join('nivel', 'tutores.id_nivel', '=', 'nivel.id_nivel')
-      //->join('users', 'personas.id_persona', '=', 'users.id_persona')
-      ->where('tutores.bandera', '=', '1')
+      ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+      ->where([['tutores.bandera', '=', '1'], ['telefonos.tipo', '=', 'celular'],])
       //->orderBy('personas.apellido_paterno', 'asc')
       ->simplePaginate(7);
     return view('personal_administrativo\formacion_integral\gestion_tutores.busqueda_tutor')->with('re', $result);
