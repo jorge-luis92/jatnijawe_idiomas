@@ -140,9 +140,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('desactivar_estudiante/{id_user}', 'AdminController@desactivar_estudiante');
   Route::get('activar_estudiante/{id_user}', 'AdminController@activar_estudiante');
 
-
-  //Route::get('home_admin', 'Administrativo_Con\AdministrativoController@admin_inicio')->name('home_admin');
-});
+/*FormacionIntegralController*/
 
 Route::get('inicio_formacion', 'FormacionIntegralController@inicio_formacion')->name('inicio_formacion');
 Route::get('busqueda_estudiante_fi', 'FormacionIntegralController@busqueda_estudiante_fi')->name('busqueda_estudiante_fi');
@@ -175,6 +173,9 @@ Route::get('constancia_parcial/{matricula}', 'FormacionIntegralController@consta
 Route::get('constancia_valida/{matricula}', 'FormacionIntegralController@constancia_val');
 Route::get('acreditar_estudiantes_formacion/{actividad}/{matricula}', 'FormacionIntegralController@acreditar_estudiantes');
 Route::get('desactivar_extra/{actividad}', 'FormacionIntegralController@desactivar_extracurricular');
+});
+
+
 
 
 

@@ -1,10 +1,12 @@
+
 <style>
 body{
-  margin: 0;
+  margin:0;
 }
 #datos {border:2px solid; width:50%; text-align:center}
 #datos tr {border:2px solid;}
 #datos tr td{border:2px solid;}
+
 </style>
 
 <table id="encabezado" >
@@ -34,31 +36,32 @@ body{
 
 
 <h4><center>SOLICITUD DE TALLER</center></h4>
-
-<table style="font-size:15px" >
+<table style="font-size:14px" >
     <tr>
-      <td colspan="3">NOMBRE DEL SOLICITANTE</td>
-      <td ><input name="nombre" type="text" required id="nombre" value="<?php echo e($data->num_solicitud); ?>" /></td>
-      <td >EDAD</td>
-      <td ><input name="edad" type="text" required id="edad" value="" /></td>
+      <td colspan="3">NOMBRE DEL SOLICITANTE: </td>
+      <td ><label ><?php echo e($datos->nombre); ?> <?php echo e($datos->apellido_paterno); ?> <?php echo e($datos->apellido_materno); ?></label></td>
+      <td >SEMESTRE</td>
+      <td ><input name="semestre" type="text" align="center"  id="semestre" value="2" /></td>
     </tr>
     <tr>
-      <td colspan="3">SEMESTRE</td>
-      <td ><input name="semestre" type="text" required id="semestre" value="" /></td>
+      <td colspan="3">MATRICULA:</td>
+      <td ><label ><?php echo e($data->matricula); ?></label></td>
       <td >MODALIDAD</td>
-      <td ><input name="modalidad" type="text" required id="modalidad" value="" /></td>
-    </tr>
+      <td ><input name="modalidad" type="text"  id="modalidad" value="<?php echo e($datos->modalidad); ?>" /></td>
+      </tr>
     <tr>
-      <td colspan="3">TELÉFONO CELULAR</td>
-      <td ><input name="telefono" type="text"  id="telefono" value="" /></td>
+      <td colspan="3">EDAD</td>
+      <td ><input name="edad" type="text" required id="edad" value="" /></td>
+      <td >TELÉFONO CELULAR</td>
+      <td ><input name="telefono" type="text"  id="telefono" value="<?php if(empty($nu_ce->numero)){ $vacio=null; echo $vacio;} else{ echo $nu_ce->numero;} ?>" /></td>
     </tr>
     <tr>
       <td colspan="3">NOMBRE DEL TALLER</td>
-      <td ><input name="nombre_ec" type="text" required id="nombre_ec" value="" /></td>
+      <td ><input name="nombre_ec" type="text" required id="nombre_ec" value="<?php echo e($data->nombre_taller); ?>" /></td>
     </tr>
     <tr>
       <td colspan="3">ÁREA</td>
-      <td ><input name="nombre_ec" type="text" required id="nombre_ec" value="" /></td>
+      <td ><input name="area" type="text" required id="area" value="" /></td>
     <td >MODALIDAD</td>
     <td ><input name="modalidad" type="text" required id="modalidad" value="" /></td>
     </tr>
