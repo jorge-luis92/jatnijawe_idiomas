@@ -63,7 +63,8 @@
             <a  class="collapse-item" href=<?php echo e(route('mis_actividades')); ?>>Mis Actividades </br> Extraescolares</a>
             <a  class="collapse-item" href=<?php echo e(route('avance')); ?>>Avance de Horas</a>
           <a  class="collapse-item" href=<?php echo e(route('solicitud_taller')); ?>>Solicitud Actividades </br> Extraescolares</a>
-            <a  class="collapse-item" href="">Generar Constancia </br>Parcial</a>
+          <a  class="collapse-item" href="descargar_solicitud_taller" target="_blank"}>Descargar Solicitud de <br />Taller</a>
+          <!--  <a  class="collapse-item" href="">Constancia Actividades Extracurriculares </br>Parcial</a>-->
         </div>
       </li>
 

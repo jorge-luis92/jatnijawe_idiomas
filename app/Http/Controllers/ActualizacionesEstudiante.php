@@ -80,15 +80,11 @@ public function desactivar_act($id_externos){
 
 public function act_datos_personales(Request $request)
 {
-  $this->validate($request, [
-    //'id_persona' => ['required', 'string', 'max:60', 'unique:personas'],
-    //'tel_local' => ['string', 'min:10', 'max:10', 'unique:telefonos'],
-    //'tel_celular' => ['required', 'string', 'min:10', 'max:10', 'unique:telefonos'],
-    'numero' => ['required', 'string', 'min:10', 'max:10', 'unique:telefonos'],
-  ]);
+
   $usuario_actual=auth()->user();
   $id=$usuario_actual->id_user;
   $data = $request;
+
   $id_persona = DB::table('estudiantes')
   ->select('estudiantes.id_persona')
   ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')

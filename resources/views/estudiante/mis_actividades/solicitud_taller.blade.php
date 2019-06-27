@@ -224,7 +224,6 @@
     @enderror
 </div>
 </div>
-<input id="area" value="<?php if(empty($taller->duracion)){ $vacio=null; echo $vacio;} else{ echo $taller->duracion;} ?>" >
 
 
                        <div class="form-group">

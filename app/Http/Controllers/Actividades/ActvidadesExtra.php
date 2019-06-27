@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use PDF;
+use Dompdf\Dompdf;
 class ActvidadesExtra extends Controller
 {
     public function catalogos(){

@@ -103,6 +103,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('solicitud_taller', 'Estudiante_Con\EstudianteController@solicitud_taller')->name('solicitud_taller');
   Route::get('pdf_solicitud_taller/{matricula}','GenerarPdf@pdf_solicitud_taller_estudiante');
   Route::post('solicitud_taller_enviar', 'Actividades\ActvidadesExtra@envio_taller')->name('solicitud_taller_enviar');
+  Route::get('descargar_solicitud_taller', 'GenerarPdf@descarga_taller');
   Route::get('solicitud_practicasP', 'Estudiante_Con\EstudianteController@solicitud_practicasP')->name('solicitud_practicasP');
   Route::get('solicitud_servicioSocial', 'Estudiante_Con\EstudianteController@solicitud_servicioSocial')->name('solicitud_servicioSocial');
 });
