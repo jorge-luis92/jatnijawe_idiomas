@@ -13,7 +13,7 @@
                                      <th scope="col">NOMBRE</th>
                                       <th scope="col">EDAD</th>
                                      <th scope="col">GRADO DE ESTUDIOS</th>
-                                      <th scope="col">TELEFONO CONTACTO</th>
+                                      <th scope="col">TELÉFONO CONTACTO</th>
                                        <th scope="col">PROCEDENCIA INTERNA</th>
                                         <th scope="col">PROCEDENCIA EXTERNA</th>
                                      <th colspan="1" >ACCIONES</th>
