@@ -5,7 +5,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('seccion'); ?>
-<div class="container" id="font2">
+<div class="container" id="font7">
    <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   </br>
   <h1 style="font-size: 2.0em; color: #000000;" align="center">Perfil del Estudiante</h1>

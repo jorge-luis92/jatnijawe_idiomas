@@ -160,7 +160,6 @@ img#img_banner{
   font-family: 'Century Gothic';
   align: center;
   background: #58ACFA;
-  opacity: 0.75;filter:alpha(opacity=5);
   max-width: 450px;
   margin: 0 auto 30px;
   padding: 6px;

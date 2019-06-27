@@ -114,8 +114,8 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=auth()->user();
-                  $id=$usuario_actual->id_user;
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=Auth::user()->id_user;
+                  $id=$usuario_actual;
                   $users = DB::table('personas')
                   ->select('personas.nombre')
                   ->join('users', 'personas.id_persona', '=', 'users.id_persona')
@@ -123,7 +123,15 @@
                   ->take(1)
                   ->first();  echo $users->nombre." ";  //url('image/logos_idiomas/logo_fon.png')echo $users->apellido_paterno." "; echo $users->apellido_materno;
                   ?></span>
-               <img class="img-profile rounded-circle"  src="{{asset('image/foto.png')}}">
+                  <?php $imagen = DB::table('users')
+                 ->select('users.imagenurl')
+                 ->where('users.id_user',$id)
+                 ->take(1)
+                 ->first();
+                 $im=$imagen->imagenurl;  ?>
+                 <?php if($im==""){ $im="foto.png"; }  ?>
+                  <img class="img-profile rounded-circle"  src="{{ asset("/image/users/$im")}}" >
+
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

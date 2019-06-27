@@ -5,7 +5,7 @@
 @endsection
 
 @section('seccion')
-<div class="container" id="font2">
+<div class="container" id="font7">
    @include('flash-message')
   </br>
   <h1 style="font-size: 2.0em; color: #000000;" align="center">Perfil del Estudiante</h1>

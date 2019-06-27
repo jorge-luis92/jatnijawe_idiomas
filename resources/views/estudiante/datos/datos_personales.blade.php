@@ -9,12 +9,7 @@
 <div class="container" id="font4">
   @include('flash-message')
 </br>
-<?php
 
-if(isset($_GET['opcion'])){
-      
-}
-?>
 <form method="POST" action="{{ route('act_datos_personales') }}">
   @csrf
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>

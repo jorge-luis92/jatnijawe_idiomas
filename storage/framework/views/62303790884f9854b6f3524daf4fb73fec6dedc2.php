@@ -147,12 +147,25 @@
 
 <div class="topbar-divider d-none d-sm-block"></div>
             <!-- Nav Item - User Information -->
-
+            <li class="nav-item dropdown no-arrow mx-1">
+                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <i class="fas fa-bell fa-fw"></i>
+                           <!-- Counter - Alerts -->
+                           <span class="badge badge-danger badge-counter">1</span>
+                         </a>
+                         <!-- Dropdown - Alerts -->
+                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                           <h6 class="dropdown-header">
+                             Notificaciones
+                           </h6>
+                           <a class="dropdown-item text-center small text-gray-500" style="background-color: red; color: white;" href="">Ver mis Notificaciones</a>
+                       </li>
+<div class="topbar-divider d-none d-sm-block"></div>
               <li class="nav-item" >
 
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=auth()->user();
-               $id=$usuario_actual->id_user;
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=Auth::user()->id_user;
+               $id=$usuario_actual;
                $users = DB::table('estudiantes')
                ->select('personas.nombre', 'apellido_paterno', 'apellido_materno')
                ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
@@ -166,15 +179,15 @@
               ->where('users.id_user',$id)
               ->take(1)
               ->first();
-              $im=$usuario_actual->imagenurl;  ?>
-              <?php if($usuario_actual->imagenurl==""){ $im="foto.png"; }  ?>
+              $im=$imagen->imagenurl;  ?>
+              <?php if($im==""){ $im="foto.png"; }  ?>
                <img class="img-profile rounded-circle"  src="<?php echo e(asset("/image/users/$im")); ?>" >
 
              </a>
                 <!-- Dropdown - User Information
                 <div class="bg-white py-2 collapse-inner rounded"
                 class="collapse" aria-labelledby="headingUtilities">-->
-                <div class="dropdown-menu dropdown-menu-right animated--grow-in"  style="background-color: #819FF7;" aria-labelledby="userDropdown">
+                <div class="dropdown-menu dropdown-menu-right animated--grow-in"  aria-labelledby="userDropdown">
                  <a class="dropdown-item" href=<?php echo e(route('cuenta')); ?> >
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
                     Configuración de Contraseña

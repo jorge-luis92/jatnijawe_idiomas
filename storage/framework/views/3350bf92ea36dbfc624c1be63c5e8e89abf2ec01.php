@@ -9,12 +9,7 @@
 <div class="container" id="font4">
   <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </br>
-<?php
 
-if(isset($_GET['opcion'])){
-      
-}
-?>
 <form method="POST" action="<?php echo e(route('act_datos_personales')); ?>">
   <?php echo csrf_field(); ?>
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
