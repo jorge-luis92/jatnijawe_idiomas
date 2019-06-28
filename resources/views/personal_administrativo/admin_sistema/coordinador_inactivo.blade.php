@@ -26,7 +26,7 @@
         <td>{!! $coordinadores->puesto !!}</td>
         <td>{!! $coordinadores->username !!}</td>
         <td>{!! $coordinadores->email !!}</td>
-             <td>  <a data-toggle="modal" href="#"> ACTIVAR</a></td>
+             <td><a href="activar_coord/{{$coordinadores->id_user}}">ACTIVAR</a></td
            </tr>
         @endforeach
     </tbody>

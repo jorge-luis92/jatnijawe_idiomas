@@ -4,21 +4,9 @@
  <?php $__env->startSection('seccion'); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Editar Estudiante</h1>
 <div class="container" id="font4">
-  <?php
-            $ids=$u;
-            $users = DB::table('estudiantes')
-            ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
-                     'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
-                     'personas.curp', 'personas.genero', 'personas.lugar_nacimiento', 'personas.edad', 'personas.tipo_sangre')
-            ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
-            ->where('estudiantes.matricula',$ids)
-            ->take(1)
-            ->first(); ?>
-</br>                    <form method="POST" action="<?php echo e(route('registro_estudiante')); ?>">
+  </br>                    <form method="POST" action="<?php echo e(route('registro_estudiante')); ?>">
                         <?php echo csrf_field(); ?>
-
                          <div class="form-row">
-
                         <div class="form-group col-md-4">
                             <label for="nombre" ><?php echo e(__('* Nombre(s)')); ?></label>
                                 <input id="nombre" type="text" value="<?php echo e($users->nombre); ?>" onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
@@ -170,7 +158,7 @@ endif; ?>
                       <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="matricula" ><?php echo e(__('* Matricula')); ?></label>
-                                <input id="matricula" maxlength="12" type="tel" class="form-control <?php if ($errors->has('matricula')) :
+                                <input id="matricula" maxlength="12" type="tel" value="<?php echo e($users->matricula); ?>" class="form-control <?php if ($errors->has('matricula')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('matricula'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -196,7 +184,7 @@ endif; ?>
 
                         <div class="form-group col-md-3">
                             <label for="fecha_ingreso" ><?php echo e(__('* Fecha Ingreso')); ?></label>
-                                  <input id="fecha_ingreso" type="date" class="form-control <?php if ($errors->has('fecha_ingreso')) :
+                                  <input id="fecha_ingreso" value="<?php echo e($users->fecha_ingreso); ?>" type="date" class="form-control <?php if ($errors->has('fecha_ingreso')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_ingreso'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -214,29 +202,27 @@ endif; ?>
 
                         <div class="form-group col-md-3">
                           <label for="semestre">* Semestre</label>
-                            <select name="semestre" id="semestre" required class="form-control">
-                            <option value="">Seleccione una opción</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-
-                                </select>
+                          <input id="semestre" type="tel" value="<?php echo e($users->semestre); ?>" maxlength="2" onkeypress="return numeros (event)" class="form-control <?php if ($errors->has('semestre')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('semestre'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"  name="semestre" autocomplete="grupo" autofocus>
+                          <?php if ($errors->has('semestre')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('semestre'); ?>
+                              <span class="invalid-feedback" role="alert">
+                                  <strong><?php echo e($message); ?></strong>
+                              </span>
+                          <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
                         </div>
 
                       </div>
                       <div class="form-row">
                         <div class="form-group col-md-1">
                             <label for="grupo" ><?php echo e(__('* Grupo')); ?></label>
-                                <input id="grupo" type="text" maxlength="1" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('grupo')) :
+                                <input id="grupo" type="text" maxlength="2" value="<?php echo e($users->grupo); ?>" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('grupo')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('grupo'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -254,16 +240,25 @@ endif; ?>
 
                         <div class="form-group col-md-3">
                           <label for="estatus">* Estatus</label>
-                            <select name="estatus" id="estatus" required class="form-control">
-                          <option value="">Seleccione una opción</option>
-                          <option value="regular">REGULAR</option>
-                          <option value="irregular">IRREGULAR</option>
-                    </select>
+                          <input id="estatus" type="text" value="<?php echo e($users->estatus); ?>" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('estatus')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('estatus'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"  name="estatus" autocomplete="estatus" autofocus>
+                          <?php if ($errors->has('estatus')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('estatus'); ?>
+                              <span class="invalid-feedback" role="alert">
+                                  <strong><?php echo e($message); ?></strong>
+                              </span>
+                          <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
                         </div>
 
                         <div class="form-group col-md-5">
                             <label for="bachillerato_origen" ><?php echo e(__('* Bachillerato de Origen')); ?></label>
-                                <input id="bachillerato_origen" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('bachillerato_origen')) :
+                                <input id="bachillerato_origen" type="text" value="<?php echo e($users->bachillerato_origen); ?>" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('bachillerato_origen')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('bachillerato_origen'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -282,7 +277,7 @@ endif; ?>
 
                         <div class="form-group col-md-3">
                             <label for="email" ><?php echo e(__('Correo')); ?></label>
-                                <input id="email" type="email" class="form-control <?php if ($errors->has('email')) :
+                                <input id="email" type="email" value="<?php echo e($emails->email); ?>" class="form-control <?php if ($errors->has('email')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('email'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -302,7 +297,7 @@ endif; ?>
                         <div class="form-group">
                             <div class="col-xs-offset-2 col-xs-9" align="center">
                                 <button type="submit" class="btn btn-primary">
-                                    <?php echo e(__('Registrar')); ?>
+                                    <?php echo e(__('Actualizar')); ?>
 
                                 </button>
                             </div>

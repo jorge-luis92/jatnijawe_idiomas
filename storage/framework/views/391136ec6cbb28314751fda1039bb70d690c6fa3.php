@@ -26,7 +26,7 @@
         <td><?php echo $coordinadores->puesto; ?></td>
         <td><?php echo $coordinadores->username; ?></td>
         <td><?php echo $coordinadores->email; ?></td>
-             <td>  <a data-toggle="modal" href="#"> ACTIVAR</a></td>
+             <td><a href="activar_coord/<?php echo e($coordinadores->id_user); ?>">ACTIVAR</a></td
            </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </tbody>

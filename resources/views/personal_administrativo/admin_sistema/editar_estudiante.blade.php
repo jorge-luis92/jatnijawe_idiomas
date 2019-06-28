@@ -5,21 +5,9 @@
  @section('seccion')
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Editar Estudiante</h1>
 <div class="container" id="font4">
-  <?php
-            $ids=$u;
-            $users = DB::table('estudiantes')
-            ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
-                     'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
-                     'personas.curp', 'personas.genero', 'personas.lugar_nacimiento', 'personas.edad', 'personas.tipo_sangre')
-            ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
-            ->where('estudiantes.matricula',$ids)
-            ->take(1)
-            ->first(); ?>
-</br>                    <form method="POST" action="{{ route('registro_estudiante') }}">
+  </br>                    <form method="POST" action="{{ route('registro_estudiante') }}">
                         @csrf
-
                          <div class="form-row">
-
                         <div class="form-group col-md-4">
                             <label for="nombre" >{{ __('* Nombre(s)') }}</label>
                                 <input id="nombre" type="text" value="{{$users->nombre}}" onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre"  required autocomplete="nombre">
@@ -115,7 +103,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="matricula" >{{ __('* Matricula') }}</label>
-                                <input id="matricula" maxlength="12" type="tel" class="form-control @error('matricula') is-invalid @enderror" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required>
+                                <input id="matricula" maxlength="12" type="tel" value="{{$users->matricula}}" class="form-control @error('matricula') is-invalid @enderror" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required>
                                 @error('matricula')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -133,7 +121,7 @@
 
                         <div class="form-group col-md-3">
                             <label for="fecha_ingreso" >{{ __('* Fecha Ingreso') }}</label>
-                                  <input id="fecha_ingreso" type="date" class="form-control @error('fecha_ingreso') is-invalid @enderror" name="fecha_ingreso" required autocomplete="fecha_ingreso">
+                                  <input id="fecha_ingreso" value="{{$users->fecha_ingreso}}" type="date" class="form-control @error('fecha_ingreso') is-invalid @enderror" name="fecha_ingreso" required autocomplete="fecha_ingreso">
                                 @error('fecha_ingreso')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -143,29 +131,19 @@
 
                         <div class="form-group col-md-3">
                           <label for="semestre">* Semestre</label>
-                            <select name="semestre" id="semestre" required class="form-control">
-                            <option value="">Seleccione una opción</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-
-                                </select>
+                          <input id="semestre" type="tel" value="{{$users->semestre}}" maxlength="2" onkeypress="return numeros (event)" class="form-control @error('semestre') is-invalid @enderror"  name="semestre" autocomplete="grupo" autofocus>
+                          @error('semestre')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
                         </div>
 
                       </div>
                       <div class="form-row">
                         <div class="form-group col-md-1">
                             <label for="grupo" >{{ __('* Grupo') }}</label>
-                                <input id="grupo" type="text" maxlength="1" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('grupo') is-invalid @enderror"  name="grupo" autocomplete="grupo" autofocus>
+                                <input id="grupo" type="text" maxlength="2" value="{{$users->grupo}}" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('grupo') is-invalid @enderror"  name="grupo" autocomplete="grupo" autofocus>
                                 @error('grupo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -175,16 +153,17 @@
 
                         <div class="form-group col-md-3">
                           <label for="estatus">* Estatus</label>
-                            <select name="estatus" id="estatus" required class="form-control">
-                          <option value="">Seleccione una opción</option>
-                          <option value="regular">REGULAR</option>
-                          <option value="irregular">IRREGULAR</option>
-                    </select>
+                          <input id="estatus" type="text" value="{{$users->estatus}}" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('estatus') is-invalid @enderror"  name="estatus" autocomplete="estatus" autofocus>
+                          @error('estatus')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
                         </div>
 
                         <div class="form-group col-md-5">
                             <label for="bachillerato_origen" >{{ __('* Bachillerato de Origen') }}</label>
-                                <input id="bachillerato_origen" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('bachillerato_origen') is-invalid @enderror"  name="bachillerato_origen" autocomplete="bachillerato_origen" autofocus>
+                                <input id="bachillerato_origen" type="text" value="{{$users->bachillerato_origen}}" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('bachillerato_origen') is-invalid @enderror"  name="bachillerato_origen" autocomplete="bachillerato_origen" autofocus>
                                 @error('bachillerato_origen')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -195,7 +174,7 @@
 
                         <div class="form-group col-md-3">
                             <label for="email" >{{ __('Correo') }}</label>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="email">
+                                <input id="email" type="email" value="{{$emails->email}}" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="email">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -207,7 +186,7 @@
                         <div class="form-group">
                             <div class="col-xs-offset-2 col-xs-9" align="center">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Registrar') }}
+                                    {{ __('Actualizar') }}
                                 </button>
                             </div>
                         </div>

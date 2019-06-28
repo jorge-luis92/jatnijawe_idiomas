@@ -26,7 +26,7 @@
               <td>{!! $coordinadores->puesto !!}</td>
               <td>{!! $coordinadores->username !!}</td>
               <td>{!! $coordinadores->email !!}</td>
-              <td><a data-toggle="modal" href="#"> DESACTIVAR</a></td>
+            <td><a href="desactivar_coord/{{$coordinadores->id_user}}">DESACTIVAR</a></td>
             </tr>
          @endforeach
      </tbody>

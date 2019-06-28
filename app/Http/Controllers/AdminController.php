@@ -272,11 +272,12 @@ if($data['edad'] >17){
            return redirect()->back();
           }
           $users = DB::table('administrativos')
-          ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'users.username', 'users.email',
-                   'administrativos.puesto')
+          ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'users.id_user', 'users.username',
+          'users.email','administrativos.puesto')
           ->join('personas', 'personas.id_persona', '=', 'administrativos.id_persona')
           ->join('users', 'personas.id_persona', '=', 'users.id_persona')
           ->where([['administrativos.puesto','!=', ''], ['users.bandera', '=', '1'] , ['users.id_user', '!=', $id],])
+          ->orderBy('personas.nombre', 'asc')
           ->simplePaginate(8);
         return view('personal_administrativo\admin_sistema.coordinador_activo')->with('coordi', $users);
       }
@@ -287,11 +288,12 @@ if($data['edad'] >17){
            return redirect()->back();
           }
           $users = DB::table('administrativos')
-          ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'users.username', 'users.email',
-                   'administrativos.puesto')
+          ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'users.id_user', 'users.username',
+          'users.email', 'administrativos.puesto')
           ->join('personas', 'personas.id_persona', '=', 'administrativos.id_persona')
           ->join('users', 'personas.id_persona', '=', 'users.id_persona')
           ->where([['administrativos.puesto','!=', ''], ['users.bandera', '=', '0'],])
+          ->orderBy('personas.nombre', 'asc')
           ->simplePaginate(8);
 
 
@@ -302,17 +304,41 @@ if($data['edad'] >17){
         public function editar_estudiante($matricula){
 
           $ids=$matricula;
-          $users = DB::table('estudiantes')
-          ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
-                   'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
-                   'personas.curp', 'personas.genero')
-          ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
-          ->where('estudiantes.matricula',$ids)
-          ->take(1)
-          ->first();
+
+                    $datos = DB::table('estudiantes')
+                    ->select('estudiantes.matricula', 'estudiantes.fecha_ingreso','estudiantes.semestre', 'estudiantes.modalidad',
+                    'estudiantes.estatus', 'estudiantes.grupo','personas.nombre', 'personas.apellido_paterno','estudiantes.grupo',
+                    'personas.apellido_materno','personas.fecha_nacimiento','personas.curp', 'personas.genero','estudiantes.estatus',
+                    'personas.lugar_nacimiento','personas.edad', 'personas.tipo_sangre', 'estudiantes.bachillerato_origen', )
+                    ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+                    ->where('estudiantes.matricula',$ids)
+                    ->take(1)
+                    ->first();
+                  $ema = DB::table('users')
+                  ->select('users.email')->where('users.id_user', $ids)->take(1)->first();
 
 
-         return view('personal_administrativo\admin_sistema.editar_estudiante')->with('u', $users);
+         return view('personal_administrativo\admin_sistema.editar_estudiante')->with('users', $datos)->with('emails', $ema);
+          }
+
+          protected function activar_cordinador($id_user){
+            $valor=$id_user;
+            DB::table('users')
+                ->where('users.id_user', $valor)
+                ->update(
+                    ['bandera' => '1'],
+                );
+                return redirect()->route('coordinador_activo')->with('success','¡El Coordinador ha sido Activado!');
+          }
+
+          protected function desactivar_cordinador($id_user){
+            $valor=$id_user;
+            DB::table('users')
+                ->where('users.id_user', $valor)
+                ->update(
+                    ['bandera' => '0'],
+                );
+                return redirect()->route('coordinador_inactivo')->with('success','¡El Coordinador ha sido Desactivado!');
           }
 
 }

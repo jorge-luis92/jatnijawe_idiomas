@@ -289,18 +289,18 @@ return view('estudiante\datos.datos_personales');
    public function solicitud_practicasP(){
      $usuario_actuales=\Auth::user();
       if($usuario_actuales->tipo_usuario!='estudiante'){
-        return redirect('register');
+      return redirect()->back();
        }
 
      $usuario_actual=auth()->user();
      $id=$usuario_actual->id_user;
   $validar = DB::table('estudiantes')
-     ->select('estudiantes.semestre')
+     ->select('estudiantes.semestre', 'estudiantes.estatus')
      ->where('estudiantes.matricula',$id)
      ->take(1)
      ->first();
 
-     if(($validar->semestre) >= 4 ){
+     if((($validar->semestre) >= 4 ) && (($validar->estatus) == 'REGULAR')){
      $id_persona = DB::table('estudiantes')
      ->select('estudiantes.id_persona')
      ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')

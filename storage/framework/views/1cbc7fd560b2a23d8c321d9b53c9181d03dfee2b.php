@@ -26,7 +26,7 @@
               <td><?php echo $coordinadores->puesto; ?></td>
               <td><?php echo $coordinadores->username; ?></td>
               <td><?php echo $coordinadores->email; ?></td>
-              <td><a data-toggle="modal" href="#"> DESACTIVAR</a></td>
+            <td><a href="desactivar_coord/<?php echo e($coordinadores->id_user); ?>">DESACTIVAR</a></td>
             </tr>
          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
      </tbody>

@@ -141,6 +141,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::any('busqueda_estudiantes', 'AdminController@Busqueda')->name('busqueda_estudiantes');
   Route::get('desactivar_estudiante/{id_user}', 'AdminController@desactivar_estudiante');
   Route::get('activar_estudiante/{id_user}', 'AdminController@activar_estudiante');
+  Route::get('activar_coord/{id_user}', 'AdminController@activar_cordinador');
+  Route::get('desactivar_coord/{id_user}', 'AdminController@desactivar_cordinador');
 
 /*FormacionIntegralController*/
 
@@ -215,8 +217,20 @@ Route::get('busqueda_estudiante_aux', 'Administrativo_Con\AdministrativoControll
 Route::get('estudiante_activo_aux', 'Administrativo_Con\AdministrativoController@estudiante_activo_aux')->name('estudiante_activo_aux');
 Route::get('estudiante_inactivo_aux', 'Administrativo_Con\AdministrativoController@estudiante_inactivo_aux')->name('estudiante_inactivo_aux');
 
-
-
+/*SERVICIO SOCIAL Y PRÁCTICAS PROFESIONALES
+***********************************************************
+*/
+Route::get('home_servicios', 'ServiciosController@home_servicios')->name('home_servicios');
+Route::get('solicitudes_practicas', 'ServiciosController@solicitudes_practicas')->name('solicitudes_practicas');
+Route::get('solicitudes_serviciosocial', 'ServiciosController@solicitudes_serviciosocial')->name('solicitudes_serviciosocial');
+Route::get('solicitudes_serviciosocial', 'ServiciosController@solicitudes_serviciosocial')->name('solicitudes_serviciosocial');
+Route::get('estudiantes_activosPP', 'ServiciosController@estudiantes_activosPP')->name('estudiantes_activosPP');
+Route::get('estudiantes_activosSS', 'ServiciosController@estudiantes_activosSS')->name('estudiantes_activosSS');
+/* SEGUIMIENTO A EGRESADOS*/
+Route::get('egresado_registrado', 'ServiciosController@egresado_registrado')->name('egresado_registrado');
+Route::get('antecedentes_laborales_egresado', 'ServiciosController@antecedentes_laborales_egresado')->name('antecedentes_laborales_egresado');
+Route::get('cuestionario_egresado_ver', 'ServiciosController@cuestionario_egresado_ver')->name('cuestionario_egresado_ver');
+Route::get('generales_egresado_ver', 'ServiciosController@generales_egresado_ver')->name('generales_egresado_ver');
 
 
 Auth::routes();

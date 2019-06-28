@@ -26,7 +26,7 @@
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href=<?php echo e(route('home_admin')); ?>>
+        <a class="nav-link" href=<?php echo e(route('home_servicios')); ?>>
             <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
@@ -40,9 +40,9 @@
         <div id="busqueda_coordinador" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href=<?php echo e(route('solicitudes_practicas')); ?>>Solicitudes</a>
-              <a class="collapse-item" href=<?php echo e(route('estudiantes_activosPP')); ?>>Estudiantes Activos</a>
-                <a class="collapse-item" href=<?php echo e(route('solicitudes_practicas')); ?>>Expedientes</a>
+          <a class="collapse-item" href=<?php echo e(route('solicitudes_practicas')); ?>>Solicitudes</a>
+          <a class="collapse-item" href=<?php echo e(route('estudiantes_activosPP')); ?>>Estudiantes Activos</a>
+          <a class="collapse-item" href=<?php echo e(route('solicitudes_practicas')); ?>>Expedientes</a>
           </div>
         </div>
       </li>
@@ -54,14 +54,27 @@
         <div id="usuario" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-          <a class="collapse-item" href=<?php echo e(route('solicitudes_serviciosocial')); ?>>Solicitudes</a>
-          <a class="collapse-item" href=<?php echo e(route('estudiantes_activosSS')); ?>>Estudiantes Activos</a>
-            <a class="collapse-item" href=<?php echo e(route('solicitudes_practicas')); ?>>Expedientes</a>
+            <a class="collapse-item" href=<?php echo e(route('solicitudes_serviciosocial')); ?>>Solicitudes</a>
+            <a class="collapse-item" href=<?php echo e(route('estudiantes_activosSS')); ?>>Estudiantes Activos</a>
+            <a class="collapse-item" href=<?php echo e(route('solicitudes_serviciosocial')); ?>>Expedientes</a>
+
           </div>
         </div>
       </li>
 
+      <li class="nav-item" >
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#egresados" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Seguimiento a Egresados</span>
+        </a>
+        <div id="egresados" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header" style="color: blue">Opciones:</h6>
+          <a class="collapse-item" href=<?php echo e(route('egresado_registrado')); ?>>Egresados</a>
 
+
+          </div>
+        </div>
+      </li>
 
 
       <!-- Nav Item - Utilities Collapse Menu -->
@@ -110,7 +123,23 @@
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <img class="img-profile rounded-circle"  src="image/foto.png">
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=Auth::user()->id_user;
+                  $id=$usuario_actual;
+                  $users = DB::table('personas')
+                  ->select('personas.nombre')
+                  ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+                  ->where('users.id_persona',$id)
+                  ->take(1)
+                  ->first();  echo $users->nombre." ";  //url('image/logos_idiomas/logo_fon.png')echo $users->apellido_paterno." "; echo $users->apellido_materno;
+                  ?></span>
+                  <?php $imagen = DB::table('users')
+                 ->select('users.imagenurl')
+                 ->where('users.id_user',$id)
+                 ->take(1)
+                 ->first();
+                 $im=$imagen->imagenurl;  ?>
+                 <?php if($im==""){ $im="foto.png"; }  ?>
+                  <img class="img-profile rounded-circle"  src="<?php echo e(asset("/image/users/$im")); ?>" >
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

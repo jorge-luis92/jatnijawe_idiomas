@@ -26,7 +26,7 @@
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href={{ route('home_admin')}}>
+        <a class="nav-link" href={{ route('home_servicios')}}>
             <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
@@ -62,7 +62,19 @@
         </div>
       </li>
 
+      <li class="nav-item" >
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#egresados" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Seguimiento a Egresados</span>
+        </a>
+        <div id="egresados" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header" style="color: blue">Opciones:</h6>
+          <a class="collapse-item" href={{ route('egresado_registrado')}}>Egresados</a>
 
+
+          </div>
+        </div>
+      </li>
 
 
       <!-- Nav Item - Utilities Collapse Menu -->
