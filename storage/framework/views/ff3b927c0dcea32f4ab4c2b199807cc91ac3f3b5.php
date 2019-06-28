@@ -6,7 +6,7 @@
 
 <?php $__env->startSection('seccion'); ?>
  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitud de Prácticas Profesionales</h1>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitud de Servicio Social</h1>
 <div class="container" id="font4">
 </br>                    <form method="POST" action="<?php echo e(route('solicitud_servicioSocial')); ?>">
 
@@ -263,7 +263,7 @@ endif; ?>
 <div class="form-row">
 
 <div class="form-group col-md-12">
-  <label for="institucion" ><?php echo e(__('Nombre del la Institución o Dependencia donde Realizará Prácticas Profesionales:')); ?></label>
+  <label for="institucion" ><?php echo e(__('Nombre del la Institución o Dependencia donde Realizará Servicio Social:')); ?></label>
     <input id="institucion" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('institucion')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('institucion'); ?> is-invalid <?php unset($message);

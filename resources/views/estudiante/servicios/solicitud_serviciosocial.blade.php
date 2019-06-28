@@ -6,7 +6,7 @@
 
 @section('seccion')
  @include('flash-message')
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitud de Prácticas Profesionales</h1>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitud de Servicio Social</h1>
 <div class="container" id="font4">
 </br>                    <form method="POST" action="{{ route('solicitud_servicioSocial') }}">
 
@@ -175,7 +175,7 @@
 <div class="form-row">
 
 <div class="form-group col-md-12">
-  <label for="institucion" >{{ __('Nombre del la Institución o Dependencia donde Realizará Prácticas Profesionales:') }}</label>
+  <label for="institucion" >{{ __('Nombre del la Institución o Dependencia donde Realizará Servicio Social:') }}</label>
     <input id="institucion" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('institucion') is-invalid @enderror" name="institucion" value="{{ old('institucion') }}" required autocomplete="institucion">
         @error('institucion')
     <span class="invalid-feedback" role="alert">

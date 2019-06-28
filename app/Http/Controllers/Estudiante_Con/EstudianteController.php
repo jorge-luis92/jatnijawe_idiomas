@@ -311,14 +311,21 @@ return view('estudiante\datos.datos_personales');
 
        $users = DB::table('estudiantes')
        ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
-                'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
+                'personas.nombre', 'personas.id_persona', 'personas.edad', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
                 'personas.curp', 'personas.genero')
        ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
        ->where('estudiantes.matricula',$id)
        ->take(1)
        ->first();
 
-   return view('estudiante\servicios.solicitud_practicas')->with('u',$users)->with('ss', $validar);
+         $direccion = DB::table('personas')
+         ->select('direcciones.vialidad_principal', 'direcciones.num_exterior', 'direcciones.cp', 'direcciones.localidad',
+         'direcciones.municipio', 'direcciones.entidad_federativa')
+         ->join('direcciones', 'direcciones.id_persona', '=', 'personas.id_persona')
+         ->where('personas.id_persona',$users->id_persona)
+         ->take(1)
+         ->first();
+   return view('estudiante\servicios.solicitud_practicas')->with('u',$users)->with('ss', $validar)->with('d', $direccion);
  }else{
   return redirect()->route('home_estudiante')->with('error','Revisa los requisitos previos para poder
    solicitar Prácticas PROFESIONALES');}

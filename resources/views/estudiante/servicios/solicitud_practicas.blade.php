@@ -55,7 +55,7 @@
 </div>
 
 <div class="form-row">
-<div class="form-group col-md-4">
+<div class="form-group col-md-5">
     <label for="nombre" >{{ __('Nombre del Estudiante') }}</label>
     <input id="nombre" type="text"disabled  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{$u->nombre}} {{$u->apellido_paterno}} {{$u->apellido_materno}}" required autocomplete="nombre">
           @error('nombre')
@@ -65,9 +65,9 @@
         @enderror
 </div>
 
-<div class="form-group col-md-3">
-    <label for="curp" >{{ __('* CURP') }}</label>
-          <input id="curp" type="text" disabled minlength="18" maxlength="18"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('curp') is-invalid @enderror" name="curp" value="{{ old('curp') }}" required autocomplete="curp">
+<div class="form-group col-md-4">
+    <label for="curp" >{{ __('CURP') }}</label>
+          <input id="curp" type="text"  minlength="18" maxlength="18" onKeyUp="this.value = this.value.toUpperCase()" disabled class="form-control @error('curp') is-invalid @enderror" name="curp" value="{{ $u->curp}}" required autocomplete="curp">
         @error('curp')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -75,9 +75,9 @@
         @enderror
 </div>
 
-<div class="form-group col-md-2">
+<div class="form-group col-md-3">
     <label for="edad" >{{ __('* Edad') }}</label>
-        <input id="edad" type="tel" disabled maxlength="2" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
+        <input id="edad" type="tel" disabled maxlength="2"  value="{{$u->edad}}" class="form-control @error('edad') is-invalid @enderror" onkeypress="return numeros (event)" name="edad" autocomplete="edad" required autofocus>
         @error('edad')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -88,34 +88,33 @@
 
 <div class="form-row">
 
-<div class="form-group col-md-6">
+<div class="form-group col-md-12">
       <label for="direccion_actual" >{{ __('Dirección Actual') }}</label>
-      <input id="direccion_actual" disabled type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('direccion_actual') is-invalid @enderror" name="direccion_actual" value="{{ old('direccion_actual') }}" required autocomplete="nombre">
+      <textarea id="direccion_actual" disabled  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('direccion_actual') is-invalid @enderror" name="direccion_actual"  required autocomplete="nombre"><?php if(empty($d->vialidad_principal)){ $vacio=null; echo $vacio;} else{ echo $d->vialidad_principal;} ?> {{$u->id_persona}}</textarea>
             @error('direccion_actual')
       <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
         </span>
           @enderror
 </div>
-
-<div class="form-group col-md-3">
-  <label for="tel_celular">* Teléfono Celular</label>
-  <input type="tel"  class="form-control" disabled value="{{$ss->semestre}}" id="tel_celular" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos"  pattern="([0-9]{3})([0-9]{7})" required>
 </div>
 
-<div class="form-group col-md-3">
-    <label for="email" >{{ __('Correo') }}</label>
-        <input id="email" disabled type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-        @error('email')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-</div>
-</div>
 
 <div class="form-row">
+  <div class="form-group col-md-4">
+    <label for="tel_celular">* Teléfono Celular</label>
+    <input type="tel"  class="form-control" disabled value="" id="tel_celular" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos"  pattern="([0-9]{3})([0-9]{7})" required>
+  </div>
 
+  <div class="form-group col-md-4">
+      <label for="email" >{{ __('Correo') }}</label>
+          <input id="email" disabled type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ Auth::user()->email }}" required autocomplete="email">
+          @error('email')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+  </div>
   <div class="form-group col-md-4">
       <label for="fecha_ingreso" >{{ __(' Fecha de Ingreso') }}</label>
             <input id="fecha_ingreso" disabled type="date" class="form-control @error('fecha_ingreso') is-invalid @enderror" name="fecha_ingreso" required autocomplete="fecha_ingreso">
@@ -191,7 +190,7 @@
     </select>
     </div>
 
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-4">
         <label for="fecha" >{{ __('Fecha') }}</label>
               <input id="fecha" type="date" class="form-control @error('fecha') is-invalid @enderror" name="fecha" required>
             @error('fecha')
