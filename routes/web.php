@@ -126,15 +126,16 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('busqueda_estudiante', 'AdminController@busqueda_estudiante')->name('busqueda_estudiante');
   Route::get('estudiante_activo', 'AdminController@estudiante_activo')->name('estudiante_activo');
   Route::get('estudiante_inactivo', 'AdminController@estudiante_inactivo')->name('estudiante_inactivo');
-  Route::get('editar_estudiante', 'AdminController@editar_estudiante')->name('editar_estudiante');
+  //Route::get('editar_estudiante', 'AdminController@editar_estudiante')->name('editar_estudiante');
 
-  Route::get('editar_estudiante/{id_user}', 'AdminController@editar_estudiante');
+  Route::get('editar_estudiante/{matricula}', 'AdminController@editar_estudiante');
 
   Route::get('registro_coordinador', 'AdminController@registro_coordinador')->name('registro_coordinador');
   Route::post('registro_estudiantes', 'RegistroEstudiantes@create_estudiante')->name('registro_estudiantes');
   Route::post('registro_estudiante_auxa', 'RegistroEstudiantes@create_estudiante_aux')->name('registro_estudiante_auxa');
   Route::post('registrar_coordinador', 'AdminController@registrar_coordinador')->name('registrar_coordinador');
   Route::get('busqueda_coordinador', 'AdminController@busqueda_coordinador')->name('busqueda_coordinador');
+  Route::any('busqueda_coordinadores', 'AdminController@busqueda_coor')->name('busqueda_coordinadores');
   Route::get('coordinador_activo', 'AdminController@coordinador_activo')->name('coordinador_activo');
   Route::get('coordinador_inactivo', 'AdminController@coordinador_inactivo')->name('coordinador_inactivo');
   Route::any('busqueda_estudiantes', 'AdminController@Busqueda')->name('busqueda_estudiantes');

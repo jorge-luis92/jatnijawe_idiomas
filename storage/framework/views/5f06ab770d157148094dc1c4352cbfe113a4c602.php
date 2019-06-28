@@ -4,6 +4,16 @@
  <?php $__env->startSection('seccion'); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Editar Estudiante</h1>
 <div class="container" id="font4">
+  <?php
+            $ids=$u;
+            $users = DB::table('estudiantes')
+            ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
+                     'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
+                     'personas.curp', 'personas.genero', 'personas.lugar_nacimiento', 'personas.edad', 'personas.tipo_sangre')
+            ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+            ->where('estudiantes.matricula',$ids)
+            ->take(1)
+            ->first(); ?>
 </br>                    <form method="POST" action="<?php echo e(route('registro_estudiante')); ?>">
                         <?php echo csrf_field(); ?>
 
@@ -11,7 +21,7 @@
 
                         <div class="form-group col-md-4">
                             <label for="nombre" ><?php echo e(__('* Nombre(s)')); ?></label>
-                                <input id="nombre" type="text" value="<?php echo e($u); ?>" onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
+                                <input id="nombre" type="text" value="<?php echo e($users->nombre); ?>" onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('nombre'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -29,11 +39,11 @@ endif; ?>
 
                         <div class="form-group col-md-4">
                             <label for="apellido_paterno" ><?php echo e(__('* Apellido Paterno')); ?></label>
-                                  <input id="apellido_paterno" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('apellido_paterno')) :
+                                  <input id="apellido_paterno" type="text" value="<?php echo e($users->apellido_paterno); ?>" onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('apellido_paterno')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('apellido_paterno'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="apellido_paterno" value="<?php echo e(old('apellido_paterno')); ?>" required autocomplete="apellido_paterno">
+endif; ?>" name="apellido_paterno"  required autocomplete="apellido_paterno">
                                 <?php if ($errors->has('apellido_paterno')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('apellido_paterno'); ?>
@@ -47,11 +57,11 @@ endif; ?>
 
                         <div class="form-group col-md-4">
                             <label for="apellido_materno" ><?php echo e(__('Apellido Materno')); ?></label>
-                                  <input id="apellido_materno"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control <?php if ($errors->has('apellido_materno')) :
+                                  <input id="apellido_materno" value="<?php echo e($users->apellido_materno); ?>" onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control <?php if ($errors->has('apellido_materno')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('apellido_materno'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="apellido_materno" value="<?php echo e(old('apellido_materno')); ?>" autocomplete="apellido_materno">
+endif; ?>" name="apellido_materno" autocomplete="apellido_materno">
                                 <?php if ($errors->has('apellido_materno')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('apellido_materno'); ?>
@@ -66,7 +76,7 @@ endif; ?>
                                 <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="curp" ><?php echo e(__('* CURP')); ?></label>
-                                  <input id="curp" type="text" minlength="18" maxlength="18"  oninput="validarInput(this)"  onblur="setearFecha();"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('curp')) :
+                                  <input id="curp" type="text" minlength="18" value="<?php echo e($users->curp); ?>"maxlength="18"  oninput="validarInput(this)"  onblur="setearFecha();"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('curp')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('curp'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -87,7 +97,7 @@ endif; ?>
                         <div class="form-group col-md-3">
                       <!--  <input type="text"  hidden size=10  maxlength=10 name="fecha_nac"  onblur="calcular_edad();" id="fecha_nac">-->
                             <label for="fecha_nacimiento" ><?php echo e(__('* Fecha de nacimiento')); ?></label>
-                                  <input id="fecha_nacimiento"  onfocus="calcular_edad();"   type="date" class="form-control <?php if ($errors->has('fecha_nacimiento')) :
+                                  <input id="fecha_nacimiento"    value="<?php echo e($users->fecha_nacimiento); ?>"type="date" class="form-control <?php if ($errors->has('fecha_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_nacimiento'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -105,11 +115,11 @@ endif; ?>
 
                         <div class="form-group col-md-5">
                             <label for="lugar_nacimiento" ><?php echo e(__('* Lugar de Nacimiento')); ?></label>
-                                  <input id="lugar_nacimiento"  onKeyUp="this.value = this.value.toUpperCase()" type="text" class="form-control <?php if ($errors->has('lugar_nacimiento')) :
+                                  <input id="lugar_nacimiento"  value="<?php echo e($users->lugar_nacimiento); ?>"onKeyUp="this.value = this.value.toUpperCase()" type="text" class="form-control <?php if ($errors->has('lugar_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('lugar_nacimiento'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="lugar_nacimiento" value="<?php echo e(old('lugar_nacimiento')); ?>" required autocomplete="lugar_nacimiento">
+endif; ?>" name="lugar_nacimiento" required autocomplete="lugar_nacimiento">
                                 <?php if ($errors->has('lugar_nacimiento')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('lugar_nacimiento'); ?>
@@ -127,7 +137,7 @@ endif; ?>
                          <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="edad" ><?php echo e(__('* Edad')); ?></label>
-                                <input id="edad" type="tel" maxlength="2"  class="form-control <?php if ($errors->has('edad')) :
+                                <input id="edad" type="tel" maxlength="2" value="<?php echo e($users->edad); ?>" class="form-control <?php if ($errors->has('edad')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('edad'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -145,23 +155,13 @@ endif; ?>
 
                         <div class="form-group col-md-3">
                           <label for="genero">* Género</label>
-                          <input name="genero"  id="genero" type="text" class="form-control" >
+                          <input name="genero"  id="genero" type="text" value="<?php echo e($users->genero); ?>" class="form-control" >
                         </div>
 
 
                         <div class="form-group col-md-4">
                           <label for="tipo_sangre">* Tipo de Sangre</label>
-                            <select name="tipo_sangre" id="tipo_sangre" required class="form-control" autocomplete="tipo_sangre" autofocus>
-                          <option value="">Seleccione una opción</option>
-                          <option value="O RH+">0 +(Positivo) u ORh +(Positivo) </option>
-                          <option value="O RH-">0 -(Negativo) u ORh -(Negativo)</option>
-                          <option value="A RH+">A +(Positivo) ó ARh +(Positivo)</option>
-                          <option value="A RH-">A -(Negativo) ó ARh -(Negativo)</option>
-                          <option value="B RH+">B +(Positivo) ó BRh +(Positivo)</option>
-                          <option value="B RH-">B -(Negativo) u BRh -(Negativo)</option>
-                          <option value="AB RH+">AB +(Positivo) ó ABRh +(Positivo)</option>
-                          <option value="AB RH-">AB -(Negativo) ó ABRh -(Negativo)</option>
-                    </select>
+                            <input name="tipo_sangre"  id="tipo_sangre" type="text" value="<?php echo e($users->tipo_sangre); ?>" class="form-control" >
                         </div>
 </div>
 
@@ -286,7 +286,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('email'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="email" value="<?php echo e(old('email')); ?>" required autocomplete="email">
+endif; ?>" name="email" required autocomplete="email">
                                 <?php if ($errors->has('email')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('email'); ?>

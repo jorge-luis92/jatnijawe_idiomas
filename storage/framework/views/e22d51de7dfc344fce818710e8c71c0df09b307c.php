@@ -2,6 +2,8 @@
 
 <?php $__env->startSection('title'); ?>
 : Búsqueda Estudiantes
+ <?php $__env->stopSection(); ?>
+
  <?php $__env->startSection('seccion'); ?>
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Búsqueda de Estudiantes</h1>
 
@@ -45,7 +47,7 @@
                  <td><?php echo e($user->nombre); ?> <?php echo e($user->apellido_paterno); ?> <?php echo e($user->apellido_materno); ?></td>
                  <td><?php echo e($user->semestre); ?></td>
                  <td><?php echo e($user->modalidad); ?></td>
-                 <td><a href="editar_estudiante/<?php echo e($user->id_user); ?>">EDITAR</a></td>
+                 <td><a href="editar_estudiante/<?php echo e($user->matricula); ?>">EDITAR</a></td>
                   <td><a href="desactivar_estudiante/<?php echo e($user->id_user); ?>">DESACTIVAR</a></td>
                  </tr>
              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -63,34 +65,5 @@
  <?php $__env->stopSection(); ?>
 
  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-     <script>
-angular.module('myApp', []).controller('namesCtrl', function($scope, $http) {
-$http.get("/buscar")}})
-.then(function (response) {$scope.names = response.data.datos; $scope.mirespuesta=null;});
-});
-</script>
- <script>
- function numeros(e){
-  key = e.keyCode || e.which;
-  tecla = String.fromCharCode(key).toLowerCase();
-  letras = " 0123456789";
-  especiales = [8,37,39,46];
-
-  tecla_especial = false
-  for(var i in especiales){
- if(key == especiales[i]){
-   tecla_especial = true;
-   break;
-      }
-  }
-
-  if(letras.indexOf(tecla)==-1 && !tecla_especial)
-      return false;
- }
- </script>
-
-
-
-  <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.plantilla_admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\admin_sistema/busqueda_estudiante.blade.php ENDPATH**/ ?>

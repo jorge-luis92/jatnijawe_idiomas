@@ -43,8 +43,6 @@
 @if (count($estudiante))
   {{ $estudiante->links() }}
 @endif
-
 </div>
-
 
   @endsection

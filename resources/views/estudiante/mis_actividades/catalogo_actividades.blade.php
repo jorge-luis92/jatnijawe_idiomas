@@ -11,8 +11,8 @@
 <div class="container" id="font7">
   @include('flash-message')
   </br>
-<div class="table-responsive">
-  <table class="table table-bordered table-info" style="color: #000000; font-size: 12px;" >
+    <div class="table-responsive" style="border:1px solid #819FF7;">
+    <table class="table table-bordered table-striped"  style="color: #000000; font-size: 12px;">
     <thead>
       <tr>
         <th scope="col">NOMBRE</th>

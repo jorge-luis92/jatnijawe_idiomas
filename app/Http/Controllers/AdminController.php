@@ -171,9 +171,6 @@ if($data['edad'] >17){
          if($usuario_actual->tipo_usuario!='5'){
            return redirect()->back();
           }
-        $est = DB::table('users')
-        ->where('users.bandera', '=', '1')
-        ->get();
 
         $q = $request->get('q');
         if($q != null){
@@ -188,12 +185,9 @@ if($data['edad'] >17){
                             ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
                             ->join('users', 'users.id_persona', '=', 'personas.id_persona')
                             ->simplePaginate(10);
-                            $est = DB::table('users')
-                            ->where('users.bandera', '=', '1')
-                            ->get();
 
 
-      if ((count ($user) > 0 ) && ($est != null)){
+      if (count ($user) > 0 ) {
             return view ( 'personal_administrativo\admin_sistema.busqueda_estudiante' )->withDetails ($user )->withQuery ($q);
     }
   else{
@@ -273,10 +267,18 @@ if($data['edad'] >17){
 
       public function coordinador_activo(){
         $usuario_actual=\Auth::user();
+        $id=$usuario_actual->id_user;
          if($usuario_actual->tipo_usuario!='5'){
            return redirect()->back();
           }
-        return view('personal_administrativo\admin_sistema.coordinador_activo');
+          $users = DB::table('administrativos')
+          ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'users.username', 'users.email',
+                   'administrativos.puesto')
+          ->join('personas', 'personas.id_persona', '=', 'administrativos.id_persona')
+          ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+          ->where([['administrativos.puesto','!=', ''], ['users.bandera', '=', '1'] , ['users.id_user', '!=', $id],])
+          ->simplePaginate(8);
+        return view('personal_administrativo\admin_sistema.coordinador_activo')->with('coordi', $users);
       }
 
       public function coordinador_inactivo(){
@@ -284,19 +286,22 @@ if($data['edad'] >17){
          if($usuario_actual->tipo_usuario!='5'){
            return redirect()->back();
           }
-        return view('personal_administrativo\admin_sistema.coordinador_inactivo');
+          $users = DB::table('administrativos')
+          ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'users.username', 'users.email',
+                   'administrativos.puesto')
+          ->join('personas', 'personas.id_persona', '=', 'administrativos.id_persona')
+          ->join('users', 'personas.id_persona', '=', 'users.id_persona')
+          ->where([['administrativos.puesto','!=', ''], ['users.bandera', '=', '0'],])
+          ->simplePaginate(8);
+
+
+        return view('personal_administrativo\admin_sistema.coordinador_inactivo')->with('coordi', $users);
       }
 
-      public function editar_estudiante($id_user){
-        $valor = $id_user;
 
-       return view('personal_administrativo.admin_sistema.editar_estudiante', ['u' => $valor]);
-//       return redirect()->route('editar_estudiante', ['u' => $valor ]);
-        }
+        public function editar_estudiante($matricula){
 
-        public function editar_estudian($id_user){
-
-          $ids=$id_user;
+          $ids=$matricula;
           $users = DB::table('estudiantes')
           ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
                    'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
@@ -305,7 +310,6 @@ if($data['edad'] >17){
           ->where('estudiantes.matricula',$ids)
           ->take(1)
           ->first();
-  $users= json_decode( json_encode($users), true);
 
 
          return view('personal_administrativo\admin_sistema.editar_estudiante')->with('u', $users);

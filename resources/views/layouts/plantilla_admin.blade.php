@@ -62,9 +62,9 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href={{ route('registro_coordinador') }}>Registrar</a>
-            <a class="collapse-item" href={{ route('busqueda_coordinador') }}> Buscar</a>
-            <a class="collapse-item" href={{ route('coordinador_activo') }}> Coordinadores Activos</a>
-        <!--    <a class="collapse-item" href={{ route('coordinador_inactivo') }}> Coordinadores Inactivos</a>-->
+          <!--  <a class="collapse-item" href={{ route('busqueda_coordinador') }}> Buscar</a>-->
+          <a class="collapse-item" href={{ route('coordinador_activo') }}> Coordinadores Activos</a>
+           <a class="collapse-item" href={{ route('coordinador_inactivo') }}> Coordinadores Inactivos</a>
           </div>
         </div>
       </li>

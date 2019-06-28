@@ -28,7 +28,7 @@
                                           <td><?php echo e($res->numero); ?></td>
                                           <td><?php echo e($res->procedencia_interna); ?></td>
                                           <td><?php echo e($res->procedencia_externa); ?></td>
-                                            <td>  <a data-toggle="modal" href="#">DESACTIVAR</a></td>
+                                          <td>  <a data-toggle="modal" href="#">DESACTIVAR</a></td>
                                         </tr>
 
                                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
