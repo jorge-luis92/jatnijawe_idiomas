@@ -1,14 +1,14 @@
-<link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_planeacion')
-@section('title')
+<link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
+
+<?php $__env->startSection('title'); ?>
 :Reporte Semestral
-  @endsection
- @section('seccion')
+  <?php $__env->stopSection(); ?>
+ <?php $__env->startSection('seccion'); ?>
  <h1 style="font-size: 2.0em; color: #000000;" align="center">Coordinación de Planeación</h1>
  <div class="container" id="font4">
  </br>
-<form  method="post" action="{{ route('reporte_semestral') }}">
-                         @csrf
+<form  method="post" action="<?php echo e(route('reporte_semestral')); ?>">
+                         <?php echo csrf_field(); ?>
 <div class="form-row">
   <div class="table-responsive">
     <table class="table table-bordered " style="color: #8181F7; background-color: #F2F2F2;" >
@@ -67,7 +67,7 @@
 </div>
 </div>
 
- @endsection
+ <?php $__env->stopSection(); ?>
 
  <script>
  function numeros(e){
@@ -88,3 +88,5 @@
       return false;
  }
  </script>
+
+<?php echo $__env->make('layouts.plantilla_planeacion', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\planeacion\reportes\reporte_semestral/reporte_semestral.blade.php ENDPATH**/ ?>

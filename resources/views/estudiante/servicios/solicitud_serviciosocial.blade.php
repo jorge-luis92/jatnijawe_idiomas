@@ -16,7 +16,7 @@
 
   <div class="form-group col-md-2">
       <label for="matricula" >{{ __('* Matricula') }}</label>
-          <input id="matricula" maxlength="12" type="tel" class="form-control @error('matricula') is-invalid @enderror" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required>
+          <input id="matricula" maxlength="12" type="tel" value="{{$u->matricula}}" class="form-control @error('matricula') is-invalid @enderror" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required disabled>
           @error('matricula')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -56,15 +56,15 @@
 </div>
 
 <div class="form-row">
-<div class="form-group col-md-6">
-    <label for="nombre" >{{ __('Nombre del Estudiante') }}</label>
-    <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre">
-          @error('nombre')
-    <span class="invalid-feedback" role="alert">
-    <strong>{{ $message }}</strong>
-      </span>
-        @enderror
-</div>
+  <div class="form-group col-md-6">
+      <label for="nombre" >{{ __('Nombre del Estudiante') }}</label>
+      <input id="nombre" type="text"disabled  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{$u->nombre}} {{$u->apellido_paterno}} {{$u->apellido_materno}}" required autocomplete="nombre">
+            @error('nombre')
+      <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+        </span>
+          @enderror
+  </div>
 
 <div class="form-group col-md-4">
     <label for="curp" >{{ __('* CURP') }}</label>

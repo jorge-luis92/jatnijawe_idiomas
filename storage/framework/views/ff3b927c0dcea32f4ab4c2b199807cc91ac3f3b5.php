@@ -16,11 +16,11 @@
 
   <div class="form-group col-md-2">
       <label for="matricula" ><?php echo e(__('* Matricula')); ?></label>
-          <input id="matricula" maxlength="12" type="tel" class="form-control <?php if ($errors->has('matricula')) :
+          <input id="matricula" maxlength="12" type="tel" value="<?php echo e($u->matricula); ?>" class="form-control <?php if ($errors->has('matricula')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('matricula'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required>
+endif; ?>" onkeypress="return numeros (event)" name="matricula"  autocomplete="matricula" autofocus required disabled>
           <?php if ($errors->has('matricula')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('matricula'); ?>
@@ -80,23 +80,23 @@ endif; ?>
 </div>
 
 <div class="form-row">
-<div class="form-group col-md-6">
-    <label for="nombre" ><?php echo e(__('Nombre del Estudiante')); ?></label>
-    <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
+  <div class="form-group col-md-6">
+      <label for="nombre" ><?php echo e(__('Nombre del Estudiante')); ?></label>
+      <input id="nombre" type="text"disabled  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('nombre'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="nombre" value="<?php echo e(old('nombre')); ?>" required autocomplete="nombre">
-          <?php if ($errors->has('nombre')) :
+endif; ?>" name="nombre" value="<?php echo e($u->nombre); ?> <?php echo e($u->apellido_paterno); ?> <?php echo e($u->apellido_materno); ?>" required autocomplete="nombre">
+            <?php if ($errors->has('nombre')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('nombre'); ?>
-    <span class="invalid-feedback" role="alert">
-    <strong><?php echo e($message); ?></strong>
-      </span>
-        <?php unset($message);
+      <span class="invalid-feedback" role="alert">
+      <strong><?php echo e($message); ?></strong>
+        </span>
+          <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
-</div>
+  </div>
 
 <div class="form-group col-md-4">
     <label for="curp" ><?php echo e(__('* CURP')); ?></label>

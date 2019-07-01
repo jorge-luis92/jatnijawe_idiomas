@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
 
-    <link rel="shortcut icon" href="{{asset('logo.ico')}}">
+    <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
   <!-- Custom fonts for this template-->
   <link href="requisitos/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -17,7 +17,7 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-3.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/nuevo.css">
-  <title>Coordinación de Planeación @yield('title')</title>
+  <title>Coordinación de Planeación <?php echo $__env->yieldContent('title'); ?></title>
 
 </head>
 
@@ -26,7 +26,7 @@
     <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href={{ route('home_planeacion')}}>
+        <a class="nav-link" href=<?php echo e(route('home_planeacion')); ?>>
             <img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
@@ -40,8 +40,8 @@
               <div id="general" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                   <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-                  <a class="collapse-item" href={{ route('gral_escuela')}}>Identificación de la Escuela</a>
-                  <a class="collapse-item" href={{ route('gral_carrera')}}>Identificación de la Carrera</a>
+                  <a class="collapse-item" href=<?php echo e(route('gral_escuela')); ?>>Identificación de la Escuela</a>
+                  <a class="collapse-item" href=<?php echo e(route('gral_carrera')); ?>>Identificación de la Carrera</a>
 
                 </div>
               </div>
@@ -54,11 +54,11 @@
         <div id="departamentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-              <a class="collapse-item" href={{ route('info_coord_academica1')}}>Coordinación Académica</a>
-            <a class="collapse-item" href={{ route('info_formacion_integral1')}}>Formación Integral</a>
-            <a class="collapse-item" href={{ route('info_serviciosocial')}}>Servicio Social</a>
-            <a class="collapse-item" href={{ route('info_practicasp')}}>Prácticas profesionales </a>
-            <a class="collapse-item" href={{ route('info_practicasp')}}>Seguimiento a Egresados</a>
+              <a class="collapse-item" href=<?php echo e(route('info_coord_academica1')); ?>>Coordinación Académica</a>
+            <a class="collapse-item" href=<?php echo e(route('info_formacion_integral1')); ?>>Formación Integral</a>
+            <a class="collapse-item" href=<?php echo e(route('info_serviciosocial')); ?>>Servicio Social</a>
+            <a class="collapse-item" href=<?php echo e(route('info_practicasp')); ?>>Prácticas profesionales </a>
+            <a class="collapse-item" href=<?php echo e(route('info_practicasp')); ?>>Seguimiento a Egresados</a>
 
           </div>
         </div>
@@ -70,9 +70,9 @@
         <div id="reportes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-              <a class="collapse-item" href={{ route('reporte_semestral')}}>Semestral</a>
-              <a class="collapse-item" href={{ route('reporte911_9')}}>911.9</a>
-              <a class="collapse-item" href={{ route('reporte911_9A_0')}}>911.9A</a>
+              <a class="collapse-item" href=<?php echo e(route('reporte_semestral')); ?>>Semestral</a>
+              <a class="collapse-item" href=<?php echo e(route('reporte911_9')); ?>>911.9</a>
+              <a class="collapse-item" href=<?php echo e(route('reporte911_9A_0')); ?>>911.9A</a>
 
 
           </div>
@@ -93,7 +93,7 @@
 
 
       <li class="nav-item">
-      <a class="nav-link"  href={{ route('ma_estudiante')}} aria-expanded="true">
+      <a class="nav-link"  href=<?php echo e(route('ma_estudiante')); ?> aria-expanded="true">
       <i class="fas fa-fw fa-archive"></i>
       <span style="font-size: 0.9em;">Manual de Usuario</span>
     </a>
@@ -142,11 +142,11 @@
                  ->first();
                  $im=$imagen->imagenurl;  ?>
                  <?php if($im==""){ $im="foto.png"; }  ?>
-                  <img class="img-profile rounded-circle"  src="{{ asset("/image/users/$im")}}" >
+                  <img class="img-profile rounded-circle"  src="<?php echo e(asset("/image/users/$im")); ?>" >
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href={{ route('cuenta')}} >
+                    <a class="dropdown-item" href=<?php echo e(route('cuenta')); ?> >
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
                     Configuración
                   </a>
@@ -162,7 +162,7 @@
         </nav>
 
         <!-- End of Topbar -->
-@yield('seccion')
+<?php echo $__env->yieldContent('seccion'); ?>
       </div>
 
       <!-- Footer -->
@@ -197,10 +197,10 @@
         <div class="modal-body">Presione "Finalizar Sesión" para confirmar.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
+          <a class="btn btn-primary" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
 
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
+          <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+              <?php echo csrf_field(); ?>
           </form>
         </div>
       </div>
@@ -233,3 +233,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/layouts/plantilla_planeacion.blade.php ENDPATH**/ ?>

@@ -159,7 +159,7 @@ endif; ?>
 <div class="form-row">
   <div class="form-group col-md-4">
     <label for="tel_celular">* Teléfono Celular</label>
-    <input type="tel"  class="form-control" disabled value="" id="tel_celular" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos"  pattern="([0-9]{3})([0-9]{7})" required>
+    <input type="text"  class="form-control" disabled value="" id="tel_celular" maxlength="10"    value="<?php if(empty($cel->numero)){ $vacio=null; echo $vacio;} else{ echo $cel->numero;} ?>" >
   </div>
 
   <div class="form-group col-md-4">
@@ -293,10 +293,10 @@ endif; ?>
 
     </select>
     </div>
-
+<?php $now = new \DateTime(); ?>
     <div class="form-group col-md-4">
         <label for="fecha" ><?php echo e(__('Fecha')); ?></label>
-              <input id="fecha" type="date" class="form-control <?php if ($errors->has('fecha')) :
+              <input id="fecha" type="date" value="" class="form-control <?php if ($errors->has('fecha')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }

@@ -54,7 +54,7 @@
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('tel_local'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="tel_local" id="tel_local" value="<?php if(empty($nl->numero)){ $vacio=null; echo $vacio;} else{ echo $nl->numero;} ?>" maxlength=""  onkeypress="return numeros (event)"  placeholder="Formato a 7 digitos -- Ejemplo: 5115090"  pattern="([0-9]{7})">
+endif; ?>" name="tel_local" id="tel_local" value="<?php if(empty($nl->numero)){ $vacio=null; echo $vacio;} else{ echo $nl->numero;} ?>" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos -- Ejemplo: 9515115090"  pattern="([0-9]{10})">
           <?php if ($errors->has('tel_local')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('tel_local'); ?>
