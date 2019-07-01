@@ -233,4 +233,51 @@ Route::get('cuestionario_egresado_ver', 'ServiciosController@cuestionario_egresa
 Route::get('generales_egresado_ver', 'ServiciosController@generales_egresado_ver')->name('generales_egresado_ver');
 
 
+/*PLANEACIÓN
+***********************************************************
+*/
+Route::get('home_planeacion', 'PlaneacionController@home_planeacion')->name('home_planeacion');
+
+/*INFO COORDINACION ACADEMICA*/
+Route::get('info_coord_academica1', 'PlaneacionController@info_coord_academica1')->name('info_coord_academica1');
+Route::get('info_coord_academica2', 'PlaneacionController@info_coord_academica2')->name('info_coord_academica2');
+Route::get('info_coord_academica3', 'PlaneacionController@info_coord_academica3')->name('info_coord_academica3');
+Route::get('info_coord_academica4', 'PlaneacionController@info_coord_academica4')->name('info_coord_academica4');
+Route::get('info_coord_academica5', 'PlaneacionController@info_coord_academica5')->name('info_coord_academica5');
+
+/*INFO FORMACIÓN INTEGRAL*/
+Route::get('info_formacion_integral1', 'PlaneacionController@info_formacion_integral1')->name('info_formacion_integral1');
+
+
+
+Route::get('gral_escuela', 'PlaneacionController@gral_escuela')->name('gral_escuela');
+Route::get('gral_carrera', 'PlaneacionController@gral_carrera')->name('gral_carrera');
+
+/*REPORTE Semestral*/
+Route::get('reporte_semestral', 'PlaneacionController@reporte_semestral')->name('reporte_semestral');
+
+/*REPORTE 911.9*/
+Route::get('reporte911_9', 'PlaneacionController@reporte911_9')->name('reporte911_9');
+
+/*REPORTE 911.9A*/
+Route::get('reporte911_9A_0', 'PlaneacionController@reporte911_9A_0')->name('reporte911_9A_0');
+Route::get('reporte911_9A_1', 'PlaneacionController@reporte911_9A_1')->name('reporte911_9A_1');
+Route::get('reporte911_9A_2', 'PlaneacionController@reporte911_9A_2')->name('reporte911_9A_2');
+Route::get('reporte911_9A_3', 'PlaneacionController@reporte911_9A_3')->name('reporte911_9A_3');
+Route::get('reporte911_9A_4', 'PlaneacionController@reporte911_9A_4')->name('reporte911_9A_4');
+Route::get('reporte911_9A_5', 'PlaneacionController@reporte911_9A_5')->name('reporte911_9A_5');
+Route::get('reporte911_9A_6', 'PlaneacionController@reporte911_9A_6')->name('reporte911_9A_6');
+
+/*Planeación ss y pp*/
+Route::get('info_practicasp', 'PlaneacionController@info_practicasp')->name('info_practicasp');
+Route::get('info_serviciosocial', 'PlaneacionController@info_serviciosocial')->name('info_serviciosocial');
+
+
+/*Seguimiento a Egresados*/
+
+Route::get('home_seguimiento_egresados', 'SeguimientoEgresadosController@home_seguimiento_egresados')->name('home_seguimiento_egresados');
+Route::get('generales_egresado', 'SeguimientoEgresadosController@generales_egresado')->name('generales_egresado');
+Route::get('cuestionario_egresado', 'SeguimientoEgresadosController@cuestionario_egresado')->name('cuestionario_egresado');
+Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedentes_laborales')->name('antecedentes_laborales');
+
 Auth::routes();
