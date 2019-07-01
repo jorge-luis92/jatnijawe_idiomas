@@ -142,7 +142,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('direccion_actual'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="direccion_actual"  required autocomplete="nombre"><?php if(empty($d->vialidad_principal)){ $vacio=null; echo $vacio;} else{ echo $d->vialidad_principal;} ?> <?php echo e($u->id_persona); ?></textarea>
+endif; ?>" name="direccion_actual"  required autocomplete="nombre"><?php if(empty($d->vialidad_principal)){ $vacio=null; echo $vacio;} else {echo "CALLE: ".$d->vialidad_principal." #".$d->num_exterior.", C.P: ".$d->cp.", COLONIA: ".$d->localidad." MUNICIPIO: ".$d->municipio." CIUDAD: ".$d->entidad_federativa;}?> </textarea>
             <?php if ($errors->has('direccion_actual')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('direccion_actual'); ?>

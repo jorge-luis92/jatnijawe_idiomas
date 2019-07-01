@@ -84,7 +84,7 @@ public function act_datos_personales(Request $request)
   $usuario_actual=auth()->user();
   $id=$usuario_actual->id_user;
   $data = $request;
-
+$now = new \DateTime();
   $id_persona = DB::table('estudiantes')
   ->select('estudiantes.id_persona')
   ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
@@ -110,7 +110,7 @@ if(empty($direccion) or empty($tels)){
       ->updateOrInsert(
           ['vialidad_principal' => $data['vialidad_principal'], 'num_exterior' => $data['num_exterior'],
           'cp' => $data['cp'], 'localidad' =>  $data['localidad'], 'municipio' => $data['municipio'],
-               'entidad_federativa' => $data['entidad_federativa'], 'id_persona' => $id_persona],
+               'entidad_federativa' => $data['entidad_federativa'], 'id_persona' => $id_persona, 'created_at' => $now, 'updated_at' => $now],
       );
 
      if($data['tel_local'] == null){
@@ -138,7 +138,7 @@ else {
       ->update(
         ['vialidad_principal' => $data['vialidad_principal'], 'num_exterior' => $data['num_exterior'],
          'localidad' =>  $data['localidad'], 'municipio' => $data['municipio'],
-          'cp' => $data['cp'],   'entidad_federativa' => $data['entidad_federativa']],
+          'cp' => $data['cp'],   'entidad_federativa' => $data['entidad_federativa'], 'updated_at' => $now],
         );
 
         $user = auth()->user();
