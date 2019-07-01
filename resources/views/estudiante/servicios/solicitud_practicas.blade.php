@@ -189,7 +189,7 @@
 
     </select>
     </div>
-<?php $now = new \DateTime(); ?>
+<?php $now = new \DateTime();?>
     <div class="form-group col-md-4">
         <label for="fecha" >{{ __('Fecha') }}</label>
               <input id="fecha" type="date" value="" class="form-control @error('fecha') is-invalid @enderror" name="fecha" required>
