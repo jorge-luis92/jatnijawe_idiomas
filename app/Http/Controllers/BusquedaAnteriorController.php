@@ -95,47 +95,40 @@ class BusquedaAnteriorController extends Controller
   ->with('estudiante', $nombre);
   }
 
-  protected function constancia_par($matricula){
-    $id=$matricula;
-    $datos_estudiante = DB::table('estudiantes')
-     ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
-    ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
-    ->where('estudiantes.matricula',$id)
+  protected function constancia_par($ID){
+    $id_usr=$ID;
+    $datos_estudiante = DB::table('alumnos')
+    ->select('alumnos.nombre')
+    ->where('alumnos.ID',$id_usr)
     ->take(1)
     ->first();
-
-    $academicas = DB::table('detalle_extracurriculares')
-    ->select('extracurriculares.nombre_ec')
-     ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
-     ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'ACADEMICA'],])
-     ->orderBy('extracurriculares.nombre_ec', 'asc')
+    $academicas = DB::table('alumcur')
+     ->select('alumcur.nombre', 'alumcur.id_curso')
+     ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'ACADEMICA'],])
+     ->orderBy('alumcur.nombre', 'asc')
+      ->get();
+    $culturales = DB::table('alumcur')
+    ->select('alumcur.nombre')
+    ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'CULTURAL'],])
+    ->orderBy('alumcur.nombre', 'asc')
      ->get();
-
-    $culturales = DB::table('detalle_extracurriculares')
-     ->select('extracurriculares.nombre_ec')
-     ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
-     ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'CULTURAL'],])
-     ->orderBy('extracurriculares.nombre_ec', 'asc')
+    $deportivas = DB::table('alumcur')
+    ->select('alumcur.nombre')
+    ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'DEPORTIVA'],])
+    ->orderBy('alumcur.nombre', 'asc')
      ->get();
-
-    $deportivas = DB::table('detalle_extracurriculares')
-    ->select('extracurriculares.nombre_ec')
-    ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
-    ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'DEPORTIVA'],])
-    ->orderBy('extracurriculares.nombre_ec', 'asc')
-    ->get();
 
     $paper_orientation = 'letter';
     $customPaper = array(2.5,2.5,600,950);
 
-    $pdf = PDF::loadView('personal_administrativo\formacion_integral.constanciaParcial', ['data' =>  $datos_estudiante,
+    $pdf = PDF::loadView('personal_administrativo\formacion_integral\constancias_anteriores.constancia_parcial', ['data' =>  $datos_estudiante,
     'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas])
     ->setPaper($customPaper,$paper_orientation);
-    return $pdf->stream('constancia_oficial.pdf');
+    return $pdf->stream('constancia_parcial.pdf');
 
   }
 
-  protected function constancia_val($matricula){
+  protected function constancia_val($ID){
   $id=$matricula;
     $datos_estudiante = DB::table('estudiantes')
      ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
@@ -161,7 +154,7 @@ class BusquedaAnteriorController extends Controller
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('personal_administrativo\formacion_integral.constanciaOficial', ['data' =>  $datos_estudiante,
+   $pdf = PDF::loadView('personal_administrativo\formacion_integral\constancias_anteriores.constancia_oficial', ['data' =>  $datos_estudiante,
    'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas, 'suma' => $sumas])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('constancia_oficial.pdf');

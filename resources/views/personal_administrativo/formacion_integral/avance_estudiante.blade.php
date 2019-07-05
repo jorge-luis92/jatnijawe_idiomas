@@ -4,10 +4,10 @@
 : Avance Estudiante
 @endsection
  @section('seccion')
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Historial del Estudiante </h1>
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Historial del Estudiante: {{$datos_es->nombre}} {{$datos_es->apellido_paterno}} {{$datos_es->apellido_materno}} </h1>
  <!--<a  href={{ route('busqueda_estudiante_fi')}} >  <i class="fas fa-reply fa-sm fa-fw mr-2 text-black-400"></i> Volver a Búsquedas
 </a>-->
- <h2 style="font-size: 1.5em; color: #0A122A;   max-width: 280px;" align="left">&nbsp;* Avance de Horas &nbsp;</h2>
+ <h2 style="font-size: 1.5em; color: #0A122A;   max-width: 280px;" align="left">&nbsp;Avance de Horas &nbsp;</h2>
  <p style="font-size: 1.0em; color: #0A122A;">&nbsp; Académicas: {{$aca}} &nbsp; Culturales: {{$cul}} &nbsp; Deportivas: {{$dep}}
  &nbsp; Total: {{$suma}} </p>
 

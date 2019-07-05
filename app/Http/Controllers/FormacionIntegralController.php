@@ -479,13 +479,21 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
       ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'DEPORTIVA'],])
       ->sum('detalle_extracurriculares.creditos');
       $sumas = $academicas + $culturales + $deportivas;
+      $datos_estudiante = DB::table('estudiantes')
+       ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+      ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+      ->where('estudiantes.matricula',$id)
+      ->take(1)
+      ->first();
+
 
     return  view ('personal_administrativo\formacion_integral.avance_estudiante')->with('dato', $result)
     ->with('aca',$academicas)
     ->with('cul',$culturales)
     ->with('dep',$deportivas)
     ->with('suma',$sumas)
-    ->with('mat',$id);
+    ->with('mat',$id)
+    ->with('datos_es',$datos_estudiante);
     }
 
 protected function acreditar_estudiantes($actividad, $matricula){
@@ -536,7 +544,7 @@ protected function constancia_par($matricula){
   $pdf = PDF::loadView('personal_administrativo\formacion_integral.constanciaParcial', ['data' =>  $datos_estudiante,
   'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas])
   ->setPaper($customPaper,$paper_orientation);
-  return $pdf->stream('constancia_oficial.pdf');
+  return $pdf->stream('constancia_parcial.pdf');
 
 }
 

@@ -4,10 +4,10 @@
 : Avance Estudiante
 <?php $__env->stopSection(); ?>
  <?php $__env->startSection('seccion'); ?>
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Historial del Estudiante </h1>
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Historial del Estudiante: <?php echo e($datos_es->nombre); ?> <?php echo e($datos_es->apellido_paterno); ?> <?php echo e($datos_es->apellido_materno); ?> </h1>
  <!--<a  href=<?php echo e(route('busqueda_estudiante_fi')); ?> >  <i class="fas fa-reply fa-sm fa-fw mr-2 text-black-400"></i> Volver a Búsquedas
 </a>-->
- <h2 style="font-size: 1.5em; color: #0A122A;   max-width: 280px;" align="left">&nbsp;* Avance de Horas &nbsp;</h2>
+ <h2 style="font-size: 1.5em; color: #0A122A;   max-width: 280px;" align="left">&nbsp;Avance de Horas &nbsp;</h2>
  <p style="font-size: 1.0em; color: #0A122A;">&nbsp; Académicas: <?php echo e($aca); ?> &nbsp; Culturales: <?php echo e($cul); ?> &nbsp; Deportivas: <?php echo e($dep); ?>
 
  &nbsp; Total: <?php echo e($suma); ?> </p>
