@@ -31,6 +31,7 @@ Route::get('talleres_finalizados', 'Tallerista_Con\TalleristaController@talleres
 Route::get('tallerista', 'Tallerista_Con\LoginTallerista@getLoginTallerista');
 Route::post('tallerista', ['as' =>'tallerista', 'uses' => 'Tallerista_Con\LoginTallerista@postLoginTallerista']);
 Route::get('admin', 'Administrativo_Con\LoginAdministrativo@getLogin');
+Route::get('logout_system', ['as' => 'logout_system', 'uses' => 'Administrativo_Con\LoginAdministrativo@getLogout']);
 //Route::post('login_admin', ['as' =>'login_admin', 'uses' => 'Administrativo_Con\AdministrativoController@index']);
 Route::post('admin', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdministrativo@postLogin']);
 //Route::get('logout_admin', ['as' => 'logout', 'uses' => 'Administrativo_Con\LoginAdministrativo@getLogout']);
@@ -65,7 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth','estudiantes'], function () {
 // Route::get('home', 'HomeController@index')->name('home_estudiante');
   Route::get('home_estudiante', 'Estudiante_Con\EstudianteController@inicio_estudiante')->name('home_estudiante');
   Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');

@@ -18,18 +18,8 @@ class RedirectIfAuthenticated
      */
    public function handle($request, Closure $next, $guard = null)
     {
-      //$usuario_actual=\Auth::user();
 
-/*      $usuario_actual=Auth::user()->tipo_usuario;
-  if($usuario_actual == 'estudiante'){
-     return $next($request);
-  }
-  if($usuario_actual=='1'){
-     return $next($request);
-  }
-  if($usuario_actual=='4'){
-     return $next($request);
-  }
-*/return $next($request);
-    }
+  return $next($request);
+
+}
 }

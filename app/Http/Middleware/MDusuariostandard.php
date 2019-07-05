@@ -17,8 +17,10 @@ class MDusuariostandard
     {
 
         $usuario_actual=\Auth::user();
+
         if($usuario_actual->tipo_usuario=='estudiante'){
            return $next($request);
-        }
+
+      }
     }
 }

@@ -97,11 +97,11 @@ class LoginAdministrativo extends Controller
 
   public function getLogout(Request $request)
 {
-    $this->guard()->logout();
-
-    $request->session()->invalidate();
-
-    return $this->loggedOut($request) ?: redirect('perfiles');
+    //$this->guard()->logout();
+Auth::logout();
+    //$request->session()->invalidate();
+   return redirect()->route('perfiles')->with('sucess','Desconección Correcta!');
+  //  return $this->loggedOut($request) ?: redirect('perfiles');
 }
 
 }

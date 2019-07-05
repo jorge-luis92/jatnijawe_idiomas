@@ -1,3 +1,4 @@
+<?php if(\Auth::check()){}?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -7,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
 
     <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
   <!-- Custom fonts for this template-->
@@ -20,9 +20,7 @@
   <title>Estudiante <?php echo $__env->yieldContent('title'); ?></title>
 
 </head>
-
 <body id="page-top">
-
   <div id="wrapper" style="font-family: 'Century Gothic';"><!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-dark " style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
@@ -246,10 +244,10 @@
         <div class="modal-body">Presione "Finalizar Sesión" para confirmar.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
+          <a class="btn btn-primary" href="<?php echo e(route('logout_system')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
 
-          <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
-              <?php echo csrf_field(); ?>
+         <form id="logout-form" action="<?php echo e(route('logout_system')); ?>" method="GET" style="display: none;">
+            <?php echo csrf_field(); ?>
           </form>
         </div>
       </div>
