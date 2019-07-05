@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
@@ -13,6 +12,8 @@ use App\Departamento;
 use App\Dpto_Administrativo;
 use App\Telefono;
 use App\Tutor;
+use App\Alumno;
+use App\AlumnoCurso;
 use App\SolicitudTaller;
 use Illuminate\Support\Facades\DB;
 use Storage;
@@ -318,7 +319,7 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
     public function busqueda_fi(Request $request){
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='1'){
-         return redirect('register');
+         return redirect('perfiles');
         }
       $est = DB::table('users')
       ->where('users.bandera', '=', '1')
@@ -353,7 +354,7 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
     public function registrar_tutor_fi(Request $request){
       $usuario_actuales=\Auth::user();
        if($usuario_actuales->tipo_usuario!='1'){
-         return redirect('register');
+         return redirect('perfiles');
         }
 
       $this->validate($request, [
@@ -586,4 +587,5 @@ $id_extra= $actividad;
 
 
 }
+
 }

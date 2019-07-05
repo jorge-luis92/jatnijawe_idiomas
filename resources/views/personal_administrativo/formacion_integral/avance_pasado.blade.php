@@ -4,10 +4,8 @@
 : Avance Estudiante
 @endsection
  @section('seccion')
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Historial del Estudiante </h1>
- <!--<a  href={{ route('busqueda_estudiante_fi')}} >  <i class="fas fa-reply fa-sm fa-fw mr-2 text-black-400"></i> Volver a Búsquedas
-</a>-->
- <h2 style="font-size: 1.5em; color: #0A122A;   max-width: 280px;" align="left">&nbsp;* Avance de Horas &nbsp;</h2>
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Historial del Estudiante: {{$estudiante->nombre}} </h1>
+ <h2 style="font-size: 1.5em; color: #0A122A;   max-width: 280px;" align="left">&nbsp;Avance de Horas &nbsp;</h2>
  <p style="font-size: 1.0em; color: #0A122A;">&nbsp; Académicas: {{$aca}} &nbsp; Culturales: {{$cul}} &nbsp; Deportivas: {{$dep}}
  &nbsp; Total: {{$suma}} </p>
 
@@ -19,27 +17,22 @@
        <thead>
          <tr>
            <th scope="col">NOMBRE</th>
-           <th scope="col">TIPO</th>
            <th scope="col">CREDITOS</th>
            <th scope="col">AREA</th>
-           <th scope="col">MODALIDAD</th>
            <th scope="col">TUTOR</th>
-           <th scope="col" >ESTATUS</th>
+           <th scope="col">STATUS</th>
          </tr>
          <tbody>
        </thead>
          @foreach($dato as $datos)
          <tr style="color: #000000;">
 
-             <td>{{$datos->nombre_ec}}</td>
-             <td>{{$datos->tipo}} </td>
+             <td>{{$datos->nombre}}</td>
              <td>{{$datos->creditos}}</td>
              <td>{{$datos->area}}</td>
-             <td>{{$datos->modalidad}}</td>
-             <td>{{$datos->nombre}} {{$datos->apellido_paterno}} {{$datos->apellido_materno}}</td>
-             <td>{{$datos->estado}}</td>
-          <!--     <td><a href="acreditar_estudiantes_formacion/{{ $datos->actividad }}/{{$mat}}">Acreditar</a></td>
-        -->    </tr>
+             <td>{{$datos->tutor}} </td>
+             <td>{{$datos->status}}</td>
+  </tr>
 
          @endforeach
         </tbody>

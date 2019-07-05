@@ -167,17 +167,24 @@ Route::get('tallerista_activo', 'FormacionIntegralController@tallerista_activo')
 Route::get('tallerista_inactivo', 'FormacionIntegralController@tallerista_inactivo')->name('tallerista_inactivo');
 Route::get('desactivar_tallerista/{id_user}', 'FormacionIntegralController@desactivar_tallerista');
 Route::get('activar_tallerista/{id_user}', 'FormacionIntegralController@activar_tallerista');
-//
 Route::get('actividades_registradas', 'FormacionIntegralController@actividades_registradas')->name('actividades_registradas');
 Route::get('solicitudes', 'FormacionIntegralController@solicitudes')->name('solicitudes');
 Route::get('asignar_taller', 'FormacionIntegralController@asignar_taller')->name('asignar_taller');
 Route::get('actividades_asignadas', 'FormacionIntegralController@actividades_asignadas')->name('actividades_asignadas');
 Route::get('registro_horas', 'FormacionIntegralController@anteriores')->name('registro_horas');
+
+Route::get('busqueda_atras', 'BusquedaAnteriorController@vista_atras')->name('busqueda_atras');
+Route::any('busqueda_atras_fi', 'BusquedaAnteriorController@anteriores_busqueda')->name('busqueda_atras_fi');
+Route::get('avance_estudiante_a/{ID}', 'BusquedaAnteriorController@ver_avance');
+Route::get('constancia_parcial_a/{ID}', 'BusquedaAnteriorController@constancia_par');
+Route::get('constancia_valida_a/{ID}', 'BusquedaAnteriorController@constancia_val');
+
 Route::get('avance_estudiante/{matricula}', 'FormacionIntegralController@ver_avance');
 Route::get('constancia_parcial/{matricula}', 'FormacionIntegralController@constancia_par');
 Route::get('constancia_valida/{matricula}', 'FormacionIntegralController@constancia_val');
 Route::get('acreditar_estudiantes_formacion/{actividad}/{matricula}', 'FormacionIntegralController@acreditar_estudiantes');
 Route::get('desactivar_extra/{actividad}', 'FormacionIntegralController@desactivar_extracurricular');
+
 });
 
 

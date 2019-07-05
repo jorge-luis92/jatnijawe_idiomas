@@ -100,7 +100,7 @@ class LoginAdministrativo extends Controller
     //$this->guard()->logout();
 Auth::logout();
     //$request->session()->invalidate();
-   return redirect()->route('perfiles')->with('sucess','Desconección Correcta!');
+   return redirect()->route('perfiles')->with('sucess','¡Cierre de Sesión Correcto!');
   //  return $this->loggedOut($request) ?: redirect('perfiles');
 }
 
