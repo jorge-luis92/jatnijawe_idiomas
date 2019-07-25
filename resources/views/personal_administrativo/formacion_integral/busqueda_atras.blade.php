@@ -31,6 +31,7 @@
                <tr style="color: #000000;">
                    <th>ID</th>
                    <th>Nombre</th>
+                   <th>Modalidad</th>
                    <th>Avance</th>
                    <th colspan="2" style="text-align: center;" >ACCIONES</th>
                </tr>
@@ -40,6 +41,7 @@
                <tr style="color: #000000;">
                    <td>{{$user->ID}}</td>
                    <td>{{$user->nombre}} </td>
+                    <td>{{$user->modalidad}} </td>
                    <td><a href="avance_estudiante_a/{{ $user->ID }}">Detalles</a></td>
                     <td><a href="constancia_parcial_a/{{ $user->ID}}" target="_blank">Generar Comprobante</a></td>
                     <td><a href="constancia_valida_a/{{ $user->ID}}" target="_blank">Generar Constancia</a></td>

@@ -1,11 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+
+  <!-- Latest compiled and minified CSS -->
+
+  <!-- Optional theme -->
+
+  <!-- Latest compiled and minified JavaScript -->
   <link rel="shortcut icon" href="{{asset('logo.ico')}}">
   <!-- Custom fonts for this template-->
   <link  rel="stylesheet" href="{{asset('requisitos/fontawesome-free/css/all.min.css')}}" type="text/css">
@@ -14,83 +21,72 @@
   <!-- Custom styles for this template-->
   <link  rel="stylesheet" href="{{asset('css/sb-admin-3.min.css')}}">
   <link rel="stylesheet"  href="{{asset('css/nuevo.css')}}">
-  <script  src="{{asset('js/funciones.min.js')}}"></script>
 
-  <title>Coordinadora Académica @yield('title')</title>
+  <title>Administrador del Sistema @yield('title')</title>
 
 </head>
 
-<body id="page-top">
-  <div id="wrapper" style="font-family: 'Century Gothic';" >
-    <!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0B173B; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
+<body id="page-top" >
+  <div id="wrapper" style="font-family: 'Century Gothic';"><!-- Sidebar -->
+    <ul class="navbar-nav sidebar sidebar-dark" style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
-
       <li class="nav-item active">
-        <a class="nav-link" href={{ route('home_auxiliar_adm')}}>
-           <img class="img-responsive center-block"   src="{{asset('logo.ico')}}" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
+        <a class="nav-link" href={{ route('home_admin')}}>
+            <img class="img-responsive center-block" src="{{asset('logo.ico')}}" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
         Gestión de Usuarios
       </div><!-- Nav Item - Pages Collapse Menu -->
 
-
       <li class="nav-item" >
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#carga_de_datos" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i><span style="font-size: 0.8em;">&nbsp;Carga de Datos</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#usuario" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa fa-user-plus" aria-hidden="true"></i><span style="font-size: 0.8em;">&nbsp;Estudiantes</span>
         </a>
-        <div id="carga_de_datos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="usuario" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href={{ route('carga_de_datos')}}>Subir Archivo</a>
-
-          </div>
-        </div>
-      </li>
-
-    <!--  <li class="nav-item" >
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#grupos" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa fa-users" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Grupos</span>
-        </a>
-        <div id="grupos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href={{ route('gestion_estudiante')}}>Ver Grupos</a>
-
-
-          </div>
-        </div>
-      </li>-->
-
-      <li class="nav-item" >
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#estudiantes" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa fa-user-circle" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Estudiantes</span>
-        </a>
-        <div id="estudiantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href={{ route('registro_estudiante_aux')}}>Registrar Estudiante</a>
-            <a class="collapse-item" href={{ route('busqueda_estudiante_aux')}}>Búsqueda de Estudiantes</a>
-            <a class="collapse-item" href={{ route('estudiante_inactivo_aux')}}>Estudiantes Inactivos</a>
+            <a class="collapse-item" href={{ route('registro_estudiante')}} >Registrar</a>
+            <a class="collapse-item" href={{ route('busqueda_estudiante')}} > Buscar</a>
+          <!--  <a class="collapse-item" href={{ route('estudiante_activo')}}   > Estudiantes Activos</a>-->
+            <a class="collapse-item" href={{ route('estudiante_inactivo')}} > Estudiantes Inactivos</a>
           </div>
         </div>
       </li>
 
 
-        <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
-<!-- Sidebar Toggler (Sidebar) -->
-    <!-- Heading -->
-    <div class="sidebar-heading" style="color: #FFFFFF">
+      <li class="nav-item" >
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#busqueda_coordinador" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fa fa-users" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Coordinadores</span>
+        </a>
+        <div id="busqueda_coordinador" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
+            <a class="collapse-item" href={{ route('registro_coordinador') }}>Registrar</a>
+          <!--  <a class="collapse-item" href={{ route('busqueda_coordinador') }}> Buscar</a>-->
+          <a class="collapse-item" href={{ route('coordinador_activo') }}> Coordinadores Activos</a>
+           <a class="collapse-item" href={{ route('coordinador_inactivo') }}> Coordinadores Inactivos</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Utilities Collapse Menu -->
+
+      <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
+      <!-- Sidebar Toggler (Sidebar) -->
+      <!-- Heading -->
+      <div class="sidebar-heading" style="color: #FFFFFF">
       Utilidades
-    </div>
+      </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-      <a class="nav-link" href="#" aria-expanded="true">
-        <i class="fas fa-fw fa-archive"></i>
-        <span style="font-size: 0.9em;">Manual de Usuario</span>
-      </a>
-    </li>
+      <!-- Nav Item - Pages Collapse Menu -->
+
+
+      <li class="nav-item">
+      <a class="nav-link"  href={{ route('ma_estudiante')}} aria-expanded="true">
+      <i class="fas fa-fw fa-archive"></i>
+      <span style="font-size: 0.9em;">Manual de Usuario</span>
+    </a>
+      </li>     <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
 
@@ -99,9 +95,9 @@
     </ul> <!-- End of Sidebar -->
     <!-- Content Wrapper -->
 
-    <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('./image/logos_idiomas/logo_fon.png'); background-position:center; background-repeat: no-repeat; position: relative; background-color: #FFFFFF;">
+    <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos_idiomas/logo_fon.png');background-position:center; background-repeat: no-repeat; position: relative; background-color: #FFFFFF;">
           <div id="content">
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5);background-color: #819FF7;">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5); background-color: #819FF7;">
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
@@ -109,38 +105,23 @@
 
 			<li >
 				 <a class="navbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <!--<img class="img-responsive center-block" src="logo.ico" width="47" height="47" alt="">-->
-           <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;">&nbsp;Portal de Servicios Educativos "Jat Nijawe"</h1>
+          <h1 class="mr-2 d-none d-lg-inline" style="color: #0B173B;font-size;2px;">&nbsp;Portal de Servicios Educativos "Jat Nijawe"</h1>
 			              </a>
             </li>
 
 <div class="topbar-divider d-none d-sm-block"></div>
-            <!-- Nav Item - User Information
-          -->
+            <!-- Nav Item - User Information -->
 
               <li class="nav-item">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php $usuario_actual=Auth::user()->id_user;
-                  $id=$usuario_actual;
-                  $users = DB::table('personas')
-                  ->select('personas.nombre')
-                  ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-                  ->where('users.id_persona',$id)
-                  ->take(1)
-                  ->first();  echo $users->nombre." ";  //url('image/logos_idiomas/logo_fon.png')echo $users->apellido_paterno." "; echo $users->apellido_materno;
-                  ?></span>
-                  <?php $imagen = DB::table('users')
-                 ->select('users.imagenurl')
-                 ->where('users.id_user',$id)
-                 ->take(1)
-                 ->first();
-                 $im=$imagen->imagenurl;  ?>
-                 <?php if($im==""){ $im="foto.png"; }  ?>
-                  <img class="img-profile rounded-circle"  src="{{ asset("/image/users/$im")}}" >
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                    
+                  <img class="img-profile rounded-circle"  src="{{ asset("/image/users/foto.png")}}" >
+
              </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href={{ route('cuenta')}} >
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>
                     Configuración
                   </a>
@@ -162,9 +143,18 @@
       <!-- Footer -->
       <footer class="container-fluid text-center" style="background-color: #58ACFA; border-radius: 14px 14px 14px 14px;-moz-border-radius: 14px 14px 14px 14px;-webkit-border-radius: 14px 14px 14px 14px;border: 0px solid #000000;" >
   <p style="color: black">Av. Universidad S/N. Ex-Hacienda 5 Señores, Oaxaca, Méx. C.P. 68120 </br>Copyright &copy; <a style="color: white">Facultad de Idiomas</a> <?php $anio= date("Y"); echo $anio?>. Todos los derechos reservados.</p>
-</footer>
+
+  </footer>
+      <!-- End of Footer -->
+
     </div>
+
+    <!-- End of Content Wrapper -->
+
   </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
@@ -194,6 +184,8 @@
 
 
 
+  </div>
+
   <script src="{{asset('requisitos/jquery/jquery.min.js')}}"></script>
   <script src="{{asset('requisitos/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
@@ -210,7 +202,6 @@
   <!-- Page level custom scripts -->
   <!--<script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>-->
-
 
 </body>
 

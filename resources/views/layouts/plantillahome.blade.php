@@ -6,12 +6,11 @@
     <link rel="shortcut icon" href="{{ asset('logo.ico') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <link href="css/animate.min.css" rel="stylesheet">
-      <link href="css/style.css" rel="stylesheet">
-        <link href="css/estilopage.css" rel="stylesheet">
-    <link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-
-    <script src="js/drow.js"></script>
+<link  rel="stylesheet" href="{{asset('css/animate.min.css')}}" type="text/css">
+<link  rel="stylesheet" href="{{asset('css/estilopage.css')}}" type="text/css">
+<link  rel="stylesheet" href="{{asset('css/style.css')}}" type="text/css">
+<link  rel="stylesheet" href="{{asset('css/bootstrap-dropdownhover.min.css')}}" type="text/css">
+  <script src="{{asset('js/drow.js')}}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -19,11 +18,11 @@
     <title>Home: @yield('title')</title>
 
   </head>
-  <body style="font-family: 'Century Gothic'; background-image: url('image/logos_idiomas/logo_fon.png'); background-size: 1000px; background-position:center; background-repeat: no-repeat; background-color: #FFFFFF  ;">
+  <body style="font-family: 'Century Gothic'; background-image: url('./image/logos_idiomas/logo_fon.png'); background-size: 1000px; background-position:center; background-repeat: no-repeat; background-color: #FFFFFF  ;">
    <div class="container">
    <div class="row">
      <div  class="col-5 col-sm-2" align="left">
-       <img src="image/idiom.png" width="150" height="150" alt=""/>
+       <img  src="{{asset('image/idiom.png')}}" width="150" height="150" alt=""/>
      </div>
      <div  class="col-6 col-sm-7">
      </br>
@@ -32,7 +31,7 @@
        <h4>Facultad de Idiomas</h4>
      </div>
      <div  class="col-7 col-sm-2" align="right">
-         <img src="image/logos_idiomas/logo_uabjo.png" width="150" height="150" alt=""/>
+         <img src="{{asset('image/logos_idiomas/logo_uabjo.png')}}" width="150" height="150" alt=""/>
      </div>
    </div>
 

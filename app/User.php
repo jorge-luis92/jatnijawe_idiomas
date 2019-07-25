@@ -26,7 +26,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      protected $primaryKey = 'id_user'; // or null
     public $incrementing = false;
     protected $fillable = [
-        'id_user', 'username','email', 'password','tipo_usuario','id_persona',
+        'id_user', 'username','email', 'password','tipo_usuario','id_persona','imagenurl', 'facebook',
     ];
 
     /**

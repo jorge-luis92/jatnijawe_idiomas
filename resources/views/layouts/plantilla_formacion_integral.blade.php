@@ -127,7 +127,7 @@
     </ul> <!-- End of Sidebar -->
     <!-- Content Wrapper -->
 
-    <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('image/logos_idiomas/logo_fon.png'); background-position:center; background-repeat: no-repeat; position: relative; background-color: #FFFFFF;">
+    <div id="content-wrapper" class="d-flex flex-column" style="background-image: url('./image/logos_idiomas/logo_fon.png'); background-position:center; background-repeat: no-repeat; position: relative; background-color: #FFFFFF;">
           <div id="content">
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow " style="opacity: 0.7;filter:alpha(opacity=5);background-color: #819FF7;">
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">

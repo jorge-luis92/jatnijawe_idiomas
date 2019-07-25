@@ -10,7 +10,8 @@ class Persona extends Model
   protected $primaryKey = 'id_persona'; // or null
  public $incrementing = false;
  protected $fillable = [
-     'id_persona', 'nombre','apellido_paterno', 'apellido_materno','curp','fecha_nacimiento','lugar_nacimiento','tipo_sangre','edad','genero',
+     'id_persona', 'nombre','apellido_paterno', 'apellido_materno','curp','fecha_nacimiento','lugar_nacimiento',
+     'tipo_sangre','edad','genero','lengua','id_direccion','id_telefono',
  ];
 
  public function scopeBusqueda($jquery, $nombre){
@@ -19,6 +20,6 @@ class Persona extends Model
    return $jquery->where( 'estudiantes.matricula', 'LIKE', '%' . $q . '%' );
  }
 
- 
+
 
 }

@@ -82,7 +82,7 @@ Route::group(['middleware' => 'auth','estudiantes'], function () {
   Route::get('datos_medico', 'ConsultasController@carga_datos_medicos')->name('datos_medico');
   Route::get('datos_personal', 'ConsultasController@carga_datos_personales')->name('datos_personal');
   Route::get('catalogo', 'Actividades\ActvidadesExtra@catalogos')->name('catalogo');
-  Route::get('inscripcion_extracurricular/{id_extracurricular}/{creditos}', 'Actividades\ActvidadesExtra@inscripcion_extra');
+  Route::get('| tracurricular/{id_extracurricular}/{creditos}', 'Actividades\ActvidadesExtra@inscripcion_extra');
   Route::post('changePassword','HomeController@changePassword')->name('changePassword');
   //Route::post('subir_imagen_usuario', 'HomeController@changePassword');
   Route::get('ma_estudiante', 'Estudiante_Con\EstudianteController@m_estudiantes')->name('ma_estudiante');
@@ -287,5 +287,8 @@ Route::get('home_seguimiento_egresados', 'SeguimientoEgresadosController@home_se
 Route::get('generales_egresado', 'SeguimientoEgresadosController@generales_egresado')->name('generales_egresado');
 Route::get('cuestionario_egresado', 'SeguimientoEgresadosController@cuestionario_egresado')->name('cuestionario_egresado');
 Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedentes_laborales')->name('antecedentes_laborales');
+Route::get('registro_externo', 'RegistrosController@ver')->name('registro_externo');
+Route::post('registro_externos', 'RegistrosController@create')->name('registro_externos');
+
 
 Auth::routes();

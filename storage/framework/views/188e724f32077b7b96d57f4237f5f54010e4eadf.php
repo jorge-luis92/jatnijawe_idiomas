@@ -32,6 +32,7 @@
                <tr style="color: #000000;">
                    <th>ID</th>
                    <th>Nombre</th>
+                   <th>Modalidad</th>
                    <th>Avance</th>
                    <th colspan="2" style="text-align: center;" >ACCIONES</th>
                </tr>
@@ -41,6 +42,7 @@
                <tr style="color: #000000;">
                    <td><?php echo e($user->ID); ?></td>
                    <td><?php echo e($user->nombre); ?> </td>
+                    <td><?php echo e($user->modalidad); ?> </td>
                    <td><a href="avance_estudiante_a/<?php echo e($user->ID); ?>">Detalles</a></td>
                     <td><a href="constancia_parcial_a/<?php echo e($user->ID); ?>" target="_blank">Generar Comprobante</a></td>
                     <td><a href="constancia_valida_a/<?php echo e($user->ID); ?>" target="_blank">Generar Constancia</a></td>
