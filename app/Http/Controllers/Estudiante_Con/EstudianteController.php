@@ -378,5 +378,36 @@ return view('estudiante\datos.datos_personales');
    }
    }
 
+   /*TUTORIAS*/
+     public function tutorias(){
+     return view('estudiante.tutorias');
+   }
+
+
+ /*SEGUIMIENTO A EGRESADOS*/
+     public function generales_egresado()
+     {
+     return view('estudiante\seguimiento_egresados.generales_egresado');
+     }
+
+     public function cuestionario_egresado()
+     {
+     return view('estudiante\seguimiento_egresados.cuestionario_egresado');
+     }
+
+     public function antecedentes_laborales()
+     {
+       return view('estudiante\seguimiento_egresados.antecedentes_laborales');
+     }
+
+     public function lineamientos()
+     {
+       return view('estudiante.lineamientos');
+     }
+
+     public function equipamientosalon()
+     {
+       return view('estudiante\lineamientos.equipamiento-salon');
+     }
 
 }

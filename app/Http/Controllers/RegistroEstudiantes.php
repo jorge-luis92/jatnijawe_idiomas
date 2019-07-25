@@ -30,8 +30,17 @@ class RegistroEstudiantes extends Controller
    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
   ]);
 
+  $ultima = DB::table('personas')
+     ->sum('personas.id_persona');
+     if(empty($ultima)){
+       $ultima=1;
+     }
+     else {
+       $ultima=$ultima+1;
+     }
+
   $data = $request;
-  $id_prueba= random_int(1, 532986) +232859 * 123 -43 +(random_int(1, 1234));
+  $id_prueba= $ultima;
   $password= $data['matricula'];
   $tipo_usuario= 'estudiante';
   if($data['edad'] > 16){
@@ -169,7 +178,7 @@ $lengua = DB::table('lenguas')
 ->first();
 
 if(($data['nombre_lengua'] == null) && ($data['tipo_lengua'] == null)){
-  if(($data['nombre_beca'] == null) && ($data['tipo_beca'] == null)){
+  if(($data['nombre_beca'] == null) && ($data['tipo_beca'] == null) && ($data['monto'] ==  null)){
       return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
   }
   else{
@@ -218,7 +227,7 @@ DB::table('lenguas')
     DB::table('becas')
         //->where('becas.id_beca', $buscar)
         ->updateOrInsert(
-            ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'matricula' => $id],
+            ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'monto' => $data['monto'],  'matricula' => $id],
         );
         return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
 

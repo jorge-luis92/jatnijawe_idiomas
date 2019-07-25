@@ -107,6 +107,23 @@ Route::group(['middleware' => 'auth','estudiantes'], function () {
   Route::get('descargar_solicitud_taller', 'GenerarPdf@descarga_taller');
   Route::get('solicitud_practicasP', 'Estudiante_Con\EstudianteController@solicitud_practicasP')->name('solicitud_practicasP');
   Route::get('solicitud_servicioSocial', 'Estudiante_Con\EstudianteController@solicitud_servicioSocial')->name('solicitud_servicioSocial');
+
+  /*TUTORIAS*/
+Route::get('tutorias', 'Estudiante_Con\EstudianteController@tutorias')->name('tutorias');
+
+/*lineamientos*/
+  Route::get('lineamientos', 'Estudiante_Con\EstudianteController@lineamientos')->name('lineamientos');
+  Route::get('equipamientosalon', 'Estudiante_Con\EstudianteController@equipamientosalon')->name('equipamientosalon');
+
+
+/*SEGUIMIENTO A EGRESADOS PERFIL ESTUDIANTE*/
+Route::get('egresado_registrado', 'Estudiante_Con\EstudianteController@egresado_registrado')->name('egresado_registrado');
+Route::get('antecedentes_laborales', 'Estudiante_Con\EstudianteController@antecedentes_laborales')->name('antecedentes_laborales');
+Route::get('cuestionario_egresado', 'Estudiante_Con\EstudianteController@cuestionario_egresado')->name('cuestionario_egresado');
+Route::get('generales_egresado', 'Estudiante_Con\EstudianteController@generales_egresado')->name('generales_egresado');
+
+
+
 });
 
 
