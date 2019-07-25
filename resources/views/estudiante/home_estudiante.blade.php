@@ -18,9 +18,11 @@
 </br>
 </br>
 <div class="nota_alumno">
-<p style="color: #000000; align: justify;"><span style="color: #000000;">NOTA: </span>Recuerda actualizar tus <span style="color: red;">Datos</span> cada inicio de semestre</br>
-* Consulta el <a style="text-decoration: underline; color: #FFFFFF;"  href={{route('ma_estudiante')}}>Manual de Usuario</a></p>
-</div>
+<p style="Times New Roman, Times, serif, cursive; color: #FFFFFF;" align="center">
+  <span style="color: #FFFFFF;"><strong>AVISO IMPORTANTE: </strong></span></br>
+   Para tener acceso a todos los servicios del sistema debes leer y aceptar
+   <span style="color: #190707">LOS LINEAMIENTOS</span> cada inicio de semestre</p>
+   <p style="color: #000000"align="center"><a style="text-decoration: underline; color: #FFFFFF;"  href={{route('lineamientos')}}>Lineamientos</a> </p>
 </div>
 
 

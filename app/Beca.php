@@ -10,6 +10,6 @@ class Beca extends Model
   protected $primaryKey = 'id_beca'; // or null
  //public $incrementing = false;
  protected $fillable = [
-     'nombre', 'tipo_beca', 'monto', 'matricula', 'bandera',
+     'nombre', 'tipo_beca', 'monto', 'matricula', 'bandera', 'periodo',
  ];
 }

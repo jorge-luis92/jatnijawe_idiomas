@@ -1,10 +1,10 @@
-<link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_estudiante')
-@section('title')
-: Lineamientos
-@endsection
+<link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
-@section('seccion')
+<?php $__env->startSection('title'); ?>
+: Lineamientos
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('seccion'); ?>
 <div class="container" id="font2">
   </br>
   <h1 style="font-size: 2.0em; color: #000000;" align="center">Perfil del Estudiante</h1>
@@ -252,13 +252,15 @@ REGLAMENTO DE ESTUDIOS DE POSGRADO
       <div class="modal-body">Al enviar aceptas haber leído todos los lineamientos, reglamentos y manuales de tu Facultad, confirmando estar enterado y de acuerdo con los mismos</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-primary" href="{{ route('logout_system') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Enviar</a>
+        <a class="btn btn-primary" href="<?php echo e(route('logout_system')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Enviar</a>
 
-       <form id="logout-form" action="{{ route('logout_system') }}" method="GET" style="display: none;">
-          @csrf
+       <form id="logout-form" action="<?php echo e(route('logout_system')); ?>" method="GET" style="display: none;">
+          <?php echo csrf_field(); ?>
         </form>
       </div>
     </div>
   </div>
 </div>
-  @endsection
+  <?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/estudiante/lineamientos.blade.php ENDPATH**/ ?>

@@ -11,7 +11,7 @@ class Persona extends Model
  public $incrementing = false;
  protected $fillable = [
      'id_persona', 'nombre','apellido_paterno', 'apellido_materno','curp','fecha_nacimiento','lugar_nacimiento',
-     'tipo_sangre','edad','genero','lengua','id_direccion','id_telefono',
+     'tipo_sangre','edad','genero','lengua','id_direccion','id_telefono', 'periodo',
  ];
 
  public function scopeBusqueda($jquery, $nombre){

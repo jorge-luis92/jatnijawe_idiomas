@@ -132,7 +132,7 @@
 
                         <div class="form-group col-md-3">
                             <label for="fecha_ingreso" >{{ __('* Fecha Ingreso') }}</label>
-                                  <input id="fecha_ingreso" type="date" class="form-control @error('fecha_ingreso') is-invalid @enderror" name="fecha_ingreso" required autocomplete="fecha_ingreso">
+                                  <input id="fecha_ingreso" type="date"  class="form-control @error('fecha_ingreso') is-invalid @enderror" name="fecha_ingreso" required autocomplete="fecha_ingreso">
                                 @error('fecha_ingreso')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -147,16 +147,6 @@
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-
                                 </select>
                         </div>
 
@@ -176,8 +166,8 @@
                           <label for="estatus">* Estatus</label>
                             <select name="estatus" id="estatus" required class="form-control">
                           <option value="">Seleccione una opción</option>
-                          <option value="regular">REGULAR</option>
-                          <option value="irregular">IRREGULAR</option>
+                          <option value="REGULAR">REGULAR</option>
+                          <option value="IRREGULAR">IRREGULAR</option>
                     </select>
                         </div>
 
@@ -480,4 +470,50 @@ function validarInput(input) {
 
 }
 
+</script>
+
+<script>
+function checar_semestres(){
+  var ed = document.getElementById('fecha_ingreso').value; //fecha de nacimiento en el formulario
+  var fechaNacimiento = ed.split("-");
+  var ano = fechaNacimiento[0];
+  var mes = fechaNacimiento[1];
+  var dia = fechaNacimiento[2];
+  var fechaHoy = new Date(); // detecto la fecha actual y asigno el dia, mes y anno a variables distintas
+  var ahora_ano = fechaHoy.getFullYear();
+  var ahora_mes = fechaHoy.getMonth()+1;
+  var ahora_dia = fechaHoy.getDate();
+
+  var edad = (ahora_ano + 1900) - ano;
+  if(ano < ahora_ano && edad >1899){
+  if ( ahora_mes < mes )
+  {
+      edad--;
+  }
+  if (mes == ahora_mes && ahora_dia < dia)
+  {
+      edad--;
+  }
+  if (edad > 1900)
+  {
+      edad -= 1900;
+  }
+  if (edad == 1900)
+  {
+      edad =0;
+  }
+  }
+  else {
+  edad=0;
+  }
+  var meses=0;
+  if(ahora_mes>mes)
+      meses=ahora_mes-mes;
+  if(ahora_mes<mes)
+      meses=12-(mes-ahora_mes);
+  document.getElementById('edad').value = edad;
+  document.getElementById('mes').value = mes;
+
+
+}
 </script>

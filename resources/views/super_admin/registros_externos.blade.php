@@ -43,7 +43,7 @@
                                 @enderror
                         </div>
 </div>
-                  
+
 
 <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
 

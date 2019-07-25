@@ -62,27 +62,29 @@
   </br>
 
   </div>
+  <div required>
   <div class="radio col-md-12" id="labels" align="justify">
 
-   <input type="checkbox"  name="area" value="Académico"  required >
+   <input type="checkbox" id="area" name="area" value="Académico"   >
    <label for="uno">Académico </label>
 </div>
 <div class="radio col-md-12" id="labels" align="justify">
-   <input type="checkbox"  name="area" value="Emocional"  required>
+   <input type="checkbox" id="area"  name="area" value="Emocional"  >
    <label for="dos">Emocional </label>
 </div>
 <div class="radio col-md-12" id="labels" align="justify">
-   <input type="checkbox"  name="area" value="Cuidado de la Salud"  required>
+   <input type="checkbox" id="area"  name="area" value="Cuidado de la Salud"  >
    <label for="res">Cuidado de la Salud </label>
 </div>
 <div class="radio col-md-12" id="labels" align="justify">
-   <input type="checkbox"  name="area" value="Actitudes y Valores"  required>
+   <input type="checkbox"  id="area" name="area" value="Actitudes y Valores"  >
    <label for="cuatro">Actitudes y Valores </label>
 </div>
 <div class="radio col-md-12" id="labels" align="justify">
-   <input type="checkbox"  name="area" value="Relaciones personales" required>
+   <input type="checkbox" id="area"  name="area" value="Relaciones personales" >
    <label for="cinco">Relaciones inter e intra personales</label>
    </div>
+ </div>
   </div>
 
 </br>

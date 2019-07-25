@@ -27,28 +27,28 @@
         </tr>
 
         <tr>
-          <td>Matrícula Atendidida</td>
+          <td><strong>Matrícula Atendidida</strong></td>
           <td bgcolor="white" ></td>
           <td bgcolor="white" ></td>
           <td bgcolor="white" ></td>
         </tr>
 
         <tr>
-          <td >Alumnos Reinscritos</td>
+          <td ><strong>Alumnos Reinscritos</strong></td>
           <td bgcolor="white" ></td>
           <td bgcolor="white" ></td>
           <td bgcolor="white" ></td>
         </tr>
 
         <tr>
-          <td >Alumnos en Servicio Social</td>
+          <td ><strong>Alumnos en Servicio Social</strong></td>
           <td bgcolor="white" ></td>
           <td bgcolor="white" ></td>
           <td bgcolor="white" ></td>
         </tr>
 
         <tr>
-          <td >Alumnos en Prácticas Profesionales</td>
+          <td ><strong>Alumnos en Prácticas Profesionales</strong></td>
           <td bgcolor="white" ></td>
           <td bgcolor="white" ></td>
           <td bgcolor="white" ></td>

@@ -10,6 +10,6 @@ class Detalle_extracurricular extends Model
   protected $primaryKey = 'id_detalle_extracurricular'; // or null
  //public $incrementing = false;
  protected $fillable = [
-     'id_detalle_extracurricular', 'matricula','actividad', 'creditos','estado',
+     'id_detalle_extracurricular', 'matricula','actividad', 'creditos','estado', 'periodo',
  ];
 }

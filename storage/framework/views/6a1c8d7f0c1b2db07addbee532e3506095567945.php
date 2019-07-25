@@ -82,10 +82,85 @@
      </div>
 
        </div>
-    <div class="form-group col-md-3" id="labels">
+<!--    <div class="form-group col-md-3" id="labels">
       <label for="nombre_lengua">Nombre de Lengua</label>
     </br>
       <input type="text"  name="nombre_lengua" id="nombre_lengua" required disabled class="form-control"  onKeyUp="this.value = this.value.toUpperCase()" placeholder="Especifica"  >
+    </div>-->
+
+    <div class="form-group col-md-3"  id="labels">
+      <label for="nombre_lengua">Nombre de Lengua</label>
+        <select name="nombre_lengua" id="nombre_lengua" required disabled class="form-control">
+        <option value="">Seleccione una opción</option>
+        <option value="Akateko">Akateko</option>
+        <option value="Amuzgo">Amuzgo</option>
+        <option value="Awakateko">Awakateko</option>
+        <option value="Ayapaneco">Ayapaneco</option>
+        <option value="Cora">Cora</option>
+        <option value="Cucapa">Cucapá</option>
+        <option value="Cuicateco">Cuicateco</option>
+        <option value="Chatino">Chatino</option>
+        <option value="Chichimeco">Chichimeco</option>
+        <option value="Chinanteco">Chinanteco</option>
+        <option value="Chocholteco">Chocholteco</option>
+        <option value="Chontal de Oaxaca">Chontal de Oaxaca</option>
+        <option value="Chuj">Chuj</option>
+        <option value="Chol">Ch’ol</option>
+        <option value="Guarijio">Guarijío</option>
+        <option value="Huasteco">Huasteco</option>
+        <option value="Huave">Huave</option>
+        <option value="Huichol">Huichol</option>
+        <option value="Ixcateco">Ixcateco</option>
+        <option value="Ixil">Ixil</option>
+        <option value="Jakalteko">Jakalteko</option>
+        <option value="Kaqchikel">Kaqchikel</option>
+        <option value="Kickapoo">Kickapoo</option>
+        <option value="Kiliwa">Kiliwa</option>
+        <option value="Kumiai">Kumiai</option>
+        <option value="Kuahl">Ku’ahl</option>
+        <option value="Kiche">K’iche’</option>
+        <option value="Lacandon">Lacandón</option>
+        <option value="Mam">Mam</option>
+        <option value="Matlatzinca">Matlatzinca</option>
+        <option value="Maya">Maya</option>
+        <option value="Mayo">Mayo</option>
+        <option value="Mazahua">Mazahua</option>
+        <option value="Mazateco">Mazateco</option>
+        <option value="Mixe">Mixe</option>
+        <option value="Mixteco">Mixteco</option>
+        <option value="Nahuatl">Náhuatl</option>
+        <option value="Oluteco">Oluteco</option>
+        <option value="Otomi">Otomí</option>
+        <option value="Paipai">Paipai</option>
+        <option value="Pame">Pame</option>
+        <option value="Papago">Pápago</option>
+        <option value="Pima">Pima</option>
+        <option value="Popoloca">Popoloca</option>
+        <option value="Popoluca de la Sierra">Popoluca de la Sierra</option>
+        <option value="Qatok">Qato’k</option>
+        <option value="Qanjobal">Q’anjob’al</option>
+        <option value="Qeqchi">Q’eqchí’</option>
+        <option value="Sayulteco">Sayulteco</option>
+        <option value="Seri">Seri</option>
+        <option value="Tarahumara">Tarahumara</option>
+        <option value="Tarasco">Tarasco</option>
+        <option value="Teko">Teko</option>
+        <option value="Tepehua">Tepehua</option>
+        <option value="Tepehuano del norte">Tepehuano del norte</option>
+        <option value="Tepehuano del sur ">Tepehuano del sur </option>
+        <option value="Texistepequeño">Texistepequeño</option>
+        <option value="Tojolabal">Tojolabal</option>
+        <option value="Totonaco">Totonaco</option>
+        <option value="Triqui">Triqui</option>
+        <option value="Tlahuica">Tlahuica</option>
+        <option value="Tlapaneco">Tlapaneco</option>
+        <option value="Tseltal">Tseltal</option>
+        <option value="Tsotsil">Tsotsil</option>
+        <option value="Yaqui">Yaqui</option>
+        <option value="Zapoteco">Zapoteco</option>
+        <option value="Zoque"></option>
+
+            </select>
     </div>
 
     <div class="form-group col-md-3">
@@ -121,6 +196,7 @@
   <label for="tipo_beca">Tipo de Beca</label>
     <select name="tipo_beca" id="tipo_beca" required disabled class="form-control">
     <option value="">Seleccione una opción</option>
+    <option value="INSTITUCIONAL">PROPIA INSTITUCION</option>
     <option value="FEDERAL">BECA FEDERAL</option>
     <option value="ESTATAL">BECA ESTATAL</option>
     <option value="MUNICIPAL">BECA MUNICIPAL</option>

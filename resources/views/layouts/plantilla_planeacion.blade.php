@@ -58,8 +58,8 @@
             <a class="collapse-item" href={{ route('info_formacion_integral1')}}>Formación Integral</a>
             <a class="collapse-item" href={{ route('info_serviciosocial')}}>Servicio Social</a>
             <a class="collapse-item" href={{ route('info_practicasp')}}>Prácticas profesionales </a>
-            <a class="collapse-item" href={{ route('info_practicasp')}}>Seguimiento a Egresados</a>
-
+        <!--    <a class="collapse-item" href={{ route('info_practicasp')}}>Seguimiento a Egresados</a>
+-->
           </div>
         </div>
       </li>

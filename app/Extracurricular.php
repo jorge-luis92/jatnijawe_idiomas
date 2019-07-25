@@ -11,7 +11,7 @@ class Extracurricular extends Model
  //public $incrementing = false;
  protected $fillable = [
      'id_extracurricular', 'nombre_ec','creditos', 'area','modalidad','cupo','lugar', 'fecha_inicio', 'fecha_fin',
-     'hora_inicio', 'hora_fin', 'dias_sem', 'materiales', 'tutor',
+     'hora_inicio', 'hora_fin', 'dias_sem', 'materiales', 'tutor', 'periodo',
  ];
 
 

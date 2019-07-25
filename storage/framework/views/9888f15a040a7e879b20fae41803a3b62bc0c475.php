@@ -254,8 +254,8 @@ endif; ?>
                           <label for="estatus">* Estatus</label>
                             <select name="estatus" id="estatus" required class="form-control">
                           <option value="">Seleccione una opción</option>
-                          <option value="regular">REGULAR</option>
-                          <option value="irregular">IRREGULAR</option>
+                          <option value="REGULAR">REGULAR</option>
+                          <option value="IRREGULAR">IRREGULAR</option>
                     </select>
                         </div>
 
