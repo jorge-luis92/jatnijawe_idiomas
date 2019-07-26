@@ -10,6 +10,6 @@ class Telefono extends Model
   protected $primaryKey = 'id_telefono'; // or null
  //public $incrementing = false;
  protected $fillable = [
-     'tipo','lada','numero', 'extension', 'id_persona',
+     'tipo','lada','numero', 'extension','id_persona',
  ];
 }

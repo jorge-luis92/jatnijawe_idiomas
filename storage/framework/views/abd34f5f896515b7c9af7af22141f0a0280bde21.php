@@ -11,8 +11,8 @@
   <h4 style="font-size: 2.0em; color: #000000;" align="center">Lineamientos</h4>
 
 
-  <form action="../../form-result.php" method="post" target="_blank">
-
+  <form method="POST" action="">
+    <?php echo csrf_field(); ?>
 <h6 style="font-size: 1.0em; color: #000000;" align="center"><strong>
 Lineamientos para la licenciatura en la Enseñanza de Idiomas de la Uiversidad Autónoma "Benito Juárez" de Oaxaca:
 </strong></h6></br>
@@ -34,7 +34,7 @@ MANUAL DE BIENVENIDA
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="manual-organizacion" value="verificado">
+<input type="checkbox" name="manual-organizacion" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 MANUAL DE ORGANIZACIÓN Y FUNCIONES
@@ -49,7 +49,7 @@ MANUAL DE ORGANIZACIÓN Y FUNCIONES
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="plan-desarrollo" value="verificado">
+<input type="checkbox" name="plan-desarrollo" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 PLAN DE DESARROLLO 2018 - 2021
@@ -64,7 +64,7 @@ PLAN DE DESARROLLO 2018 - 2021
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="reglamento-ingreso-permanencia-egreso" value="verificado">
+<input type="checkbox" name="reglamento-ingreso-permanencia-egreso" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 REGLAMENTO PARA EL INGRESO, PERMANENCIA Y EGRESO
@@ -79,7 +79,7 @@ REGLAMENTO PARA EL INGRESO, PERMANENCIA Y EGRESO
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="reglamento-defernsoria" value="verificado">
+<input type="checkbox" name="reglamento-defernsoria" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 REGLAMENTO DE LA DEFENSORÍA DE LOS DERECHOS UNIVERSITARIOS
@@ -94,7 +94,7 @@ REGLAMENTO DE LA DEFENSORÍA DE LOS DERECHOS UNIVERSITARIOS
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="reglamento-leyorganica" value="verificado">
+<input type="checkbox" name="reglamento-leyorganica" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 REGLAMENTO DE LA LEY ORGÁNICA
@@ -109,7 +109,7 @@ REGLAMENTO DE LA LEY ORGÁNICA
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="reglamento-leyorganica" value="verificado">
+<input type="checkbox" name="reglamento-leyorganica" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 REGLAMENTO DE LA LEY ORGÁNICA
@@ -124,7 +124,7 @@ REGLAMENTO DE LA LEY ORGÁNICA
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="equipamiento-salon" value="verificado">
+<input type="checkbox" name="equipamiento-salon" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 REGLAMENTO DE EQUIPAMIENTO DEL SALÓN
@@ -139,7 +139,7 @@ REGLAMENTO DE EQUIPAMIENTO DEL SALÓN
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="reglamento-cc" value="verificado">
+<input type="checkbox" name="reglamento-cc" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 REGLAMENTO DEL CENTRO DE CÓMPUTO
@@ -154,7 +154,7 @@ REGLAMENTO DEL CENTRO DE CÓMPUTO
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="reglamento-biblioteca" value="verificado">
+<input type="checkbox" name="reglamento-biblioteca" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 REGLAMENTO DE BIBLIOTECA
@@ -169,7 +169,7 @@ REGLAMENTO DE BIBLIOTECA
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="reglamento-areasverdes" value="verificado">
+<input type="checkbox" name="reglamento-areasverdes" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 REGLAMENTO DE ÁREAS VERDES Y DEPORTIVAS
@@ -184,7 +184,7 @@ REGLAMENTO DE ÁREAS VERDES Y DEPORTIVAS
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="reglamento-ss" value="verificado">
+<input type="checkbox" name="reglamento-ss" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 REGLAMENTO DE SERVICIO SOCIAL
@@ -199,7 +199,7 @@ REGLAMENTO DE SERVICIO SOCIAL
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="reglamento-titulacion" value="verificado">
+<input type="checkbox" name="reglamento-titulacion" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 REGLAMENTO DE TITULACIÓN PROFESIONAL
@@ -214,7 +214,7 @@ REGLAMENTO DE TITULACIÓN PROFESIONAL
 
 <div class="form-row">
 <div class="form-group col-md-1">
-<input type="checkbox" name="reglamento-posgrado" value="verificado">
+<input type="checkbox" name="reglamento-posgrado" value="verificado" required>
 </div>
 <div class="form-group col-md-7">
 REGLAMENTO DE ESTUDIOS DE POSGRADO
@@ -230,15 +230,13 @@ REGLAMENTO DE ESTUDIOS DE POSGRADO
  <br>
    <div class="form-group">
        <div class="col-xs-offset-2 col-xs-9" align="center">
-         <a  class="btn btn-primary" href="#" data-toggle="modal" data-target="#logoutModal">
-                     Aceptar
-         </a>
+         <a  class="btn btn-primary" href="#" data-toggle="modal" data-target="#logoutModal">Aceptar </a>
          <!--  <button type="button"  class="btn btn-secondary" data-dismiss="modal">Cancelar</button>-->
        </div>
    </div>
 </div>
 </div>
-
+</form>
 
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -249,14 +247,11 @@ REGLAMENTO DE ESTUDIOS DE POSGRADO
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <div class="modal-body">Al enviar aceptas haber leído todos los lineamientos, reglamentos y manuales de tu Facultad, confirmando estar enterado y de acuerdo con los mismos</div>
+      <div class="modal-body">Al enviar aceptas haber leído todos los lineamientos, reglamentos y manuales de tu Facultad, confirmando estar enterado y de acuerdo con los mismos.</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-primary" href="<?php echo e(route('logout_system')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Enviar</a>
+        <button class="btn btn-primary" type="submit" >Enviar</button>
 
-       <form id="logout-form" action="<?php echo e(route('logout_system')); ?>" method="GET" style="display: none;">
-          <?php echo csrf_field(); ?>
-        </form>
       </div>
     </div>
   </div>

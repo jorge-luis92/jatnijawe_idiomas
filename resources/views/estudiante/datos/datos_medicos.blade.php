@@ -17,71 +17,160 @@
       <label for="tipo_sangre">* Tipo de Sangre</label>
       <input type="text" class="form-control" name="tipo_sangre" value="<?php if(empty($s->tipo_sangre)){ $vacio=null; echo $vacio;} else{ echo $s->tipo_sangre;} ?>" id="tipo_sangre" placeholder="Tipo de Sangre"  onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
-    <div class="form-group col-md-4">
-      <label for="nombre_responsable">* En caso de emergencia llamar a: </label>
-      <input type="text" class="form-control" name="nombre_responsable" value="<?php if(empty($e->nombre_responsable)){ $vacio=null; echo $vacio;} else{ echo $e->nombre_responsable;} ?>" id="nombre_responsable" placeholder="Nombre"  onKeyUp="this.value = this.value.toUpperCase();" required>
-    </div>
-    <div class="form-group col-md-4">
-      <label for="parentesco">* Parentesco</label>
-      <input type="text" class="form-control" name="parentesco" value="<?php if(empty($e->parentesco)){ $vacio=null; echo $vacio;} else{ echo $e->parentesco;} ?>"id="parentesco" placeholder="Parentesco"  onKeyUp="this.value = this.value.toUpperCase();" required>
-    </div>
   </div>
-    <div class="form-row">
-    <div class="form-group col-md-5">
-      <label for="tel_emergencia">* Teléfono</label>
-      <input type="tel" maxlength="10" name="tel_emergencia" value="<?php if(empty($ne->numero)){ $vacio=null; echo $vacio;} else{ echo $ne->numero;} ?>" class="form-control" onkeypress="return numeros (event)" id="tel_emergencia" placeholder="Teléfono de Emergencia a 10 dígitos" pattern="([0-9]{3})([0-9]{7})" required>
-    </div>
-  </div>
-    <div class="radio col-md-12">
+
+  <div class="radio col-md-12">
       <label>* ¿Sufres alguna Alergia o Enfermedad?</label>
 
-     <input type="radio" id="si_alergia" name="alergias" value="si_alergia" onclick="habilita_alergia()" required >
-     <label for="si_actividad">Si</label>
+     <input type="radio" id="si_alergia" name="alergias" value="si_alergia" onclick="checar_alergia(this.id)" required >
+     <label for="si_alergia">Si</label>
 
-     <input type="radio" id="no_alergia" name="alergias" value="no_alergia" onclick="deshabilita_alergia()" required>
-     <label for="no_actividad">No</label>
+     <input type="radio" id="no_alergia" name="alergias" value="no_alergia" onclick="nochecar_alergia(this.id)" required>
+     <label for="no_alergia">No</label>
      </div>
 
-      <div class="form-row">
-         <div class="form-group col-md-3">
-        <label for="tipo_enfer">Tipo</label></br>
-          <select class="inputA" name="tipo_enfer" id="tipo_enfer" disabled required >
-        <option value="">Seleccione una opción</option>
-        <option value="alergia">Alergia</option>
-        <option value="enfermedad">Enfermedad</option>
-  </select>
-</br>
-  <a data-toggle="modal" href="#act_externas">Registro de Enfermedades - Alergias</a>
-        </div>
-     <div class="form-group col-md-3">
-       <label for="nombre_enf_ale">Nombre</label></br>
-       <input type="text" name="nombre_enf_ale" class="inputA" id="nombre_enf_ale" placeholder="Nombre" disabled required>
+     <div class="form-row">
+          <div class="form-group col-md-3">
+         <label for="tipo_enfer">Tipo</label></br>
+           <select class="form-control" onclick="checar_seleccion()" name="tipo_enfer" id="tipo_enfer" disabled required >
+         <option value="">Seleccione una opción</option>
+         <option value="Alergia">Alergia</option>
+         <option value="Enfermedad">Enfermedad</option>
+   </select>
+         </div>
+     <div class="form-group col-md-4">
+       <label for="nombre_enf_ale">Nombre Alergia</label>
+       <select name="nombre_enf_ale" id="alergias_d" required disabled class="form-control">
+       <option value="">Seleccione una opción</option>
+       <option value="respiratoria">RESPIRATORIA</option>
+       <option value="dermica">DÉRMICA</option>
+       <option value="alimentos">ALIMENTOS</option>
+       <option value="medicamentos">MEDICAMENTOS</option>
+       <option value="plantas">PLANTAS E INSECTOS</option>
+       <option value="lesiones">LESIONES, HERIDAS, INTOXICACIONES</option>
+       <option value="otra">OTRA</option>
+           </select>
+     </div>
+
+     <div class="form-group col-md-4">
+       <label for="nombre_enfermedad">Nombre Enfermedad</label>
+       <select name="nombre_enf_ale" id="enfermedad_de" required class="form-control" disabled>
+       <option value="">Seleccione una opción</option>
+       <option value="infecciosa">INFECCIOSA Y PARASITARIA</option>
+       <option value="neoplasma">NEOPLASMAS</option>
+       <option value="sangre">SANGRE Y SISTEMA INMUNOLÓGICO</option>
+       <option value="endocrina">ENDÓCRINA</option>
+       <option value="mental">MENTAL</option>
+       <option value="sentidos">SENTIDOS</option>
+       <option value="cardiocirculatorio">CARDIOCIRCULATORIO</option>
+       <option value="respiratorio">SISTEMA RESPIRATORIO</option>
+       <option value="digestivo">SISTEMA DIGESTIVO</option>
+       <option value="nervioso">SISTEMA NERVIOSO</option>
+       <option value="genitourinario">SISTEMA GENITOURINARIO</option>
+       <option value="piel">PIEL</option>
+       <option value="locomotor">APARATO LOCOMOTOR</option>
+       <option value="embarazo">EMBARAZO, PARTO Y PUERPERIO</option>
+       <option value="congenita">CONGÉNITAS</option>
+       <option value="lesiones">LESIONES, HERIDAS, INTOXICACIONES</option>
+
+           </select>
      </div>
      <div class="form-group col-md-3">
        <label for="des_enf_ale">Descripción</label>
-        <textarea type="text" class="inputA" name="des_enf_ale" id="des_enf_ale" placeholder="Descripción" disabled required></textarea>
-     </div>
-     <div class="form-group col-md-3">
+       <textarea class="form-control" name="des_enf_ale" id="des_enf_ale" placeholder="Descripción" disabled required ></textarea>
+
+             </div>
+     <div class="form-group col-md-4">
        <label for="ind_enf_ale">Indicaciones</label>
-       <textarea type="text" class="inputA" name="ind_enf_ale" id="ind_enf_ale" placeholder="Indicaciones " disabled required></textarea>
+       <textarea class="form-control" name="ind_enf_ale" id="ind_enf_ale" placeholder="Indicaciones" disabled required></textarea>
      </div>
-     </div>
+     <div class="form-group col-md-4">
+     </br>
+    <a data-toggle="modal" href="#act_externas">Registro de Enfermedades - Alergias</a>
+    </div>
+ </div>
 
-     <div class="radio col-md-12">
-       <label>* ¿Sufres alguna Discapacidad?</label>
-      <input type="radio" id="tipo_discapacidad" name="enfermedades" value="si_enfermedad" onclick="habilita_enfermedad()" required>
-      <label for="si_enfermedad">Si</label>
+  <div class="radio col-md-12">
+    <label>* ¿Sufres alguna Discapacidad?</label>
 
-      <input type="radio" id="no_enfermedad" name="enfermedades" value="no_enfermedad" onclick="deshabilita_enfermedad()" required>
-      <label for="si_enfermedad">No</label>
-      </div>
+   <input type="radio" id="si_discapacidad" name="discapacidad" value="si_discapacidad" onclick="checar_dis(this.id)" required >
+   <label for="si_discapacidad">Si</label>
 
-      <div class="form-row">
-      <div class="form-group col-md-4">
-        <label for="tipo_discapacidad">Tipo de Discapacidad</label>
-        <input type="text" class="inputEnfermedad" name="tipo_discapacidad" value="<?php if(empty($dis->tipo)){ $vacio=null; echo $vacio;} else{ echo $dis->tipo;} ?>"id="tipo_discapacidad" placeholder="Tipo de Discapacidad" disabled required>
-      </div>
-  </div>
+   <input type="radio" id="no_discapacidad" name="discapacidad" value="no_discapacidad" onclick="nochecar_dis(this.id)" required>
+   <label for="no_discapacidad">No</label>
+   </div>
+
+   <div class="form-row">
+   <div class="form-group col-md-4">
+     <label for="tipo_discapacidad">Nombre Discapacidad</label>
+     <select name="tipo_discapacidad" id="tipo_discapacidad" disabled required class="form-control">
+     <option value="">Seleccione una opción</option>
+     <option value="fisica">FÍSICA/MOTRIZ</option>
+     <option value="intelectual">INTELECTUAL</option>
+     <option value="multiple">MULTIPLE</option>
+     <option value="hipoacusa">HIPOACUSIA (AUDITIVA)</option>
+     <option value="sordera">SORDERA (AUDITIVA)</option>
+     <option value="visual1">BAJA VISIÓN (VISUAL)</option>
+     <option value="viasual2">CEGUERA (VISUAL)</option>
+     <option value="psicosocial">PSICOSOCIAL</option>
+     <option value="lesiones">LESIONES, HERIDAS, INTOXICACIONES</option>
+     <option value="otra">OTRA</option>
+         </select>
+   </div>
+
+   <div class="form-group col-md-4">
+     <label for="registro_dis">Registro Discapacidad</label>
+     <input type="text" class="form-control" name="registro_dis" value="<?php if(empty($dis->tipo)){ $vacio=null; echo $vacio;} else{ echo $dis->tipo;} ?>" id="registro_dis" placeholder="Ninguno"  disabled>
+   </div>
+</div>
+</br>
+<label for="emergencia">En caso de emergencia llamar a:</label>
+<div class="form-row">
+
+<div class="form-group col-md-4">
+<label for="nombre" >{{ __('* Nombre(s)') }}</label>
+<input id="nombre" type="text" value="<?php if(empty($e->nombre)){ $vacio=null; echo $vacio;} else{ echo $e->nombre;} ?>" onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre"  required autocomplete="nombre">
+   @error('nombre')
+<span class="invalid-feedback" role="alert">
+<strong>{{ $message }}</strong>
+</span>
+ @enderror
+</div>
+
+<div class="form-group col-md-4">
+<label for="apellido_paterno" >{{ __('* Apellido Paterno') }}</label>
+     <input id="apellido_paterno" type="text"  value="<?php if(empty($e->apellido_paterno)){ $vacio=null; echo $vacio;} else{ echo $e->apellido_paterno;} ?>"onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('apellido_paterno') is-invalid @enderror" name="apellido_paterno"  required autocomplete="apellido_paterno">
+   @error('apellido_paterno')
+       <span class="invalid-feedback" role="alert">
+           <strong>{{ $message }}</strong>
+       </span>
+   @enderror
+</div>
+
+<div class="form-group col-md-4">
+<label for="apellido_materno" >{{ __('Apellido Materno') }}</label>
+     <input id="apellido_materno"  value="<?php if(empty($e->apellido_materno)){ $vacio=null; echo $vacio;} else{ echo $e->apellido_materno;} ?>" onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('apellido_materno') is-invalid @enderror" name="apellido_materno"  autocomplete="apellido_materno">
+   @error('apellido_materno')
+       <span class="invalid-feedback" role="alert">
+           <strong>{{ $message }}</strong>
+       </span>
+   @enderror
+</div>
+</div>
+
+
+<div class="form-row">
+<div class="form-group col-md-6">
+<label for="parentesco">* Parentesco</label>
+<input type="text" class="form-control" value="<?php if(empty($p->parentesco)){ $vacio=null; echo $vacio;} else{ echo $p->parentesco;} ?>" name="parentesco" id="parentesco" placeholder="Parentesco"  onKeyUp="this.value = this.value.toUpperCase();" required>
+</div>
+
+<div class="form-group col-md-6">
+<label for="tel_emergencia">* Teléfono</label>
+<input type="tel" maxlength="10" class="form-control" onkeypress="return numeros (event)" id="tel_emergencia" placeholder="Teléfono de Emergencia a 10 dígitos" pattern="([0-9]{3})([0-9]{7})" >
+</div>
+</div>
+
   <div class="form-group">
    <br>
    <div class="col-xs-offset-2 col-xs-9" align="center">
@@ -131,27 +220,73 @@
   </div>
   </div>
   @endsection
+  <script language="JavaScript">
+      function checar_alergia(id){
+        // document.getElementById("nombre_lengua").removeAttr("disabled");
+         //$(".inputText").removeAttr("disabled");
+         if ( id == "si_alergia" ) {
+          document.getElementById("tipo_enfer").removeAttribute("disabled");
+        //  document.getElementById("descripcion_alergia").removeAttribute("disabled");
+          //document.getElementById("indicacion_alergia").removeAttribute("disabled");
+        }
+      }
 
-<script language="JavaScript">
-    function habilita_alergia(){
-        $(".inputA").removeAttr("disabled");
+      function nochecar_alergia(id){
+        if ( id == "no_alergia" ) {
+         document.getElementById("tipo_enfer").setAttribute("disabled","disabled");
+//document.getElementById("descripcion_alergia").setAttribute("disabled","disabled");
+  //       document.getElementById("indicacion_alergia").setAttribute("disabled","disabled");
+           }
+
+      }
+  </script>
+
+  <script language="JavaScript">
+      function checar_dis(id){
+        // document.getElementById("nombre_lengua").removeAttr("disabled");
+         //$(".inputText").removeAttr("disabled");
+         if ( id == "si_discapacidad" ) {
+          document.getElementById("tipo_discapacidad").removeAttribute("disabled");
+
+        }
+      }
+
+      function nochecar_dis(id){
+        if ( id == "no_discapacidad" ) {
+         document.getElementById("tipo_discapacidad").setAttribute("disabled","disabled");
+           }
+
+      }
+  </script>
+
+
+  <script>
+  function checar_seleccion(){
+    var ed = document.getElementById('tipo_enfer').value; //fecha de nacimiento en el formulario
+
+    if(ed == ''){
+      document.getElementById("enfermedad_de").setAttribute("disabled","disabled");
+      document.getElementById("alergias_d").setAttribute("disabled","disabled");
+      document.getElementById("des_enf_ale").setAttribute("disabled","disabled");
+      document.getElementById("ind_enf_ale").setAttribute("disabled","disabled");
     }
 
-    function deshabilita_alergia(){
-        $(".inputA").attr("disabled","disabled");
-    }
-</script>
-
-<script language="JavaScript">
-    function habilita_enfermedad(){
-        $(".inputEnfermedad").removeAttr("disabled");
+    if(ed == 'Alergia'){
+      document.getElementById("alergias_d").removeAttribute("disabled");
+      document.getElementById("des_enf_ale").removeAttribute("disabled");
+      document.getElementById("ind_enf_ale").removeAttribute("disabled");
+      document.getElementById("enfermedad_de").setAttribute("disabled","disabled");
     }
 
-    function deshabilita_enfermedad(){
-        $(".inputEnfermedad").attr("disabled","disabled");
+    if(ed == 'Enfermedad'){
+      document.getElementById("enfermedad_de").removeAttribute("disabled");
+      document.getElementById("des_enf_ale").removeAttribute("disabled");
+      document.getElementById("ind_enf_ale").removeAttribute("disabled");
+      document.getElementById("alergias_d").setAttribute("disabled","disabled");
     }
-</script>
 
+  }
+  </script>
 
 <script>
 function numeros(e){

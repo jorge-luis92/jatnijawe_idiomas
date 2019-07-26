@@ -161,6 +161,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('activar_estudiante/{id_user}', 'AdminController@activar_estudiante');
   Route::get('activar_coord/{id_user}', 'AdminController@activar_cordinador');
   Route::get('desactivar_coord/{id_user}', 'AdminController@desactivar_cordinador');
+  Route::get('nuevo_periodo', 'AdminController@nuevo_periodo')->name('nuevo_periodo');
+
 
 /*FormacionIntegralController*/
 

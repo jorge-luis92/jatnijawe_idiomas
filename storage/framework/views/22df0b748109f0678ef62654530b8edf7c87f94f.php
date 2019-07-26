@@ -69,6 +69,18 @@
         </div>
       </li>
 
+      <li class="nav-item" >
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#periodos" aria-expanded="true" aria-controls="collapseTwo">
+      <i class="fa fa-calendar" aria-hidden="true"></i><span style="font-size: 0.8em;">&nbsp;Períodos</span>
+      </a>
+      <div id="periodos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header" style="color: blue">Opciones:</h6>
+          <a class="collapse-item" href=<?php echo e(route('nuevo_periodo')); ?>>Agregar Período</a>
+      </div>
+      </div>
+    </li>
+
       <!-- Nav Item - Utilities Collapse Menu -->
 
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;">

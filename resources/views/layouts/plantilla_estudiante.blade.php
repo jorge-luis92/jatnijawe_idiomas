@@ -194,7 +194,8 @@
               ->where('users.id_user',$id)
               ->take(1)
               ->first();
-              $im=$imagen->imagenurl;  ?>
+              $im=$imagen->imagenurl;
+                         ?>
               <?php if($im==""){ $im="foto.png"; }  ?>
                <img class="img-profile rounded-circle"  src="{{ asset("/image/users/$im")}}" >
 
@@ -202,6 +203,7 @@
                 <!-- Dropdown - User Information
                 <div class="bg-white py-2 collapse-inner rounded"
                 class="collapse" aria-labelledby="headingUtilities">-->
+
                 <div class="dropdown-menu dropdown-menu-right animated--grow-in"  aria-labelledby="userDropdown">
                  <a class="dropdown-item" href={{ route('cuenta')}} >
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-black-400"></i>

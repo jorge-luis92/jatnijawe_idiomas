@@ -11,6 +11,6 @@ class Direccion extends Model
  //public $incrementing = false;
  protected $fillable = [
      'vialidad_principal', 'vialidad_derecha','vialidad_izquierda', 'vialidad_psterior', 'num_exterior',
-     'num_interior', 'cp', 'localidad', 'municipio', 'entidad_federativa', 'asentamiento_humano', 'id_persona',
+     'num_interior', 'cp', 'localidad', 'municipio', 'entidad_federativa', 'asentamiento_humano',
  ];
 }

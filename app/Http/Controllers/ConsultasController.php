@@ -30,7 +30,7 @@ class ConsultasController extends Controller
     {
       $usuario_actuales=\Auth::user();
        if($usuario_actuales->tipo_usuario!='estudiante'){
-         return redirect('register');
+         return redirect()->back();
         }
 
 
@@ -73,7 +73,7 @@ class ConsultasController extends Controller
       {
         $usuario_actuales=\Auth::user();
          if($usuario_actuales->tipo_usuario!='estudiante'){
-           return redirect('register');
+           return redirect()->back();
           }
         $usuario_actual=auth()->user();
         $id=$usuario_actual->id_user;
@@ -92,7 +92,7 @@ class ConsultasController extends Controller
         {
           $usuario_actuales=\Auth::user();
            if($usuario_actuales->tipo_usuario!='estudiante'){
-             return redirect('register');
+             return redirect()->back();
             }
           $usuario_actual=auth()->user();
           $id=$usuario_actual->id_user;
@@ -103,12 +103,12 @@ class ConsultasController extends Controller
           ->where('estudiantes.matricula',$id)
           ->take(1)
           ->first();
-            $id_persona= json_decode( json_encode($id_persona), true);
+            $id_persona= $id_persona->id_persona;
 
             $direccion = DB::table('personas')
             ->select('direcciones.vialidad_principal', 'direcciones.num_exterior', 'direcciones.cp', 'direcciones.localidad',
             'direcciones.municipio', 'direcciones.entidad_federativa')
-            ->join('direcciones', 'direcciones.id_persona', '=', 'personas.id_persona')
+            ->join('direcciones', 'direcciones.id_direccion', '=', 'personas.id_direccion')
             ->where('personas.id_persona',$id_persona)
             ->take(1)
             ->first();
@@ -134,7 +134,7 @@ class ConsultasController extends Controller
           {
             $usuario_actuales=\Auth::user();
              if($usuario_actuales->tipo_usuario!='estudiante'){
-               return redirect('register');
+               return redirect()->back();
               }
             $usuario_actual=auth()->user();
             $id=$usuario_actual->id_user;
@@ -145,7 +145,7 @@ class ConsultasController extends Controller
             ->where('estudiantes.matricula',$id)
             ->take(1)
             ->first();
-              $id_persona= json_decode( json_encode($id_persona), true);
+              $id_persona= $id_persona->id_persona;
 
               $sangre = DB::table('personas')
               ->select('personas.tipo_sangre')
@@ -153,10 +153,25 @@ class ConsultasController extends Controller
               ->take(1)
               ->first();
 
-              $emergencia = DB::table('datos_emergencias')
-              ->select('datos_emergencias.nombre_responsable', 'datos_emergencias.parentesco')
+              $emergencia_dato = DB::table('datos_emergencias')
+              ->select('datos_emergencias.responsable')
               ->join('estudiantes', 'estudiantes.matricula', '=', 'datos_emergencias.matricula')
               ->where('estudiantes.matricula', $id)
+              ->take(1)
+              ->first();
+            //  $emergencia_dato= $emergencia_dato->responsable;
+              $emergencia_dato= json_decode( json_encode($emergencia_dato), true);
+
+              $emergencia = DB::table('personas')
+              ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+              ->where('personas.id_persona', $emergencia_dato)
+              ->take(1)
+              ->first();
+
+
+              $parentesco = DB::table('datos_emergencias')
+              ->select('datos_emergencias.parentesco')
+              ->where('datos_emergencias.matricula', $id)
               ->take(1)
               ->first();
 
@@ -187,7 +202,8 @@ class ConsultasController extends Controller
               ->with('e',$emergencia)
               ->with('ne',$num_emergencia)
               ->with('ea', $enf_ale)
-              ->with('dis', $disca);
+              ->with('dis', $disca)
+              ->with('p', $parentesco);
             }
 
 

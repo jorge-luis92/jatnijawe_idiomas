@@ -92,16 +92,15 @@ $now = new \DateTime();
   ->take(1)
   ->first();
   $id_persona = $id_persona->id_persona;
+
     $direccion = DB::table('personas')
-    ->select('direcciones.id_persona')
-    ->join('direcciones', 'direcciones.id_persona', '=', 'personas.id_persona')
+    ->select('personas.id_direccion')
     ->where('personas.id_persona',$id_persona)
     ->take(1)
     ->first();
 
     $tels = DB::table('personas')
-    ->select('telefonos.id_persona')
-    ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+    ->select('personas.id_telefono')
     ->where('personas.id_persona',$id_persona)
     ->first();
 
@@ -179,7 +178,19 @@ else {
   {
     $usuario_actual=auth()->user();
     $id=$usuario_actual->id_user;
+
+    $ultima = DB::table('personas')
+       ->sum('personas.id_persona');
+       if(empty($ultima)){
+         $ultima=1;
+       }
+       else {
+         $ultima=$ultima+1;
+       }
+
+    $id_prueba= $ultima;
     $data = $request;
+
     $id_persona = DB::table('estudiantes')
     ->select('estudiantes.id_persona')
     ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
@@ -187,12 +198,7 @@ else {
     ->take(1)
     ->first();
     $id_persona = $id_persona->id_persona;
-      $direccion = DB::table('personas')
-      ->select('direcciones.id_persona')
-      ->join('direcciones', 'direcciones.id_persona', '=', 'personas.id_persona')
-      ->where('personas.id_persona',$id_persona)
-      ->take(1)
-      ->first();
+
 
       DB::table('personas')
           ->where('personas.id_persona',$id_persona)
@@ -208,17 +214,39 @@ else {
         ->first();
 
       if(empty($emergencia_a)){
+        $persona=new Persona;
+        $persona->id_persona=$id_prueba;
+        $persona->nombre=$data['nombre'];
+        $persona->apellido_paterno=$data['apellido_paterno'];
+        $persona->apellido_materno=$data['apellido_materno'];
+        $persona->save();
+
+         $id_guardado = $persona->id_persona;
+
       DB::table('datos_emergencias')
           ->where('datos_emergencias.matricula',$id)
           ->Insert(
-            ['nombre_responsable' => $data['nombre_responsable'], 'parentesco' => $data['parentesco'], 'matricula' => $id],
+            ['responsable' => $id_guardado, 'parentesco' => $data['parentesco'], 'matricula' => $id],
           );
         }
         else{
+          //$emergencia_dato= json_decode( json_encode($emergencia_dato), true);
+          $responsable_emergencia = DB::table('datos_emergencias')
+          ->select('datos_emergencias.responsable')
+          ->where('datos_emergencias.matricula',$id)
+          ->take(1)
+          ->first();
+           $responsable_emergencia= json_decode( json_encode($responsable_emergencia), true);
+           DB::table('personas')
+               ->where('personas.id_persona',$responsable_emergencia)
+               ->update(
+                 ['nombre' => $data['nombre'], 'apellido_paterno' => $data['apellido_paterno'], 'apellido_materno' => $data['apellido_materno']],
+               );
+
           DB::table('datos_emergencias')
               ->where('datos_emergencias.matricula',$id)
               ->update(
-                ['nombre_responsable' => $data['nombre_responsable'], 'parentesco' => $data['parentesco']],
+                ['parentesco' => $data['parentesco']],
               );
         }
 

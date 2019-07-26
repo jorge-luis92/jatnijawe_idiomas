@@ -341,4 +341,9 @@ if($data['edad'] >17){
                 return redirect()->route('coordinador_inactivo')->with('success','¡El Coordinador ha sido Desactivado!');
           }
 
+          public function nuevo_periodo(){
+      return view('personal_administrativo\admin_sistema.nuevo_periodo');
+    }
+
+
 }

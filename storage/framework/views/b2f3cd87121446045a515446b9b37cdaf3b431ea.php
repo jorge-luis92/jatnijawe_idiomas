@@ -293,7 +293,7 @@ endif; ?>
 
     </select>
     </div>
-<?php $now = new \DateTime(); ?>
+<?php $now = new \DateTime();?>
     <div class="form-group col-md-4">
         <label for="fecha" ><?php echo e(__('Fecha')); ?></label>
               <input id="fecha" type="date" value="" class="form-control <?php if ($errors->has('fecha')) :

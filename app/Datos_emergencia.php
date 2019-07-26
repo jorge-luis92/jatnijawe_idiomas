@@ -10,6 +10,6 @@ class Datos_emergencia extends Model
   protected $primaryKey = 'id_de'; // or null
  //public $incrementing = false;
  protected $fillable = [
-     'nombre_responsable', 'parentesco', 'matricula',
+     'responsable', 'parentesco', 'matricula', 'periodo',
  ];
 }
