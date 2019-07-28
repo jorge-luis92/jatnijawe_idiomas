@@ -333,9 +333,11 @@ return view('estudiante\datos.datos_personales');
          ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular'],])
          ->take(1)
          ->first();
+         $valor_direccion = DB::table('direcciones')->max('id_direccion');
 
 
-   return view('estudiante\servicios.solicitud_practicas')->with('u',$users)->with('d', $direccion)->with('cel', $num_cel);
+   return view('estudiante\servicios.solicitud_practicas')
+   ->with('u',$users)->with('d', $direccion)->with('cel', $num_cel)->with('valor_d', $valor_direccion);
  }else{
   return redirect()->route('home_estudiante')->with('error','Revisa los requisitos previos para poder
    solicitar Prácticas PROFESIONALES');}
@@ -383,10 +385,14 @@ return view('estudiante\datos.datos_personales');
          ->where([['personas.id_persona',$users->id_persona], ['telefonos.tipo', '=', 'celular'],])
          ->take(1)
          ->first();
-   return view('estudiante\servicios.solicitud_servicioSocial')->with('u',$users)->with('d', $direccion)->with('cel', $num_cel);}
+
+         $valor_direccion = DB::table('direcciones')->max('id_direccion');
+
+   return view('estudiante\servicios.solicitud_servicioSocial')
+   ->with('u',$users)->with('d', $direccion)->with('cel', $num_cel)->with('valor_d', $valor_direccion);
+ }
    else {
-     return redirect()->route('home_estudiante')->with('error','Revisa los requisitos previos para poder
-      solicitar SERVICIO SOCIAL');
+     return redirect()->route('home_estudiante')->with('error','Revisa los requisitos previos para poder solicitar SERVICIO SOCIAL');
    }
    }
 

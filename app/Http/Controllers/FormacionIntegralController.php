@@ -150,8 +150,7 @@ class FormacionIntegralController extends Controller
               ['nombre_ec' => $data['nombre_ec'], 'tipo' => 'Taller', 'creditos' => $data['creditos'], 'area'=> $data['area'],
                'modalidad'=> $data['modalidad'],  'cupo'=> $data['cupo'], 'lugar'=> $data['lugar'], 'fecha_inicio'=> $data['fecha_inicio'],
                'fecha_fin'=> $data['fecha_fin'],  'hora_inicio'=> $data['hora_inicio'],  'hora_fin'=> $data['hora_fin'],
-               'dias_sem'=> $data['dias_sem'],  'materiales'=> $data['materiales'],  'tutor'=> $data['tutor']],
-          );
+               'dias_sem'=> $data['dias_sem'],  'materiales'=> $data['materiales'],  'tutor'=> $data['tutor']]);
       return redirect()->route('actividades_registradas')->with('sucess','Taller Registrado Correctamente');
     }
 
@@ -173,8 +172,7 @@ class FormacionIntegralController extends Controller
           ->Insert(
               ['nombre_ec' => $data['nombre_ec'], 'tipo' => 'Conferencia', 'creditos' => $data['creditos'], 'area'=> $data['area'],
                'modalidad'=> $data['modalidad'],  'cupo'=> $data['cupo'], 'lugar'=> $data['lugar'], 'fecha_inicio'=> $data['fecha_inicio'],
-               'hora_inicio'=> $data['hora_inicio'],   'tutor'=> $data['tutor']],
-          );
+               'hora_inicio'=> $data['hora_inicio'],   'tutor'=> $data['tutor']]);
       return redirect()->route('actividades_registradas')->with('sucess','Conferencia Registrada Correctamente');
     }
 
@@ -299,8 +297,7 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
       DB::table('users')
           ->where('users.id_user', $valor)
           ->update(
-              ['bandera' => '1'],
-          );
+              ['bandera' => '1']);
           return redirect()->route('tallerista_activo')->with('success','¡El Usuario ha sido Activado!');
 
     }
@@ -310,7 +307,7 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
       DB::table('users')
           ->where('users.id_user', $valor)
           ->update(
-              ['bandera' => '0'],
+              ['bandera' => '0']
           );
           return redirect()->route('tallerista_inactivo')->with('success','¡El Usuario ha sido desactivado!');
 
@@ -503,7 +500,7 @@ $mat=$matricula;
   DB::table('detalle_extracurriculares')
         ->where([['detalle_extracurriculares.matricula','=', $mat], ['detalle_extracurriculares.actividad', '=', $act],])
         ->update(
-          ['estado' => 'Acreditado'],
+          ['estado' => 'Acreditado']
       );
       return redirect()->route('inicio_formacion')->with('success','¡Acreditación Correcta!');
 }
@@ -589,7 +586,7 @@ $id_extra= $actividad;
   DB::table('extracurriculares')
       ->where('extracurriculares.id_extracurricular', $id_extra)
       ->update(
-          ['bandera' => '0'],
+          ['bandera' => '0']
       );
       return redirect()->route('actividades_registradas')->with('success','¡Actividad Desactivada!');
 

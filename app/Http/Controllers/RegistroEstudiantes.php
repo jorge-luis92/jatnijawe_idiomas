@@ -38,9 +38,9 @@ class RegistroEstudiantes extends Controller
      else {
        $ultima=$ultima+1;
      }
-
+ $valor_persona = DB::table('personas')->max('id_persona');
   $data = $request;
-  $id_prueba= $ultima;
+  $id_prueba= $valor_persona+1;
   $password= $data['matricula'];
   $tipo_usuario= 'estudiante';
   if($data['edad'] > 16){

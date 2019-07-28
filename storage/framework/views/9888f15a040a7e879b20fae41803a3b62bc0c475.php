@@ -194,7 +194,7 @@ endif; ?>
 
                         <div class="form-group col-md-3">
                             <label for="fecha_ingreso" ><?php echo e(__('* Fecha Ingreso')); ?></label>
-                                  <input id="fecha_ingreso" type="date" class="form-control <?php if ($errors->has('fecha_ingreso')) :
+                                  <input id="fecha_ingreso" type="date"  class="form-control <?php if ($errors->has('fecha_ingreso')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_ingreso'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -226,7 +226,6 @@ endif; ?>
                             <option value="10">10</option>
                             <option value="11">11</option>
                             <option value="12">12</option>
-
                                 </select>
                         </div>
 
@@ -575,6 +574,52 @@ function validarInput(input) {
 
 }
 
+</script>
+
+<script>
+function checar_semestres(){
+  var ed = document.getElementById('fecha_ingreso').value; //fecha de nacimiento en el formulario
+  var fechaNacimiento = ed.split("-");
+  var ano = fechaNacimiento[0];
+  var mes = fechaNacimiento[1];
+  var dia = fechaNacimiento[2];
+  var fechaHoy = new Date(); // detecto la fecha actual y asigno el dia, mes y anno a variables distintas
+  var ahora_ano = fechaHoy.getFullYear();
+  var ahora_mes = fechaHoy.getMonth()+1;
+  var ahora_dia = fechaHoy.getDate();
+
+  var edad = (ahora_ano + 1900) - ano;
+  if(ano < ahora_ano && edad >1899){
+  if ( ahora_mes < mes )
+  {
+      edad--;
+  }
+  if (mes == ahora_mes && ahora_dia < dia)
+  {
+      edad--;
+  }
+  if (edad > 1900)
+  {
+      edad -= 1900;
+  }
+  if (edad == 1900)
+  {
+      edad =0;
+  }
+  }
+  else {
+  edad=0;
+  }
+  var meses=0;
+  if(ahora_mes>mes)
+      meses=ahora_mes-mes;
+  if(ahora_mes<mes)
+      meses=12-(mes-ahora_mes);
+  document.getElementById('edad').value = edad;
+  document.getElementById('mes').value = mes;
+
+
+}
 </script>
 
 <?php echo $__env->make('layouts.plantilla_admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\admin_sistema/registro_estudiante.blade.php ENDPATH**/ ?>

@@ -28,10 +28,23 @@
     <label for="estatus">Estatus</label>
     <input type="text" class="form-control" id="estatus" value="{{$u->estatus}}"disabled>
   </div>
+  <div class="form-group col-md-2" id="labels">
+    <label for="semestre">Semestre</label>
+    <input type="number" class="form-control" id="semestre" value="{{$u->semestre}}" disabled>
+  </div>
 
+  <div class="form-group col-md-2">
+      <label for="anio" >{{ __('Año Escolar') }}</label>
+          <input id="anio" type="text" maxlength="1" value="<?php  ?>" disabled onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('anio') is-invalid @enderror"  name="anio" autocomplete="anio" autofocus>
+          @error('anio')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+  </div>
   <div class="form-group col-md-4">
     <label for="carrera" >{{ __('Carrera') }}</label>
-    <input id="carrera" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('carrera') is-invalid @enderror" name="carrera" value="{{ old('carrera') }}" required autocomplete="carrera">
+    <input id="carrera" type="text" disabled onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('carrera') is-invalid @enderror" name="carrera" value="{{ old('carrera') }}" required autocomplete="carrera">
           @error('carrera')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
@@ -39,16 +52,18 @@
         @enderror
   </div>
 
-  <div class="form-group col-md-4">
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-12">
     <label for="facultad" >{{ __('Facultad') }}</label>
-    <input id="facultad" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('facultad') is-invalid @enderror" name="facultad" value="{{ old('facultad') }}" required autocomplete="facultad">
+    <input id="facultad" type="text" disabled onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('facultad') is-invalid @enderror" name="facultad" value="{{ old('facultad') }}" required autocomplete="facultad">
           @error('facultad')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
       </span>
         @enderror
   </div>
-
 </div>
 
 <div class="form-row">
@@ -120,22 +135,7 @@
           @enderror
   </div>
 
-  <div class="form-group col-md-3">
-      <label for="anio" >{{ __('Año Escolar') }}</label>
-          <input id="anio" type="text" maxlength="1" value="<?php  ?>" disabled onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('anio') is-invalid @enderror"  name="anio" autocomplete="anio" autofocus>
-          @error('anio')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-          @enderror
-  </div>
-</div>
 
-<div class="form-row">
-  <div class="form-group col-md-3" id="labels">
-    <label for="semestre">Semestre</label>
-    <input type="number" class="form-control" id="semestre" value="{{$u->semestre}}" disabled>
-  </div>
 
   <div class="form-group col-md-3">
       <label for="avance" >{{ __('Porcentaje de Avance') }}</label>
@@ -146,8 +146,8 @@
               </span>
           @enderror
   </div>
-
 </div>
+
 
 <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
 <h3 style="font-size: 1.2em; color: #000000;" align="left"><strong>Datos de la Empresa</strong></h3>

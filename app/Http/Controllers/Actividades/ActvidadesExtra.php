@@ -41,7 +41,7 @@ class ActvidadesExtra extends Controller
         ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
         //->where('extracurriculares.control_cupo', '>', '0')
-        ->where([['extracurriculares.control_cupo', '>', '0'], ['extracurriculares.bandera', '=', '1'],])
+        ->where([['extracurriculares.control_cupo', '>', '0'], ['extracurriculares.bandera', '=', '1']])
         ->orderBy('personas.nombre', 'asc')
         ->simplePaginate(10);
     return view("estudiante\mis_actividades.catalogo_actividades")->with('dato', $result);
@@ -61,19 +61,17 @@ class ActvidadesExtra extends Controller
        $aa = DB::table('detalle_extracurriculares')
       ->select('detalle_extracurriculares.actividad')
       ->join('estudiantes', 'estudiantes.matricula', '=', 'detalle_extracurriculares.matricula')
-        ->where([['estudiantes.matricula',$id], ['detalle_extracurriculares.actividad', $extra],])
+        ->where([['estudiantes.matricula',$id], ['detalle_extracurriculares.actividad', $extra]])
       ->take(1)
       ->first();
 if(empty($aa)){
       DB::table('detalle_extracurriculares')
           //->where('becas.id_beca', $valor)
-          ->Insert(
-              ['matricula' => $id, 'actividad' => $extra, 'creditos' => $credito, 'estado' => 'Cursando'],
-          );
+          ->Insert(['matricula' => $id, 'actividad' => $extra, 'creditos' => $credito, 'estado' => 'Cursando']);
        $reducir=($result->control_cupo)-1;
           DB::table('extracurriculares')
               ->where('extracurriculares.id_extracurricular',$extra )
-              ->update(['control_cupo' => $reducir],);
+              ->update(['control_cupo' => $reducir]);
 
 
       return redirect()->route('mis_actividades')->with('success','¡Inscripción Realizada correctamente!');
@@ -130,8 +128,7 @@ else {
            'fecha_inicio' => $data['fecha_inicio'], 'fecha_fin' => $data['fecha_fin'], 'hora_inicio' => $data['hora_inicio'],
            'hora_fin' => $data['hora_fin'], 'dias_sem' => $data['dias_sem'], 'descripcion' => $data['descripcion'],
            'objetivos' => $data['objetivos'], 'justificacion' => $data['justificacion'], 'creditos' => $data['creditos'],
-           'proyecto_final' => $data['propuesta'], 'materiales' => $data['materiales'], 'cupo' => $data['cupo']],
-      );
+           'proyecto_final' => $data['propuesta'], 'materiales' => $data['materiales'], 'cupo' => $data['cupo']]);
  return redirect()->route('solicitud_taller')->with('success','¡Actualización correcta!');}
 }
 

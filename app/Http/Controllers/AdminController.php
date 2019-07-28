@@ -241,9 +241,7 @@ if($data['edad'] >17){
         $valor=$id_user;
         DB::table('users')
             ->where('users.id_user', $valor)
-            ->update(
-                ['bandera' => '1'],
-            );
+            ->update(['bandera' => '1']);
             return redirect()->route('busqueda_estudiante')->with('success','¡El estudiante ha sido Activado!');
 
       }
@@ -253,8 +251,7 @@ if($data['edad'] >17){
         DB::table('users')
             ->where('users.id_user', $valor)
             ->update(
-                ['bandera' => '0'],
-            );
+                ['bandera' => '0']);
             return redirect()->route('estudiante_inactivo')->with('success','¡El estudiante ha sido desactivado!');
 
       }
@@ -310,7 +307,7 @@ if($data['edad'] >17){
                     ->select('estudiantes.matricula', 'estudiantes.fecha_ingreso','estudiantes.semestre', 'estudiantes.modalidad',
                     'estudiantes.estatus', 'estudiantes.grupo','personas.nombre', 'personas.apellido_paterno','estudiantes.grupo',
                     'personas.apellido_materno','personas.fecha_nacimiento','personas.curp', 'personas.genero','estudiantes.estatus',
-                    'personas.lugar_nacimiento','personas.edad', 'personas.tipo_sangre', 'estudiantes.bachillerato_origen', )
+                    'personas.lugar_nacimiento','personas.edad', 'personas.tipo_sangre', 'estudiantes.bachillerato_origen')
                     ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
                     ->where('estudiantes.matricula',$ids)
                     ->take(1)
@@ -327,8 +324,7 @@ if($data['edad'] >17){
             DB::table('users')
                 ->where('users.id_user', $valor)
                 ->update(
-                    ['bandera' => '1'],
-                );
+                    ['bandera' => '1']);
                 return redirect()->route('coordinador_activo')->with('success','¡El Coordinador ha sido Activado!');
           }
 
@@ -337,8 +333,7 @@ if($data['edad'] >17){
             DB::table('users')
                 ->where('users.id_user', $valor)
                 ->update(
-                    ['bandera' => '0'],
-                );
+                    ['bandera' => '0']);
                 return redirect()->route('coordinador_inactivo')->with('success','¡El Coordinador ha sido Desactivado!');
           }
 
@@ -373,8 +368,7 @@ else{
   DB::table('periodos')
       ->where('periodos.id_periodo', $update_periodo)
       ->update(
-          ['estatus' => 'anterior'],
-      );
+          ['estatus' => 'anterior']);
       $periodo=new Periodo;
       $periodo->inicio=$data['inicio'];
       $periodo->final=$data['final'];

@@ -36,10 +36,31 @@ endif; ?>
     <label for="estatus">Estatus</label>
     <input type="text" class="form-control" id="estatus" value="<?php echo e($u->estatus); ?>"disabled>
   </div>
+  <div class="form-group col-md-2" id="labels">
+    <label for="semestre">Semestre</label>
+    <input type="number" class="form-control" id="semestre" value="<?php echo e($u->semestre); ?>" disabled>
+  </div>
 
+  <div class="form-group col-md-2">
+      <label for="anio" ><?php echo e(__('Año Escolar')); ?></label>
+          <input id="anio" type="text" maxlength="1" value="<?php  ?>" disabled onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('anio')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('anio'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"  name="anio" autocomplete="anio" autofocus>
+          <?php if ($errors->has('anio')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('anio'); ?>
+              <span class="invalid-feedback" role="alert">
+                  <strong><?php echo e($message); ?></strong>
+              </span>
+          <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+  </div>
   <div class="form-group col-md-4">
     <label for="carrera" ><?php echo e(__('Carrera')); ?></label>
-    <input id="carrera" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('carrera')) :
+    <input id="carrera" type="text" disabled onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('carrera')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('carrera'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -55,9 +76,12 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
 
-  <div class="form-group col-md-4">
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-12">
     <label for="facultad" ><?php echo e(__('Facultad')); ?></label>
-    <input id="facultad" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('facultad')) :
+    <input id="facultad" type="text" disabled onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('facultad')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('facultad'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -72,7 +96,6 @@ $message = $errors->first('facultad'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
-
 </div>
 
 <div class="form-row">
@@ -188,30 +211,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
 
-  <div class="form-group col-md-3">
-      <label for="anio" ><?php echo e(__('Año Escolar')); ?></label>
-          <input id="anio" type="text" maxlength="1" value="<?php  ?>" disabled onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('anio')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('anio'); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="anio" autocomplete="anio" autofocus>
-          <?php if ($errors->has('anio')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('anio'); ?>
-              <span class="invalid-feedback" role="alert">
-                  <strong><?php echo e($message); ?></strong>
-              </span>
-          <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>
-  </div>
-</div>
 
-<div class="form-row">
-  <div class="form-group col-md-3" id="labels">
-    <label for="semestre">Semestre</label>
-    <input type="number" class="form-control" id="semestre" value="<?php echo e($u->semestre); ?>" disabled>
-  </div>
 
   <div class="form-group col-md-3">
       <label for="avance" ><?php echo e(__('Porcentaje de Avance')); ?></label>
@@ -230,8 +230,8 @@ $message = $errors->first('grupo'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
-
 </div>
+
 
 <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
 <h3 style="font-size: 1.2em; color: #000000;" align="left"><strong>Datos de la Empresa</strong></h3>

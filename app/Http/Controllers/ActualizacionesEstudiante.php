@@ -121,7 +121,9 @@ if(empty($direccion) or empty($tels)){
      else {
        $ultima_d=$ultima_d+1;
      }
-     $id_direc=$ultima_d;
+
+     $valor_direccion = DB::table('direcciones')->max('id_direccion');
+     $id_direc=$valor_direccion+1;
 $id_direccion= DB::table('direcciones')
       ->updateOrInsert(
           ['id_direccion' => $id_direc ,'vialidad_principal' => $data['vialidad_principal'], 'num_exterior' => $data['num_exterior'],

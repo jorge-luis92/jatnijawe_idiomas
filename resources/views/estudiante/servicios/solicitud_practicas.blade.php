@@ -6,7 +6,7 @@
 
 @section('seccion')
  @include('flash-message')
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitud de Prácticas Profesionales</h1>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitud de Prácticas Profesionales </h1>
 <div class="container" id="font7">
 <h2 style="font-size: 1.2em; color: #000000;" align="left"><strong>Datos del Estudiante</strong></h2>
                   <form method="POST" action="{{ route('solicitud_practicasP') }}">

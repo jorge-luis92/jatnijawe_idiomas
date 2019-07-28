@@ -74,10 +74,7 @@
 function ba(){
   var ed = document.getElementById('inicio').value; //fecha de nacimiento en el formulario
   var fechaNacimiento = ed.split("-");
-  var ano = fechaNacimiento[0];
   var mes = fechaNacimiento[1];
-  var dia = fechaNacimiento[2];
-
   document.getElementById('ss').value = mes;
 }
 </script>
