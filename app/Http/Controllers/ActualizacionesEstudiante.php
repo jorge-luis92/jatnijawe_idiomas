@@ -10,6 +10,7 @@ use App\Datos_externo;
 use App\Enfermedad_Alergia;
 use App\Datos_emergencia;
 use App\Discapacidad;
+use App\CodigoPostal;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use Illuminate\Http\Request;
@@ -95,23 +96,45 @@ $now = new \DateTime();
 
     $direccion = DB::table('personas')
     ->select('personas.id_direccion')
+    ->join('direcciones', 'direcciones.id_direccion', '=', 'personas.id_direccion')
     ->where('personas.id_persona',$id_persona)
     ->take(1)
     ->first();
 
     $tels = DB::table('personas')
-    ->select('personas.id_telefono')
-    ->where('personas.id_persona',$id_persona)
-    ->first();
+     ->select('telefonos.id_persona')
+     ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+     ->where('personas.id_persona',$id_persona)
+     ->first();
 
+$codigo = DB::table('codigos_postales')
+ ->select('codigos_postales.cp')
+ ->where('codigos_postales.cp',$data['cp'])
+ ->first();
+if(!empty($codigo)){
 if(empty($direccion) or empty($tels)){
-  DB::table('direcciones')
+  $ultima_d = DB::table('direcciones')
+     ->sum('direcciones.id_direccion');
+     if(empty($ultima_d)){
+       $ultima_d=1;
+     }
+     else {
+       $ultima_d=$ultima_d+1;
+     }
+     $id_direc=$ultima_d;
+$id_direccion= DB::table('direcciones')
       ->updateOrInsert(
-          ['vialidad_principal' => $data['vialidad_principal'], 'num_exterior' => $data['num_exterior'],
+          ['id_direccion' => $id_direc ,'vialidad_principal' => $data['vialidad_principal'], 'num_exterior' => $data['num_exterior'],
           'cp' => $data['cp'], 'localidad' =>  $data['localidad'], 'municipio' => $data['municipio'],
-               'entidad_federativa' => $data['entidad_federativa'], 'id_persona' => $id_persona, 'created_at' => $now, 'updated_at' => $now],
+               'entidad_federativa' => $data['entidad_federativa'],  'created_at' => $now, 'updated_at' => $now],
       );
 
+
+      DB::table('personas')
+          ->where('personas.id_persona',$id_persona)
+          ->update(
+            ['id_direccion' => $id_direc],
+          );
      if($data['tel_local'] == null){
           DB::table('telefonos')
               ->updateOrInsert(
@@ -132,8 +155,16 @@ if(empty($direccion) or empty($tels)){
           return redirect()->route('datos_personal')->with('success','¡Datos actualizados correctamente!');
 }
 else {
+  $direccion = DB::table('personas')
+  ->select('personas.id_direccion')
+  ->join('direcciones', 'direcciones.id_direccion', '=', 'personas.id_direccion')
+  ->where('personas.id_persona',$id_persona)
+  ->take(1)
+  ->first();
+
+$direcciones= $direccion->id_direccion;
   DB::table('direcciones')
-      ->where('direcciones.id_persona', $id_persona)
+      ->where('direcciones.id_direccion', $direcciones)
       ->update(
         ['vialidad_principal' => $data['vialidad_principal'], 'num_exterior' => $data['num_exterior'],
          'localidad' =>  $data['localidad'], 'municipio' => $data['municipio'],
@@ -171,7 +202,8 @@ else {
                     );
 
       return redirect()->route('datos_personal')->with('success','¡Datos actualizados correctamente!');
-}
+}}
+return redirect()->route('datos_personal')->with('error','¡El código postal que ingreso no existe!');
   }
 
   public function act_datos_medicos(Request $request)

@@ -114,7 +114,6 @@
      <option value="viasual2">CEGUERA (VISUAL)</option>
      <option value="psicosocial">PSICOSOCIAL</option>
      <option value="lesiones">LESIONES, HERIDAS, INTOXICACIONES</option>
-     <option value="otra">OTRA</option>
          </select>
    </div>
 
@@ -191,7 +190,7 @@ endif; ?>
 
 <div class="form-group col-md-6">
 <label for="tel_emergencia">* Teléfono</label>
-<input type="tel" maxlength="10" class="form-control" onkeypress="return numeros (event)" id="tel_emergencia" placeholder="Teléfono de Emergencia a 10 dígitos" pattern="([0-9]{3})([0-9]{7})" >
+<input type="tel" name="tel_emergencia" maxlength="10" class="form-control" value="<?php if(empty($ne->numero)){ $vacio=null; echo $vacio;} else{ echo $ne->numero;} ?>" onkeypress="return numeros (event)" required id="tel_emergencia" placeholder="Teléfono de Emergencia a 10 dígitos" pattern="([0-9]{3})([0-9]{7})" >
 </div>
 </div>
 
@@ -258,8 +257,16 @@ endif; ?>
       function nochecar_alergia(id){
         if ( id == "no_alergia" ) {
          document.getElementById("tipo_enfer").setAttribute("disabled","disabled");
-//document.getElementById("descripcion_alergia").setAttribute("disabled","disabled");
-  //       document.getElementById("indicacion_alergia").setAttribute("disabled","disabled");
+         document.getElementById("enfermedad_de").setAttribute("disabled","disabled");
+         document.getElementById("alergias_d").setAttribute("disabled","disabled");
+         document.getElementById("des_enf_ale").setAttribute("disabled","disabled");
+         document.getElementById("ind_enf_ale").setAttribute("disabled","disabled");
+        document.getElementById('tipo_enfer').value = '';
+        document.getElementById('enfermedad_de').value = '';
+        document.getElementById('alergias_d').value = '';
+        document.getElementById('des_enf_ale').value = '';
+          document.getElementById('ind_enf_ale').value = '';
+
            }
 
       }
@@ -278,6 +285,8 @@ endif; ?>
       function nochecar_dis(id){
         if ( id == "no_discapacidad" ) {
          document.getElementById("tipo_discapacidad").setAttribute("disabled","disabled");
+           document.getElementById('tipo_discapacidad').value = '';
+
            }
 
       }

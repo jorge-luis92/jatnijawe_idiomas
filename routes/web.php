@@ -82,7 +82,7 @@ Route::group(['middleware' => 'auth','estudiantes'], function () {
   Route::get('datos_medico', 'ConsultasController@carga_datos_medicos')->name('datos_medico');
   Route::get('datos_personal', 'ConsultasController@carga_datos_personales')->name('datos_personal');
   Route::get('catalogo', 'Actividades\ActvidadesExtra@catalogos')->name('catalogo');
-  Route::get('| tracurricular/{id_extracurricular}/{creditos}', 'Actividades\ActvidadesExtra@inscripcion_extra');
+  Route::get('extracurricular/{id_extracurricular}/{creditos}', 'Actividades\ActvidadesExtra@inscripcion_extra');
   Route::post('changePassword','HomeController@changePassword')->name('changePassword');
   //Route::post('subir_imagen_usuario', 'HomeController@changePassword');
   Route::get('ma_estudiante', 'Estudiante_Con\EstudianteController@m_estudiantes')->name('ma_estudiante');
@@ -162,6 +162,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('activar_coord/{id_user}', 'AdminController@activar_cordinador');
   Route::get('desactivar_coord/{id_user}', 'AdminController@desactivar_cordinador');
   Route::get('nuevo_periodo', 'AdminController@nuevo_periodo')->name('nuevo_periodo');
+  Route::post('nuevo_periodo_agregar', 'AdminController@crear_periodo')->name('nuevo_periodo_agregar');
 
 
 /*FormacionIntegralController*/

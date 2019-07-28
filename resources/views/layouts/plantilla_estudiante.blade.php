@@ -20,7 +20,7 @@
   <title>Estudiante @yield('title')</title>
 
 </head>
-<body id="page-top">
+<body id="page-top" onload="validar_sesion();">
   <div id="wrapper" style="font-family: 'Century Gothic';"><!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-dark " style="background-color: #0A122A; font-size: 1.0em;" id="accordionSidebar" ><!-- Sidebar - Brand -->
           <!-- Nav Item - Dashboard -->
@@ -86,7 +86,7 @@
         <div id="prac_prof" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item" href="#">Requisitos Previos</a>
+        <!--  <a  class="collapse-item" href="#">Requisitos Previos</a>-->
             <a  class="collapse-item" href={{ route('solicitud_practicasP')}}>Solicitud de Prácticas</br>Profesionales</a>
             </div>
         </div>
@@ -99,7 +99,7 @@
         <div id="serv_social" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item" href="#">Requisitos Previos</a>
+          <!--  <a  class="collapse-item" href="#">Requisitos Previos</a>-->
             <a  class="collapse-item" href={{ route('solicitud_servicioSocial')}}>Solicitud de Servicio Social</a>
            </div>
         </div>
@@ -197,6 +197,7 @@
               $im=$imagen->imagenurl;
                          ?>
               <?php if($im==""){ $im="foto.png"; }  ?>
+              <input type="text" id="sesion" hidden value="{{$id}}">
                <img class="img-profile rounded-circle"  src="{{ asset("/image/users/$im")}}" >
 
              </a>
@@ -286,7 +287,17 @@
   <!-- Custom scripts for all pages-->
   <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
+<script>
 
+function validar_sesion(){
+  var ed = document.getElementById('sesion').value;
+  if(ed == '' ){
+     alert("Acceso restringido, Ingrese correctamente");
+     window.location = 'localhost:8000/perfiles';
+  }
+  window.onload=validar_sesion;
+}
+</script>
 
 
 </body>

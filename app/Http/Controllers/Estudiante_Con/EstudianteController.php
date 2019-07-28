@@ -308,10 +308,10 @@ return view('estudiante\datos.datos_personales');
      ->where('estudiantes.matricula',$id)
      ->take(1)
      ->first();
-       //$id_persona= json_decode( json_encode($id_persona), true);
+       $id_persona= json_decode( json_encode($id_persona), true);
 
        $users = DB::table('estudiantes')
-       ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
+       ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo', 'estudiantes.fecha_ingreso',
                 'personas.nombre', 'personas.id_persona', 'personas.edad', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
                 'personas.curp', 'personas.genero')
        ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
@@ -319,18 +319,23 @@ return view('estudiante\datos.datos_personales');
        ->take(1)
        ->first();
 
-
-
          $direccion = DB::table('personas')
          ->select('direcciones.vialidad_principal', 'direcciones.num_exterior', 'direcciones.cp', 'direcciones.localidad',
          'direcciones.municipio', 'direcciones.entidad_federativa')
-         ->join('direcciones', 'direcciones.id_persona', '=', 'personas.id_persona')
+         ->join('direcciones', 'direcciones.id_direccion', '=', 'personas.id_direccion')
          ->where('personas.id_persona',$users->id_persona)
          ->take(1)
          ->first();
 
+         $num_cel = DB::table('personas')
+         ->select('telefonos.numero')
+         ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+         ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular'],])
+         ->take(1)
+         ->first();
 
-   return view('estudiante\servicios.solicitud_practicas')->with('u',$users)->with('d', $direccion);
+
+   return view('estudiante\servicios.solicitud_practicas')->with('u',$users)->with('d', $direccion)->with('cel', $num_cel);
  }else{
   return redirect()->route('home_estudiante')->with('error','Revisa los requisitos previos para poder
    solicitar Prácticas PROFESIONALES');}
@@ -354,7 +359,7 @@ return view('estudiante\datos.datos_personales');
        //$id_persona= json_decode( json_encode($id_persona), true);
 
        $users = DB::table('estudiantes')
-       ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
+       ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.fecha_ingreso', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
                 'personas.nombre', 'personas.id_persona', 'personas.edad', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
                 'personas.curp', 'personas.genero')
        ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
@@ -367,11 +372,18 @@ return view('estudiante\datos.datos_personales');
          $direccion = DB::table('personas')
          ->select('direcciones.vialidad_principal', 'direcciones.num_exterior', 'direcciones.cp', 'direcciones.localidad',
          'direcciones.municipio', 'direcciones.entidad_federativa')
-         ->join('direcciones', 'direcciones.id_persona', '=', 'personas.id_persona')
+         ->join('direcciones', 'direcciones.id_direccion', '=', 'personas.id_direccion')
          ->where('personas.id_persona',$users->id_persona)
          ->take(1)
          ->first();
-   return view('estudiante\servicios.solicitud_servicioSocial')->with('u',$users)->with('d', $direccion);}
+
+         $num_cel = DB::table('personas')
+         ->select('telefonos.numero')
+         ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+         ->where([['personas.id_persona',$users->id_persona], ['telefonos.tipo', '=', 'celular'],])
+         ->take(1)
+         ->first();
+   return view('estudiante\servicios.solicitud_servicioSocial')->with('u',$users)->with('d', $direccion)->with('cel', $num_cel);}
    else {
      return redirect()->route('home_estudiante')->with('error','Revisa los requisitos previos para poder
       solicitar SERVICIO SOCIAL');

@@ -27,7 +27,7 @@
     </div>
     <div class="form-group col-md-3">
       <label for="cp">* Código Postal</label>
-      <input type="tel" onkeypress="return buscar();" class="form-control" name="cp" id="cp" value="<?php if(empty($d->cp)){ $vacio=null; echo $vacio;} else{ echo $d->cp;} ?>" maxlength="5"  onkeypress="return numeros (event)"  placeholder="Código Postal" onKeyUp="this.value = this.value.toUpperCase();" required>
+      <input type="tel" class="form-control" name="cp" id="cp" value="<?php if(empty($d->cp)){ $vacio=null; echo $vacio;} else{ echo $d->cp;} ?>" maxlength="5"  onkeypress="return numeros (event)"  placeholder="Código Postal" onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
     <div class="form-group col-md-3">
       <label for="localidad" >*Colonia</label>

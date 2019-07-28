@@ -108,12 +108,12 @@ class ConsultasController extends Controller
             $direccion = DB::table('personas')
             ->select('direcciones.vialidad_principal', 'direcciones.num_exterior', 'direcciones.cp', 'direcciones.localidad',
             'direcciones.municipio', 'direcciones.entidad_federativa')
-            ->join('direcciones', 'direcciones.id_direccion', '=', 'personas.id_direccion')
+            ->join('direcciones', 'direcciones.id_direccion', '=' , 'personas.id_direccion')
             ->where('personas.id_persona',$id_persona)
             ->take(1)
             ->first();
 
-            $num_local = DB::table('personas')
+                    $num_local = DB::table('personas')
             ->select('telefonos.numero')
             ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
             ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'local'],])

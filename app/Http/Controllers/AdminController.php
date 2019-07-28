@@ -5,6 +5,7 @@ use App\Estudiante;
 use App\Persona;
 use App\Administrativo;
 use App\Nivel;
+use App\Periodo;
 use App\Departamento;
 use App\Dpto_Administrativo;
 use Illuminate\Support\Facades\DB;
@@ -342,8 +343,46 @@ if($data['edad'] >17){
           }
 
           public function nuevo_periodo(){
-      return view('personal_administrativo\admin_sistema.nuevo_periodo');
+            $periodos = DB::table('periodos')
+            ->select('periodos.inicio', 'periodos.final', 'periodos.estatus', 'periodos.created_at')
+            ->orderBy('periodos.estatus', 'asc')
+            ->simplePaginate(7);
+      return view('personal_administrativo\admin_sistema.nuevo_periodo')->with('guardados', $periodos);
     }
 
+protected function crear_periodo(Request $request){
 
+$data = $request;
+$buscar_periodo = DB::table('periodos')
+->select('periodos.id_periodo')
+->where('periodos.estatus', '=',  'actual')
+->take(1)
+->first();
+
+$update_periodo = json_decode( json_encode($buscar_periodo), true);
+if(empty($update_periodo)){
+$periodo=new Periodo;
+$periodo->inicio=$data['inicio'];
+$periodo->final=$data['final'];
+$periodo->estatus='actual';
+$periodo->save();
+
+return redirect()->route('home_admin')->with('success','¡Periodo agregado correctamente!');
+}
+else{
+  DB::table('periodos')
+      ->where('periodos.id_periodo', $update_periodo)
+      ->update(
+          ['estatus' => 'anterior'],
+      );
+      $periodo=new Periodo;
+      $periodo->inicio=$data['inicio'];
+      $periodo->final=$data['final'];
+      $periodo->estatus='actual';
+      $periodo->save();
+      return redirect()->route('home_admin')->with('success','¡Periodo agregado correctamente!');
+
+}
+
+}
 }
