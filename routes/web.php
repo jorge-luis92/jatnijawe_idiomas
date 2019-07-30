@@ -122,8 +122,6 @@ Route::get('antecedentes_laborales', 'Estudiante_Con\EstudianteController@antece
 Route::get('cuestionario_egresado', 'Estudiante_Con\EstudianteController@cuestionario_egresado')->name('cuestionario_egresado');
 Route::get('generales_egresado', 'Estudiante_Con\EstudianteController@generales_egresado')->name('generales_egresado');
 
-
-
 });
 
 
@@ -205,6 +203,9 @@ Route::get('constancia_valida/{matricula}', 'FormacionIntegralController@constan
 Route::get('acreditar_estudiantes_formacion/{actividad}/{matricula}', 'FormacionIntegralController@acreditar_estudiantes');
 Route::get('desactivar_extra/{actividad}', 'FormacionIntegralController@desactivar_extracurricular');
 
+Route::get('antecedentes_laborales_egresado', 'ServiciosController@antecedentes_laborales_egresado')->name('antecedentes_laborales_egresado');
+Route::get('cuestionario_egresado_ver', 'ServiciosController@cuestionario_egresado_ver')->name('cuestionario_egresado_ver');
+Route::get('generales_egresado_ver', 'ServiciosController@generales_egresado_ver')->name('generales_egresado_ver');
 });
 
 
@@ -256,9 +257,7 @@ Route::get('estudiantes_activosPP', 'ServiciosController@estudiantes_activosPP')
 Route::get('estudiantes_activosSS', 'ServiciosController@estudiantes_activosSS')->name('estudiantes_activosSS');
 /* SEGUIMIENTO A EGRESADOS*/
 Route::get('egresado_registrado', 'ServiciosController@egresado_registrado')->name('egresado_registrado');
-Route::get('antecedentes_laborales_egresado', 'ServiciosController@antecedentes_laborales_egresado')->name('antecedentes_laborales_egresado');
-Route::get('cuestionario_egresado_ver', 'ServiciosController@cuestionario_egresado_ver')->name('cuestionario_egresado_ver');
-Route::get('generales_egresado_ver', 'ServiciosController@generales_egresado_ver')->name('generales_egresado_ver');
+
 
 
 /*PLANEACIÓN
@@ -279,7 +278,10 @@ Route::get('info_formacion_integral1', 'PlaneacionController@info_formacion_inte
 
 
 Route::get('gral_escuela', 'PlaneacionController@gral_escuela')->name('gral_escuela');
+Route::post('agregar_escuela', 'PlaneacionController@crear_escuela')->name('agregar_escuela');
 Route::get('gral_carrera', 'PlaneacionController@gral_carrera')->name('gral_carrera');
+Route::post('agregar_carrera', 'PlaneacionController@crear_carrera')->name('agregar_carrera');
+Route::get('carreras_registradas', 'PlaneacionController@info_carreras')->name('carreras_registradas');
 
 /*REPORTE Semestral*/
 Route::get('reporte_semestral', 'PlaneacionController@reporte_semestral')->name('reporte_semestral');
@@ -309,6 +311,17 @@ Route::get('cuestionario_egresado', 'SeguimientoEgresadosController@cuestionario
 Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedentes_laborales')->name('antecedentes_laborales');
 Route::get('registro_externo', 'RegistrosController@ver')->name('registro_externo');
 Route::post('registro_externos', 'RegistrosController@create')->name('registro_externos');
+
+Route::post('datos_codigo', function(Request $request)
+{
+  $id_cp = $request;
+	$datos =DB::table('codigos_postales')
+  ->select('codigos_postales.colonia', 'codigos_postales.municipio', 'codigos_postales.estado')
+  ->where('codigos_postales.cp', '=', $id_cp['cp'])
+  ->take(1)
+  ->first();
+  return response()->json($datos);
+  });
 
 
 Auth::routes();

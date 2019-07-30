@@ -5,158 +5,46 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('seccion'); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center">Datos Generales del Egresado</h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
 </br>
 <form method="POST" action="<?php echo e(route('generales_egresado')); ?>">
                         <?php echo csrf_field(); ?>
-
-
+<p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
    <div class="form-row">
-
-          <div class="form-group col-md-4">
-            <label for="nombre" ><?php echo e(__('* Nombre(s)')); ?></label>
-            <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('nombre'); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="nombre" value="<?php echo e(old('nombre')); ?>" required autocomplete="nombre">
-                          <?php if ($errors->has('nombre')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('nombre'); ?>
-            <span class="invalid-feedback" role="alert">
-            <strong><?php echo e($message); ?></strong>
-            </span>
-                              <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>
-          </div>
-
-          <div class="form-group col-md-4">
-            <label for="apellido_paterno" ><?php echo e(__('* Apellido Paterno')); ?></label>
-            <input id="apellido_paterno" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('apellido_paterno')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('apellido_paterno'); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="apellido_paterno" value="<?php echo e(old('apellido_paterno')); ?>" required autocomplete="apellido_paterno">
-                                <?php if ($errors->has('apellido_paterno')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('apellido_paterno'); ?>
-            <span class="invalid-feedback" role="alert">
-            <strong><?php echo e($message); ?></strong>
-            </span>
-                                <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>
-           </div>
-
-        <div class="form-group col-md-4">
-        <label for="apellido_materno" ><?php echo e(__('Apellido Materno')); ?></label>
-        <input id="apellido_materno"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control <?php if ($errors->has('apellido_materno')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('apellido_materno'); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="apellido_materno" value="<?php echo e(old('apellido_materno')); ?>" autocomplete="apellido_materno">
-                <?php if ($errors->has('apellido_materno')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('apellido_materno'); ?>
-        <span class="invalid-feedback" role="alert">
-        <strong><?php echo e($message); ?></strong>
-        </span>
-                                <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>
-        </div>
-</div>
-
- <div class="form-row">
-<div class="form-group col-md-5">
-  <label for="genero">* Género</label>
-    <select name="genero" id="genero" required class="form-control">
-  <option value="">Seleccione una opción</option>
-  <option value="MASCULINO">MASCULINO</option>
-  <option value="FEMEMINO">FEMEMINO</option>
-</select>
-</div>
-</div>
-
-<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
-</br>
- <div class="form-row">
-<div class="radio col-md-12" id="labels">
-  <label>* ¿Hablante de alguna Lengua?</label>
-
- <input type="radio" id="si_lengua" name="lengua" value="si_lengua" onclick="checar()" required >
- <label for="si_actividad">Si</label>
-
- <input type="radio" id="no_lengua" name="lengua" value="no_lengua" onclick="nochecar()" required>
- <label for="no_actividad">No</label>
-
-</div>
-</div>
-<div class="form-row">
-<div class="form-group col-md-5" id="labels">
-<label for="nombre_lengua">Nombre de Lengua</label>
-</br>
-<input type="text"  name="nombre_lengua" id="nombre_lengua" required disabled class='inputText'  placeholder="Especifica" value="<?php if(empty($l->nombre_lengua)){ $vacio=null; echo $vacio;} else{ echo $l->nombre_lengua;} ?>" >
-</div>
-
-<div class="form-group col-md-4">
-<label for="tipo_lengua">Nivel de Comprensión </label>
-  <select name="tipo_lengua" id="tipo_lengua" required disabled class='inputText'>
-  <option value="">Seleccione una opción</option>
-  <option value="entiende">Entiende</option>
-  <option value="entiende_habla">Entiende y Habla</option>
-  <option value="entiende_habla_escribe">Entiende, Habla y Escribe</option>
-      </select>
-</div>
-</div>
-
-
-</br>
-<div class="form-row">
-<div class="radio col-md-12">
-  <label>* ¿Sufres alguna Enfermedad?</label>
- <input type="radio" id="si_enfermedad" name="enfermedades" value="si_enfermedad" onclick="habilita_enfermedad()" required>
- <label for="si_enfermedad">Si</label>
-
- <input type="radio" id="no_enfermedad" name="enfermedades" value="no_enfermedad" onclick="deshabilita_enfermedad()" required>
- <label for="si_enfermedad">No</label>
- </div>
- </div>
- <div class="form-row">
- <div class="form-group col-md-4">
-   <label for="nombre_enfermedad">Nombre Enfermedad</label>
-   <input type="text" class="inputEnfermedad" id="nombre_enfermedad" placeholder="Nombre Enfermedad" disabled required>
- </div>
- <div class="form-group col-md-4">
-   <label for="descripcion_enfermedad">Descripción</label>
-   <textarea class="inputEnfermedad" id="descripción" placeholder="Descripción Enfermedad" disabled required ></textarea>
+     <div class="form-group col-md-12">
+       <h6 align="left">Datos Personales</h6>
          </div>
- <div class="form-group col-md-4">
-   <label for="indicacion_enfermedad">Indicaciones</label>
-   <textarea class="inputEnfermedad" id="indicacion_enfermedad" placeholder="Indicaciones Enfermedad" disabled required></textarea>
- </div>
+
+     <div class="form-group col-md-3" id="labels">
+       <label for="nombre">Nombre(s)</label>
+       <input type="text" class="form-control" value="<?php echo e($u->nombre); ?>" disabled>
+     </div>
+     <div class="form-group col-md-3" id="labels">
+       <label for="apellido_paterno">Apellido Paterno</label>
+       <input type="text" class="form-control" id="ap_pat"  value="<?php echo e($u->apellido_paterno); ?>" disabled>
+     </div>
+     <div class="form-group col-md-3" id="labels">
+       <label for="ap_mat">Apellido Materno</label>
+       <input type="text" class="form-control" id="ap_mat" value="<?php echo e($u->apellido_materno); ?>" disabled>
+     </div>
+
+     <div class="form-group col-md-3" id="labels">
+       <label for="genero">Género</label>
+       <input type="text" class="form-control" id="genero" value="<?php echo e($u->genero); ?>" disabled>
+     </div>
 </div>
-
-
 
 <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
 </br>
-
-
-
  <div class="form-row">
    <div class="form-group col-md-12">
      <h6 align="left">Datos Escolares</h6>
        </div>
-
-  <div class="form-group col-md-12">
-  <label for="bachillerato_origen" ><?php echo e(__('* Bachillerato de Origen')); ?></label>
-  <input id="bachillerato_origen" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('bachillerato_origen')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('bachillerato_origen'); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="bachillerato_origen" autocomplete="bachillerato_origen" autofocus>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-4">
+  <label for="bachillerato_origen" ><?php echo e(__('Bachillerato de Origen')); ?></label>
+  <input id="bachillerato_origen" disabled value="<?php if(empty($u->bachillerato_origen)){ $vacio=null; echo $vacio;} else{ echo $u->bachillerato_origen;} ?>" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control"  name="bachillerato_origen">
     <?php if ($errors->has('bachillerato_origen')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('bachillerato_origen'); ?>
@@ -167,46 +55,36 @@ $message = $errors->first('bachillerato_origen'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
 </div>
-</div>
 
-<div class="form-row">
- <div class="form-group col-md-12">
- <label for="nombre_escuela" ><?php echo e(__('Escuela en la que cursó la Licenciatura')); ?></label>
- <input id="nombre_escuela" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('nombre_escuela')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('nombre_escuela'); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="nombre_escuela" autocomplete="nombre_escuela" autofocus>
-   <?php if ($errors->has('nombre_escuela')) :
+<div class="form-group col-md-4">
+<label for="nombre_escuela" ><?php echo e(__('Escuela en la que cursó la Licenciatura')); ?></label>
+<input id="nombre_escuela" disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control"  name="nombre_escuela">
+  <?php if ($errors->has('nombre_escuela')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('nombre_escuela'); ?>
- <span class="invalid-feedback" role="alert">
- <strong><?php echo e($message); ?></strong>
- </span>
-                             <?php unset($message);
+<span class="invalid-feedback" role="alert">
+<strong><?php echo e($message); ?></strong>
+</span>
+                            <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
 </div>
+
+<div class="form-group col-md-4" id="labels">
+  <label for="modalidad">Modalidad</label>
+  <input type="text" class="form-control" id="modalidad" value="<?php echo e($u->modalidad); ?>" disabled>
+</div>
+
 </div>
 
 <div class="form-row">
-  <div class="form-group col-md-4">
-    <label for="modalidad">Sistema/Modalidad</label>
-      <select name="modalidad" id="modalidad" required class="form-control">
-      <option value="">Seleccione una opción</option>
-      <option value="escolarizada">ESCOLARIZADA</option>
-      <option value="semiescolarizada">SEMIESCOLARIZADA</option>
-      <option value="flexi">FLEXI</option>
-          </select>
-</div>
-
 <div class="form-group col-md-4">
-<label for="generacion" ><?php echo e(__('Generación')); ?></label>
-<input id="generacion" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('generacion')) :
+<label for="generacion" ><?php echo e(__('* Generación')); ?></label>
+<input id="generacion" autofocus type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('generacion')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('generacion'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="generacion" autocomplete="generacion" autofocus>
+endif; ?>">
   <?php if ($errors->has('generacion')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('generacion'); ?>
@@ -218,13 +96,70 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
 </div>
 <div class="form-group col-md-3" id="labels">
-  <label for="promedio_final">Promedio Final</label>
+  <label for="promedio_final">* Promedio Final</label>
   <input type="number" class="form-control" id="promedio_final">
 </div>
 
 </div>
 
+<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
+</br>
+<div class="form-row">
+  <div class="form-group col-md-12">
+    <h6 align="left">Lenguas Registradas</h6>
+      </div>
+</div>
 
+<div class="table-responsive" style="border:1px solid #819FF7;" >
+<table class="table table-bordered table-striped" >
+    <thead>
+      <tr>
+        <th scope="col" id="labels">Nombre Lengua</th>
+        <th scope="col" id="labels">Nivel de Entendimiento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php $__currentLoopData = $l; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $le): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <tr>
+        <td id="labels"><?php echo $le->nombre_lengua; ?></td>
+        <td id="labels"><?php echo $le->tipo; ?></td>
+      </tr>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </tbody>
+  </table>
+</div>
+</br>
+<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
+</br>
+
+<div class="form-row">
+  <div class="form-group col-md-12">
+    <h6 align="left">Enfermedades Y/O Alergias Registradas</h6>
+      </div>
+</div>
+<div class="table-responsive" style="border:1px solid #819FF7;">
+<table class="table table-bordered table-striped" >
+    <thead>
+      <tr>
+        <th scope="col" id="labels">Nombre</th>
+        <th scope="col" id="labels">Tipo</th>
+        <th scope="col" id="labels">Descripción</th>
+        <th scope="col" id="labels">Indicaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php $__currentLoopData = $ea; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $eas): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <tr>
+        <td id="labels"><?php echo $eas->nombre_enfermedadalergia; ?></td>
+        <td id="labels"><?php echo $eas->tipo_enfermedadalergia; ?></td>
+        <td id="labels"><?php echo $eas->descripcion; ?></td>
+        <td id="labels"><?php echo $eas->indicaciones; ?></td>
+      </tr>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </tbody>
+  </table>
+</div>
+</br>
 <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
 </br>
 
@@ -233,28 +168,53 @@ endif; ?>
   <div class="form-group col-md-12">
     <h6 align="left">Contacto</h6>
       </div>
-  <div class="form-group col-md-6">
-    <label for="tel_local">Teléfono Local</label>
-      <input type="tel"  class="form-control" id="tel_local" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos -- Ejemplo: 9515115090"  pattern="([0-9]{3})([0-9]{7})">
-  </div>
-  <div class="form-group col-md-6">
-    <label for="tel_celular">* Teléfono Celular</label>
-    <input type="tel"  class="form-control" id="tel_celular" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos  -- Ejemplo: 9511234567"  pattern="([0-9]{3})([0-9]{7})" required>
-  </div>
-</div>
-  <div class="form-row">
-  <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
+        <label for="tel_local">Teléfono de Casa</label>
+          <input type="tel" disabled  class="form-control <?php if ($errors->has('tel_local')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('tel_local'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="tel_local" id="tel_local" value="<?php if(empty($nl->numero)){ $vacio=null; echo $vacio;} else{ echo $nl->numero;} ?>" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos -- Ejemplo: 9515115090"  pattern="([0-9]{10})">
+            <?php if ($errors->has('tel_local')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('tel_local'); ?>
+            <span class="invalid-feedback" role="alert">
+            <strong><?php echo e($message); ?></strong>
+            </span>
+            <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="tel_celular">Teléfono Celular</label>
+        <input type="tel"   disabled class="form-control <?php if ($errors->has('tel_celular')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('tel_celular'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="tel_celular" id="tel_celular" value="<?php if(empty($nc->numero)){ $vacio=null; echo $vacio;} else{ echo $nc->numero;} ?>" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos  -- Ejemplo: 9511234567"  pattern="([0-9]{3})([0-9]{7})" required>
+          <?php if ($errors->has('tel_celular')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('tel_celular'); ?>
+          <span class="invalid-feedback" role="alert">
+          <strong><?php echo e($message); ?></strong>
+          </span>
+          <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+      </div>
+
+  <div class="form-group col-md-3">
     <label for="contacto_persona">Contacto de un familiar</label>
-    <input type="tel" maxlength="10" class="form-control" onkeypress="return numeros (event)" id="contacto_persona" placeholder="Teléfono de un Familiar a 10 dígitos" pattern="([0-9]{3})([0-9]{7})" required>
+    <input type="tel" name="tel_emergencia" maxlength="10" disabled class="form-control" value="<?php if(empty($ne->numero)){ $vacio=null; echo $vacio;} else{ echo $ne->numero;} ?>" onkeypress="return numeros (event)" required id="tel_emergencia" placeholder="Teléfono de Emergencia a 10 dígitos" pattern="([0-9]{3})([0-9]{7})" >
   </div>
 
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
       <label for="email" ><?php echo e(__('Correo')); ?></label>
-      <input id="email" type="email" class="form-control <?php if ($errors->has('email')) :
+      <input id="email" type="email"  disabled class="form-control <?php if ($errors->has('email')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('email'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="email" value="<?php echo e(old('email')); ?>" required autocomplete="email">
+endif; ?>" name="email" value="<?php echo e(Auth::user()->email); ?>" autocomplete="email">
                                 <?php if ($errors->has('email')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('email'); ?>
@@ -281,8 +241,9 @@ endif; ?>
 
                 </div>
 
-<?php $__env->stopSection(); ?>
 
+
+<?php $__env->stopSection(); ?>
 <script>
 function numeros(e){
  key = e.keyCode || e.which;
@@ -303,4 +264,4 @@ if(key == especiales[i]){
 }
 </script>
 
-<?php echo $__env->make('layouts.plantilla_seguimiento_egresados', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/seguimiento_egresadosP/generales_egresado.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/seguimiento_egresadosP/generales_egresado.blade.php ENDPATH**/ ?>

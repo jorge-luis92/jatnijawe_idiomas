@@ -42,6 +42,7 @@
                   <h6 class="collapse-header" style="color: blue">Opciones:</h6>
                   <a class="collapse-item" href={{ route('gral_escuela')}}>Identificación de la Escuela</a>
                   <a class="collapse-item" href={{ route('gral_carrera')}}>Identificación de la Carrera</a>
+                  <a class="collapse-item" href={{ route('carreras_registradas')}}>Carreras Registradas</a>
 
                 </div>
               </div>

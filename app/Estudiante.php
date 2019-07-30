@@ -10,7 +10,8 @@ class Estudiante extends Model
   protected $primaryKey = 'matricula'; // or null
  public $incrementing = false;
  protected $fillable = [
-     'matricula', 'modalidad','fecha_ingreso', 'semestre','grupo','estatus','bachillerato_origen', 'id_persona', 'sede',
+     'matricula', 'modalidad','fecha_ingreso', 'semestre','grupo','estatus','bachillerato_origen',
+     'id_persona', 'sede', 'periodo', 'materias_pendientes', 'egresado',
  ];
 
 

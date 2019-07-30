@@ -6,7 +6,7 @@
 
 @section('seccion')
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos Personales  </h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
   @include('flash-message')
 </br>
 
@@ -25,10 +25,19 @@
       <label for="num_exterior"  >* Número</label>
       <input type="tel"  class="form-control" name="num_exterior" value="<?php if(empty($d->num_exterior)){ $vacio=null; echo $vacio;} else{ echo $d->num_exterior;} ?>" id="num_exterior" placeholder="Número" onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
-    <div class="form-group col-md-3">
+  <div class="form-group col-md-3">
       <label for="cp">* Código Postal</label>
       <input type="tel" class="form-control" name="cp" id="cp" value="<?php if(empty($d->cp)){ $vacio=null; echo $vacio;} else{ echo $d->cp;} ?>" maxlength="5"  onkeypress="return numeros (event)"  placeholder="Código Postal" onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
+    <!--  <div class="form-group col-md-3">
+      <label for="cp">{{ __('*Código Postal') }}</label>
+        <select name="cp" id="cp" required onchange="buscar();" class="form-control">
+        <option value="">Seleccione una opción</option>
+        @foreach ($codes_o as $des)
+        <option value="{!! $des->cp !!}">{!! $des->cp !!}</option>
+        @endforeach
+            </select>
+          </div>-->
     <div class="form-group col-md-3">
       <label for="localidad" >*Colonia</label>
       <input type="text" class="form-control" name="localidad" value="<?php if(empty($d->localidad)){ $vacio=null; echo $vacio;} else{ echo $d->localidad;} ?>" id="localidad" placeholder="Colonia" onKeyUp="this.value = this.value.toUpperCase();" required >
@@ -90,7 +99,7 @@
         //  window.location.href = 'http://localhost:8888/autofillform/index.php?opcion='+opcion;
       }
   </script>
-<script>
+  <script>
 function numeros(e){
  key = e.keyCode || e.which;
  tecla = String.fromCharCode(key).toLowerCase();
@@ -108,4 +117,27 @@ if(key == especiales[i]){
  if(letras.indexOf(tecla)==-1 && !tecla_especial)
      return false;
 }
+</script>
+
+
+
+<script type="text/javascript">
+function buscar(){
+recargarDatos();
+}
+
+</script>
+<script type="text/javascript">
+	function recargarDatos(){
+		$.ajax({
+
+			type: 'POST',
+			url:'datos_codigo',
+			data:"cp=" + $('#cp').val(),
+			success:function(resultado){
+        $('#municipio').html(resultado.datos.municipio);
+
+			}
+		});
+	}
 </script>

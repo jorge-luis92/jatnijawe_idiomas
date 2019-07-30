@@ -6,7 +6,7 @@
 
 <?php $__env->startSection('seccion'); ?>
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos Personales  </h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
   <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </br>
 
@@ -25,10 +25,19 @@
       <label for="num_exterior"  >* Número</label>
       <input type="tel"  class="form-control" name="num_exterior" value="<?php if(empty($d->num_exterior)){ $vacio=null; echo $vacio;} else{ echo $d->num_exterior;} ?>" id="num_exterior" placeholder="Número" onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
-    <div class="form-group col-md-3">
+  <div class="form-group col-md-3">
       <label for="cp">* Código Postal</label>
       <input type="tel" class="form-control" name="cp" id="cp" value="<?php if(empty($d->cp)){ $vacio=null; echo $vacio;} else{ echo $d->cp;} ?>" maxlength="5"  onkeypress="return numeros (event)"  placeholder="Código Postal" onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
+    <!--  <div class="form-group col-md-3">
+      <label for="cp"><?php echo e(__('*Código Postal')); ?></label>
+        <select name="cp" id="cp" required onchange="buscar();" class="form-control">
+        <option value="">Seleccione una opción</option>
+        <?php $__currentLoopData = $codes_o; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $des): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <option value="<?php echo $des->cp; ?>"><?php echo $des->cp; ?></option>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </select>
+          </div>-->
     <div class="form-group col-md-3">
       <label for="localidad" >*Colonia</label>
       <input type="text" class="form-control" name="localidad" value="<?php if(empty($d->localidad)){ $vacio=null; echo $vacio;} else{ echo $d->localidad;} ?>" id="localidad" placeholder="Colonia" onKeyUp="this.value = this.value.toUpperCase();" required >
@@ -106,7 +115,7 @@ endif; ?>
         //  window.location.href = 'http://localhost:8888/autofillform/index.php?opcion='+opcion;
       }
   </script>
-<script>
+  <script>
 function numeros(e){
  key = e.keyCode || e.which;
  tecla = String.fromCharCode(key).toLowerCase();
@@ -124,6 +133,29 @@ if(key == especiales[i]){
  if(letras.indexOf(tecla)==-1 && !tecla_especial)
      return false;
 }
+</script>
+
+
+
+<script type="text/javascript">
+function buscar(){
+recargarDatos();
+}
+
+</script>
+<script type="text/javascript">
+	function recargarDatos(){
+		$.ajax({
+
+			type: 'POST',
+			url:'datos_codigo',
+			data:"cp=" + $('#cp').val(),
+			success:function(resultado){
+        $('#municipio').html(resultado.datos.municipio);
+
+			}
+		});
+	}
 </script>
 
 <?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/estudiante\datos/datos_personales.blade.php ENDPATH**/ ?>

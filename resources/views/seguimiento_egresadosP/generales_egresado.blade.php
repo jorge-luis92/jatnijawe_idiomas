@@ -1,168 +1,78 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_seguimiento_egresados')
+@extends('layouts.plantilla_estudiante')
 @section('title')
 : Egresados
 @endsection
 @section('seccion')
 <h1 style="font-size: 2.0em; color: #000000;" align="center">Datos Generales del Egresado</h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
 </br>
 <form method="POST" action="{{ route('generales_egresado') }}">
                         @csrf
-
-
+<p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
    <div class="form-row">
-
-          <div class="form-group col-md-4">
-            <label for="nombre" >{{ __('* Nombre(s)') }}</label>
-            <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre">
-                          @error('nombre')
-            <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-            </span>
-                              @enderror
-          </div>
-
-          <div class="form-group col-md-4">
-            <label for="apellido_paterno" >{{ __('* Apellido Paterno') }}</label>
-            <input id="apellido_paterno" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('apellido_paterno') is-invalid @enderror" name="apellido_paterno" value="{{ old('apellido_paterno') }}" required autocomplete="apellido_paterno">
-                                @error('apellido_paterno')
-            <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-            </span>
-                                @enderror
-           </div>
-
-        <div class="form-group col-md-4">
-        <label for="apellido_materno" >{{ __('Apellido Materno') }}</label>
-        <input id="apellido_materno"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('apellido_materno') is-invalid @enderror" name="apellido_materno" value="{{ old('apellido_materno') }}" autocomplete="apellido_materno">
-                @error('apellido_materno')
-        <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-        </span>
-                                @enderror
-        </div>
-</div>
-
- <div class="form-row">
-<div class="form-group col-md-5">
-  <label for="genero">* Género</label>
-    <select name="genero" id="genero" required class="form-control">
-  <option value="">Seleccione una opción</option>
-  <option value="MASCULINO">MASCULINO</option>
-  <option value="FEMEMINO">FEMEMINO</option>
-</select>
-</div>
-</div>
-
-<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
-</br>
- <div class="form-row">
-<div class="radio col-md-12" id="labels">
-  <label>* ¿Hablante de alguna Lengua?</label>
-
- <input type="radio" id="si_lengua" name="lengua" value="si_lengua" onclick="checar()" required >
- <label for="si_actividad">Si</label>
-
- <input type="radio" id="no_lengua" name="lengua" value="no_lengua" onclick="nochecar()" required>
- <label for="no_actividad">No</label>
-
-</div>
-</div>
-<div class="form-row">
-<div class="form-group col-md-5" id="labels">
-<label for="nombre_lengua">Nombre de Lengua</label>
-</br>
-<input type="text"  name="nombre_lengua" id="nombre_lengua" required disabled class='inputText'  placeholder="Especifica" value="<?php if(empty($l->nombre_lengua)){ $vacio=null; echo $vacio;} else{ echo $l->nombre_lengua;} ?>" >
-</div>
-
-<div class="form-group col-md-4">
-<label for="tipo_lengua">Nivel de Comprensión </label>
-  <select name="tipo_lengua" id="tipo_lengua" required disabled class='inputText'>
-  <option value="">Seleccione una opción</option>
-  <option value="entiende">Entiende</option>
-  <option value="entiende_habla">Entiende y Habla</option>
-  <option value="entiende_habla_escribe">Entiende, Habla y Escribe</option>
-      </select>
-</div>
-</div>
-
-
-</br>
-<div class="form-row">
-<div class="radio col-md-12">
-  <label>* ¿Sufres alguna Enfermedad?</label>
- <input type="radio" id="si_enfermedad" name="enfermedades" value="si_enfermedad" onclick="habilita_enfermedad()" required>
- <label for="si_enfermedad">Si</label>
-
- <input type="radio" id="no_enfermedad" name="enfermedades" value="no_enfermedad" onclick="deshabilita_enfermedad()" required>
- <label for="si_enfermedad">No</label>
- </div>
- </div>
- <div class="form-row">
- <div class="form-group col-md-4">
-   <label for="nombre_enfermedad">Nombre Enfermedad</label>
-   <input type="text" class="inputEnfermedad" id="nombre_enfermedad" placeholder="Nombre Enfermedad" disabled required>
- </div>
- <div class="form-group col-md-4">
-   <label for="descripcion_enfermedad">Descripción</label>
-   <textarea class="inputEnfermedad" id="descripción" placeholder="Descripción Enfermedad" disabled required ></textarea>
+     <div class="form-group col-md-12">
+       <h6 align="left">Datos Personales</h6>
          </div>
- <div class="form-group col-md-4">
-   <label for="indicacion_enfermedad">Indicaciones</label>
-   <textarea class="inputEnfermedad" id="indicacion_enfermedad" placeholder="Indicaciones Enfermedad" disabled required></textarea>
- </div>
+
+     <div class="form-group col-md-3" id="labels">
+       <label for="nombre">Nombre(s)</label>
+       <input type="text" class="form-control" value="{{$u->nombre}}" disabled>
+     </div>
+     <div class="form-group col-md-3" id="labels">
+       <label for="apellido_paterno">Apellido Paterno</label>
+       <input type="text" class="form-control" id="ap_pat"  value="{{$u->apellido_paterno}}" disabled>
+     </div>
+     <div class="form-group col-md-3" id="labels">
+       <label for="ap_mat">Apellido Materno</label>
+       <input type="text" class="form-control" id="ap_mat" value="{{$u->apellido_materno}}" disabled>
+     </div>
+
+     <div class="form-group col-md-3" id="labels">
+       <label for="genero">Género</label>
+       <input type="text" class="form-control" id="genero" value="{{$u->genero}}" disabled>
+     </div>
 </div>
-
-
 
 <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
 </br>
-
-
-
  <div class="form-row">
    <div class="form-group col-md-12">
      <h6 align="left">Datos Escolares</h6>
        </div>
-
-  <div class="form-group col-md-12">
-  <label for="bachillerato_origen" >{{ __('* Bachillerato de Origen') }}</label>
-  <input id="bachillerato_origen" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('bachillerato_origen') is-invalid @enderror"  name="bachillerato_origen" autocomplete="bachillerato_origen" autofocus>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-4">
+  <label for="bachillerato_origen" >{{ __('Bachillerato de Origen') }}</label>
+  <input id="bachillerato_origen" disabled value="<?php if(empty($u->bachillerato_origen)){ $vacio=null; echo $vacio;} else{ echo $u->bachillerato_origen;} ?>" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control"  name="bachillerato_origen">
     @error('bachillerato_origen')
   <span class="invalid-feedback" role="alert">
   <strong>{{ $message }}</strong>
   </span>
                               @enderror
 </div>
-</div>
-
-<div class="form-row">
- <div class="form-group col-md-12">
- <label for="nombre_escuela" >{{ __('Escuela en la que cursó la Licenciatura') }}</label>
- <input id="nombre_escuela" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('nombre_escuela') is-invalid @enderror"  name="nombre_escuela" autocomplete="nombre_escuela" autofocus>
-   @error('nombre_escuela')
- <span class="invalid-feedback" role="alert">
- <strong>{{ $message }}</strong>
- </span>
-                             @enderror
-</div>
-</div>
-
-<div class="form-row">
-  <div class="form-group col-md-4">
-    <label for="modalidad">Sistema/Modalidad</label>
-      <select name="modalidad" id="modalidad" required class="form-control">
-      <option value="">Seleccione una opción</option>
-      <option value="escolarizada">ESCOLARIZADA</option>
-      <option value="semiescolarizada">SEMIESCOLARIZADA</option>
-      <option value="flexi">FLEXI</option>
-          </select>
-</div>
 
 <div class="form-group col-md-4">
-<label for="generacion" >{{ __('Generación') }}</label>
-<input id="generacion" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('generacion') is-invalid @enderror"  name="generacion" autocomplete="generacion" autofocus>
+<label for="nombre_escuela" >{{ __('Escuela en la que cursó la Licenciatura') }}</label>
+<input id="nombre_escuela" disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control"  name="nombre_escuela">
+  @error('nombre_escuela')
+<span class="invalid-feedback" role="alert">
+<strong>{{ $message }}</strong>
+</span>
+                            @enderror
+</div>
+
+<div class="form-group col-md-4" id="labels">
+  <label for="modalidad">Modalidad</label>
+  <input type="text" class="form-control" id="modalidad" value="{{$u->modalidad}}" disabled>
+</div>
+
+</div>
+
+<div class="form-row">
+<div class="form-group col-md-4">
+<label for="generacion" >{{ __('* Generación') }}</label>
+<input id="generacion" autofocus type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('generacion') is-invalid @enderror">
   @error('generacion')
 <span class="invalid-feedback" role="alert">
 <strong>{{ $message }}</strong>
@@ -170,13 +80,70 @@
                             @enderror
 </div>
 <div class="form-group col-md-3" id="labels">
-  <label for="promedio_final">Promedio Final</label>
+  <label for="promedio_final">* Promedio Final</label>
   <input type="number" class="form-control" id="promedio_final">
 </div>
 
 </div>
 
+<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
+</br>
+<div class="form-row">
+  <div class="form-group col-md-12">
+    <h6 align="left">Lenguas Registradas</h6>
+      </div>
+</div>
 
+<div class="table-responsive" style="border:1px solid #819FF7;" >
+<table class="table table-bordered table-striped" >
+    <thead>
+      <tr>
+        <th scope="col" id="labels">Nombre Lengua</th>
+        <th scope="col" id="labels">Nivel de Entendimiento</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach ($l as $le)
+      <tr>
+        <td id="labels">{!! $le->nombre_lengua !!}</td>
+        <td id="labels">{!! $le->tipo !!}</td>
+      </tr>
+@endforeach
+    </tbody>
+  </table>
+</div>
+</br>
+<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
+</br>
+
+<div class="form-row">
+  <div class="form-group col-md-12">
+    <h6 align="left">Enfermedades Y/O Alergias Registradas</h6>
+      </div>
+</div>
+<div class="table-responsive" style="border:1px solid #819FF7;">
+<table class="table table-bordered table-striped" >
+    <thead>
+      <tr>
+        <th scope="col" id="labels">Nombre</th>
+        <th scope="col" id="labels">Tipo</th>
+        <th scope="col" id="labels">Descripción</th>
+        <th scope="col" id="labels">Indicaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach ($ea as $eas)
+      <tr>
+        <td id="labels">{!! $eas->nombre_enfermedadalergia !!}</td>
+        <td id="labels">{!! $eas->tipo_enfermedadalergia !!}</td>
+        <td id="labels">{!! $eas->descripcion !!}</td>
+        <td id="labels">{!! $eas->indicaciones !!}</td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
+</br>
 <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
 </br>
 
@@ -185,24 +152,33 @@
   <div class="form-group col-md-12">
     <h6 align="left">Contacto</h6>
       </div>
-  <div class="form-group col-md-6">
-    <label for="tel_local">Teléfono Local</label>
-      <input type="tel"  class="form-control" id="tel_local" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos -- Ejemplo: 9515115090"  pattern="([0-9]{3})([0-9]{7})">
-  </div>
-  <div class="form-group col-md-6">
-    <label for="tel_celular">* Teléfono Celular</label>
-    <input type="tel"  class="form-control" id="tel_celular" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos  -- Ejemplo: 9511234567"  pattern="([0-9]{3})([0-9]{7})" required>
-  </div>
-</div>
-  <div class="form-row">
-  <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
+        <label for="tel_local">Teléfono de Casa</label>
+          <input type="tel" disabled  class="form-control @error('tel_local') is-invalid @enderror" name="tel_local" id="tel_local" value="<?php if(empty($nl->numero)){ $vacio=null; echo $vacio;} else{ echo $nl->numero;} ?>" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos -- Ejemplo: 9515115090"  pattern="([0-9]{10})">
+            @error('tel_local')
+            <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+      </div>
+      <div class="form-group col-md-3">
+        <label for="tel_celular">Teléfono Celular</label>
+        <input type="tel"   disabled class="form-control @error('tel_celular') is-invalid @enderror" name="tel_celular" id="tel_celular" value="<?php if(empty($nc->numero)){ $vacio=null; echo $vacio;} else{ echo $nc->numero;} ?>" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos  -- Ejemplo: 9511234567"  pattern="([0-9]{3})([0-9]{7})" required>
+          @error('tel_celular')
+          <span class="invalid-feedback" role="alert">
+          <strong>{{ $message }}</strong>
+          </span>
+          @enderror
+      </div>
+
+  <div class="form-group col-md-3">
     <label for="contacto_persona">Contacto de un familiar</label>
-    <input type="tel" maxlength="10" class="form-control" onkeypress="return numeros (event)" id="contacto_persona" placeholder="Teléfono de un Familiar a 10 dígitos" pattern="([0-9]{3})([0-9]{7})" required>
+    <input type="tel" name="tel_emergencia" maxlength="10" disabled class="form-control" value="<?php if(empty($ne->numero)){ $vacio=null; echo $vacio;} else{ echo $ne->numero;} ?>" onkeypress="return numeros (event)" required id="tel_emergencia" placeholder="Teléfono de Emergencia a 10 dígitos" pattern="([0-9]{3})([0-9]{7})" >
   </div>
 
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
       <label for="email" >{{ __('Correo') }}</label>
-      <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+      <input id="email" type="email"  disabled class="form-control @error('email') is-invalid @enderror" name="email" value="{{ Auth::user()->email }}" autocomplete="email">
                                 @error('email')
       <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
@@ -224,8 +200,9 @@
 
                 </div>
 
-@endsection
 
+
+@endsection
 <script>
 function numeros(e){
  key = e.keyCode || e.which;

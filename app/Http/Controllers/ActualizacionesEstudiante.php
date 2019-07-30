@@ -40,8 +40,7 @@ else{
       ->updateOrInsert(
           ['nombre_actividadexterna' => $data['nombre_actividadexterna'], 'tipo_actividadexterna' => $data['tipo_actividadexterna'],
            'dias_sem'=>  $data['dias_sem'], 'hora_entrada'=>  $data['hora_entrada'], 'hora_salida'=>  $data['hora_salida'],
-           'lugar'=>  $data['lugar'], 'matricula'=>  $id],
-      );
+           'lugar'=>  $data['lugar'], 'matricula'=>  $id]);
       return redirect()->route('otras_actividades')->with('success','¡Datos actualizados correctamente!');
 }
 }
@@ -51,8 +50,7 @@ public function desactivar_lengua($id_beca){
   DB::table('becas')
       ->where('becas.id_beca', $valor)
       ->update(
-          ['bandera' => '0'],
-      );
+          ['bandera' => '0']);
       return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
 
 }
@@ -63,8 +61,7 @@ public function act_actividades(Request $request){
   DB::table('datos_externos')
       ->where('datos_externos.id_externos', $externos)
       ->update(
-          ['dias_sem' => $data['dias_sem'], 'hora_entrada' => $data['hora_entrada'], 'hora_salida' => $data['hora_salida']],
-      );
+          ['dias_sem' => $data['dias_sem'], 'hora_entrada' => $data['hora_entrada'], 'hora_salida' => $data['hora_salida']]);
       return redirect()->route('otras_actividades')->with('success','¡Datos actualizados correctamente!');
 }
 
@@ -73,8 +70,7 @@ public function desactivar_act($id_externos){
   DB::table('datos_externos')
       ->where('datos_externos.id_externos', $valor)
       ->update(
-          ['bandera' => '0'],
-      );
+          ['bandera' => '0']);
       return redirect()->route('otras_actividades')->with('success','¡Datos actualizados correctamente!');
 
 }
@@ -128,30 +124,24 @@ $id_direccion= DB::table('direcciones')
       ->updateOrInsert(
           ['id_direccion' => $id_direc ,'vialidad_principal' => $data['vialidad_principal'], 'num_exterior' => $data['num_exterior'],
           'cp' => $data['cp'], 'localidad' =>  $data['localidad'], 'municipio' => $data['municipio'],
-               'entidad_federativa' => $data['entidad_federativa'],  'created_at' => $now, 'updated_at' => $now],
-      );
+               'entidad_federativa' => $data['entidad_federativa'],  'created_at' => $now, 'updated_at' => $now]);
 
 
       DB::table('personas')
           ->where('personas.id_persona',$id_persona)
-          ->update(
-            ['id_direccion' => $id_direc],
-          );
+          ->update(['id_direccion' => $id_direc]);
      if($data['tel_local'] == null){
           DB::table('telefonos')
               ->updateOrInsert(
-                    ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona],
-              );
+                    ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona]);
             }
     else {
       DB::table('telefonos')
           ->updateOrInsert(
-              ['numero' => $data['tel_local'], 'tipo' => 'local', 'id_persona' => $id_persona],
-                      );
+              ['numero' => $data['tel_local'], 'tipo' => 'local', 'id_persona' => $id_persona]);
           DB::table('telefonos')
               ->updateOrInsert(
-                  ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona],
-              );
+                  ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona]);
     }
 
           return redirect()->route('datos_personal')->with('success','¡Datos actualizados correctamente!');
@@ -170,38 +160,30 @@ $direcciones= $direccion->id_direccion;
       ->update(
         ['vialidad_principal' => $data['vialidad_principal'], 'num_exterior' => $data['num_exterior'],
          'localidad' =>  $data['localidad'], 'municipio' => $data['municipio'],
-          'cp' => $data['cp'],   'entidad_federativa' => $data['entidad_federativa'], 'updated_at' => $now],
-        );
+          'cp' => $data['cp'],   'entidad_federativa' => $data['entidad_federativa'], 'updated_at' => $now]);
 
         $user = auth()->user();
         $user->email = $data['email'];
         $user->save();
         if($data['tel_local'] == null){
              DB::table('telefonos')
-                 ->updateOrInsert(
-                       ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona],
-                 );
+                 ->updateOrInsert(['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona]);
                }
        else {
          DB::table('telefonos')
-             ->updateOrInsert(
-                 ['numero' => $data['tel_local'], 'tipo' => 'local', 'id_persona' => $id_persona],
-                         );
+             ->updateOrInsert(['numero' => $data['tel_local'], 'tipo' => 'local', 'id_persona' => $id_persona]);
              DB::table('telefonos')
                  ->updateOrInsert(
-                     ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona],
-                 );
+                     ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona]);
        }
         DB::table('telefonos')
-            ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'local'],])
+            ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'local']])
             ->update(
-              ['numero' => $data['tel_local']],
-              );
+              ['numero' => $data['tel_local']]);
               DB::table('telefonos')
-                  ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular'],])
+                  ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular']])
                   ->update(
-                    ['numero' => $data['tel_celular']],
-                    );
+                    ['numero' => $data['tel_celular']]);
 
       return redirect()->route('datos_personal')->with('success','¡Datos actualizados correctamente!');
 }}
@@ -237,8 +219,7 @@ return redirect()->route('datos_personal')->with('error','¡El código postal qu
       DB::table('personas')
           ->where('personas.id_persona',$id_persona)
           ->update(
-            ['tipo_sangre' => $data['tipo_sangre']],
-            );
+            ['tipo_sangre' => $data['tipo_sangre']]);
 
         $emergencia_a = DB::table('estudiantes')
         ->select('datos_emergencias.matricula')
@@ -260,8 +241,7 @@ return redirect()->route('datos_personal')->with('error','¡El código postal qu
       DB::table('datos_emergencias')
           ->where('datos_emergencias.matricula',$id)
           ->Insert(
-            ['responsable' => $id_guardado, 'parentesco' => $data['parentesco'], 'matricula' => $id],
-          );
+            ['responsable' => $id_guardado, 'parentesco' => $data['parentesco'], 'matricula' => $id]);
         }
         else{
           //$emergencia_dato= json_decode( json_encode($emergencia_dato), true);
@@ -274,20 +254,18 @@ return redirect()->route('datos_personal')->with('error','¡El código postal qu
            DB::table('personas')
                ->where('personas.id_persona',$responsable_emergencia)
                ->update(
-                 ['nombre' => $data['nombre'], 'apellido_paterno' => $data['apellido_paterno'], 'apellido_materno' => $data['apellido_materno']],
-               );
+                 ['nombre' => $data['nombre'], 'apellido_paterno' => $data['apellido_paterno'], 'apellido_materno' => $data['apellido_materno']]);
 
           DB::table('datos_emergencias')
               ->where('datos_emergencias.matricula',$id)
               ->update(
-                ['parentesco' => $data['parentesco']],
-              );
+                ['parentesco' => $data['parentesco']]);
         }
 
       $emer = DB::table('personas')
       ->select('telefonos.numero')
       ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-      ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
+      ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia']])
       ->take(1)
       ->first();
 
@@ -302,15 +280,13 @@ return redirect()->route('datos_personal')->with('error','¡El código postal qu
           DB::table('telefonos')
           //    ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
               ->Insert(
-                ['tipo' => 'emergencia', 'numero' => $data['tel_emergencia'], 'id_persona' => $id_persona],
-                );
+                ['tipo' => 'emergencia', 'numero' => $data['tel_emergencia'], 'id_persona' => $id_persona]);
         }
         else {
           DB::table('telefonos')
-              ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
+              ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia']])
               ->update(
-                ['numero' => $data['tel_emergencia']],
-                );
+                ['numero' => $data['tel_emergencia']]);
         }
 
           if($data['nombre_enf_ale'] == null){
@@ -319,8 +295,7 @@ return redirect()->route('datos_personal')->with('error','¡El código postal qu
                DB::table('discapacidades')
                    //->where('discapacidades.id_persona',$dis)
                    ->Insert(
-                     ['tipo' => $data['tipo_discapacidad'], 'id_persona' => $id_persona],
-                     );
+                     ['tipo' => $data['tipo_discapacidad'], 'id_persona' => $id_persona]);
              }else {
                  if($data['tipo_discapacidad'] == null){
                      return redirect()->route('datos_medico')->with('success','¡Datos actualizados correctamente!');
@@ -329,8 +304,7 @@ return redirect()->route('datos_personal')->with('error','¡El código postal qu
                       DB::table('discapacidades')
                     ->where('discapacidades.id_persona',$id_persona)
                     ->update(
-                      ['tipo' => $data['tipo_discapacidad']],
-                    );}
+                      ['tipo' => $data['tipo_discapacidad']]);}
     }
             return redirect()->route('datos_medico')->with('success','¡Datos actualizados correctamente!');
           }
@@ -339,8 +313,7 @@ return redirect()->route('datos_personal')->with('error','¡El código postal qu
         //    ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
             ->Insert(
               ['nombre_enfermedadalergia' => $data['nombre_enf_ale'], 'tipo_enfermedadalergia' => $data['tipo_enfer'],
-              'descripcion' => $data['des_enf_ale'], 'indicaciones' => $data['ind_enf_ale'], 'matricula' => $id],
-            );
+              'descripcion' => $data['des_enf_ale'], 'indicaciones' => $data['ind_enf_ale'], 'matricula' => $id]);
             $dis = DB::table('personas')
             ->select('discapacidades.id_persona')
             ->join('discapacidades', 'discapacidades.id_persona', '=', 'personas.id_persona')
@@ -351,8 +324,7 @@ return redirect()->route('datos_personal')->with('error','¡El código postal qu
                DB::table('discapacidades')
                    //->where('discapacidades.id_persona',$dis)
                    ->Insert(
-                     ['tipo' => $data['tipo_discapacidad'], 'id_persona' => $id_persona],
-                     );
+                     ['tipo' => $data['tipo_discapacidad'], 'id_persona' => $id_persona]);
              }else {
                if($data['tipo_discapacidad'] == null){
                    return redirect()->route('datos_medico')->with('success','¡Datos actualizados correctamente!');
@@ -360,8 +332,7 @@ return redirect()->route('datos_personal')->with('error','¡El código postal qu
                           DB::table('discapacidades')
                     ->where('discapacidades.id_persona',$dis)
                     ->update(
-                      ['tipo' => $data['tipo_discapacidad']],
-                      );
+                      ['tipo' => $data['tipo_discapacidad']]);
     }}
 
           }

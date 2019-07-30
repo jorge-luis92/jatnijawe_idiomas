@@ -217,10 +217,10 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
   </div>
 </div>
-<label for="responsable" ><strong><?php echo e(__('Nombre del Titular de la Dependencia(A quien va dirigido el oficio de Presentación)')); ?></strong></label>
+<label for="responsable" ><strong><?php echo e(__('Información del Titular de la Dependencia(A quien va dirigido el oficio de Presentación)')); ?></strong></label>
 
 <div class="form-row">
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
    <label for="nombre_titular" ><?php echo e(__('* Nombre(s)')); ?></label>
        <input id="nombre_titular" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre_titular')) :
 if (isset($message)) { $messageCache = $message; }
@@ -238,7 +238,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
 </div>
 
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
    <label for="apellido_paterno" ><?php echo e(__('* Apellido Paterno')); ?></label>
          <input id="apellido_paterno" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('apellido_paterno')) :
 if (isset($message)) { $messageCache = $message; }
@@ -256,7 +256,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
 </div>
 
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
    <label for="apellido_materno" ><?php echo e(__('Apellido Materno')); ?></label>
          <input id="apellido_materno"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control <?php if ($errors->has('apellido_materno')) :
 if (isset($message)) { $messageCache = $message; }
@@ -273,6 +273,24 @@ $message = $errors->first('apellido_materno'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
 </div>
+
+<div class="form-group col-md-3">
+      <label for="cargo_responsable" ><?php echo e(__('Cargo del Titular')); ?></label>
+        <input id="cargo_responsable" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('cargo_responsable')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('cargo_responsable'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="cargo_responsable" value="<?php echo e(old('cargo_responsable')); ?>" required autocomplete="cargo_responsable">
+            <?php if ($errors->has('cargo_responsable')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('cargo_responsable'); ?>
+        <span class="invalid-feedback" role="alert">
+          <strong><?php echo e($message); ?></strong>
+        </span>
+          <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+      </div>
 </div>
 
 <label for="responsable" ><strong><?php echo e(__('Dirección de la Institución o dependencia')); ?></strong> </label>

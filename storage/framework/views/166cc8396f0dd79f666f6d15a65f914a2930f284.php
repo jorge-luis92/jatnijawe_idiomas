@@ -6,7 +6,7 @@
 
 <?php $__env->startSection('seccion'); ?>
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Otras Actividades</h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
   <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </br>
 

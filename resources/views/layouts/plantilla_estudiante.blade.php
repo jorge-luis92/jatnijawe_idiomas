@@ -48,7 +48,7 @@
           </div>
         </div>
       </li>
-
+<!--
       <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tutorias" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fa fa-question-circle" aria-hidden="true"></i><span style="font-size: 0.8em;">&nbsp;Tutorías</span>
@@ -61,7 +61,7 @@
           </div>
         </div>
       </li>
-
+-->
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#activid_extra" aria-expanded="true" aria-controls="collapseUtilities">
@@ -118,7 +118,19 @@
         </div>
       </li>
 
-
+      <li class="nav-item" >
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#egresado" aria-expanded="true" aria-controls="collapseTwo">
+           <i class="fa fa-graduation-cap" aria-hidden="true"></i><span style="font-size: 0.9em;">&nbsp;Egresado</span>
+        </a>
+        <div id="egresado" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
+            <a class="collapse-item" href={{ route('generales_egresado')}}>Datos Generales</a>
+            <a class="collapse-item" href={{ route('cuestionario_egresado')}}>Cuestionario</a>
+            <a class="collapse-item" href={{ route('antecedentes_laborales')}}>Datos Laborales</a>
+          </div>
+        </div>
+      </li>
 
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;">
       <!-- Sidebar Toggler (Sidebar) -->

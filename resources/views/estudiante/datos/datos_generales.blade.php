@@ -6,7 +6,7 @@
 
 @section('seccion')
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos Generales</h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
     @include('flash-message')
 </br>
   <form method="POST" action="{{ route('datos_general_actualizar') }}">

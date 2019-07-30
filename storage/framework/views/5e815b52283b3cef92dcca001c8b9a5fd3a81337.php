@@ -5,14 +5,14 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('seccion'); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center">Cuestionario al Egresado</h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
 </br>
 <form method="POST" action="<?php echo e(route('cuestionario_egresado')); ?>">
                         <?php echo csrf_field(); ?>
 
  <div class="form-row">
 <div class="radio col-md-4" id="labels">
-  <label>Títulado</label>
+  <label>¿Títulado?</label>
 
  <input type="radio" id="si_titulo" name="titulo" value="si_titulo" onclick="checar()" required >
  <label for="si_titulo">Si</label>
@@ -45,15 +45,15 @@
 </br>
 <div class="form-row">
   <div class="form-group col-md-12">
-  <label for="motivos_post" ><?php echo e(__('En caso de no haberse titulado, ¿Cuales son los motivos de haber postergado la Titulación?')); ?></label>
-  <input id="motivos_post" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('motivos_post')) :
+  <label for="motivos_notitulado" ><?php echo e(__('En caso de no haberse titulado, ¿Cuales son los motivos de haber postergado la Titulación?')); ?></label>
+  <textarea id="motivos_notitulado" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('motivos_notitulado')) :
 if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('motivos_post'); ?> is-invalid <?php unset($message);
+$message = $errors->first('motivos_notitulado'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="motivos_post" autocomplete="motivos_post" autofocus>
-    <?php if ($errors->has('motivos_post')) :
+endif; ?>"  name="motivos_notitulado" autocomplete="motivos_notitulado"> </textarea>
+    <?php if ($errors->has('motivos_notitulado')) :
 if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('motivos_post'); ?>
+$message = $errors->first('motivos_notitulado'); ?>
   <span class="invalid-feedback" role="alert">
   <strong><?php echo e($message); ?></strong>
   </span>
@@ -65,15 +65,15 @@ endif; ?>
 
 <div class="form-row">
   <div class="form-group col-md-12">
-  <label for="bachillerato_origen" ><?php echo e(__('¿Cual es la razón de haber estudiado la Licenciatura?')); ?></label>
-  <input id="bachillerato_origen" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('bachillerato_origen')) :
+  <label for="razon_carrera" ><?php echo e(__('¿Cual es la razón de haber estudiado la Licenciatura?')); ?></label>
+  <textarea id="razon_carrera" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('razon_carrera')) :
 if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('bachillerato_origen'); ?> is-invalid <?php unset($message);
+$message = $errors->first('razon_carrera'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="bachillerato_origen" autocomplete="bachillerato_origen" autofocus>
-    <?php if ($errors->has('bachillerato_origen')) :
+endif; ?>"  name="razon_carrera" autocomplete="razon_carrera" > </textarea>
+    <?php if ($errors->has('razon_carrera')) :
 if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('bachillerato_origen'); ?>
+$message = $errors->first('razon_carrera'); ?>
   <span class="invalid-feedback" role="alert">
   <strong><?php echo e($message); ?></strong>
   </span>
@@ -126,7 +126,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('estudios_despues'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="estudios_despues" autocomplete="estudios_despues" autofocus>
+endif; ?>"  name="estudios_despues" autocomplete="estudios_despues" >
     <?php if ($errors->has('estudios_despues')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('estudios_despues'); ?>
@@ -172,7 +172,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('la_misma'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="la_misma" autocomplete="la_misma" autofocus>
+endif; ?>"  name="la_misma" autocomplete="la_misma" >
   <?php if ($errors->has('la_misma')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('la_misma'); ?>
@@ -220,4 +220,4 @@ if(key == especiales[i]){
 }
 </script>
 
-<?php echo $__env->make('layouts.plantilla_seguimiento_egresados', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/seguimiento_egresadosP/cuestionario_egresado.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/seguimiento_egresadosP/cuestionario_egresado.blade.php ENDPATH**/ ?>

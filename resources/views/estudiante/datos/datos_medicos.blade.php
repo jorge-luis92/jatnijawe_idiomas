@@ -6,7 +6,7 @@
 
 @section('seccion')
   <h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos Médicos</h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
     @include('flash-message')
 </br>
 <form method="POST" action="{{ route('act_datos_medicos') }}">
@@ -165,7 +165,7 @@
 </div>
 
 <div class="form-group col-md-6">
-<label for="tel_emergencia">* Teléfono</label>
+<label for="tel_emergencia">* Teléfono de Emergencia</label>
 <input type="tel" name="tel_emergencia" maxlength="10" class="form-control" value="<?php if(empty($ne->numero)){ $vacio=null; echo $vacio;} else{ echo $ne->numero;} ?>" onkeypress="return numeros (event)" required id="tel_emergencia" placeholder="Teléfono de Emergencia a 10 dígitos" pattern="([0-9]{3})([0-9]{7})" >
 </div>
 </div>

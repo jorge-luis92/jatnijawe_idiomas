@@ -141,10 +141,10 @@
       @enderror
   </div>
 </div>
-<label for="responsable" ><strong>{{ __('Nombre del Titular de la Dependencia(A quien va dirigido el oficio de Presentación)') }}</strong></label>
+<label for="responsable" ><strong>{{ __('Información del Titular de la Dependencia(A quien va dirigido el oficio de Presentación)') }}</strong></label>
 
 <div class="form-row">
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
    <label for="nombre_titular" >{{ __('* Nombre(s)') }}</label>
        <input id="nombre_titular" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre_titular') is-invalid @enderror" name="nombre_titular" value="{{ old('nombre_titular') }}" required autocomplete="nombre_titular">
        @error('nombre_titular')
@@ -154,7 +154,7 @@
      @enderror
 </div>
 
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
    <label for="apellido_paterno" >{{ __('* Apellido Paterno') }}</label>
          <input id="apellido_paterno" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('apellido_paterno') is-invalid @enderror" name="apellido_paterno" value="{{ old('apellido_paterno') }}" required autocomplete="apellido_paterno">
        @error('apellido_paterno')
@@ -164,7 +164,7 @@
        @enderror
 </div>
 
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
    <label for="apellido_materno" >{{ __('Apellido Materno') }}</label>
          <input id="apellido_materno"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('apellido_materno') is-invalid @enderror" name="apellido_materno" value="{{ old('apellido_materno') }}" autocomplete="apellido_materno">
        @error('apellido_materno')
@@ -173,6 +173,16 @@
            </span>
        @enderror
 </div>
+
+<div class="form-group col-md-3">
+      <label for="cargo_responsable" >{{ __('Cargo del Titular') }}</label>
+        <input id="cargo_responsable" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('cargo_responsable') is-invalid @enderror" name="cargo_responsable" value="{{ old('cargo_responsable') }}" required autocomplete="cargo_responsable">
+            @error('cargo_responsable')
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ $message }}</strong>
+        </span>
+          @enderror
+      </div>
 </div>
 
 <label for="responsable" ><strong>{{ __('Dirección de la Institución o dependencia') }}</strong> </label>

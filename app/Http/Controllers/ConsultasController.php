@@ -62,7 +62,7 @@ class ConsultasController extends Controller
         ->select('becas.nombre', 'becas.tipo_beca', 'becas.id_beca', 'becas.monto')
         ->join('becas', 'estudiantes.matricula', '=', 'becas.matricula')
         //->where('estudiantes.matricula',$id)
-        ->where([['estudiantes.matricula',$id], ['becas.bandera', '=', '1'],])
+        ->where([['estudiantes.matricula',$id], ['becas.bandera', '=', '1']])
         ->simplePaginate(7);
 
         return view('estudiante\datos.datos_generales')->with('u',$users)->with('l',$lenguas_r)->with('b',$becas_r);
@@ -83,7 +83,7 @@ class ConsultasController extends Controller
                    'datos_externos.dias_sem', 'datos_externos.hora_entrada',
                    'datos_externos.hora_salida', 'datos_externos.lugar',  'datos_externos.id_externos')
           ->join('datos_externos', 'estudiantes.matricula', '=', 'datos_externos.matricula')
-          ->where([['estudiantes.matricula',$id], ['datos_externos.bandera', '=', '1'],])
+          ->where([['estudiantes.matricula',$id], ['datos_externos.bandera', '=', '1']])
           ->simplePaginate(7);
           return view('estudiante\datos.datos_laborales')->with('u',$users);
         }
@@ -116,18 +116,24 @@ class ConsultasController extends Controller
                     $num_local = DB::table('personas')
             ->select('telefonos.numero')
             ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-            ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'local'],])
+            ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'local']])
             ->take(1)
             ->first();
 
             $num_cel = DB::table('personas')
             ->select('telefonos.numero')
             ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-            ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular'],])
+            ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular']])
             ->take(1)
             ->first();
+      
 
-            return view('estudiante\datos.datos_personales')->with('d',$direccion)->with('nl',$num_local)->with('nc',$num_cel);
+            $codigos = DB::table('codigos_postales')
+            ->select('codigos_postales.cp')
+            ->where('codigos_postales.estado', '=', 'Oaxaca')
+            ->get();
+            return view('estudiante\datos.datos_personales')
+            ->with('d',$direccion)->with('nl',$num_local)->with('nc',$num_cel)->with('codes_o', $codigos);
           }
 
           public function carga_datos_medicos(Request $request)
@@ -168,7 +174,6 @@ class ConsultasController extends Controller
               ->take(1)
               ->first();
 
-
               $parentesco = DB::table('datos_emergencias')
               ->select('datos_emergencias.parentesco')
               ->where('datos_emergencias.matricula', $id)
@@ -178,9 +183,10 @@ class ConsultasController extends Controller
               $num_emergencia = DB::table('personas')
               ->select('telefonos.numero')
               ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-              ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
+              ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia']])
               ->take(1)
               ->first();
+
 
               $enf_ale = DB::table('estudiantes')
               ->select('enfermedades_alergias.nombre_enfermedadalergia', 'enfermedades_alergias.tipo_enfermedadalergia',

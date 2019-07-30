@@ -1,14 +1,14 @@
-<link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_estudiante')
-@section('title')
+<link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
+
+<?php $__env->startSection('title'); ?>
 : Egresados
-@endsection
-@section('seccion')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('seccion'); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center">Antecedentes Laborales</h1>
 <div class="container" id="font7">
 </br>
 <form method="POST" action="">
-                        @csrf
+                        <?php echo csrf_field(); ?>
                         <div class="form-row">
                           <div class="form-group col-md-12">
                             <h6 align="left">Trabajo Actual</h6>
@@ -29,23 +29,39 @@
 
       <div class="form-row">
       <div class="form-group col-md-6">
-      <label for="lugar_labor_actual" >{{ __('Lugar donde labora') }}</label>
-       <input id="lugar_labor_actual"  required disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('lugar_labor_actual') is-invalid @enderror"  name="lugar_labor_actual" autocomplete="lugar_labor_actual" >
-         @error('lugar_labor_actual')
+      <label for="lugar_labor_actual" ><?php echo e(__('Lugar donde labora')); ?></label>
+       <input id="lugar_labor_actual"  required disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('lugar_labor_actual')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('lugar_labor_actual'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"  name="lugar_labor_actual" autocomplete="lugar_labor_actual" >
+         <?php if ($errors->has('lugar_labor_actual')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('lugar_labor_actual'); ?>
        <span class="invalid-feedback" role="alert">
-       <strong>{{ $message }}</strong>
+       <strong><?php echo e($message); ?></strong>
        </span>
-                                   @enderror
+                                   <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
       </div>
 
       <div class="form-group col-md-6">
-      <label for="funcion_labor_actual" >{{ __('Función que desempeña') }}</label>
-       <input id="funcion_labor_actual" required disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('funcion_labor_actual') is-invalid @enderror"  name="funcion_labor_actual" autocomplete="funcion_labor_actual" >
-         @error('funcion_labor_actual')
+      <label for="funcion_labor_actual" ><?php echo e(__('Función que desempeña')); ?></label>
+       <input id="funcion_labor_actual" required disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('funcion_labor_actual')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('funcion_labor_actual'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"  name="funcion_labor_actual" autocomplete="funcion_labor_actual" >
+         <?php if ($errors->has('funcion_labor_actual')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('funcion_labor_actual'); ?>
        <span class="invalid-feedback" role="alert">
-       <strong>{{ $message }}</strong>
+       <strong><?php echo e($message); ?></strong>
        </span>
-                                   @enderror
+                                   <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
       </div>
       </div>
 
@@ -65,23 +81,39 @@
 
 
     <div class="form-group col-md-3">
-    <label for="ingreso_mensual" >{{ __('¿Cuál es su ingreso mensual?') }}</label>
-    <input id="ingreso_mensual" required disabled type="tel" maxlength="10" onkeypress="return numeros (event)" class="form-control @error('ingreso_mensual') is-invalid @enderror"  name="ingreso_mensual" autocomplete="ingreso_mensual" >
-      @error('ingreso_mensual')
+    <label for="ingreso_mensual" ><?php echo e(__('¿Cuál es su ingreso mensual?')); ?></label>
+    <input id="ingreso_mensual" required disabled type="tel" maxlength="10" onkeypress="return numeros (event)" class="form-control <?php if ($errors->has('ingreso_mensual')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('ingreso_mensual'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"  name="ingreso_mensual" autocomplete="ingreso_mensual" >
+      <?php if ($errors->has('ingreso_mensual')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('ingreso_mensual'); ?>
     <span class="invalid-feedback" role="alert">
-    <strong>{{ $message }}</strong>
+    <strong><?php echo e($message); ?></strong>
     </span>
-                                @enderror
+                                <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
     </div>
 
     <div class="form-group col-md-4">
-    <label for="antiguedad" >{{ __('Antigüedad(Años)') }}</label>
-    <input id="antiguedad" disabled required type="tel" maxlength="2" onkeypress="return numeros (event)" class="form-control @error('antiguedad') is-invalid @enderror"  name="antiguedad" autocomplete="antiguedad" >
-      @error('antiguedad')
+    <label for="antiguedad" ><?php echo e(__('Antigüedad(Años)')); ?></label>
+    <input id="antiguedad" disabled required type="tel" maxlength="2" onkeypress="return numeros (event)" class="form-control <?php if ($errors->has('antiguedad')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('antiguedad'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"  name="antiguedad" autocomplete="antiguedad" >
+      <?php if ($errors->has('antiguedad')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('antiguedad'); ?>
     <span class="invalid-feedback" role="alert">
-    <strong>{{ $message }}</strong>
+    <strong><?php echo e($message); ?></strong>
     </span>
-                                @enderror
+                                <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
     </div>
   </div>
   <hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
@@ -106,23 +138,39 @@
 
 <div class="form-row">
   <div class="form-group col-md-6">
-  <label for="trabajo_anterior" >{{ __('Lugar donde laboraba') }}</label>
-  <input id="trabajo_anterior" disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('trabajo_anterior') is-invalid @enderror"  name="trabajo_anterior" autocomplete="trabajo_anterior" >
-    @error('trabajo_anterior')
+  <label for="trabajo_anterior" ><?php echo e(__('Lugar donde laboraba')); ?></label>
+  <input id="trabajo_anterior" disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('trabajo_anterior')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('trabajo_anterior'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"  name="trabajo_anterior" autocomplete="trabajo_anterior" >
+    <?php if ($errors->has('trabajo_anterior')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('trabajo_anterior'); ?>
   <span class="invalid-feedback" role="alert">
-  <strong>{{ $message }}</strong>
+  <strong><?php echo e($message); ?></strong>
   </span>
-                              @enderror
+                              <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
   </div>
 
   <div class="form-group col-md-6">
-  <label for="trabajos_anteriores" >{{ __('Función que desempeñaba') }}</label>
-  <input id="funcion_trabajo_anterior" disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('funcion_trabajo_anterior') is-invalid @enderror"  name="funcion_trabajo_anterior" autocomplete="funcion_trabajo_anterior" >
-    @error('funcion_trabajo_anterior')
+  <label for="trabajos_anteriores" ><?php echo e(__('Función que desempeñaba')); ?></label>
+  <input id="funcion_trabajo_anterior" disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('funcion_trabajo_anterior')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('funcion_trabajo_anterior'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"  name="funcion_trabajo_anterior" autocomplete="funcion_trabajo_anterior" >
+    <?php if ($errors->has('funcion_trabajo_anterior')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('funcion_trabajo_anterior'); ?>
   <span class="invalid-feedback" role="alert">
-  <strong>{{ $message }}</strong>
+  <strong><?php echo e($message); ?></strong>
   </span>
-                              @enderror
+                              <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
   </div>
 
   </div>
@@ -130,7 +178,8 @@
                         <div class="form-group">
                             <div class="col-xs-offset-2 col-xs-9" align="center">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Guardar') }}
+                                    <?php echo e(__('Guardar')); ?>
+
                                 </button>
                             </div>
                         </div>
@@ -139,7 +188,7 @@
 
                 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 <script>
 function numeros(e){
@@ -216,3 +265,5 @@ if(key == especiales[i]){
 
     }
 </script>
+
+<?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/seguimiento_egresadosP/antecedentes_laborales.blade.php ENDPATH**/ ?>

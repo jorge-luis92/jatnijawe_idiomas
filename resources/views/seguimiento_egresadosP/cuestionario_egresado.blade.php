@@ -1,18 +1,18 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_seguimiento_egresados')
+@extends('layouts.plantilla_estudiante')
 @section('title')
 : Egresados
 @endsection
 @section('seccion')
 <h1 style="font-size: 2.0em; color: #000000;" align="center">Cuestionario al Egresado</h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
 </br>
 <form method="POST" action="{{ route('cuestionario_egresado') }}">
                         @csrf
 
  <div class="form-row">
 <div class="radio col-md-4" id="labels">
-  <label>Títulado</label>
+  <label>¿Títulado?</label>
 
  <input type="radio" id="si_titulo" name="titulo" value="si_titulo" onclick="checar()" required >
  <label for="si_titulo">Si</label>
@@ -45,9 +45,9 @@
 </br>
 <div class="form-row">
   <div class="form-group col-md-12">
-  <label for="motivos_post" >{{ __('En caso de no haberse titulado, ¿Cuales son los motivos de haber postergado la Titulación?') }}</label>
-  <input id="motivos_post" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('motivos_post') is-invalid @enderror"  name="motivos_post" autocomplete="motivos_post" autofocus>
-    @error('motivos_post')
+  <label for="motivos_notitulado" >{{ __('En caso de no haberse titulado, ¿Cuales son los motivos de haber postergado la Titulación?') }}</label>
+  <textarea id="motivos_notitulado" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('motivos_notitulado') is-invalid @enderror"  name="motivos_notitulado" autocomplete="motivos_notitulado"> </textarea>
+    @error('motivos_notitulado')
   <span class="invalid-feedback" role="alert">
   <strong>{{ $message }}</strong>
   </span>
@@ -57,9 +57,9 @@
 
 <div class="form-row">
   <div class="form-group col-md-12">
-  <label for="bachillerato_origen" >{{ __('¿Cual es la razón de haber estudiado la Licenciatura?') }}</label>
-  <input id="bachillerato_origen" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('bachillerato_origen') is-invalid @enderror"  name="bachillerato_origen" autocomplete="bachillerato_origen" autofocus>
-    @error('bachillerato_origen')
+  <label for="razon_carrera" >{{ __('¿Cual es la razón de haber estudiado la Licenciatura?') }}</label>
+  <textarea id="razon_carrera" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('razon_carrera') is-invalid @enderror"  name="razon_carrera" autocomplete="razon_carrera" > </textarea>
+    @error('razon_carrera')
   <span class="invalid-feedback" role="alert">
   <strong>{{ $message }}</strong>
   </span>
@@ -106,7 +106,7 @@
 <div class="form-row">
   <div class="form-group col-md-12">
   <label for="estudios_despues" >{{ __('Específique') }}</label>
-  <input id="estudios_despues" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('estudios_despues') is-invalid @enderror"  name="estudios_despues" autocomplete="estudios_despues" autofocus>
+  <input id="estudios_despues" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('estudios_despues') is-invalid @enderror"  name="estudios_despues" autocomplete="estudios_despues" >
     @error('estudios_despues')
   <span class="invalid-feedback" role="alert">
   <strong>{{ $message }}</strong>
@@ -144,7 +144,7 @@
 
 <div class="form-group col-md-12">
 <label for="la_misma" >{{ __('¿Por qué?') }}</label>
-<input id="la_misma" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('la_misma') is-invalid @enderror"  name="la_misma" autocomplete="la_misma" autofocus>
+<input id="la_misma" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('la_misma') is-invalid @enderror"  name="la_misma" autocomplete="la_misma" >
   @error('la_misma')
 <span class="invalid-feedback" role="alert">
 <strong>{{ $message }}</strong>
