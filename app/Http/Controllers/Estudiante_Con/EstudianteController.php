@@ -412,7 +412,7 @@ return view('estudiante\datos.datos_personales');
    }
 
 
- /*SEGUIMIENTO A EGRESADOS*/
+ /*SEGUIMIENTO A EGRESADOS
      public function generales_egresado()
      {
      return view('estudiante\seguimiento_egresados.generales_egresado');
@@ -427,7 +427,7 @@ return view('estudiante\datos.datos_personales');
      {
        return view('estudiante\seguimiento_egresados.antecedentes_laborales');
      }
-
+*/
      public function lineamientos()
      {
        return view('estudiante.lineamientos');

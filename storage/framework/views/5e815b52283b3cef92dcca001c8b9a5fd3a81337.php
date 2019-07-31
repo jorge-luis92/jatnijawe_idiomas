@@ -7,7 +7,7 @@
 <h1 style="font-size: 2.0em; color: #000000;" align="center">Cuestionario al Egresado</h1>
 <div class="container" id="font7">
 </br>
-<form method="POST" action="<?php echo e(route('cuestionario_egresado')); ?>">
+<form method="POST" action="<?php echo e(route('cuestionario_egresado_actu')); ?>">
                         <?php echo csrf_field(); ?>
 
  <div class="form-row">

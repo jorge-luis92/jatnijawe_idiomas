@@ -11,6 +11,9 @@ use App\Datos_emergencia;
 use App\Discapacidad;
 use App\Egresado;
 use App\Enfermedad_Alergia;
+use App\Titulo;
+use App\AntecedenteLaboral;
+use App\Cuestionario;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -30,7 +33,6 @@ public function generales_egresado()
     }
   $usuario_actual=auth()->user();
   $id=$usuario_actual->id_user;
-
   $egresado_si = DB::table('estudiantes')
   ->select('estudiantes.egresado')
   ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
@@ -155,11 +157,54 @@ if(empty($egresado_si)){
 
 public function cuestionario_egresado()
 {
+  $usuario_actuales=\Auth::user();
+   if($usuario_actuales->tipo_usuario!='estudiante'){
+     return redirect()->back();
+    }
+  $usuario_actual=auth()->user();
+  $id=$usuario_actual->id_user;
+  $egresado_si = DB::table('estudiantes')
+  ->select('estudiantes.egresado')
+  ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+  ->where('estudiantes.matricula',$id)
+  ->take(1)
+  ->first();
+   $e= $egresado_si->egresado;
+  if($e == 1){
 return view('seguimiento_egresadosP.cuestionario_egresado');
 }
+return redirect()->route('home_estudiante')->with('error','¡Opción del menú no habilitada, Aún no eres un egresado!');
+}
+
+protected function cuestionario_egresado_actualizar(){
+
+}
+
 
 public function antecedentes_laborales()
 {
+  $usuario_actuales=\Auth::user();
+   if($usuario_actuales->tipo_usuario!='estudiante'){
+     return redirect()->back();
+    }
+  $usuario_actual=auth()->user();
+  $id=$usuario_actual->id_user;
+  $egresado_si = DB::table('estudiantes')
+  ->select('estudiantes.egresado')
+  ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+  ->where('estudiantes.matricula',$id)
+  ->take(1)
+  ->first();
+   $e= $egresado_si->egresado;
+  if($e == 1){
   return view('seguimiento_egresadosP.antecedentes_laborales');
 }
+
+return redirect()->route('home_estudiante')->with('error','¡Opción del menú no habilitada, Aún no eres un egresado!');
+}
+
+protected function antecedentes_laborales_actualizar(){
+
+}
+
 }

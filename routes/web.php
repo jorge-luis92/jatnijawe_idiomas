@@ -111,21 +111,17 @@ Route::group(['middleware' => 'auth','estudiantes'], function () {
   Route::get('descargar_solicitud_taller', 'GenerarPdf@descarga_taller');
   Route::get('solicitud_practicasP', 'Estudiante_Con\EstudianteController@solicitud_practicasP')->name('solicitud_practicasP');
   Route::get('solicitud_servicioSocial', 'Estudiante_Con\EstudianteController@solicitud_servicioSocial')->name('solicitud_servicioSocial');
-
-
   /*TUTORIAS*/
 Route::get('tutorias', 'Estudiante_Con\EstudianteController@tutorias')->name('tutorias');
 /*lineamientos*/
   Route::get('lineamientos', 'Estudiante_Con\EstudianteController@lineamientos')->name('lineamientos');
   Route::get('equipamientosalon', 'Estudiante_Con\EstudianteController@equipamientosalon')->name('equipamientosalon');
-
-
 /*SEGUIMIENTO A EGRESADOS PERFIL ESTUDIANTE*/
-Route::get('antecedentes_laborales', 'Estudiante_Con\EstudianteController@antecedentes_laborales')->name('antecedentes_laborales');
+/*Route::get('antecedentes_laborales', 'Estudiante_Con\EstudianteController@antecedentes_laborales')->name('antecedentes_laborales');
 Route::get('cuestionario_egresado', 'Estudiante_Con\EstudianteController@cuestionario_egresado')->name('cuestionario_egresado');
 Route::get('generales_egresado', 'Estudiante_Con\EstudianteController@generales_egresado')->name('generales_egresado');
+*/
 });
-
 
 Route::get('register_tallerista', 'Auth\RegisterController@getRegister');
 Route::post('register_tallerista', ['as' => 'register_tallerista', 'uses' => 'Auth\RegisterController@postRegister']);
@@ -198,16 +194,18 @@ Route::any('busqueda_atras_fi', 'BusquedaAnteriorController@anteriores_busqueda'
 Route::get('avance_estudiante_a/{ID}', 'BusquedaAnteriorController@ver_avance');
 Route::get('constancia_parcial_a/{ID}', 'BusquedaAnteriorController@constancia_par');
 Route::get('constancia_valida_a/{ID}', 'BusquedaAnteriorController@constancia_val');
-
 Route::get('avance_estudiante/{matricula}', 'FormacionIntegralController@ver_avance');
 Route::get('constancia_parcial/{matricula}', 'FormacionIntegralController@constancia_par');
 Route::get('constancia_valida/{matricula}', 'FormacionIntegralController@constancia_val');
 Route::get('acreditar_estudiantes_formacion/{actividad}/{matricula}', 'FormacionIntegralController@acreditar_estudiantes');
 Route::get('desactivar_extra/{actividad}', 'FormacionIntegralController@desactivar_extracurricular');
+
 Route::get('generales_egresado', 'SeguimientoEgresadosController@generales_egresado')->name('generales_egresado');
 Route::post('generales_egresado_actu', 'SeguimientoEgresadosController@generales_egresado_actualizar')->name('generales_egresado_actu');
 Route::get('cuestionario_egresado', 'SeguimientoEgresadosController@cuestionario_egresado')->name('cuestionario_egresado');
+Route::post('cuestionario_egresado_actu', 'SeguimientoEgresadosController@cuestionario_egresado_actualizar')->name('cuestionario_egresado_actu');
 Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedentes_laborales')->name('antecedentes_laborales');
+Route::post('antecedentes_laborales_actu', 'SeguimientoEgresadosController@antecedentes_laborales_actualizar')->name('antecedentes_laborales_actu');
 
 });
 
