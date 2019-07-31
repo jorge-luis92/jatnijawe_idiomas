@@ -197,14 +197,86 @@ public function antecedentes_laborales()
   ->first();
    $e= $egresado_si->egresado;
   if($e == 1){
-  return view('seguimiento_egresadosP.antecedentes_laborales');
+    $egresado_si = DB::table('egresados')
+    ->select('egresados.id_egresado')
+    ->where('egresados.matricula',$id)
+    ->take(1)
+    ->first();
+    $egresado_si = $egresado_si->id_egresado;
+
+    $laboral = DB::table('antecedentes_laborales')
+    ->select('antecedentes_laborales.lugar_labor_actual', 'antecedentes_laborales.funcion_labor_actual', 'antecedentes_laborales.ingreso_mensual',
+    'antecedentes_laborales.antiguedad', 'antecedentes_laborales.trabajo_anterior', 'antecedentes_laborales.funcion_trabajo_anterior')
+    ->where('antecedentes_laborales.id_egresado',$egresado_si)
+    ->take(1)
+    ->first();
+
+  return view('seguimiento_egresadosP.antecedentes_laborales')->with('laborales', $laboral);
 }
 
 return redirect()->route('home_estudiante')->with('error','¡Opción del menú no habilitada, Aún no eres un egresado!');
 }
 
-protected function antecedentes_laborales_actualizar(){
+protected function antecedentes_laborales_actualizar(Request $request){
+  $usuario_actuales=\Auth::user();
+   if($usuario_actuales->tipo_usuario!='estudiante'){
+     return redirect()->back();
+    }
+  $usuario_actual=auth()->user();
+  $id=$usuario_actual->id_user;
+  $data= $request;
+
+  $egresado_si = DB::table('egresados')
+  ->select('egresados.id_egresado')
+  ->where('egresados.matricula',$id)
+  ->take(1)
+  ->first();
+  $egresado_si = $egresado_si->id_egresado;
+
+  $laboral = DB::table('antecedentes_laborales')
+  ->select('antecedentes_laborales.id_egresado')
+  ->where('antecedentes_laborales.id_egresado',$egresado_si)
+  ->take(1)
+  ->first();
+
+  $id_p = DB::table('periodos')
+  ->select('periodos.id_periodo')
+  ->where('periodos.estatus', '=', 'actual')
+  ->take(1)
+  ->first();
+
+  $id_p= $id_p->id_periodo;
+
+  if(empty($laboral)){
+    $antecendente = new AntecedenteLaboral;
+    $antecendente->bandera_laboractual = $data['bandera_laboractual'];
+    $antecendente->lugar_labor_actual = $data['lugar_labor_actual'];
+    $antecendente->funcion_labor_actual = $data['funcion_labor_actual'];
+    $antecendente->bandera_coincidencia = $data['bandera_coincidencia'];
+    $antecendente->ingreso_mensual = $data['ingreso_mensual'];
+    $antecendente->antiguedad = $data['antiguedad'];
+    $antecendente->trabajo_anterior = $data['trabajo_anterior'];
+    $antecendente->funcion_trabajo_anterior = $data['funcion_trabajo_anterior'];
+    $antecendente->id_egresado = $egresado_si;
+    $antecendente->periodo=$id_p;
+    $antecendente->save();
+
+    if($antecendente->save()){
+    return redirect()->route('antecedentes_laborales')->with('success','¡Datos Registrados Correctamente!');
+    }
+  }
+
+  else {
+    DB::table('antecedentes_laborales')
+        ->where('antecedentes_laborales.id_egresado', $egresado_si)
+        ->update(['bandera_laboractual' => $data['bandera_laboractual'], 'lugar_labor_actual' => $data['lugar_labor_actual'],
+                  'funcion_labor_actual' => $data['funcion_labor_actual'], 'bandera_coincidencia' => $data['bandera_coincidencia'],
+                  'ingreso_mensual' => $data['ingreso_mensual'], 'antiguedad' => $data['antiguedad'],
+                  'trabajo_anterior' => $data['trabajo_anterior'], 'funcion_trabajo_anterior' => $data['funcion_trabajo_anterior']]);
+
+        return redirect()->route('antecedentes_laborales')->with('success','¡Datos Actualizados Correctamente!');
+
+  }
 
 }
-
 }

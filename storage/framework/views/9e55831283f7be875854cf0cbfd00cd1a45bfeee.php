@@ -6,6 +6,7 @@
 <?php $__env->startSection('seccion'); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center">Antecedentes Laborales</h1>
 <div class="container" id="font7">
+  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </br>
 <form method="POST" action="<?php echo e(route('antecedentes_laborales_actu')); ?>">
                         <?php echo csrf_field(); ?>
@@ -30,7 +31,7 @@
       <div class="form-row">
       <div class="form-group col-md-6">
       <label for="lugar_labor_actual" ><?php echo e(__('Lugar donde labora')); ?></label>
-       <input id="lugar_labor_actual"  name="lugar_labor_actual" required disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('lugar_labor_actual')) :
+       <input id="lugar_labor_actual"  name="lugar_labor_actual" value="<?php if(empty($laborales->lugar_labor_actual)){ $vacio=null; echo $vacio;} else{ echo $laborales->lugar_labor_actual;} ?>" required disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('lugar_labor_actual')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('lugar_labor_actual'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -48,7 +49,7 @@ endif; ?>
 
       <div class="form-group col-md-6">
       <label for="funcion_labor_actual" ><?php echo e(__('Función que desempeña')); ?></label>
-       <input id="funcion_labor_actual" name="funcion_labor_actual" required disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('funcion_labor_actual')) :
+       <input id="funcion_labor_actual" name="funcion_labor_actual" value="<?php if(empty($laborales->funcion_labor_actual)){ $vacio=null; echo $vacio;} else{ echo $laborales->funcion_labor_actual;} ?>" required disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('funcion_labor_actual')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('funcion_labor_actual'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -82,7 +83,7 @@ endif; ?>
 
     <div class="form-group col-md-3">
     <label for="ingreso_mensual" ><?php echo e(__('¿Cuál es su ingreso mensual?')); ?></label>
-    <input id="ingreso_mensual" name="ingreso_mensual" required disabled type="tel" maxlength="10" onkeypress="return numeros (event)" class="form-control <?php if ($errors->has('ingreso_mensual')) :
+    <input id="ingreso_mensual" name="ingreso_mensual" value="<?php if(empty($laborales->ingreso_mensual)){ $vacio=null; echo $vacio;} else{ echo $laborales->ingreso_mensual;} ?>" required disabled type="tel" maxlength="10" onkeypress="return numeros (event)" class="form-control <?php if ($errors->has('ingreso_mensual')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('ingreso_mensual'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -100,7 +101,7 @@ endif; ?>
 
     <div class="form-group col-md-4">
     <label for="antiguedad" ><?php echo e(__('Antigüedad(Años)')); ?></label>
-    <input id="antiguedad" name="antiguedad" disabled required type="tel" maxlength="2" onkeypress="return numeros (event)" class="form-control <?php if ($errors->has('antiguedad')) :
+    <input id="antiguedad" name="antiguedad" disabled value="<?php if(empty($laborales->antiguedad)){ $vacio=null; echo $vacio;} else{ echo $laborales->antiguedad;} ?>"  required type="tel" maxlength="2" onkeypress="return numeros (event)" class="form-control <?php if ($errors->has('antiguedad')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('antiguedad'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -127,10 +128,10 @@ endif; ?>
  <div class="radio col-md-12" id="labels">
  <label> ¿Algún trabajo anterior al actual?</label>
 
- <input type="radio" id="si_anterior" name="trabajo_anterior" value="si_labora" onclick="checar_an(this.id)" required >
+ <input type="radio" id="si_anterior" name="hola" onclick="checar_an(this.id)" required >
  <label for="si_labora">Si</label>
 
- <input type="radio" id="no_anterior" name="trabajo_anterior" value="no_labora" onclick="nochecar_an(this.id)" required>
+ <input type="radio" id="no_anterior"  name="hola" onclick="nochecar_an(this.id)" required>
  <label for="no_labora">No</label>
 
  </div>
@@ -139,7 +140,7 @@ endif; ?>
 <div class="form-row">
   <div class="form-group col-md-6">
   <label for="trabajo_anterior" ><?php echo e(__('Lugar donde laboraba')); ?></label>
-  <input id="trabajo_anterior" name="trabajo_anterior" disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('trabajo_anterior')) :
+  <input id="trabajo_anterior" name="trabajo_anterior" value="<?php if(empty($laborales->trabajo_anterior)){ $vacio=null; echo $vacio;} else{ echo $laborales->trabajo_anterior;} ?>"  disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('trabajo_anterior')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('trabajo_anterior'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -156,8 +157,8 @@ endif; ?>
   </div>
 
   <div class="form-group col-md-6">
-  <label for="trabajos_anteriores" ><?php echo e(__('Función que desempeñaba')); ?></label>
-  <input id="funcion_trabajo_anterior" name="funcion_trabajo_anterior" disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('funcion_trabajo_anterior')) :
+  <label for="funcion_trabajo_anterior" ><?php echo e(__('Función que desempeñaba')); ?></label>
+  <input id="funcion_trabajo_anterior" name="funcion_trabajo_anterior" value="<?php if(empty($laborales->funcion_trabajo_anterior)){ $vacio=null; echo $vacio;} else{ echo $laborales->funcion_trabajo_anterior;} ?>"  disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('funcion_trabajo_anterior')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('funcion_trabajo_anterior'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }

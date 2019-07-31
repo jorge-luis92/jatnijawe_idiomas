@@ -6,6 +6,7 @@ use App\Persona;
 use App\Administrativo;
 use App\Nivel;
 use App\Periodo;
+use App\FechaActualizacion;
 use App\Departamento;
 use App\Dpto_Administrativo;
 use Illuminate\Support\Facades\DB;
@@ -338,6 +339,10 @@ if($data['edad'] >17){
           }
 
           public function nuevo_periodo(){
+            $usuario_actual=\Auth::user();
+             if($usuario_actual->tipo_usuario!='5'){
+               return redirect()->back();
+              }
             $periodos = DB::table('periodos')
             ->select('periodos.inicio', 'periodos.final', 'periodos.estatus', 'periodos.created_at')
             ->orderBy('periodos.estatus', 'asc')
@@ -346,7 +351,6 @@ if($data['edad'] >17){
     }
 
 protected function crear_periodo(Request $request){
-
 $data = $request;
 $buscar_periodo = DB::table('periodos')
 ->select('periodos.id_periodo')
@@ -379,4 +383,79 @@ else{
 }
 
 }
+
+
+protected function nueva_actualizacion(){
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='5'){
+     return redirect()->back();
+    }
+
+    $id_clave = DB::table('periodo_actualizacion')
+    ->select('periodo_actualizacion.fecha_inicio', 'periodo_actualizacion.fecha_fin')
+    ->take(1)
+    ->first();
+
+    $fecha_inicio = DB::table('periodo_actualizacion')
+    ->select('periodo_actualizacion.fecha_inicio')
+    ->take(1)
+    ->first();
+    $fecha_inicio= $fecha_inicio ->fecha_inicio;
+
+    $fecha_fin = DB::table('periodo_actualizacion')
+    ->select('periodo_actualizacion.fecha_fin')
+    ->take(1)
+    ->first();
+    $fecha_fin= $fecha_fin ->fecha_fin;
+    $now = new \DateTime();
+       $fecha_inicio =  date('d-m-Y', strtotime($fecha_inicio));
+       $fecha_fin =  date('d-m-Y', strtotime($fecha_fin));
+       $now =  date('d-m-Y');
+       $hola='';
+       if ($now < $fecha_fin){
+         $hola = 'si';
+}
+  return view('personal_administrativo\admin_sistema.fecha_actualizacion')->with('fechas', $id_clave)->with('ss', $hola);
+
+}
+
+protected function crear_fecha(Request $request){
+  $data = $request;
+  $id_clave = DB::table('periodo_actualizacion')
+  ->select('periodo_actualizacion.id_actualizacion')
+  ->take(1)
+  ->first();
+
+  if(empty($id_clave)){
+    $nueva_ac = new FechaActualizacion;
+    $nueva_ac->fecha_inicio=$data['fecha_inicio'];
+    $nueva_ac->fecha_fin=$data['fecha_fin'];
+    $nueva_ac->save();
+
+    if($nueva_ac->save()){
+      return redirect()->route('agregar_fecha')->with('success','¡Fechas agregadas Correctamente!');
+    }
+  }
+  else {
+    $id_clave = $id_clave->id_actualizacion;
+    DB::table('periodo_actualizacion')
+        ->where('periodo_actualizacion.id_actualizacion', $id_clave)
+        ->update(['fecha_inicio' => $data['fecha_inicio'], 'fecha_fin' => $data['fecha_fin']]);
+        return redirect()->route('agregar_fecha')->with('success','¡Fechas actualizadas Correctamente!');
+  }
+
+
+}
+
+/*public function hola(){
+  else {
+    $id_clave = $id_clave->id_actualizacion;
+  }
+  $id_clave = DB::table('escuelas')
+  ->select('escuelas.clave_institucion')
+  ->take(1)
+  ->first();
+  $id_clave = $id_clave->clave_institucion;
+}*/
+
 }

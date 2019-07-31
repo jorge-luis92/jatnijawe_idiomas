@@ -6,6 +6,7 @@
 @section('seccion')
 <h1 style="font-size: 2.0em; color: #000000;" align="center">Antecedentes Laborales</h1>
 <div class="container" id="font7">
+  @include('flash-message')
 </br>
 <form method="POST" action="{{ route('antecedentes_laborales_actu') }}">
                         @csrf
@@ -30,7 +31,7 @@
       <div class="form-row">
       <div class="form-group col-md-6">
       <label for="lugar_labor_actual" >{{ __('Lugar donde labora') }}</label>
-       <input id="lugar_labor_actual"  name="lugar_labor_actual" required disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('lugar_labor_actual') is-invalid @enderror"   autocomplete="lugar_labor_actual" >
+       <input id="lugar_labor_actual"  name="lugar_labor_actual" value="<?php if(empty($laborales->lugar_labor_actual)){ $vacio=null; echo $vacio;} else{ echo $laborales->lugar_labor_actual;} ?>" required disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('lugar_labor_actual') is-invalid @enderror"   autocomplete="lugar_labor_actual" >
          @error('lugar_labor_actual')
        <span class="invalid-feedback" role="alert">
        <strong>{{ $message }}</strong>
@@ -40,7 +41,7 @@
 
       <div class="form-group col-md-6">
       <label for="funcion_labor_actual" >{{ __('Función que desempeña') }}</label>
-       <input id="funcion_labor_actual" name="funcion_labor_actual" required disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('funcion_labor_actual') is-invalid @enderror"  autocomplete="funcion_labor_actual" >
+       <input id="funcion_labor_actual" name="funcion_labor_actual" value="<?php if(empty($laborales->funcion_labor_actual)){ $vacio=null; echo $vacio;} else{ echo $laborales->funcion_labor_actual;} ?>" required disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('funcion_labor_actual') is-invalid @enderror"  autocomplete="funcion_labor_actual" >
          @error('funcion_labor_actual')
        <span class="invalid-feedback" role="alert">
        <strong>{{ $message }}</strong>
@@ -66,7 +67,7 @@
 
     <div class="form-group col-md-3">
     <label for="ingreso_mensual" >{{ __('¿Cuál es su ingreso mensual?') }}</label>
-    <input id="ingreso_mensual" name="ingreso_mensual" required disabled type="tel" maxlength="10" onkeypress="return numeros (event)" class="form-control @error('ingreso_mensual') is-invalid @enderror"   autocomplete="ingreso_mensual" >
+    <input id="ingreso_mensual" name="ingreso_mensual" value="<?php if(empty($laborales->ingreso_mensual)){ $vacio=null; echo $vacio;} else{ echo $laborales->ingreso_mensual;} ?>" required disabled type="tel" maxlength="10" onkeypress="return numeros (event)" class="form-control @error('ingreso_mensual') is-invalid @enderror"   autocomplete="ingreso_mensual" >
       @error('ingreso_mensual')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
@@ -76,7 +77,7 @@
 
     <div class="form-group col-md-4">
     <label for="antiguedad" >{{ __('Antigüedad(Años)') }}</label>
-    <input id="antiguedad" name="antiguedad" disabled required type="tel" maxlength="2" onkeypress="return numeros (event)" class="form-control @error('antiguedad') is-invalid @enderror"   autocomplete="antiguedad" >
+    <input id="antiguedad" name="antiguedad" disabled value="<?php if(empty($laborales->antiguedad)){ $vacio=null; echo $vacio;} else{ echo $laborales->antiguedad;} ?>"  required type="tel" maxlength="2" onkeypress="return numeros (event)" class="form-control @error('antiguedad') is-invalid @enderror"   autocomplete="antiguedad" >
       @error('antiguedad')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
@@ -95,10 +96,10 @@
  <div class="radio col-md-12" id="labels">
  <label> ¿Algún trabajo anterior al actual?</label>
 
- <input type="radio" id="si_anterior" name="trabajo_anterior" value="si_labora" onclick="checar_an(this.id)" required >
+ <input type="radio" id="si_anterior" name="hola" onclick="checar_an(this.id)" required >
  <label for="si_labora">Si</label>
 
- <input type="radio" id="no_anterior" name="trabajo_anterior" value="no_labora" onclick="nochecar_an(this.id)" required>
+ <input type="radio" id="no_anterior"  name="hola" onclick="nochecar_an(this.id)" required>
  <label for="no_labora">No</label>
 
  </div>
@@ -107,7 +108,7 @@
 <div class="form-row">
   <div class="form-group col-md-6">
   <label for="trabajo_anterior" >{{ __('Lugar donde laboraba') }}</label>
-  <input id="trabajo_anterior" name="trabajo_anterior" disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('trabajo_anterior') is-invalid @enderror"   autocomplete="trabajo_anterior" >
+  <input id="trabajo_anterior" name="trabajo_anterior" value="<?php if(empty($laborales->trabajo_anterior)){ $vacio=null; echo $vacio;} else{ echo $laborales->trabajo_anterior;} ?>"  disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('trabajo_anterior') is-invalid @enderror"   autocomplete="trabajo_anterior" >
     @error('trabajo_anterior')
   <span class="invalid-feedback" role="alert">
   <strong>{{ $message }}</strong>
@@ -116,8 +117,8 @@
   </div>
 
   <div class="form-group col-md-6">
-  <label for="trabajos_anteriores" >{{ __('Función que desempeñaba') }}</label>
-  <input id="funcion_trabajo_anterior" name="funcion_trabajo_anterior" disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('funcion_trabajo_anterior') is-invalid @enderror"   autocomplete="funcion_trabajo_anterior" >
+  <label for="funcion_trabajo_anterior" >{{ __('Función que desempeñaba') }}</label>
+  <input id="funcion_trabajo_anterior" name="funcion_trabajo_anterior" value="<?php if(empty($laborales->funcion_trabajo_anterior)){ $vacio=null; echo $vacio;} else{ echo $laborales->funcion_trabajo_anterior;} ?>"  disabled type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('funcion_trabajo_anterior') is-invalid @enderror"   autocomplete="funcion_trabajo_anterior" >
     @error('funcion_trabajo_anterior')
   <span class="invalid-feedback" role="alert">
   <strong>{{ $message }}</strong>

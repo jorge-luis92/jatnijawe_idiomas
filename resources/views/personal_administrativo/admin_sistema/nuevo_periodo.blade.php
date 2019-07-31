@@ -7,13 +7,10 @@
 @section('seccion')
  @include('flash-message')
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Períodos - Semestre</h1>
-<div class="container" id="font5">
+<div class="container" id="font7">
 </br>                    <form method="POST" action="{{ route('nuevo_periodo_agregar')}}">
                         @csrf
-
-
     <div class="form-row">
-
   <div class="form-group col-md-6">
     <label for="inicio" >{{ __('* Fecha de inicio') }}</label>
     <input id="inicio" type="date" name="inicio" min="<?php echo date("Y-m-d");?>" onblur="ba();"  class="form-control"  required>
@@ -21,7 +18,7 @@
 
     <div class="form-group col-md-6">
       <label for="final" >{{ __('* Fecha Final') }}</label>
-      <input id="final" type="date" name="final" min= "<?php echo date("Y-m-d");?>"  class="form-control" name="final" required>
+      <input id="final" type="date" name="final" min= "<?php echo date("Y-m-d");?>"  class="form-control"  required>
             </div>
             </div>
 

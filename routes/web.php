@@ -159,6 +159,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('desactivar_coord/{id_user}', 'AdminController@desactivar_cordinador');
   Route::get('nuevo_periodo', 'AdminController@nuevo_periodo')->name('nuevo_periodo');
   Route::post('nuevo_periodo_agregar', 'AdminController@crear_periodo')->name('nuevo_periodo_agregar');
+  Route::get('agregar_fecha', 'AdminController@nueva_actualizacion')->name('agregar_fecha');
+  Route::post('agregar_fecha_actualizacion', 'AdminController@crear_fecha')->name('agregar_fecha_actualizacion');
 
 
 /*FormacionIntegralController*/

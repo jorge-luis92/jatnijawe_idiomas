@@ -330,7 +330,7 @@ function validarInput(input) {
     //alert(fe);HEVJ920901HOCRLR08
     }
     if( as == 'M'){
-    document.getElementById('genero').value = "FEMEMINO" ;
+    document.getElementById('genero').value = "FEMENINO" ;
     }
     var l = document.getElementById('curp').value;
   var  lug = l.substring(11,13);

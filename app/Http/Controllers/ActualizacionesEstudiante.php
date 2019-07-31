@@ -49,8 +49,7 @@ public function desactivar_lengua($id_beca){
   $valor=$id_beca;
   DB::table('becas')
       ->where('becas.id_beca', $valor)
-      ->update(
-          ['bandera' => '0']);
+      ->update(['bandera' => '0']);
       return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
 
 }
