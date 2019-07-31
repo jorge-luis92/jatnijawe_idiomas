@@ -252,7 +252,53 @@ public function gral_carrera(){
   return view ('personal_administrativo\planeacion.gral_carrera')->with('re', $result)->with('datos_escuela', $escuela_r);
 }
 
-protected function crear_carrera(){
+protected function crear_carrera(Request $request){
+
+  $usuario_actuales=\Auth::user();
+   if($usuario_actuales->tipo_usuario!='2'){
+     return redirect()->back();
+    }
+  $usuario_actual=auth()->user();
+  $id=$usuario_actual->id_user;
+  $data = $request;
+  $id_persona = DB::table('users')
+  ->select('users.id_persona')
+  ->join('personas', 'personas.id_persona', '=', 'users.id_persona')
+  ->where('users.id_persona',$id)
+  ->take(1)
+  ->first();
+
+    $id_persona= $id_persona->id_persona;
+    $id_admin = DB::table('administrativos')
+    ->select('administrativos.id_administrativo')
+    ->where('administrativos.id_persona', $id_persona)
+    ->take(1)
+    ->first();
+    $id_admin= $id_admin->id_administrativo;
+
+    $escuela_r = DB::table('escuelas')
+    ->select('escuelas.clave_institucion')
+    ->where('escuelas.responsable', $id_admin)
+    ->take(1)
+    ->first();
+
+     $escuela_r = $escuela_r->clave_institucion;
+    // $escuela_r= json_decode( json_encode($escuela_r), true);
+
+    $carrera = new Carrera;
+    $carrera->clave_carrera = $data['clave_carrera'];$id_direc;
+    $carrera->clave_institucion= $escuela_r;
+    $carrera->facultad='FACULTAD DE IDIOMAS';
+    $carrera->carrera=$data['carrera'];
+    $carrera->modalidad=$data['modalidad'];
+    $carrera->save();
+
+    if($carrera->save()){
+      return redirect()->route('carreras_registradas')->with('success', 'Carrera Registrada correctamente');
+
+    }
+
+
 
 }
 

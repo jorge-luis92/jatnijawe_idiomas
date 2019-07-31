@@ -81,7 +81,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('clave_carrera'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="clave_carrera" value="<?php echo e(old('clave_carrera')); ?>" required autocomplete="clave_carrera">
+endif; ?>" name="clave_carrera" value="" required autocomplete="clave_carrera">
                                 <?php if ($errors->has('clave_carrera')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('clave_carrera'); ?>
@@ -117,7 +117,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('carrera'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="nombre_carrera" value=""   required autocomplete="carrera">
+endif; ?>" name="carrera" value=""   required autocomplete="carrera">
                                <?php if ($errors->has('carrera')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('carrera'); ?>

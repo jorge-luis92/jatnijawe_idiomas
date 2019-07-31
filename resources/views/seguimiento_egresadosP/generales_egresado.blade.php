@@ -6,8 +6,9 @@
 @section('seccion')
 <h1 style="font-size: 2.0em; color: #000000;" align="center">Datos Generales del Egresado</h1>
 <div class="container" id="font7">
+    @include('flash-message')
 </br>
-<form method="POST" action="{{ route('generales_egresado') }}">
+<form method="POST" action="{{ route('generales_egresado_actu') }}">
                         @csrf
 <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
    <div class="form-row">
@@ -72,7 +73,7 @@
 <div class="form-row">
 <div class="form-group col-md-4">
 <label for="generacion" >{{ __('* Generación') }}</label>
-<input id="generacion" autofocus type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('generacion') is-invalid @enderror">
+<input id="generacion" name="generacion" value="<?php if(empty($pro->generacion)){ $vacio=null; echo $vacio;} else{ echo $pro->generacion;} ?>" autofocus type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('generacion') is-invalid @enderror">
   @error('generacion')
 <span class="invalid-feedback" role="alert">
 <strong>{{ $message }}</strong>
@@ -81,7 +82,7 @@
 </div>
 <div class="form-group col-md-3" id="labels">
   <label for="promedio_final">* Promedio Final</label>
-  <input type="number" class="form-control" id="promedio_final">
+  <input type="tel" name="promedio_final" value="<?php if(empty($pro->promedio_final)){ $vacio=null; echo $vacio;} else{ echo $pro->promedio_final;} ?>" onkeypress="return numeros (event)" class="form-control">
 </div>
 
 </div>

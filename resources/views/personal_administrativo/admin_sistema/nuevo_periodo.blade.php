@@ -67,7 +67,7 @@
                          {{ $guardados->links() }}
                          @endif
                 </div>
-<input id="ss" type="text">
+
 
 @endsection
 <script>

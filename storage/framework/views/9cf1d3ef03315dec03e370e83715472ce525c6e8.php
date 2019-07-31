@@ -69,7 +69,7 @@
 
                          <?php endif; ?>
                 </div>
-<input id="ss" type="text">
+
 
 <?php $__env->stopSection(); ?>
 <script>

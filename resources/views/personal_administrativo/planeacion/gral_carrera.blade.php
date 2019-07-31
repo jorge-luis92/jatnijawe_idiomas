@@ -54,7 +54,7 @@
 <div class="form-row">
   <div class="form-group col-md-5">
     <label for="clave_carrera" >{{ __('*Clave de la Carrera ') }}</label>
-    <input id="clave_carrera" autofocus type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('clave_carrera') is-invalid @enderror" name="clave_carrera" value="{{ old('clave_carrera') }}" required autocomplete="clave_carrera">
+    <input id="clave_carrera" autofocus type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('clave_carrera') is-invalid @enderror" name="clave_carrera" value="" required autocomplete="clave_carrera">
                                 @error('clave_carrera')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
@@ -87,7 +87,7 @@
          <option value="">Seleccione una opción</option>
          <option value="ESCOLARIZADO">ESCOLARIZADO</option>
          <option value="SEMIESCOLARIZADO">SEMIESCOLARIZADO</option>
-         <option value="SEMIESCOLARIZADO">MIXTA</option>
+         <option value="MIXTA">MIXTA</option>
          </select>
      </div>
   </div>

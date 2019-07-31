@@ -2,6 +2,7 @@
 @extends('layouts.plantilla_auxadmin')
 @section('title')
 : Búsqueda Estudiantes
+@endsection
 @section('seccion')
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Búsqueda de Estudiantes</h1>
 
@@ -59,34 +60,3 @@
 </div>
 </div>
 @endsection
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <script>
-angular.module('myApp', []).controller('namesCtrl', function($scope, $http) {
-$http.get("/buscar")}})
-.then(function (response) {$scope.names = response.data.datos; $scope.mirespuesta=null;});
-});
-</script>
-<script>
-function numeros(e){
- key = e.keyCode || e.which;
- tecla = String.fromCharCode(key).toLowerCase();
- letras = " 0123456789";
- especiales = [8,37,39,46];
-
- tecla_especial = false
- for(var i in especiales){
-if(key == especiales[i]){
-  tecla_especial = true;
-  break;
-     }
- }
-
- if(letras.indexOf(tecla)==-1 && !tecla_especial)
-     return false;
-}
-</script>
-
-
-
- @endsection

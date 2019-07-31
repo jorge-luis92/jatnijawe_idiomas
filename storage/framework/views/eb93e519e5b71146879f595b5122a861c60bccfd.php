@@ -72,6 +72,8 @@
             <a class="collapse-item" href=<?php echo e(route('registro_estudiante_aux')); ?>>Registrar Estudiante</a>
             <a class="collapse-item" href=<?php echo e(route('busqueda_estudiante_aux')); ?>>Búsqueda de Estudiantes</a>
             <a class="collapse-item" href=<?php echo e(route('estudiante_inactivo_aux')); ?>>Estudiantes Inactivos</a>
+            <a class="collapse-item" href=<?php echo e(route('futuros_egresados')); ?>>Estudiantes a Egresar</a>
+            <a class="collapse-item" href=<?php echo e(route('estudiantes_egresados')); ?>>Egresados</a>
           </div>
         </div>
       </li>

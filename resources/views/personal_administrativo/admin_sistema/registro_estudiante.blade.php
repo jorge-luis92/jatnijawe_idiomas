@@ -125,8 +125,8 @@
                           <label for="modalidad">* Modalidad</label>
                             <select name="modalidad" id="modalidad" required class="form-control">
                             <option value="">Seleccione una opción</option>
-                            <option value="escolarizada">ESCOLARIZADA</option>
-                            <option value="semiescolarizada">SEMIESCOLARIZADA</option>
+                            <option value="ESCOLARIZADA">ESCOLARIZADA</option>
+                            <option value="SEMIESCOLARIZADA">SEMIESCOLARIZADA</option>
                                 </select>
                         </div>
 
@@ -299,7 +299,7 @@ function validarInput(input) {
     //alert(fe);HEVJ920901HOCRLR08
     }
     if( as == 'M'){
-    document.getElementById('genero').value = "FEMEMINO" ;
+    document.getElementById('genero').value = "FEMENINO" ;
     }
     var l = document.getElementById('curp').value;
   var  lug = l.substring(11,13);

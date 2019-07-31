@@ -27,7 +27,9 @@
 
                    ?>
 <?php if($usuario_actual->imagenurl==""){ $im="foto.png"; }  ?>
-                              <img   src="<?php echo e(asset("/image/users/$im")); ?>"   width="150px">
+</br>
+                              <img   src="<?php echo e(asset("/image/users/$im")); ?>"  width="200" height="250" ></br>
+</br>
                                  <input type="file" name="foto" accept="image/png, .jpeg, .jpg" required>
                              </div>
                              <br />

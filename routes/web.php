@@ -49,6 +49,10 @@ Route::get('busqueda_estudiante_aux', 'Administrativo_Con\AdministrativoControll
 Route::any('busqueda_estudiantes_aux', 'AdminController@busqueda_aux')->name('busqueda_estudiantes_aux');
 Route::get('estudiante_activo_aux', 'Administrativo_Con\AdministrativoController@estudiante_activo_aux')->name('estudiante_activo_aux');
 Route::get('estudiante_inactivo_aux', 'Administrativo_Con\AdministrativoController@estudiante_inactivo_aux')->name('estudiante_inactivo_aux');
+Route::get('futuros_egresados', 'CoordinadorAcademico@ver_futuros_egresados')->name('futuros_egresados');
+Route::get('acreditar_egresado/{matricula}', 'CoordinadorAcademico@cambiar_estudiante');
+Route::get('estudiantes_egresados', 'CoordinadorAcademico@egresados_estudiantes')->name('estudiantes_egresados');
+
 });
 
 Route::group(['middleware' => 'auth','checar'], function () {
@@ -108,20 +112,18 @@ Route::group(['middleware' => 'auth','estudiantes'], function () {
   Route::get('solicitud_practicasP', 'Estudiante_Con\EstudianteController@solicitud_practicasP')->name('solicitud_practicasP');
   Route::get('solicitud_servicioSocial', 'Estudiante_Con\EstudianteController@solicitud_servicioSocial')->name('solicitud_servicioSocial');
 
+
   /*TUTORIAS*/
 Route::get('tutorias', 'Estudiante_Con\EstudianteController@tutorias')->name('tutorias');
-
 /*lineamientos*/
   Route::get('lineamientos', 'Estudiante_Con\EstudianteController@lineamientos')->name('lineamientos');
   Route::get('equipamientosalon', 'Estudiante_Con\EstudianteController@equipamientosalon')->name('equipamientosalon');
 
 
 /*SEGUIMIENTO A EGRESADOS PERFIL ESTUDIANTE*/
-Route::get('egresado_registrado', 'Estudiante_Con\EstudianteController@egresado_registrado')->name('egresado_registrado');
 Route::get('antecedentes_laborales', 'Estudiante_Con\EstudianteController@antecedentes_laborales')->name('antecedentes_laborales');
 Route::get('cuestionario_egresado', 'Estudiante_Con\EstudianteController@cuestionario_egresado')->name('cuestionario_egresado');
 Route::get('generales_egresado', 'Estudiante_Con\EstudianteController@generales_egresado')->name('generales_egresado');
-
 });
 
 
@@ -202,10 +204,11 @@ Route::get('constancia_parcial/{matricula}', 'FormacionIntegralController@consta
 Route::get('constancia_valida/{matricula}', 'FormacionIntegralController@constancia_val');
 Route::get('acreditar_estudiantes_formacion/{actividad}/{matricula}', 'FormacionIntegralController@acreditar_estudiantes');
 Route::get('desactivar_extra/{actividad}', 'FormacionIntegralController@desactivar_extracurricular');
+Route::get('generales_egresado', 'SeguimientoEgresadosController@generales_egresado')->name('generales_egresado');
+Route::post('generales_egresado_actu', 'SeguimientoEgresadosController@generales_egresado_actualizar')->name('generales_egresado_actu');
+Route::get('cuestionario_egresado', 'SeguimientoEgresadosController@cuestionario_egresado')->name('cuestionario_egresado');
+Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedentes_laborales')->name('antecedentes_laborales');
 
-Route::get('antecedentes_laborales_egresado', 'ServiciosController@antecedentes_laborales_egresado')->name('antecedentes_laborales_egresado');
-Route::get('cuestionario_egresado_ver', 'ServiciosController@cuestionario_egresado_ver')->name('cuestionario_egresado_ver');
-Route::get('generales_egresado_ver', 'ServiciosController@generales_egresado_ver')->name('generales_egresado_ver');
 });
 
 
@@ -257,6 +260,9 @@ Route::get('estudiantes_activosPP', 'ServiciosController@estudiantes_activosPP')
 Route::get('estudiantes_activosSS', 'ServiciosController@estudiantes_activosSS')->name('estudiantes_activosSS');
 /* SEGUIMIENTO A EGRESADOS*/
 Route::get('egresado_registrado', 'ServiciosController@egresado_registrado')->name('egresado_registrado');
+Route::get('antecedentes_laborales_egresado', 'ServiciosController@antecedentes_laborales_egresado')->name('antecedentes_laborales_egresado');
+Route::get('cuestionario_egresado_ver', 'ServiciosController@cuestionario_egresado_ver')->name('cuestionario_egresado_ver');
+Route::get('generales_egresado_ver/{matricula}', 'ServiciosController@generales_egresado_ver');
 
 
 
@@ -304,11 +310,8 @@ Route::get('info_serviciosocial', 'PlaneacionController@info_serviciosocial')->n
 
 
 /*Seguimiento a Egresados*/
-
 Route::get('home_seguimiento_egresados', 'SeguimientoEgresadosController@home_seguimiento_egresados')->name('home_seguimiento_egresados');
-Route::get('generales_egresado', 'SeguimientoEgresadosController@generales_egresado')->name('generales_egresado');
-Route::get('cuestionario_egresado', 'SeguimientoEgresadosController@cuestionario_egresado')->name('cuestionario_egresado');
-Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedentes_laborales')->name('antecedentes_laborales');
+
 Route::get('registro_externo', 'RegistrosController@ver')->name('registro_externo');
 Route::post('registro_externos', 'RegistrosController@create')->name('registro_externos');
 

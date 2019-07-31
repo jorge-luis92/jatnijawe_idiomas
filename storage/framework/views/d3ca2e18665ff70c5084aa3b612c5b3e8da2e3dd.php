@@ -6,8 +6,9 @@
 <?php $__env->startSection('seccion'); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center">Datos Generales del Egresado</h1>
 <div class="container" id="font7">
+    <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </br>
-<form method="POST" action="<?php echo e(route('generales_egresado')); ?>">
+<form method="POST" action="<?php echo e(route('generales_egresado_actu')); ?>">
                         <?php echo csrf_field(); ?>
 <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
    <div class="form-row">
@@ -80,7 +81,7 @@ endif; ?>
 <div class="form-row">
 <div class="form-group col-md-4">
 <label for="generacion" ><?php echo e(__('* Generación')); ?></label>
-<input id="generacion" autofocus type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('generacion')) :
+<input id="generacion" name="generacion" value="<?php if(empty($pro->generacion)){ $vacio=null; echo $vacio;} else{ echo $pro->generacion;} ?>" autofocus type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('generacion')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('generacion'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -97,7 +98,7 @@ endif; ?>
 </div>
 <div class="form-group col-md-3" id="labels">
   <label for="promedio_final">* Promedio Final</label>
-  <input type="number" class="form-control" id="promedio_final">
+  <input type="tel" name="promedio_final" value="<?php if(empty($pro->promedio_final)){ $vacio=null; echo $vacio;} else{ echo $pro->promedio_final;} ?>" onkeypress="return numeros (event)" class="form-control">
 </div>
 
 </div>

@@ -17,8 +17,9 @@
   use Symfony\Component\HttpFoundation\RedirectResponse as BaseRedirectResponse;
   use Illuminate\Support\Facades\Validator;
   use Storage;
-  use Image;
+  //use Image;
   use PDF;
+  use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Validation\Rule;
 
 
@@ -113,19 +114,18 @@ use Illuminate\Validation\Rule;
       $id=$usuario_actual->id_user;
       $archivo = $request->file('foto');
        $input  = array('image' => $archivo) ;
-        $reglas = array('image' => 'required|image|mimes:jpeg,jpg,bmp,png,gif|max:1000 ');
-        $validacion = Validator::make($input,  $reglas);
+        $reglas = array('image' => 'required|image|mimes:jpeg,jpg,bmp,png,gif|max:3000');
+      $validacion = Validator::make($input,  $reglas);
         if ($validacion->fails())
         {
             return redirect()->route('foto_perfil')->with('error','El archivo es muy pesado, intente con otra imagen ');
         }
         else
         {
-          $nombre_original=$archivo->getClientOriginalName();
+         $nombre_original=$archivo->getClientOriginalName();
       $extension=$archivo->getClientOriginalExtension();
       $nuevo_nombre="userimagen-".$id.".".$extension;
         $r1 = Image::make($archivo)
-        ->resize(200,250)
         ->save('image/users/'.$nuevo_nombre);
           $rutadelaimagen=$nuevo_nombre;
       if ($r1){

@@ -362,7 +362,7 @@ $periodo->final=$data['final'];
 $periodo->estatus='actual';
 $periodo->save();
 
-return redirect()->route('home_admin')->with('success','¡Periodo agregado correctamente!');
+return redirect()->route('nuevo_periodo')->with('success','¡Periodo agregado correctamente!');
 }
 else{
   DB::table('periodos')

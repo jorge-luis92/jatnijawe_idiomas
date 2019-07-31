@@ -9,6 +9,7 @@ use App\Beca;
 use App\Telefono;
 use App\Datos_emergencia;
 use App\Discapacidad;
+use App\Egresado;
 use App\Enfermedad_Alergia;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -27,8 +28,6 @@ public function generales_egresado()
    if($usuario_actuales->tipo_usuario!='estudiante'){
      return redirect()->back();
     }
-
-
   $usuario_actual=auth()->user();
   $id=$usuario_actual->id_user;
 
@@ -39,7 +38,7 @@ public function generales_egresado()
   ->take(1)
   ->first();
    $e= $egresado_si->egresado;
-  if($e == 0){
+  if($e == 1){
   $users = DB::table('estudiantes')
   ->select('estudiantes.matricula', 'estudiantes.bachillerato_origen', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
            'personas.nombre', 'personas.apellido_paterno', 'personas.edad',  'personas.apellido_materno', 'personas.fecha_nacimiento',
@@ -91,11 +90,67 @@ $num_emergencia = DB::table('personas')
 ->take(1)
 ->first();
 
+$datos_pro = DB::table('egresados')
+->select('egresados.generacion', 'egresados.promedio_final')
+->where('egresados.matricula', $id)
+->take(1)
+->first();
 
 return view('seguimiento_egresadosP.generales_egresado')
-->with('u', $users)->with('l', $lenguas_r)->with('ea', $enf_ale)->with('nl',$num_local)->with('nc',$num_cel)->with('ne',$num_emergencia);
+->with('u', $users)->with('l', $lenguas_r)->with('ea', $enf_ale)->with('nl',$num_local)
+->with('nc',$num_cel)->with('ne',$num_emergencia)->with('pro', $datos_pro);
 }
-  return redirect()->route('home_estudiante')->with('error','¡Opción del menu no habilitada, Aún no eres un egresado!');
+  return redirect()->route('home_estudiante')->with('error','¡Opción del menú no habilitada, Aún no eres un egresado!');
+}
+
+public function generales_egresado_actualizar(Request $request)
+{
+  $usuario_actuales=\Auth::user();
+   if($usuario_actuales->tipo_usuario!='estudiante'){
+     return redirect()->back();
+    }
+  $usuario_actual=auth()->user();
+  $id=$usuario_actual->id_user;
+  $data= $request;
+
+  $egresado_si = DB::table('egresados')
+  ->select('egresados.matricula')
+  ->where('egresados.matricula',$id)
+  ->take(1)
+  ->first();
+
+  $id_clave = DB::table('escuelas')
+  ->select('escuelas.clave_institucion')
+  ->take(1)
+  ->first();
+  $id_clave = $id_clave->clave_institucion;
+
+  $id_p = DB::table('periodos')
+  ->select('periodos.id_periodo')
+  ->where('periodos.estatus', '=', 'actual')
+  ->take(1)
+  ->first();
+
+  $id_p= $id_p->id_periodo;
+
+//$id_clave= json_decode( json_encode($id_clave), true);
+if(empty($egresado_si)){
+
+
+  $egresado=new Egresado;
+  $egresado->matricula=$id;
+  $egresado->clave_institucion=$id_clave;
+  $egresado->generacion=$data['generacion'];
+  $egresado->promedio_final=$data['promedio_final'];
+  $egresado->periodo=$id_p;
+  $egresado->save();
+
+  if($egresado->save()){
+  return redirect()->route('generales_egresado')->with('success','¡Datos Actualizados Correctamente!');
+  }
+}
+  return redirect()->route('generales_egresado')->with('error','¡Los datos ya están actualizados!');
+
 }
 
 public function cuestionario_egresado()
