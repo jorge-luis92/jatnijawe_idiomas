@@ -100,16 +100,32 @@ class AdministrativoController extends Controller
     }
 
   public function busqueda_estudiante_aux(){
-
+    $usuario_actual=\Auth::user();
+     if($usuario_actual->tipo_usuario!='4'){
+       return redirect()->back();
+      }
   return view('personal_administrativo\auxiliar_administrativo.busqueda_estudiante_aux');
     }
 
   public function estudiante_activo_aux(){
   return view('personal_administrativo\auxiliar_administrativo.estudiante_activo_aux');
     }
-
-    
-
+    public function carga_hoy(){
+      $usuario_actual=\Auth::user();
+       if($usuario_actual->tipo_usuario!='4'){
+         return redirect()->back();
+        }
+        $now = new \DateTime();
+        $est = DB::table('estudiantes')
+        ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'users.id_user', 'users.bandera')
+        ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+        ->join('users', 'users.id_persona', '=', 'personas.id_persona')
+        ->where('users.bandera', '=', '1')
+        ->whereDate('users.created_at', $now)
+         ->orderBy('users.created_at', 'desc')
+        ->simplePaginate(20);
+    return view('personal_administrativo\auxiliar_administrativo.creados')->with('estudiante', $est);
+      }
 
   public function estudiante_inactivo_aux(){
     $usuario_actual=\Auth::user();

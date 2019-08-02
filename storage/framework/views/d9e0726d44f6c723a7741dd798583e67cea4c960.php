@@ -7,7 +7,7 @@
 <?php $__env->startSection('seccion'); ?>
  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Estudiantes Activos en Prácticas Profesionales </h1>
-<div class="container" id="font5">
+<div class="container" id="font7">
   </br>
   <div class="form-row">
   <label for="nombre" ><?php echo e(__('Buscar Estudiantes')); ?></label>

@@ -1,4 +1,3 @@
-<?php if(\Auth::check()){}?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -284,35 +283,14 @@
       </div>
     </div>
   </div>
-
-
-
   </div>
-
 
   <script src="<?php echo e(asset('requisitos/jquery/jquery.min.js')); ?>"></script>
   <script src="<?php echo e(asset('requisitos/bootstrap/js/bootstrap.bundle.min.js')); ?>"></script>
-
   <!-- Core plugin JavaScript-->
   <script src="<?php echo e(asset('requisitos/jquery-easing/jquery.easing.min.js')); ?>"></script>
-
   <!-- Custom scripts for all pages-->
   <script src="<?php echo e(asset('js/sb-admin-2.min.js')); ?>"></script>
-
-<script>
-
-function validar_sesion(){
-  var ed = document.getElementById('sesion').value;
-  if(ed == '' ){
-     alert("Acceso restringido, Ingrese correctamente");
-     window.location = 'localhost:8000/perfiles';
-  }
-  window.onload=validar_sesion;
-}
-</script>
-
-
 </body>
-
 </html>
 <?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/layouts/plantilla_estudiante.blade.php ENDPATH**/ ?>

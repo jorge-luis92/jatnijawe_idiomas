@@ -27,7 +27,7 @@
                <th >{!! $estudiantes->matricula !!}</th>
                 <th>{!! $estudiantes->semestre !!}</th>
                <td>{!! $estudiantes->nombre!!} {!! $estudiantes->apellido_paterno!!} {!! $estudiantes->apellido_materno!!}</td>
-                 <th >{!! $estudiantes->genero !!}</th>
+                 <th ><?php if(($estudiantes->genero == 'M') or ($estudiantes->genero == 'MASCULINO')){echo "MASCULINO";}else {echo "FEMENINO";}?></th>
                <td style="text-align: center;">EGRESADO</td>
                <td><a  href=""></a></td>
                <td ><a href="generales_egresado_ver/{{ $estudiantes->matricula }}">DATOS GENERALES</a></td>

@@ -256,6 +256,26 @@ if($data['edad'] >17){
             return redirect()->route('estudiante_inactivo')->with('success','¡El estudiante ha sido desactivado!');
 
       }
+
+      public function activar_estudiante_aux($id_user){
+
+        $valor=$id_user;
+        DB::table('users')
+            ->where('users.id_user', $valor)
+            ->update(['bandera' => '1']);
+            return redirect()->route('busqueda_estudiante_aux')->with('success','¡El estudiante ha sido Activado!');
+
+      }
+
+      public function desactivar_estudiante_aux($id_user){
+        $valor=$id_user;
+        DB::table('users')
+            ->where('users.id_user', $valor)
+            ->update(
+                ['bandera' => '0']);
+            return redirect()->route('estudiante_inactivo_aux')->with('success','¡El estudiante ha sido desactivado!');
+
+      }
       public function busqueda_coordinador(){
         $usuario_actual=\Auth::user();
          if($usuario_actual->tipo_usuario!='5'){
@@ -408,14 +428,17 @@ protected function nueva_actualizacion(){
     ->first();
     $fecha_fin= $fecha_fin ->fecha_fin;
     $now = new \DateTime();
-       $fecha_inicio =  date('d-m-Y', strtotime($fecha_inicio));
-       $fecha_fin =  date('d-m-Y', strtotime($fecha_fin));
+       $fechas_inicio =  date('d-m-Y', strtotime($fecha_inicio));
+       $fechas_fin =  date('d-m-Y', strtotime($fecha_fin));
        $now =  date('d-m-Y');
-       $hola='';
-       if ($now < $fecha_fin){
-         $hola = 'si';
+       $actualizacion='';
+       if (($now >= $fechas_inicio) && ($now <= $fechas_fin)){
+         $actualizacion = 'SI';
 }
-  return view('personal_administrativo\admin_sistema.fecha_actualizacion')->with('fechas', $id_clave)->with('ss', $hola);
+else {
+     $actualizacion = 'NO';
+}
+  return view('personal_administrativo\admin_sistema.fecha_actualizacion')->with('fechas', $id_clave)->with('ss', $actualizacion);
 
 }
 
@@ -447,15 +470,5 @@ protected function crear_fecha(Request $request){
 
 }
 
-/*public function hola(){
-  else {
-    $id_clave = $id_clave->id_actualizacion;
-  }
-  $id_clave = DB::table('escuelas')
-  ->select('escuelas.clave_institucion')
-  ->take(1)
-  ->first();
-  $id_clave = $id_clave->clave_institucion;
-}*/
 
 }

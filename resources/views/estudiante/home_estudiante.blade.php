@@ -1,9 +1,9 @@
+@if(auth()->check())
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_estudiante')
 @section('title')
 : Perfil
 @endsection
-
 @section('seccion')
 <div class="container" id="font7">
    @include('flash-message')
@@ -24,6 +24,5 @@
    <span style="color: #190707">LOS LINEAMIENTOS</span> cada inicio de semestre</p>
    <p style="color: #000000"align="center"><a style="text-decoration: underline; color: #FFFFFF;"  href={{route('lineamientos')}}>Lineamientos</a> </p>
 </div>
-
-
   @endsection
+@endif

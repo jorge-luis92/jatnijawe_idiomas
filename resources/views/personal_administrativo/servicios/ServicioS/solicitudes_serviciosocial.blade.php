@@ -4,7 +4,7 @@
 :Solicitudes
  @section('seccion')
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitudes de Servicio Social </h1>
- <div class="container" id="font4">
+ <div class="container" id="font7">
  </br>                    <form method="POST" action="{{ route('solicitudes_practicas') }}">
                          @csrf
 

@@ -11,6 +11,7 @@ Route::get('denegado', 'Homepag@restringdo')->name('denegado');
 
 Route::get('cargar_datos_usuario_estudiante', 'UserSystemController@cargar_datos_usuario_estudiante')->name('carga_persona');
 Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar_datos_usuarios');
+Route::get('cargar_datos_usuario_estudiante', 'UserSystemController@cargar_datos_usuario_estudiante')->name('carga_persona');
 /* Rutas de logueo---*/
 //Route::get('login', 'HomeController@index');
 Route::get('login_estudiante', 'Auth\LoginController@getLogin')->name('login_estudiante');
@@ -248,6 +249,9 @@ Route::get('registro_estudiante_aux', 'Administrativo_Con\AdministrativoControll
 Route::get('busqueda_estudiante_aux', 'Administrativo_Con\AdministrativoController@busqueda_estudiante_aux')->name('busqueda_estudiante_aux');
 Route::get('estudiante_activo_aux', 'Administrativo_Con\AdministrativoController@estudiante_activo_aux')->name('estudiante_activo_aux');
 Route::get('estudiante_inactivo_aux', 'Administrativo_Con\AdministrativoController@estudiante_inactivo_aux')->name('estudiante_inactivo_aux');
+Route::get('desactivar_estudiante_auxiliar/{id_user}', 'AdminController@desactivar_estudiante_aux');
+Route::get('activar_estudiante_auxiliar/{id_user}', 'AdminController@activar_estudiante_aux');
+Route::get('registros_estudiantes', 'Administrativo_Con\AdministrativoController@carga_hoy')->name('registros_estudiantes');
 
 /*SERVICIO SOCIAL Y PRÁCTICAS PROFESIONALES
 ***********************************************************

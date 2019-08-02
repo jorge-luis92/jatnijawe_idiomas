@@ -78,7 +78,7 @@ class GenerarPdf extends Controller
     ->take(1)
     ->first();
     if(empty($detalles->matricula)){
-      return redirect()->route('home_estudiante')->with('error','¡Aún no has enviado ninguna solicitu de taller!');
+      return redirect()->route('home_estudiante')->with('error','¡Aún no has enviado ninguna solicitud de taller!');
     }
     else {
   $id_persona = DB::table('estudiantes')

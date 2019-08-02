@@ -6,7 +6,7 @@
 
 @section('seccion')
  @include('flash-message')
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Estudiantes Inactivos</h1>
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registros de Estudiantes </h1>
   <div class="container" id="font7">
     </br>
   <div class="table-responsive">
@@ -15,8 +15,8 @@
         <tr>
           <th scope="col">MATRICULA</th>
             <th scope="col">SEMESTRE</th>
+            <th scope="col">MODALIDAD</th>
           <th scope="col">NOMBRE</th>
-          <th style="text-align: center;" colspan="1" >ACCIONES</th>
         </tr>
       </thead>
       <tbody>
@@ -24,8 +24,8 @@
         <tr>
                <th scope="row">{!! $estudiantes->matricula !!}</th>
                 <th scope="row">{!! $estudiantes->semestre !!}</th>
-               <td>{!! $estudiantes->nombre!!} {!! $estudiantes->apellido_paterno!!} {!! $estudiantes->apellido_materno!!}</td>
-                <td><a href="activar_estudiante_auxiliar/{{ $estudiantes->id_user }}">ACTIVAR</a></td>
+                  <th scope="row">{!! $estudiantes->modalidad !!}</th>
+               <td scope="row">{!! $estudiantes->nombre!!} {!! $estudiantes->apellido_paterno!!} {!! $estudiantes->apellido_materno!!}</td>
              </tr>
          @endforeach
       </tbody>

@@ -6,6 +6,7 @@
 <?php $__env->startSection('seccion'); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center">Cuestionario al Egresado</h1>
 <div class="container" id="font7">
+    <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </br>
 <form method="POST" action="<?php echo e(route('cuestionario_egresado_actu')); ?>">
                         <?php echo csrf_field(); ?>
@@ -14,63 +15,52 @@
 <div class="radio col-md-4" id="labels">
   <label>¿Títulado?</label>
 
- <input type="radio" id="si_titulo" name="titulo" value="si_titulo" onclick="checar()" required >
+ <input type="radio" id="si_titulo" name="titulo" value="1" onclick="sititulado(this.id)" required >
  <label for="si_titulo">Si</label>
 
- <input type="radio" id="no_titulo" name="titulo" value="no_titulo" onclick="nochecar()" required>
+ <input type="radio" id="no_titulo" name="titulo" value="0" onclick="notitulado(this.id)" required>
  <label for="no_titulo">No</label>
 
 </div>
 
 <div class="form-group col-md-4" id="labels">
   <label for="fecha_expedicion">Fecha de Expedición del título</label>
-  <input type="date" class="form-control" id="fecha_expedicion" >
+  <input type="date" name="fecha_expedicion" onchange="validarFechaMenorActual();" max="<?php echo date("Y-m-d");?>" value="<?php if(empty($titulo_e->fecha_expedicion)){ $vacio=null; echo $vacio;} else{ echo $titulo_e->fecha_expedicion;} ?>" class="form-control" id="fecha_expedicion" required disabled >
+  <pre id="resultado"></pre>
 </div>
 
 
   <div class="form-group col-md-4">
-    <label for="modalidad_tit">Modalidad de Titulación</label>
-      <select name="modalidad_tit" id="modalidad_tit" required class="form-control">
+    <label for="modalidad_tit">Modalidad de Titulación: <?php if(empty($titulo_e->modalidad_tit)){ $vacio=null; echo $vacio;} else{ echo $titulo_e->modalidad_tit;}?></label>
+      <select name="modalidad_tit" id="modalidad_tit"  required class="form-control" required disabled>
       <option value="">Seleccione una opción</option>
-      <option value="escolarizada">TESIS</option>
-      <option value="semiescolarizada">PROMEDIO</option>
-      <option value="flexi">CENEVAL</option>
-      <option value="flexi">EXPERIENCIA PROFESIONAL</option>
-      <option value="flexi">OTRO</option>
+      <option value="TESIS">TESIS</option>
+      <option value="PROMEDIO">PROMEDIO</option>
+      <option value="CENEVAL">CENEVAL</option>
+      <option value="EXPERIENCIA PROFESIONAL">EXPERIENCIA PROFESIONAL</option>
           </select>
 </div>
-
 </div>
-
 </br>
 <div class="form-row">
   <div class="form-group col-md-12">
   <label for="motivos_notitulado" ><?php echo e(__('En caso de no haberse titulado, ¿Cuales son los motivos de haber postergado la Titulación?')); ?></label>
-  <textarea id="motivos_notitulado" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('motivos_notitulado')) :
+  <textarea id="motivos_notitulado" name="motivos_notitulado" type="text" disabled onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('motivos_notitulado')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('motivos_notitulado'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="motivos_notitulado" autocomplete="motivos_notitulado"> </textarea>
-    <?php if ($errors->has('motivos_notitulado')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('motivos_notitulado'); ?>
-  <span class="invalid-feedback" role="alert">
-  <strong><?php echo e($message); ?></strong>
-  </span>
-                              <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>
+endif; ?>"   autocomplete="motivos_notitulado" required><?php if(empty($titulo_e->motivos_notitulado)){$vacio=null; echo $vacio;}else{echo $titulo_e->motivos_notitulado;}?></textarea>
 </div>
 </div>
 
 <div class="form-row">
   <div class="form-group col-md-12">
   <label for="razon_carrera" ><?php echo e(__('¿Cual es la razón de haber estudiado la Licenciatura?')); ?></label>
-  <textarea id="razon_carrera" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('razon_carrera')) :
+  <textarea id="razon_carrera" type="text" onKeyUp="this.value = this.value.toUpperCase();" required class="form-control <?php if ($errors->has('razon_carrera')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('razon_carrera'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="razon_carrera" autocomplete="razon_carrera" > </textarea>
+endif; ?>"  name="razon_carrera" autocomplete="razon_carrera" ><?php if(empty($cuestionario_e->razon_carrera)){$vacio=null; echo $vacio;}else{echo $cuestionario_e->razon_carrera;}?></textarea>
     <?php if ($errors->has('razon_carrera')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('razon_carrera'); ?>
@@ -87,21 +77,21 @@ endif; ?>
 <div class="radio col-md-8" id="labels">
  <label>¿Has realizado o actualmente realizas estudios de Posgrado?</label>
 
-<input type="radio" id="si_titulo" name="titulo" value="si_titulo" onclick="checar()" required >
+<input type="radio" id="si_pos" name="bandera_posgrado" value="1" onclick="posgrado_si(this.id)" required >
 <label for="si_titulo">Si</label>
 
-<input type="radio" id="no_titulo" name="titulo" value="no_titulo" onclick="nochecar()" required>
+<input type="radio" id="no_pos" name="bandera_posgrado" value="0" onclick="posgrado_no(this.id)" required>
 <label for="no_titulo">No</label>
 </div>
 </div>
 
 <div class="form-group col-md-4">
-  <label for="modalidad_tit">Específique</label>
-    <select name="modalidad_tit" id="modalidad_tit" required class="form-control">
+  <label for="posgrado">Específique</label>
+    <select name="posgrado" id="posgrado" required class="form-control" disabled>
     <option value="">Seleccione una opción</option>
-    <option value="escolarizada">DIPLOMADO</option>
-    <option value="semiescolarizada">MAESTRÍA</option>
-    <option value="flexi">DOCTORADO</option>
+    <option value="DIPLOMADO">DIPLOMADO</option>
+    <option value="MAESTRÍA">MAESTRÍA</option>
+    <option value="DOCTORADO">DOCTORADO</option>
 
         </select>
 </div>
@@ -111,43 +101,30 @@ endif; ?>
 <div class="radio col-md-12" id="labels">
  <label>¿Has realizado o actualmente realizas otros estudios en un ámbito diferente al perfil?</label>
 
-<input type="radio" id="si_titulo" name="titulo" value="si_titulo" onclick="checar()" required >
-<label for="si_titulo">Si</label>
+<input type="radio" id="si_estudio" name="otros_e"  onclick="si_otros(this.id)" required >
+<label for="si_estudio">Si</label>
 
-<input type="radio" id="no_titulo" name="titulo" value="no_titulo" onclick="nochecar()" required>
-<label for="no_titulo">No</label>
+<input type="radio" id="no_estudio" name="otros_e"  onclick="no_otros(this.id)" required>
+<label for="no_estudio">No</label>
 </div>
 </div>
 
 <div class="form-row">
   <div class="form-group col-md-12">
-  <label for="estudios_despues" ><?php echo e(__('Específique')); ?></label>
-  <input id="estudios_despues" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('estudios_despues')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('estudios_despues'); ?> is-invalid <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="estudios_despues" autocomplete="estudios_despues" >
-    <?php if ($errors->has('estudios_despues')) :
-if (isset($message)) { $messageCache = $message; }
-$message = $errors->first('estudios_despues'); ?>
-  <span class="invalid-feedback" role="alert">
-  <strong><?php echo e($message); ?></strong>
-  </span>
-                              <?php unset($message);
-if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>
-</div>
+  <label for="otros_estudios" ><?php echo e(__('Específique')); ?></label>
+  <input id="otros_estudios" disabled type="text"  name="otros_estudios" <?php if(empty($cuestionario_e->otros_estudios)){$vacio=null; echo $vacio;}else{echo $cuestionario_e->otros_estudios;}?> onKeyUp="this.value = this.value.toUpperCase();" class="form-control">
+  </div>
 </div>
 
 <div class="form-row">
   <div class="form-group col-md-8">
-    <label for="modalidad_tit">¿Cuál es el	Grado de satisfacción en cuanto a la formación recibida por la Licenciatura?</label>
-      <select name="modalidad_tit" id="modalidad_tit" required class="form-control">
+    <label for="grado_satisfaccion">¿Cuál es el	Grado de satisfacción en cuanto a la formación recibida por la Licenciatura?</label>
+      <select name="grado_satisfaccion" id="grado_satisfaccion" required class="form-control">
       <option value="">Seleccione una opción</option>
-      <option value="excelente">EXCELENTE</option>
-      <option value="bueno">BUENO</option>
-      <option value="regular">REGULAR</option>
-      <option value="malo">MALO</option>
+      <option value="EXCELENTE">EXCELENTE</option>
+      <option value="BUENO">BUENO</option>
+      <option value="REGULAR">REGULAR</option>
+      <option value="MALO">MALO</option>
           </select>
 </div>
 </div>
@@ -156,11 +133,11 @@ endif; ?>
 <div class="radio col-md-4" id="labels">
  <label>¿Elegirías la misma institución?</label>
 
-<input type="radio" id="si_titulo" name="titulo" value="si_titulo" onclick="checar()" required >
-<label for="si_titulo">Si</label>
+<input type="radio" id="si_elegir" name="bandera_lamisma" value="1" onclick="elegir_si(this.id)" required >
+<label for="si_elegir">Si</label>
 
-<input type="radio" id="no_titulo" name="titulo" value="no_titulo" onclick="nochecar()" required>
-<label for="no_titulo">No</label>
+<input type="radio" id="no_elegir" name="bandera_lamisma" value="0" onclick="elegir_no(this.id)" required>
+<label for="no_elegir">No</label>
 
 </div>
 
@@ -168,11 +145,11 @@ endif; ?>
 
 <div class="form-group col-md-12">
 <label for="la_misma" ><?php echo e(__('¿Por qué?')); ?></label>
-<input id="la_misma" type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('la_misma')) :
+<input id="la_misma" type="text" disabled onKeyUp="this.value = this.value.toUpperCase();" class="form-control <?php if ($errors->has('la_misma')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('la_misma'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="la_misma" autocomplete="la_misma" >
+endif; ?>"  name="la_misma" value="<?php if(empty($cuestionario_e->la_misma)){$vacio=null; echo $vacio;}else{echo $cuestionario_e->la_misma;}?>" autocomplete="la_misma" >
   <?php if ($errors->has('la_misma')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('la_misma'); ?>
@@ -200,24 +177,95 @@ endif; ?>
 
 <?php $__env->stopSection(); ?>
 
-<script>
-function numeros(e){
- key = e.keyCode || e.which;
- tecla = String.fromCharCode(key).toLowerCase();
- letras = " 0123456789";
- especiales = [8,37,39,46];
+<script language="JavaScript">
+    function sititulado(id){
+      // document.getElementById("nombre_lengua").removeAttr("disabled");
+       //$(".inputText").removeAttr("disabled");
+       if ( id == "si_titulo" ) {
+        document.getElementById("fecha_expedicion").removeAttribute("disabled");
+        document.getElementById("modalidad_tit").removeAttribute("disabled");
+         document.getElementById("motivos_notitulado").setAttribute("disabled","disabled");
+        document.getElementById('motivos_notitulado').value = '';
+      }
+    }
 
- tecla_especial = false
- for(var i in especiales){
-if(key == especiales[i]){
-  tecla_especial = true;
-  break;
-     }
- }
+    function notitulado(id){
+      if ( id == "no_titulo" ) {
+        document.getElementById("motivos_notitulado").removeAttribute("disabled");
+       document.getElementById("fecha_expedicion").setAttribute("disabled","disabled");
+       document.getElementById("modalidad_tit").setAttribute("disabled","disabled");
+       document.getElementById('fecha_expedicion').value = '';
+       document.getElementById('modalidad_tit').value = '';
+         }
 
- if(letras.indexOf(tecla)==-1 && !tecla_especial)
-     return false;
+    }
+</script>
+
+<script language="JavaScript">
+    function posgrado_si(id){
+      // document.getElementById("nombre_lengua").removeAttr("disabled");
+       //$(".inputText").removeAttr("disabled");
+       if ( id == "si_pos" ) {
+        document.getElementById("posgrado").removeAttribute("disabled");
+      }
+    }
+
+    function posgrado_no(id){
+      if ( id == "no_pos" ) {
+        document.getElementById("posgrado").setAttribute("disabled","disabled");
+       document.getElementById('posgrado').value = '';
+         }
+
+    }
+</script>
+
+<script language="JavaScript">
+    function si_otros(id){
+      // document.getElementById("nombre_lengua").removeAttr("disabled");
+       //$(".inputText").removeAttr("disabled");
+       if ( id == "si_estudio" ) {
+        document.getElementById("otros_estudios").removeAttribute("disabled");
+      }
+    }
+
+    function no_otros(id){
+      if ( id == "no_estudio" ) {
+        document.getElementById("otros_estudios").setAttribute("disabled","disabled");
+       document.getElementById('otros_estudios').value = '';
+         }
+
+    }
+</script>
+
+<script language="JavaScript">
+    function elegir_si(id){
+      // document.getElementById("nombre_lengua").removeAttr("disabled");
+       //$(".inputText").removeAttr("disabled");
+       if ( id == "si_elegir" ) {
+        document.getElementById("la_misma").removeAttribute("disabled");
+      }
+    }
+
+    function elegir_no(id){
+      if ( id == "no_elegir" ) {
+       document.getElementById("la_misma").removeAttribute("disabled");
+       //document.getElementById('la_misma').value = '';
+         }
+    }
+</script>
+
+<script language="JavaScript">
+function validarFechaMenorActual(){
+  var today = new Date();
+  var ingreso = document.getElementById('fecha_expedicion').value;
+  var hoy = today.split("-");
+  var fecha_ingreso_form = ingreso.split("-");
+
+  if (fecha_ingreso_form > hoy){
+    document.getElementById('resultado').value = 'No puedes ingresar una fecha mayor al día de hoy' ;
+  }
 }
+
 </script>
 
 <?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/seguimiento_egresadosP/cuestionario_egresado.blade.php ENDPATH**/ ?>

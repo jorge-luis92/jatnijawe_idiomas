@@ -30,7 +30,7 @@ class CoordinadorAcademico extends Controller
       ->select('estudiantes.matricula', 'estudiantes.semestre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.genero', 'users.id_user', 'users.bandera')
       ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
       ->join('users', 'users.id_persona', '=', 'personas.id_persona')
-      ->where([['estudiantes.egresado', '=', '0'], ['estudiantes.semestre', '=', '8']])
+      ->where([['estudiantes.egresado', '=', '0'], ['estudiantes.semestre', '=', '8'], ['estudiantes.sede', '=', 'C.U.']])
        ->orderBy('estudiantes.matricula', 'asc')
       ->simplePaginate(10);
 

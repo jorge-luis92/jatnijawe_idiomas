@@ -7,7 +7,7 @@
 @section('seccion')
  @include('flash-message')
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Estudiantes Activos en Prácticas Profesionales </h1>
-<div class="container" id="font5">
+<div class="container" id="font7">
   </br>
   <div class="form-row">
   <label for="nombre" >{{ __('Buscar Estudiantes') }}</label>

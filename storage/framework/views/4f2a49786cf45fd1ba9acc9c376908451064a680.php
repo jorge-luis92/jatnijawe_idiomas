@@ -309,6 +309,9 @@ endif; ?>
       document.getElementById("des_enf_ale").removeAttribute("disabled");
       document.getElementById("ind_enf_ale").removeAttribute("disabled");
       document.getElementById("enfermedad_de").setAttribute("disabled","disabled");
+      document.getElementById('enfermedad_de').value = '';
+  //    document.getElementById('des_enf_ale').value = '';
+    //    document.getElementById('ind_enf_ale').value = '';
     }
 
     if(ed == 'Enfermedad'){
@@ -316,6 +319,9 @@ endif; ?>
       document.getElementById("des_enf_ale").removeAttribute("disabled");
       document.getElementById("ind_enf_ale").removeAttribute("disabled");
       document.getElementById("alergias_d").setAttribute("disabled","disabled");
+      document.getElementById('alergias_d').value = '';
+      //document.getElementById('des_enf_ale').value = '';
+        //document.getElementById('ind_enf_ale').value = '';
     }
 
   }

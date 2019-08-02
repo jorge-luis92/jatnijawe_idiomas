@@ -46,7 +46,7 @@
                 <td>{{$user->semestre}}</td>
                 <td>{{$user->modalidad}}</td>
                 <td><a data-toggle="modal" href="#">EDITAR</a></td>
-                 <td><a href="desactivar_estudiante/{{ $user->id_user }}">DESACTIVAR</a></td>
+                 <td><a href="desactivar_estudiante_auxiliar/{{ $user->id_user }}">DESACTIVAR</a></td>
                 </tr>
             @endforeach
         </tbody>

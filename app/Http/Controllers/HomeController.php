@@ -39,6 +39,12 @@ use Illuminate\Validation\Rule;
      }
      public function index( Request $request)
       {
+        if (!auth()->check())
+            {
+              return redirect()->route('perfiles');
+            }
+            else
+            {
         $usuario_actual=\Auth::user();
          if($usuario_actual->tipo_usuario=='estudiante'){
            if($usuario_actual->bandera=='1'){
@@ -77,7 +83,7 @@ use Illuminate\Validation\Rule;
            return $this->loggedOut($request) ?: redirect('perfiles');
            }
           }
-
+}
         }
 
 

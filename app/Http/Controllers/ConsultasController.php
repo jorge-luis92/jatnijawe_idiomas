@@ -33,7 +33,29 @@ class ConsultasController extends Controller
          return redirect()->back();
         }
 
+        $fecha_inicio = DB::table('periodo_actualizacion')
+        ->select('periodo_actualizacion.fecha_inicio')
+        ->take(1)
+        ->first();
+        $fecha_inicio= $fecha_inicio ->fecha_inicio;
 
+        $fecha_fin = DB::table('periodo_actualizacion')
+        ->select('periodo_actualizacion.fecha_fin')
+        ->take(1)
+        ->first();
+        $fecha_fin= $fecha_fin ->fecha_fin;
+        $now = new \DateTime();
+           $fechas_inicio =  date('d-m-Y', strtotime($fecha_inicio));
+           $fechas_fin =  date('d-m-Y', strtotime($fecha_fin));
+           $now =  date('d-m-Y');
+           $actualizacion='';
+           if (($now >= $fechas_inicio) && ($now <= $fechas_fin)){
+             $actualizacion = 'SI';
+    }
+    else {
+         $actualizacion = 'NO';
+    }
+    if($actualizacion == 'SI'){
       $usuario_actual=auth()->user();
       $id=$usuario_actual->id_user;
       $id_persona = DB::table('estudiantes')
@@ -66,6 +88,10 @@ class ConsultasController extends Controller
         ->simplePaginate(7);
 
         return view('estudiante\datos.datos_generales')->with('u',$users)->with('l',$lenguas_r)->with('b',$becas_r);
+      }
+      else {
+        return redirect()->route('home_estudiante')->with('error', 'El periodo de Actualizacion de datos ha terminado');
+      }
       }
 
 
@@ -126,7 +152,7 @@ class ConsultasController extends Controller
             ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular']])
             ->take(1)
             ->first();
-      
+
 
             $codigos = DB::table('codigos_postales')
             ->select('codigos_postales.cp')

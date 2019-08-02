@@ -43,24 +43,11 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href={{ route('carga_de_datos')}}>Subir Archivo</a>
+            <a class="collapse-item" href={{ route('registros_estudiantes')}}>Registros del día</a>
 
           </div>
         </div>
       </li>
-
-    <!--  <li class="nav-item" >
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#grupos" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa fa-users" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Grupos</span>
-        </a>
-        <div id="grupos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href={{ route('gestion_estudiante')}}>Ver Grupos</a>
-
-
-          </div>
-        </div>
-      </li>-->
 
       <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#estudiantes" aria-expanded="true" aria-controls="collapseTwo">

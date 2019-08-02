@@ -13,11 +13,11 @@
   <div class="form-row">
   <div class="form-group col-md-6">
     <label for="fecha_inicio" ><?php echo e(__('* Fecha de inicio')); ?></label>
-    <input id="fecha_inicio" type="date"  name="fecha_inicio"  value="<?php if(empty($fechas->fecha_inicio)){ $vacio=null; echo $vacio;} else{ echo $fechas->fecha_inicio;} ?>" onblur="ba();"  class="form-control"  required>
+    <input id="fecha_inicio" type="date"  name="fecha_inicio"  min= "<?php echo date("Y-m-d");?>"  value="<?php if(empty($fechas->fecha_inicio)){ $vacio=null; echo $vacio;} else{ echo $fechas->fecha_inicio;} ?>" onblur="ba();"  class="form-control"  required>
     </div>
     <div class="form-group col-md-6">
       <label for="fecha_fin" ><?php echo e(__('* Fecha Final')); ?></label>
-      <input id="fecha_fin" type="date" name="fecha_fin" min= "<?php echo date("Y-m-d");?>"  value="<?php if(empty($fechas->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo $fechas->fecha_fin;} ?>"class="form-control"  required>
+      <input id="fecha_fin" type="date" name="fecha_fin" min="<?php echo date("Y-m-d");?>"  value="<?php if(empty($fechas->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo $fechas->fecha_fin;} ?>"class="form-control"  required>
             </div>
             </div>
                         <div class="form-group">
@@ -29,8 +29,8 @@
                             </div>
                         </div>
                     </form>
-                    <input  type="text"  value="<?php echo e($ss); ?>" class="form-control"  >
-
+                    <input  type="text"  value="<?php echo e($ss); ?> <?php echo date("Y-m-d");?>" class="form-control"  >
+</div>
 
 <?php $__env->stopSection(); ?>
 

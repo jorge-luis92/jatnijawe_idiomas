@@ -15,12 +15,13 @@ class MDusuariostandard
      */
     public function handle($request, Closure $next)
     {
-
         $usuario_actual=\Auth::user();
-
         if($usuario_actual->tipo_usuario=='estudiante'){
            return $next($request);
 
       }
+
     }
+
+
 }

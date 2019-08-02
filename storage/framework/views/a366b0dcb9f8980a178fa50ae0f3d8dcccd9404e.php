@@ -27,7 +27,7 @@
                <th ><?php echo $estudiantes->matricula; ?></th>
                 <th><?php echo $estudiantes->semestre; ?></th>
                <td><?php echo $estudiantes->nombre; ?> <?php echo $estudiantes->apellido_paterno; ?> <?php echo $estudiantes->apellido_materno; ?></td>
-                 <th ><?php echo $estudiantes->genero; ?></th>
+                 <th ><?php if(($estudiantes->genero == 'M') or ($estudiantes->genero == 'MASCULINO')){echo "MASCULINO";}else {echo "FEMENINO";}?></th>
                <td style="text-align: center;">EGRESADO</td>
                <td><a  href=""></a></td>
                <td ><a href="generales_egresado_ver/<?php echo e($estudiantes->matricula); ?>">DATOS GENERALES</a></td>
