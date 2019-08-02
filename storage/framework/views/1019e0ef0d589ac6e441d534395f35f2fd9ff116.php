@@ -17,3 +17,4 @@
 	proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
 </body>
 </html>
+<?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/myPDF.blade.php ENDPATH**/ ?>

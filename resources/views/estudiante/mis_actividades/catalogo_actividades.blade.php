@@ -55,7 +55,7 @@
       @endforeach
      </tbody>
      </table>
-     </div>
+     </div> 
      @if (count($dato))
      {{ $dato->links() }}
      @endif

@@ -34,7 +34,7 @@ class UserSystemController extends Controller
 
     public function form_nuevo_usuario()
 	{
-  //  $usuario_actual=\Auth::user();
+  // $usuario_actual=\Auth::user();
     // if($usuario_actual->tipo_usuario!='admin'){
      //return redirect()->back();
     //}
@@ -73,7 +73,10 @@ class UserSystemController extends Controller
 
 
   public function cargar_datos_usuario_estudiante(){
-      //$usu=0;
+    $usuario_actual=\Auth::user();
+     if($usuario_actual->tipo_usuario!='4'){
+       return redirect()->back();
+      }
      return view('personal_administrativo\auxiliar_administrativo.carga_de_datos');
 
 }

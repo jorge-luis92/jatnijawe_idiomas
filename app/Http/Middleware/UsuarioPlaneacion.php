@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class MDusuarioadmin
+class UsuarioPlaneacion
 {
     /**
      * Handle an incoming request.
@@ -15,14 +15,13 @@ class MDusuarioadmin
      */
     public function handle($request, Closure $next)
     {
-        $usuario_actual=\Auth::user();
-        if($usuario_actual->tipo_usuario=='5'){
-           return $next($request);
+          $usuario_actual=\Auth::user();
+          if($usuario_actual->tipo_usuario=='2'){
+             return $next($request);
         }
         else{
           return redirect()->back();
         }
     }
 }
-
 // 1= formacion 2=planeacion 3=servicios 4=auxiliar 5=admin

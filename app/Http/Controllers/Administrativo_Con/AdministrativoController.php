@@ -56,14 +56,26 @@ class AdministrativoController extends Controller
     }
 
     public function auxiliar(){
+      $usuario_actuales=\Auth::user();
+       if($usuario_actuales->tipo_usuario!='4'){
+         return redirect()->back();
+        }
       return view('personal_administrativo\auxiliar_administrativo.gestion_estudiante');
     }
 
     public function auxiliar_carga(){
+      $usuario_actuales=\Auth::user();
+       if($usuario_actuales->tipo_usuario!='4'){
+         return redirect()->back();
+        }
       return view('personal_administrativo\auxiliar_administrativo.carga_de_datos');
     }
 
     public function formacion_busqueda(){
+      $usuario_actuales=\Auth::user();
+       if($usuario_actuales->tipo_usuario!='1'){
+         return redirect()->back();
+        }
       return view('personal_administrativo\formacion_integral.home_formacion');
     }
 
@@ -76,26 +88,50 @@ class AdministrativoController extends Controller
   }
 
   public function home_formacion(){
+    $usuario_actuales=\Auth::user();
+     if($usuario_actuales->tipo_usuario!='1'){
+       return redirect()->back();
+      }
   return view('personal_administrativo\formacion_integral.home_formacion');
 }
 
   public function carga_de_datos(){
+    $usuario_actuales=\Auth::user();
+     if($usuario_actuales->tipo_usuario!='4'){
+       return redirect()->back();
+      }
     return view('personal_administrativo\auxiliar_administrativo.carga_de_datos');
   }
 
   public function gestion_estudiante(){
+    $usuario_actuales=\Auth::user();
+     if($usuario_actuales->tipo_usuario!='4'){
+       return redirect()->back();
+      }
     return view('personal_administrativo\auxiliar_administrativo.gestion_estudiante');
     }
 
   public function grupo_auxadm(){
+    $usuario_actuales=\Auth::user();
+     if($usuario_actuales->tipo_usuario!='4'){
+       return redirect()->back();
+      }
   return view('personal_administrativo\auxiliar_administrativo.grupo_auxadm');
       }
 
   public function datos_estudiantes(){
+    $usuario_actuales=\Auth::user();
+     if($usuario_actuales->tipo_usuario!='4'){
+       return redirect()->back();
+      }
   return view('personal_administrativo\auxiliar_administrativo.datos_estudiantes');
         }
 
         public function registro_estudiante_aux(){
+          $usuario_actuales=\Auth::user();
+           if($usuario_actuales->tipo_usuario!='4'){
+             return redirect()->back();
+            }
   return view('personal_administrativo\auxiliar_administrativo.registro_estudiante_aux');
     }
 
@@ -108,6 +144,10 @@ class AdministrativoController extends Controller
     }
 
   public function estudiante_activo_aux(){
+    $usuario_actuales=\Auth::user();
+     if($usuario_actuales->tipo_usuario!='4'){
+       return redirect()->back();
+      }
   return view('personal_administrativo\auxiliar_administrativo.estudiante_activo_aux');
     }
     public function carga_hoy(){

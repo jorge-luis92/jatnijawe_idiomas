@@ -5,20 +5,19 @@ use App\Estudiante;
 use App\Persona;
 /* Página principal---*/
 Route::get('/', 'Homepag@homepage')->name('welcome');
-
+Route::get('perfiles', 'Homepag@perfil')->name('perfiles');
 Route::get('prueba', 'UserSystemController@checando')->name('prueba');
 Route::get('denegado', 'Homepag@restringdo')->name('denegado');
-
-Route::get('cargar_datos_usuario_estudiante', 'UserSystemController@cargar_datos_usuario_estudiante')->name('carga_persona');
-Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar_datos_usuarios');
-Route::get('cargar_datos_usuario_estudiante', 'UserSystemController@cargar_datos_usuario_estudiante')->name('carga_persona');
 /* Rutas de logueo---*/
-//Route::get('login', 'HomeController@index');
-Route::get('login_estudiante', 'Auth\LoginController@getLogin')->name('login_estudiante');
+Route::get('estudiante', 'Auth\LoginController@getLogin')->name('estudiante');
 Route::post('login_studiante', ['as' =>'login_studiante', 'uses' => 'Auth\LoginController@postLogin']);
-//Route::post('login_admin', ['as' =>'login_admin', 'uses' => 'Administrativo_Con\AdministrativoController@index']);
-//Route::post('login_studiante', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdministrativo@postLogin']);
-Route::get('perfiles', 'Homepag@perfil')->name('perfiles');
+Route::get('tallerista', 'Tallerista_Con\LoginTallerista@getLoginTallerista')->name('tallerista');
+Route::post('tallerista', ['as' =>'tallerista', 'uses' => 'Tallerista_Con\LoginTallerista@postLoginTallerista']);
+Route::get('administrativo', 'Administrativo_Con\LoginAdministrativo@getLogin')->name('administrativo');
+Route::get('logout_system', ['as' => 'logout_system', 'uses' => 'Administrativo_Con\LoginAdministrativo@getLogout']);
+Route::post('admin', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdministrativo@postLogin']);
+
+
 Route::group(['middleware' => 'auth','talleristamiddleware'], function () {
 //Route::get('login_personal', 'Administrativo_Con\AdministrativoController@login_admin')->name('login_personal');
 Route::get('login_tallerista', 'Tallerista_Con\TalleristaController@logintallerista')->name('login_tallerista');
@@ -26,43 +25,33 @@ Route::get('home_tallerista', 'Tallerista_Con\TalleristaController@home_talleris
 Route::get('talleres_tallerista', 'Tallerista_Con\TalleristaController@talleres_tallerista')->name('talleres_tallerista');
 Route::get('grupo_tallerista', 'Tallerista_Con\TalleristaController@grupo_tallerista')->name('grupo_tallerista');
 Route::get('talleres_finalizados', 'Tallerista_Con\TalleristaController@talleres_finalizados')->name('talleres_finalizados');
-
-
 });
-Route::get('tallerista', 'Tallerista_Con\LoginTallerista@getLoginTallerista');
-Route::post('tallerista', ['as' =>'tallerista', 'uses' => 'Tallerista_Con\LoginTallerista@postLoginTallerista']);
-Route::get('admin', 'Administrativo_Con\LoginAdministrativo@getLogin');
-Route::get('logout_system', ['as' => 'logout_system', 'uses' => 'Administrativo_Con\LoginAdministrativo@getLogout']);
-//Route::post('login_admin', ['as' =>'login_admin', 'uses' => 'Administrativo_Con\AdministrativoController@index']);
-Route::post('admin', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdministrativo@postLogin']);
-//Route::get('logout_admin', ['as' => 'logout', 'uses' => 'Administrativo_Con\LoginAdministrativo@getLogout']);
-//Route::get('/', 'HomeController@index');
-/* Rutas de Estudiante---*/
-Route::group(['middleware' => 'auth'], function () {
-Route::get('inicio_formacion', 'FormacionIntegralController@inicio_formacion')->name('inicio_formacion');
+/* Rutas de Acdemico---*/
+Route::group(['middleware' => 'auth','academicomiddleware'], function () {
 Route::get('home_auxiliar_adm', 'Administrativo_Con\AdministrativoController@home_auxiliar_adm')->name('home_auxiliar_adm');
 Route::get('carga_de_datos', 'Administrativo_Con\AdministrativoController@carga_de_datos')->name('carga_de_datos');
+Route::get('registros_estudiantes', 'Administrativo_Con\AdministrativoController@carga_hoy')->name('registros_estudiantes');
+Route::get('registro_estudiante_aux', 'Administrativo_Con\AdministrativoController@registro_estudiante_aux')->name('registro_estudiante_aux');
+Route::get('busqueda_estudiante_aux', 'Administrativo_Con\AdministrativoController@busqueda_estudiante_aux')->name('busqueda_estudiante_aux');
+Route::get('estudiante_activo_aux', 'Administrativo_Con\AdministrativoController@estudiante_activo_aux')->name('estudiante_activo_aux');
+Route::get('estudiante_inactivo_aux', 'Administrativo_Con\AdministrativoController@estudiante_inactivo_aux')->name('estudiante_inactivo_aux');
+Route::get('desactivar_estudiante_auxiliar/{id_user}', 'AdminController@desactivar_estudiante_aux');
+Route::get('activar_estudiante_auxiliar/{id_user}', 'AdminController@activar_estudiante_aux');
 Route::get('gestion_estudiante', 'Administrativo_Con\AdministrativoController@gestion_estudiante')->name('gestion_estudiante');
 Route::get('grupo_auxadm', 'Administrativo_Con\AdministrativoController@grupo_auxadm')->name('grupo_auxadm');
 Route::get('datos_estudiantes', 'Administrativo_Con\AdministrativoController@datos_estudiantes')->name('datos_estudiantes');
-Route::get('registro_estudiante_aux', 'Administrativo_Con\AdministrativoController@registro_estudiante_aux')->name('registro_estudiante_aux');
-Route::get('busqueda_estudiante_aux', 'Administrativo_Con\AdministrativoController@busqueda_estudiante_aux')->name('busqueda_estudiante_aux');
-Route::any('busqueda_estudiantes_aux', 'AdminController@busqueda_aux')->name('busqueda_estudiantes_aux');
-Route::get('estudiante_activo_aux', 'Administrativo_Con\AdministrativoController@estudiante_activo_aux')->name('estudiante_activo_aux');
-Route::get('estudiante_inactivo_aux', 'Administrativo_Con\AdministrativoController@estudiante_inactivo_aux')->name('estudiante_inactivo_aux');
 Route::get('futuros_egresados', 'CoordinadorAcademico@ver_futuros_egresados')->name('futuros_egresados');
 Route::get('acreditar_egresado/{matricula}', 'CoordinadorAcademico@cambiar_estudiante');
 Route::get('estudiantes_egresados', 'CoordinadorAcademico@egresados_estudiantes')->name('estudiantes_egresados');
-
+Route::any('busqueda_estudiantes_aux', 'AdminController@busqueda_aux')->name('busqueda_estudiantes_aux');
+Route::get('cargar_datos_usuario_estudiante', 'UserSystemController@cargar_datos_usuario_estudiante')->name('carga_persona');
+Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar_datos_usuarios');
 });
 
-Route::group(['middleware' => 'auth','checar'], function () {
-//Route::get('home_auxiliar', 'HomeController@index')->name('home_auxiliar');
+
+Route::group(['middleware' => 'auth','formacionmiddleware'], function () {
+Route::get('inicio_formacion', 'FormacionIntegralController@inicio_formacion')->name('inicio_formacion');
 Route::get('register_tallerista', 'FormacionIntegralController@getRegister');
-//Route::post('register_tallerista', ['as' => 'register_tallerista', 'uses' => 'FormacionIntegralController@postRegister']);
-Route::get('registros_talleristas', 'UserSystemController@index')->name('registros_talleristas');
-//Route::get('form_nuevo_usuario', 'UserSystemController@form_nuevo_usuario')->name('form_nuevo_usuario');
-//Route::post('agregar_nuevo_usuario', 'UserSystemController@agregar_nuevo_usuario')->name('agregar_nuevo_usuario');
 Route::get('form_nuevo_taller', 'FormacionIntegralController@form_nuevo_taller')->name('form_nuevo_taller');
 Route::post('agregar_nuevo_taller', 'FormacionIntegralController@agregar_nuevo_taller')->name('agregar_nuevo_taller');
 });
@@ -163,10 +152,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('nuevo_periodo_agregar', 'AdminController@crear_periodo')->name('nuevo_periodo_agregar');
   Route::get('agregar_fecha', 'AdminController@nueva_actualizacion')->name('agregar_fecha');
   Route::post('agregar_fecha_actualizacion', 'AdminController@crear_fecha')->name('agregar_fecha_actualizacion');
-
-
 /*FormacionIntegralController*/
-
 Route::get('inicio_formacion', 'FormacionIntegralController@inicio_formacion')->name('inicio_formacion');
 Route::get('busqueda_estudiante_fi', 'FormacionIntegralController@busqueda_estudiante_fi')->name('busqueda_estudiante_fi');
 Route::any('busqueda_estudiante_fi', 'FormacionIntegralController@busqueda_fi')->name('busqueda_estudiante_fi');
@@ -206,8 +192,6 @@ Route::get('constancia_valida/{matricula}', 'FormacionIntegralController@constan
 Route::get('acreditar_estudiantes_formacion/{actividad}/{matricula}', 'FormacionIntegralController@acreditar_estudiantes');
 Route::get('desactivar_extra/{actividad}', 'FormacionIntegralController@desactivar_extracurricular');
 
-
-
 Route::get('generales_egresado', 'SeguimientoEgresadosController@generales_egresado')->name('generales_egresado');
 Route::post('generales_egresado_actu', 'SeguimientoEgresadosController@generales_egresado_actualizar')->name('generales_egresado_actu');
 Route::get('cuestionario_egresado', 'SeguimientoEgresadosController@cuestionario_egresado')->name('cuestionario_egresado');
@@ -216,10 +200,6 @@ Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedente
 Route::post('antecedentes_laborales_actu', 'SeguimientoEgresadosController@antecedentes_laborales_actualizar')->name('antecedentes_laborales_actu');
 
 });
-
-
-
-
 
 /*Controller ADMIN DEL SISTEMA
 ***********************************************************
@@ -245,18 +225,6 @@ Route::get('estudiantes_activosSS', 'ServiciosController@estudiantes_activosSS')
 /*AUXILIAR ADMINISTRATIVO
 ***********************************************************
 */
-Route::get('home_auxiliar_adm', 'Administrativo_Con\AdministrativoController@home_auxiliar_adm')->name('home_auxiliar_adm');
-Route::get('carga_de_datos', 'Administrativo_Con\AdministrativoController@carga_de_datos')->name('carga_de_datos');
-Route::get('gestion_estudiante', 'Administrativo_Con\AdministrativoController@gestion_estudiante')->name('gestion_estudiante');
-Route::get('grupo_auxadm', 'Administrativo_Con\AdministrativoController@grupo_auxadm')->name('grupo_auxadm');
-Route::get('datos_estudiantes', 'Administrativo_Con\AdministrativoController@datos_estudiantes')->name('datos_estudiantes');
-Route::get('registro_estudiante_aux', 'Administrativo_Con\AdministrativoController@registro_estudiante_aux')->name('registro_estudiante_aux');
-Route::get('busqueda_estudiante_aux', 'Administrativo_Con\AdministrativoController@busqueda_estudiante_aux')->name('busqueda_estudiante_aux');
-Route::get('estudiante_activo_aux', 'Administrativo_Con\AdministrativoController@estudiante_activo_aux')->name('estudiante_activo_aux');
-Route::get('estudiante_inactivo_aux', 'Administrativo_Con\AdministrativoController@estudiante_inactivo_aux')->name('estudiante_inactivo_aux');
-Route::get('desactivar_estudiante_auxiliar/{id_user}', 'AdminController@desactivar_estudiante_aux');
-Route::get('activar_estudiante_auxiliar/{id_user}', 'AdminController@activar_estudiante_aux');
-Route::get('registros_estudiantes', 'Administrativo_Con\AdministrativoController@carga_hoy')->name('registros_estudiantes');
 
 /*SERVICIO SOCIAL Y PRÁCTICAS PROFESIONALES
 ***********************************************************
@@ -272,14 +240,10 @@ Route::get('egresado_registrado', 'ServiciosController@egresado_registrado')->na
 Route::get('antecedentes_laborales_egresado', 'ServiciosController@antecedentes_laborales_egresado')->name('antecedentes_laborales_egresado');
 Route::get('cuestionario_egresado_ver', 'ServiciosController@cuestionario_egresado_ver')->name('cuestionario_egresado_ver');
 Route::get('generales_egresado_ver/{matricula}', 'ServiciosController@generales_egresado_ver');
-
-
-
 /*PLANEACIÓN
 ***********************************************************
 */
 Route::get('home_planeacion', 'PlaneacionController@home_planeacion')->name('home_planeacion');
-
 /*INFO COORDINACION ACADEMICA*/
 Route::get('info_coord_academica1', 'PlaneacionController@info_coord_academica1')->name('info_coord_academica1');
 Route::get('info_coord_academica2', 'PlaneacionController@info_coord_academica2')->name('info_coord_academica2');
@@ -289,21 +253,15 @@ Route::get('info_coord_academica5', 'PlaneacionController@info_coord_academica5'
 
 /*INFO FORMACIÓN INTEGRAL*/
 Route::get('info_formacion_integral1', 'PlaneacionController@info_formacion_integral1')->name('info_formacion_integral1');
-
-
-
 Route::get('gral_escuela', 'PlaneacionController@gral_escuela')->name('gral_escuela');
 Route::post('agregar_escuela', 'PlaneacionController@crear_escuela')->name('agregar_escuela');
 Route::get('gral_carrera', 'PlaneacionController@gral_carrera')->name('gral_carrera');
 Route::post('agregar_carrera', 'PlaneacionController@crear_carrera')->name('agregar_carrera');
 Route::get('carreras_registradas', 'PlaneacionController@info_carreras')->name('carreras_registradas');
-
 /*REPORTE Semestral*/
 Route::get('reporte_semestral', 'PlaneacionController@reporte_semestral')->name('reporte_semestral');
-
 /*REPORTE 911.9*/
 Route::get('reporte911_9', 'PlaneacionController@reporte911_9')->name('reporte911_9');
-
 /*REPORTE 911.9A*/
 Route::get('reporte911_9A_0', 'PlaneacionController@reporte911_9A_0')->name('reporte911_9A_0');
 Route::get('reporte911_9A_1', 'PlaneacionController@reporte911_9A_1')->name('reporte911_9A_1');
@@ -312,28 +270,14 @@ Route::get('reporte911_9A_3', 'PlaneacionController@reporte911_9A_3')->name('rep
 Route::get('reporte911_9A_4', 'PlaneacionController@reporte911_9A_4')->name('reporte911_9A_4');
 Route::get('reporte911_9A_5', 'PlaneacionController@reporte911_9A_5')->name('reporte911_9A_5');
 Route::get('reporte911_9A_6', 'PlaneacionController@reporte911_9A_6')->name('reporte911_9A_6');
-
 /*Planeación ss y pp*/
 Route::get('info_practicasp', 'PlaneacionController@info_practicasp')->name('info_practicasp');
 Route::get('info_serviciosocial', 'PlaneacionController@info_serviciosocial')->name('info_serviciosocial');
-
-
 /*Seguimiento a Egresados*/
 Route::get('home_seguimiento_egresados', 'SeguimientoEgresadosController@home_seguimiento_egresados')->name('home_seguimiento_egresados');
-
 Route::get('registro_externo', 'RegistrosController@ver')->name('registro_externo');
-Route::post('registro_externos', 'RegistrosController@create')->name('registro_externos');
 
-Route::post('datos_codigo', function(Request $request)
-{
-  $id_cp = $request;
-	$datos =DB::table('codigos_postales')
-  ->select('codigos_postales.colonia', 'codigos_postales.municipio', 'codigos_postales.estado')
-  ->where('codigos_postales.cp', '=', $id_cp['cp'])
-  ->take(1)
-  ->first();
-  return response()->json($datos);
-  });
+Route::post('registro_externos', 'RegistrosController@create')->name('registro_externos');
 
 
 Auth::routes();

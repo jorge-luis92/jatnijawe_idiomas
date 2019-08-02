@@ -14,21 +14,8 @@ class Homepag extends Controller
       return view('perfiles');
     }
 
-    public function bases(){
-      return view('layouts.plantillabase');
-    }
-
-    public function pruebas(){
-      return view('logi');
-    }
-
     public function restringdo(){
       return view('errores.intentosfallidos');
     }
-
-    public function sino(){
-      return view('myPDF');
-    }
-
 
 }

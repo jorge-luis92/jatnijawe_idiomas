@@ -96,8 +96,8 @@
             <a class="collapse-item" href={{ route('registro_taller')}}>Registrar Taller</a>
               <a class="collapse-item" href={{ route('registro_conferencia')}}>Registrar Conferencia</a>
              <a class="collapse-item" href={{ route('actividades_registradas')}}>Actividades Registradas</a>
-            <!-- <a class="collapse-item" href={{ route('actividades_asignadas')}}>Actividades Asignadas</a>
-            -->  <a class="collapse-item" href={{ route('solicitudes')}}>Solicitudes</a>
+             <a class="collapse-item" href={{ route('fechas_actividades')}}>Fecha de envío de solicitudes</a>
+              <a class="collapse-item" href={{ route('solicitudes')}}>Solicitudes</a>
 
           </div>
         </div>
@@ -210,9 +210,9 @@
         <div class="modal-body">Presione "Finalizar Sesión" para confirmar.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
+          <a class="btn btn-primary" href="{{ route('logout_system') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
 
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          <form id="logout-form" action="{{ route('logout_system') }}" method="POST" style="display: none;">
               @csrf
           </form>
         </div>

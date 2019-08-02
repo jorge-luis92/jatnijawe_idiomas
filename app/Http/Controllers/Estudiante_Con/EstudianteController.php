@@ -31,20 +31,19 @@ class EstudianteController extends Controller
 {
 
   public function inicio_estudiante(){
-    if (!auth()->check())
-        {
-          return redirect()->route('perfiles')->with('error', 'No se ha iniciado sesión');
-        }
-        else
-        {
+    $usuario_actuales=\Auth::user();
+     if($usuario_actuales->tipo_usuario!='estudiante'){
+       return redirect()->back();
+      }
+
     $usuario_actual=auth()->user();
-    if($usuario_actual->tipo_usuario=='estudiante'){
-      if($usuario_actual->bandera=='1'){
+    if($usuario_actual->tipo_usuario == 'estudiante'){
+      if($usuario_actual->bandera == '1'){
    return view('estudiante.home_estudiante');
  }
 }
 }
-  }
+
 
     public function dato_general()
     {

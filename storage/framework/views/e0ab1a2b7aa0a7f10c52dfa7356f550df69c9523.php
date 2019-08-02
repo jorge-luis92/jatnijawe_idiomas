@@ -14,13 +14,13 @@
     </br>
     <div class="form-row">
       <div class="form-group  col-md-12">
-            <a href=<?php echo e(route('admin')); ?> class="btn btn-primary" role="button" aria-pressed="true">ADMINISTRATIVOS</a>
+            <a href=<?php echo e(route('administrativo')); ?> class="btn btn-primary" role="button" aria-pressed="true">ADMINISTRATIVOS</a>
       </div>
 
  </br>
 
  <div class="form-group col-md-6" align="center">
-        <a href=<?php echo e(route('login_estudiante')); ?> class="btn btn-primary" role="button" aria-pressed="true">ESTUDIANTES</a>
+        <a href=<?php echo e(route('estudiante')); ?> class="btn btn-primary" role="button" aria-pressed="true">ESTUDIANTES</a>
       </div>
       <div class="form-group col-md-6" align="center">
     <a href=<?php echo e(route('tallerista')); ?> class="btn btn-primary" role="button" aria-pressed="true">TALLERISTAS</a>

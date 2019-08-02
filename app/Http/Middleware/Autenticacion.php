@@ -46,13 +46,13 @@ class Autenticacion
 
     public function handle($request, Closure $next)
     {
-
         $usuario_actual=\Auth::user();
-        if($usuario_actual->tipo_usuario=='admin'){
+        if($usuario_actual->tipo_usuario=='1'){
            return $next($request);
         }
         else{
           return redirect()->back();
         }
     }
+     //1= formacion 2=planeacion 3=servicios 4=auxiliar 5=admin
 }
