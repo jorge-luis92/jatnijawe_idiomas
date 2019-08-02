@@ -213,6 +213,7 @@ $egresado_si = DB::table('egresados')
 ->where('egresados.matricula',$id)
 ->take(1)
 ->first();
+$egresado_si = $egresado_si->id_egresado;
   //$egresado_si= json_decode( json_encode($egresado_si), true);
 $titulo_si = DB::table('titulos')
 ->select('titulos.id_titulo')
