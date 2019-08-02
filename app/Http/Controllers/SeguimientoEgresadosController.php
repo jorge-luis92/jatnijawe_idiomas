@@ -213,8 +213,7 @@ $egresado_si = DB::table('egresados')
 ->where('egresados.matricula',$id)
 ->take(1)
 ->first();
-//$egresado_si = $egresado_si->id_egresado;
-  $egresado_si= json_decode( json_encode($egresado_si), true);
+  //$egresado_si= json_decode( json_encode($egresado_si), true);
 $titulo_si = DB::table('titulos')
 ->select('titulos.id_titulo')
 ->where('titulos.id_egresado',$egresado_si)
@@ -233,6 +232,7 @@ $id_p = DB::table('periodos')
 ->take(1)
 ->first();
 $id_p= $id_p->id_periodo;
+//  $id_p= json_decode( json_encode($id_p), true);
 if(empty($titulo_si)){
   $titulo = new Titulo;
   $titulo->bandera_titulo=$data['bandera_titulo'];
@@ -308,8 +308,8 @@ public function antecedentes_laborales()
       return redirect()->route('generales_egresado')->with('error','¡Para rellenar el cuestionario de datos ladebes actualizar tus datos!');
     }
     else {
-  //  $egresado_si = $egresado_si->id_egresado;
-      $egresado_si= json_decode( json_encode($egresado_si), true);
+    $egresado_si = $egresado_si->id_egresado;
+  //    $egresado_si= json_decode( json_encode($egresado_si), true);
     $laboral = DB::table('antecedentes_laborales')
     ->select('antecedentes_laborales.lugar_labor_actual', 'antecedentes_laborales.funcion_labor_actual', 'antecedentes_laborales.ingreso_mensual',
     'antecedentes_laborales.antiguedad', 'antecedentes_laborales.trabajo_anterior', 'antecedentes_laborales.funcion_trabajo_anterior')
@@ -337,8 +337,8 @@ protected function antecedentes_laborales_actualizar(Request $request){
   ->where('egresados.matricula',$id)
   ->take(1)
   ->first();
-  //$egresado_si = $egresado_si->id_egresado;
-  $egresado_si= json_decode( json_encode($egresado_si), true);
+  $egresado_si = $egresado_si->id_egresado;
+  //$egresado_si= json_decode( json_encode($egresado_si), true);
 
   $laboral = DB::table('antecedentes_laborales')
   ->select('antecedentes_laborales.id_egresado')
