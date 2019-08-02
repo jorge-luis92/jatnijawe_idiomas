@@ -7,7 +7,7 @@
 @section('seccion')
  @include('flash-message')
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Talleristas Activos</h1>
- <div class="container" id="font4">
+ <div class="container" id="font7">
  </br>
                              <div class="table-responsive">
                                <table class="table table-bordered table-info" style="color: #000000;" >

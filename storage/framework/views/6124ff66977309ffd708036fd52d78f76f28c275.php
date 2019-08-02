@@ -4,7 +4,7 @@
 : Búsqueda Tutores
 <?php $__env->stopSection(); ?>
  <?php $__env->startSection('seccion'); ?>
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Tutores Registrados</h1>
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Tutores Inactivos</h1>
  <div class="container" id="font7">
  </br>
  <div class="table-responsive" style="border:1px solid #819FF7;">
@@ -64,4 +64,4 @@
  }
  </script>
 
-<?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\formacion_integral\gestion_tutores/busqueda_tutor.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\formacion_integral\gestion_tutores/tutor_inactivo.blade.php ENDPATH**/ ?>

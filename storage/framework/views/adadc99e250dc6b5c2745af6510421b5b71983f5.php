@@ -7,7 +7,7 @@
 <?php $__env->startSection('seccion'); ?>
  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Talleristas Inactivos</h1>
- <div class="container" id="font4">
+ <div class="container" id="font7">
  </br>
                              <div class="table-responsive">
                                <table class="table table-bordered table-info" style="color: #000000;" >

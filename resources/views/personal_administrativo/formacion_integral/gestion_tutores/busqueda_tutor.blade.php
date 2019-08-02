@@ -2,6 +2,7 @@
 @extends('layouts.plantilla_formacion_integral')
 @section('title')
 : Búsqueda Tutores
+@endsection
  @section('seccion')
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Tutores Registrados</h1>
  <div class="container" id="font7">
@@ -61,7 +62,3 @@
       return false;
  }
  </script>
-
-
-
-  @endsection

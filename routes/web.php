@@ -87,7 +87,7 @@ Route::group(['middleware' => 'auth','estudiantes'], function () {
   Route::get('datos_medico', 'ConsultasController@carga_datos_medicos')->name('datos_medico');
   Route::get('datos_personal', 'ConsultasController@carga_datos_personales')->name('datos_personal');
   Route::get('catalogo', 'Actividades\ActvidadesExtra@catalogos')->name('catalogo');
-  Route::get('extracurricular/{id_extracurricular}/{creditos}', 'Actividades\ActvidadesExtra@inscripcion_extra');
+  Route::get('inscripcion_extracurricular/{id_extracurricular}/{creditos}', 'Actividades\ActvidadesExtra@inscripcion_extra');
   Route::post('changePassword','HomeController@changePassword')->name('changePassword');
   //Route::post('subir_imagen_usuario', 'HomeController@changePassword');
   Route::get('ma_estudiante', 'Estudiante_Con\EstudianteController@m_estudiantes')->name('ma_estudiante');
@@ -100,6 +100,7 @@ Route::group(['middleware' => 'auth','estudiantes'], function () {
   Route::post('act_foto','HomeController@act_foto')->name('act_foto');
   Route::get('cuenta_form', 'FormacionIntegralController@cuenta_formacion')->name('cuenta_form');
   Route::get('cambiar_estatus_beca/{id_beca}', 'ActualizacionesEstudiante@desactivar_lengua');
+  //Route::get('inscripcion_extracurricular/{id_extracurricular}/{creditos}', 'Actividades\ActividadesExtra@inscripcion_extra');
   //Route::get('editar_actividad/{id_externos}', 'Estudiante_Con\EstudianteController@editar_actividades');
   Route::get('quitar_act/{id_externos}', 'ActualizacionesEstudiante@desactivar_act');
   Route::post('act_actividades', 'ActualizacionesEstudiante@act_actividades')->name('act_actividades');
@@ -173,6 +174,8 @@ Route::get('registrar_tutor', 'FormacionIntegralController@registrar_tutor')->na
 Route::post('registrar_tutor_fi', 'FormacionIntegralController@registrar_tutor_fi')->name('registrar_tutor_fi');
 Route::get('busqueda_tutor', 'FormacionIntegralController@busqueda_tutor')->name('busqueda_tutor');
 Route::get('tutor_activo', 'FormacionIntegralController@tutor_activo')->name('tutor_activo');
+Route::get('desactivar_tutor/{id_tutor}', 'FormacionIntegralController@desactivar_tutor');
+Route::get('activar_tutor/{id_tutor}', 'FormacionIntegralController@activar_tutor');
 Route::get('tutor_inactivo', 'FormacionIntegralController@tutor_inactivo')->name('tutor_inactivo');
 Route::get('registro_extracurricular', 'FormacionIntegralController@registro_extracurricular')->name('registro_extracurricular');
 Route::get('registro_taller', 'FormacionIntegralController@registro_taller')->name('registro_taller');
@@ -202,6 +205,8 @@ Route::get('constancia_parcial/{matricula}', 'FormacionIntegralController@consta
 Route::get('constancia_valida/{matricula}', 'FormacionIntegralController@constancia_val');
 Route::get('acreditar_estudiantes_formacion/{actividad}/{matricula}', 'FormacionIntegralController@acreditar_estudiantes');
 Route::get('desactivar_extra/{actividad}', 'FormacionIntegralController@desactivar_extracurricular');
+
+
 
 Route::get('generales_egresado', 'SeguimientoEgresadosController@generales_egresado')->name('generales_egresado');
 Route::post('generales_egresado_actu', 'SeguimientoEgresadosController@generales_egresado_actualizar')->name('generales_egresado_actu');

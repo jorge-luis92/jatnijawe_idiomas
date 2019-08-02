@@ -7,7 +7,7 @@
 @section('seccion')
  @include('flash-message')
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Tallerista</h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
 </br>                    <form method="POST" action="{{ route('registrar_talleristas') }}">
                         @csrf
 <div class="form-row">

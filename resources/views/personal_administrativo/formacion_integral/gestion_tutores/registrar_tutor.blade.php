@@ -7,13 +7,13 @@
 @section('seccion')
  @include('flash-message')
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Tutores</h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
 </br>                    <form method="POST" action="{{ route('registrar_tutor_fi')}}">
                         @csrf
+                        <label for="responsable" ><strong>{{ __('Datos Personales') }}</strong></label>
 
                          <div class="form-row">
-
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="nombre" >{{ __('* Nombre(s)') }}</label>
                                 <input id="nombre" type="text"   onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}"  autocomplete="nombre">
                                 @error('nombre')
@@ -23,7 +23,7 @@
                               @enderror
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="apellido_paterno" >{{ __('* Apellido Paterno') }}</label>
                                   <input id="apellido_paterno" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('apellido_paterno') is-invalid @enderror" name="apellido_paterno" value="{{ old('apellido_paterno') }}"  autocomplete="apellido_paterno">
                                 @error('apellido_paterno')
@@ -33,7 +33,7 @@
                                 @enderror
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="apellido_materno" >{{ __('Apellido Materno') }}</label>
                                   <input id="apellido_materno"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('apellido_materno') is-invalid @enderror" name="apellido_materno" value="{{ old('apellido_materno') }}" autocomplete="apellido_materno">
                                 @error('apellido_materno')
@@ -42,8 +42,8 @@
                                     </span>
                                 @enderror
                         </div>
-</div>
-                                <div class="form-row">
+
+                    <!--            <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="curp" >{{ __('* CURP') }}</label>
                                   <input id="curp" type="text" minlength="18" maxlength="18"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('curp') is-invalid @enderror" name="curp" value="{{ old('curp') }}"  autocomplete="curp">
@@ -74,7 +74,7 @@
                                     </span>
                                 @enderror
                         </div>
-
+-->
                         <div class="form-group col-md-3">
                           <label for="genero">* Género</label>
                             <select name="genero" id="genero" class="form-control">
@@ -83,19 +83,20 @@
                           <option value="FEMEMINO">FEMEMINO</option>
                     </select>
                         </div>
-</div>
+                      </div>
 
-<!--<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">-->
 
+<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
+</br>
+<label for="responsable" ><strong>{{ __('Datos Académicos') }}</strong></label>
 <div class="form-row">
   <div class="form-group col-md-3">
     <label for="grado_estudios">Grado de Estudios</label>
       <select name="grado_estudios" id="grado_estudios"  class="form-control">
       <option value="">Seleccione una opción</option>
-      <option value="licenciatura">LICENCIATURA</option>
-      <option value="maestria">MAESTRÍA</option>
-      <option value="doctorado">DOCTORADO</option>
-      <option value="otro">OTRO</option>
+      <option value="Licenciatura">LICENCIATURA</option>
+      <option value="Maestria">MAESTRÍA</option>
+      <option value="Doctorado">DOCTORADO</option>
           </select>
   </div>
   <div class="form-group col-md-3">

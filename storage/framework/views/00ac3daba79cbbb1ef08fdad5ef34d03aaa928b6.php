@@ -64,8 +64,8 @@
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href=<?php echo e(route('registrar_tutor')); ?>>Registrar</a>
              <a class="collapse-item" href=<?php echo e(route('busqueda_tutor')); ?>>Tutores Registrados</a>
-          <!--   <a class="collapse-item" href=<?php echo e(route('tutor_activo')); ?>>Tutores Activos</a>
-             <a class="collapse-item" href=<?php echo e(route('tutor_inactivo')); ?>>Tutores Inactivos</a>-->
+          <!--  <a class="collapse-item" href=<?php echo e(route('tutor_activo')); ?>>Tutores Activos</a>-->
+             <a class="collapse-item" href=<?php echo e(route('tutor_inactivo')); ?>>Tutores Inactivos</a>
           </div>
         </div>
       </li>

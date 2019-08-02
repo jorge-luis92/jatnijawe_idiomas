@@ -7,13 +7,13 @@
 <?php $__env->startSection('seccion'); ?>
  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Tutores</h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
 </br>                    <form method="POST" action="<?php echo e(route('registrar_tutor_fi')); ?>">
                         <?php echo csrf_field(); ?>
+                        <label for="responsable" ><strong><?php echo e(__('Datos Personales')); ?></strong></label>
 
                          <div class="form-row">
-
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="nombre" ><?php echo e(__('* Nombre(s)')); ?></label>
                                 <input id="nombre" type="text"   onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
 if (isset($message)) { $messageCache = $message; }
@@ -31,7 +31,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="apellido_paterno" ><?php echo e(__('* Apellido Paterno')); ?></label>
                                   <input id="apellido_paterno" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('apellido_paterno')) :
 if (isset($message)) { $messageCache = $message; }
@@ -49,7 +49,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="apellido_materno" ><?php echo e(__('Apellido Materno')); ?></label>
                                   <input id="apellido_materno"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control <?php if ($errors->has('apellido_materno')) :
 if (isset($message)) { $messageCache = $message; }
@@ -66,8 +66,8 @@ $message = $errors->first('apellido_materno'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
-</div>
-                                <div class="form-row">
+
+                    <!--            <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="curp" ><?php echo e(__('* CURP')); ?></label>
                                   <input id="curp" type="text" minlength="18" maxlength="18"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('curp')) :
@@ -122,7 +122,7 @@ $message = $errors->first('edad'); ?>
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                         </div>
-
+-->
                         <div class="form-group col-md-3">
                           <label for="genero">* Género</label>
                             <select name="genero" id="genero" class="form-control">
@@ -131,10 +131,12 @@ endif; ?>
                           <option value="FEMEMINO">FEMEMINO</option>
                     </select>
                         </div>
-</div>
+                      </div>
 
-<!--<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">-->
 
+<hr style="height:1px; border:none; color:#000; background-color:#000; width:100%; text-align:left; margin: 0 auto 0 0;">
+</br>
+<label for="responsable" ><strong><?php echo e(__('Datos Académicos')); ?></strong></label>
 <div class="form-row">
   <div class="form-group col-md-3">
     <label for="grado_estudios">Grado de Estudios</label>

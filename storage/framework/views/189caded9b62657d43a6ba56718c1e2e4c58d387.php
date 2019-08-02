@@ -7,7 +7,7 @@
 <?php $__env->startSection('seccion'); ?>
  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Tallerista</h1>
-<div class="container" id="font4">
+<div class="container" id="font7">
 </br>                    <form method="POST" action="<?php echo e(route('registrar_talleristas')); ?>">
                         <?php echo csrf_field(); ?>
 <div class="form-row">

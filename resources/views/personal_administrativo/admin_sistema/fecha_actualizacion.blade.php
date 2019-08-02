@@ -20,7 +20,7 @@
       <input id="fecha_fin" type="date" onchange="vamo()"  name="fecha_fin"  min="<?php echo date("Y-m-d");?>"  max="" value="<?php if(empty($fechas->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo $fechas->fecha_fin;} ?>"class="form-control"  required>
             </div>
             </div>
-
+<!--
             <div class="form-row">
             <div class="form-group col-md-6">
               <label for="hora_inicio" >{{ __('* Hora de inicio') }}</label>
@@ -30,7 +30,7 @@
                 <label for="hora_fin" >{{ __('* Hora Final') }}</label>
                 <input id="hora_fin" type="time" onchange="vamos()"  name="hora_fin"  min="" max="20:00"  value="" class="form-control"  required>
                       </div>
-                      </div>
+                    </div>-->
 
                         <div class="form-group">
                             <div class="col-xs-offset-2 col-xs-9" align="center">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </form>
-                    <input  type="text"  id ="otro" value="{{ $ss }} <?php echo date("Y-m-d");?>" class="form-control"  >
+                
 </div>
 
 @endsection
@@ -74,7 +74,7 @@ function vamos(){
    var minutes = ed.split(":")[1];
    var nueva_hora= parseInt(hours);
 
-    document.getElementById("hora_fin").min = hours + ":" + minutes;
+       document.getElementById("hora_fin").min = hours + ":" + minutes;
     document.getElementById("otro").value = nueva_hora + ":" + minutes;
 }
 </script>
