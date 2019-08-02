@@ -10,10 +10,7 @@
 <div class="container" id="font7">
 </br>                    <form method="POST" action="<?php echo e(route('nuevo_periodo_agregar')); ?>">
                         <?php echo csrf_field(); ?>
-
-
     <div class="form-row">
-
   <div class="form-group col-md-6">
     <label for="inicio" ><?php echo e(__('* Fecha de inicio')); ?></label>
     <input id="inicio" type="date" name="inicio" min="<?php echo date("Y-m-d");?>" onblur="ba();"  class="form-control"  required>

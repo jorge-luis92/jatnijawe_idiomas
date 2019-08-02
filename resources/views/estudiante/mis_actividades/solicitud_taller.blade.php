@@ -171,21 +171,17 @@
 
 <div class="form-group col-md-4">
    <label for="hora_inicio">Hora de entrada(tentativo)</label>
-       <input class="timepicker form-control" type="text" id="hora_inicio" value="<?php if(empty($taller->hora_inicio)){ $vacio=null; echo $vacio;} else{ echo $taller->hora_inicio;} ?>"  name="hora_inicio" required>
+       <input class="form-control"  type="time" min="07:00" max="20:00" id="hora_inicio" value="<?php if(empty($taller->hora_inicio)){ $vacio=null; echo $vacio;} else{ echo $taller->hora_inicio;} ?>"  name="hora_inicio" required>
    </div>
 
 <div class="form-group col-md-4">
    <label for="hora_fin">Hora de salida (tentativo)</label>
-     <input class="timepicker form-control" type="text" id="hora_fin" value="<?php if(empty($taller->hora_fin)){ $vacio=null; echo $vacio;} else{ echo $taller->hora_fin;} ?>" name="hora_fin" required>
+     <input class="form-control" type="time" min="07:00" max="20:00" id="hora_fin" value="<?php if(empty($taller->hora_fin)){ $vacio=null; echo $vacio;} else{ echo $taller->hora_fin;} ?>" name="hora_fin" required>
 </div>
-<script type="text/javascript">
-   $('.timepicker').datetimepicker({
-       format: 'HH:mm'
-   });
-</script>
+
   <div class="form-group col-md-2">
       <label for="creditos" >{{ __('Créditos') }}</label>
-      <input id="creditos" type="tel" maxlength="2"  value="" class="form-control @error('creditos') is-invalid @enderror" onkeypress="return numeros (event)" name="creditos" autocomplete="creditos" required autofocus>
+      <input id="creditos" type="tel" maxlength="2"  value="<?php if(empty($taller->creditos)){ $vacio=null; echo $vacio;} else{ echo $taller->creditos;} ?>" class="form-control @error('creditos') is-invalid @enderror" onkeypress="return numeros (event)" name="creditos" autocomplete="creditos" required autofocus>
           @error('creditos')
       <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -283,8 +279,27 @@ if(form == 'CHARLA'){
 document.getElementById('creditos').value = 2;
 }
 }
+</script>
 
+<script type="text/javascript">
+function vamo(){
+    var ed = document.getElementById('fecha_inicio').value; //fecha de nacimiento en el formulario
+    var fecha_inicio = ed.split("-");
+    var anio = fecha_inicio[0];
+    var mes = fecha_inicio[1];
+    var dia = fecha_inicio[2];
 
+document.getElementById("fecha_fin").min = anio+'-'+mes+'-'+dia;
+document.getElementById("otro").value = anio+'-'+mes+'-'+dia;
+}
+
+function vamos(){
+    var ed = document.getElementById('hora_inicio').value; //fecha de nacimiento en el formulario
+    var hours = ed.split(":")[0];
+   var minutes = ed.split(":")[1];
+    document.getElementById("hora_fin").min = hours + ":" + minutes;
+    document.getElementById("otro").value = hours + ":" + minutes;
+}
 </script>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>

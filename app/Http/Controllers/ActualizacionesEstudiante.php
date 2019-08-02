@@ -102,10 +102,11 @@ $now = new \DateTime();
      ->where('personas.id_persona',$id_persona)
      ->first();
 
-$codigo = DB::table('codigos_postales')
+$codigo=CodigoPostal::find($data['cp']);
+/*$codigo = DB::table('codigos_postales')
  ->select('codigos_postales.cp')
  ->where('codigos_postales.cp',$data['cp'])
- ->first();
+ ->first();*/
 if(!empty($codigo)){
 if(empty($direccion) or empty($tels)){
   $ultima_d = DB::table('direcciones')

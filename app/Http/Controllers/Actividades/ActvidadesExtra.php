@@ -93,6 +93,14 @@ $detalles = DB::table('solicitud_talleres')
 ->where('solicitud_talleres.matricula',$id)
 ->take(1)
 ->first();
+
+$periodo_semestre = DB::table('periodos')
+->select('periodos.id_periodo')
+->where('periodos.estatus', '=', 'actual')
+->take(1)
+->first();
+$periodo_semestre= $periodo_semestre->id_periodo;
+
 if(empty($detalles->matricula)){
 $now = new \DateTime();
 $taller=new SolicitudTaller;
@@ -115,6 +123,7 @@ $taller->materiales=$data['materiales'];
 $taller->cupo=$data['cupo'];
 $taller->matricula=$id;
 $taller->departamento='1';
+$taller->periodo=$periodo_semestre;
 $taller->estado='Pendiente';
 $taller->save();
 if($taller->save()){

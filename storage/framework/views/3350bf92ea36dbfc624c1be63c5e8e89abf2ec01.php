@@ -19,7 +19,7 @@
         </div>
     <div class="form-group col-md-4">
       <label for="vialidad_principal"  align="left">* Calle</label>
-      <input type="text" class="form-control" name="vialidad_principal" value="<?php if(empty($d->vialidad_principal)){ $vacio=null; echo $vacio;} else{ echo $d->vialidad_principal;} ?>" id="vialidad_principal" placeholder="Calle" onKeyUp="this.value = this.value.toUpperCase();" required>
+      <input type="text" class="form-control" name="vialidad_principal" value="<?php if(empty($d->vialidad_principal)){ $vacio=null; echo $vacio;} else{ echo $d->vialidad_principal;} ?>" id="vialidad_principal" autocomplete="calle" placeholder="Calle" onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
     <div class="form-group col-md-2">
       <label for="num_exterior"  >* Número</label>
@@ -45,7 +45,7 @@
 
     <div class="form-group col-md-5">
       <label for="municipio">* Municipio</label>
-      <input type="text" class="form-control" name="municipio" value="<?php if(empty($d->municipio)){ $vacio=null; echo $vacio;} else{ echo $d->municipio;} ?>"  id="municipio" placeholder="Municipio" onKeyUp="this.value = this.value.toUpperCase();" required>
+      <input type="text" class="form-control"  name="municipio" value="<?php if(empty($d->municipio)){ $vacio=null; echo $vacio;} else{ echo $d->municipio;} ?>"  id="municipio" placeholder="Municipio" onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
     <div class="form-group col-md-5">
       <label for="entidad_federativa">* Ciudad</label>

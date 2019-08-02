@@ -24,8 +24,8 @@
       </div>
 
       <div class="form-group col-md-1" id="labels">
-        <label for="grupo">Grupo</label>
-        <input type="text" class="form-control" max="2"  onKeyUp="this.value = this.value.toUpperCase()" name="grupo" id="grupo" value="<?php if(empty($u->grupo)){ $vacio=null; echo $vacio;} else{ echo $u->grupo;} ?>" >
+        <label for="grupo">* Grupo</label>
+        <input type="text" required class="form-control" max="2"  onKeyUp="this.value = this.value.toUpperCase()" name="grupo" id="grupo" value="<?php if(empty($u->grupo)){ $vacio=null; echo $vacio;} else{ echo $u->grupo;} ?>" >
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="modalidad">Modalidad</label>

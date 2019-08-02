@@ -97,10 +97,14 @@ $datos_pro = DB::table('egresados')
 ->where('egresados.matricula', $id)
 ->take(1)
 ->first();
-
+if(empty($num_cel) || empty($num_emergencia)){
+  return redirect()->route('home_estudiante')->with('error','¡Actualización de datos requerida!');
+}
+else {
 return view('seguimiento_egresadosP.generales_egresado')
 ->with('u', $users)->with('l', $lenguas_r)->with('ea', $enf_ale)->with('nl',$num_local)
 ->with('nc',$num_cel)->with('ne',$num_emergencia)->with('pro', $datos_pro);
+}
 }
   return redirect()->route('home_estudiante')->with('error','¡Opción del menú no habilitada, Aún no eres un egresado!');
 }
@@ -158,6 +162,7 @@ public function cuestionario_egresado()
    if($usuario_actuales->tipo_usuario!='estudiante'){
      return redirect()->back();
     }
+
   $usuario_actual=auth()->user();
   $id=$usuario_actual->id_user;
   $egresado_si = DB::table('estudiantes')
@@ -174,6 +179,10 @@ public function cuestionario_egresado()
     ->take(1)
     ->first();
     //$egresado_si = $egresado_si->id_egresado;
+    if(empty($egresado_si)){
+      return redirect()->route('generales_egresado')->with('error','¡Para contestar el cuestionario debes actualizar tus datos!');
+    }
+    else {
       $egresado_si= json_decode( json_encode($egresado_si), true);
     $datos_titulo = DB::table('titulos')
     ->select('titulos.fecha_expedicion', 'titulos.modalidad_tit', 'titulos.motivos_notitulado')
@@ -189,6 +198,7 @@ public function cuestionario_egresado()
 
 return view('seguimiento_egresadosP.cuestionario_egresado')
 ->with('titulo_e', $datos_titulo)->with('cuestionario_e', $datos_cuestionario);
+}
 }
 return redirect()->route('home_estudiante')->with('error','¡Opción del menú no habilitada, Aún no eres un egresado!');
 }
@@ -268,9 +278,7 @@ else {
                 'posgrado' => $data['posgrado'], 'otros_estudios' => $data['otros_estudios'],
                 'grado_satisfaccion' => $data['grado_satisfaccion'], 'bandera_lamisma' => $data['bandera_lamisma'],
                 'la_misma' => $data['la_misma']]);
-
       return redirect()->route('cuestionario_egresado')->with('success','¡Datos Actualizados Correctamente!');
-
 }
 }
 
@@ -296,6 +304,10 @@ public function antecedentes_laborales()
     ->where('egresados.matricula',$id)
     ->take(1)
     ->first();
+    if(empty($egresado_si)){
+      return redirect()->route('generales_egresado')->with('error','¡Para rellenar el cuestionario de datos ladebes actualizar tus datos!');
+    }
+    else {
   //  $egresado_si = $egresado_si->id_egresado;
       $egresado_si= json_decode( json_encode($egresado_si), true);
     $laboral = DB::table('antecedentes_laborales')
@@ -307,7 +319,7 @@ public function antecedentes_laborales()
 
   return view('seguimiento_egresadosP.antecedentes_laborales')->with('laborales', $laboral);
 }
-
+}
 return redirect()->route('home_estudiante')->with('error','¡Opción del menú no habilitada, Aún no eres un egresado!');
 }
 

@@ -71,7 +71,7 @@
  <div class="form-group">
   <br>
   <div class="col-xs-offset-2 col-xs-9" align="center">
-      <input type="submit" class="btn btn-primary" name="agregar" value="Registrar Actividad">
+      <input type="submit" class="btn btn-primary" name="agregar" value="Actualizar">
 
   </div>
 </div>

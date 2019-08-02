@@ -90,7 +90,7 @@ class ConsultasController extends Controller
         return view('estudiante\datos.datos_generales')->with('u',$users)->with('l',$lenguas_r)->with('b',$becas_r);
       }
       else {
-        return redirect()->route('home_estudiante')->with('error', 'El periodo de Actualizacion de datos ha terminado');
+        return redirect()->route('home_estudiante')->with('error', 'El periodo de Actualización de datos ha terminado');
       }
       }
 
