@@ -2,7 +2,7 @@
 
 <?php $__env->startSection('title'); ?>
 : Información Formación Integral
-  <?php $__env->stopSection(); ?>
+<?php $__env->stopSection(); ?>
  <?php $__env->startSection('seccion'); ?>
  <h1 style="font-size: 2.0em; color: #000000;" align="center">Información de Estudiantes</h1>
  <div class="container" id="font4">
@@ -99,25 +99,5 @@
 </div>
 
  <?php $__env->stopSection(); ?>
-
- <script>
- function numeros(e){
-  key = e.keyCode || e.which;
-  tecla = String.fromCharCode(key).toLowerCase();
-  letras = " 0123456789";
-  especiales = [8,37,39,46];
-
-  tecla_especial = false
-  for(var i in especiales){
- if(key == especiales[i]){
-   tecla_especial = true;
-   break;
-      }
-  }
-
-  if(letras.indexOf(tecla)==-1 && !tecla_especial)
-      return false;
- }
- </script>
 
 <?php echo $__env->make('layouts.plantilla_planeacion', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\planeacion\info_departamentos\info_form_integral/info_formacion_integral1.blade.php ENDPATH**/ ?>
