@@ -279,21 +279,18 @@ var primero;
 if((nueva_hora >= 6) &&  (nueva_hora <= 8)){
        primero= nueva_hora + 1;
        document.getElementById("hora_fin").min = "0"+primero  + ":" + minutes;
-       document.getElementById("dias_sem").value = primero;
-        document.getElementById("cupo").value = nueva_hora;
+    
      }
 
    if((nueva_hora >= 9) &&  (nueva_hora <= 19)){
           primero= nueva_hora + 1;
           document.getElementById("hora_fin").min = primero  + ":" + minutes;
-          document.getElementById("dias_sem").value = primero;
-           document.getElementById("cupo").value = nueva_hora;
+
         }
     if(nueva_hora == 20){
            primero= nueva_hora + 1;
            document.getElementById("hora_fin").min = primero  + ":" + minutes;
-           document.getElementById("dias_sem").value = primero;
-            document.getElementById("cupo").value = nueva_hora;
+
          }
 
 }

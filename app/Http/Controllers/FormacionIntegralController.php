@@ -192,12 +192,14 @@ class FormacionIntegralController extends Controller
       ->where('periodos.estatus', '=', 'actual')
       ->take(1)
       ->first();
+      $now = new \DateTime();
      $periodo_semestre= $periodo_semestre->id_periodo;
       DB::table('extracurriculares')
       ->Insert(['nombre_ec' => $data['nombre_ec'], 'tipo' => 'Taller', 'creditos' => $data['creditos'], 'area'=> $data['area'],
      'modalidad'=> $data['modalidad'],  'cupo'=> $data['cupo'], 'lugar'=> $data['lugar'], 'fecha_inicio'=> $data['fecha_inicio'],
      'fecha_fin'=> $data['fecha_fin'],  'hora_inicio'=> $data['hora_inicio'],  'hora_fin'=> $data['hora_fin'],
-     'dias_sem'=> $data['dias_sem'],  'materiales'=> $data['materiales'],  'tutor'=> $data['tutor'], 'periodo'=> $periodo_semestre, 'control_cupo'=> $data['cupo']]);
+     'dias_sem'=> $data['dias_sem'],  'materiales'=> $data['materiales'],  'tutor'=> $data['tutor'],
+     'periodo'=> $periodo_semestre, 'control_cupo'=> $data['cupo'], 'created_at'=> $now, 'updated_at'=> $now]);
 return redirect()->route('actividades_registradas')->with('sucess','Taller Registrado Correctamente');
     }
 
@@ -215,11 +217,19 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
       ]);
 
       $data = $request;
+      $now = new \DateTime();
+      $periodo_semestre = DB::table('periodos')
+      ->select('periodos.id_periodo')
+      ->where('periodos.estatus', '=', 'actual')
+      ->take(1)
+      ->first();
+     $periodo_semestre= $periodo_semestre->id_periodo;
       DB::table('extracurriculares')
           ->Insert(
               ['nombre_ec' => $data['nombre_ec'], 'tipo' => 'Conferencia', 'creditos' => $data['creditos'], 'area'=> $data['area'],
                'modalidad'=> $data['modalidad'],  'cupo'=> $data['cupo'], 'lugar'=> $data['lugar'], 'fecha_inicio'=> $data['fecha_inicio'],
-               'hora_inicio'=> $data['hora_inicio'],   'tutor'=> $data['tutor']]);
+               'fecha_fin'=> $data['fecha_inicio'], 'hora_inicio'=> $data['hora_inicio'], 'hora_fin'=> $data['hora_fin'],
+             'tutor'=> $data['tutor'], 'periodo'=> $periodo_semestre, 'control_cupo'=> $data['cupo'], 'created_at'=> $now, 'updated_at'=> $now]);
       return redirect()->route('actividades_registradas')->with('sucess','Conferencia Registrada Correctamente');
     }
 
@@ -677,6 +687,13 @@ $id_extra= $actividad;
       return redirect()->route('actividades_registradas')->with('success','¡Actividad Desactivada!');
 
 
+}
+
+protected function actualizar_fechas_solicitud(){
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='1'){
+     return redirect()->back();
+    }
 }
 
 }

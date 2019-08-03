@@ -48,8 +48,9 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href=<?php echo e(route('busqueda_estudiante_fi')); ?>>Búsqueda</a>
-            <a class="collapse-item" href=<?php echo e(route('busqueda_atras')); ?>>Búsqueda Atrás</a>
-            <a class="collapse-item" href=<?php echo e(route('registro_horas')); ?>>Registro de Horas</a>
+            <a class="collapse-item" href=<?php echo e(route('solicitudes')); ?>>Solicitudes</a>
+            <!--<a class="collapse-item" href=<?php echo e(route('busqueda_atras')); ?>>Búsqueda Atrás</a>
+            <a class="collapse-item" href=<?php echo e(route('registro_horas')); ?>>Registro de Horas</a>-->
           </div>
         </div>
       </li>
@@ -96,8 +97,7 @@
             <a class="collapse-item" href=<?php echo e(route('registro_taller')); ?>>Registrar Taller</a>
               <a class="collapse-item" href=<?php echo e(route('registro_conferencia')); ?>>Registrar Conferencia</a>
              <a class="collapse-item" href=<?php echo e(route('actividades_registradas')); ?>>Actividades Registradas</a>
-             <a class="collapse-item" href=<?php echo e(route('actividades_asignadas')); ?>>Fecha de envío de solicitudes</a>
-              <a class="collapse-item" href=<?php echo e(route('solicitudes')); ?>>Solicitudes</a>
+             <a class="collapse-item" href=<?php echo e(route('fechas_actividades')); ?>>Fecha de envío de </br>solicitudes</a>
 
           </div>
         </div>
@@ -210,9 +210,9 @@
         <div class="modal-body">Presione "Finalizar Sesión" para confirmar.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
+          <a class="btn btn-primary" href="<?php echo e(route('logout_system')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
 
-          <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+          <form id="logout-form" action="<?php echo e(route('logout_system')); ?>" method="POST" style="display: none;">
               <?php echo csrf_field(); ?>
           </form>
         </div>

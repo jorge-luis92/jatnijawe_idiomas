@@ -78,7 +78,7 @@
   <div class="form-row">
         <div class="form-group col-md-3">
         <label for="fecha_inicio" >{{ __('* Fecha de Inicio') }}</label>
-        <input id="fecha_inicio" type="date" class="form-control @error('fecha_inicio') is-invalid @enderror" name="fecha_inicio" required>
+        <input id="fecha_inicio" type="date" min= "<?php echo date("Y-m-d");?>"  class="form-control @error('fecha_inicio') is-invalid @enderror" name="fecha_inicio" required>
         @error('fecha_inicio')
         <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -86,12 +86,17 @@
         @enderror
         </div>
 
-  <div class="form-group col-md-3">
-        <label for="hora_inicio">Hora de Inicio</label>
-        <input type="time" name="hora_inicio" class="form-control"  id="hora_inicio" required >
-  </div>
+        <div class="form-group col-md-3">
+              <label for="hora_inicio">* Hora de entrada</label>
+              <input id="hora_inicio" type="time" oninput="vamos()" min= "07:00" max="19:00" class="form-control"  name="hora_inicio"  required class="form-control" >
+        </div>
 
-  <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
+          <label for="hora_fin" >{{ __('* Hora Salida') }}</label>
+          <input id="hora_fin" type="time" onchange="vamos()"  name="hora_fin"  min="" max="20:00"  value="" class="form-control"  required>
+                </div>
+
+  <div class="form-group col-md-3">
       <label for="tutor">* Tutor</label>
           <select name="tutor" id="tutor" required class="form-control">
       <option value="">Seleccione un Tutor</option>
@@ -135,4 +140,50 @@ if(key == especiales[i]){
  if(letras.indexOf(tecla)==-1 && !tecla_especial)
      return false;
 }
+</script>
+
+
+<script>
+function vamo(){
+    var ed = document.getElementById('fecha_inicio').value; //fecha de nacimiento en el formulario
+   var fecha_inicio = ed.split("-");
+    var anio = fecha_inicio[0];
+    var mes = fecha_inicio[1];
+    var dia = fecha_inicio[2];
+  /*var mm = parseInt(mes);
+  var anios= parseInt(anio);
+var j=anio;
+var hey;
+if((mes >= 1) || (mes <12)){
+  mm=1+mm;
+if((mm > 1) || (mm < 10)){
+hey =mm;*/
+document.getElementById("fecha_fin").min = anio+'-'+'0'+hey+'-'+dia;
+}
+
+function vamos(){
+    var ed = document.getElementById('hora_inicio').value; //fecha de nacimiento en el formulario
+    var hours = ed.split(":")[0];
+   var minutes = ed.split(":")[1];
+var nueva_hora= parseInt(hours);
+var primero;
+if((nueva_hora >= 6) &&  (nueva_hora <= 8)){
+       primero= nueva_hora + 1;
+       document.getElementById("hora_fin").min = "0"+primero  + ":" + minutes;
+
+     }
+
+   if((nueva_hora >= 9) &&  (nueva_hora <= 19)){
+          primero= nueva_hora + 1;
+          document.getElementById("hora_fin").min = primero  + ":" + minutes;
+
+        }
+    if(nueva_hora == 20){
+           primero= nueva_hora + 1;
+           document.getElementById("hora_fin").min = primero  + ":" + minutes;
+
+         }
+
+}
+
 </script>

@@ -34,10 +34,6 @@ class UserSystemController extends Controller
 
     public function form_nuevo_usuario()
 	{
-  // $usuario_actual=\Auth::user();
-    // if($usuario_actual->tipo_usuario!='admin'){
-     //return redirect()->back();
-    //}
 		return view('personal_administrativo\formacion_integral\gestion_tallerista.create');
 	}
 

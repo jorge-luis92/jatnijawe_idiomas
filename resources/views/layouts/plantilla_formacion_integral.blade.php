@@ -48,8 +48,9 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href={{ route('busqueda_estudiante_fi')}}>Búsqueda</a>
-            <a class="collapse-item" href={{ route('busqueda_atras')}}>Búsqueda Atrás</a>
-            <a class="collapse-item" href={{ route('registro_horas')}}>Registro de Horas</a>
+            <a class="collapse-item" href={{ route('solicitudes')}}>Solicitudes</a>
+            <!--<a class="collapse-item" href={{ route('busqueda_atras')}}>Búsqueda Atrás</a>
+            <a class="collapse-item" href={{ route('registro_horas')}}>Registro de Horas</a>-->
           </div>
         </div>
       </li>
@@ -96,8 +97,7 @@
             <a class="collapse-item" href={{ route('registro_taller')}}>Registrar Taller</a>
               <a class="collapse-item" href={{ route('registro_conferencia')}}>Registrar Conferencia</a>
              <a class="collapse-item" href={{ route('actividades_registradas')}}>Actividades Registradas</a>
-             <a class="collapse-item" href={{ route('fechas_actividades')}}>Fecha de envío de solicitudes</a>
-              <a class="collapse-item" href={{ route('solicitudes')}}>Solicitudes</a>
+             <a class="collapse-item" href={{ route('fechas_actividades')}}>Fecha de envío de </br>solicitudes</a>
 
           </div>
         </div>

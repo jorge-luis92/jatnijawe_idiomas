@@ -37,6 +37,7 @@
                                </tbody>
                            </table>
                          </div>
+                       </br></br>
                            @if (count($dato))
                              {{ $dato->links() }}
                            @endif

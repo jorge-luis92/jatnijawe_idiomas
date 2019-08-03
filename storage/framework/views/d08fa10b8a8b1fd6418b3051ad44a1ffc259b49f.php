@@ -142,10 +142,9 @@ endif; ?>
     <label for="grado_estudios">Grado de Estudios</label>
       <select name="grado_estudios" id="grado_estudios"  class="form-control">
       <option value="">Seleccione una opción</option>
-      <option value="licenciatura">LICENCIATURA</option>
-      <option value="maestria">MAESTRÍA</option>
-      <option value="doctorado">DOCTORADO</option>
-      <option value="otro">OTRO</option>
+      <option value="Licenciatura">LICENCIATURA</option>
+      <option value="Maestria">MAESTRÍA</option>
+      <option value="Doctorado">DOCTORADO</option>
           </select>
   </div>
   <div class="form-group col-md-3">

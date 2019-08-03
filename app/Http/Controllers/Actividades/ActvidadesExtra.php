@@ -31,7 +31,7 @@ class ActvidadesExtra extends Controller
        if($usuario_actual->tipo_usuario!='estudiante'){
         return redirect()->back();
         }
-
+        $now = new \DateTime();
         $result = DB::table('extracurriculares')
         ->select('extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
         'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.control_cupo', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
@@ -42,6 +42,7 @@ class ActvidadesExtra extends Controller
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
         //->where('extracurriculares.control_cupo', '>', '0')
         ->where([['extracurriculares.control_cupo', '>', '0'], ['extracurriculares.bandera', '=', '1']])
+        ->whereDate('extracurriculares.fecha_inicio', '>', $now)
         ->orderBy('personas.nombre', 'asc')
         ->simplePaginate(10);
     return view("estudiante\mis_actividades.catalogo_actividades")->with('dato', $result);
@@ -52,22 +53,35 @@ class ActvidadesExtra extends Controller
       $credito= $creditos;
       $usuario_actual=auth()->user();
       $id=$usuario_actual->id_user;
-      $result = DB::table('extracurriculares')
-      ->select('extracurriculares.control_cupo')
-     ->where('extracurriculares.id_extracurricular',$extra )
-    ->take(1)
-    ->first();
-
-       $aa = DB::table('detalle_extracurriculares')
+           $aa = DB::table('detalle_extracurriculares')
       ->select('detalle_extracurriculares.actividad')
       ->join('estudiantes', 'estudiantes.matricula', '=', 'detalle_extracurriculares.matricula')
         ->where([['estudiantes.matricula',$id], ['detalle_extracurriculares.actividad', $extra]])
       ->take(1)
       ->first();
 if(empty($aa)){
-      DB::table('detalle_extracurriculares')
+  $periodo_semestre = DB::table('periodos')
+  ->select('periodos.id_periodo')
+  ->where('periodos.estatus', '=', 'actual')
+  ->take(1)
+  ->first();
+ $periodo_semestre= $periodo_semestre->id_periodo;
+ $result = DB::table('extracurriculares')
+ ->select('extracurriculares.control_cupo')
+->where('extracurriculares.id_extracurricular',$extra )
+->take(1)
+->first();
+  $inscripcion = new Detalle_extracurricular;
+  $inscripcion->matricula= $id;
+  $inscripcion->actividad= $extra;
+  $inscripcion->creditos= $credito;
+  $inscripcion->estado= 'Cursando';
+  $inscripcion->periodo= $periodo_semestre;
+  $inscripcion->save();
+
+      //DB::table('detalle_extracurriculares')
           //->where('becas.id_beca', $valor)
-          ->Insert(['matricula' => $id, 'actividad' => $extra, 'creditos' => $credito, 'estado' => 'Cursando']);
+        //  ->Insert(['matricula' => $id, 'actividad' => $extra, 'creditos' => $credito, 'estado' => 'Cursando']);
        $reducir=($result->control_cupo)-1;
           DB::table('extracurriculares')
               ->where('extracurriculares.id_extracurricular',$extra )

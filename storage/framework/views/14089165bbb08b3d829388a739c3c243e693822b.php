@@ -37,6 +37,7 @@
                                </tbody>
                            </table>
                          </div>
+                       </br></br>
                            <?php if(count($dato)): ?>
                              <?php echo e($dato->links()); ?>
 

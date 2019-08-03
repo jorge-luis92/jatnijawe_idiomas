@@ -46,8 +46,8 @@
           <td>{{$datos->modalidad}}</td>
           <td>{{$datos->nombre}} {{$datos->apellido_paterno}} {{$datos->apellido_materno}}</td>
           <td>{{ date('d-m-Y', strtotime($datos->fecha_inicio)) }}
-           <?php if(empty($datos->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo date('d-m-Y', strtotime($datos->fecha_fin));}?></td>
-          <td><?php if(empty($datos->dias_sem) && empty($datos->hora_fin)){ echo $datos->hora_inicio;} else{ echo $datos->dias_sem; echo "\n\n"; echo $datos->hora_inicio;echo " a "; echo $datos->hora_fin;} ?>
+           <?php echo " al "; if(empty($datos->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo date('d-m-Y', strtotime($datos->fecha_fin));}?></td>
+          <td><?php if(empty($datos->dias_sem) && empty($datos->hora_fin)){ echo $datos->hora_inicio;} else{ echo $datos->dias_sem; echo "\n\n"; echo $datos->hora_inicio; echo " a "; echo $datos->hora_fin;} ?>
             </td>
             <td>{{$datos->control_cupo}}</td>
             <td><a href="inscripcion_extracurricular/{{ $datos->id_extracurricular}}/{{ $datos->creditos}}"><?php if(empty($usuario)){echo "INSCRIBIRSE";}?></a></td>
@@ -55,7 +55,7 @@
       @endforeach
      </tbody>
      </table>
-     </div> 
+     </div>
      @if (count($dato))
      {{ $dato->links() }}
      @endif
