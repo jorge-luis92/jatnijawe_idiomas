@@ -95,13 +95,14 @@ class LoginController extends Controller
    //  return view('personal_administrativo\admin_sistema.home_admin');
        return redirect()->route('home_estudiante')->with('sucess', 'Inicio de sesión correctamente');
    }
+ }
    else {
      $this->guard()->logout();
     $request->session()->invalidate();
-   return $this->loggedOut($request) ?: redirect('login_estudiante')->with('error', 'Usuario Incorrecto, ¡Favor de Verificar Datos!');
+   return $this->loggedOut($request) ?: redirect('estudiante')->with('error', 'Usuario Incorrecto, ¡Favor de Verificar Datos!');
  }
  }
 
-}
+
 
 }

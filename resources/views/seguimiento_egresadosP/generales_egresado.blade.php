@@ -73,7 +73,7 @@
 <div class="form-row">
 <div class="form-group col-md-4">
 <label for="generacion" >{{ __('* Generación') }}</label>
-<input id="generacion" name="generacion" value="<?php if(empty($pro->generacion)){ $vacio=null; echo $vacio;} else{ echo $pro->generacion;} ?>" autofocus type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('generacion') is-invalid @enderror">
+<input id="generacion" name="generacion" required pattern="(([0-9]{4})+([-])+([0-9]{4}))" placeholder="Ejemplo: 2010-2014" value="<?php if(empty($pro->generacion)){ $vacio=null; echo $vacio;} else{ echo $pro->generacion;} ?>" autofocus type="text" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('generacion') is-invalid @enderror">
   @error('generacion')
 <span class="invalid-feedback" role="alert">
 <strong>{{ $message }}</strong>
@@ -82,7 +82,7 @@
 </div>
 <div class="form-group col-md-3" id="labels">
   <label for="promedio_final">* Promedio Final</label>
-  <input type="tel" name="promedio_final" value="<?php if(empty($pro->promedio_final)){ $vacio=null; echo $vacio;} else{ echo $pro->promedio_final;} ?>" onkeypress="return numeros (event)" class="form-control">
+  <input type="tel" name="promedio_final" maxlength="3" required pattern="(([0-9]{1})+(['.']{1})+([0-9]{1}))" placeholder="Ejemplo: 8.5"  value="<?php if(empty($pro->promedio_final)){ $vacio=null; echo $vacio;} else{ echo $pro->promedio_final;} ?>" onkeypress="return numeros (event)" class="form-control">
 </div>
 
 </div>

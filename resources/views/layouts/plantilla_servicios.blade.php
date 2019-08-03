@@ -196,7 +196,7 @@
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
           <a class="btn btn-primary" href="{{ route('logout_system') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
 
-         <form id="logout-form" action="{{ route('logout_system') }}" method="GET" style="display: none;">
+         <form id="logout-form" action="{{ route('logout_system') }}" method="POST" style="display: none;">
             @csrf
           </form>
         </div>

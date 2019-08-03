@@ -199,9 +199,9 @@
         <div class="modal-body">Presione "Finalizar Sesión" para confirmar.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
+          <a class="btn btn-primary" href="<?php echo e(route('logout_system')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Finalizar Sesión</a>
 
-          <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+          <form id="logout-form" action="<?php echo e(route('logout_system')); ?>" method="POST" style="display: none;">
               <?php echo csrf_field(); ?>
           </form>
         </div>

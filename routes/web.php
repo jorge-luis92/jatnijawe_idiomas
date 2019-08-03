@@ -14,9 +14,8 @@ Route::post('login_studiante', ['as' =>'login_studiante', 'uses' => 'Auth\LoginC
 Route::get('tallerista', 'Tallerista_Con\LoginTallerista@getLoginTallerista')->name('tallerista');
 Route::post('tallerista', ['as' =>'tallerista', 'uses' => 'Tallerista_Con\LoginTallerista@postLoginTallerista']);
 Route::get('administrativo', 'Administrativo_Con\LoginAdministrativo@getLogin')->name('administrativo');
-Route::get('logout_system', ['as' => 'logout_system', 'uses' => 'Administrativo_Con\LoginAdministrativo@getLogout']);
+Route::post('logout_system', ['as' => 'logout_system', 'uses' => 'Administrativo_Con\LoginAdministrativo@getLogout']);
 Route::post('admin', ['as' =>'admin', 'uses' => 'Administrativo_Con\LoginAdministrativo@postLogin']);
-
 
 Route::group(['middleware' => 'auth','talleristamiddleware'], function () {
 //Route::get('login_personal', 'Administrativo_Con\AdministrativoController@login_admin')->name('login_personal');
@@ -27,11 +26,12 @@ Route::get('grupo_tallerista', 'Tallerista_Con\TalleristaController@grupo_taller
 Route::get('talleres_finalizados', 'Tallerista_Con\TalleristaController@talleres_finalizados')->name('talleres_finalizados');
 });
 /* Rutas de Acdemico---*/
-Route::group(['middleware' => 'auth','academicomiddleware'], function () {
+Route::group(['middleware' => 'auth', 'academicomiddleware'], function () {
 Route::get('home_auxiliar_adm', 'Administrativo_Con\AdministrativoController@home_auxiliar_adm')->name('home_auxiliar_adm');
 Route::get('carga_de_datos', 'Administrativo_Con\AdministrativoController@carga_de_datos')->name('carga_de_datos');
 Route::get('registros_estudiantes', 'Administrativo_Con\AdministrativoController@carga_hoy')->name('registros_estudiantes');
 Route::get('registro_estudiante_aux', 'Administrativo_Con\AdministrativoController@registro_estudiante_aux')->name('registro_estudiante_aux');
+Route::post('registro_estudiante_auxa', 'RegistroEstudiantes@create_estudiante_aux')->name('registro_estudiante_auxa');
 Route::get('busqueda_estudiante_aux', 'Administrativo_Con\AdministrativoController@busqueda_estudiante_aux')->name('busqueda_estudiante_aux');
 Route::get('estudiante_activo_aux', 'Administrativo_Con\AdministrativoController@estudiante_activo_aux')->name('estudiante_activo_aux');
 Route::get('estudiante_inactivo_aux', 'Administrativo_Con\AdministrativoController@estudiante_inactivo_aux')->name('estudiante_inactivo_aux');
@@ -137,7 +137,6 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::get('registro_coordinador', 'AdminController@registro_coordinador')->name('registro_coordinador');
   Route::post('registro_estudiantes', 'RegistroEstudiantes@create_estudiante')->name('registro_estudiantes');
-  Route::post('registro_estudiante_auxa', 'RegistroEstudiantes@create_estudiante_aux')->name('registro_estudiante_auxa');
   Route::post('registrar_coordinador', 'AdminController@registrar_coordinador')->name('registrar_coordinador');
   Route::get('busqueda_coordinador', 'AdminController@busqueda_coordinador')->name('busqueda_coordinador');
   Route::any('busqueda_coordinadores', 'AdminController@busqueda_coor')->name('busqueda_coordinadores');
@@ -204,7 +203,6 @@ Route::post('antecedentes_laborales_actu', 'SeguimientoEgresadosController@antec
 /*Controller ADMIN DEL SISTEMA
 ***********************************************************
 */
-Route::get('sisi','Homepag@sino');
 Route::get('notes', 'Estudiante_Con\EstudianteController@index');
 Route::get('pdf', 'Estudiante_Con\EstudianteController@pdf_g');
 Route::get('consultitas', 'ConsultasController@carga_datos_general');

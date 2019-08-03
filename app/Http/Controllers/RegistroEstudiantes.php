@@ -38,14 +38,21 @@ class RegistroEstudiantes extends Controller
      else {
        $ultima=$ultima+1;
      }
- $valor_persona = DB::table('personas')->max('id_persona');
+
+     $periodo_semestre = DB::table('periodos')
+     ->select('periodos.id_periodo')
+     ->where('periodos.estatus', '=', 'actual')
+     ->take(1)
+     ->first();
+    $periodo_semestre= $periodo_semestre->id_periodo;
+ //$valor_persona = DB::table('personas')->max('id_persona');
   $data = $request;
-  $id_prueba= $valor_persona+1;
+//  $id_prueba= $valor_persona+1;
   $password= $data['matricula'];
   $tipo_usuario= 'estudiante';
   if($data['edad'] > 16){
   $persona=new Persona;
-  $persona->id_persona=$id_prueba;
+  $persona->id_persona=$data['matricula'];
   $persona->nombre=$data['nombre'];
   $persona->apellido_paterno=$data['apellido_paterno'];
   $persona->apellido_materno=$data['apellido_materno'];
@@ -55,6 +62,7 @@ class RegistroEstudiantes extends Controller
   $persona->tipo_sangre=$data['tipo_sangre'];
   $persona->edad=$data['edad'];
   $persona->genero=$data['genero'];
+  $persona->periodo=$periodo_semestre;
   $persona->save();
 
   if($persona->save()){
@@ -66,7 +74,9 @@ class RegistroEstudiantes extends Controller
     $estudiante->grupo=$data['grupo'];
     $estudiante->estatus=$data['estatus'];
     $estudiante->bachillerato_origen=$data['bachillerato_origen'];
-    $estudiante->id_persona=$id_prueba;
+    $estudiante->id_persona=$data['matricula'];
+    $estudiante->sede='C.U.';
+    $estudiante->periodo=$periodo_semestre;
     $estudiante->save();
     if($estudiante->save()){
 
@@ -76,10 +86,11 @@ class RegistroEstudiantes extends Controller
       $user->email=$data['email'];
       $user->password = Hash::make($password);
       $user->tipo_usuario=$tipo_usuario;
-      $user->id_persona=$id_prueba;
+      $user->id_persona=$data['matricula'];
+      $user->periodo=$periodo_semestre;
       $user->save();
         if($user->save()){
-      return redirect()->route('home_admin')->with('success','¡Datos registrados correctamente!');
+      return redirect()->route('busqueda_estudiante')->with('success','¡Datos registrados correctamente!');
     }}}}
 else{
  return redirect()->route('registro_estudiante')->with('error','El estudiante debe ser mayor de 16 años');
@@ -106,9 +117,15 @@ $data = $request;
 $id_prueba= random_int(1, 532986) +232859 * 123 -43 +(random_int(1, 1234));
 $password= $data['matricula'];
 $tipo_usuario= 'estudiante';
+$periodo_semestre = DB::table('periodos')
+->select('periodos.id_periodo')
+->where('periodos.estatus', '=', 'actual')
+->take(1)
+->first();
+$periodo_semestre= $periodo_semestre->id_periodo;
 if(($data['edad']) >16){
 $persona=new Persona;
-$persona->id_persona=$id_prueba;
+$persona->id_persona=$data['matricula'];
 $persona->nombre=$data['nombre'];
 $persona->apellido_paterno=$data['apellido_paterno'];
 $persona->apellido_materno=$data['apellido_materno'];
@@ -118,6 +135,7 @@ $persona->lugar_nacimiento=$data['lugar_nacimiento'];
 $persona->tipo_sangre=$data['tipo_sangre'];
 $persona->edad=$data['edad'];
 $persona->genero=$data['genero'];
+$persona->periodo=$periodo_semestre;
 $persona->save();
 
 if($persona->save()){
@@ -129,7 +147,9 @@ if($persona->save()){
   $estudiante->grupo=$data['grupo'];
   $estudiante->estatus=$data['estatus'];
   $estudiante->bachillerato_origen=$data['bachillerato_origen'];
-  $estudiante->id_persona=$id_prueba;
+  $estudiante->id_persona=$data['matricula'];
+  $estudiante->sede='C.U.';
+  $estudiante->periodo=$periodo_semestre;
   $estudiante->save();
   if($estudiante->save()){
 
@@ -139,10 +159,11 @@ if($persona->save()){
     $user->email=$data['email'];
     $user->password = Hash::make($password);
     $user->tipo_usuario=$tipo_usuario;
-    $user->id_persona=$id_prueba;
+    $user->id_persona=$data['matricula'];
+    $user->periodo=$periodo_semestre;
     $user->save();
       if($user->save()){
-    return redirect()->route('home_auxiliar_adm')->with('success','¡Datos registrados correctamente!');
+    return redirect()->route('busqueda_estudiante_aux')->with('success','¡Datos registrados correctamente!');
   }}}}
 else{
 return redirect()->route('registro_estudiante_aux')->with('error','El estudiante debe ser mayor a 16 años');

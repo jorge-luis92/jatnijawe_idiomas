@@ -306,7 +306,7 @@ public function antecedentes_laborales()
     ->take(1)
     ->first();
     if(empty($egresado_si)){
-      return redirect()->route('generales_egresado')->with('error','¡Para rellenar el cuestionario de datos ladebes actualizar tus datos!');
+      return redirect()->route('generales_egresado')->with('error','¡Para rellenar el cuestionario de datos debes actualizar tus datos!');
     }
     else {
     $egresado_si = $egresado_si->id_egresado;

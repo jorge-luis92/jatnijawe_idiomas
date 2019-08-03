@@ -105,7 +105,6 @@ return view('estudiante\datos.datos_personales');
       return  view ('estudiante\mis_actividades.misActividades')->with('dato', $result);
     }
 
-
         public function avance_horas(){
           $usuario_actual=\Auth::user();
            if($usuario_actual->tipo_usuario!='estudiante'){
@@ -175,11 +174,7 @@ return view('estudiante\datos.datos_personales');
         ->first();
           $id_persona= json_decode( json_encode($id_persona), true);
           $users = DB::table('estudiantes')
-        /*  ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
-                   'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
-                   'personas.curp', 'personas.genero', 'direcciones.vialidad_principal', 'direcciones.num_exterior', 'direcciones.cp',
-                   'direcciones.localidad', 'direcciones.municipio', 'direcciones.entidad_federativa')*/
-           ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
+             ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
                       'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
                       'personas.curp', 'personas.genero')
           ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
@@ -187,16 +182,6 @@ return view('estudiante\datos.datos_personales');
           ->where('estudiantes.matricula',$ids)
           ->take(1)
           ->first();
-
-        /*  $direccion = DB::table('direcciones')
-                        ->select('direcciones.vialidad_principal', 'direcciones.num_exterior', 'direcciones.cp',
-                                 'direcciones.localidad', 'direcciones.municipio', 'direcciones.entidad_federativa')
-                         ->join('personas', 'personas.id_persona', '=', 'direcciones.id_persona')
-                         //->join('direcciones', 'personas.id_persona', '=', 'direcciones.id_persona')
-                         ->where('personas.id_persona',$id_persona)
-                         ->take(1)
-                         ->first();*/
-
                          $direccion = DB::table('personas')
                          ->select('direcciones.vialidad_principal', 'direcciones.num_exterior', 'direcciones.cp', 'direcciones.localidad',
                          'direcciones.municipio', 'direcciones.entidad_federativa')
@@ -352,8 +337,7 @@ return view('estudiante\datos.datos_personales');
    return view('estudiante\servicios.solicitud_practicas')
    ->with('u',$users)->with('d', $direccion)->with('cel', $num_cel)->with('valor_d', $valor_direccion);
  }else{
-  return redirect()->route('home_estudiante')->with('error','Revisa los requisitos previos para poder
-   solicitar Prácticas PROFESIONALES');}
+  return redirect()->route('home_estudiante')->with('error','No cumples con los requisitos para realizar Prácticas Profesionales');}
  }
    public function solicitud_servicioSocial(){
      $usuario_actual=auth()->user();
@@ -405,7 +389,7 @@ return view('estudiante\datos.datos_personales');
    ->with('u',$users)->with('d', $direccion)->with('cel', $num_cel)->with('valor_d', $valor_direccion);
  }
    else {
-     return redirect()->route('home_estudiante')->with('error','Revisa los requisitos previos para poder solicitar SERVICIO SOCIAL');
+     return redirect()->route('home_estudiante')->with('error','No cumples con los requisitos para llenar los datos de SERVICIO SOCIAL');
    }
    }
 

@@ -89,7 +89,7 @@ class LoginAdministrativo extends Controller
 
    }
 
-   return redirect()->route('admin')->with('error','Usuario invalido: !Verifique sus datos!');
+   return redirect()->route('administrativo')->with('error','Usuario invalido: !Verifique sus datos!');
         /* return view("personal_administrativo.login_personal");*/
     //   }
   }
@@ -97,13 +97,8 @@ class LoginAdministrativo extends Controller
 
   public function getLogout(Request $request)
 {
-//Auth::logout();
-  //  return redirect()->back();
-
   $this->guard()->logout();
-
  $request->session()->invalidate();
-
 return $this->loggedOut($request) ?:  redirect()->back()->with('success', 'Cierre de sesión correcto!');
 }
 

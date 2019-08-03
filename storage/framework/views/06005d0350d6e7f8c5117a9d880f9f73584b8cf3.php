@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </form>
-                    <input  type="text"  id ="otro" value="<?php echo e($ss); ?> <?php echo date("Y-m-d");?>" class="form-control"  >
+                
 </div>
 
 <?php $__env->stopSection(); ?>

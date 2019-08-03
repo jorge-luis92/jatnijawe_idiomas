@@ -56,7 +56,7 @@
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
      </tbody>
      </table>
-     </div>
+     </div> 
      <?php if(count($dato)): ?>
      <?php echo e($dato->links()); ?>
 

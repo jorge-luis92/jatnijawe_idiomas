@@ -205,10 +205,6 @@ if($data['edad'] >17){
        if($usuario_actual->tipo_usuario!='4'){
          return redirect()->back();
         }
-      /*$est = DB::table('users')
-      ->where('users.bandera', '=', '1')
-      ->get();
-*/
       $q = $request->get('q');
       if($q != null){
       $user = Estudiante::where( 'estudiantes.matricula', 'LIKE', '%' . $q . '%' )
@@ -321,9 +317,7 @@ if($data['edad'] >17){
 
 
         public function editar_estudiante($matricula){
-
           $ids=$matricula;
-
                     $datos = DB::table('estudiantes')
                     ->select('estudiantes.matricula', 'estudiantes.fecha_ingreso','estudiantes.semestre', 'estudiantes.modalidad',
                     'estudiantes.estatus', 'estudiantes.grupo','personas.nombre', 'personas.apellido_paterno','estudiantes.grupo',
@@ -335,8 +329,6 @@ if($data['edad'] >17){
                     ->first();
                   $ema = DB::table('users')
                   ->select('users.email')->where('users.id_user', $ids)->take(1)->first();
-
-
          return view('personal_administrativo\admin_sistema.editar_estudiante')->with('users', $datos)->with('emails', $ema);
           }
 
