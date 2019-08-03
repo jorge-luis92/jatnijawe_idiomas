@@ -49,7 +49,7 @@ endif; ?>
                           <label for="password" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Contraseña')); ?></label>
 
                           <div class="col-md-6">
-                              <input id="password" type="password" class="form-control <?php if ($errors->has('password')) :
+                              <input id="password" value="<?php echo e(old('password')); ?>" type="password" class="form-control <?php if ($errors->has('password')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('password'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -79,7 +79,7 @@ endif; ?>
 
                                    </a>
                                <?php endif; ?>
-                            </div>                  
+                            </div>
                         </div>
                     </form>
                 </div>

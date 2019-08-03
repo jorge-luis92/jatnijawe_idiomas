@@ -13,6 +13,7 @@ use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Session\Store as SessionStore;
 use Illuminate\Contracts\Support\MessageProvider;
+use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyUploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse as BaseRedirectResponse;
 
@@ -72,8 +73,8 @@ class LoginTallerista extends Controller
       return redirect()->route('home_tallerista')->with('sucess', 'Inicio de sesión correctamente');
     }
   }
-
-   return redirect()->route('tallerista')->with('error','Usuario invalido: !Verifique sus datos!');
+   return redirect()->back()->withInput(Input::all())->with('error','Usuario invalido: !Verifique sus datos!');
+   //return redirect()->route('tallerista')->with('error','Usuario invalido: !Verifique sus datos!');
         /* return view("personal_administrativo.login_personal");*/
     //   }
 

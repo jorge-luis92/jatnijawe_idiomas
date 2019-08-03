@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Input;
 use App\User;
 use App\Estudiante;
 use App\Persona;
+use App\Invoice;
 /* Página principal---*/
 Route::get('/', 'Homepag@homepage')->name('welcome');
 Route::get('perfiles', 'Homepag@perfil')->name('perfiles');
@@ -189,7 +190,7 @@ Route::group(['middleware' => 'auth', 'serviciomiddleware' ], function () {
   });
 
 /*RUTAS Planeación*/
-Route::group(['middleware' => 'auth', 'adminmiddleware' ], function () {
+Route::group(['middleware' => 'auth', 'planeacionmiddleware' ], function () {
   Route::get('home_planeacion', 'PlaneacionController@home_planeacion')->name('home_planeacion');
   Route::get('info_coord_academica1', 'PlaneacionController@info_coord_academica1')->name('info_coord_academica1');
   Route::get('info_coord_academica2', 'PlaneacionController@info_coord_academica2')->name('info_coord_academica2');
@@ -222,6 +223,4 @@ Route::group(['middleware' => 'auth', 'adminmiddleware' ], function () {
 Route::get('home_seguimiento_egresados', 'SeguimientoEgresadosController@home_seguimiento_egresados')->name('home_seguimiento_egresados');
 Route::get('registro_externo', 'RegistrosController@ver')->name('registro_externo');
 Route::post('registro_externos', 'RegistrosController@create')->name('registro_externos');
-
-
 Auth::routes();

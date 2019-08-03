@@ -15,6 +15,7 @@ use Illuminate\Session\Store as SessionStore;
 use Illuminate\Contracts\Support\MessageProvider;
 use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyUploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse as BaseRedirectResponse;
+use Illuminate\Support\Facades\Input;
 
 class LoginAdministrativo extends Controller
 {
@@ -88,8 +89,8 @@ class LoginAdministrativo extends Controller
     }
 
    }
-
-   return redirect()->route('administrativo')->with('error','Usuario invalido: !Verifique sus datos!');
+     return redirect()->back()->withInput(Input::all())->with('error','Usuario invalido: !Verifique sus datos!');
+   //return redirect()->route('administrativo')->with('error','Usuario invalido: !Verifique sus datos!');
         /* return view("personal_administrativo.login_personal");*/
     //   }
   }

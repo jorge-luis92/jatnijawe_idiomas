@@ -16,6 +16,7 @@ use Illuminate\Session\Store as SessionStore;
 use Illuminate\Contracts\Support\MessageProvider;
 use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyUploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse as BaseRedirectResponse;
+use Illuminate\Support\Facades\Input;
 
 class LoginController extends Controller
 {
@@ -99,7 +100,8 @@ class LoginController extends Controller
    else {
      $this->guard()->logout();
     $request->session()->invalidate();
-   return $this->loggedOut($request) ?: redirect('estudiante')->with('error', 'Usuario Incorrecto, ¡Favor de Verificar Datos!');
+   //return $this->loggedOut($request) ?: redirect('estudiante')->with('error', 'Usuario Incorrecto, ¡Favor de Verificar Datos!');
+  return $this->loggedOut($request) ?:  redirect()->back()->withInput(Input::all())->with('error','Usuario invalido: !Verifique sus datos!');
  }
  }
 

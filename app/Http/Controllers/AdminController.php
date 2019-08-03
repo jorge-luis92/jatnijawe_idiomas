@@ -25,6 +25,7 @@ class AdminController extends Controller
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='5'){
          return redirect()->back();
+        //  return redirect('perfiles')->with('error','Acceso Denegado');
         }
         return view('personal_administrativo\admin_sistema.home_admin');
       }
@@ -33,6 +34,7 @@ class AdminController extends Controller
         $usuario_actual=\Auth::user();
          if($usuario_actual->tipo_usuario!='5'){
            return redirect()->back();
+          //  return redirect()->back()->with('error','Acceso Denegado');
           }
         return view('personal_administrativo\admin_sistema.registro_estudiante');
       }

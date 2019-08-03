@@ -43,7 +43,7 @@ endif; ?>
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('password'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"  name="password" required >
+endif; ?>" value="<?php echo e(old('password')); ?>" name="password" required >
 
                                 <?php if ($errors->has('password')) :
 if (isset($message)) { $messageCache = $message; }
