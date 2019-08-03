@@ -106,7 +106,12 @@ class AdminController extends Controller
 
 $data = $request;
 if($data['edad'] >17){
-
+  $periodo_semestre = DB::table('periodos')
+  ->select('periodos.id_periodo')
+  ->where('periodos.estatus', '=', 'actual')
+  ->take(1)
+  ->first();
+ $periodo_semestre= $periodo_semestre->id_periodo;
         $id_prueba= random_int(1, 532986) +232859 * 123 -43 +(random_int(1, 1234));
         $password= $data['apellido_paterno'];
         $persona=new Persona;
@@ -118,6 +123,7 @@ if($data['edad'] >17){
         $persona->fecha_nacimiento=$data['fecha_nacimiento'];
         $persona->edad=$data['edad'];
         $persona->genero=$data['genero'];
+        $persona->periodo=$periodo_semestre;
         $persona->save();
 
         if($persona->save()){
@@ -137,13 +143,14 @@ if($data['edad'] >17){
             $depto_admin=new Dpto_Administrativo;
             $depto_admin->id_departamento=$data['departamento'];
             $depto_admin->id_administrativo=$bus_adm;
+            $depto_admin->periodo=$periodo_semestre;
             $depto_admin->save();
 
               if($depto_admin->save()){
                 $nivel = new Nivel();
                 $nivel ->id_administrativo= $bus_adm;
                 $nivel ->grado_estudios=$data['grado_estudios'];
-                $nivel ->rfc=$data['curp'];
+              //  $nivel ->rfc=$data['curp'];
                 $nivel ->save();
 
               if($nivel->save()){
@@ -154,6 +161,7 @@ if($data['edad'] >17){
             $user->password = Hash::make($data['password']);
             $user->tipo_usuario=$data['departamento'];
             $user->id_persona=$id_prueba;
+            $user->periodo=$periodo_semestre;
             $user->save();
               if($user->save()){
             return redirect()->route('home_admin')->with('success','¡Datos registrados correctamente!');

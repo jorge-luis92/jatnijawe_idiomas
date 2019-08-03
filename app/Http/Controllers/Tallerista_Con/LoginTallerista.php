@@ -67,7 +67,7 @@ class LoginTallerista extends Controller
          $credentials = $request->only('username', 'password');
          if ($this->auth->attempt($credentials, $request->has('remember')))
    {;
-    if(Auth::user()->tipo_usuario == 'tallerista'){
+    if(Auth::user()->tipo_usuario == 'tallerista' &&  Auth::user()->bandera == '1'){
     //  return view('tallerista.home_tallerista');
       return redirect()->route('home_tallerista')->with('sucess', 'Inicio de sesión correctamente');
     }

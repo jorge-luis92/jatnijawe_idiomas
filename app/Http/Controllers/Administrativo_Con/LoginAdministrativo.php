@@ -67,23 +67,23 @@ class LoginAdministrativo extends Controller
          $credentials = $request->only('username', 'password');
          if ($this->auth->attempt($credentials, $request->has('remember')))
    {;
-    if(Auth::user()->tipo_usuario == '5'){
-    //  return view('personal_administrativo\admin_sistema.home_admin');
+    if(Auth::user()->tipo_usuario == '5' &&  Auth::user()->bandera == '1'){
+    // if(Auth::user()->tipo_usuario == 'estudiante' &&  Auth::user()->bandera == '1'){
         return redirect()->route('home_admin')->with('sucess', 'Inicio de sesión correctamente');
     }
-    if (Auth::user()->tipo_usuario == '1') {
+    if (Auth::user()->tipo_usuario == '1' &&  Auth::user()->bandera == '1') {
       //  return view('personal_administrativo\formacion_integral.home_formacion');
           return redirect()->route('inicio_formacion')->with('sucess', 'Inicio de sesión correctamente');
     }
-    if (Auth::user()->tipo_usuario == '2') {
+    if (Auth::user()->tipo_usuario == '2' &&  Auth::user()->bandera == '1') {
       //  planeacion;
           return redirect()->route('home_planeacion')->with('sucess', 'Inicio de sesión correctamente');
     }
-    if (Auth::user()->tipo_usuario == '3') {
+    if (Auth::user()->tipo_usuario == '3' &&  Auth::user()->bandera == '1') {
       //  return view('personal_administrativo\formacion_integral.home_formacion');
           return redirect()->route('home_servicios')->with('sucess', 'Inicio de sesión correctamente');
     }
-    elseif (Auth::user()->tipo_usuario == '4') {
+    elseif (Auth::user()->tipo_usuario == '4' &&  Auth::user()->bandera == '1') {
       return redirect()->route('home_auxiliar_adm')->with('sucess', 'Inicio de sesión correctamente');
     }
 
