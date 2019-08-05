@@ -142,6 +142,13 @@ Route::get('constancia_parcial/{matricula}', 'FormacionIntegralController@consta
 Route::get('constancia_valida/{matricula}', 'FormacionIntegralController@constancia_val');
 Route::get('acreditar_estudiantes_formacion/{actividad}/{matricula}', 'FormacionIntegralController@acreditar_estudiantes');
 Route::get('desactivar_extra/{actividad}', 'FormacionIntegralController@desactivar_extracurricular');
+Route::get('solicitud_correcion/{id_matricula}', 'Notificaciones@solicitud_correcion');
+Route::post('replantear_solicitud', 'Notificaciones@enviar_correccion')->name('replantear_solicitud');
+Route::get('solicitud_rechazo/{id_matricula}', 'Notificaciones@solicitud_rechazo');
+Route::post('taller_rechazo', 'Notificaciones@enviar_rechazo')->name('taller_rechazo');
+Route::get('solicitud_aprobada/{id_matricula}', 'Notificaciones@solicitud_aceptada');
+Route::post('taller_aprobado', 'Notificaciones@enviar_aprobacion')->name('taller_aprobado');
+Route::get('talleres_aprobados', 'FormacionIntegralController@taller_aprobado')->name('solicitudes');
 });
 /*Rutas ADMIN DEL SISTEMA*/
 Route::group(['middleware' => 'auth', 'adminmiddleware' ], function () {

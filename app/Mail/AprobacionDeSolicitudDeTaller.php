@@ -6,23 +6,24 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\SolicitudTaller;
 
-class TalleresNotificacion extends Mailable
+class AprobacionDeSolicitudDeTaller extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $datos_correo;
     public $datos_recibidos;
+    public $datos_taller;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($datos_correo, $datos_recibidos)
+    public function __construct($datos_correo, $datos_recibidos, $datos_taller)
    {
        $this->datos_correo = $datos_correo;
        $this->datos_recibidos = $datos_recibidos;
+       $this->datos_taller = $datos_taller;
    }
 
     /**
@@ -32,7 +33,6 @@ class TalleresNotificacion extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.mensaje_correccion');
+        return $this->view('mails.mensaje_aprobacion');
     }
-
 }

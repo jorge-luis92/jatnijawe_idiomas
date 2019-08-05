@@ -275,13 +275,15 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
         $result = DB::table('solicitud_talleres')
       ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.fecha_solicitud', 'solicitud_talleres.nombre_taller', 'solicitud_talleres.descripcion',
       'solicitud_talleres.objetivos', 'solicitud_talleres.justificacion', 'solicitud_talleres.creditos',
-      'solicitud_talleres.proyecto_final', 'solicitud_talleres.cupo', 'solicitud_talleres.estado  ','solicitud_talleres.matricula', 'solicitud_talleres.departamento',
+      'solicitud_talleres.proyecto_final', 'solicitud_talleres.cupo', 'solicitud_talleres.estado','solicitud_talleres.matricula', 'solicitud_talleres.departamento',
       'solicitud_talleres.estado', 'estudiantes.matricula', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
       ->join('estudiantes', 'solicitud_talleres.matricula', '=', 'estudiantes.matricula')
       ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
-      ->where('solicitud_talleres.estado', '=', 'pendiente')
-      ->orderBy('solicitud_talleres.matricula', 'asc')
-      ->get();
+       ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
+    //  ->where('solicitud_talleres.estado', '=', 'pendiente')
+      ->where([['solicitud_talleres.estado', '=', 'pendiente'], ['periodos.estatus', '=', 'actual']])
+      ->orderBy('solicitud_talleres.created_at', 'desc')
+        ->simplePaginate(10);
     return view('personal_administrativo\formacion_integral\gestion_talleres.solicitudes')->with('data', $result);
     }
 

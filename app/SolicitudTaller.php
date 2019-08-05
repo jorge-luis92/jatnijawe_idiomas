@@ -12,6 +12,7 @@ class SolicitudTaller extends Model
  protected $fillable = [
      'fecha_solicitud','nombre_taller', 'duracion', 'area', 'lugar', 'fecha_inicio', 'fecha_fin','hora_inicio',
      'hora_fin', 'dias_sem','descripcion', 'objetivos', 'justificacion', 'creditos', 'proyecto_final',
-     'materiales',  'cupo', 'matricula', 'departamento', 'estado', 'periodo',
+     'materiales',  'cupo', 'matricula', 'departamento', 'periodo', 'estado',
  ];
 }
+    

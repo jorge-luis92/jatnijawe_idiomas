@@ -189,7 +189,7 @@ endif; ?>
     <option value="3 MESES">3 MESES (25 HORAS)</option>
     <option value="2 MESES">2 MESES (20 HORAS)</option>
     <option value="1 MES">1 MES (15 HORAS)</option>
-    <option value="CHARLA">CHARLA (2-15 HORAS)</option>
+    <!--<option value="CHARLA">CHARLA (2-15 HORAS)</option>-->
   </select>
   </div>
   <div class="form-group col-md-3">
@@ -211,7 +211,7 @@ endif; ?>
    </div>
         <div class="form-group col-md-3">
         <label for="fecha_inicio" ><?php echo e(__('* Fecha de Inicio(tentativo)')); ?></label>
-        <input id="fecha_inicio" type="date" value="<?php if(empty($taller->fecha_inicio)){ $vacio=null; echo $vacio;} else{ echo $taller->fecha_inicio;} ?>" class="form-control <?php if ($errors->has('fecha_inicio')) :
+        <input id="fecha_inicio" type="date" min= "<?php echo date("Y-m-d");?>"  max="" oninput="vamo()" value="<?php if(empty($taller->fecha_inicio)){ $vacio=null; echo $vacio;} else{ echo $taller->fecha_inicio;} ?>" class="form-control <?php if ($errors->has('fecha_inicio')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_inicio'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -229,7 +229,7 @@ endif; ?>
 
   <div class="form-group col-md-3">
        <label for="fecha_fin" ><?php echo e(__('* Fecha Terminación(tentativo)')); ?></label>
-       <input id="fecha_fin" type="date" value="<?php if(empty($taller->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo $taller->fecha_fin;} ?>" class="form-control <?php if ($errors->has('fecha_fin')) :
+       <input id="fecha_fin" type="date" onchange="vamo()"  min="<?php echo date("Y-m-d");?>"  max="" value="<?php if(empty($taller->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo $taller->fecha_fin;} ?>" class="form-control <?php if ($errors->has('fecha_fin')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_fin'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -251,12 +251,12 @@ endif; ?>
 
 <div class="form-group col-md-4">
    <label for="hora_inicio">Hora de entrada(tentativo)</label>
-       <input class="form-control"  type="time" min="07:00" max="20:00" id="hora_inicio" value="<?php if(empty($taller->hora_inicio)){ $vacio=null; echo $vacio;} else{ echo $taller->hora_inicio;} ?>"  name="hora_inicio" required>
+       <input class="form-control" oninput="vamos()"  type="time" min="07:00" max="20:00" id="hora_inicio" value="<?php if(empty($taller->hora_inicio)){ $vacio=null; echo $vacio;} else{ echo $taller->hora_inicio;} ?>"  name="hora_inicio" required>
    </div>
 
 <div class="form-group col-md-4">
    <label for="hora_fin">Hora de salida (tentativo)</label>
-     <input class="form-control" type="time" min="07:00" max="20:00" id="hora_fin" value="<?php if(empty($taller->hora_fin)){ $vacio=null; echo $vacio;} else{ echo $taller->hora_fin;} ?>" name="hora_fin" required>
+     <input class="form-control" type="time" onchange="vamos()" min="07:00" max="20:00" id="hora_fin" value="<?php if(empty($taller->hora_fin)){ $vacio=null; echo $vacio;} else{ echo $taller->hora_fin;} ?>" name="hora_fin" required>
 </div>
 
   <div class="form-group col-md-2">
@@ -401,18 +401,46 @@ function vamo(){
     var anio = fecha_inicio[0];
     var mes = fecha_inicio[1];
     var dia = fecha_inicio[2];
+  var mm = parseInt(mes);
+  var anios= parseInt(anio);
+var j=anio;
+var hey;
+if((mes >= 1) || (mes <12)){
+  mm=1+mm;
+if((mm > 1) || (mm < 10)){
+hey =mm;
+document.getElementById("fecha_fin").min = anio+'-'+'0'+hey+'-'+dia;
+//document.getElementById("fecha_fin").max = j+'-'+'0'+vale+'-'+dia;
+}
+}
 
-document.getElementById("fecha_fin").min = anio+'-'+mes+'-'+dia;
-document.getElementById("otro").value = anio+'-'+mes+'-'+dia;
 }
 
 function vamos(){
     var ed = document.getElementById('hora_inicio').value; //fecha de nacimiento en el formulario
     var hours = ed.split(":")[0];
    var minutes = ed.split(":")[1];
-    document.getElementById("hora_fin").min = hours + ":" + minutes;
-    document.getElementById("otro").value = hours + ":" + minutes;
+var nueva_hora= parseInt(hours);
+var primero;
+if((nueva_hora >= 6) &&  (nueva_hora <= 8)){
+       primero= nueva_hora + 1;
+       document.getElementById("hora_fin").min = "0"+primero  + ":" + minutes;
+
+     }
+
+   if((nueva_hora >= 9) &&  (nueva_hora <= 19)){
+          primero= nueva_hora + 1;
+          document.getElementById("hora_fin").min = primero  + ":" + minutes;
+
+        }
+    if(nueva_hora == 20){
+           primero= nueva_hora + 1;
+           document.getElementById("hora_fin").min = primero  + ":" + minutes;
+
+         }
+
 }
+
 </script>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>

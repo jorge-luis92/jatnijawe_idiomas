@@ -49,6 +49,7 @@
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a class="collapse-item" href=<?php echo e(route('busqueda_estudiante_fi')); ?>>Búsqueda</a>
             <a class="collapse-item" href=<?php echo e(route('solicitudes')); ?>>Solicitudes</a>
+            <a class="collapse-item" href=<?php echo e(route('solicitudes')); ?>>Talleres Aprobados</a>
             <!--<a class="collapse-item" href=<?php echo e(route('busqueda_atras')); ?>>Búsqueda Atrás</a>
             <a class="collapse-item" href=<?php echo e(route('registro_horas')); ?>>Registro de Horas</a>-->
           </div>
