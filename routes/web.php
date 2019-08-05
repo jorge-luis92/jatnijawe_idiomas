@@ -148,7 +148,11 @@ Route::get('solicitud_rechazo/{id_matricula}', 'Notificaciones@solicitud_rechazo
 Route::post('taller_rechazo', 'Notificaciones@enviar_rechazo')->name('taller_rechazo');
 Route::get('solicitud_aprobada/{id_matricula}', 'Notificaciones@solicitud_aceptada');
 Route::post('taller_aprobado', 'Notificaciones@enviar_aprobacion')->name('taller_aprobado');
-Route::get('talleres_aprobados', 'FormacionIntegralController@taller_aprobado')->name('solicitudes');
+Route::get('talleres_aprobados', 'FormacionIntegralController@taller_aprobado')->name('talleres_aprobados');
+Route::get('pdf_taller_aprobado/{matricula}','GenerarPdf@pdf_apro_taller_estudiante');
+Route::get('fecha_solicitud', 'FormacionIntegralController@actualizar_fechas_solicitud')->name('fecha_solicitud');
+Route::get('notificaciones_enviadas', 'Notificaciones@enviadas_notifaciones')->name('notificaciones_enviadas');
+Route::post('agregar_fecha_taller', 'FormacionIntegralController@fecha_taller')->name('agregar_fecha_taller');
 });
 /*Rutas ADMIN DEL SISTEMA*/
 Route::group(['middleware' => 'auth', 'adminmiddleware' ], function () {

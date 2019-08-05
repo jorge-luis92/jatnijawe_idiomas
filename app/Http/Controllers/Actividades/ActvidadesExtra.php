@@ -31,6 +31,13 @@ class ActvidadesExtra extends Controller
        if($usuario_actual->tipo_usuario!='estudiante'){
         return redirect()->back();
         }
+
+        $id_tutores = DB::table('tutores')
+        ->select('tutores.id_tutor')
+        ->join('personas', 'personas.id_persona', '=' ,'tutores.id_persona')
+        ->join('estudiantes', 'estudiantes.id_persona', '=' ,'personas.id_persona')
+        ->take(1)
+        ->first();
         $now = new \DateTime();
         $result = DB::table('extracurriculares')
         ->select('extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
@@ -41,7 +48,7 @@ class ActvidadesExtra extends Controller
         ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
         //->where('extracurriculares.control_cupo', '>', '0')
-        ->where([['extracurriculares.control_cupo', '>', '0'], ['extracurriculares.bandera', '=', '1']])
+        ->where([['extracurriculares.control_cupo', '>', '0'], ['extracurriculares.bandera', '=', '1'], ['tutores.id_tutor', '!=', $id_tutores->id_tutor]])
         ->whereDate('extracurriculares.fecha_inicio', '>', $now)
         ->orderBy('personas.nombre', 'asc')
         ->simplePaginate(10);

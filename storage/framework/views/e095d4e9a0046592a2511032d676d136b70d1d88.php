@@ -15,7 +15,7 @@
               <div class="card-header" align="center"><?php echo e(__('Mensaje Nuevo')); ?></div>
 
               <div class="card-body">
-                <form method="POST" action="<?php echo e(route('taller_rechazo')); ?>">
+                <form method="POST" action="<?php echo e(route('taller_aprobado')); ?>">
                 <?php echo csrf_field(); ?>
 
 

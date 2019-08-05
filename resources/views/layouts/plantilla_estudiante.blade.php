@@ -112,7 +112,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a  class="collapse-item"  href={{ route('mi_taller')}}>Listado de Talleres</a>
-            <a  class="collapse-item" href="#">Gestión de Taller</a>
+          <!--  <a  class="collapse-item" href="#">Gestión de Taller</a>-->
           </div>
         </div>
       </li>

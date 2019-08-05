@@ -32,15 +32,20 @@ class ConsultasController extends Controller
        if($usuario_actuales->tipo_usuario!='estudiante'){
          return redirect()->back();
         }
-
         $fecha_inicio = DB::table('periodo_actualizacion')
         ->select('periodo_actualizacion.fecha_inicio')
+        ->where('periodo_actualizacion.tipo', '=', 'estudiante')
         ->take(1)
         ->first();
+        if(empty($fecha_inicio)){
+          return redirect()->route('home_estudiante')->with('error', 'El periodo de Actualización de datos aún no comienza');
+        }
+        else {
         $fecha_inicio= $fecha_inicio ->fecha_inicio;
 
         $fecha_fin = DB::table('periodo_actualizacion')
         ->select('periodo_actualizacion.fecha_fin')
+        ->where('periodo_actualizacion.tipo', '=', 'estudiante')
         ->take(1)
         ->first();
         $fecha_fin= $fecha_fin ->fecha_fin;
@@ -55,6 +60,7 @@ class ConsultasController extends Controller
     else {
          $actualizacion = 'NO';
     }
+
     if($actualizacion == 'SI'){
       $usuario_actual=auth()->user();
       $id=$usuario_actual->id_user;
@@ -88,10 +94,12 @@ class ConsultasController extends Controller
         ->simplePaginate(7);
 
         return view('estudiante\datos.datos_generales')->with('u',$users)->with('l',$lenguas_r)->with('b',$becas_r);
-      }
+          }
+
       else {
         return redirect()->route('home_estudiante')->with('error', 'El periodo de Actualización de datos ha terminado');
       }
+    }
       }
 
 

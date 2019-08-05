@@ -15,7 +15,7 @@
               <div class="card-header" align="center">{{ __('Mensaje Nuevo') }}</div>
 
               <div class="card-body">
-                <form method="POST" action="{{route('taller_rechazo') }}">
+                <form method="POST" action="{{route('taller_aprobado') }}">
                 @csrf
 
 

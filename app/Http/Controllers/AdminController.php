@@ -301,7 +301,7 @@ if($data['edad'] >17){
           'users.email','administrativos.puesto')
           ->join('personas', 'personas.id_persona', '=', 'administrativos.id_persona')
           ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-          ->where([['administrativos.puesto','!=', ''], ['users.bandera', '=', '1'] , ['users.id_user', '!=', $id],])
+          ->where([['administrativos.puesto','!=', ''], ['users.bandera', '=', '1'] , ['users.id_user', '!=', $id]])
           ->orderBy('personas.nombre', 'asc')
           ->simplePaginate(8);
         return view('personal_administrativo\admin_sistema.coordinador_activo')->with('coordi', $users);
@@ -317,7 +317,7 @@ if($data['edad'] >17){
           'users.email', 'administrativos.puesto')
           ->join('personas', 'personas.id_persona', '=', 'administrativos.id_persona')
           ->join('users', 'personas.id_persona', '=', 'users.id_persona')
-          ->where([['administrativos.puesto','!=', ''], ['users.bandera', '=', '0'],])
+          ->where([['administrativos.puesto','!=', ''], ['users.bandera', '=', '0']])
           ->orderBy('personas.nombre', 'asc')
           ->simplePaginate(8);
 
@@ -415,17 +415,20 @@ protected function nueva_actualizacion(){
 
     $id_clave = DB::table('periodo_actualizacion')
     ->select('periodo_actualizacion.fecha_inicio', 'periodo_actualizacion.fecha_fin')
+    ->where('periodo_actualizacion.tipo', '=', 'estudiante')
     ->take(1)
     ->first();
 
-    $fecha_inicio = DB::table('periodo_actualizacion')
+/*    $fecha_inicio = DB::table('periodo_actualizacion')
     ->select('periodo_actualizacion.fecha_inicio')
+    ->where('periodo_actualizacion.tipo', '=', 'estudiante')
     ->take(1)
     ->first();
     $fecha_inicio= $fecha_inicio ->fecha_inicio;
 
     $fecha_fin = DB::table('periodo_actualizacion')
     ->select('periodo_actualizacion.fecha_fin')
+    ->where('periodo_actualizacion.tipo', '=', 'estudiante')
     ->take(1)
     ->first();
     $fecha_fin= $fecha_fin ->fecha_fin;
@@ -439,7 +442,8 @@ protected function nueva_actualizacion(){
 }
 else {
      $actualizacion = 'NO';
-}
+}*/
+$actualizacion= 'NO';
   return view('personal_administrativo\admin_sistema.fecha_actualizacion')->with('fechas', $id_clave)->with('ss', $actualizacion);
 
 }
@@ -448,6 +452,7 @@ protected function crear_fecha(Request $request){
   $data = $request;
   $id_clave = DB::table('periodo_actualizacion')
   ->select('periodo_actualizacion.id_actualizacion')
+  ->where('periodo_actualizacion.tipo', 'estudiante')
   ->take(1)
   ->first();
 
@@ -455,6 +460,7 @@ protected function crear_fecha(Request $request){
     $nueva_ac = new FechaActualizacion;
     $nueva_ac->fecha_inicio=$data['fecha_inicio'];
     $nueva_ac->fecha_fin=$data['fecha_fin'];
+    $nueva_ac->tipo='estudiante';
     $nueva_ac->save();
 
     if($nueva_ac->save()){
@@ -464,13 +470,11 @@ protected function crear_fecha(Request $request){
   else {
     $id_clave = $id_clave->id_actualizacion;
     DB::table('periodo_actualizacion')
-        ->where('periodo_actualizacion.id_actualizacion', $id_clave)
+        //->where('periodo_actualizacion.id_actualizacion', $id_clave)
+        ->where([['periodo_actualizacion.id_actualizacion', $id_clave], ['periodo_actualizacion.tipo', '=', 'estudiante']])
         ->update(['fecha_inicio' => $data['fecha_inicio'], 'fecha_fin' => $data['fecha_fin']]);
         return redirect()->route('agregar_fecha')->with('success','¡Fechas actualizadas Correctamente!');
   }
-
-
 }
-
 
 }

@@ -249,8 +249,37 @@ return view('estudiante\datos.datos_personales');
      if($usuario_actual->tipo_usuario!='estudiante'){
        return redirect()->back();
       }
-        $id=$usuario_actual->id_user;
+      $fecha_inicio = DB::table('periodo_actualizacion')
+      ->select('periodo_actualizacion.fecha_inicio')
+      ->where('periodo_actualizacion.tipo', '=', 'taller')
+      ->take(1)
+      ->first();
+      if(empty($fecha_inicio)){
+        return redirect()->route('home_estudiante')->with('error', 'El periodo de Actualización de datos aún no comienza');
+      }
+      else {
+      $fecha_inicio= $fecha_inicio ->fecha_inicio;
 
+      $fecha_fin = DB::table('periodo_actualizacion')
+      ->select('periodo_actualizacion.fecha_fin')
+      ->where('periodo_actualizacion.tipo', '=', 'taller')
+      ->take(1)
+      ->first();
+      $fecha_fin= $fecha_fin ->fecha_fin;
+      $now = new \DateTime();
+         $fechas_inicio =  date('d-m-Y', strtotime($fecha_inicio));
+         $fechas_fin =  date('d-m-Y', strtotime($fecha_fin));
+         $now =  date('d-m-Y');
+         $actualizacion='';
+         if (($now >= $fechas_inicio) && ($now <= $fechas_fin)){
+           $actualizacion = 'SI';
+  }
+  else {
+       $actualizacion = 'NO';
+  }
+
+  if($actualizacion == 'SI'){
+        $id=$usuario_actual->id_user;
         $id_persona = DB::table('estudiantes')
         ->select('estudiantes.id_persona')
         ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
@@ -284,6 +313,11 @@ return view('estudiante\datos.datos_personales');
           ->first();
   return view('estudiante\mis_actividades.solicitud_taller')->with('u',$users)->with('num_c', $num_cel)->with('taller', $detalles);
    }
+   else {
+     return redirect()->route('home_estudiante')->with('error', 'El periodo de Actualización de datos ha terminado');
+   }
+ }
+}
 
    public function solicitud_practicasP(){
      $usuario_actuales=\Auth::user();

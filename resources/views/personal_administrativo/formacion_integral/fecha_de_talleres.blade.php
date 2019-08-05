@@ -1,14 +1,14 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
-@extends('layouts.plantilla_admin')
+@extends('layouts.plantilla_formacion_integral')
 @section('title')
-: Fechas de Actualización
+: Fechas de Solicitud de Talleres
 @endsection
 
 @section('seccion')
  @include('flash-message')
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Fechas de Actualización(Estudiante)</h1>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Registro de Fechas de Solicitud de Talleres</h1>
 <div class="container" id="font7">
-</br>                    <form method="POST" action="{{ route('agregar_fecha_actualizacion')}}">
+</br>                    <form method="POST" action="{{ route('agregar_fecha_taller')}}">
                         @csrf
   <div class="form-row">
   <div class="form-group col-md-6">
@@ -20,7 +20,7 @@
       <input id="fecha_fin" type="date" onchange="vamo()"  name="fecha_fin"  min="<?php echo date("Y-m-d");?>"  max="" value="<?php if(empty($fechas->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo $fechas->fecha_fin;} ?>"class="form-control"  required>
             </div>
             </div>
-            <input type="text" name="tipo"  hidden class="form-control" value="estudiante">
+            <input type="text" name="tipo"  hidden class="form-control" value="taller">
 <!--
             <div class="form-row">
             <div class="form-group col-md-6">

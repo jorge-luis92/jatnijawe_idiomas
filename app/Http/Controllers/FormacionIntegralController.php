@@ -15,6 +15,7 @@ use App\Tutor;
 use App\Alumno;
 use App\AlumnoCurso;
 use App\Periodo;
+use App\FechaActualizacion;
 use App\SolicitudTaller;
 use Illuminate\Support\Facades\DB;
 use Storage;
@@ -696,6 +697,87 @@ protected function actualizar_fechas_solicitud(){
    if($usuario_actual->tipo_usuario!='1'){
      return redirect()->back();
     }
+
+      $id_clave = DB::table('periodo_actualizacion')
+      ->select('periodo_actualizacion.fecha_inicio', 'periodo_actualizacion.fecha_fin')
+      ->where('periodo_actualizacion.tipo', '=', 'taller')
+      ->take(1)
+      ->first();
+
+      $fecha_inicio = DB::table('periodo_actualizacion')
+      ->select('periodo_actualizacion.fecha_inicio')
+      ->where('periodo_actualizacion.tipo', '=', 'taller')
+      ->take(1)
+      ->first();
+    //  $fecha_inicio= $fecha_inicio ->fecha_inicio;
+
+      $fecha_fin = DB::table('periodo_actualizacion')
+      ->select('periodo_actualizacion.fecha_fin')
+      ->where('periodo_actualizacion.tipo', '=', 'taller')
+      ->take(1)
+      ->first();
+      //$fecha_fin= $fecha_fin ->fecha_fin;
+      /*$now = new \DateTime();
+         $fechas_inicio =  date('d-m-Y', strtotime($fecha_inicio));
+         $fechas_fin =  date('d-m-Y', strtotime($fecha_fin));
+         $now =  date('d-m-Y');
+         $actualizacion='';
+         if (($now >= $fechas_inicio) && ($now <= $fechas_fin)){
+           $actualizacion = 'SI';
+    }
+    else {
+       $actualizacion = 'NO';
+    }*/$actualizacion= 'NO';
+    return view('personal_administrativo\formacion_integral.fecha_de_talleres')->with('fechas', $id_clave)->with('ss', $actualizacion);
 }
 
+protected function fecha_taller(Request $request){
+  $data = $request;
+  $id_clave = DB::table('periodo_actualizacion')
+  ->select('periodo_actualizacion.id_actualizacion')
+  ->where('periodo_actualizacion.tipo', 'taller')
+  ->take(1)
+  ->first();
+
+  if(empty($id_clave)){
+    $nueva_ac = new FechaActualizacion;
+    $nueva_ac->fecha_inicio=$data['fecha_inicio'];
+    $nueva_ac->fecha_fin=$data['fecha_fin'];
+    $nueva_ac->tipo='taller';
+    $nueva_ac->save();
+
+    if($nueva_ac->save()){
+      return redirect()->route('fecha_solicitud')->with('success','¡Fechas agregadas Correctamente!');
+    }
+  }
+  else {
+    $id_clave = $id_clave->id_actualizacion;
+    DB::table('periodo_actualizacion')
+        //->where('periodo_actualizacion.id_actualizacion', $id_clave)
+        ->where([['periodo_actualizacion.id_actualizacion', $id_clave], ['periodo_actualizacion.tipo', '=', 'taller']])
+        ->update(['fecha_inicio' => $data['fecha_inicio'], 'fecha_fin' => $data['fecha_fin']]);
+        return redirect()->route('fecha_solicitud')->with('success','¡Fechas actualizadas Correctamente!');
+  }
+}
+
+public function taller_aprobado()
+{
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='1'){
+     return redirect()->back();
+    }
+    $result = DB::table('solicitud_talleres')
+  ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.fecha_solicitud', 'solicitud_talleres.nombre_taller', 'solicitud_talleres.descripcion',
+  'solicitud_talleres.objetivos', 'solicitud_talleres.justificacion', 'solicitud_talleres.creditos',
+  'solicitud_talleres.proyecto_final', 'solicitud_talleres.cupo', 'solicitud_talleres.estado','solicitud_talleres.matricula', 'solicitud_talleres.departamento',
+  'solicitud_talleres.estado', 'estudiantes.matricula', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+  ->join('estudiantes', 'solicitud_talleres.matricula', '=', 'estudiantes.matricula')
+  ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+   ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
+  ->where('solicitud_talleres.estado', '=', 'Aprobado')
+//  ->where([['solicitud_talleres.estado', '=', 'pendiente'], ['periodos.estatus', '=', 'actual']])
+  ->orderBy('solicitud_talleres.created_at', 'desc')
+    ->simplePaginate(10);
+return view('personal_administrativo\formacion_integral\gestion_talleres.talleres_aprobados_estudiante')->with('data', $result);
+}
 }
