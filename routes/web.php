@@ -93,6 +93,7 @@ Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar
   Route::post('cuestionario_egresado_actu', 'SeguimientoEgresadosController@cuestionario_egresado_actualizar')->name('cuestionario_egresado_actu');
   Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedentes_laborales')->name('antecedentes_laborales');
   Route::post('antecedentes_laborales_actu', 'SeguimientoEgresadosController@antecedentes_laborales_actualizar')->name('antecedentes_laborales_actu');
+
 });
 
 

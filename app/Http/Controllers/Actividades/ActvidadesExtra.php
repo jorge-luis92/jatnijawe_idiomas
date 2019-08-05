@@ -39,6 +39,7 @@ class ActvidadesExtra extends Controller
         ->take(1)
         ->first();
         $now = new \DateTime();
+        if(empty($id_tutores->id_tutor)){
         $result = DB::table('extracurriculares')
         ->select('extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
         'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.control_cupo', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
@@ -48,11 +49,27 @@ class ActvidadesExtra extends Controller
         ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
         //->where('extracurriculares.control_cupo', '>', '0')
-        ->where([['extracurriculares.control_cupo', '>', '0'], ['extracurriculares.bandera', '=', '1'], ['tutores.id_tutor', '!=', $id_tutores->id_tutor]])
+        ->where([['extracurriculares.control_cupo', '>', '0'], ['extracurriculares.bandera', '=', '1']])
         ->whereDate('extracurriculares.fecha_inicio', '>', $now)
         ->orderBy('personas.nombre', 'asc')
         ->simplePaginate(10);
-    return view("estudiante\mis_actividades.catalogo_actividades")->with('dato', $result);
+    return view("estudiante\mis_actividades.catalogo_actividades")->with('dato', $result);}
+    else {
+      $result = DB::table('extracurriculares')
+      ->select('extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+      'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.control_cupo', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+      'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+      'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+    //  ->join('detalle_extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+      ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+      ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+      //->where('extracurriculares.control_cupo', '>', '0')
+      ->where([['extracurriculares.control_cupo', '>', '0'], ['extracurriculares.bandera', '=', '1'], ['tutores.id_tutor', '!=', $id_tutores->id_tutor]])
+      ->whereDate('extracurriculares.fecha_inicio', '>', $now)
+      ->orderBy('personas.nombre', 'asc')
+      ->simplePaginate(10);
+  return view("estudiante\mis_actividades.catalogo_actividades")->with('dato', $result);
+    }
     }
 
     public function inscripcion_extra($id_extracurricular, $creditos){
