@@ -71,16 +71,24 @@ class Notificaciones extends Controller
         ->where('solicitud_talleres.matricula',  $data['matricula'])
         ->take(1)
         ->first();
-        $notificacion = new Notificacion;
-        $notificacion->matricula= $data['matricula'];
-        $notificacion->num_solicitud= $datos_taller->num_solicitud;
-        $notificacion->asunto= $data['asunto'];
-        $notificacion->mensaje= $data['contenido'];
-        $notificacion->estatus= 'enviado';
-        $notificacion->save();
 
-       Mail::to($datos_correo->email)
-       ->send(new CorreccionDeSolicitudDeTaller($datos_correo, $data, $datos_taller));
+        try {
+          Mail::to($datos_correo->email)
+          ->send(new CorreccionDeSolicitudDeTaller($datos_correo, $data, $datos_taller));
+   } catch (Exception $e) {
+       report($e);
+       redirect()->back()->with('error', 'Hubo un error al tratar de enviar el correo!');
+      // return redirect()->route('mis_actividades')->with('success','¡Inscripción Realizada correctamente!');
+      }
+
+
+       $notificacion = new Notificacion;
+       $notificacion->matricula= $data['matricula'];
+       $notificacion->num_solicitud= $datos_taller->num_solicitud;
+       $notificacion->asunto= $data['asunto'];
+       $notificacion->mensaje= $data['contenido'];
+       $notificacion->estatus= 'enviado';
+       $notificacion->save();
 
           return redirect()->route('notificaciones_enviadas')->with('success','¡Notificación Enviada Correctamente!');
     }
@@ -131,16 +139,22 @@ class Notificaciones extends Controller
         ->take(1)
         ->first();
 
-        $notificacion = new Notificacion;
-        $notificacion->matricula= $data['matricula'];
-        $notificacion->num_solicitud= $datos_taller->num_solicitud;
-        $notificacion->asunto= $data['asunto'];
-        $notificacion->mensaje= $data['contenido'];
-        $notificacion->estatus= 'enviado';
-        $notificacion->save();
+              try {
+      Mail::to($datos_correo->email)
+      ->send(new RechazoDeSolicitudDeTaller($datos_correo, $data, $datos_taller));
 
-       Mail::to($datos_correo->email)
-       ->send(new RechazoDeSolicitudDeTaller($datos_correo, $data, $datos_taller));
+    } catch (Exception $e) {
+        report($e);
+           redirect()->back()->with('error', 'Hubo un error al tratar de enviar el correo!');
+        //return false;
+    }
+    $notificacion = new Notificacion;
+    $notificacion->matricula= $data['matricula'];
+    $notificacion->num_solicitud= $datos_taller->num_solicitud;
+    $notificacion->asunto= $data['asunto'];
+    $notificacion->mensaje= $data['contenido'];
+    $notificacion->estatus= 'enviado';
+    $notificacion->save();
 
           return redirect()->route('notificaciones_enviadas')->with('success','¡Notificación Enviada Correctamente!');
     }
@@ -171,6 +185,27 @@ class Notificaciones extends Controller
 
     public function enviar_aprobacion(Request $request){
       $data= $request;
+      $datos_correo= DB::table('users')
+       ->select('users.email', 'users.id_user', 'personas.nombre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+       ->join('personas', 'users.id_persona', '=' , 'personas.id_persona')
+       ->where('users.id_user', $data['matricula'])
+       ->take(1)
+       ->first();
+
+       $datos_taller= DB::table('solicitud_talleres')
+        ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.nombre_taller')
+        ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
+        ->where('solicitud_talleres.matricula',  $data['matricula'])
+        ->take(1)
+        ->first();
+          try {
+            Mail::to($datos_correo->email)
+            ->send(new AprobacionDeSolicitudDeTaller($datos_correo, $data, $datos_taller));
+          } catch (Exception $e) {
+              report($e);
+                 redirect()->back()->with('error', 'Hubo un error al tratar de enviar el correo!');
+              //return false;
+          }
       $periodo_semestre = DB::table('periodos')
       ->select('periodos.id_periodo')
       ->where('periodos.estatus', '=', 'actual')
@@ -255,32 +290,13 @@ class Notificaciones extends Controller
          ->update(
            ['estado' => 'Aprobado']);
 
-
-      $datos_correo= DB::table('users')
-       ->select('users.email', 'users.id_user', 'personas.nombre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
-       ->join('personas', 'users.id_persona', '=' , 'personas.id_persona')
-       ->where('users.id_user', $data['matricula'])
-       ->take(1)
-       ->first();
-
-       $datos_taller= DB::table('solicitud_talleres')
-        ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.nombre_taller')
-        ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
-        ->where('solicitud_talleres.matricula',  $data['matricula'])
-        ->take(1)
-        ->first();
-
-        $notificacion = new Notificacion;
-        $notificacion->matricula= $data['matricula'];
-        $notificacion->num_solicitud= $datos_taller->num_solicitud;
-        $notificacion->asunto= $data['asunto'];
-        $notificacion->mensaje= $data['contenido'];
-        $notificacion->estatus= 'enviado';
-        $notificacion->save();
-
-
-       Mail::to($datos_correo->email)
-       ->send(new AprobacionDeSolicitudDeTaller($datos_correo, $data, $datos_taller));
+    $notificacion = new Notificacion;
+    $notificacion->matricula= $data['matricula'];
+    $notificacion->num_solicitud= $datos_taller->num_solicitud;
+    $notificacion->asunto= $data['asunto'];
+    $notificacion->mensaje= $data['contenido'];
+    $notificacion->estatus= 'enviado';
+    $notificacion->save();
 
           return redirect()->route('notificaciones_enviadas')->with('success','¡Notificación Enviada Correctamente!');
     }

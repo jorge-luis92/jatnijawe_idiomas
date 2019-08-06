@@ -3,7 +3,6 @@
 @section('title')
 : Solicitudes
 @endsection
-
 @section('seccion')
  @include('flash-message')
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitud de Taller</h1>

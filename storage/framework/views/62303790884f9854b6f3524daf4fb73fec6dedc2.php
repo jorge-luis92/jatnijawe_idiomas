@@ -111,8 +111,8 @@
         <div id="mis_talleres_menu" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a  class="collapse-item"  href=<?php echo e(route('mi_taller')); ?>>Listado de Talleres</a>
-          <!--  <a  class="collapse-item" href="#">Gestión de Taller</a>-->
+            <a  class="collapse-item"  href=<?php echo e(route('mi_taller')); ?>>Taller Activo</a>
+           <a  class="collapse-item" href="#">Talleres Finalizados</a>
           </div>
         </div>
       </li>

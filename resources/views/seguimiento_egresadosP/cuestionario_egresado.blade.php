@@ -119,7 +119,7 @@
 
 <div class="form-row">
 <div class="radio col-md-4" id="labels">
- <label>¿Elegirías la misma institución?</label>
+ <label>¿Elegirías la misma institución, para realizar algún estudio de Posgrado?</label>
 
 <input type="radio" id="si_elegir" name="bandera_lamisma" value="1" onclick="elegir_si(this.id)" required >
 <label for="si_elegir">Si</label>

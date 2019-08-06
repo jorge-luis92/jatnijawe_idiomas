@@ -3,11 +3,10 @@
 <?php $__env->startSection('title'); ?>
 : Avance de Horas
 <?php $__env->stopSection(); ?>
-
 <?php $__env->startSection('seccion'); ?>
 <!--<h1 style="font-size: 3.5em; color: #000000; font-family: Medium;" align="center">"JATWEB"</h1>-->
   <h2 style="font-size: 1.7em; color: #000000;" align="center">Actividades Extracurriculares </h2>
-<div class="container" id="font2">
+<div class="container" id="font7">
     <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?> </br>
   <h2 style="font-size: 1.0em; color: #0A122A;   max-width: 280px; text-decoration: underline;" align="left">Avance de Horas:&nbsp; <?php echo e($av); ?></h2>
   <div class="table-responsive">

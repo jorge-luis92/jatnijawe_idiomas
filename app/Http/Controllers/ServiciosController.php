@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 class ServiciosController extends Controller
 {
-    //
 public function home_servicios(){
 return view('personal_administrativo\servicios.home_servicios');
 }

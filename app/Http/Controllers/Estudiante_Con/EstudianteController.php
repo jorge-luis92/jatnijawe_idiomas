@@ -44,7 +44,6 @@ class EstudianteController extends Controller
 }
 }
 
-
     public function dato_general()
     {
       $usuario_actual=auth()->user();
@@ -88,6 +87,14 @@ return view('estudiante\datos.datos_personales');
          return redirect()->back();
         }
         $id=$usuario_actual->id_user;
+        $periodo_semestre = DB::table('periodos')
+        ->select('periodos.id_periodo')
+        ->where('periodos.estatus', '=', 'actual')
+        ->take(1)
+        ->first();
+        if(empty($periodo_semestre->id_periodo)){
+          return redirect()->route('home_estudiante')->with('error','Ninguna Actividad Registrada');
+        }else {
         $result = DB::table('detalle_extracurriculares')
         ->select('detalle_extracurriculares.estado','extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
         'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
@@ -96,14 +103,11 @@ return view('estudiante\datos.datos_personales');
         ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
         ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-        //->where('estudiantes.matricula',$id)
-        ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'cursando'],])
-        //->where([['users.bandera','=', '1'], ['users.tipo_usuario', '=', 'tallerista'],])
-      //  ->orderBy('personas.nombre', 'asc')
+        ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Cursando'],  ['detalle_extracurriculares.periodo', $periodo_semestre->id_periodo]])
         ->simplePaginate(10);
-
       return  view ('estudiante\mis_actividades.misActividades')->with('dato', $result);
     }
+  }
 
         public function avance_horas(){
           $usuario_actual=\Auth::user();
@@ -134,30 +138,41 @@ return view('estudiante\datos.datos_personales');
        if($usuario_actual->tipo_usuario!='estudiante'){
          return redirect()->back();
         }
+          $id=$usuario_actual->id_user;
+
+          $periodo_semestre = DB::table('periodos')
+          ->select('periodos.id_periodo')
+          ->where('periodos.estatus', '=', 'actual')
+          ->take(1)
+          ->first();
 
         $id_tutores = DB::table('tutores')
         ->select('tutores.id_tutor')
         ->join('personas', 'personas.id_persona', '=' ,'tutores.id_persona')
         ->join('estudiantes', 'estudiantes.id_persona', '=' ,'personas.id_persona')
+        ->where('estudiantes.matricula', $id)
         ->take(1)
         ->first();
         $now = new \DateTime();
+        if(!empty($id_tutores)){
         $result = DB::table('extracurriculares')
         ->select('extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
         'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.control_cupo', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
         'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
         'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
-      //  ->join('detalle_extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
         ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-        //->where('extracurriculares.control_cupo', '>', '0')
-        ->where([['extracurriculares.bandera', '=', '1'], ['tutores.id_tutor', '=', $id_tutores->id_tutor]])
-        ->whereDate('extracurriculares.fecha_inicio', '>', $now)
+        ->where([['extracurriculares.bandera', '=', '1'], ['tutores.id_tutor', $id_tutores->id_tutor]])
+       ->whereDate('extracurriculares.fecha_inicio', '>=', $now)
         ->orderBy('personas.nombre', 'asc')
-        ->simplePaginate(10);
-
+        ->simplePaginate(3);
       return  view ('estudiante\mis_actividades.mis_talleres')->with('dato', $result);
     }
+    else {
+      return redirect()->route('home_estudiante')->with('error', 'Ningún taller activo');
+
+    }
+  }
 
 
     public function loginestudiantes(){
@@ -252,8 +267,6 @@ return view('estudiante\datos.datos_personales');
     return view('estudiante.foto_perfil');
     }
 
-
-
   public function editar_actividades($id_externos)
   {
     $usuario_actual=\Auth::user();
@@ -271,74 +284,88 @@ return view('estudiante\datos.datos_personales');
      if($usuario_actual->tipo_usuario!='estudiante'){
        return redirect()->back();
       }
-      $fecha_inicio = DB::table('periodo_actualizacion')
-      ->select('periodo_actualizacion.fecha_inicio')
-      ->where('periodo_actualizacion.tipo', '=', 'taller')
-      ->take(1)
-      ->first();
-      if(empty($fecha_inicio)){
-        return redirect()->route('home_estudiante')->with('error', 'El periodo de Actualización de datos aún no comienza');
-      }
-      else {
-      $fecha_inicio= $fecha_inicio ->fecha_inicio;
-
-      $fecha_fin = DB::table('periodo_actualizacion')
-      ->select('periodo_actualizacion.fecha_fin')
-      ->where('periodo_actualizacion.tipo', '=', 'taller')
-      ->take(1)
-      ->first();
-      $fecha_fin= $fecha_fin ->fecha_fin;
-      $now = new \DateTime();
-         $fechas_inicio =  date('d-m-Y', strtotime($fecha_inicio));
-         $fechas_fin =  date('d-m-Y', strtotime($fecha_fin));
-         $now =  date('d-m-Y');
-         $actualizacion='';
-         if (($now >= $fechas_inicio) && ($now <= $fechas_fin)){
-           $actualizacion = 'SI';
-  }
-  else {
-       $actualizacion = 'NO';
-  }
-
-  if($actualizacion == 'SI'){
         $id=$usuario_actual->id_user;
+        $periodo_semestre = DB::table('periodos')
+        ->select('periodos.id_periodo')
+        ->where('periodos.estatus', '=', 'actual')
+        ->take(1)
+        ->first();
         $id_persona = DB::table('estudiantes')
-        ->select('estudiantes.id_persona')
-        ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+      ->select('estudiantes.id_persona')
+      ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+      ->where('estudiantes.matricula',$id)
+      ->take(1)
+      ->first();
+        $id_persona= json_decode( json_encode($id_persona), true);
+        $users = DB::table('estudiantes')
+        ->select('estudiantes.semestre', 'estudiantes.modalidad', 'personas.edad', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+        ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
         ->where('estudiantes.matricula',$id)
         ->take(1)
         ->first();
-          $id_persona= json_decode( json_encode($id_persona), true);
 
-          $users = DB::table('estudiantes')
-          ->select('estudiantes.semestre', 'estudiantes.modalidad', 'personas.edad', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
-          ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
-          ->where('estudiantes.matricula',$id)
+        $num_cel = DB::table('personas')
+        ->select('telefonos.numero')
+        ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+        ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular']])
+        ->take(1)
+        ->first();
+
+        $fecha_inicio = DB::table('periodo_actualizacion')
+        ->select('periodo_actualizacion.fecha_inicio')
+        ->where('periodo_actualizacion.tipo', '=', 'taller')
+        ->take(1)
+        ->first();
+        if(empty($fecha_inicio->fecha_inicio)){
+          return redirect()->route('home_estudiante')->with('error', 'El periodo de envío de Solicitud de taller aún no empieza');
+        }
+        else {
+
+          $fecha_inicio= $fecha_inicio ->fecha_inicio;
+          $fecha_fin = DB::table('periodo_actualizacion')
+          ->select('periodo_actualizacion.fecha_fin')
+          ->where('periodo_actualizacion.tipo', '=', 'taller')
           ->take(1)
           ->first();
-
-          $num_cel = DB::table('personas')
-          ->select('telefonos.numero')
-          ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-          ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular'],])
+          $fecha_fin= $fecha_fin ->fecha_fin;
+          $now = new \DateTime();
+             $fechas_inicio =  date('d-m-Y', strtotime($fecha_inicio));
+             $fechas_fin =  date('d-m-Y', strtotime($fecha_fin));
+             $now =  date('d-m-Y');
+             $actualizacion='';
+             if (($now >= $fechas_inicio) && ($now <= $fechas_fin))
+             {
+               $actualizacion = 'SI';
+          }
+          else { $actualizacion = 'NO';
+          }
+        if($actualizacion == 'SI'){
+          $detalles_de_s = DB::table('solicitud_talleres')
+          ->select('solicitud_talleres.estado')
+          ->where([['solicitud_talleres.matricula', $id], ['solicitud_talleres.periodo',$periodo_semestre->id_periodo]])
           ->take(1)
           ->first();
-
-          $detalles = DB::table('solicitud_talleres')
-          ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.duracion', 'solicitud_talleres.fecha_solicitud', 'solicitud_talleres.nombre_taller', 'solicitud_talleres.descripcion',
-          'solicitud_talleres.objetivos', 'solicitud_talleres.lugar', 'solicitud_talleres.justificacion', 'solicitud_talleres.creditos', 'solicitud_talleres.area',
-          'solicitud_talleres.proyecto_final', 'solicitud_talleres.cupo', 'solicitud_talleres.matricula', 'solicitud_talleres.departamento',
-          'solicitud_talleres.estado', 'solicitud_talleres.fecha_inicio', 'solicitud_talleres.fecha_fin', 'solicitud_talleres.hora_inicio',
-          'solicitud_talleres.hora_fin', 'solicitud_talleres.dias_sem', 'solicitud_talleres.materiales' )
-          ->where('solicitud_talleres.matricula',$id)
-          ->take(1)
-          ->first();
-  return view('estudiante\mis_actividades.solicitud_taller')->with('u',$users)->with('num_c', $num_cel)->with('taller', $detalles);
-   }
-   else {
-     return redirect()->route('home_estudiante')->with('error', 'El periodo de Actualización de datos ha terminado');
-   }
- }
+            if(($detalles_de_s->estado) == 'Pendiente'){
+        $detalles = DB::table('solicitud_talleres')
+        ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.duracion', 'solicitud_talleres.fecha_solicitud', 'solicitud_talleres.nombre_taller', 'solicitud_talleres.descripcion',
+        'solicitud_talleres.objetivos', 'solicitud_talleres.lugar', 'solicitud_talleres.justificacion', 'solicitud_talleres.creditos', 'solicitud_talleres.area',
+        'solicitud_talleres.proyecto_final', 'solicitud_talleres.cupo', 'solicitud_talleres.matricula', 'solicitud_talleres.departamento',
+        'solicitud_talleres.estado', 'solicitud_talleres.fecha_inicio', 'solicitud_talleres.fecha_fin', 'solicitud_talleres.hora_inicio',
+        'solicitud_talleres.hora_fin', 'solicitud_talleres.dias_sem', 'solicitud_talleres.materiales' )
+        //->where('solicitud_talleres.matricula',$id)
+        ->where([['solicitud_talleres.matricula',$id], ['solicitud_talleres.periodo',$periodo_semestre->id_periodo],])
+        ->take(1)
+        ->first();
+        return view('estudiante\mis_actividades.solicitud_taller')->with('u',$users)->with('num_c', $num_cel)->with('taller', $detalles);
+}
+if(($detalles_de_s->estado) == 'Aprobado'){
+  return redirect()->route('mi_taller')->with('error', 'Actualmente cuentas con un taller activo');
+}
+}
+else {
+  return redirect()->route('home_estudiante')->with('error', 'El periodo de Solicitud de Taller ha terminado');
+}
+}
 }
 
    public function solicitud_practicasP(){
@@ -354,7 +381,11 @@ return view('estudiante\datos.datos_personales');
      ->where('estudiantes.matricula',$id)
      ->take(1)
      ->first();
-
+     $periodo_semestre = DB::table('periodos')
+     ->select('periodos.id_periodo')
+     ->where('periodos.estatus', '=', 'actual')
+     ->take(1)
+     ->first();
      if((($validar->semestre) >= 4 ) && (($validar->estatus) == 'REGULAR')){
      $id_persona = DB::table('estudiantes')
      ->select('estudiantes.id_persona')
@@ -384,7 +415,7 @@ return view('estudiante\datos.datos_personales');
          $num_cel = DB::table('personas')
          ->select('telefonos.numero')
          ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-         ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular'],])
+         ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular']])
          ->take(1)
          ->first();
          $valor_direccion = DB::table('direcciones')->max('id_direccion');
@@ -403,7 +434,11 @@ return view('estudiante\datos.datos_personales');
         ->where('estudiantes.matricula',$id)
         ->take(1)
         ->first();
-
+        $periodo_semestre = DB::table('periodos')
+        ->select('periodos.id_periodo')
+        ->where('periodos.estatus', '=', 'actual')
+        ->take(1)
+        ->first();
         if((($validar->semestre) >= 7 ) && (($validar->estatus) == 'REGULAR')){
      $id_persona = DB::table('estudiantes')
      ->select('estudiantes.id_persona')
@@ -435,7 +470,7 @@ return view('estudiante\datos.datos_personales');
          $num_cel = DB::table('personas')
          ->select('telefonos.numero')
          ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-         ->where([['personas.id_persona',$users->id_persona], ['telefonos.tipo', '=', 'celular'],])
+         ->where([['personas.id_persona',$users->id_persona], ['telefonos.tipo', '=', 'celular']])
          ->take(1)
          ->first();
 
