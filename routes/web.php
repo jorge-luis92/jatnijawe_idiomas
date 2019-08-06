@@ -93,7 +93,9 @@ Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar
   Route::post('cuestionario_egresado_actu', 'SeguimientoEgresadosController@cuestionario_egresado_actualizar')->name('cuestionario_egresado_actu');
   Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedentes_laborales')->name('antecedentes_laborales');
   Route::post('antecedentes_laborales_actu', 'SeguimientoEgresadosController@antecedentes_laborales_actualizar')->name('antecedentes_laborales_actu');
-
+  Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedentes_laborales')->name('antecedentes_laborales');
+  Route::get('talleres_finalizados_estudiante', 'Actividades\ActvidadesExtra@taller_finalizado_estudiante')->name('talleres_finalizados_estudiante');
+  Route::get('descarga_lista_estudiante/{id_taller}','GenerarPdf@descargar_lista_taller');
 });
 
 
@@ -108,7 +110,7 @@ Route::get('register_tallerista', 'FormacionIntegralController@getRegister');
 Route::get('form_nuevo_taller', 'FormacionIntegralController@form_nuevo_taller')->name('form_nuevo_taller');
 Route::post('agregar_nuevo_taller', 'FormacionIntegralController@agregar_nuevo_taller')->name('agregar_nuevo_taller');
 Route::get('busqueda_estudiante_fi', 'FormacionIntegralController@busqueda_estudiante_fi')->name('busqueda_estudiante_fi');
-Route::any('busqueda_estudiante_formacion', 'FormacionIntegralController@busqueda_fi')->name('busqueda_estudiante_formacion');
+Route::any('busqueda_estudiante_formacion', 'FormacionIntegralController@busqueda_fi')->name('busqueda_estudiante_formacion ');
 Route::get('registrar_tutor', 'FormacionIntegralController@registrar_tutor')->name('registrar_tutor');
 Route::post('registrar_tutor_fi', 'FormacionIntegralController@registrar_tutor_fi')->name('registrar_tutor_fi');
 Route::get('busqueda_tutor', 'FormacionIntegralController@busqueda_tutor')->name('busqueda_tutor');

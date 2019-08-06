@@ -207,4 +207,45 @@ else {
 }
 }
 
+public function taller_finalizado_estudiante(){
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='estudiante'){
+     return redirect()->back();
+    }
+      $id=$usuario_actual->id_user;
+
+      $periodo_semestre = DB::table('periodos')
+      ->select('periodos.id_periodo')
+      ->where('periodos.estatus', '=', 'actual')
+      ->take(1)
+      ->first();
+
+    $id_tutores = DB::table('tutores')
+    ->select('tutores.id_tutor')
+    ->join('personas', 'personas.id_persona', '=' ,'tutores.id_persona')
+    ->join('estudiantes', 'estudiantes.id_persona', '=' ,'personas.id_persona')
+    ->where('estudiantes.matricula', $id)
+    ->take(1)
+    ->first();
+    $now = new \DateTime();
+    if(!empty($id_tutores)){
+    $result = DB::table('extracurriculares')
+    ->select('extracurriculares.id_extracurricular',  'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+    'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.control_cupo', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+    'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+    'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+    ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+    ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+    ->where([['extracurriculares.bandera', '=', '2'], ['tutores.id_tutor', $id_tutores->id_tutor]])
+   //->whereDate('extracurriculares.fecha_inicio', '>=', $now)
+    ->orderBy('personas.nombre', 'asc')
+    ->simplePaginate(3);
+  return  view ('estudiante\mis_actividades.talleres_finalizados_estudiante')->with('dato', $result);
+}
+else {
+  return redirect()->route('home_estudiante')->with('error', 'Ningún taller Registrado');
+
+}
+}
+
 }

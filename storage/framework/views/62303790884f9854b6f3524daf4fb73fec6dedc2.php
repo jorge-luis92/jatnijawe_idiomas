@@ -112,7 +112,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
             <a  class="collapse-item"  href=<?php echo e(route('mi_taller')); ?>>Taller Activo</a>
-           <a  class="collapse-item" href="#">Talleres Finalizados</a>
+           <a  class="collapse-item" href=<?php echo e(route('talleres_finalizados_estudiante')); ?>>Talleres Finalizados</a>
           </div>
         </div>
       </li>

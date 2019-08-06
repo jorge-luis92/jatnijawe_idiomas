@@ -127,7 +127,7 @@ return view('estudiante\datos.datos_personales');
             ->simplePaginate(10);
 
             $avance = DB::table('detalle_extracurriculares')
-             ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'],])
+             ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado']])
              ->sum('detalle_extracurriculares.creditos');
 
           return  view ('estudiante\mis_actividades.avance_horas')->with('dato', $result)->with('av',$avance);
@@ -162,8 +162,8 @@ return view('estudiante\datos.datos_personales');
         'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
         ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-        ->where([['extracurriculares.bandera', '=', '1'], ['tutores.id_tutor', $id_tutores->id_tutor]])
-       ->whereDate('extracurriculares.fecha_inicio', '>=', $now)
+        ->where([['extracurriculares.bandera', '=', '1'], ['tutores.id_tutor', $id_tutores->id_tutor], ['extracurriculares.periodo', $periodo_semestre->id_periodo]])
+       // ->whereDate('extracurriculares.fecha_inicio', '>=', $now)
         ->orderBy('personas.nombre', 'asc')
         ->simplePaginate(3);
       return  view ('estudiante\mis_actividades.mis_talleres')->with('dato', $result);

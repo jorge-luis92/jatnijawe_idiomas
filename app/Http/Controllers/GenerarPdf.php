@@ -45,7 +45,7 @@ class GenerarPdf extends Controller
   $num_cel = DB::table('personas')
   ->select('telefonos.numero')
   ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-  ->where([['personas.id_persona',$id_persona->id_persona], ['telefonos.tipo', '=', 'celular'],])
+  ->where([['personas.id_persona',$id_persona->id_persona], ['telefonos.tipo', '=', 'celular']])
   ->take(1)
   ->first();
 
@@ -62,7 +62,7 @@ class GenerarPdf extends Controller
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('estudiante\mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users,])
+   $pdf = PDF::loadView('estudiante\mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('solicitud_taller.pdf');
    $paper_orientation = 'letter';
@@ -98,7 +98,7 @@ class GenerarPdf extends Controller
   $num_cel = DB::table('personas')
   ->select('telefonos.numero')
   ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-  ->where([['personas.id_persona',$id_persona->id_persona], ['telefonos.tipo', '=', 'celular'],])
+  ->where([['personas.id_persona',$id_persona->id_persona], ['telefonos.tipo', '=', 'celular']])
   ->take(1)
   ->first();
 
@@ -115,7 +115,7 @@ class GenerarPdf extends Controller
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('estudiante\mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users,])
+   $pdf = PDF::loadView('estudiante\mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('solicitud_taller.pdf');
    $paper_orientation = 'letter';
@@ -142,7 +142,7 @@ class GenerarPdf extends Controller
   $num_cel = DB::table('personas')
   ->select('telefonos.numero')
   ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-  ->where([['personas.id_persona',$id_persona->id_persona], ['telefonos.tipo', '=', 'celular'],])
+  ->where([['personas.id_persona',$id_persona->id_persona], ['telefonos.tipo', '=', 'celular']])
   ->take(1)
   ->first();
 
@@ -159,9 +159,52 @@ class GenerarPdf extends Controller
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('estudiante\mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users,])
+   $pdf = PDF::loadView('estudiante\mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('solicitud_taller.pdf');
+   $paper_orientation = 'letter';
+   $customPaper = array(2.5,2.5,600,950);
+  }
+
+  protected function descargar_lista_taller($id_taller){
+    $usuario_actual=\Auth::user();
+     if($usuario_actual->tipo_usuario!='estudiante'){
+       return redirect()->back();
+      }
+      $id=$usuario_actual->id_user;
+      $id_extra= $id_taller;
+      $id_tutores = DB::table('tutores')
+      ->select('tutores.id_tutor')
+      ->join('personas', 'personas.id_persona', '=' ,'tutores.id_persona')
+      ->join('estudiantes', 'estudiantes.id_persona', '=' ,'personas.id_persona')
+      ->where('estudiantes.matricula', $id)
+      ->take(1)
+      ->first();
+
+      $periodo_semestre = DB::table('periodos')
+      ->select('periodos.id_periodo')
+      ->where('periodos.estatus', '=', 'actual')
+      ->take(1)
+      ->first();
+
+      $result = DB::table('tutores')
+      ->select(/*'telefonos.numero',*/ 'estudiantes.matricula', 'detalle_extracurriculares.estado','extracurriculares.nombre_ec',  'extracurriculares.fecha_inicio', 'extracurriculares.fecha_fin',
+      'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+      ->join('extracurriculares', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+      ->join('detalle_extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+       ->join('estudiantes', 'estudiantes.matricula', '=', 'detalle_extracurriculares.matricula')
+      ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+      //->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+      ->where([['tutores.id_tutor', $id_tutores->id_tutor], ['detalle_extracurriculares.actividad', '=', $id_extra], ['detalle_extracurriculares.estado', '=', 'Cursando']])
+    //  ->where([['detalle_extracurriculares.actividad', '=', $id_extra], ['detalle_extracurriculares.estado', '=', 'Cursando']])
+
+      ->get();
+      $paper_orientation = 'letter';
+      $customPaper = array(2.5,2.5,600,950);
+      $detalles='';
+   $pdf = PDF::loadView('estudiante\mis_actividades.listadeasistencia', ['dato' =>  $result])
+  ->setPaper($customPaper,$paper_orientation);
+   return $pdf->stream('lista_asistencia.pdf');
    $paper_orientation = 'letter';
    $customPaper = array(2.5,2.5,600,950);
   }
