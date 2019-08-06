@@ -27,7 +27,7 @@
                                         <td>{{$detalles->matricula}}</td>
                                         <td>{{$detalles->nombre}} {{$detalles->apellido_paterno}} {{$detalles->apellido_materno}}</td>
                                         <td>{{$detalles->nombre_taller}}</td>
-                                        <td>{{ date('d-m-Y', strtotime($detalles->created_at))}} </td>
+                                        <td>{{date("d-m-y H:i a", strtotime($detalles->created_at))}} </td>
                                         <td>{{$detalles->asunto}}</td>
                                         <td>{{$detalles->mensaje}}</td>
                                                                             </tr>

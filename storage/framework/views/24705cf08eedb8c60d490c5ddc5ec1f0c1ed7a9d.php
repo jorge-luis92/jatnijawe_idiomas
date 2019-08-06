@@ -27,7 +27,7 @@
                                         <td><?php echo e($detalles->matricula); ?></td>
                                         <td><?php echo e($detalles->nombre); ?> <?php echo e($detalles->apellido_paterno); ?> <?php echo e($detalles->apellido_materno); ?></td>
                                         <td><?php echo e($detalles->nombre_taller); ?></td>
-                                        <td><?php echo e(date('d-m-Y', strtotime($detalles->created_at))); ?> </td>
+                                        <td><?php echo e(date("d-m-y H:i a", strtotime($detalles->created_at))); ?> </td>
                                         <td><?php echo e($detalles->asunto); ?></td>
                                         <td><?php echo e($detalles->mensaje); ?></td>
                                                                             </tr>

@@ -117,7 +117,39 @@ protected function envio_taller(Request $request){
 $data=$request;
 $usuario_actual=auth()->user();
 $id=$usuario_actual->id_user;
-$periodo_semestre = DB::table('periodos')
+
+        $fecha_inicio = DB::table('periodo_actualizacion')
+        ->select('periodo_actualizacion.fecha_inicio')
+        ->where('periodo_actualizacion.tipo', '=', 'taller')
+        ->take(1)
+        ->first();
+        if(empty($fecha_inicio->fecha_inicio)){
+          return redirect()->route('home_estudiante')->with('error', 'El periodo de envío de Solicitud de taller aún no empieza');
+        }
+        else {
+          $fecha_inicio= $fecha_inicio ->fecha_inicio;
+          $fecha_fin = DB::table('periodo_actualizacion')
+          ->select('periodo_actualizacion.fecha_fin')
+          ->where('periodo_actualizacion.tipo', '=', 'taller')
+          ->take(1)
+          ->first();
+          $fecha_fin= $fecha_fin ->fecha_fin;
+          $now = new \DateTime();
+             $fechas_inicio =  date('d-m-Y', strtotime($fecha_inicio));
+             $fechas_fin =  date('d-m-Y', strtotime($fecha_fin));
+             $now =  date('d-m-Y');
+             $actualizacion='';
+             if (($now >= $fechas_inicio) && ($now <= $fechas_fin))
+             {
+               $actualizacion = 'SI';
+          }
+          else { $actualizacion = 'NO';
+          }
+        if($actualizacion == 'NO'){
+          return redirect()->route('home_estudiante')->with('error', 'Fecha de envió de Solicitudes terminada');
+        }else {
+
+          $periodo_semestre = DB::table('periodos')
 ->select('periodos.id_periodo')
 ->where('periodos.estatus', '=', 'actual')
 ->take(1)
@@ -126,11 +158,10 @@ $periodo_semestre= $periodo_semestre->id_periodo;
 
 $detalles = DB::table('solicitud_talleres')
 ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.matricula')
-->where('solicitud_talleres.matricula',$id)
+//->where('solicitud_talleres.matricula',$id)
 ->where([['solicitud_talleres.matricula',$id], ['solicitud_talleres.periodo',$periodo_semestre->id_periodo]])
 ->take(1)
 ->first();
-
 
 if(empty($detalles->matricula)){
 $now = new \DateTime();
@@ -158,7 +189,8 @@ $taller->periodo=$periodo_semestre;
 $taller->estado='Pendiente';
 $taller->save();
 if($taller->save()){
-return redirect()->route('solicitud_taller')->with('success','¡Solicitud enviada Correctamente!');}
+return redirect()->route('solicitud_taller')->with('success','¡Solicitud enviada Correctamente!');
+}
 }
 else {
   DB::table('solicitud_talleres')
@@ -169,8 +201,10 @@ else {
            'hora_fin' => $data['hora_fin'], 'dias_sem' => $data['dias_sem'], 'descripcion' => $data['descripcion'],
            'objetivos' => $data['objetivos'], 'justificacion' => $data['justificacion'], 'creditos' => $data['creditos'],
            'proyecto_final' => $data['propuesta'], 'materiales' => $data['materiales'], 'cupo' => $data['cupo']]);
- return redirect()->route('solicitud_taller')->with('success','¡Actualización correcta!');}
+ return redirect()->route('solicitud_taller')->with('success','¡Actualización correcta!');
 }
-
+}
+}
+}
 
 }

@@ -108,7 +108,7 @@ Route::get('register_tallerista', 'FormacionIntegralController@getRegister');
 Route::get('form_nuevo_taller', 'FormacionIntegralController@form_nuevo_taller')->name('form_nuevo_taller');
 Route::post('agregar_nuevo_taller', 'FormacionIntegralController@agregar_nuevo_taller')->name('agregar_nuevo_taller');
 Route::get('busqueda_estudiante_fi', 'FormacionIntegralController@busqueda_estudiante_fi')->name('busqueda_estudiante_fi');
-Route::any('busqueda_estudiante_fi', 'FormacionIntegralController@busqueda_fi')->name('busqueda_estudiante_fi');
+Route::any('busqueda_estudiante_formacion', 'FormacionIntegralController@busqueda_fi')->name('busqueda_estudiante_formacion');
 Route::get('registrar_tutor', 'FormacionIntegralController@registrar_tutor')->name('registrar_tutor');
 Route::post('registrar_tutor_fi', 'FormacionIntegralController@registrar_tutor_fi')->name('registrar_tutor_fi');
 Route::get('busqueda_tutor', 'FormacionIntegralController@busqueda_tutor')->name('busqueda_tutor');

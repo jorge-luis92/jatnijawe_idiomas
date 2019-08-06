@@ -8,7 +8,7 @@
    <div class="container" id="font7">
        <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
    </br>
-   <form action="<?php echo e(route ('busqueda_estudiante_fi')); ?>" method="POST" role="search">
+   <form action="<?php echo e(route ('busqueda_estudiante_formacion')); ?>" method="POST" role="search">
        <?php echo e(csrf_field()); ?>
 
         <div class="form-row">
