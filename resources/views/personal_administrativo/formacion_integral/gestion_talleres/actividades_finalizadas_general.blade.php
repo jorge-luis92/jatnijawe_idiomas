@@ -14,24 +14,29 @@
                                  <table class="table table-bordered table-striped" style="color: #000000; font-size: 13px;"  >
                                  <thead>
                                    <tr>
-                                     <th scope="col">ACTIVIDAD</th>
-                                      <th scope="col">TIPO</th>
-                                      <th scope="col">AREA</th>
-                                       <th scope="col">MODALIDAD</th>
-                                     <th scope="col">CREDITOS</th>
+                                     <th scope="col">NOMBRE DE ACTIVIDAD </th>
                                      <th scope="col">TUTOR</th>
+                                     <th scope="col">TIPO</th>
+                                     <th scope="col">CREDITOS</th>
+                                     <th scope="col">ESTATUS</th>
+                                     <th scope="col">FECHA INICIO </th>
+                                     <th scope="col">FECHA FIN</th>
+                                     <th scope="col">OBSERVACIONES</th>
+
                                                      </tr>
                                  </thead>
                                  <tbody>
                                    @foreach($dato as $datos)
                                    <tr style="color: #000000;">
                                        <td>{{$datos->nombre_ec}}</td>
-                                       <td>{{$datos->tipo}} </td>
-                                       <td>{{$datos->area}}</td>
-                                       <td>{{$datos->modalidad}}</td>
-                                       <td>{{$datos->creditos}}</td>
                                        <td>{{$datos->nombre}} {{$datos->apellido_paterno}} {{$datos->apellido_materno}}</td>
-                                      </tr>
+                                       <td>{{$datos->tipo}} </td>
+                                       <td>{{$datos->creditos}}</td>
+                                       <td>FINALIZADO</td>
+                                       <td>{{ date('d-m-Y', strtotime($datos->fecha_inicio)) }}</td>
+                                       <td>{{ date('d-m-Y', strtotime($datos->fecha_fin)) }}</td>
+                                       <td>{{$datos->observaciones}}</td>
+                                         </tr>
                                    @endforeach
                                </tbody>
                            </table>

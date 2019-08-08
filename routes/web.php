@@ -25,6 +25,9 @@ Route::get('home_tallerista', 'Tallerista_Con\TalleristaController@home_talleris
 Route::get('talleres_tallerista', 'Tallerista_Con\TalleristaController@talleres_tallerista')->name('talleres_tallerista');
 Route::get('grupo_tallerista', 'Tallerista_Con\TalleristaController@grupo_tallerista')->name('grupo_tallerista');
 Route::get('talleres_finalizados', 'Tallerista_Con\TalleristaController@talleres_finalizados')->name('talleres_finalizados');
+Route::get('descargar_lista_taller/{id_taller}','GenerarPdf@descargar_lista_tallerista');
+Route::get('finalizar_grupo/{id_extracurricular}','Tallerista_Con\TalleristaController@prueba_grupo');
+Route::post('finalizar_talleres', 'Tallerista_Con\TalleristaController@finalizar_taller')->name('finalizar_talleres');
 });
 /* Rutas de Acdemico---*/
 Route::group(['middleware' => 'auth', 'academicomiddleware'], function () {
@@ -97,8 +100,9 @@ Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar
   Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedentes_laborales')->name('antecedentes_laborales');
   Route::get('talleres_finalizados_estudiante', 'Actividades\ActvidadesExtra@taller_finalizado_estudiante')->name('talleres_finalizados_estudiante');
   Route::get('descarga_lista_estudiante/{id_taller}','GenerarPdf@descargar_lista_taller');
+  Route::get('finalizar/{id_extracurricular}','RegistrosController@prueba');
+  Route::post('finalizar_taller', 'RegistrosController@finalizar_t')->name('finalizar_taller');
 });
-
 
 Route::get('register_tallerista', 'Auth\RegisterController@getRegister');
 Route::post('register_tallerista', ['as' => 'register_tallerista', 'uses' => 'Auth\RegisterController@postRegister']);

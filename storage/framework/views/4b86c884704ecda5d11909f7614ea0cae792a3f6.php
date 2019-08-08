@@ -14,24 +14,29 @@
                                  <table class="table table-bordered table-striped" style="color: #000000; font-size: 13px;"  >
                                  <thead>
                                    <tr>
-                                     <th scope="col">ACTIVIDAD</th>
-                                      <th scope="col">TIPO</th>
-                                      <th scope="col">AREA</th>
-                                       <th scope="col">MODALIDAD</th>
-                                     <th scope="col">CREDITOS</th>
+                                     <th scope="col">NOMBRE DE ACTIVIDAD </th>
                                      <th scope="col">TUTOR</th>
+                                     <th scope="col">TIPO</th>
+                                     <th scope="col">CREDITOS</th>
+                                     <th scope="col">ESTATUS</th>
+                                     <th scope="col">FECHA INICIO </th>
+                                     <th scope="col">FECHA FIN</th>
+                                     <th scope="col">OBSERVACIONES</th>
+
                                                      </tr>
                                  </thead>
                                  <tbody>
                                    <?php $__currentLoopData = $dato; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $datos): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                    <tr style="color: #000000;">
                                        <td><?php echo e($datos->nombre_ec); ?></td>
-                                       <td><?php echo e($datos->tipo); ?> </td>
-                                       <td><?php echo e($datos->area); ?></td>
-                                       <td><?php echo e($datos->modalidad); ?></td>
-                                       <td><?php echo e($datos->creditos); ?></td>
                                        <td><?php echo e($datos->nombre); ?> <?php echo e($datos->apellido_paterno); ?> <?php echo e($datos->apellido_materno); ?></td>
-                                      </tr>
+                                       <td><?php echo e($datos->tipo); ?> </td>
+                                       <td><?php echo e($datos->creditos); ?></td>
+                                       <td>FINALIZADO</td>
+                                       <td><?php echo e(date('d-m-Y', strtotime($datos->fecha_inicio))); ?></td>
+                                       <td><?php echo e(date('d-m-Y', strtotime($datos->fecha_fin))); ?></td>
+                                       <td><?php echo e($datos->observaciones); ?></td>
+                                         </tr>
                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                </tbody>
                            </table>

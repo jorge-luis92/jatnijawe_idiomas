@@ -1,12 +1,21 @@
 <?php
 namespace App\Http\Controllers;
 use App\User;
+use App\Extracurricular;
+use App\Detalle_extracurricular;
 use App\Estudiante;
 use App\Persona;
 use App\Administrativo;
 use App\Nivel;
 use App\Departamento;
 use App\Dpto_Administrativo;
+use App\Telefono;
+use App\Tutor;
+use App\Alumno;
+use App\AlumnoCurso;
+use App\Periodo;
+use App\FechaActualizacion;
+use App\SolicitudTaller;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use Illuminate\Http\Request;
@@ -100,6 +109,33 @@ class RegistrosController extends Controller
          return redirect()->route('registro_externo')->with('error','error en la creacion');
         }
       }}}}
+
+    }
+
+
+    function prueba($id_extracurricular){
+      $usuario_actual=\Auth::user();
+       if($usuario_actual->tipo_usuario!='1'){
+         return redirect()->back();
+        }
+      $data= $id_extracurricular;
+
+      $result = DB::table('extracurriculares')
+      ->select('extracurriculares.id_extracurricular', 'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+      'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+      'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+      'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+      ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+      ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->where([['extracurriculares.bandera', '=', '1'], ['extracurriculares.id_extracurricular',$data ]])
+      ->take(1)
+      ->first();
+      return view('personal_administrativo/formacion_integral/gestion_talleres.finalizar_taller_admin')->with('dato', $data)->with('datos', $result);
+
+    }
+
+    public function finalizar_t(Request $request){
+    $data= $request;
 
 
     }

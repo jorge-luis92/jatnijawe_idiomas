@@ -1,41 +1,45 @@
-@extends('layouts.plantilla_formacion_integral')
-@section('title')
-@endsection
-@section('seccion')
+<?php $__env->startSection('title'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('seccion'); ?>
 <div class="container">
-@include('flash-message')
+<?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   <div class="row justify-content-center">
       <div class="col-md-8">
           <div class="card">
-              <div class="card-header" align="center">{{ __('Finalizar Extracurricular') }}</div>
+              <div class="card-header" align="center"><?php echo e(__('Finalizar Extracurricular')); ?></div>
 
               <div class="card-body">
-                <form method="POST" action="">
-                @csrf
+                <form method="POST" >
+                <?php echo csrf_field(); ?>
 
     <div class="form-group row">
-        <label for="nombre_taller" class="col-md-4 col-form-label text-md-right" >{{ __('Nombre de la Actividad:') }}</label>
+        <label for="nombre_taller" class="col-md-4 col-form-label text-md-right" ><?php echo e(__('Nombre de la Actividad:')); ?></label>
         <div class="col-md-6">
-            <input id="nombre_taller" value="{{$datos->nombre_ec}}" name="nombre_taller" type="text" class="form-control" disabled>
+            <input id="nombre_taller" value="<?php echo e($datos->nombre_ec); ?>" name="nombre_taller" type="text" class="form-control" disabled>
     </div>
   </div>
 
 
     <div class="form-group row">
-        <label for="observaciones" class="col-md-4 col-form-label text-md-right" >{{ __('Observaciones:') }}</label>
+        <label for="observaciones" class="col-md-4 col-form-label text-md-right" ><?php echo e(__('Observaciones:')); ?></label>
         <div class="col-md-6">
             <textarea id="observaciones" name="observaciones" rows="6" style="resize: both;" class="form-control" required ></textarea>
-            @error('observaciones')
+            <?php if ($errors->has('observaciones')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('observaciones'); ?>
           <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
+            <strong><?php echo e($message); ?></strong>
           </span>
-          @enderror
+          <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
         </div>
     </div>
 <div class="form-group">
     <div class="col-xs-offset-2 col-xs-9" align="center">
         <button  class="btn btn-primary" data-toggle="modal" data-target="#logoutModal">
-          {{ __('Finalizar Taller') }}
+          <?php echo e(__('Finalizar Taller')); ?>
+
         </button>
     </div>
 </div>
@@ -67,4 +71,6 @@
   </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/notes_pdf.blade.php ENDPATH**/ ?>

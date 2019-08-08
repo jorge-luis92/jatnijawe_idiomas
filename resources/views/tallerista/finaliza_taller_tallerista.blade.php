@@ -1,4 +1,4 @@
-@extends('layouts.plantilla_formacion_integral')
+@extends('layouts.plantilla_tallerista')
 @section('title')
 @endsection
 @section('seccion')
@@ -10,7 +10,7 @@
               <div class="card-header" align="center">{{ __('Finalizar Extracurricular') }}</div>
 
               <div class="card-body">
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('finalizar_talleres') }}">
                 @csrf
 
     <div class="form-group row">
@@ -19,7 +19,7 @@
             <input id="nombre_taller" value="{{$datos->nombre_ec}}" name="nombre_taller" type="text" class="form-control" disabled>
     </div>
   </div>
-
+<input type="text" name="id_extracurricular" id="id_extracurricular" value="{{$datos->id_extracurricular}}" hidden>
 
     <div class="form-group row">
         <label for="observaciones" class="col-md-4 col-form-label text-md-right" >{{ __('Observaciones:') }}</label>
@@ -57,7 +57,7 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <div class="modal-body">Al enviar aceptas haber leído todos los lineamientos, reglamentos y manuales de tu Facultad, confirmando estar enterado y de acuerdo con los mismos.</div>
+      <div class="modal-body">¿Estás seguro de Finalizar? <br />Al dar clic en Finalizar no se podrá deshacer está acción</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
         <button class="btn btn-primary" type="submit" >Enviar</button>

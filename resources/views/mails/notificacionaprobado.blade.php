@@ -5,7 +5,6 @@
 @endsection
 
 @section('seccion')
- @include('flash-message')
 <!--<h1 style="font-size: 2.0em; color: #000000;" align="center">{{$estudiante_matricula}} Replantamiento de Solicitud de Taller|</h1>-->
 <div class="container">
 @include('flash-message')

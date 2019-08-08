@@ -260,7 +260,7 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
       'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
       ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
       ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-      ->where([['extracurriculares.bandera', '=', '1']])
+      ->where('extracurriculares.bandera', '=', '1')
        ->orderBy('extracurriculares.created_at', 'desc')
       ->simplePaginate(10);
 
@@ -277,7 +277,7 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
         $result = DB::table('extracurriculares')
         ->select('extracurriculares.id_extracurricular', 'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
         'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
-        'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+        'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.observaciones', 'extracurriculares.hora_fin', 'tutores.id_tutor',
         'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
         ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')

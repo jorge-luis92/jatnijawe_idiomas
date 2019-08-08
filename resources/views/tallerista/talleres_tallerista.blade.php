@@ -5,85 +5,37 @@
 @endsection
 @section('seccion')
  <h1 style="font-size: 2.0em; color: #000000;" align="center"> Mis talleres activos</h1>
- <div class="container" id="font4">
- </br>     <form  method="post" action="{{ route('talleres_tallerista') }}">
-                         @csrf
-
-          <div class="form-row">
-
-              <div class="form-group col-md-4">
-                  </div>
-                  <div class="form-group col-md-4">
-                  <label for="nombre" >{{ __('') }}</label>
-                  <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre">
-                  @error('nombre')
-                  <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                  </span>
-                  @enderror
-                  </div>
-
-<br>
-                  <div class="form-group">
-                  <div class="col-xs-offset-1 col-xs-8" align="">
-                  <button type="submit" class="btn btn-primary">
-                  {{ __('Buscar') }}
-                  </button>
-                  </div>
-                  </div>
-
+ <div class="container" id="font7">
+ </br>
           <div class="table-responsive">
           <table class="table table-bordered table-info" style="color: #000000;" >
           <thead>
           <tr>
-            <th scope="col">CLAVE</th>
-            <th scope="col">TALLER</th>
+            <th scope="col">NOMBRE DE TALLER</th>
             <th scope="col">CREDITOS</th>
             <th scope="col">DÍAS DE LA SEMANA</th>
             <th scope="col">HORARIO</th>
-            <th colspan="3" >ACCIONES</th>
+            <th colspan="3" align="center" >ACCIONES</th>
 
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <th scope="row">95687</th>
-            <th scope="row">CINE</th>
-            <th scope="row">15</th>
-            <th scope="row">LUNES, MIERCOLES, VIERNES</th>
-            <th scope="row">12:00 - 14:00 HRS</th>
-            <td>  <a  href="{{ route ('grupo_tallerista')}}">VER GRUPO</a></td>
-            <td>  <a  href="#">ESTATUS</a></td>
-            <td>  <a  href="#">DESCARGAR LISTA</a></td>
-            </tr>
-
-          </tbody>
-          </table>
+            @foreach($dato as $datos)
+                <tr>
+                  <td>{{$datos->nombre_ec}}</td>
+                  <td>{{$datos->creditos}}</td>
+                  <td>{{$datos->dias_sem}}</td>
+                  <td>{{$datos->hora_inicio}} a {{$datos->hora_fin}}</td>
+                  <td><a href="descarga_lista_estudiante/{{$datos->id_extracurricular}}" target="_blank">Ver Grupo</a></td>
+                  <td><a href="descargar_lista_taller/{{$datos->id_extracurricular}}" target="_blank">Descargar Lista</a></td>
+                  <td><a href="finalizar_grupo/{{$datos->id_extracurricular}}">Finalizar Grupo</a></td>
+                </tr>
+                @endforeach
+               </tbody>
+               </table>
+               </div>
+               @if (count($dato))
+               {{ $dato->links() }}
+               @endif
           </div>
-          </form>
-          </div>
-        </div>
-
-
-
  @endsection
-
- <script>
- function numeros(e){
-  key = e.keyCode || e.which;
-  tecla = String.fromCharCode(key).toLowerCase();
-  letras = " 0123456789";
-  especiales = [8,37,39,46];
-
-  tecla_especial = false
-  for(var i in especiales){
- if(key == especiales[i]){
-   tecla_especial = true;
-   break;
-      }
-  }
-
-  if(letras.indexOf(tecla)==-1 && !tecla_especial)
-      return false;
- }
- </script>

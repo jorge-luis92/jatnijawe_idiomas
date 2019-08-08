@@ -10,7 +10,7 @@
               <div class="card-header" align="center">{{ __('Finalizar Extracurricular') }}</div>
 
               <div class="card-body">
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('finalizar_talleres') }}">
                 @csrf
 
     <div class="form-group row">
@@ -57,10 +57,10 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <div class="modal-body">Al enviar aceptas haber leído todos los lineamientos, reglamentos y manuales de tu Facultad, confirmando estar enterado y de acuerdo con los mismos.</div>
+      <div class="modal-body">¿Estás seguro de Finalizar? <br />Al dar clic en Finalizar no se podrá deshacer está acción</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-        <button class="btn btn-primary" type="submit" >Enviar</button>
+        <button class="btn btn-primary" type="submit" >Finalizar</button>
 
       </div>
     </div>

@@ -75,6 +75,7 @@ class GenerarPdf extends Controller
 
   protected function descarga_taller(){
     $usuario_actual=\Auth::user();
+
      if($usuario_actual->tipo_usuario!='estudiante'){
       return redirect()->back();
     }
@@ -203,10 +204,6 @@ if(($detalles->estado) == 'Acreditado'){
      if($usuario_actual->tipo_usuario!='estudiante'){
       return redirect()->back();
     }
-    $usuario_actual=\Auth::user();
-     if($usuario_actual->tipo_usuario!='estudiante'){
-       return redirect()->back();
-      }
       $id=$usuario_actual->id_user;
       $id_extra= $id_taller;
       $id_tutores = DB::table('tutores')
@@ -251,6 +248,54 @@ if(($detalles->estado) == 'Acreditado'){
    $customPaper = array(2.5,2.5,600,950);
   }
 
+  protected function descargar_lista_tallerista($id_taller){
+    $usuario_actual=\Auth::user();
+     if($usuario_actual->tipo_usuario!='tallerista'){
+      return redirect()->back();
+    }
+      $id=$usuario_actual->id_user;
+      $id_extra= $id_taller;
+      $id_tutores = DB::table('tutores')
+      ->select('tutores.id_tutor')
+      ->join('personas', 'personas.id_persona', '=' ,'tutores.id_persona')
+      ->join('users', 'users.id_persona', '=' ,'personas.id_persona')
+      ->where('users.id_user', $id)
+      ->take(1)
+      ->first();
+
+      $periodo_semestre = DB::table('periodos')
+      ->select('periodos.id_periodo')
+      ->where('periodos.estatus', '=', 'actual')
+      ->take(1)
+      ->first();
+
+      $result = DB::table('extracurriculares')
+      ->select('telefonos.numero', 'estudiantes.matricula','extracurriculares.nombre_ec', 'personas.nombre',
+               'personas.apellido_paterno', 'personas.apellido_materno')
+      ->join('detalle_extracurriculares', 'detalle_extracurriculares.actividad', '=', 'extracurriculares.id_extracurricular')
+      ->join('estudiantes', 'estudiantes.matricula', '=', 'detalle_extracurriculares.matricula')
+      ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+      ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+      ->where([['extracurriculares.bandera', '=' , '1'], ['extracurriculares.tutor', $id_tutores->id_tutor], ['detalle_extracurriculares.actividad', $id_extra], ['detalle_extracurriculares.estado', '=', 'Cursando'], ['detalle_extracurriculares.periodo', $periodo_semestre->id_periodo], ['telefonos.tipo', '=', 'celular']])
+      ->get();
+
+      $datos_extra = DB::table('extracurriculares')
+      ->select('extracurriculares.nombre_ec', 'extracurriculares.fecha_inicio', 'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio',
+                'extracurriculares.hora_fin', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+      ->join('tutores', 'tutores.id_tutor', '=', 'extracurriculares.tutor')
+      ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->where([['extracurriculares.bandera', '=' , '1'], ['extracurriculares.tutor', $id_tutores->id_tutor], ['extracurriculares.id_extracurricular', $id_extra], ['extracurriculares.periodo', $periodo_semestre->id_periodo]])
+      ->take(1)
+      ->first();
+      $paper_orientation = 'letter';
+      $customPaper = array(2.5,2.5,600,950);
+
+   $pdf = PDF::loadView('estudiante\mis_actividades.listadeasistencia', ['dato' =>  $result, 'datos_extra' => $datos_extra])
+  ->setPaper($customPaper,$paper_orientation);
+   return $pdf->stream('lista_asistencia.pdf');
+   $paper_orientation = 'letter';
+   $customPaper = array(2.5,2.5,600,950);
+  }
 
   protected function descarga_taller_act($id_taller){
     $usuario_actual=\Auth::user();

@@ -37,7 +37,6 @@
      <?php endif; ?>
 </div>
 
-
   <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/estudiante\mis_actividades/mis_talleres.blade.php ENDPATH**/ ?>
