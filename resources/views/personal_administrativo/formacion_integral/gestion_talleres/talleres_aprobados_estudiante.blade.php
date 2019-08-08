@@ -15,20 +15,21 @@
                                      <!--<th scope="col">SOLICITUD</th>-->
                                       <th scope="col">ESTUDIANTE</th>
                                        <th scope="col">TALLER</th>
-                                     <th scope="col">FECHA DE SOLICITUD</th>
+                                     <th scope="col">FECHA DE APROBACIÓN</th>
                                      <th scope="col">ESTATUS</th>
-                                     <th scope="col">DETALLES</th>
+                                     <th colspan="3">ACCIONES</th>
                                      </tr>
                                  </thead>
                                  <tbody>
                                     @foreach($data as $detalles)
                                     <tr style="color: #000000;">
-                                      <!--  <td>{{$detalles->num_solicitud}}</td>-->
                                         <td>{{$detalles->nombre}} {{$detalles->apellido_paterno}} {{$detalles->apellido_materno}}</td>
-                                        <td>{{$detalles->nombre_taller}}</td>
-                                        <td>{{ date('d-m-Y', strtotime($detalles->fecha_solicitud))}} </td>
-                                        <td>{{$detalles->estado}}</td>
-                                        <td><a href="pdf_taller_aprobado/{{$detalles->matricula}}" target="_blank">VER</a></td>
+                                        <td>{{$detalles->nombre_ec}}</td>
+                                        <td>{{ date('d-m-Y', strtotime($detalles->created_at))}}</td>
+                                        <td>ACTIVO</td>
+                                        <td><a href="acreditar_estudiante/{{$detalles->matricula}}" target="_blank">Acreditar</a></td>
+                                         <td><a href="desactivar_extra/{{$detalles->id_extracurricular}}">Desactivar</a></td>
+                                        <td><a href="pdf_taller_aprobado/{{$detalles->matricula}}" target="_blank">Detalles</a></td>
                                         </tr>
                                         @endforeach
                                     </tbody>

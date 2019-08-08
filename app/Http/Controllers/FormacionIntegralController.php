@@ -260,11 +260,58 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
       'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
       ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
       ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-      ->where('extracurriculares.bandera', '=', '1')
-      //->where([['extracurriculares.control_cupo', '>', '0'], ['extracurriculares.control_cupo', '=', '1'],])
-      ->orderBy('personas.nombre', 'asc')
+      ->where([['extracurriculares.bandera', '=', '1']])
+       ->orderBy('extracurriculares.created_at', 'desc')
       ->simplePaginate(10);
+
     return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_registradas')->with('dato', $result);
+    }
+
+    public function actividades_finalizadas()
+    {
+      $usuario_actual=\Auth::user();
+       if($usuario_actual->tipo_usuario!='1'){
+         return redirect()->back();
+        }
+
+        $result = DB::table('extracurriculares')
+        ->select('extracurriculares.id_extracurricular', 'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+        'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+        'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+        'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+        ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+        ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+        ->where([['extracurriculares.bandera', '=', '2']])
+         ->orderBy('extracurriculares.created_at', 'desc')
+        ->simplePaginate(10);
+    return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_finalizadas_general')->with('dato', $result);
+    }
+
+    public function actividades_desactivadas()
+    {
+      $usuario_actual=\Auth::user();
+       if($usuario_actual->tipo_usuario!='1'){
+         return redirect()->back();
+        }
+
+        $periodo_semestre = DB::table('periodos')
+        ->select('periodos.id_periodo')
+        ->where('periodos.estatus', '=', 'actual')
+        ->take(1)
+        ->first();
+
+        $result = DB::table('extracurriculares')
+        ->select('extracurriculares.id_extracurricular', 'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+        'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+        'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+        'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+        ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+        ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+        ->where([['extracurriculares.bandera', '=', '0']])
+         ->orderBy('extracurriculares.created_at', 'desc')
+        ->simplePaginate(10);
+
+    return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_desactivadas_general')->with('dato', $result);
     }
 
     public function solicitudes()
@@ -687,7 +734,7 @@ $id_extra= $actividad;
       ->update(
           ['bandera' => '0']
       );
-      return redirect()->route('actividades_registradas')->with('success','¡Actividad Desactivada!');
+      return redirect()->route('actividades_desactivadas_general')->with('success','¡Actividad Desactivada!');
 
 
 }
@@ -766,18 +813,25 @@ public function taller_aprobado()
    if($usuario_actual->tipo_usuario!='1'){
      return redirect()->back();
     }
-    $result = DB::table('solicitud_talleres')
-  ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.fecha_solicitud', 'solicitud_talleres.nombre_taller', 'solicitud_talleres.descripcion',
-  'solicitud_talleres.objetivos', 'solicitud_talleres.justificacion', 'solicitud_talleres.creditos',
-  'solicitud_talleres.proyecto_final', 'solicitud_talleres.cupo', 'solicitud_talleres.estado','solicitud_talleres.matricula', 'solicitud_talleres.departamento',
-  'solicitud_talleres.estado', 'estudiantes.matricula', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
-  ->join('estudiantes', 'solicitud_talleres.matricula', '=', 'estudiantes.matricula')
-  ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
-   ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
-  ->where('solicitud_talleres.estado', '=', 'Aprobado')
-//  ->where([['solicitud_talleres.estado', '=', 'pendiente'], ['periodos.estatus', '=', 'actual']])
-  ->orderBy('solicitud_talleres.created_at', 'desc')
+
+    $periodo_semestre = DB::table('periodos')
+    ->select('periodos.id_periodo')
+    ->where('periodos.estatus', '=', 'actual')
+    ->take(1)
+    ->first();
+
+    $result = DB::table('extracurriculares')
+    ->select('estudiantes.matricula', 'extracurriculares.id_extracurricular', 'extracurriculares.created_at', 'extracurriculares.nombre_ec', 'extracurriculares.fecha_inicio',
+    'extracurriculares.fecha_fin', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+    ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+    ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+    ->join('estudiantes', 'estudiantes.id_persona', '=', 'personas.id_persona')
+    ->join('users', 'users.id_persona', '=', 'personas.id_persona')
+    ->where([['extracurriculares.periodo', $periodo_semestre->id_periodo],['extracurriculares.bandera', '=', '1'],
+    ['users.tipo_usuario', '=', 'estudiante']])
+     ->orderBy('extracurriculares.created_at', 'desc')
     ->simplePaginate(10);
+
 return view('personal_administrativo\formacion_integral\gestion_talleres.talleres_aprobados_estudiante')->with('data', $result);
 }
 

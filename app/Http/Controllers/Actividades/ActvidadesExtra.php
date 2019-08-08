@@ -240,7 +240,7 @@ public function taller_finalizado_estudiante(){
     ->where([['extracurriculares.bandera', '=', '2'], ['tutores.id_tutor', $id_tutores->id_tutor]])
    //->whereDate('extracurriculares.fecha_inicio', '>=', $now)
     ->orderBy('personas.nombre', 'asc')
-    ->simplePaginate(3);
+    ->simplePaginate(10);
   return  view ('estudiante\mis_actividades.talleres_finalizados_estudiante')->with('dato', $result);
 }
 else {

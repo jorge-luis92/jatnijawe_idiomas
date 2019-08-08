@@ -59,8 +59,8 @@
         <label for="modalidad">* Modalidad</label>
         <select name="modalidad" id="modalidad" required class="form-control">
         <option value="">Seleccione una opción</option>
-        <option value="ESCOLARIZADO">ESCOLARIZADO</option>
-        <option value="SEMIESCOLARIZADO">SEMIESCOLARIZADO</option>
+        <option value="ESCOLARIZADA">ESCOLARIZADA</option>
+        <option value="SEMIESCOLARIZADA">SEMIESCOLARIZADA</option>
         </select>
     </div>
 

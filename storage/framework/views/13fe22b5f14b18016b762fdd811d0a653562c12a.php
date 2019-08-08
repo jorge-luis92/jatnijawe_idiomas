@@ -2,9 +2,9 @@
 
 <?php $__env->startSection('title'); ?>
 :Talleres
-<?php $__env->stopSection(); ?>
+  <?php $__env->stopSection(); ?>
  <?php $__env->startSection('seccion'); ?>
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Actividades Registradas</h1>
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Actividades Desactivadas</h1>
  <div class="container" id="font7">
    <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
  </br>                    <form method="POST" action="<?php echo e(route('actividades_registradas')); ?>">
@@ -20,8 +20,7 @@
                                        <th scope="col">MODALIDAD</th>
                                      <th scope="col">CREDITOS</th>
                                      <th scope="col">TUTOR</th>
-                                     <th colspan="1" >ACCIONES</th>
-                                   </tr>
+                                                     </tr>
                                  </thead>
                                  <tbody>
                                    <?php $__currentLoopData = $dato; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $datos): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -32,7 +31,6 @@
                                        <td><?php echo e($datos->modalidad); ?></td>
                                        <td><?php echo e($datos->creditos); ?></td>
                                        <td><?php echo e($datos->nombre); ?> <?php echo e($datos->apellido_paterno); ?> <?php echo e($datos->apellido_materno); ?></td>
-                                       <td><a href="desactivar_extra/<?php echo e($datos->id_extracurricular); ?>">Desactivar</a></td>
                                       </tr>
                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                </tbody>
@@ -46,6 +44,7 @@
                          </div>
                      </form>
                  </div>
+
  <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\formacion_integral\gestion_talleres/actividades_registradas.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\formacion_integral\gestion_talleres/actividades_desactivadas_general.blade.php ENDPATH**/ ?>

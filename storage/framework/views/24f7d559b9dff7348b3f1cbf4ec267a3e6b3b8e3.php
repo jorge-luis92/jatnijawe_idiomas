@@ -15,20 +15,21 @@
                                      <!--<th scope="col">SOLICITUD</th>-->
                                       <th scope="col">ESTUDIANTE</th>
                                        <th scope="col">TALLER</th>
-                                     <th scope="col">FECHA DE SOLICITUD</th>
+                                     <th scope="col">FECHA DE APROBACIÓN</th>
                                      <th scope="col">ESTATUS</th>
-                                     <th scope="col">DETALLES</th>
+                                     <th colspan="3">ACCIONES</th>
                                      </tr>
                                  </thead>
                                  <tbody>
                                     <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $detalles): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr style="color: #000000;">
-                                      <!--  <td><?php echo e($detalles->num_solicitud); ?></td>-->
                                         <td><?php echo e($detalles->nombre); ?> <?php echo e($detalles->apellido_paterno); ?> <?php echo e($detalles->apellido_materno); ?></td>
-                                        <td><?php echo e($detalles->nombre_taller); ?></td>
-                                        <td><?php echo e(date('d-m-Y', strtotime($detalles->fecha_solicitud))); ?> </td>
-                                        <td><?php echo e($detalles->estado); ?></td>
-                                        <td><a href="pdf_taller_aprobado/<?php echo e($detalles->matricula); ?>" target="_blank">VER</a></td>
+                                        <td><?php echo e($detalles->nombre_ec); ?></td>
+                                        <td><?php echo e(date('d-m-Y', strtotime($detalles->created_at))); ?></td>
+                                        <td>ACTIVO</td>
+                                        <td><a href="acreditar_estudiante/<?php echo e($detalles->matricula); ?>" target="_blank">Acreditar</a></td>
+                                         <td><a href="desactivar_extra/<?php echo e($detalles->id_extracurricular); ?>">Desactivar</a></td>
+                                        <td><a href="pdf_taller_aprobado/<?php echo e($detalles->matricula); ?>" target="_blank">Detalles</a></td>
                                         </tr>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
