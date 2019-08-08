@@ -28,7 +28,7 @@
                   <td>{{$datos->hora_inicio}} a {{$datos->hora_fin}}</td>
                   <td><a href="descarga_lista_estudiante/{{$datos->id_extracurricular}}" target="_blank">Ver Grupo</a></td>
                   <td><a href="descargar_lista_taller/{{$datos->id_extracurricular}}" target="_blank">Descargar Lista</a></td>
-                  <td><a href="finalizar_grupo/{{$datos->id_extracurricular}}">Finalizar Grupo</a></td>
+                  <td><a href="finalizar_grupo/{{$datos->id_extracurricular}}">Finalizar Actividad</a></td>
                 </tr>
                 @endforeach
                </tbody>

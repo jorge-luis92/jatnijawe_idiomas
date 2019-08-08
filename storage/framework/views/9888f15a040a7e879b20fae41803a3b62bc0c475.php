@@ -9,7 +9,7 @@
 
                         <div class="form-group col-md-4">
                             <label for="nombre" ><?php echo e(__('* Nombre(s)')); ?></label>
-                                <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
+                                <input id="nombre" type="text" autofocus  onKeyUp="this.value = this.value.toUpperCase()" class="form-control <?php if ($errors->has('nombre')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('nombre'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -123,6 +123,12 @@ endif; ?>
                       </div>
 
                          <div class="form-row">
+
+                        <div class="form-group col-md-3">
+                          <label for="genero">* Género</label>
+                          <input name="genero"  id="genero" type="text" class="form-control" >
+                        </div>
+
                         <div class="form-group col-md-2">
                             <label for="edad" ><?php echo e(__('* Edad')); ?></label>
                                 <input id="edad" type="tel" maxlength="2"  class="form-control <?php if ($errors->has('edad')) :
@@ -139,11 +145,6 @@ $message = $errors->first('edad'); ?>
                                 <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
-                        </div>
-
-                        <div class="form-group col-md-3">
-                          <label for="genero">* Género</label>
-                          <input name="genero"  id="genero" type="text" class="form-control" >
                         </div>
 
 
@@ -194,7 +195,7 @@ endif; ?>
 
                         <div class="form-group col-md-3">
                             <label for="fecha_ingreso" ><?php echo e(__('* Fecha Ingreso')); ?></label>
-                                  <input id="fecha_ingreso" type="date"  class="form-control <?php if ($errors->has('fecha_ingreso')) :
+                                  <input id="fecha_ingreso" max= "<?php echo date("Y-m-d");?>" type="date" oninput="checar_semestres()"  class="form-control <?php if ($errors->has('fecha_ingreso')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('fecha_ingreso'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -222,10 +223,6 @@ endif; ?>
                             <option value="6">6</option>
                             <option value="7">7</option>
                             <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
                                 </select>
                         </div>
 
@@ -579,44 +576,51 @@ function validarInput(input) {
 <script>
 function checar_semestres(){
   var ed = document.getElementById('fecha_ingreso').value; //fecha de nacimiento en el formulario
-  var fechaNacimiento = ed.split("-");
-  var ano = fechaNacimiento[0];
-  var mes = fechaNacimiento[1];
-  var dia = fechaNacimiento[2];
+  var fechaIngreso= ed.split("-");
+  var anio = fechaIngreso[0];
+  var mes = fechaIngreso[1];
+  var dia = fechaIngreso[2];
   var fechaHoy = new Date(); // detecto la fecha actual y asigno el dia, mes y anno a variables distintas
-  var ahora_ano = fechaHoy.getFullYear();
+  var ahora_anio = fechaHoy.getFullYear();
   var ahora_mes = fechaHoy.getMonth()+1;
   var ahora_dia = fechaHoy.getDate();
 
-  var edad = (ahora_ano + 1900) - ano;
-  if(ano < ahora_ano && edad >1899){
-  if ( ahora_mes < mes )
-  {
-      edad--;
+  var anio_ingreso= parseInt(anio);
+  var mes_ingreso = parseInt(mes);
+
+  var anio_hoy= parseInt(ahora_anio);
+  var mes_hoy = parseInt(ahora_mes);
+  var semestre;
+  var anio_restado;
+
+  if(((mes_ingreso >= 7) && (mes_ingreso <= 12)) && ((mes_hoy >= 7) || (anio_hoy <= 12))) {
+        anio_restado=anio_hoy-anio_ingreso;
+        if(anio_restado == 0){
+          semestre=1;
+        }
+        else {
+          anio_restado=anio_restado*2;
+          semestre=anio_restado+1;
+          if(semestre > 8){
+            semestre=8;
+          }
+          else {
+              semestre=anio_restado+1;
+          }
+        }
   }
-  if (mes == ahora_mes && ahora_dia < dia)
-  {
-      edad--;
+
+  if(((mes_ingreso >= 2) && (mes_ingreso <= 6)) && ((mes_hoy >= 7) || (anio_hoy <= 12))) {
+        anio_restado=anio_hoy-anio_ingreso;
+        if(anio_restado == 0){
+          semestre=2;
+        }
   }
-  if (edad > 1900)
-  {
-      edad -= 1900;
-  }
-  if (edad == 1900)
-  {
-      edad =0;
-  }
-  }
-  else {
-  edad=0;
-  }
-  var meses=0;
-  if(ahora_mes>mes)
-      meses=ahora_mes-mes;
-  if(ahora_mes<mes)
-      meses=12-(mes-ahora_mes);
-  document.getElementById('edad').value = edad;
-  document.getElementById('mes').value = mes;
+
+
+
+  document.getElementById('edad').value = anio_restado;
+  document.getElementById('genero').value = semestre;
 
 
 }

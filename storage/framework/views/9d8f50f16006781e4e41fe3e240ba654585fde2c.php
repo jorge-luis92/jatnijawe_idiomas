@@ -7,9 +7,10 @@
       <div class="col-md-8">
           <div class="card">
               <div class="card-header" align="center"><?php echo e(__('Finalizar Extracurricular')); ?></div>
-
+            </br>
+      <label align="center">*Nota: Al dar clic en Finalizar no se podrá deshacer está acción </label>
               <div class="card-body">
-                <form method="POST" action="">
+                <form method="POST" action="<?php echo e(route('finalizar_talleres')); ?>">
                 <?php echo csrf_field(); ?>
 
     <div class="form-group row">
@@ -18,7 +19,7 @@
             <input id="nombre_taller" value="<?php echo e($datos->nombre_ec); ?>" name="nombre_taller" type="text" class="form-control" disabled>
     </div>
   </div>
-
+<input type="text" name="id_extracurricular" id="id_extracurricular" value="<?php echo e($datos->id_extracurricular); ?>" hidden>
 
     <div class="form-group row">
         <label for="observaciones" class="col-md-4 col-form-label text-md-right" ><?php echo e(__('Observaciones:')); ?></label>
@@ -37,7 +38,7 @@ endif; ?>
     </div>
 <div class="form-group">
     <div class="col-xs-offset-2 col-xs-9" align="center">
-        <button  class="btn btn-primary" data-toggle="modal" data-target="#logoutModal">
+        <button class="btn btn-primary" type="submit" >
           <?php echo e(__('Finalizar Taller')); ?>
 
         </button>
@@ -51,26 +52,6 @@ endif; ?>
 </div>
 </div>
 </div>
-
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">¿Confirmar?</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">Al enviar aceptas haber leído todos los lineamientos, reglamentos y manuales de tu Facultad, confirmando estar enterado y de acuerdo con los mismos.</div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-        <button class="btn btn-primary" type="submit" >Enviar</button>
-
-      </div>
-    </div>
-  </div>
-</div>
-
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.plantilla_tallerista', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/tallerista/finaliza_taller_tallerista.blade.php ENDPATH**/ ?>

@@ -27,13 +27,13 @@
                                    <tr style="color: #000000;">
                                        <td>{{$datos->nombre_ec}}</td>
                                        <td>{{$datos->tipo}} </td>
-                                       
+
                                        <td>{{$datos->area}}</td>
                                        <td>{{$datos->modalidad}}</td>
                                        <td>{{$datos->creditos}}</td>
                                        <td>{{$datos->nombre}} {{$datos->apellido_paterno}} {{$datos->apellido_materno}}</td>
                                        <td><a href="desactivar_extra/{{$datos->id_extracurricular}}">Desactivar</a></td>
-                                         <td><a href="finalizar/{{$datos->id_extracurricular}}">Finalizare Grupo</a></td>
+                                         <td><a href="finalizar/{{$datos->id_extracurricular}}">Finalizar Actividad</a></td>
 
                                         </tr>
                                    @endforeach

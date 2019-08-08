@@ -27,13 +27,13 @@
                                    <tr style="color: #000000;">
                                        <td><?php echo e($datos->nombre_ec); ?></td>
                                        <td><?php echo e($datos->tipo); ?> </td>
-                                       
+
                                        <td><?php echo e($datos->area); ?></td>
                                        <td><?php echo e($datos->modalidad); ?></td>
                                        <td><?php echo e($datos->creditos); ?></td>
                                        <td><?php echo e($datos->nombre); ?> <?php echo e($datos->apellido_paterno); ?> <?php echo e($datos->apellido_materno); ?></td>
                                        <td><a href="desactivar_extra/<?php echo e($datos->id_extracurricular); ?>">Desactivar</a></td>
-                                         <td><a href="finalizar/<?php echo e($datos->id_extracurricular); ?>">Finalizare Grupo</a></td>
+                                         <td><a href="finalizar/<?php echo e($datos->id_extracurricular); ?>">Finalizar Grupo</a></td>
 
                                         </tr>
                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

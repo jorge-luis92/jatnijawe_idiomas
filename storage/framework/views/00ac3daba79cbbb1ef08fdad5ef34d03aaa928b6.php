@@ -103,7 +103,7 @@
              <a class="collapse-item" href=<?php echo e(route('actividades_registradas')); ?>>Actividades Registradas</a>
              <a class="collapse-item" href=<?php echo e(route('actividades_finalizadas_general')); ?>>Actividades Finalizadas</a>
              <a class="collapse-item" href=<?php echo e(route('actividades_desactivadas_general')); ?>>Actividades Desactivadas</a>
-             <a class="collapse-item" href=<?php echo e(route('fechas_actividades')); ?>>Fecha de envío de </br>solicitudes</a>
+          <!--   <a class="collapse-item" href=<?php echo e(route('fechas_actividades')); ?>>Fecha de envío de </br>solicitudes</a>-->
 
           </div>
         </div>
