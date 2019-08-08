@@ -82,6 +82,7 @@ Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar
   Route::get('pdf_solicitud_taller/{matricula}','GenerarPdf@pdf_solicitud_taller_estudiante');
   Route::post('solicitud_taller_enviar', 'Actividades\ActvidadesExtra@envio_taller')->name('solicitud_taller_enviar');
   Route::get('descargar_solicitud_taller', 'GenerarPdf@descarga_taller');
+  Route::get('descargar_solicitud_taller_act/{id_taller}', 'GenerarPdf@descarga_taller_act');
   Route::get('solicitud_practicasP', 'Estudiante_Con\EstudianteController@solicitud_practicasP')->name('solicitud_practicasP');
   Route::get('solicitud_servicioSocial', 'Estudiante_Con\EstudianteController@solicitud_servicioSocial')->name('solicitud_servicioSocial');
   Route::get('tutorias', 'Estudiante_Con\EstudianteController@tutorias')->name('tutorias');
@@ -110,7 +111,7 @@ Route::get('register_tallerista', 'FormacionIntegralController@getRegister');
 Route::get('form_nuevo_taller', 'FormacionIntegralController@form_nuevo_taller')->name('form_nuevo_taller');
 Route::post('agregar_nuevo_taller', 'FormacionIntegralController@agregar_nuevo_taller')->name('agregar_nuevo_taller');
 Route::get('busqueda_estudiante_fi', 'FormacionIntegralController@busqueda_estudiante_fi')->name('busqueda_estudiante_fi');
-Route::any('busqueda_estudiante_formacion', 'FormacionIntegralController@busqueda_fi')->name('busqueda_estudiante_formacion ');
+Route::any('busqueda_estudiante_formacion', 'FormacionIntegralController@busqueda_fi')->name('busqueda_estudiante_formacion');
 Route::get('registrar_tutor', 'FormacionIntegralController@registrar_tutor')->name('registrar_tutor');
 Route::post('registrar_tutor_fi', 'FormacionIntegralController@registrar_tutor_fi')->name('registrar_tutor_fi');
 Route::get('busqueda_tutor', 'FormacionIntegralController@busqueda_tutor')->name('busqueda_tutor');
@@ -156,6 +157,8 @@ Route::get('pdf_taller_aprobado/{matricula}','GenerarPdf@pdf_apro_taller_estudia
 Route::get('fecha_solicitud', 'FormacionIntegralController@actualizar_fechas_solicitud')->name('fecha_solicitud');
 Route::get('notificaciones_enviadas', 'Notificaciones@enviadas_notifaciones')->name('notificaciones_enviadas');
 Route::post('agregar_fecha_taller', 'FormacionIntegralController@fecha_taller')->name('agregar_fecha_taller');
+Route::get('talleres_acreditados', 'FormacionIntegralController@taller_acreditado')->name('talleres_acreditados');
+
 });
 /*Rutas ADMIN DEL SISTEMA*/
 Route::group(['middleware' => 'auth', 'adminmiddleware' ], function () {

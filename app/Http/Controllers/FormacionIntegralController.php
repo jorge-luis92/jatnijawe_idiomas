@@ -780,4 +780,25 @@ public function taller_aprobado()
     ->simplePaginate(10);
 return view('personal_administrativo\formacion_integral\gestion_talleres.talleres_aprobados_estudiante')->with('data', $result);
 }
+
+public function taller_acreditado()
+{
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='1'){
+     return redirect()->back();
+    }
+    $result = DB::table('solicitud_talleres')
+  ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.fecha_solicitud', 'solicitud_talleres.nombre_taller', 'solicitud_talleres.descripcion',
+  'solicitud_talleres.objetivos', 'solicitud_talleres.justificacion', 'solicitud_talleres.creditos',
+  'solicitud_talleres.proyecto_final', 'solicitud_talleres.cupo', 'solicitud_talleres.estado','solicitud_talleres.matricula', 'solicitud_talleres.departamento',
+  'solicitud_talleres.estado', 'estudiantes.matricula', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+  ->join('estudiantes', 'solicitud_talleres.matricula', '=', 'estudiantes.matricula')
+  ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+   ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
+  ->where('solicitud_talleres.estado', '=', 'Acreditado')
+//  ->where([['solicitud_talleres.estado', '=', 'pendiente'], ['periodos.estatus', '=', 'actual']])
+  ->orderBy('solicitud_talleres.created_at', 'desc')
+    ->simplePaginate(10);
+return view('personal_administrativo\formacion_integral\gestion_talleres.taller_acreditado')->with('data', $result);
+}
 }

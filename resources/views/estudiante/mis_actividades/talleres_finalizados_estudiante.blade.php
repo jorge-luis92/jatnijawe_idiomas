@@ -18,7 +18,6 @@
         <th scope="col">ESTATUS</th>
         <th scope="col">FECHA INICIO DE TALLER</th>
         <th scope="col">FECHA FIN DE TALLER</th>
-        <th colspan="2" >ACCIONES</th>
       </tr>
     </thead>
     <tbody>
@@ -26,11 +25,9 @@
       <tr>
         <td>{{$datos->nombre_ec}}</td>
         <td>FINALIZADO</td>
-        <td>{{ date('d-m-Y', strtotime($datos->fecha->inicio))}}</td>
-        <td>{{ date('d-m-Y', strtotime($datos->fecha->fin))}}</td>
-        <td><a href="descargar_solicitud_taller" target="_blank">DETALLES</a></td>
-        <td><a href="lista_estudiante" target="_blank">DESCARGAR LISTA</a></td>
-      </tr>
+        <td>{{ date('d-m-Y', strtotime($datos->fecha_inicio)) }}</td>
+        <td>{{ date('d-m-Y', strtotime($datos->fecha_fin)) }}</td>
+        </tr>
       @endforeach
      </tbody>
      </table>

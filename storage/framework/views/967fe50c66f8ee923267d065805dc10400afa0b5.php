@@ -36,25 +36,25 @@ body{
 
 <table align="left" style="font-size:15px" >
     <tr>
-      <td colspan="3">NOMBRE DE TALLER</td>
-      <td><input type="text" value="" /></td>
-      <td colspan="3">NOMBRE DE TUTOR</td>
-      <td><input  type="text" required  value="" /></td>
+      <td colspan="3" style="font-size: 15px;">NOMBRE DE TALLER</td>
+      <td><input type="text" value="<?php echo e($datos_extra->nombre_ec); ?>" /></td>
+      <td colspan="3" style="font-size: 15px;">NOMBRE DE TUTOR</td>
+      <td style="font-size: 10px;" ><input  type="text" required  value="<?php echo e($datos_extra->nombre); ?> <?php echo e($datos_extra->apellido_paterno); ?><?php echo e($datos_extra->apellido_materno); ?>" /></td>
     </tr>
+    <br/><br/><br/><br/>
     <tr>
-      <td colspan="3">FECHA INICIO</td>
-      <td><input type="text"  value="" /></td>
-      <td colspan="3">FECHA FIN</td>
-      <td><input  type="text"  value="" /></td>
+      <td colspan="3" style="font-size: 15px;">FECHA INICIO</td>
+      <td><input type="text"  value="<?php echo e(date('d-m-Y', strtotime($datos_extra->fecha_inicio))); ?>" /></td>
+      <td colspan="3" style="font-size: 15px;">FECHA FIN</td>
+      <td><input  type="text"  value="<?php echo e(date('d-m-Y', strtotime($datos_extra->fecha_fin))); ?>" /></td>
     </tr>
 </table>
-<br/><br/>
 <table align="left" style="font-size:15px" >
       <tr>
-      <td colspan="2">HORA DE ENTRADA </td>
-      <td><input  type="text"  value="" /></td>
-      <td colspan="2">HORA DE SALIDA</td>
-      <td><input type="text" value="" /></td>
+      <td colspan="2" style="font-size: 15px;">HORA DE ENTRADA </td>
+      <td ><input  type="text"  value="<?php echo e($datos_extra->hora_inicio); ?>" /></td>
+      <td colspan="2" style="font-size: 15px;">HORA DE SALIDA</td>
+      <td><input type="text" value="<?php echo e($datos_extra->hora_fin); ?>" /></td>
     </tr>
 </table>
 <br/><br/>
@@ -78,7 +78,7 @@ body{
       <tr>
         <th style="width:auto; font-size: 12px;" scope="row"><?php echo e($datos->matricula); ?></th>
         <td style="width:250px; font-size: 12px;"><?php echo e($datos->nombre); ?> <?php echo e($datos->apellido_paterno); ?> <?php echo e($datos->apellido_materno); ?></td>
-        <td style="width:auto; font-size: 12px;" ></td>
+        <td style="width:auto; font-size: 12px;" ><?php echo e($datos->numero); ?></td>
         <td style="width:50px; font-size: 12px;"> </td>
         <td style="width:100px; font-size: 12px;"> </td>
         <td>  <a ></a></td>

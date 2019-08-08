@@ -5,12 +5,10 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('seccion'); ?>
  <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitud de Taller</h1>
-<div class="container" id="font4">
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitud de Taller <?php if(empty($hola->bandera)){ $vacio=null; echo $vacio;} else{ echo $hola->bandera;} ?></h1>
+<div class="container" id="font7">
 </br>                    <form method="POST" action="<?php echo e(route('solicitud_taller_enviar')); ?>">
-
                         <?php echo csrf_field(); ?>
-
 <div class="form-row">
   <div class="form-group col-md-4">
     <label for="nombre" ><?php echo e(__('Nombre del Solicitante')); ?></label>

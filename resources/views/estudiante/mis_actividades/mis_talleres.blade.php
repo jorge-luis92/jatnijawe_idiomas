@@ -24,7 +24,7 @@
       <tr>
         <td>{{$datos->nombre_ec}}</td>
         <td>ACTIVO</td>
-        <td><a href="descargar_solicitud_taller" target="_blank">DETALLES</a></td>
+        <td><a href="descargar_solicitud_taller_act/{{$datos->id_extracurricular}}" target="_blank">DETALLES</a></td>
         <td><a href="descarga_lista_estudiante/{{$datos->id_extracurricular}}" target="_blank">DESCARGAR LISTA</a></td>
       </tr>
       @endforeach

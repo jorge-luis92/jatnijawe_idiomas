@@ -50,6 +50,7 @@
             <a class="collapse-item" href=<?php echo e(route('busqueda_estudiante_fi')); ?>>Búsqueda</a>
             <a class="collapse-item" href=<?php echo e(route('solicitudes')); ?>>Solicitudes</a>
             <a class="collapse-item" href=<?php echo e(route('talleres_aprobados')); ?>>Talleres Aprobados</a>
+            <a class="collapse-item" href=<?php echo e(route('talleres_acreditados')); ?>>Talleres Acreditados</a>
             <a class="collapse-item" href=<?php echo e(route('notificaciones_enviadas')); ?>>Notificaciones Enviadas</a>
             <a class="collapse-item" href=<?php echo e(route('fecha_solicitud')); ?>>Registro Fechas de </br>Solicitud de Taller</a>
             <!--<a class="collapse-item" href=<?php echo e(route('busqueda_atras')); ?>>Búsqueda Atrás</a>

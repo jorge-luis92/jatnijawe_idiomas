@@ -40,16 +40,29 @@
           </div>-->
     <div class="form-group col-md-3">
       <label for="localidad" >*Colonia</label>
-      <input type="text" class="form-control" name="localidad" value="<?php if(empty($d->localidad)){ $vacio=null; echo $vacio;} else{ echo $d->localidad;} ?>" id="localidad" placeholder="Colonia" onKeyUp="this.value = this.value.toUpperCase();" required >
+      <input type="text" autocomplete="localidad" id="localidad" class="form-control <?php if ($errors->has('localidad')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('localidad'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="localidad" value="<?php if(empty($d->localidad)){ $vacio=null; echo $vacio;} else{ echo $d->localidad;} ?>" id="localidad" placeholder="Colonia" onKeyUp="this.value = this.value.toUpperCase();" required >
+      <?php if ($errors->has('localidad')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('localidad'); ?>
+      <span class="invalid-feedback" role="alert">
+      <strong><?php echo e($message); ?></strong>
+      </span>
+      <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
     </div>
 
     <div class="form-group col-md-5">
-      <label for="municipio">* Municipio</label>
-      <input type="text" class="form-control"  name="municipio" value="<?php if(empty($d->municipio)){ $vacio=null; echo $vacio;} else{ echo $d->municipio;} ?>"  id="municipio" placeholder="Municipio" onKeyUp="this.value = this.value.toUpperCase();" required>
+      <label for="municipio">Municipio</label>
+      <input type="text" class="form-control"  disabled name="municipio" value="<?php if(empty($d->municipio)){ $vacio=null; echo $vacio;} else{ echo $d->municipio;} ?>"  id="municipio" placeholder="Municipio" onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
     <div class="form-group col-md-5">
-      <label for="entidad_federativa">* Ciudad</label>
-      <input type="text" class="form-control" name="entidad_federativa" value="<?php if(empty($d->entidad_federativa)){ $vacio=null; echo $vacio;} else{ echo $d->entidad_federativa;} ?>" id="entidad_federativa" placeholder="Ciudad" onKeyUp="this.value = this.value.toUpperCase();" required>
+      <label for="entidad_federativa">Estado</label>
+      <input type="text" class="form-control" disabled name="entidad_federativa" value="<?php if(empty($d->entidad_federativa)){ $vacio=null; echo $vacio;} else{ echo $d->entidad_federativa;} ?>" id="entidad_federativa" placeholder="Ciudad" onKeyUp="this.value = this.value.toUpperCase();" required>
     </div>
   </div>
 
@@ -93,7 +106,20 @@ endif; ?>
     </div>
     <div class="form-group col-md-4">
       <label for="email">* Correo Electrónico</label>
-      <input type="email" class="form-control" name="email" id="email" value="<?php echo e(Auth::user()->email); ?>" placeholder="Correo Electrónico" required>
+      <input type="email"  autocomplete="email" class="form-control <?php if ($errors->has('email')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('email'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" name="email" id="email" value="<?php echo e(Auth::user()->email); ?>" placeholder="Correo Electrónico" required>
+      <?php if ($errors->has('email')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('email'); ?>
+      <span class="invalid-feedback" role="alert">
+      <strong><?php echo e($message); ?></strong>
+      </span>
+      <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
     </div>
  </div>
  <div class="form-group">

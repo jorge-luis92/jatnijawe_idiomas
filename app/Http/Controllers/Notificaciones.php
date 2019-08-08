@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\User;
 use App\Extracurricular;
@@ -35,7 +33,11 @@ class Notificaciones extends Controller
 {
     public function solicitud_correcion($id_matricula){
       $matricula= $id_matricula;
-
+      $periodo_semestre = DB::table('periodos')
+      ->select('periodos.id_periodo')
+      ->where('periodos.estatus', '=', 'actual')
+      ->take(1)
+      ->first();
       $datos_correo= DB::table('users')
        ->select('users.email', 'personas.nombre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
        ->join('personas', 'users.id_persona', '=' , 'personas.id_persona')
@@ -45,9 +47,10 @@ class Notificaciones extends Controller
        $datos_taller= DB::table('solicitud_talleres')
         ->select('solicitud_talleres.nombre_taller')
         ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
-        ->where('solicitud_talleres.matricula', $matricula)
-        ->take(1)
-        ->first();
+      //  ->where('solicitud_talleres.matricula', $matricula)
+      ->where([['solicitud_talleres.matricula', $matricula], ['periodos.estatus', '=', 'actual'], ['solicitud_talleres.estado', '=', 'Pendiente']])
+      ->take(1)
+      ->first();
 
       return view('mails.notificacioncorrecion')
       ->with('datos_estudiante', $datos_correo)->
@@ -57,7 +60,11 @@ class Notificaciones extends Controller
 
     public function enviar_correccion(Request $request){
       $data= $request;
-
+      $periodo_semestre = DB::table('periodos')
+      ->select('periodos.id_periodo')
+      ->where('periodos.estatus', '=', 'actual')
+      ->take(1)
+      ->first();
       $datos_correo= DB::table('users')
        ->select('users.email', 'users.id_user', 'personas.nombre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
        ->join('personas', 'users.id_persona', '=' , 'personas.id_persona')
@@ -68,7 +75,7 @@ class Notificaciones extends Controller
        $datos_taller= DB::table('solicitud_talleres')
         ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.nombre_taller')
         ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
-        ->where('solicitud_talleres.matricula',  $data['matricula'])
+        ->where([['solicitud_talleres.matricula',  $data['matricula']], ['periodos.estatus', '=', 'actual'], ['solicitud_talleres.estado', '=', 'Pendiente']])
         ->take(1)
         ->first();
 
@@ -99,9 +106,8 @@ class Notificaciones extends Controller
       $datos_taller= DB::table('solicitud_talleres')
        ->select('solicitud_talleres.nombre_taller')
        ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
-      // ->where('solicitud_talleres.matricula', $matricula)
-       ->where([['solicitud_talleres.matricula', $matricula], ['periodos.estatus', '=', 'actual']])
-       ->take(1)
+       ->where([['solicitud_talleres.matricula', $matricula], ['periodos.estatus', '=', 'actual'], ['solicitud_talleres.estado', '=', 'Pendiente']])
+         ->take(1)
        ->first();
 
       $datos_correo= DB::table('users')
@@ -119,12 +125,6 @@ class Notificaciones extends Controller
 
     public function enviar_rechazo(Request $request){
       $data= $request;
-
-      DB::table('solicitud_talleres')
-          ->where('solicitud_talleres.matricula', $data['matricula'])
-          ->update(
-            ['estado' => 'Rechazado']);
-
       $datos_correo= DB::table('users')
        ->select('users.email', 'users.id_user', 'personas.nombre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
        ->join('personas', 'users.id_persona', '=' , 'personas.id_persona')
@@ -136,6 +136,7 @@ class Notificaciones extends Controller
         ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.nombre_taller')
         ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
         ->where('solicitud_talleres.matricula',  $data['matricula'])
+        ->where([['solicitud_talleres.matricula', $data['matricula']], ['periodos.estatus', '=', 'actual'], ['solicitud_talleres.estado', '=', 'Pendiente']])
         ->take(1)
         ->first();
 
@@ -148,6 +149,13 @@ class Notificaciones extends Controller
            redirect()->back()->with('error', 'Hubo un error al tratar de enviar el correo!');
         //return false;
     }
+
+    DB::table('solicitud_talleres')
+        ->where([['solicitud_talleres.matricula', $data['matricula']], ['solicitud_talleres.estado', '=', 'Pendiente']])
+        //->where('solicitud_talleres.matricula', $data['matricula'])
+        ->update(
+          ['estado' => 'Rechazado', 'bandera' => '0']);
+
     $notificacion = new Notificacion;
     $notificacion->matricula= $data['matricula'];
     $notificacion->num_solicitud= $datos_taller->num_solicitud;
@@ -165,8 +173,7 @@ class Notificaciones extends Controller
       $datos_taller= DB::table('solicitud_talleres')
        ->select('solicitud_talleres.nombre_taller')
        ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
-      // ->where('solicitud_talleres.matricula', $matricula)
-       ->where([['solicitud_talleres.matricula', $matricula], ['periodos.estatus', '=', 'actual']])
+       ->where([['solicitud_talleres.matricula', $matricula], ['periodos.estatus', '=', 'actual'], ['solicitud_talleres.estado', '=', 'Pendiente']])
        ->take(1)
        ->first();
 
@@ -192,10 +199,16 @@ class Notificaciones extends Controller
        ->take(1)
        ->first();
 
+       $periodo_semestre = DB::table('periodos')
+       ->select('periodos.id_periodo')
+       ->where('periodos.estatus', '=', 'actual')
+       ->take(1)
+       ->first();
+
        $datos_taller= DB::table('solicitud_talleres')
         ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.nombre_taller')
         ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
-        ->where('solicitud_talleres.matricula',  $data['matricula'])
+        ->where([['solicitud_talleres.matricula', $data['matricula']], ['periodos.estatus', '=', 'actual'], ['solicitud_talleres.estado', '=', 'Pendiente']])
         ->take(1)
         ->first();
           try {
@@ -206,11 +219,17 @@ class Notificaciones extends Controller
                  redirect()->back()->with('error', 'Hubo un error al tratar de enviar el correo!');
               //return false;
           }
-      $periodo_semestre = DB::table('periodos')
-      ->select('periodos.id_periodo')
-      ->where('periodos.estatus', '=', 'actual')
-      ->take(1)
-      ->first();
+      $result = DB::table('solicitud_talleres')
+      ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.fecha_solicitud', 'solicitud_talleres.nombre_taller', 'solicitud_talleres.area',
+               'solicitud_talleres.creditos', 'solicitud_talleres.lugar', 'solicitud_talleres.cupo', 'solicitud_talleres.estado',
+               'solicitud_talleres.lugar', 'solicitud_talleres.fecha_inicio', 'solicitud_talleres.fecha_fin', 'solicitud_talleres.hora_inicio',
+               'solicitud_talleres.hora_fin', 'solicitud_talleres.dias_sem', 'solicitud_talleres.materiales')
+      ->join('estudiantes', 'solicitud_talleres.matricula', '=', 'estudiantes.matricula')
+      ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+       ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
+       ->where([['solicitud_talleres.matricula', $data['matricula']], ['periodos.estatus', '=', 'actual'], ['solicitud_talleres.estado', '=', 'Pendiente']])
+       ->take(1)
+       ->first();
 
       $persona_id = DB::table('estudiantes')
       ->select('estudiantes.id_persona')
@@ -218,14 +237,22 @@ class Notificaciones extends Controller
       ->take(1)
       ->first();
     //  $persona_id= json_decode( json_encode($persona_id), true);
-
       $modali = DB::table('estudiantes')
       ->select('estudiantes.modalidad')
       ->where('estudiantes.matricula', $data['matricula'])
       ->take(1)
       ->first();
+      $bus_adm = DB::table('administrativos')
+      ->select('administrativos.id_administrativo')
+      ->join('personas', 'personas.id_persona', '=', 'administrativos.id_persona')
+      ->where('personas.id_persona',$persona_id->id_persona)
+      ->take(1)
+      ->first();
+        //  $bus_adm = $bus_adm->id_administrativo;
+     if(empty($bus_adm->id_administrativo)){
+
       $administrativo=new Administrativo;
-     $administrativo->id_persona=$persona_id->id_persona;
+      $administrativo->id_persona=$persona_id->id_persona;
       $administrativo->save();
 
       $bus_adm = DB::table('administrativos')
@@ -234,47 +261,27 @@ class Notificaciones extends Controller
       ->where('personas.id_persona',$persona_id->id_persona)
       ->take(1)
       ->first();
-
-      $bus_admi = DB::table('administrativos')
-      ->select('administrativos.id_persona')
-      ->join('personas', 'personas.id_persona', '=', 'administrativos.id_persona')
-      ->where('personas.id_persona',$persona_id->id_persona)
-      ->take(1)
-      ->first();
-
       $bus_adm = $bus_adm->id_administrativo;
-         $nivel = new Nivel();
-         $nivel ->id_administrativo= $bus_adm;
-         $nivel ->grado_estudios='estudiante';
-         $nivel ->save();
 
-        $bus_nivel = DB::table('nivel')
-        ->select('nivel.id_nivel')
-        ->join('administrativos', 'nivel.id_administrativo', '=', 'administrativos.id_administrativo')
-        ->where('administrativos.id_administrativo',$bus_adm)
-        ->take(1)
-        ->first();
+      $nivel = new Nivel();
+      $nivel ->id_administrativo= $bus_adm;
+      $nivel ->grado_estudios='estudiante';
+      $nivel ->save();
 
-
-          $tutor = new Tutor();
-           $tutor ->procedencia_interna= 'FACULTAD DE IDIOMAS';
-           $tutor ->procedencia_externa= 'FACULTAD DE IDIOMAS';
-         $tutor ->id_persona= $persona_id->id_persona ;
-           $tutor ->id_nivel= $bus_nivel->id_nivel;
-           $tutor->periodo=$periodo_semestre->id_periodo;
-           $tutor->save();
-
-           $result = DB::table('solicitud_talleres')
-     ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.fecha_solicitud', 'solicitud_talleres.nombre_taller', 'solicitud_talleres.area',
-              'solicitud_talleres.creditos', 'solicitud_talleres.lugar', 'solicitud_talleres.cupo', 'solicitud_talleres.estado',
-              'solicitud_talleres.lugar', 'solicitud_talleres.fecha_inicio', 'solicitud_talleres.fecha_fin', 'solicitud_talleres.hora_inicio',
-              'solicitud_talleres.hora_fin', 'solicitud_talleres.dias_sem', 'solicitud_talleres.materiales')
-     ->join('estudiantes', 'solicitud_talleres.matricula', '=', 'estudiantes.matricula')
-     ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
-      ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
-      ->where('solicitud_talleres.matricula',  $data['matricula'])
+      $bus_nivel = DB::table('nivel')
+      ->select('nivel.id_nivel')
+      ->join('administrativos', 'nivel.id_administrativo', '=', 'administrativos.id_administrativo')
+      ->where('administrativos.id_administrativo',$bus_adm)
       ->take(1)
       ->first();
+
+      $tutor = new Tutor();
+      $tutor ->procedencia_interna= 'FACULTAD DE IDIOMAS';
+      $tutor ->procedencia_externa= 'FACULTAD DE IDIOMAS';
+      $tutor ->id_persona= $persona_id->id_persona ;
+      $tutor ->id_nivel= $bus_nivel->id_nivel;
+      $tutor->periodo=$periodo_semestre->id_periodo;
+      $tutor->save();
 
       $now = new \DateTime();
      $periodo_semestre= $periodo_semestre->id_periodo;
@@ -284,6 +291,24 @@ class Notificaciones extends Controller
      'fecha_fin'=> $result->fecha_fin,  'hora_inicio'=> $result->hora_inicio,  'hora_fin'=> $result->hora_fin, 'dias_sem'=> $result->dias_sem,
      'materiales'=> $result->materiales,  'tutor'=> $tutor->id_tutor, 'periodo'=> $periodo_semestre, 'control_cupo'=> $result->cupo,
      'created_at'=> $now, 'updated_at'=> $now]);
+    }
+    else {
+      $id_tutores = DB::table('tutores')
+      ->select('tutores.id_tutor')
+      ->join('personas', 'personas.id_persona', '=' ,'tutores.id_persona')
+      ->join('estudiantes', 'estudiantes.id_persona', '=' ,'personas.id_persona')
+      ->where('estudiantes.matricula', $id)
+      ->take(1)
+      ->first();
+      $now = new \DateTime();
+     $periodo_semestre= $periodo_semestre->id_periodo;
+      DB::table('extracurriculares')
+      ->Insert(['nombre_ec' => $result->nombre_taller, 'tipo' => 'Taller', 'creditos' => $result->creditos, 'area'=> $result->area,
+     'modalidad'=> $modali->modalidad,  'cupo'=> $result->cupo, 'lugar'=> $result->lugar, 'fecha_inicio'=> $result->fecha_inicio,
+     'fecha_fin'=> $result->fecha_fin,  'hora_inicio'=> $result->hora_inicio,  'hora_fin'=> $result->hora_fin, 'dias_sem'=> $result->dias_sem,
+     'materiales'=> $result->materiales,  'tutor'=> $id_tutores->id_tutor, 'periodo'=> $periodo_semestre, 'control_cupo'=> $result->cupo,
+     'created_at'=> $now, 'updated_at'=> $now]);
+    }
 
      DB::table('solicitud_talleres')
          ->where('solicitud_talleres.matricula', $data['matricula'])
@@ -310,8 +335,9 @@ class Notificaciones extends Controller
         $result = DB::table('notificaciones')
       ->select('notificaciones.asunto', 'notificaciones.matricula', 'notificaciones.mensaje', 'notificaciones.created_at',
       'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'solicitud_talleres.nombre_taller')
-      ->join('estudiantes', 'estudiantes.matricula', '=', 'notificaciones.matricula')
-      ->join('solicitud_talleres', 'solicitud_talleres.matricula', '=' , 'estudiantes.matricula')
+       ->join('solicitud_talleres', 'solicitud_talleres.num_solicitud', '=' , 'notificaciones.num_solicitud')
+       ->join('estudiantes', 'estudiantes.matricula', '=', 'notificaciones.matricula')
+    //  ->join('solicitud_talleres', 'solicitud_talleres.num_solicitud', '=' , 'estudiantes.matricula')
       ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
       ->where('notificaciones.estatus', '=', 'enviado')
       ->orderBy('notificaciones.created_at', 'desc')

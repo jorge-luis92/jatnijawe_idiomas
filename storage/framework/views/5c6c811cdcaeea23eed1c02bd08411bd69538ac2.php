@@ -32,7 +32,7 @@ endif; ?>
 
     <div class="form-group col-md-2">
         <label for="creditos" ><?php echo e(__('* Créditos')); ?></label>
-        <input id="creditos" type="creditos" maxlength="2" class="form-control <?php if ($errors->has('creditos')) :
+        <input id="creditos" type="tel" maxlength="2" class="form-control <?php if ($errors->has('creditos')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('creditos'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
@@ -279,7 +279,7 @@ var primero;
 if((nueva_hora >= 6) &&  (nueva_hora <= 8)){
        primero= nueva_hora + 1;
        document.getElementById("hora_fin").min = "0"+primero  + ":" + minutes;
-    
+
      }
 
    if((nueva_hora >= 9) &&  (nueva_hora <= 19)){

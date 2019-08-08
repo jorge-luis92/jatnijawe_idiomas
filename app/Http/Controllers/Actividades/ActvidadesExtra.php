@@ -159,7 +159,8 @@ $periodo_semestre= $periodo_semestre->id_periodo;
 $detalles = DB::table('solicitud_talleres')
 ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.matricula')
 //->where('solicitud_talleres.matricula',$id)
-->where([['solicitud_talleres.matricula',$id], ['solicitud_talleres.periodo',$periodo_semestre->id_periodo]])
+->where([['solicitud_talleres.bandera','=', '1'], ['solicitud_talleres.matricula',$id],
+['solicitud_talleres.periodo',$periodo_semestre]])
 ->take(1)
 ->first();
 
