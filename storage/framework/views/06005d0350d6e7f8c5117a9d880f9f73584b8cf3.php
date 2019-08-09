@@ -20,6 +20,7 @@
       <input id="fecha_fin" type="date" onchange="vamo()"  name="fecha_fin"  min="<?php echo date("Y-m-d");?>"  max="" value="<?php if(empty($fechas->fecha_fin)){ $vacio=null; echo $vacio;} else{ echo $fechas->fecha_fin;} ?>"class="form-control"  required>
             </div>
             </div>
+            <input type="text" name="tipo"  hidden class="form-control" value="estudiante">
 <!--
             <div class="form-row">
             <div class="form-group col-md-6">
@@ -41,7 +42,7 @@
                             </div>
                         </div>
                     </form>
-                
+
 </div>
 
 <?php $__env->stopSection(); ?>

@@ -5,8 +5,8 @@ use App\Estudiante;
 use App\Persona;
 use App\Invoice;
 /* Página principal---*/
-Route::get('/', 'Homepag@homepage')->name('welcome');
-Route::get('perfiles', 'Homepag@perfil')->name('perfiles');
+//Route::get('/', 'Homepag@homepage')->name('welcome');
+Route::get('/', 'Homepag@perfil')->name('perfiles');
 Route::get('prueba', 'UserSystemController@checando')->name('prueba');
 Route::get('denegado', 'Homepag@restringdo')->name('denegado');
 /* Rutas de logueo---*/
@@ -27,7 +27,7 @@ Route::get('grupo_tallerista', 'Tallerista_Con\TalleristaController@grupo_taller
 Route::get('talleres_finalizados', 'Tallerista_Con\TalleristaController@talleres_finalizados')->name('talleres_finalizados');
 Route::get('descargar_lista_taller/{id_taller}','GenerarPdf@descargar_lista_tallerista');
 Route::get('finalizar_grupo/{id_extracurricular}','Tallerista_Con\TalleristaController@prueba_grupo');
-Route::post('finalizar_talleres', 'Tallerista_Con\TalleristaController@finalizar_taller')->name('finalizar_talleres');
+Route::post('finalizar_talleres_tallerista', 'Tallerista_Con\TalleristaController@finalizar_taller_t')->name('finalizar_talleres_tallerista');
 });
 /* Rutas de Acdemico---*/
 Route::group(['middleware' => 'auth', 'academicomiddleware'], function () {
@@ -164,6 +164,7 @@ Route::get('fecha_solicitud', 'FormacionIntegralController@actualizar_fechas_sol
 Route::get('notificaciones_enviadas', 'Notificaciones@enviadas_notifaciones')->name('notificaciones_enviadas');
 Route::post('agregar_fecha_taller', 'FormacionIntegralController@fecha_taller')->name('agregar_fecha_taller');
 Route::get('talleres_acreditados', 'FormacionIntegralController@taller_acreditado')->name('talleres_acreditados');
+Route::post('finalizar_talleres_formacion', 'FormacionIntegralController@finalizar_taller_f')->name('finalizar_talleres_formacion');
 
 });
 /*Rutas ADMIN DEL SISTEMA*/

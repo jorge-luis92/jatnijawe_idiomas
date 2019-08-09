@@ -40,7 +40,7 @@
  </div>
     <div class="container" align="center" id="font2">
     <nav class="navbar" style="background-color: #58ACFA; border-radius: 14px 14px 14px 14px;-moz-border-radius: 14px 14px 14px 14px;-webkit-border-radius: 14px 14px 14px 14px;border: 0px solid #000000;" >
-      <a class="navbar-brand" style="color:black" href=<?php echo e(route('welcome')); ?>>
+      <a class="navbar-brand" style="color:black" href=<?php echo e(route('perfiles')); ?>>
         <img src="logo.ico" width="30" height="30" class="d-inline-block align-top" alt="">&nbsp;Facultad de Idiomas </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>

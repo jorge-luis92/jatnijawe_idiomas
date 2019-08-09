@@ -615,9 +615,34 @@ function checar_semestres(){
         if(anio_restado == 0){
           semestre=2;
         }
+        else {
+          anio_restado=anio_restado*2;
+          semestre=anio_restado+1;
+          if(semestre > 8){
+            semestre=8;
+          }
+          else {
+              semestre=anio_restado*2;
+          }
+        }
   }
 
-
+  if(((mes_ingreso >= 2) && (mes_ingreso <= 6)) && ((mes_hoy >= 2) || (anio_hoy <= 6))) {
+        anio_restado=anio_hoy-anio_ingreso;
+        if(anio_restado == 0){
+          semestre=2;
+        }
+        else {
+          anio_restado=anio_restado*2;
+          semestre=anio_restado+1;
+          if(semestre > 8){
+            semestre=8;
+          }
+          else {
+              semestre=anio_restado+1;
+          }
+        }
+      }
 
   document.getElementById('edad').value = anio_restado;
   document.getElementById('genero').value = semestre;

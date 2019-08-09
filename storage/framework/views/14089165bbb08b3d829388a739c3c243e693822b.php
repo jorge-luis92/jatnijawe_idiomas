@@ -33,7 +33,7 @@
                                        <td><?php echo e($datos->creditos); ?></td>
                                        <td><?php echo e($datos->nombre); ?> <?php echo e($datos->apellido_paterno); ?> <?php echo e($datos->apellido_materno); ?></td>
                                        <td><a href="desactivar_extra/<?php echo e($datos->id_extracurricular); ?>">Desactivar</a></td>
-                                         <td><a href="finalizar/<?php echo e($datos->id_extracurricular); ?>">Finalizar Grupo</a></td>
+                                         <td><a href="finalizar/<?php echo e($datos->id_extracurricular); ?>">Finalizar Actividad</a></td>
 
                                         </tr>
                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

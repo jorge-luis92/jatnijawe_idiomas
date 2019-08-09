@@ -11,7 +11,7 @@
             </br>
       <label align="center">*Nota: Al dar clic en Finalizar no se podrá deshacer está acción </label>
               <div class="card-body">
-                <form method="POST" action="{{ route('finalizar_talleres') }}">
+                <form method="POST" action="{{ route('finalizar_talleres_tallerista') }}">
                 @csrf
 
     <div class="form-group row">

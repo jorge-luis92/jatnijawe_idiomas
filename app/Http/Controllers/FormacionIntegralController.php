@@ -171,6 +171,8 @@ class FormacionIntegralController extends Controller
       $result = DB::table('personas')
       ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.id_tutor')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->join('nivel', 'nivel.id_nivel', '=', 'tutores.id_nivel')
+      ->where('nivel.grado_estudios', '!=', 'estudiante')
       ->orderBy('personas.nombre', 'asc')
       ->get();
     return view('personal_administrativo\formacion_integral\gestion_talleres.registro_taller')->with('taller', $result);
@@ -260,7 +262,8 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
       'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
       ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
       ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-      ->where('extracurriculares.bandera', '=', '1')
+      ->join('nivel', 'nivel.id_nivel', '=', 'tutores.id_nivel')
+      ->where([['extracurriculares.bandera', '=', '1'], ['nivel.grado_estudios', '!=', 'estudiante']])
        ->orderBy('extracurriculares.created_at', 'desc')
       ->simplePaginate(10);
 
@@ -855,4 +858,10 @@ public function taller_acreditado()
     ->simplePaginate(10);
 return view('personal_administrativo\formacion_integral\gestion_talleres.taller_acreditado')->with('data', $result);
 }
+
+public function finalizar_taller_f(Request $request){
+$data= $request;
+
+}
+
 }
