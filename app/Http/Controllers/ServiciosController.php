@@ -51,7 +51,7 @@ public function egresado_registrado(){
         ->join('users', 'users.id_persona', '=', 'personas.id_persona')
         ->where([['estudiantes.egresado', '=', '1']])
          ->orderBy('estudiantes.matricula', 'asc')
-        ->simplePaginate(10);
+        ->simplePaginate(4);
 return view('personal_administrativo\servicios\seguimientoE.egresado_registrado')->with('estudiante', $est);
 }
 

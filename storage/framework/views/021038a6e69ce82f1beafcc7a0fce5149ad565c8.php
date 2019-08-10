@@ -5,10 +5,15 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('seccion'); ?>
-
+<div class="loader"></div>
 <div class="container" align="center" id="font7" >
       <div class="form">
         <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <div class="row">
+      <div id="content" class="col-lg-12">
+
+      </div>
+  </div>
                         <form class="form-horizontal" method="POST" action="<?php echo e(route('cargar_datos_usuarios')); ?>" validate enctype="multipart/form-data" data-toggle="validator">
                             <?php echo e(csrf_field()); ?>
 
@@ -41,6 +46,12 @@ endif; ?>
                         </form>
       </div>
   </div>
+
+  <script type="text/javascript">
+  $(window).load(function() {
+      $(".loader").fadeOut("slow");
+  });
+  </script>
 
   <?php $__env->stopSection(); ?>
 

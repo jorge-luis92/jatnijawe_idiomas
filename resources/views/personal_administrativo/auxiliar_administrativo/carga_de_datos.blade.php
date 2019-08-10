@@ -5,10 +5,14 @@
 @endsection
 
 @section('seccion')
-
 <div class="container" align="center" id="font7" >
       <div class="form">
         @include('flash-message')
+        <div class="row">
+      <div id="content" class="col-lg-12">
+
+      </div>
+  </div>
                         <form class="form-horizontal" method="POST" action="{{ route('cargar_datos_usuarios') }}" validate enctype="multipart/form-data" data-toggle="validator">
                             {{ csrf_field() }}
 
@@ -32,5 +36,7 @@
                         </form>
       </div>
   </div>
+
+
 
   @endsection

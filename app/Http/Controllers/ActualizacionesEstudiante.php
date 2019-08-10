@@ -207,7 +207,13 @@ return redirect()->back()->withInput(Input::all())->with('error','¡El código p
   {
     $usuario_actual=auth()->user();
     $id=$usuario_actual->id_user;
-
+    $now = new \DateTime();
+    $periodo_semestre = DB::table('periodos')
+    ->select('periodos.id_periodo')
+    ->where('periodos.estatus', '=', 'actual')
+    ->take(1)
+    ->first();
+    $periodo_semestre= $periodo_semestre->id_periodo;
     $ultima = DB::table('personas')
        ->sum('personas.id_persona');
        if(empty($ultima)){

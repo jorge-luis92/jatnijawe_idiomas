@@ -768,6 +768,12 @@ protected function actualizar_fechas_solicitud(){
       ->first();
       //$fecha_fin= $fecha_fin ->fecha_fin;
       /*$now = new \DateTime();
+      $periodo_semestre = DB::table('periodos')
+      ->select('periodos.id_periodo')
+      ->where('periodos.estatus', '=', 'actual')
+      ->take(1)
+      ->first();
+     $periodo_semestre= $periodo_semestre->id_periodo;
          $fechas_inicio =  date('d-m-Y', strtotime($fecha_inicio));
          $fechas_fin =  date('d-m-Y', strtotime($fecha_fin));
          $now =  date('d-m-Y');

@@ -375,13 +375,12 @@ if($data['edad'] >17){
 protected function crear_periodo(Request $request){
 $data = $request;
 $buscar_periodo = DB::table('periodos')
-->select('periodos.id_periodo')
+->select('periodos.id_periodo', 'periodos.final')
 ->where('periodos.estatus', '=',  'actual')
 ->take(1)
 ->first();
 
-$update_periodo = json_decode( json_encode($buscar_periodo), true);
-if(empty($update_periodo)){
+if(empty($buscar_periodo->id_periodo)){
 $periodo=new Periodo;
 $periodo->inicio=$data['inicio'];
 $periodo->final=$data['final'];
@@ -391,19 +390,31 @@ $periodo->save();
 return redirect()->route('nuevo_periodo')->with('success','¡Periodo agregado correctamente!');
 }
 else{
-  DB::table('periodos')
-      ->where('periodos.id_periodo', $update_periodo)
-      ->update(
-          ['estatus' => 'anterior']);
-      $periodo=new Periodo;
-      $periodo->inicio=$data['inicio'];
-      $periodo->final=$data['final'];
-      $periodo->estatus='actual';
-      $periodo->save();
-      return redirect()->route('home_admin')->with('success','¡Periodo agregado correctamente!');
+  $buscar_periodos = DB::table('periodos')
+  ->select('periodos.id_periodo', 'periodos.final')
+  ->where('periodos.estatus', '=',  'actual')
+  ->take(1)
+  ->first();
+  //$fecha_fin= $buscar_periodos->final;
+     $fechas_inicio =  date('d-m-Y', strtotime($data['inicio']));
+     $fechas_fin =  date('d-m-Y', strtotime($buscar_periodos->final));
+     if ($fechas_inicio > $fechas_fin){
+       $actualizacion = true;
+        }
+        else {
+   $actualizacion = false;
+         }
+
+if($actualizacion = true){
+
+      return redirect()->route('nuevo_periodo')->with('success','entro en si agregado correctamente!');
 
 }
+else {
+  return redirect()->route('nuevo_periodo')->with('error','¡La fecha inicio no puede se menor a la fecha de final del periodo actual!');
+}
 
+}
 }
 
 
@@ -455,7 +466,6 @@ protected function crear_fecha(Request $request){
   ->where('periodo_actualizacion.tipo', 'estudiante')
   ->take(1)
   ->first();
-
   if(empty($id_clave)){
     $nueva_ac = new FechaActualizacion;
     $nueva_ac->fecha_inicio=$data['fecha_inicio'];

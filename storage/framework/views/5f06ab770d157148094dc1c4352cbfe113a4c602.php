@@ -616,7 +616,6 @@ function checar_semestres(){
   document.getElementById('edad').value = edad;
   document.getElementById('mes').value = mes;
 
-
 }
 </script>
 

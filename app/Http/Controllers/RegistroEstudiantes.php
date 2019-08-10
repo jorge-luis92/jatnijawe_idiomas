@@ -176,6 +176,14 @@ public function actualizacion_estudiante(Request $request)
   $data=$request;
 $usuario_actual=auth()->user();
 $id=$usuario_actual->id_user;
+$now = new \DateTime();
+
+$periodo_semestre = DB::table('periodos')
+->select('periodos.id_periodo')
+->where('periodos.estatus', '=', 'actual')
+->take(1)
+->first();
+$periodo_semestre= $periodo_semestre->id_periodo;
 
 DB::table('estudiantes')
 ->where('estudiantes.matricula', $id)
@@ -214,8 +222,8 @@ if(($data['nombre_lengua'] == null) && ($data['tipo_lengua'] == null)){
   DB::table('becas')
       //->where('becas.id_beca', $buscar)
       ->updateOrInsert(
-          ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'monto' => $data['monto'],  'matricula' => $id],
-      );
+          ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'monto' => $data['monto'],
+            'matricula' => $id, 'periodo' => $periodo_semestre, 'created_at' => $now, 'updated_at' => $now]);
       return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
 
   }
@@ -225,8 +233,8 @@ DB::table('lenguas')
 
     // ->where('lenguas.id_lengua', $lengua)
     ->updateOrInsert(
-        ['nombre_lengua' => $data['nombre_lengua'], 'tipo' => $data['tipo_lengua'], 'id_persona'=> $id_persona],
-    );
+        ['nombre_lengua' => $data['nombre_lengua'], 'tipo' => $data['tipo_lengua'], 'id_persona'=> $id_persona,
+          'periodo' => $periodo_semestre, 'created_at' => $now, 'updated_at' => $now]);
 
     DB::table('personas')
         ->where('personas.id_persona', $id_persona)
@@ -248,7 +256,8 @@ DB::table('lenguas')
     DB::table('becas')
         //->where('becas.id_beca', $buscar)
         ->updateOrInsert(
-            ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'monto' => $data['monto'],  'matricula' => $id],
+            ['nombre' => $data['nombre_beca'], 'tipo_beca' => $data['tipo_beca'], 'monto' => $data['monto'],  'matricula' => $id,
+             'periodo' => $periodo_semestre, 'created_at' => $now, 'updated_at' => $now],
         );
         return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
 

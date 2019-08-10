@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
+  <link rel="shortcut icon" href="<?php echo e(asset('/logo.ico')); ?>">
   <!-- Custom fonts for this template-->
   <link  rel="stylesheet" href="<?php echo e(asset('requisitos/fontawesome-free/css/all.min.css')); ?>" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link  rel="stylesheet" href="<?php echo e(asset('css/sb-admin-3.min.css')); ?>">
-  <link rel="stylesheet"  href="<?php echo e(asset('css/nuevo.css')); ?>">
-  <script  src="<?php echo e(asset('js/funciones.min.js')); ?>"></script>
+  <link  rel="stylesheet" href="<?php echo e(asset('/css/sb-admin-3.min.css')); ?>">
+  <link rel="stylesheet"  href="<?php echo e(asset('/css/nuevo.css')); ?>">
+  <script  src="<?php echo e(asset('/js/funciones.min.js')); ?>"></script>
 
   <title>Coordinadora Académica <?php echo $__env->yieldContent('title'); ?></title>
 
@@ -28,7 +28,7 @@
 
       <li class="nav-item active">
         <a class="nav-link" href=<?php echo e(route('home_auxiliar_adm')); ?>>
-           <img class="img-responsive center-block"   src="<?php echo e(asset('logo.ico')); ?>" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
+           <img class="img-responsive center-block"   src="<?php echo e(asset('/logo.ico')); ?>" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
         Gestión de Usuarios
@@ -185,7 +185,7 @@
 
   <script src="<?php echo e(asset('requisitos/jquery/jquery.min.js')); ?>"></script>
   <script src="<?php echo e(asset('requisitos/bootstrap/js/bootstrap.bundle.min.js')); ?>"></script>
-
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <!-- Core plugin JavaScript-->
   <script src="<?php echo e(asset('requisitos/jquery-easing/jquery.easing.min.js')); ?>"></script>
 

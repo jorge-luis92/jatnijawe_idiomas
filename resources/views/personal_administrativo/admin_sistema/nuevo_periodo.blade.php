@@ -13,12 +13,12 @@
     <div class="form-row">
   <div class="form-group col-md-6">
     <label for="inicio" >{{ __('* Fecha de inicio') }}</label>
-    <input id="inicio" type="date" name="inicio" min="<?php echo date("Y-m-d");?>" onblur="ba();"  class="form-control"  required>
+    <input id="inicio" type="date" oninput="vamo()" name="inicio"    class="form-control"  required>
     </div>
 
     <div class="form-group col-md-6">
       <label for="final" >{{ __('* Fecha Final') }}</label>
-      <input id="final" type="date" name="final" min= "<?php echo date("Y-m-d");?>"  class="form-control"  required>
+      <input id="final" type="date" onchange="vamo()" name="final" min= "<?php echo date("Y-m-d");?>"  class="form-control"  required>
             </div>
             </div>
 
@@ -65,13 +65,47 @@
                          @endif
                 </div>
 
-
+<input id="hola" type="text" value="">
 @endsection
 <script>
-function ba(){
-  var ed = document.getElementById('inicio').value; //fecha de nacimiento en el formulario
-  var fechaNacimiento = ed.split("-");
-  var mes = fechaNacimiento[1];
-  document.getElementById('ss').value = mes;
+function vamo(){
+    var ed = document.getElementById('inicio').value; //fecha de nacimiento en el formulario
+    var fecha_inicio = ed.split("-");
+    var anio = fecha_inicio[0];
+    var mes = fecha_inicio[1];
+    var dia = fecha_inicio[2];
+  var mm = parseInt(mes);
+  var anios= parseInt(anio);
+var j=anio;
+var hey;
+j=anios+1;
+if(mes >= 1 || mes <12){
+  mm=1+mm;
+
+  hey=mm;
+  if(mm >=1 || mm <=9){
+
+  document.getElementById("final").min = anios+'-'+'0'+hey+'-'+dia;
+       document.getElementById("hola").value = '2-9 mes cal: '+mm;
+  }
+if(mm >= 10 || mm < 12){
+  document.getElementById("final").min = anios+'-'+hey+'-'+dia;
+  document.getElementById("hola").value = '10 - 11 mes cal: '+mm;
 }
+  if(mm == 12){
+  j=anios+1;
+  hey=mm;
+  document.getElementById("final").min = j+'-'+hey+'-'+dia;
+       document.getElementById("hola").value = '12 mes cal: '+mm;
+  }
+}
+
+  if(mes == 12){
+    j=anios+1;
+     document.getElementById("hola").value = 'mes: '+mes+' año: '+j;
+     document.getElementById("final").min = j+'-'+'01'+'-'+dia;
+
+}
+}
+//min="<?php echo date("Y-m-d");?>"
 </script>

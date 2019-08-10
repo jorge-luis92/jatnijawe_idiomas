@@ -124,7 +124,7 @@ function prueba_grupo($id_extracurricular){
 
 }
 
-public function finalizar_taller(Request $request){
+public function finalizar_taller_t(Request $request){
 $data= $request;
 
 }
