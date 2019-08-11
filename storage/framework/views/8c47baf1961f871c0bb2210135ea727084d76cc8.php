@@ -57,7 +57,7 @@ endif; ?>
         <div class="form-group row">
         <label for="asunto" class="col-md-4 col-form-label text-md-right" ><?php echo e(__('Asunto:')); ?></label>
         <div class="col-md-6">
-            <input id="asunto" name="asunto" type="text" value="Taller Aprobado" onKeyUp="this.value = this.value.toUpperCase()" class="form-control" required >
+            <input id="asunto" name="asunto" type="text" value="Taller Acreditado" onKeyUp="this.value = this.value.toUpperCase()" class="form-control" required >
             <?php if ($errors->has('asunto')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('asunto'); ?>

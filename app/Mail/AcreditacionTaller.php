@@ -33,6 +33,6 @@ class AcreditacionTaller extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.mensaje_aprobacion');
+        return $this->view('mails.mensaje_acreditacion');
     }
 }

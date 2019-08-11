@@ -395,6 +395,7 @@ class Notificaciones extends Controller
       ->where('periodos.estatus', '=', 'actual')
       ->take(1)
       ->first();
+      $periodo_semestre=$periodo_semestre->id_periodo;
       $datos_correo= DB::table('users')
        ->select('users.email', 'users.id_user', 'personas.nombre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
        ->join('personas', 'users.id_persona', '=' , 'personas.id_persona')
@@ -429,8 +430,8 @@ class Notificaciones extends Controller
       // return redirect()->route('mis_actividades')->with('success','¡Inscripción Realizada correctamente!');
       }
       DB::table('solicitud_talleres')
-          ->where('solicitud_talleres.matricula', $data['matricula'])
-          ->update(
+      ->where(['solicitud_talleres.matricula', $data['matricula'], ['solicitud_talleres.periodo', $periodo_semestre]])
+      ->update(
             ['estado' => 'Cancelado']);
 
       DB::table('extracurriculares')
@@ -488,6 +489,8 @@ class Notificaciones extends Controller
       ->where('periodos.estatus', '=', 'actual')
       ->take(1)
       ->first();
+      $periodo_semestre= $periodo_semestre->id_periodo;
+
       $datos_correo= DB::table('users')
        ->select('users.email', 'users.id_user', 'personas.nombre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
        ->join('personas', 'users.id_persona', '=' , 'personas.id_persona')
@@ -505,7 +508,7 @@ class Notificaciones extends Controller
        ->where([['extracurriculares.bandera', '=', '1'], ['extracurriculares.id_extracurricular',$data['id_extracurricular'] ]])
        ->take(1)
        ->first();
-
+       $creditos_taller= ($datos_taller->creditos) * 2;
        $datos_solicitud = DB::table('solicitud_talleres')
         ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.nombre_taller')
         ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
@@ -515,21 +518,27 @@ class Notificaciones extends Controller
 
         try {
           Mail::to($datos_correo->email)
-          ->send(new CancelacionTaller($datos_correo, $data, $datos_taller));
+          ->send(new AcreditacionTaller($datos_correo, $data, $datos_taller));
    } catch (Exception $e) {
        report($e);
        redirect()->back()->with('error', 'Hubo un error al tratar de enviar el correo!');
       // return redirect()->route('mis_actividades')->with('success','¡Inscripción Realizada correctamente!');
       }
       DB::table('solicitud_talleres')
-          ->where('solicitud_talleres.matricula', $data['matricula'])
-          ->update(
-            ['estado' => 'Acreditado']);
+          ->where([['solicitud_talleres.matricula', $data['matricula']], ['solicitud_talleres.periodo', $periodo_semestre]])
+          ->update(['estado' => 'Acreditado']);
 
       DB::table('extracurriculares')
           ->where('extracurriculares.id_extracurricular', $data['id_extracurricular'])
-          ->update(
-            ['bandera' => '3', 'observaciones' => $data['observaciones']]);
+          ->update(['bandera' => '2', 'observaciones' => $data['observaciones']]);
+
+            $inscripcion = new Detalle_extracurricular;
+            $inscripcion->matricula= $data['matricula'];
+            $inscripcion->actividad= $data['id_extracurricular'];
+            $inscripcion->creditos= $creditos_taller;
+            $inscripcion->estado= 'Acreditado';
+            $inscripcion->periodo= $periodo_semestre;
+            $inscripcion->save();
 
        $notificacion = new Notificacion;
        $notificacion->matricula= $data['matricula'];
