@@ -103,7 +103,7 @@ return view('estudiante\datos.datos_personales');
         ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
         ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-        ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Cursando'],  ['detalle_extracurriculares.periodo', $periodo_semestre->id_periodo]])
+        ->where([['extracurriculares.bandera','=', '1'], ['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Cursando'],  ['detalle_extracurriculares.periodo', $periodo_semestre->id_periodo]])
         ->simplePaginate(10);
       return  view ('estudiante\mis_actividades.misActividades')->with('dato', $result);
     }

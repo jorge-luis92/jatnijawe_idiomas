@@ -64,7 +64,17 @@
             <input id="nombre_taller" value="{{$datos_taller->nombre_ec}}" name="nombre_taller" type="text" class="form-control" disabled>
     </div>
   </div>
-
+  <div class="form-group row">
+      <label for="observaciones" class="col-md-4 col-form-label text-md-right" >{{ __('Observaciones de Taller:') }}</label>
+      <div class="col-md-6">
+          <textarea id="observaciones" name="observaciones" rows="4" style="resize: both;" class="form-control" required ></textarea>
+          @error('observaciones')
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+      </div>
+  </div>
 
     <div class="form-group row">
         <label for="contenido" class="col-md-4 col-form-label text-md-right" >{{ __('Contenido del Mensaje:') }}</label>

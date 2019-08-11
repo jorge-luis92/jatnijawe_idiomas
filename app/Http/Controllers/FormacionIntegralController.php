@@ -263,7 +263,7 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
       ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
       ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
       ->join('nivel', 'nivel.id_nivel', '=', 'tutores.id_nivel')
-      ->where([['extracurriculares.bandera', '=', '1'], ['nivel.grado_estudios', '!=', 'estudiante']])
+      ->where([['extracurriculares.bandera', '=', '1'] , ['extracurriculares.tipo', '=', 'Taller'] , ['nivel.grado_estudios', '!=', 'estudiante']])
        ->orderBy('extracurriculares.created_at', 'desc')
       ->simplePaginate(10);
 
@@ -306,11 +306,11 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
         $result = DB::table('extracurriculares')
         ->select('extracurriculares.id_extracurricular', 'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
         'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
-        'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+        'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.observaciones', 'extracurriculares.hora_fin', 'tutores.id_tutor',
         'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
         ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
-        ->where([['extracurriculares.bandera', '=', '0']])
+        ->where([['extracurriculares.bandera', '=', '3']])
          ->orderBy('extracurriculares.created_at', 'desc')
         ->simplePaginate(10);
 
@@ -885,9 +885,73 @@ public function taller_can_estudiante()
 return view('personal_administrativo\formacion_integral\gestion_talleres.taller_cancelado')->with('data', $result);
 }
 
-public function finalizar_taller_f(Request $request){
+public function taller_desactivado($id_extracurricular)
+{
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='1'){
+     return redirect()->back();
+    }
+    $data=$id_extracurricular;
+    $result = DB::table('extracurriculares')
+    ->select('extracurriculares.id_extracurricular', 'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+    'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+    'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+    'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+    ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+    ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+    ->where([['extracurriculares.bandera', '=', '1'], ['extracurriculares.id_extracurricular',$data ]])
+    ->take(1)
+    ->first();
+    //return view('personal_administrativo/formacion_integral/gestion_talleres.desactivar_extra_estudiante')->with('dato', $data)->with('datos', $result);
+
+
+    return view('personal_administrativo/formacion_integral/gestion_talleres.cancelar_taller')
+    ->with('datos_taller', $result);
+}
+
+
+public function cancel_actividad(Request $request){
 $data= $request;
 
+DB::table('extracurriculares')
+    ->where('extracurriculares.id_extracurricular', $data['id_extracurricular'])
+    ->update(
+      ['bandera' => '3', 'observaciones' => $data['observaciones']]);
+
+        return redirect()->route('actividades_desactivadas_general')->with('success','¡Taller Cancelado Correctamente!');
+
+}
+
+public function actividades_cancel()
+{
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='1'){
+     return redirect()->back();
+    }
+  $result = DB::table('extracurriculares')
+  ->select('extracurriculares.id_extracurricular', 'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+  'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+  'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+  'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'extracurriculares.observaciones')
+  ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+  ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+  ->join('nivel', 'nivel.id_nivel', '=', 'tutores.id_nivel')
+  ->where([['extracurriculares.bandera', '=', '3'] ,  ['nivel.grado_estudios', '!=', 'estudiante']])
+   ->orderBy('extracurriculares.created_at', 'desc')
+  ->simplePaginate(10);
+
+return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_desactivadas_general')->with('dato', $result);
+}
+
+
+public function finalizar_taller_f(Request $request){
+$data= $request;
+DB::table('extracurriculares')
+    ->where('extracurriculares.id_extracurricular', $data['id_extracurricular'])
+    ->update(
+      ['bandera' => '2', 'observaciones' => $data['observaciones']]);
+
+        return redirect()->route('actividades_finalizadas_general')->with('success','¡Actividad Acreditada Correctamente!');
 }
 
 }

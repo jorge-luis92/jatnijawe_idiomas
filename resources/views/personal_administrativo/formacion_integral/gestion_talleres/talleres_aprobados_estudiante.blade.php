@@ -17,7 +17,7 @@
                                        <th scope="col">TALLER</th>
                                      <th scope="col">FECHA DE APROBACIÓN</th>
                                      <th scope="col">ESTATUS</th>
-                                     <th colspan="3">ACCIONES</th>
+                                     <th colspan="4">ACCIONES</th>
                                      </tr>
                                  </thead>
                                  <tbody>
@@ -27,9 +27,10 @@
                                         <td>{{$detalles->nombre_ec}}</td>
                                         <td>{{ date('d-m-Y', strtotime($detalles->created_at))}}</td>
                                         <td>ACTIVO</td>
-                                        <td><a href="acreditar_estudiante/{{$detalles->id_extracurricular}}/{{$detalles->matricula}}" >Acreditar</a></td>
-                                         <td><a href="desactivar_taller_estudiante/{{$detalles->id_extracurricular}}/{{$detalles->matricula}}">Cancelar</a></td>
-                                        <td><a href="pdf_taller_aprobado/{{$detalles->matricula}}" target="_blank">Detalles</a></td>
+                                        <td><a href="gestion_taller_estudiante/{{$detalles->id_extracurricular}}/{{$detalles->matricula}}">Gestión Taller</a></td>
+                                        <td><a href="desactivar_taller_estudiante/{{$detalles->id_extracurricular}}/{{$detalles->matricula}}">Cancelar</a></td>
+                                         <td><a href="acreditar_estudiante/{{$detalles->id_extracurricular}}/{{$detalles->matricula}}" >Acreditar</a></td>
+                                         <td><a href="pdf_taller_aprobado/{{$detalles->matricula}}" target="_blank">Detalles</a></td>
 
                                         </tr>
                                         @endforeach

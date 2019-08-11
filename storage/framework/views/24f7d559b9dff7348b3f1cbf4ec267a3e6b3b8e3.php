@@ -27,9 +27,9 @@
                                         <td><?php echo e($detalles->nombre_ec); ?></td>
                                         <td><?php echo e(date('d-m-Y', strtotime($detalles->created_at))); ?></td>
                                         <td>ACTIVO</td>
-                                        <td><a href="acreditar_estudiante/<?php echo e($detalles->id_extracurricular); ?>/<?php echo e($detalles->matricula); ?>" >Acreditar</a></td>
                                          <td><a href="desactivar_taller_estudiante/<?php echo e($detalles->id_extracurricular); ?>/<?php echo e($detalles->matricula); ?>">Cancelar</a></td>
-                                        <td><a href="pdf_taller_aprobado/<?php echo e($detalles->matricula); ?>" target="_blank">Detalles</a></td>
+                                         <td><a href="acreditar_estudiante/<?php echo e($detalles->id_extracurricular); ?>/<?php echo e($detalles->matricula); ?>" >Acreditar</a></td>
+                                         <td><a href="pdf_taller_aprobado/<?php echo e($detalles->matricula); ?>" target="_blank">Detalles</a></td>
 
                                         </tr>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

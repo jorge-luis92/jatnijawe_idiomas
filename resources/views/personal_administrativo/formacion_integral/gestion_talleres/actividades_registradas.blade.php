@@ -32,7 +32,7 @@
                                        <td>{{$datos->modalidad}}</td>
                                        <td>{{$datos->creditos}}</td>
                                        <td>{{$datos->nombre}} {{$datos->apellido_paterno}} {{$datos->apellido_materno}}</td>
-                                       <td><a href="desactivar_extra/{{$datos->id_extracurricular}}">Desactivar</a></td>
+                                       <td><a href="cancelar_actividad/{{$datos->id_extracurricular}}">Cancelar Taller</a></td>
                                          <td><a href="finalizar/{{$datos->id_extracurricular}}">Finalizar Actividad</a></td>
 
                                         </tr>
