@@ -1,10 +1,10 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_formacion_integral')
 @section('title')
-: Talleres
+: Conferencias
 @endsection
  @section('seccion')
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Actividades Registradas</h1>
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Conferencias Registradas</h1>
  <div class="container" id="font7">
    @include('flash-message')
  </br>

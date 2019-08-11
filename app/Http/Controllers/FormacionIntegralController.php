@@ -270,6 +270,28 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
     return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_registradas')->with('dato', $result);
     }
 
+    public function confe_registradas()
+    {
+      $usuario_actual=\Auth::user();
+       if($usuario_actual->tipo_usuario!='1'){
+         return redirect()->back();
+        }
+      $result = DB::table('extracurriculares')
+      ->select('extracurriculares.id_extracurricular', 'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+      'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+      'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+      'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+      ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+      ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->join('nivel', 'nivel.id_nivel', '=', 'tutores.id_nivel')
+      ->where([['extracurriculares.bandera', '=', '1'] , ['extracurriculares.tipo', '=', 'Conferencia'] , ['nivel.grado_estudios', '!=', 'estudiante']])
+       ->orderBy('extracurriculares.created_at', 'desc')
+      ->simplePaginate(10);
+
+    return view('personal_administrativo\formacion_integral\gestion_talleres.conferencias_registradas')->with('dato', $result);
+    }
+
+
     public function actividades_finalizadas()
     {
       $usuario_actual=\Auth::user();

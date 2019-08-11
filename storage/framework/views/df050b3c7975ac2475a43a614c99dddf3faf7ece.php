@@ -1,10 +1,10 @@
 <link rel="shortcut icon" href="<?php echo e(asset('logo.ico')); ?>">
 
 <?php $__env->startSection('title'); ?>
-: Talleres
+: Conferencias
 <?php $__env->stopSection(); ?>
  <?php $__env->startSection('seccion'); ?>
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Actividades Registradas</h1>
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Conferencias Registradas</h1>
  <div class="container" id="font7">
    <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
  </br>
@@ -49,4 +49,4 @@
 
  <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\formacion_integral\gestion_talleres/actividades_registradas.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.plantilla_formacion_integral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/personal_administrativo\formacion_integral\gestion_talleres/conferencias_registradas.blade.php ENDPATH**/ ?>

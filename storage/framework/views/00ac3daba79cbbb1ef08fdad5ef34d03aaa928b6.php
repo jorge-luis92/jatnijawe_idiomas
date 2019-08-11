@@ -102,7 +102,7 @@
             <a class="collapse-item" href=<?php echo e(route('registro_taller')); ?>>Registrar Taller</a>
               <a class="collapse-item" href=<?php echo e(route('registro_conferencia')); ?>>Registrar Conferencia</a>
              <a class="collapse-item" href=<?php echo e(route('actividades_registradas')); ?>>Talleres Registrados</a>
-              <a class="collapse-item" href=<?php echo e(route('actividades_registradas')); ?>>Conferencias Registradas</a>
+              <a class="collapse-item" href=<?php echo e(route('conferencias_registradas')); ?>>Conferencias Registradas</a>
              <a class="collapse-item" href=<?php echo e(route('actividades_finalizadas_general')); ?>>Actividades Finalizadas</a>
              <a class="collapse-item" href=<?php echo e(route('actividades_canceladas')); ?>>Actividades Canceladas</a>
           <!--   <a class="collapse-item" href=<?php echo e(route('fechas_actividades')); ?>>Fecha de envío de </br>solicitudes</a>-->
