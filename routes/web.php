@@ -173,6 +173,7 @@ Route::post('acreditar_extra', 'Notificaciones@enviar_acreditacion')->name('acre
 Route::get('cancelar_actividad/{id_extracurricular}','FormacionIntegralController@taller_desactivado');
 Route::post('cancelar_actividad_general','FormacionIntegralController@cancel_actividad')->name('cancelar_actividad_general');
 Route::get('actividades_canceladas', 'FormacionIntegralController@actividades_cancel')->name('actividades_canceladas');
+Route::get('gestion_taller_estudiante/{id_extracurricular}', 'FormacionIntegralController@gestion_estudiante_taller');
 });
 /*Rutas ADMIN DEL SISTEMA*/
 Route::group(['middleware' => 'auth', 'adminmiddleware' ], function () {

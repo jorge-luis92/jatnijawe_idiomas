@@ -719,12 +719,12 @@ protected function constancia_par($matricula){
 protected function constancia_val($matricula){
 $id=$matricula;
   $datos_estudiante = DB::table('estudiantes')
-   ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+   ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'estudiantes.modalidad')
   ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
   ->where('estudiantes.matricula',$id)
   ->take(1)
   ->first();
-
+if(($datos_estudiante->modalidad) == 'ESCOLARIZADA'){
 $academicas = DB::table('detalle_extracurriculares')
  ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
  ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'ACADEMICA'],])
@@ -749,6 +749,31 @@ if($academicas >= 80 && $sumas >= 200){
 }
 else{
   return redirect()->route('busqueda_estudiante_fi')->with('error','¡El Estudiante no cumple con los requisitos para generar la constancia!');
+}
+}
+else{
+  $academicas = DB::table('detalle_extracurriculares')
+   ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+   ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'ACADEMICA'],])
+    ->sum('detalle_extracurriculares.creditos');
+  $culturales = DB::table('detalle_extracurriculares')
+   ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+   ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'CULTURAL'],])
+   ->sum('detalle_extracurriculares.creditos');
+  $deportivas = DB::table('detalle_extracurriculares')
+  ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
+  ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'DEPORTIVA'],])
+  ->sum('detalle_extracurriculares.creditos');
+  $sumas = $academicas + $culturales + $deportivas;
+  if($academicas >= 56 && $sumas >= 140){
+      $paper_orientation = 'letter';
+      $customPaper = array(2.5,2.5,600,950);
+
+   $pdf = PDF::loadView('personal_administrativo\formacion_integral.constanciaOficial', ['data' =>  $datos_estudiante,
+   'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas, 'suma' => $sumas])
+  ->setPaper($customPaper,$paper_orientation);
+   return $pdf->stream('constancia_oficial.pdf');
+}
 }
 }
 
@@ -974,6 +999,22 @@ DB::table('extracurriculares')
       ['bandera' => '2', 'observaciones' => $data['observaciones']]);
 
         return redirect()->route('actividades_finalizadas_general')->with('success','¡Actividad Acreditada Correctamente!');
+}
+
+
+protected function gestion_estudiante_taller($id_extracurricular){
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='1'){
+     return redirect()->back();
+    }
+  $usuario_actual=auth()->user();
+  $id=$usuario_actual->id_user;
+  $id_extra = $id_extracurricular;
+
+
+return view('personal_administrativo\formacion_integral\gestion_talleres.grupo_estudiante')->with('dato', $result);
+
+
 }
 
 }
