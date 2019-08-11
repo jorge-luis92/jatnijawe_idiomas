@@ -28,8 +28,9 @@
                                         <td>{{ date('d-m-Y', strtotime($detalles->created_at))}}</td>
                                         <td>ACTIVO</td>
                                         <td><a href="acreditar_estudiante/{{$detalles->matricula}}" target="_blank">Acreditar</a></td>
-                                         <td><a href="desactivar_extra/{{$detalles->id_extracurricular}}">Desactivar</a></td>
+                                         <td><a href="desactivar_taller_estudiante/{{$detalles->id_extracurricular}}/{{$detalles->matricula}}">Cancelar</a></td>
                                         <td><a href="pdf_taller_aprobado/{{$detalles->matricula}}" target="_blank">Detalles</a></td>
+
                                         </tr>
                                         @endforeach
                                     </tbody>

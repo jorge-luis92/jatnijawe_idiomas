@@ -8,9 +8,9 @@
           <div class="card">
               <div class="card-header" align="center"><?php echo e(__('Finalizar Extracurricular')); ?></div>
             </br>
-   <label align="center">*Nota: Al dar clic en hhFinalizar no se podrá deshacer está acción </label>
+   <label align="center">*Nota: Al dar clic en Finalizar no se podrá deshacer está acción </label>
               <div class="card-body">
-                <form method="POST" action="<?php echo e(route('finalizar_talleres')); ?>">
+                <form method="POST" action="<?php echo e(route('finalizar_talleres_formacion')); ?>">
                 <?php echo csrf_field(); ?>
 
     <div class="form-group row">

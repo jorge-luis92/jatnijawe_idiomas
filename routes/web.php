@@ -100,8 +100,6 @@ Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar
   Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedentes_laborales')->name('antecedentes_laborales');
   Route::get('talleres_finalizados_estudiante', 'Actividades\ActvidadesExtra@taller_finalizado_estudiante')->name('talleres_finalizados_estudiante');
   Route::get('descarga_lista_estudiante/{id_taller}','GenerarPdf@descargar_lista_taller');
-  Route::get('finalizar/{id_extracurricular}','RegistrosController@prueba');
-  Route::post('finalizar_taller', 'RegistrosController@finalizar_t')->name('finalizar_taller');
 });
 
 Route::get('register_tallerista', 'Auth\RegisterController@getRegister');
@@ -151,7 +149,6 @@ Route::get('avance_estudiante/{matricula}', 'FormacionIntegralController@ver_ava
 Route::get('constancia_parcial/{matricula}', 'FormacionIntegralController@constancia_par');
 Route::get('constancia_valida/{matricula}', 'FormacionIntegralController@constancia_val');
 Route::get('acreditar_estudiantes_formacion/{actividad}/{matricula}', 'FormacionIntegralController@acreditar_estudiantes');
-Route::get('desactivar_extra/{actividad}', 'FormacionIntegralController@desactivar_extracurricular');
 Route::get('solicitud_correcion/{id_matricula}', 'Notificaciones@solicitud_correcion');
 Route::post('replantear_solicitud', 'Notificaciones@enviar_correccion')->name('replantear_solicitud');
 Route::get('solicitud_rechazo/{id_matricula}', 'Notificaciones@solicitud_rechazo');
@@ -165,7 +162,10 @@ Route::get('notificaciones_enviadas', 'Notificaciones@enviadas_notifaciones')->n
 Route::post('agregar_fecha_taller', 'FormacionIntegralController@fecha_taller')->name('agregar_fecha_taller');
 Route::get('talleres_acreditados', 'FormacionIntegralController@taller_acreditado')->name('talleres_acreditados');
 Route::post('finalizar_talleres_formacion', 'FormacionIntegralController@finalizar_taller_f')->name('finalizar_talleres_formacion');
-
+Route::get('finalizar/{id_extracurricular}','RegistrosController@prueba');
+Route::post('finalizar_taller', 'RegistrosController@finalizar_t')->name('finalizar_taller');
+Route::get('desactivar_taller_estudiante/{id_extracurricular}/{matricula}','Notificaciones@cancelacion_aprobado');
+Route::post('desactivar_extra', 'Notificaciones@enviar_cancelacion')->name('desactivar_extra');
 });
 /*Rutas ADMIN DEL SISTEMA*/
 Route::group(['middleware' => 'auth', 'adminmiddleware' ], function () {

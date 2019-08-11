@@ -49,11 +49,11 @@
 <div class="form-row">
     <div class="form-group col-md-2">
       <label for="hora_entrada">Entrada</label>
-      <input type="time"class="form-control" name="hora_entrada" id="hora_entrada" disabled  required>
+      <input type="time"class="form-control"  name="hora_entrada" id="hora_entrada" oninput="vamos()" min= "07:00" max="19:00" disabled  required>
     </div>
     <div class="form-group col-md-2">
       <label for="hora_salida">Salida</label>
-      <input type="time" class="form-control" name="hora_salida" id="hora_salida" disabled  required >
+      <input type="time" class="form-control" name="hora_salida" id="hora_salida" onchange="vamos()"  name="hora_fin"  min="" max="20:00"  disabled  required >
     </div>
     <div class="form-group col-md-4">
       <label for="lugar">Nombre del lugar</label>
@@ -163,6 +163,44 @@ if(key == especiales[i]){
  if(letras.indexOf(tecla)==-1 && !tecla_especial)
      return false;
 }
+</script>
+
+<script>
+function vamo(){
+    var ed = document.getElementById('hora_entrada').value; //fecha de nacimiento en el formulario
+   var fecha_inicio = ed.split("-");
+    var anio = fecha_inicio[0];
+    var mes = fecha_inicio[1];
+    var dia = fecha_inicio[2];
+
+document.getElementById("hora_salida").min = anio+'-'+'0'+hey+'-'+dia;
+}
+
+function vamos(){
+    var ed = document.getElementById('hora_entrada').value; //fecha de nacimiento en el formulario
+    var hours = ed.split(":")[0];
+   var minutes = ed.split(":")[1];
+var nueva_hora= parseInt(hours);
+var primero;
+if((nueva_hora >= 6) &&  (nueva_hora <= 8)){
+       primero= nueva_hora + 1;
+       document.getElementById("hora_salida").min = "0"+primero  + ":" + minutes;
+
+     }
+
+   if((nueva_hora >= 9) &&  (nueva_hora <= 19)){
+          primero= nueva_hora + 1;
+          document.getElementById("hora_salida").min = primero  + ":" + minutes;
+
+        }
+    if(nueva_hora == 20){
+           primero= nueva_hora + 1;
+           document.getElementById("hora_salida").min = primero  + ":" + minutes;
+
+         }
+
+}
+
 </script>
 
 <?php echo $__env->make('layouts.plantilla_estudiante', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\segunda_version\jatnijawe\resources\views/estudiante\datos/datos_laborales.blade.php ENDPATH**/ ?>

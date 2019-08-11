@@ -5,7 +5,6 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('seccion'); ?>
- <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <!--<h1 style="font-size: 2.0em; color: #000000;" align="center"><?php echo e($estudiante_matricula); ?> Replantamiento de Solicitud de Taller|</h1>-->
 <div class="container">
 <?php echo $__env->make('flash-message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

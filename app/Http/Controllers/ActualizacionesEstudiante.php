@@ -26,7 +26,13 @@ class ActualizacionesEstudiante extends Controller
     $data=$request;
   $usuario_actual=auth()->user();
   $id=$usuario_actual->id_user;
-
+  $now = new \DateTime();
+  $periodo_semestre = DB::table('periodos')
+  ->select('periodos.id_periodo')
+  ->where('periodos.estatus', '=', 'actual')
+  ->take(1)
+  ->first();
+  $periodo_semestre = $periodo_semestre->id_periodo;
 if($data['nombre_actividadexterna'] == null){
   return redirect()->route('otras_actividades')->with('success','¡Datos actualizados correctamente!');
 }
@@ -41,7 +47,7 @@ else{
       ->updateOrInsert(
           ['nombre_actividadexterna' => $data['nombre_actividadexterna'], 'tipo_actividadexterna' => $data['tipo_actividadexterna'],
            'dias_sem'=>  $data['dias_sem'], 'hora_entrada'=>  $data['hora_entrada'], 'hora_salida'=>  $data['hora_salida'],
-           'lugar'=>  $data['lugar'], 'matricula'=>  $id]);
+           'lugar'=>  $data['lugar'], 'matricula'=>  $id, 'periodo' => $periodo_semestre, 'created_at' => $now, 'updated_at' => $now]);
       return redirect()->route('otras_actividades')->with('success','¡Datos actualizados correctamente!');
 }
 }
@@ -81,7 +87,13 @@ public function act_datos_personales(Request $request)
   $usuario_actual=auth()->user();
   $id=$usuario_actual->id_user;
   $data = $request;
+
 $now = new \DateTime();
+$periodo_semestre = DB::table('periodos')
+->select('periodos.id_periodo')
+->where('periodos.estatus', '=', 'actual')
+->take(1)
+->first();
   $id_persona = DB::table('estudiantes')
   ->select('estudiantes.id_persona')
   ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
@@ -253,6 +265,7 @@ return redirect()->back()->withInput(Input::all())->with('error','¡El código p
         $persona->nombre=$data['nombre'];
         $persona->apellido_paterno=$data['apellido_paterno'];
         $persona->apellido_materno=$data['apellido_materno'];
+        $persona->periodo=$periodo_semestre;
         $persona->save();
 
          $id_guardado = $persona->id_persona;
@@ -260,7 +273,7 @@ return redirect()->back()->withInput(Input::all())->with('error','¡El código p
       DB::table('datos_emergencias')
           ->where('datos_emergencias.matricula',$id)
           ->Insert(
-            ['responsable' => $id_guardado, 'parentesco' => $data['parentesco'], 'matricula' => $id]);
+            ['responsable' => $id_guardado, 'parentesco' => $data['parentesco'], 'matricula' => $id, 'periodo' => $periodo_semestre, 'created_at' => $now, 'updated_at' => $now]);
         }
         else{
           //$emergencia_dato= json_decode( json_encode($emergencia_dato), true);
@@ -299,7 +312,8 @@ return redirect()->back()->withInput(Input::all())->with('error','¡El código p
           DB::table('telefonos')
           //    ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
               ->Insert(
-                ['tipo' => 'emergencia', 'numero' => $data['tel_emergencia'], 'id_persona' => $id_persona]);
+                ['tipo' => 'emergencia', 'numero' => $data['tel_emergencia'], 'id_persona' => $id_persona,
+                'created_at' => $now , 'updated_at' => $now]);
         }
         else {
           DB::table('telefonos')
@@ -314,7 +328,8 @@ return redirect()->back()->withInput(Input::all())->with('error','¡El código p
                DB::table('discapacidades')
                    //->where('discapacidades.id_persona',$dis)
                    ->Insert(
-                     ['tipo' => $data['tipo_discapacidad'], 'id_persona' => $id_persona]);
+                     ['tipo' => $data['tipo_discapacidad'], 'id_persona' => $id_persona,
+                     'periodo' => $periodo_semestre, 'created_at' => $now, 'updated_at' => $now]);
              }else {
                  if($data['tipo_discapacidad'] == null){
                      return redirect()->route('datos_medico')->with('success','¡Datos actualizados correctamente!');
@@ -332,7 +347,8 @@ return redirect()->back()->withInput(Input::all())->with('error','¡El código p
         //    ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia'],])
             ->Insert(
               ['nombre_enfermedadalergia' => $data['nombre_enf_ale'], 'tipo_enfermedadalergia' => $data['tipo_enfer'],
-              'descripcion' => $data['des_enf_ale'], 'indicaciones' => $data['ind_enf_ale'], 'matricula' => $id]);
+              'descripcion' => $data['des_enf_ale'], 'indicaciones' => $data['ind_enf_ale'], 'matricula' => $id,
+              'periodo' => $periodo_semestre, 'created_at' => $now, 'updated_at' => $now]);
             $dis = DB::table('personas')
             ->select('discapacidades.id_persona')
             ->join('discapacidades', 'discapacidades.id_persona', '=', 'personas.id_persona')
@@ -343,7 +359,8 @@ return redirect()->back()->withInput(Input::all())->with('error','¡El código p
                DB::table('discapacidades')
                    //->where('discapacidades.id_persona',$dis)
                    ->Insert(
-                     ['tipo' => $data['tipo_discapacidad'], 'id_persona' => $id_persona]);
+                     ['tipo' => $data['tipo_discapacidad'], 'id_persona' => $id_persona,
+                     'periodo' => $periodo_semestre, 'created_at' => $now, 'updated_at' => $now]);
              }else {
                if($data['tipo_discapacidad'] == null){
                    return redirect()->route('datos_medico')->with('success','¡Datos actualizados correctamente!');

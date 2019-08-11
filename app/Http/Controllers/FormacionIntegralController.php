@@ -730,12 +730,12 @@ else{
 }
 }
 
-protected function desactivar_extracurricular($actividad){
-$id_extra= $actividad;
+protected function desactivar_extracurricular(Request $request){
+$id_extra= $request;
   DB::table('extracurriculares')
       ->where('extracurriculares.id_extracurricular', $id_extra)
       ->update(
-          ['bandera' => '0']
+          ['bandera' => '0', $id_extra['observaciones']]
       );
       return redirect()->route('actividades_desactivadas_general')->with('success','¡Actividad Desactivada!');
 
