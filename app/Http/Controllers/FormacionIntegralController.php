@@ -865,6 +865,26 @@ public function taller_acreditado()
 return view('personal_administrativo\formacion_integral\gestion_talleres.taller_acreditado')->with('data', $result);
 }
 
+public function taller_can_estudiante()
+{
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='1'){
+     return redirect()->back();
+    }
+    $result = DB::table('extracurriculares')
+    ->select('estudiantes.matricula', 'extracurriculares.id_extracurricular', 'extracurriculares.created_at', 'extracurriculares.nombre_ec', 'extracurriculares.fecha_inicio',
+    'extracurriculares.fecha_fin', 'extracurriculares.observaciones', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+    ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+    ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+    ->join('estudiantes', 'estudiantes.id_persona', '=', 'personas.id_persona')
+    ->join('users', 'users.id_persona', '=', 'personas.id_persona')
+    ->where([['extracurriculares.bandera', '=', '3'] , ['users.tipo_usuario', '=', 'estudiante']])
+     ->orderBy('extracurriculares.created_at', 'desc')
+    ->simplePaginate(10);
+
+return view('personal_administrativo\formacion_integral\gestion_talleres.taller_cancelado')->with('data', $result);
+}
+
 public function finalizar_taller_f(Request $request){
 $data= $request;
 

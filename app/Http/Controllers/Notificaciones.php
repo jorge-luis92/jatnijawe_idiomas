@@ -448,5 +448,98 @@ class Notificaciones extends Controller
 
           return redirect()->route('notificaciones_enviadas')->with('success','¡Notificación Enviada Correctamente!');
     }
+    /*************************************/
+
+    public function acreditacion_aprobado($id_extracurricular, $matricula){
+
+      $data= $id_extracurricular;
+      $matricula_estudiante = $matricula;
+
+      $datos_correo= DB::table('users')
+       ->select('users.email', 'personas.nombre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+       ->join('personas', 'users.id_persona', '=' , 'personas.id_persona')
+       ->where('users.id_user', $matricula_estudiante)
+       ->take(1)
+       ->first();
+
+      $result = DB::table('extracurriculares')
+      ->select('extracurriculares.id_extracurricular', 'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+      'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+      'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+      'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+      ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+      ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->where([['extracurriculares.bandera', '=', '1'], ['extracurriculares.id_extracurricular',$data ]])
+      ->take(1)
+      ->first();
+      //return view('personal_administrativo/formacion_integral/gestion_talleres.desactivar_extra_estudiante')->with('dato', $data)->with('datos', $result);
+
+
+      return view('mails.notificacion_acreditacion')
+      ->with('datos_estudiante', $datos_correo)->
+      with('estudiante_matricula', $matricula_estudiante)
+        ->with('datos_taller', $result);
+    }
+
+    public function enviar_acreditacion(Request $request){
+      $data= $request;
+      $periodo_semestre = DB::table('periodos')
+      ->select('periodos.id_periodo')
+      ->where('periodos.estatus', '=', 'actual')
+      ->take(1)
+      ->first();
+      $datos_correo= DB::table('users')
+       ->select('users.email', 'users.id_user', 'personas.nombre', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+       ->join('personas', 'users.id_persona', '=' , 'personas.id_persona')
+       ->where('users.id_user', $data['matricula'])
+       ->take(1)
+       ->first();
+
+       $datos_taller = DB::table('extracurriculares')
+       ->select('extracurriculares.id_extracurricular', 'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+       'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+       'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+       'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+       ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+       ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+       ->where([['extracurriculares.bandera', '=', '1'], ['extracurriculares.id_extracurricular',$data['id_extracurricular'] ]])
+       ->take(1)
+       ->first();
+
+       $datos_solicitud = DB::table('solicitud_talleres')
+        ->select('solicitud_talleres.num_solicitud', 'solicitud_talleres.nombre_taller')
+        ->join('periodos', 'periodos.id_periodo', '=', 'solicitud_talleres.periodo')
+        ->where([['solicitud_talleres.matricula', $data['matricula']], ['periodos.estatus', '=', 'actual'], ['solicitud_talleres.estado', '=', 'Aprobado']])
+        ->take(1)
+        ->first();
+
+        try {
+          Mail::to($datos_correo->email)
+          ->send(new CancelacionTaller($datos_correo, $data, $datos_taller));
+   } catch (Exception $e) {
+       report($e);
+       redirect()->back()->with('error', 'Hubo un error al tratar de enviar el correo!');
+      // return redirect()->route('mis_actividades')->with('success','¡Inscripción Realizada correctamente!');
+      }
+      DB::table('solicitud_talleres')
+          ->where('solicitud_talleres.matricula', $data['matricula'])
+          ->update(
+            ['estado' => 'Acreditado']);
+
+      DB::table('extracurriculares')
+          ->where('extracurriculares.id_extracurricular', $data['id_extracurricular'])
+          ->update(
+            ['bandera' => '3', 'observaciones' => $data['observaciones']]);
+
+       $notificacion = new Notificacion;
+       $notificacion->matricula= $data['matricula'];
+       $notificacion->num_solicitud= $datos_solicitud->num_solicitud;
+       $notificacion->asunto= $data['asunto'];
+       $notificacion->mensaje= $data['contenido'];
+       $notificacion->estatus= 'enviado';
+       $notificacion->save();
+
+          return redirect()->route('notificaciones_enviadas')->with('success','¡Notificación Enviada Correctamente!');
+    }
 
 }

@@ -1,10 +1,10 @@
 <link rel="shortcut icon" href="{{asset('logo.ico')}}">
 @extends('layouts.plantilla_formacion_integral')
 @section('title')
-:Solicitudes Aprobadas
+:Talleres Cancelados
 @endsection
  @section('seccion')
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Talleres Activos </h1>
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Talleres Cancelados </h1>
  <div class="container" id="font7">
    @include('flash-message')
  </br>
@@ -17,8 +17,8 @@
                                        <th scope="col">TALLER</th>
                                      <th scope="col">FECHA DE APROBACIÓN</th>
                                      <th scope="col">ESTATUS</th>
-                                     <th colspan="3">ACCIONES</th>
-                                     </tr>
+                                     <th scope="col">OBSERVACIONES</th>
+                                                           </tr>
                                  </thead>
                                  <tbody>
                                     @foreach($data as $detalles)
@@ -26,11 +26,8 @@
                                         <td>{{$detalles->nombre}} {{$detalles->apellido_paterno}} {{$detalles->apellido_materno}}</td>
                                         <td>{{$detalles->nombre_ec}}</td>
                                         <td>{{ date('d-m-Y', strtotime($detalles->created_at))}}</td>
-                                        <td>ACTIVO</td>
-                                        <td><a href="acreditar_estudiante/{{$detalles->id_extracurricular}}/{{$detalles->matricula}}" >Acreditar</a></td>
-                                         <td><a href="desactivar_taller_estudiante/{{$detalles->id_extracurricular}}/{{$detalles->matricula}}">Cancelar</a></td>
-                                        <td><a href="pdf_taller_aprobado/{{$detalles->matricula}}" target="_blank">Detalles</a></td>
-
+                                        <td>CANCELADO</td>
+                                        <td>{{$detalles->observaciones}}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

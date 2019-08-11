@@ -51,6 +51,7 @@
             <a class="collapse-item" href={{ route('solicitudes')}}>Solicitudes</a>
             <a class="collapse-item" href={{ route('talleres_aprobados')}}>Talleres Aprobados</a>
             <a class="collapse-item" href={{ route('talleres_acreditados')}}>Talleres Acreditados</a>
+            <a class="collapse-item" href={{ route('talleres_cancelados_estudiante')}}>Talleres Cancelados</a>
             <a class="collapse-item" href={{ route('notificaciones_enviadas')}}>Notificaciones Enviadas</a>
             <a class="collapse-item" href={{ route('fecha_solicitud')}}>Registro Fechas de </br>Solicitud de Taller</a>
             <!--<a class="collapse-item" href={{ route('busqueda_atras')}}>Búsqueda Atrás</a>

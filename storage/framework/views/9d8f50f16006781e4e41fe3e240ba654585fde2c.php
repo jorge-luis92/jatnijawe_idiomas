@@ -10,7 +10,7 @@
             </br>
       <label align="center">*Nota: Al dar clic en Finalizar no se podrá deshacer está acción </label>
               <div class="card-body">
-                <form method="POST" action="<?php echo e(route('finalizar_talleres')); ?>">
+                <form method="POST" action="<?php echo e(route('finalizar_talleres_tallerista')); ?>">
                 <?php echo csrf_field(); ?>
 
     <div class="form-group row">
