@@ -36,7 +36,7 @@
                  <th>Nombre</th>
                  <th>Semestre</th>
                  <th>Modalidad</th>
-                 <th colspan="2" >ACCIONES</th>
+                 <th colspan="4" >ACCIONES</th>
              </tr>
          </thead>
          <tbody>
@@ -48,6 +48,8 @@
                  <td>{{$user->modalidad}}</td>
                  <td><a href="editar_estudiante/{{$user->matricula}}">EDITAR</a></td>
                   <td><a href="desactivar_estudiante/{{$user->id_user}}">DESACTIVAR</a></td>
+                  <td><a href="editar_estudiante/{{$user->matricula}}">EDITAR</a></td>
+                   <td><a href="desactivar_estudiante/{{$user->id_user}}">DESACTIVAR</a></td>
                  </tr>
              @endforeach
          </tbody>
