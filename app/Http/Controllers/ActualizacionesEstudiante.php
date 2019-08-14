@@ -133,8 +133,9 @@ if(empty($direccion) or empty($tels)){
                   ->update(
                     ['email' => $data['email'], 'facebook' => $data['facebook']]);
 
-
-
+					  DB::table('telefonos')
+          ->updateOrInsert(
+              ['numero' => $data['tel_local'], 'tipo' => 'local', 'id_persona' => $id_persona]);
      $valor_direccion = DB::table('direcciones')->max('id_direccion');
      $id_direc=intval($id)*3;
      $codigo_de = DB::table('codigos_postales')->select('codigos_postales.municipio', 'codigos_postales.estado')
@@ -160,7 +161,7 @@ $id_direccion= DB::table('direcciones')
     else {
       DB::table('telefonos')
           ->Insert(
-              ['numero' => $data['tel_local'], 'tipo' => 'local', 'id_persona' => $id_persona]);
+              ['numero' => $data['tel_celular'], 'tipo' => 'local', 'id_persona' => $id_persona]);
           DB::table('telefonos')
               ->Insert(
                   ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona]);
@@ -240,6 +241,7 @@ $codigo_de = DB::table('codigos_postales')->select('codigos_postales.municipio',
 return redirect()->route('datos_personal')->with('error','¡El código postal que ingreso no existe!');
 //return redirect()->back()->withInput(Input::all())->with('error','¡El código postasl que ingreso no existe!');
   }
+
 
   public function act_datos_medicos(Request $request)
   {

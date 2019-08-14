@@ -48,8 +48,8 @@
                  <td>{{$user->modalidad}}</td>
                  <td><a href="editar_estudiante/{{$user->matricula}}">EDITAR</a></td>
                   <td><a href="desactivar_estudiante/{{$user->id_user}}">DESACTIVAR</a></td>
-                  <td><a href="editar_estudiante/{{$user->matricula}}">EDITAR</a></td>
-                   <td><a href="desactivar_estudiante/{{$user->id_user}}">DESACTIVAR</a></td>
+                  <td><a href="editar_estudiante/{{$user->matricula}}">RESTABLECER CONTRASEÑA</a></td>
+                   <td><a href="desactivar_estudiante/{{$user->id_user}}">HOJA DE DATOS PERSONALES</a></td>
                  </tr>
              @endforeach
          </tbody>
