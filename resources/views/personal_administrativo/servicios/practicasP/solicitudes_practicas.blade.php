@@ -7,49 +7,26 @@
  <div class="container" id="font7">
  </br>                    <form method="POST" action="{{ route('solicitudes_practicas') }}">
                          @csrf
+                         <div class="form-row">
+                              <div class="table-responsive" style="border:1px solid #819FF7;">
+                                <table class="table table-bordered table-striped" style="color: #000000; font-size: 13px;"  >
 
-                          <div class="form-row">
-                            <label for="nombre" >{{ __('Buscar solictudes') }}</label>
-                         <div class="form-group col-md-4">
-
-                                 <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre">
-                                 @error('nombre')
-                                     <span class="invalid-feedback" role="alert">
-                                         <strong>{{ $message }}</strong>
-                                     </span>
-                               @enderror
-                         </div>
-
-
-                             <div class="col-xs-offset-2 col-xs-9" align="center">
-                                 <button type="submit" class="btn btn-primary">
-                                     {{ __('Buscar') }}
-                                 </button>
-                             </div>
-
-                             <div class="table-responsive">
-                               <table class="table table-bordered table-info" style="color: #000000;" >
                                  <thead>
                                    <tr>
-                                     <th scope="col">SOLICITUD</th>
                                       <th scope="col">ESTUDIANTE</th>
                                        <th scope="col">ESTABLECIMIENTO</th>
-                                     <th scope="col">FECHA</th>
+                                     <th scope="col">FECHA SOLICITUD</th>
                                      <th colspan="2" >ACCIONES</th>
                                    </tr>
                                  </thead>
                                  <tbody>
                                    <tr>
-                                          <th scope="row">1</th>
-                                          <th scope="row">ANGELICA MENDEZ ORTIZ</th>
+                                        <th scope="row">ANGELICA MENDEZ ORTIZ</th>
                                           <th scope="row">INGLÉS DE OAXACA</th>
                                           <th scope="row">08/06/2019</th>
-                                          <td>  <a data-toggle="modal" href="#">VER SOLICITUD</a></td>
-                                          <td>  <a data-toggle="modal" href="#">ELIMINAR</a></td>
-
-                                        </tr>
-
-
+                                          <td>  <a data-toggle="modal" href="#">ACREDITAR</a></td>
+                                         <td>  <a data-toggle="modal" href="#">GENERAR CARTA PRESENTACION</a></td>
+                                      </tr>
                                  </tbody>
                                </table>
                              </div>

@@ -78,10 +78,10 @@ class ConsultasController extends Controller
         ->simplePaginate(7 );
 
         $users = DB::table('estudiantes')
-        ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
-                 'personas.nombre', 'personas.apellido_paterno', 'personas.edad',  'personas.apellido_materno', 'personas.fecha_nacimiento',
-                 'personas.curp', 'personas.genero')
+        ->select('users.facebook', 'estudiantes.horario_asesorias', 'estudiantes.materias_pendientes', 'estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
+                 'personas.nombre', 'personas.apellido_paterno', 'personas.edad',  'personas.apellido_materno', 'personas.fecha_nacimiento', 'personas.curp', 'personas.genero')
         ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+        ->join('users', 'users.id_persona', '=', 'personas.id_persona')
         ->where('estudiantes.matricula',$id)
         ->take(1)
         ->first();
@@ -93,7 +93,7 @@ class ConsultasController extends Controller
         ->where([['estudiantes.matricula',$id], ['becas.bandera', '=', '1']])
         ->simplePaginate(7);
 
-        return view('estudiante\datos.datos_generales')->with('u',$users)->with('l',$lenguas_r)->with('b',$becas_r);
+        return view('estudiante/datos.datos_generales')->with('u',$users)->with('l',$lenguas_r)->with('b',$becas_r);
           }
 
       else {
@@ -119,7 +119,7 @@ class ConsultasController extends Controller
           ->join('datos_externos', 'estudiantes.matricula', '=', 'datos_externos.matricula')
           ->where([['estudiantes.matricula',$id], ['datos_externos.bandera', '=', '1']])
           ->simplePaginate(7);
-          return view('estudiante\datos.datos_laborales')->with('u',$users);
+          return view('estudiante/datos.datos_laborales')->with('u',$users);
         }
 
         public function carga_datos_personales(Request $request)
@@ -138,6 +138,12 @@ class ConsultasController extends Controller
           ->take(1)
           ->first();
             $id_persona= $id_persona->id_persona;
+
+            $face = DB::table('users')
+            ->select('users.facebook')
+            ->where('users.id_persona',$id_persona)
+            ->take(1)
+            ->first();
 
             $direccion = DB::table('personas')
             ->select('direcciones.vialidad_principal', 'direcciones.num_exterior', 'direcciones.cp', 'direcciones.localidad',
@@ -166,8 +172,9 @@ class ConsultasController extends Controller
             ->select('codigos_postales.cp')
             ->where('codigos_postales.estado', '=', 'Oaxaca')
             ->get();
-            return view('estudiante\datos.datos_personales')
-            ->with('d',$direccion)->with('nl',$num_local)->with('nc',$num_cel)->with('codes_o', $codigos);
+            return view('estudiante/datos.datos_personales')
+            ->with('d',$direccion)->with('nl',$num_local)->with('nc',$num_cel)
+            ->with('codes_o', $codigos)->with('facebo', $face);
           }
 
           public function carga_datos_medicos(Request $request)
@@ -237,7 +244,7 @@ class ConsultasController extends Controller
               ->take(1)
               ->first();
 
-              return view('estudiante\datos.datos_medicos')
+              return view('estudiante/datos.datos_medicos')
               ->with('s',$sangre)
               ->with('e',$emergencia)
               ->with('ne',$num_emergencia)

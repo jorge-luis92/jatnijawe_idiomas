@@ -66,7 +66,7 @@ class GenerarPdf extends Controller
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('estudiante\mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users])
+   $pdf = PDF::loadView('estudiante/mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('solicitud_taller.pdf');
    $paper_orientation = 'letter';
@@ -133,7 +133,7 @@ class GenerarPdf extends Controller
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('estudiante\mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users])
+   $pdf = PDF::loadView('estudiante/mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('solicitud_taller.pdf');
    $paper_orientation = 'letter';
@@ -192,7 +192,7 @@ if(($detalles->estado) == 'Acreditado'){
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('estudiante\mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users])
+   $pdf = PDF::loadView('estudiante/mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('solicitud_taller.pdf');
    $paper_orientation = 'letter';
@@ -241,7 +241,7 @@ if(($detalles->estado) == 'Acreditado'){
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('estudiante\mis_actividades.listadeasistencia', ['dato' =>  $result, 'datos_extra' => $datos_extra])
+   $pdf = PDF::loadView('estudiante/mis_actividades.listadeasistencia', ['dato' =>  $result, 'datos_extra' => $datos_extra])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('lista_asistencia.pdf');
    $paper_orientation = 'letter';
@@ -290,7 +290,7 @@ if(($detalles->estado) == 'Acreditado'){
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('estudiante\mis_actividades.listadeasistencia', ['dato' =>  $result, 'datos_extra' => $datos_extra])
+   $pdf = PDF::loadView('estudiante/mis_actividades.listadeasistencia', ['dato' =>  $result, 'datos_extra' => $datos_extra])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('lista_asistencia.pdf');
    $paper_orientation = 'letter';
@@ -346,11 +346,24 @@ if(($detalles->estado) == 'Acreditado'){
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('estudiante\mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users])
+   $pdf = PDF::loadView('estudiante/mis_actividades.pdf_solicitud', ['data' =>  $detalles, 'nu_ce' => $num_cel, 'datos' =>  $users])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('solicitud_taller.pdf');
    $paper_orientation = 'letter';
    $customPaper = array(2.5,2.5,600,950);
+}
+
+
+public function probado(){
+
+  $paper_orientation = 'letter';
+    $customPaper = array(2.5,2.5,600,950);
+$data ="hola";
+ $pdf = PDF::loadView('pruebaso', ['data' =>  $data])
+->setPaper($customPaper,$paper_orientation);
+ return $pdf->stream('solicitud_taller.pdf');
+ $paper_orientation = 'letter';
+ $customPaper = array(2.5,2.5,600,950);
 }
 
 }

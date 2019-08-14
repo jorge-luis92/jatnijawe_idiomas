@@ -47,14 +47,13 @@ $arrayDias = array('Domingo', 'Lunes', 'Martes','Miercoles', 'Jueves', 'Viernes'
 	</br>
 </br>
 </br>
-	A el/la C. {{$data->nombre}} {{$data->apellido_paterno}} {{$data->apellido_materno}}
+	A el/la C. {{$data->nombre}}
 
         <strong style="font-size:14px"> </strong><br />
 
   Alumno(a) de la <strong style="font-size:14px">LICENCIATURA EN ENSE&Ntilde;ANZA DE IDIOMAS...................................
     <BR /></strong>Por haber cumplido satisfactoriamente con las Horas Extracurriculares en el:
     <br />
-    <br /><br /><br />
   </td>
 
   </tr>
@@ -105,7 +104,7 @@ $arrayDias = array('Domingo', 'Lunes', 'Martes','Miercoles', 'Jueves', 'Viernes'
   </tr>
   <tr>
   <td style="text-align: justify;">
-<br /><br /><br />
+
   <br />Expediendose las presente por tener cumplidos los requisitos previstos por el reglamento de horas extracurriculares.
   <br /><br />
   A petici&oacute;n del o la interesado(a) se extiende la presente para los usos administrativos y acad&eacute;micos a que haya lugar,
@@ -114,7 +113,7 @@ $arrayDias = array('Domingo', 'Lunes', 'Martes','Miercoles', 'Jueves', 'Viernes'
   <br /><br /><br />
   CIENCIA ARTE Y LIBERTAD
 
-  <br /><br /><br /><br /><br /><br /><br /><br />
+  <br /><br /><br /><br /><br />
   </div>
   </td>
   </tr>

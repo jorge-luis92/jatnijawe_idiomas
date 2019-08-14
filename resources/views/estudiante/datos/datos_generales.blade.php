@@ -18,9 +18,9 @@
         <input type="text" class="form-control" id="matricula"  value="{{$u->matricula}}" disabled>
       </div>
 
-      <div class="form-group col-md-2" id="labels">
-        <label for="semestre">Semestre</label>
-        <input type="number" class="form-control" id="semestre" value="{{$u->semestre}}" disabled>
+     <div class="form-group col-md-2" id="labels">
+        <label for="semestre">*Semestre</label>
+        <input type="number" name="semestre" class="form-control" required id="semestre" value="<?php if(empty($u->semestre)){ $vacio=null; echo $vacio;} else{ echo $u->semestre;} ?>" >
       </div>
 
       <div class="form-group col-md-1" id="labels">
@@ -31,10 +31,15 @@
         <label for="modalidad">Modalidad</label>
         <input type="text" class="form-control" id="modalidad" value="{{$u->modalidad}}" disabled>
       </div>
-      <div class="form-group col-md-3" id="labels">
-        <label for="estatus">Estatus</label>
-        <input type="text" class="form-control" id="estatus" value="{{$u->estatus}}"disabled>
-      </div>
+         <div class="form-group col-md-3">
+      <label for="estatus">*Estatus</label>
+        <select name="estatus" id="estatus" required class="form-control">
+        <option value="">Seleccione una opción</option>
+        <option value="REGULAR">REGULAR</option>
+        <option value="IRREGULAR">IRREGULAR</option>
+        <option value="REPETIDOR">REPETIDOR</option>
+            </select>
+    </div>
     </div>
 
     <div class="form-row">
@@ -52,19 +57,19 @@
         <input type="text" class="form-control" id="ap_mat" value="{{ $u->apellido_materno}}" disabled>
       </div>
       <div class="form-group col-md-3" id="labels">
-        <label for="fecha_nac">Fecha de Nacimiento</label>
-        <input type="date" class="form-control" id="fecha_nac" value="{{ $u->fecha_nacimiento}}" disabled>
+        <label for="fecha_nac">* Fecha de Nacimiento</label>
+        <input type="date" name="fecha_nacimiento" required class="form-control" id="fecha_nac" value="<?php if(empty($u->fecha_nacimiento)){ $vacio=null; echo $vacio;} else{ echo $u->fecha_nacimiento;} ?>"  >
       </div>
       <div class="form-group col-md-1" id="labels">
-        <label for="edad">Edad</label>
-        <input type="text" class="form-control" id="edad"  value="{{ $u->edad}}" disabled>
+        <label for="edad">* Edad</label>
+        <input type="text" name="edad" class="form-control" id="edad"  value="<?php if(empty($u->edad)){ $vacio=null; echo $vacio;} else{ echo $u->edad;} ?>"  >
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-md-3" id="labels">
-        <label for="ap_pat">CURP</label>
-        <input type="text" class="form-control" id="curp" value="{{ $u->curp}}" disabled>
+        <label for="ap_pat">*CURP</label>
+        <input type="text" name="curp" required class="form-control" id="curp" value="<?php if(empty($u->curp)){ $vacio=null; echo $vacio;} else{ echo $u->curp;} ?>"  >
       </div>
       <div class="form-group col-md-3" id="labels">
         <label for="genero">Género</label>

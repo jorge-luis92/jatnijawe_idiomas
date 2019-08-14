@@ -14,7 +14,7 @@
     <table class="table table-bordered table-info" style="color: #8181F7;" >
 
     <h4 style="font-size: 1.0em; color: #000000;" align="center"><strong>MATRÍCULA TOTAL DE LA CARRERA</strong></h4>
-    <h5 style="font-size: 1.0em; color: #000000;" align="rigt">Alumnos inscritos en el ciclo escolar actual</h5>
+    <h5 style="font-size: 1.0em; color: #000000;" align="rigt">Estudiantes inscritos en el ciclo escolar actual</h5>
 
     <tr>
       <th scope="row">Semestre</th>
@@ -23,115 +23,86 @@
       <th scope="row">Total</th>
       <th scope="row">Con Discapacidad</th>
       <th scope="row">Hablante de Lengua</th>
-      <th scope="row">Nacidos fuera de México</th>
     </tr>
     <tr>
       <td bgcolor="white">Primero</td>
-      <td bgcolor="white"></td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-    </tr>
+      <td bgcolor="white">{{$inscritos_M['1']}}</td>
+      <td bgcolor="white">{{$inscritos_F['1']}}</td>
+      <td bgcolor="white">{{$inscritos_G['1']}}</td>
+      <td bgcolor="white">{{$inscritos_D['1']}}</td>
+      <td bgcolor="white">{{$inscritos_L['1']}}</td>
+      </tr>
   <tr>
       <td bgcolor="white">Segundo</td>
-      <td bgcolor="white"></td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-  </tr>
+      <td bgcolor="white">{{$inscritos_M['2']}}</td>
+      <td bgcolor="white">{{$inscritos_F['2']}}</td>
+      <td bgcolor="white">{{$inscritos_G['2']}}</td>
+      <td bgcolor="white">{{$inscritos_D['2']}}</td>
+      <td bgcolor="white">{{$inscritos_L['2']}}</td>
+    </tr>
   <tr>
       <td bgcolor="white">Tercero</td>
-      <td bgcolor="white"></td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
+      <td bgcolor="white">{{$inscritos_M['3']}}</td>
+      <td bgcolor="white">{{$inscritos_F['3']}}</td>
+      <td bgcolor="white">{{$inscritos_G['3']}}</td>
+      <td bgcolor="white">{{$inscritos_D['3']}}</td>
+      <td bgcolor="white">{{$inscritos_L['3']}}</td>
   </tr>
   <tr>
       <td bgcolor="white">Cuarto</td>
-      <td bgcolor="white"></td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
+      <td bgcolor="white">{{$inscritos_M['4']}}</td>
+      <td bgcolor="white">{{$inscritos_F['4']}}</td>
+      <td bgcolor="white">{{$inscritos_G['4']}}</td>
+      <td bgcolor="white">{{$inscritos_D['4']}}</td>
+      <td bgcolor="white">{{$inscritos_L['4']}}</td>
   <tr>
       <td bgcolor="white">Quinto</td>
-      <td bgcolor="white"></td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
+      <td bgcolor="white">{{$inscritos_M['5']}}</td>
+      <td bgcolor="white">{{$inscritos_F['5']}}</td>
+      <td bgcolor="white">{{$inscritos_G['5']}}</td>
+      <td bgcolor="white">{{$inscritos_D['5']}}</td>
+      <td bgcolor="white">{{$inscritos_L['5']}}</td>
   </tr>
   <tr>
       <td bgcolor="white">Sexto</td>
-      <td bgcolor="white"></td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
+      <td bgcolor="white">{{$inscritos_M['6']}}</td>
+      <td bgcolor="white">{{$inscritos_F['6']}}</td>
+      <td bgcolor="white">{{$inscritos_G['6']}}</td>
+      <td bgcolor="white">{{$inscritos_D['6']}}</td>
+      <td bgcolor="white">{{$inscritos_L['6']}}</td>
   </tr>
   <tr>
       <td bgcolor="white">Séptimo</td>
-      <td bgcolor="white"></td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
+      <td bgcolor="white">{{$inscritos_M['7']}}</td>
+      <td bgcolor="white">{{$inscritos_F['7']}}</td>
+      <td bgcolor="white">{{$inscritos_G['7']}}</td>
+      <td bgcolor="white">{{$inscritos_D['7']}}</td>
+      <td bgcolor="white">{{$inscritos_L['7']}}</td>
   </tr>
   <tr>
       <td bgcolor="white">Octavo</td>
-      <td bgcolor="white"></td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
+      <td bgcolor="white">{{$inscritos_M['8']}}</td>
+      <td bgcolor="white">{{$inscritos_F['8']}}</td>
+      <td bgcolor="white">{{$inscritos_G['8']}}</td>
+      <td bgcolor="white">{{$inscritos_D['8']}}</td>
+      <td bgcolor="white">{{$inscritos_L['8']}}</td>
   </tr>
 
     <tr>
       <th>Total</th>
-      <td bgcolor="white"></td>
-      <td bgcolor="white"> </td>
-      <td> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
+      <td bgcolor="white">{{$inscritos_M['TOTAL']}}</td>
+      <td bgcolor="white">{{$inscritos_F['TOTAL']}}</td>
+      <td>{{$inscritos_G['TOTAL']}}</td>
+      <td bgcolor="white">{{$inscritos_D['TOTAL']}}</td>
+      <td bgcolor="white">{{$inscritos_L['TOTAL']}}</td>
     </tr>
 
     </table>
 
-    <table class="table table-bordered table-info" style="color: #8181F7;" >
-
-      <h4 style="font-size: 1.0em; color: #000000;" align="center"><strong>ALUMNOS INSCRITOS SEGÚN SU LUGAR DE NACIMIENTO</strong></h4>
-
-      <tr>
-        <th scope="row">Lugar de Nacimiento</th>
-        <th scope="row">Total</th>
-      </tr>
-      <tr>
-        <td bgcolor="white"> </td>
-        <td bgcolor="white"> </td>
-
-      </tr>
-
-      </table>
 <a> Páginas</a>
       <a class="siguiente" align="rigth" href={{ route('reporte911_9A_0')}}>1</a>
       <a class="siguiente" align="rigth" href={{ route('reporte911_9A_1')}}>2</a>
-      <a class="siguiente" align="rigth" href={{ route('reporte911_9A_2')}}>3</a>
-      <a class="siguiente" align="rigth" href={{ route('reporte911_9A_3')}}><strong>4</strong></a>
-      <a class="siguiente" align="rigth" href={{ route('reporte911_9A_4')}}>5</a>
-      <a class="siguiente" align="rigth" href={{ route('reporte911_9A_5')}}>6</a>
-      <a class="siguiente" align="rigth" href={{ route('reporte911_9A_6')}}>7</a>
+      <a class="siguiente" align="rigth" href={{ route('reporte911_9A_3')}}><strong>3</strong></a>
 
     </div>
   </form>

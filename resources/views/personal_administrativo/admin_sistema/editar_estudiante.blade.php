@@ -5,12 +5,12 @@
  @section('seccion')
 <h1 style="font-size: 2.0em; color: #000000;" align="center"> Editar Estudiante</h1>
 <div class="container" id="font7">
-  </br>                    <form method="POST" action="{{ route('registro_estudiante') }}">
+  </br>                    <form method="POST" action="{{ route('editar_estudiantes') }}">
                         @csrf
                          <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="nombre" >{{ __('* Nombre(s)') }}</label>
-                                <input id="nombre" type="text" value="{{$users->nombre}}" onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre"  required autocomplete="nombre">
+                                <input id="nombre" type="text" value="{{$users->nombre}}" autofocus onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre"  required autocomplete="nombre">
                                 @error('nombre')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -41,7 +41,9 @@
                                 <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="curp" >{{ __('* CURP') }}</label>
-                                  <input id="curp" type="text" autofocus minlength="18" oninput="validarInput(this)"  onblur="setearFecha();" value="<?php if(empty($users->curp)){ $vacio=null; echo $vacio;} else{ echo $users->curp;} ?>" maxlength="18"  oninput="validarInput(this)"  onblur="setearFecha();"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('curp') is-invalid @enderror" name="curp" value="{{ old('curp') }}" required autocomplete="curp">
+                                  <input id="curp" type="text" autofocus minlength="18" oninput="validarInput(this)"  onblur="setearFecha();"
+                                  value="<?php if(empty($users->curp)){ $vacio=null; echo $vacio;} else{ echo $users->curp;} ?>" maxlength="18"  oninput="validarInput(this)"  onblur="setearFecha();"
+                                  required onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('curp') is-invalid @enderror" name="curp"  >
                                   <pre id="resultado"></pre>
 
                                 @error('curp')
@@ -161,7 +163,7 @@
                           @enderror
                         </div>
 
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-3">
                             <label for="bachillerato_origen" >{{ __('* Bachillerato de Origen') }}</label>
                                 <input id="bachillerato_origen" type="text" value="<?php if(empty($users->bachillerato_origen)){ $vacio=null; echo $vacio;} else{ echo $users->bachillerato_origen;} ?>" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('bachillerato_origen') is-invalid @enderror"  name="bachillerato_origen" autocomplete="bachillerato_origen" autofocus>
                                 @error('bachillerato_origen')
@@ -181,6 +183,8 @@
                                     </span>
                                 @enderror
                         </div>
+
+
                         </div>
 
                         <div class="form-group">

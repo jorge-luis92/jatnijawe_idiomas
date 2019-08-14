@@ -42,7 +42,7 @@
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
           <a class="collapse-item" href={{ route('solicitudes_practicas')}}>Solicitudes</a>
           <a class="collapse-item" href={{ route('estudiantes_activosPP')}}>Estudiantes Activos</a>
-          <a class="collapse-item" href={{ route('solicitudes_practicas')}}>Expedientes</a>
+        <!--  <a class="collapse-item" href={{ route('solicitudes_practicas')}}>Expedientes</a>-->
           </div>
         </div>
       </li>
@@ -54,9 +54,9 @@
         <div id="usuario" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-            <a class="collapse-item" href={{ route('solicitudes_serviciosocial')}}>Solicitudes</a>
+          <!--  <a class="collapse-item" href={{ route('solicitudes_serviciosocial')}}>Solicitudes</a>-->
             <a class="collapse-item" href={{ route('estudiantes_activosSS')}}>Estudiantes Activos</a>
-            <a class="collapse-item" href={{ route('solicitudes_serviciosocial')}}>Expedientes</a>
+        <!--    <a class="collapse-item" href={{ route('solicitudes_serviciosocial')}}>Expedientes</a>-->
 
           </div>
         </div>

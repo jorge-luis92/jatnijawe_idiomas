@@ -6,10 +6,10 @@
 
 @section('seccion')
  @include('flash-message')
-<h1 style="font-size: 2.0em; color: #000000;" align="center"> Solicitud de Servicio Social</h1>
+<h1 style="font-size: 2.0em; color: #000000;" align="center"> Datos de Servicio Social</h1>
 <div class="container" id="font7">
   <h2 style="font-size: 1.2em; color: #000000;" align="left"><strong>Datos del Estudiante</strong></h2>
-                  <form method="POST" action="{{ route('solicitud_servicioSocial') }}">
+                  <form method="POST" action="{{ route('enviar_solicitud_servicio') }}">
 
                         @csrf
 
@@ -24,7 +24,7 @@
               </span>
           @enderror
   </div>
-  <div class="form-group col-md-2" id="labels">
+  <div class="form-group col-md-3" id="labels">
     <label for="estatus">Estatus</label>
     <input type="text" class="form-control" id="estatus" value="{{$u->estatus}}"disabled>
   </div>
@@ -33,18 +33,10 @@
     <input type="number" class="form-control" id="semestre" value="{{$u->semestre}}" disabled>
   </div>
 
-  <div class="form-group col-md-2">
-      <label for="anio" >{{ __('Año Escolar') }}</label>
-          <input id="anio" type="text" maxlength="1" value="<?php  ?>" disabled onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('anio') is-invalid @enderror"  name="anio" autocomplete="anio" autofocus>
-          @error('anio')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-          @enderror
-  </div>
-  <div class="form-group col-md-4">
+
+  <div class="form-group col-md-5">
     <label for="carrera" >{{ __('Carrera') }}</label>
-    <input id="carrera" type="text" disabled onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('carrera') is-invalid @enderror" name="carrera" value="{{ old('carrera') }}" required autocomplete="carrera">
+    <input id="carrera" type="text" disabled onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('carrera') is-invalid @enderror" name="carrera" value="<?php if(empty($carreras->carrera)){ $vacio=null; echo $vacio;} else{ echo $carreras->carrera;} ?>" required autocomplete="carrera">
           @error('carrera')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
@@ -57,7 +49,7 @@
 <div class="form-row">
   <div class="form-group col-md-12">
     <label for="facultad" >{{ __('Facultad') }}</label>
-    <input id="facultad" type="text" disabled onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('facultad') is-invalid @enderror" name="facultad" value="{{ old('facultad') }}" required autocomplete="facultad">
+    <input id="facultad" type="text" disabled onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('facultad') is-invalid @enderror" name="facultad" value="FACULTAD DE IDIOMAS" required autocomplete="facultad">
           @error('facultad')
     <span class="invalid-feedback" role="alert">
     <strong>{{ $message }}</strong>
@@ -139,7 +131,7 @@
 
   <div class="form-group col-md-3">
       <label for="avance" >{{ __('Porcentaje de Avance') }}</label>
-          <input id="avance" type="text" maxlength="1" onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('avance') is-invalid @enderror"  name="avance" autocomplete="avance" autofocus>
+          <input id="avance" type="text" value="<?php if(empty($datos_practicas->porcentaje_avance)){ $vacio=null; echo $vacio;} else{ echo $datos_practicas->porcentaje_avance;} ?>" maxlength="2" placeholder="Ejemplo: 90 "onKeyUp="this.value = this.value.toUpperCase();" class="form-control @error('avance') is-invalid @enderror"  name="avance" autocomplete="avance" autofocus>
           @error('grupo')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -155,8 +147,8 @@
 <div class="form-row">
 
 <div class="form-group col-md-12">
-  <label for="institucion" >{{ __('Nombre del la Institución o Dependencia donde Realizará Prácticas Profesionales:') }}</label>
-    <input id="institucion" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('institucion') is-invalid @enderror" name="institucion" value="{{ old('institucion') }}" required autocomplete="institucion">
+  <label for="institucion" >{{ __('Nombre del la Institución o Dependencia donde Realiza Servicio Social:') }}</label>
+    <input id="institucion" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('institucion') is-invalid @enderror" name="institucion" value="<?php if(empty($datos_practicas->nombre_dependencia)){ $vacio=null; echo $vacio;} else{ echo $datos_practicas->nombre_dependencia;} ?>" required autocomplete="institucion">
         @error('institucion')
     <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
@@ -165,21 +157,22 @@
   </div>
 </div>
 
-<label for="responsable" >{{ __('Nombre del Titular de la Dependencia(A quien va dirigido el oficio de Presentación)') }}</label>
+<label for="responsable" ><strong>{{ __('Información del Titular de la Dependencia(A quien fue dirigido el oficio de Presentación)') }}</strong></label>
+
 <div class="form-row">
-<div class="form-group col-md-4">
-   <label for="nombre" >{{ __('* Nombre(s)') }}</label>
-       <input id="nombre" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre">
-       @error('nombre')
+<div class="form-group col-md-3">
+   <label for="nombre_titular" >{{ __('* Nombre(s)') }}</label>
+       <input id="nombre_titular" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('nombre_titular') is-invalid @enderror" name="nombre_titular" value="<?php if(empty($datos_practicas->nombre)){ $vacio=null; echo $vacio;} else{ echo $datos_practicas->nombre;} ?>"required autocomplete="nombre_titular">
+       @error('nombre_titular')
            <span class="invalid-feedback" role="alert">
                <strong>{{ $message }}</strong>
            </span>
      @enderror
 </div>
 
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
    <label for="apellido_paterno" >{{ __('* Apellido Paterno') }}</label>
-         <input id="apellido_paterno" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('apellido_paterno') is-invalid @enderror" name="apellido_paterno" value="{{ old('apellido_paterno') }}" required autocomplete="apellido_paterno">
+         <input id="apellido_paterno_titular" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('apellido_paterno_titular') is-invalid @enderror" name="apellido_paterno_titular" value="<?php if(empty($datos_practicas->apellido_paterno)){ $vacio=null; echo $vacio;} else{ echo $datos_practicas->apellido_paterno;} ?>"required autocomplete="apellido_paterno_titular">
        @error('apellido_paterno')
            <span class="invalid-feedback" role="alert">
                <strong>{{ $message }}</strong>
@@ -187,21 +180,19 @@
        @enderror
 </div>
 
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
    <label for="apellido_materno" >{{ __('Apellido Materno') }}</label>
-         <input id="apellido_materno"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('apellido_materno') is-invalid @enderror" name="apellido_materno" value="{{ old('apellido_materno') }}" autocomplete="apellido_materno">
+         <input id="apellido_materno_titular"  onKeyUp="this.value = this.value.toUpperCase()"  type="text" class="form-control @error('apellido_materno_titular') is-invalid @enderror" name="apellido_materno_titular" value="<?php if(empty($datos_practicas->apellido_materno)){ $vacio=null; echo $vacio;} else{ echo $datos_practicas->apellido_materno;} ?>" autocomplete="apellido_materno_titular">
        @error('apellido_materno')
            <span class="invalid-feedback" role="alert">
                <strong>{{ $message }}</strong>
            </span>
        @enderror
 </div>
-</div>
 
-<div class="form-row">
-    <div class="form-group col-md-4">
+<div class="form-group col-md-3">
       <label for="cargo_responsable" >{{ __('Cargo del Titular') }}</label>
-        <input id="cargo_responsable" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('cargo_responsable') is-invalid @enderror" name="cargo_responsable" value="{{ old('cargo_responsable') }}" required autocomplete="cargo_responsable">
+        <input id="cargo_responsable" type="text"  onKeyUp="this.value = this.value.toUpperCase()" class="form-control @error('cargo_responsable') is-invalid @enderror" name="cargo_responsable" value="<?php if(empty($datos_practicas->cargo_titular)){ $vacio=null; echo $vacio;} else{ echo $datos_practicas->cargo_titular;} ?>" required autocomplete="cargo_responsable">
             @error('cargo_responsable')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -209,7 +200,7 @@
           @enderror
       </div>
       <div class="form-group col-md-4">
-          <label for="fecha" >{{ __('Fecha de Realización de la Solicitud') }}</label>
+          <label for="fecha" >{{ __('Fecha de Realización de la carga de Datos') }}</label>
                 <input id="fecha" type="date" value="<?php echo date("Y-m-d");?>" disabled class="form-control @error('fecha') is-invalid @enderror" name="fecha" required>
               @error('fecha')
                   <span class="invalid-feedback" role="alert">

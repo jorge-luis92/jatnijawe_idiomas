@@ -32,8 +32,8 @@ class RegistrosController extends Controller
     $dep = DB::table('departamentos')
     ->select('departamentos.id_departamento', 'departamentos.departamento')
     ->get();
-
-      return view('super_admin.registros_externos')->with('de', $dep);
+              return view('errores.intentosfallidos');
+    //  return view('super_admin.registros_externos')->with('de', $dep);
   }
 
     public function create(Request $request){

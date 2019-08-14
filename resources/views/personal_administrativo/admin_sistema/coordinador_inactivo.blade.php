@@ -6,7 +6,7 @@
 
 @section('seccion')
  @include('flash-message')
- <h1 style="font-size: 2.0em; color: #000000;" align="center"> Cordinadores Inactivos</h1>
+ <h1 style="font-size: 2.0em; color: #000000;" align="center"> Coordinadores Inactivos</h1>
 <div class="container" id="font7">
   <div class="table-responsive" style="border:1px solid #819FF7;">
   <table class="table table-bordered table-striped"  style="color: #000000; font-size: 12px;">

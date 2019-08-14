@@ -52,7 +52,7 @@ class ActvidadesExtra extends Controller
         ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
         ->where([['extracurriculares.control_cupo', '>', '0'], ['extracurriculares.bandera', '=', '1']])->whereDate('extracurriculares.fecha_inicio', '>', $now)
         ->orderBy('personas.nombre', 'asc')->simplePaginate(10);
-    return view("estudiante\mis_actividades.catalogo_actividades")->with('dato', $result);
+    return view("estudiante/mis_actividades.catalogo_actividades")->with('dato', $result);
   }
   else {
     $result = DB::table('extracurriculares')
@@ -66,7 +66,7 @@ class ActvidadesExtra extends Controller
     ->whereDate('extracurriculares.fecha_inicio', '>', $now)
     ->orderBy('personas.nombre', 'asc')
     ->simplePaginate(10);
-return view("estudiante\mis_actividades.catalogo_actividades")->with('dato', $result);
+return view("estudiante/mis_actividades.catalogo_actividades")->with('dato', $result);
   }
   }
 
@@ -241,7 +241,7 @@ public function taller_finalizado_estudiante(){
    //->whereDate('extracurriculares.fecha_inicio', '>=', $now)
     ->orderBy('personas.nombre', 'asc')
     ->simplePaginate(10);
-  return  view ('estudiante\mis_actividades.talleres_finalizados_estudiante')->with('dato', $result);
+  return  view ('estudiante/mis_actividades.talleres_finalizados_estudiante')->with('dato', $result);
 }
 else {
   return redirect()->route('home_estudiante')->with('error', 'Ningún taller Registrado');

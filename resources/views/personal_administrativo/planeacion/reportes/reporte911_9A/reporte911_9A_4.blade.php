@@ -34,7 +34,7 @@
         </tr>
 
         <tr>
-          <td ></td>
+          <td >Menos de 18 años</td>
           <td bgcolor="white" ></td>
           <td bgcolor="white" ></td>
           <td bgcolor="white"></td>
@@ -45,6 +45,187 @@
           <td bgcolor="white"></td>
           <td ></td>
         </tr>
+
+        <tr>
+          <td >18 años</td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td ></td>
+        </tr>
+        <tr>
+          <td >19 años</td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td ></td>
+        </tr>
+        <tr>
+          <td >20 años</td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td ></td>
+        </tr>
+        <tr>
+          <td >21 años</td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td ></td>
+        </tr>
+        <tr>
+          <td >22 años</td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td ></td>
+        </tr>
+        <tr>
+          <td >23 años</td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td ></td>
+        </tr>
+        <tr>
+          <td >24 años</td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td ></td>
+        </tr>
+        <tr>
+          <td >25 años</td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td ></td>
+        </tr>
+        <tr>
+          <td >26 años</td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td bgcolor="white"></td>
+          <td ></td>
+          </tr>
+          <tr>
+            <td >27 años</td>
+            <td bgcolor="white" ></td>
+            <td bgcolor="white" ></td>
+            <td bgcolor="white"></td>
+            <td bgcolor="white"></td>
+            <td bgcolor="white"></td>
+            <td bgcolor="white"></td>
+            <td bgcolor="white"></td>
+            <td bgcolor="white"></td>
+            <td ></td>
+          </tr>
+            <tr>
+              <td >28 años</td>
+              <td bgcolor="white" ></td>
+              <td bgcolor="white" ></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td ></td>
+            </tr>
+            <tr>
+              <td >29 años</td>
+              <td bgcolor="white" ></td>
+              <td bgcolor="white" ></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td ></td>
+            </tr>
+            <tr>
+              <td >30 a 34 años</td>
+              <td bgcolor="white" ></td>
+              <td bgcolor="white" ></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td ></td>
+            </tr>
+            <tr>
+              <td >35 a 39 años</td>
+              <td bgcolor="white" ></td>
+              <td bgcolor="white" ></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td ></td>
+            </tr>
+            <tr>
+              <td >40 años o más</td>
+              <td bgcolor="white" ></td>
+              <td bgcolor="white" ></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td bgcolor="white"></td>
+              <td ></td>
+            </tr>
         <tr>
         <td ><strong>Total</strong></td>
           <td bgcolor="white" ></td>
@@ -62,11 +243,11 @@
 <a> Páginas</a>
         <a class="siguiente" align="rigth" href={{ route('reporte911_9A_0')}}>1</a>
         <a class="siguiente" align="rigth" href={{ route('reporte911_9A_1')}}>2</a>
-        <a class="siguiente" align="rigth" href={{ route('reporte911_9A_2')}}>3</a>
-        <a class="siguiente" align="rigth" href={{ route('reporte911_9A_3')}}>4</a>
-        <a class="siguiente" align="rigth" href={{ route('reporte911_9A_4')}}><strong>5</strong></a>
-        <a class="siguiente" align="rigth" href={{ route('reporte911_9A_5')}}>6</a>
-        <a class="siguiente" align="rigth" href={{ route('reporte911_9A_6')}}>7</a>
+  <!--  <a class="siguiente" align="rigth" href={{ route('reporte911_9A_2')}}>3</a>-->
+        <a class="siguiente" align="rigth" href={{ route('reporte911_9A_3')}}>3</a>
+        <a class="siguiente" align="rigth" href={{ route('reporte911_9A_4')}}><strong>4</strong></a>
+        <a class="siguiente" align="rigth" href={{ route('reporte911_9A_5')}}>5</a>
+        <a class="siguiente" align="rigth" href={{ route('reporte911_9A_6')}}>6</a>
     </div>
   </form>
 </div>

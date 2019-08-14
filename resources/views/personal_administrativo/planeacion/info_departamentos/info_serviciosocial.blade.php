@@ -12,16 +12,17 @@
 <div class="form-row">
   <div class="table-responsive">
     <table class="table table-bordered table-info" style="color: #8181F7;" >
-    <h4 style="font-size: 1.0em; color: #000000;" align="center"><strong>ESTUDIANTES ACTIVOS EN SERVICIO SOCIAL</strong></h4>
+    <h4 style="font-size: 1.0em; color: #000000;" align="center"><strong>ESTUDIANTES ACTIVOS QUE PRESTAN SERVICIOS</strong></h4>
+    <h6 style="font-size: 1.0em; color: #000000;" align="left"><strong>MODALIDAD ESCOLARIZADA</strong></h6>
 
 
       <tr>
-        <td colspan="6"align="center"><strong>LICENCIATURA</strong></td>
+        <td colspan="6"align="center"><strong>PRACTICAS PROFESIONALES</strong></td>
      </tr>
         <tr>
           <td ><strong></strong></td>
-          <td align="center"><strong>Modalidad Escolarizada</strong></td>
-          <td align="center"><strong>Modalidad Semiescolarizada</strong></td>
+          <td align="center"><strong>Hombres</strong></td>
+          <td align="center"><strong>Mujeres</strong></td>
           <td ><strong>Total</strong></td>
 
         </tr>
@@ -29,7 +30,70 @@
 
 
         <tr>
-          <td ><strong>Alumnos en Servicio Social</strong></td>
+          <td ><strong>Estudiantes activos</strong></td>
+          <td bgcolor="white" >{{$total_inscritos_SS}}</td>
+          <td bgcolor="white" >{{$total_inscritos_PP}}</td>
+          <td bgcolor="white" ></td>
+        </tr>
+
+
+
+        <tr>
+        <td ><strong>Total</strong></td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white" ></td>
+          <td bgcolor="white" ></td>
+        </tr>
+
+
+        <tr>
+          <td colspan="6"align="center"><strong>SERVICIO SOCIAL</strong></td>
+       </tr>
+          <tr>
+            <td ><strong></strong></td>
+            <td align="center"><strong>Hombres</strong></td>
+            <td align="center"><strong>Mujeres</strong></td>
+            <td ><strong>Total</strong></td>
+
+          </tr>
+
+
+
+          <tr>
+            <td ><strong>Estudiantes activos</strong></td>
+            <td bgcolor="white" ></td>
+            <td bgcolor="white" ></td>
+            <td bgcolor="white" ></td>
+          </tr>
+
+
+
+          <tr>
+          <td ><strong>Total</strong></td>
+            <td bgcolor="white" ></td>
+            <td bgcolor="white" ></td>
+            <td bgcolor="white" ></td>
+          </tr>
+    </table>
+    <table class="table table-bordered table-info" style="color: #8181F7;" >
+    <h6 style="font-size: 1.0em; color: #000000;" align="left"><strong>MODALIDAD SEMIESCOLARIZADA</strong></h6>
+
+
+      <tr>
+        <td colspan="6"align="center"><strong>PRACTICAS PROFESIONALES</strong></td>
+     </tr>
+        <tr>
+          <td ><strong></strong></td>
+          <td align="center"><strong>Hombres</strong></td>
+          <td align="center"><strong>Mujeres</strong></td>
+          <td ><strong>Total</strong></td>
+
+        </tr>
+
+
+
+        <tr>
+          <td ><strong>Estudiantes activos</strong></td>
           <td bgcolor="white" ></td>
           <td bgcolor="white" ></td>
           <td bgcolor="white" ></td>
@@ -43,6 +107,36 @@
           <td bgcolor="white" ></td>
           <td bgcolor="white" ></td>
         </tr>
+
+
+        <tr>
+          <td colspan="6"align="center"><strong>SERVICIO SOCIAL</strong></td>
+       </tr>
+          <tr>
+            <td ><strong></strong></td>
+            <td align="center"><strong>Hombres</strong></td>
+            <td align="center"><strong>Mujeres</strong></td>
+            <td ><strong>Total</strong></td>
+
+          </tr>
+
+
+
+          <tr>
+            <td ><strong>Estudiantes activos</strong></td>
+            <td bgcolor="white" ></td>
+            <td bgcolor="white" ></td>
+            <td bgcolor="white" ></td>
+          </tr>
+
+
+
+          <tr>
+          <td ><strong>Total</strong></td>
+            <td bgcolor="white" ></td>
+            <td bgcolor="white" ></td>
+            <td bgcolor="white" ></td>
+          </tr>
     </table>
     </div>
   </form>

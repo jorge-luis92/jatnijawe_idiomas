@@ -99,7 +99,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
           <!--  <a  class="collapse-item" href="#">Requisitos Previos</a>-->
-            <a  class="collapse-item" href={{ route('solicitud_servicioSocial')}}>Solicitud de Servicio Social</a>
+            <a  class="collapse-item" href={{ route('solicitud_servicioSocial')}}>Datos de Servicio Social</a>
            </div>
         </div>
       </li>

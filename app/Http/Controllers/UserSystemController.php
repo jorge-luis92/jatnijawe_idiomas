@@ -28,13 +28,13 @@ class UserSystemController extends Controller
         ->where([['tipo_usuario', '=', 'tallerista'], ['bandera', '=', '1'],])
         ->simplePaginate(7 );
 
-        return view('personal_administrativo\formacion_integral\gestion_tallerista.read', ['users' => $users]);
+        return view('personal_administrativo/formacion_integral/gestion_tallerista.read', ['users' => $users]);
 
     }
 
     public function form_nuevo_usuario()
 	{
-		return view('personal_administrativo\formacion_integral\gestion_tallerista.create');
+		return view('personal_administrativo/formacion_integral/gestion_tallerista.create');
 	}
 
     public function agregar_nuevo_usuario(Request $request)
@@ -73,7 +73,7 @@ class UserSystemController extends Controller
      if($usuario_actual->tipo_usuario!='4'){
        return redirect()->back();
       }
-     return view('personal_administrativo\auxiliar_administrativo.carga_de_datos');
+     return view('personal_administrativo/auxiliar_administrativo.carga_de_datos');
 
 }
 
@@ -147,7 +147,7 @@ public function axcel(Request $request)
 
   public function creados_hoy(){
       //$usu=0;
-     return view('personal_administrativo\auxiliar_administrativo.creados');
+     return view('personal_administrativo/auxiliar_administrativo.creados');
 
 }
 

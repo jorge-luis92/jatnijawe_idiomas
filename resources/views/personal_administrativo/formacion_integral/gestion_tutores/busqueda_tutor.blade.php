@@ -12,7 +12,6 @@
       <thead>
                                    <tr style="font-size: 12px;" >
                                      <th scope="col">NOMBRE</th>
-                                      <th scope="col">EDAD</th>
                                      <th scope="col">GRADO DE ESTUDIOS</th>
                                       <th scope="col">TELÉFONO CONTACTO</th>
                                        <th scope="col">PROCEDENCIA INTERNA</th>
@@ -24,12 +23,11 @@
                                    @foreach($re as $res)
                                    <tr>
                                           <td>{{$res->nombre}} {{$res->apellido_paterno}} {{$res->apellido_materno}}</td>
-                                          <td>{{$res->edad}}</td>
                                           <td>{{$res->grado_estudios}}</td>
                                           <td>{{$res->numero}}</td>
                                           <td>{{$res->procedencia_interna}}</td>
                                           <td>{{$res->procedencia_externa}}</td>
-                                          <td>  <a data-toggle="modal" href="#">DESACTIVAR</a></td>
+                                          <td><a href="desactivar_tutor/{{$res->id_tutor}}">DESACTIVAR</a></td>
                                         </tr>
 
                                               @endforeach

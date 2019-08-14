@@ -39,7 +39,7 @@
                       @enderror
                     </div>
                 </div>
-                <input type="text" name="matricula"  hidden class="form-control" value="{{$estudiante_matricula}}">
+                <input type="text" name="matricula" hidden class="form-control" value="{{$estudiante_matricula}}">
 
                 <div class="form-group row">
                 <label for="asunto" class="col-md-4 col-form-label text-md-right" >{{ __('Asunto:') }}</label>

@@ -35,7 +35,7 @@ class FormacionIntegralController extends Controller
        if($usuario_actual->tipo_usuario!='1'){
          return redirect()->back();
         }
-        return view('personal_administrativo\formacion_integral\gestion_tallerista.create');
+        return view('personal_administrativo/formacion_integral/gestion_tallerista.create');
     }
 
   protected function postRegister(Request $request)
@@ -72,7 +72,7 @@ class FormacionIntegralController extends Controller
      if($usuario_actual->tipo_usuario!='1'){
        return redirect()->back();
       }
-    return view('personal_administrativo\formacion_integral\home_formacion');
+    return view('personal_administrativo/formacion_integral/home_formacion');
     }
 
     public function cuenta_formacion(){
@@ -80,14 +80,14 @@ class FormacionIntegralController extends Controller
        if($usuario_actual->tipo_usuario!='1'){
          return redirect()->back();
         }
-    return view('personal_administrativo\formacion_integral.configuracion_cuenta');
+    return view('personal_administrativo/formacion_integral.configuracion_cuenta');
     }
     public function read(){
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='1'){
          return redirect()->back();
         }
-    return view('personal_administrativo\formacion_integral\gestion_tallerista.read');
+    return view('personal_administrativo/formacion_integral/gestion_tallerista.read');
     }
 
     public function busqueda_estudiante_fi()
@@ -96,7 +96,7 @@ class FormacionIntegralController extends Controller
        if($usuario_actual->tipo_usuario!='1'){
          return redirect()->back();
         }
-    return view('personal_administrativo\formacion_integral.busqueda_estudiante_fi');
+    return view('personal_administrativo/formacion_integral.busqueda_estudiante_fi');
     }
 
     public function registrar_tutor()
@@ -105,7 +105,7 @@ class FormacionIntegralController extends Controller
        if($usuario_actual->tipo_usuario!='1'){
          return redirect()->back();
         }
-    return view('personal_administrativo\formacion_integral\gestion_tutores.registrar_tutor');
+    return view('personal_administrativo/formacion_integral/gestion_tutores.registrar_tutor');
     }
 
     public function busqueda_tutor()
@@ -116,14 +116,16 @@ class FormacionIntegralController extends Controller
         }
       $result = DB::table('personas')
       ->select('personas.nombre', 'personas.edad', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.bandera',
-      'tutores.procedencia_interna', 'tutores.procedencia_externa','nivel.grado_estudios', 'telefonos.numero')
+      'tutores.procedencia_interna', 'tutores.id_tutor' , 'tutores.procedencia_externa','nivel.grado_estudios', 'telefonos.numero')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
       ->join('nivel', 'tutores.id_nivel', '=', 'nivel.id_nivel')
       ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-      ->where([['tutores.bandera', '=', '1'], ['telefonos.tipo', '=', 'celular'],])
+      ->where([['tutores.bandera', '=', '1'], ['telefonos.tipo', '=', 'celular'], ['nivel.grado_estudios', '!=', 'estudiante']])
       //->orderBy('personas.apellido_paterno', 'asc')
       ->simplePaginate(7);
-    return view('personal_administrativo\formacion_integral\gestion_tutores.busqueda_tutor')->with('re', $result);
+
+
+    return view('personal_administrativo/formacion_integral/gestion_tutores.busqueda_tutor')->with('re', $result);
     }
 
     public function tutor_activo()
@@ -132,7 +134,7 @@ class FormacionIntegralController extends Controller
        if($usuario_actual->tipo_usuario!='1'){
          return redirect()->back();
         }
-    return view('personal_administrativo\formacion_integral\gestion_tutores.tutor_activo');
+    return view('personal_administrativo/formacion_integral/gestion_tutores.tutor_activo');
     }
 
     public function tutor_inactivo()
@@ -143,14 +145,14 @@ class FormacionIntegralController extends Controller
         }
       $result = DB::table('personas')
       ->select('personas.nombre', 'personas.edad', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.bandera',
-      'tutores.procedencia_interna', 'tutores.procedencia_externa','nivel.grado_estudios', 'telefonos.numero')
+      'tutores.procedencia_interna', 'tutores.id_tutor',  'tutores.procedencia_externa','nivel.grado_estudios', 'telefonos.numero')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
       ->join('nivel', 'tutores.id_nivel', '=', 'nivel.id_nivel')
       ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
       ->where([['tutores.bandera', '=', '0'], ['telefonos.tipo', '=', 'celular'],])
       //->orderBy('personas.apellido_paterno', 'asc')
       ->simplePaginate(7);
-    return view('personal_administrativo\formacion_integral\gestion_tutores.tutor_inactivo')->with('re', $result);
+    return view('personal_administrativo/formacion_integral/gestion_tutores.tutor_inactivo')->with('re', $result);
     }
 
     public function registro_extracurricular()
@@ -159,7 +161,7 @@ class FormacionIntegralController extends Controller
        if($usuario_actual->tipo_usuario!='1'){
          return redirect()->back();
         }
-    return view('personal_administrativo\formacion_integral\gestion_talleres.registro_extracurricular');
+    return view('personal_administrativo/formacion_integral/gestion_talleres.registro_extracurricular');
     }
 
     public function registro_taller()
@@ -172,10 +174,10 @@ class FormacionIntegralController extends Controller
       ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.id_tutor')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
       ->join('nivel', 'nivel.id_nivel', '=', 'tutores.id_nivel')
-      ->where('nivel.grado_estudios', '!=', 'estudiante')
+      ->where([['nivel.grado_estudios', '!=', 'estudiante'], ['tutores.bandera', '=', '1']])
       ->orderBy('personas.nombre', 'asc')
       ->get();
-    return view('personal_administrativo\formacion_integral\gestion_talleres.registro_taller')->with('taller', $result);
+    return view('personal_administrativo/formacion_integral/gestion_talleres.registro_taller')->with('taller', $result);
     }
 
     public function registrar_taller(Request $request)
@@ -203,7 +205,7 @@ class FormacionIntegralController extends Controller
      'fecha_fin'=> $data['fecha_fin'],  'hora_inicio'=> $data['hora_inicio'],  'hora_fin'=> $data['hora_fin'],
      'dias_sem'=> $data['dias_sem'],  'materiales'=> $data['materiales'],  'tutor'=> $data['tutor'],
      'periodo'=> $periodo_semestre, 'control_cupo'=> $data['cupo'], 'created_at'=> $now, 'updated_at'=> $now]);
-return redirect()->route('actividades_registradas')->with('sucess','Taller Registrado Correctamente');
+return redirect()->route('actividades_registradas')->with('success','Taller Registrado Correctamente');
     }
 
 
@@ -233,7 +235,7 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
                'modalidad'=> $data['modalidad'],  'cupo'=> $data['cupo'], 'lugar'=> $data['lugar'], 'fecha_inicio'=> $data['fecha_inicio'],
                'fecha_fin'=> $data['fecha_inicio'], 'hora_inicio'=> $data['hora_inicio'], 'hora_fin'=> $data['hora_fin'],
              'tutor'=> $data['tutor'], 'periodo'=> $periodo_semestre, 'control_cupo'=> $data['cupo'], 'created_at'=> $now, 'updated_at'=> $now]);
-      return redirect()->route('actividades_registradas')->with('sucess','Conferencia Registrada Correctamente');
+      return redirect()->route('actividades_registradas')->with('success','Conferencia Registrada Correctamente');
     }
 
     public function registro_conferencia()
@@ -242,11 +244,15 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
        if($usuario_actual->tipo_usuario!='1'){
          return redirect()->back();
         }
+
       $result = DB::table('personas')
       ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.id_tutor')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->join('nivel', 'nivel.id_nivel', '=', 'tutores.id_nivel')
+      ->where([['nivel.grado_estudios', '!=', 'estudiante'], ['tutores.bandera', '=', '1']])
+      ->orderBy('personas.nombre', 'asc')
       ->get();
-    return view('personal_administrativo\formacion_integral\gestion_talleres.registro_conferencia')->with('taller', $result);
+    return view('personal_administrativo/formacion_integral/gestion_talleres.registro_conferencia')->with('taller', $result);
     }
 
     public function actividades_registradas()
@@ -267,7 +273,7 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
        ->orderBy('extracurriculares.created_at', 'desc')
       ->simplePaginate(10);
 
-    return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_registradas')->with('dato', $result);
+    return view('personal_administrativo/formacion_integral/gestion_talleres.actividades_registradas')->with('dato', $result);
     }
 
     public function confe_registradas()
@@ -288,7 +294,7 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
        ->orderBy('extracurriculares.created_at', 'desc')
       ->simplePaginate(10);
 
-    return view('personal_administrativo\formacion_integral\gestion_talleres.conferencias_registradas')->with('dato', $result);
+    return view('personal_administrativo/formacion_integral/gestion_talleres.conferencias_registradas')->with('dato', $result);
     }
 
 
@@ -309,7 +315,7 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
         ->where([['extracurriculares.bandera', '=', '2']])
          ->orderBy('extracurriculares.created_at', 'desc')
         ->simplePaginate(10);
-    return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_finalizadas_general')->with('dato', $result);
+    return view('personal_administrativo/formacion_integral/gestion_talleres.actividades_finalizadas_general')->with('dato', $result);
     }
 
     public function actividades_desactivadas()
@@ -336,7 +342,7 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
          ->orderBy('extracurriculares.created_at', 'desc')
         ->simplePaginate(10);
 
-    return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_desactivadas_general')->with('dato', $result);
+    return view('personal_administrativo/formacion_integral/gestion_talleres.actividades_desactivadas_general')->with('dato', $result);
     }
 
     public function solicitudes()
@@ -357,7 +363,7 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
       ->where([['solicitud_talleres.estado', '=', 'pendiente'], ['periodos.estatus', '=', 'actual']])
       ->orderBy('solicitud_talleres.created_at', 'desc')
         ->simplePaginate(10);
-    return view('personal_administrativo\formacion_integral\gestion_talleres.solicitudes')->with('data', $result);
+    return view('personal_administrativo/formacion_integral/gestion_talleres.solicitudes')->with('data', $result);
     }
 
     public function asignar_taller()
@@ -366,7 +372,7 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
        if($usuario_actual->tipo_usuario!='1'){
          return redirect()->back();
         }
-    return view('personal_administrativo\formacion_integral\gestion_talleres.asignar_taller');
+    return view('personal_administrativo/formacion_integral/gestion_talleres.asignar_taller');
     }
 
     public function actividades_asignadas()
@@ -375,7 +381,7 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
        if($usuario_actual->tipo_usuario!='1'){
          return redirect()->back();
         }
-    return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_asignadas');
+    return view('personal_administrativo/formacion_integral/gestion_talleres.actividades_asignadas');
     }
 
     public function registro_tallerista()
@@ -387,9 +393,10 @@ return redirect()->route('actividades_registradas')->with('sucess','Taller Regis
       $result = DB::table('personas')
       ->select('personas.id_persona', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.id_tutor')
       ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
+      ->where('tutores.bandera', '=', '1')
       ->orderBy('personas.nombre', 'asc')
       ->get();
-    return view('personal_administrativo\formacion_integral\gestion_tallerista.registro_tallerista')->with('taller', $result);
+    return view('personal_administrativo/formacion_integral/gestion_tallerista.registro_tallerista')->with('taller', $result);
     }
 
     public function registrar_talleristas(Request $request)
@@ -440,7 +447,7 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
       ->where([['users.bandera','=', '1'], ['users.tipo_usuario', '=', 'tallerista'],])
       ->orderBy('personas.nombre', 'asc')
       ->simplePaginate(7);
-    return view('personal_administrativo\formacion_integral\gestion_tallerista.tallerista_activo')->with('re', $result);
+    return view('personal_administrativo/formacion_integral/gestion_tallerista.tallerista_activo')->with('re', $result);
     }
 
     public function tallerista_inactivo()
@@ -458,7 +465,7 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
       ->where([['users.bandera','=', '0'], ['users.tipo_usuario', '=', 'tallerista'],])
       ->orderBy('personas.nombre', 'asc')
       ->simplePaginate(7);
-    return view('personal_administrativo\formacion_integral\gestion_tallerista.tallerista_inactivo')->with('re', $result);
+    return view('personal_administrativo/formacion_integral/gestion_tallerista.tallerista_inactivo')->with('re', $result);
     }
 
     public function activar_tallerista($id_user){
@@ -468,7 +475,7 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
           ->where('users.id_user', $valor)
           ->update(
               ['bandera' => '1']);
-          return redirect()->route('tallerista_activo')->with('success','¡El Usuario ha sido Activado!');
+          return redirect()->route('tallerista_activo')->with('success','¡El Tallerista ha sido Activado!');
 
     }
 
@@ -479,7 +486,29 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
           ->update(
               ['bandera' => '0']
           );
-          return redirect()->route('tallerista_inactivo')->with('success','¡El Usuario ha sido desactivado!');
+          return redirect()->route('tallerista_inactivo')->with('success','¡El Tallerista ha sido desactivado!');
+
+    }
+
+    public function activar_tutor($id_tutor){
+
+      $valor=$id_tutor;
+      DB::table('tutores')
+          ->where('tutores.id_tutor', $valor)
+          ->update(
+              ['bandera' => '1']);
+          return redirect()->route('busqueda_tutor')->with('success','¡El Tutor ha sido Activado!');
+
+    }
+
+    public function desactivar_tutor($id_tutor){
+      $valor=$id_tutor;
+      DB::table('tutores')
+          ->where('tutores.id_tutor', $valor)
+          ->update(
+              ['bandera' => '0']
+          );
+          return redirect()->route('tutor_inactivo')->with('success','¡El Tutor ha sido desactivado!');
 
     }
 
@@ -509,7 +538,7 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
                           ->get();
 
       if ((count ($user) > 0 ) && ($est != null)){
-          return view ( 'personal_administrativo\formacion_integral.busqueda_estudiante_fi' )->withDetails ($user )->withQuery ($q);
+          return view ( 'personal_administrativo/formacion_integral.busqueda_estudiante_fi' )->withDetails ($user )->withQuery ($q);
     }
   else{
     return redirect()->route('busqueda_estudiante_fi')->with('error','¡Sin resultados!');
@@ -546,7 +575,7 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
     //  $persona->curp=$data['curp'];
     // $persona->curp=$id_prueba;
       //$persona->fecha_nacimiento=$data['fecha_nacimiento'];
-      //$persona->edad=$data['edad'];
+    //  $persona->edad=$data['edad'];
       $persona->genero=$data['genero'];
       $persona->periodo=$periodo_semestre;
       $persona->save();
@@ -603,17 +632,74 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
     }
     }
 
-    protected function anteriores(){
+    protected function anteriores($matricula){
       $usuario_actual=\Auth::user();
        if($usuario_actual->tipo_usuario!='1'){
          return redirect()->back();
         }
-      $result = DB::table('personas')
-      ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.id_tutor')
-      ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
-      ->where('personas.nombre', '=', 'FACULTAD DE IDIOMAS')
-      ->get();
-      return view('personal_administrativo\formacion_integral.registro_estudiantes')->with('taller', $result);
+        $matriculas=$matricula;
+        $result = DB::table('personas')
+        ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.id_tutor')
+        ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
+        ->join('nivel', 'nivel.id_nivel', '=', 'tutores.id_nivel')
+        ->where([['nivel.grado_estudios', '!=', 'estudiante'], ['tutores.bandera', '=', '1']])
+        ->orderBy('personas.nombre', 'asc')
+        ->get();
+
+        $datos_est = DB::table('personas')
+        ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'estudiantes.matricula')
+        ->join('estudiantes', 'estudiantes.id_persona', '=', 'personas.id_persona')
+        ->where('estudiantes.matricula', $matriculas)
+        ->take(1)
+        ->first();
+
+        $resultado = DB::table('extracurriculares')
+        ->select('extracurriculares.id_extracurricular', 'extracurriculares.dias_sem', 'extracurriculares.nombre_ec', 'extracurriculares.tipo',
+        'extracurriculares.creditos', 'extracurriculares.area', 'extracurriculares.modalidad', 'extracurriculares.fecha_inicio',
+        'extracurriculares.fecha_fin', 'extracurriculares.hora_inicio', 'extracurriculares.hora_fin', 'tutores.id_tutor',
+        'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'extracurriculares.observaciones')
+        ->join('tutores', 'extracurriculares.tutor', '=', 'tutores.id_tutor')
+        ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
+        ->join('nivel', 'nivel.id_nivel', '=', 'tutores.id_nivel')
+        ->where([['extracurriculares.bandera', '=', '2'] ,  ['nivel.grado_estudios', '!=', 'estudiante']])
+         ->orderBy('extracurriculares.created_at', 'desc')
+        ->simplePaginate(10);
+
+      return view('personal_administrativo/formacion_integral.registro_estudiantes')
+      ->with('taller', $result)->with('uno', $matriculas)->with('extra', $resultado)->with('estudiante_da',$datos_est);
+    }
+
+
+    public function registro_hora(Request $request){
+      $data = $request;
+  $periodo_semestre = DB::table('periodos')
+  ->select('periodos.id_periodo')
+  ->where('periodos.estatus', '=', 'actual')
+  ->take(1)
+  ->first();
+ $periodo_semestre= $periodo_semestre->id_periodo;
+ $busqueda = DB::table('detalle_extracurriculares')
+->select('detalle_extracurriculares.actividad')
+->join('estudiantes', 'estudiantes.matricula', '=', 'detalle_extracurriculares.matricula')
+ ->where([['estudiantes.matricula', '=', $data['matricula']], ['detalle_extracurriculares.actividad', '=', $data['extra']],
+          ['detalle_extracurriculares.periodo', '=', $periodo_semestre], ['detalle_extracurriculares.estado', '=', 'Acreditado']])
+->take(1)
+->first();
+if(empty($busqueda->actividad)){
+ $resultado = DB::table('extracurriculares')
+ ->select('extracurriculares.creditos')
+ ->where([['extracurriculares.id_extracurricular', $data['extra']] , ['extracurriculares.bandera', '=', '2']])
+ ->take(1)
+ ->first();
+  $inscripcion = new Detalle_extracurricular;
+  $inscripcion->matricula= $data['matricula'];
+  $inscripcion->actividad= $data['extra'];;
+  $inscripcion->creditos= $resultado->creditos;
+  $inscripcion->estado= 'Acreditado';
+  $inscripcion->periodo= $periodo_semestre;
+  $inscripcion->save();
+      return redirect()->back()->with('success','Registro de Horas Realizada correctamente!');}
+      else {return redirect()->back()->with('error','¡El estudiante ya se encuentra registrado!');}
     }
 
     protected function ver_avance($matricula){
@@ -655,7 +741,7 @@ return redirect()->route('registro_tallerista')->with('error','error en la creac
       ->first();
 
 
-    return  view ('personal_administrativo\formacion_integral.avance_estudiante')->with('dato', $result)
+    return  view ('personal_administrativo/formacion_integral.avance_estudiante')->with('dato', $result)
     ->with('aca',$academicas)
     ->with('cul',$culturales)
     ->with('dep',$deportivas)
@@ -709,7 +795,7 @@ protected function constancia_par($matricula){
   $paper_orientation = 'letter';
   $customPaper = array(2.5,2.5,600,950);
 
-  $pdf = PDF::loadView('personal_administrativo\formacion_integral.constanciaParcial', ['data' =>  $datos_estudiante,
+  $pdf = PDF::loadView('personal_administrativo/formacion_integral.constanciaParcial', ['data' =>  $datos_estudiante,
   'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas])
   ->setPaper($customPaper,$paper_orientation);
   return $pdf->stream('constancia_parcial.pdf');
@@ -742,7 +828,7 @@ if($academicas >= 80 && $sumas >= 200){
     $paper_orientation = 'letter';
     $customPaper = array(2.5,2.5,600,950);
 
- $pdf = PDF::loadView('personal_administrativo\formacion_integral.constanciaOficial', ['data' =>  $datos_estudiante,
+ $pdf = PDF::loadView('personal_administrativo/formacion_integral.constanciaOficial', ['data' =>  $datos_estudiante,
  'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas, 'suma' => $sumas])
 ->setPaper($customPaper,$paper_orientation);
  return $pdf->stream('constancia_oficial.pdf');
@@ -769,7 +855,7 @@ else{
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('personal_administrativo\formacion_integral.constanciaOficial', ['data' =>  $datos_estudiante,
+   $pdf = PDF::loadView('personal_administrativo/formacion_integral.constanciaOficial', ['data' =>  $datos_estudiante,
    'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas, 'suma' => $sumas])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('constancia_oficial.pdf');
@@ -831,7 +917,7 @@ protected function actualizar_fechas_solicitud(){
     else {
        $actualizacion = 'NO';
     }*/$actualizacion= 'NO';
-    return view('personal_administrativo\formacion_integral.fecha_de_talleres')->with('fechas', $id_clave)->with('ss', $actualizacion);
+    return view('personal_administrativo/formacion_integral.fecha_de_talleres')->with('fechas', $id_clave)->with('ss', $actualizacion);
 }
 
 protected function fecha_taller(Request $request){
@@ -888,7 +974,7 @@ public function taller_aprobado()
      ->orderBy('extracurriculares.created_at', 'desc')
     ->simplePaginate(10);
 
-return view('personal_administrativo\formacion_integral\gestion_talleres.talleres_aprobados_estudiante')->with('data', $result);
+return view('personal_administrativo/formacion_integral/gestion_talleres.talleres_aprobados_estudiante')->with('data', $result);
 }
 
 public function taller_acreditado()
@@ -909,7 +995,7 @@ public function taller_acreditado()
 //  ->where([['solicitud_talleres.estado', '=', 'pendiente'], ['periodos.estatus', '=', 'actual']])
   ->orderBy('solicitud_talleres.created_at', 'desc')
     ->simplePaginate(10);
-return view('personal_administrativo\formacion_integral\gestion_talleres.taller_acreditado')->with('data', $result);
+return view('personal_administrativo/formacion_integral/gestion_talleres.taller_acreditado')->with('data', $result);
 }
 
 public function taller_can_estudiante()
@@ -929,7 +1015,7 @@ public function taller_can_estudiante()
      ->orderBy('extracurriculares.created_at', 'desc')
     ->simplePaginate(10);
 
-return view('personal_administrativo\formacion_integral\gestion_talleres.taller_cancelado')->with('data', $result);
+return view('personal_administrativo/formacion_integral/gestion_talleres.taller_cancelado')->with('data', $result);
 }
 
 public function taller_desactivado($id_extracurricular)
@@ -987,7 +1073,7 @@ public function actividades_cancel()
    ->orderBy('extracurriculares.created_at', 'desc')
   ->simplePaginate(10);
 
-return view('personal_administrativo\formacion_integral\gestion_talleres.actividades_desactivadas_general')->with('dato', $result);
+return view('personal_administrativo/formacion_integral/gestion_talleres.actividades_desactivadas_general')->with('dato', $result);
 }
 
 
@@ -1010,11 +1096,52 @@ protected function gestion_estudiante_taller($id_extracurricular){
   $usuario_actual=auth()->user();
   $id=$usuario_actual->id_user;
   $id_extra = $id_extracurricular;
-
-
-return view('personal_administrativo\formacion_integral\gestion_talleres.grupo_estudiante')->with('dato', $result);
-
-
+return view('personal_administrativo/formacion_integral/gestion_talleres.grupo_estudiante')->with('dato', $result);
 }
+
+public function registro_actividad()
+{
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='1'){
+     return redirect()->back();
+    }
+  $result = DB::table('personas')
+  ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'tutores.id_tutor')
+  ->join('tutores', 'personas.id_persona', '=', 'tutores.id_persona')
+  ->join('nivel', 'nivel.id_nivel', '=', 'tutores.id_nivel')
+  ->where([['nivel.grado_estudios', '!=', 'estudiante'], ['tutores.bandera', '=', '1']])
+  ->orderBy('personas.nombre', 'asc')
+  ->get();
+return view('personal_administrativo/formacion_integral/registrar_actividad')->with('taller', $result);
+}
+
+public function registro_actividad_es(Request $request)
+{
+  $this->validate($request, [
+    'nombre_ec' => ['required', 'string', 'max:100'],
+    'creditos' => ['required', 'string', 'max:100'],
+    'area' => ['required', 'string', 'max:25'],
+    'modalidad' => ['required', 'string', 'max:30'],
+    'cupo' => ['required', 'string', 'max:200'],
+    'lugar' => ['required', 'string', 'max:100'],
+  ]);
+
+  $data = $request;
+  $periodo_semestre = DB::table('periodos')
+  ->select('periodos.id_periodo')
+  ->where('periodos.estatus', '=', 'actual')
+  ->take(1)
+  ->first();
+  $now = new \DateTime();
+ $periodo_semestre= $periodo_semestre->id_periodo;
+  DB::table('extracurriculares')
+  ->Insert(['nombre_ec' => $data['nombre_ec'], 'tipo' => $data['tipo'], 'creditos' => $data['creditos'], 'area'=> $data['area'],
+ 'modalidad'=> $data['modalidad'],  'cupo'=> $data['cupo'], 'lugar'=> $data['lugar'], 'fecha_inicio'=> $data['fecha_inicio'],
+ 'fecha_fin'=> $data['fecha_fin'],  'hora_inicio'=> $data['hora_inicio'],  'hora_fin'=> $data['hora_fin'],
+ 'dias_sem'=> $data['dias_sem'],  'materiales'=> $data['materiales'],  'tutor'=> $data['tutor'],
+ 'periodo'=> $periodo_semestre, 'control_cupo'=> $data['cupo'], 'bandera'=> '2',  'created_at'=> $now, 'updated_at'=> $now]);
+return redirect()->route('actividades_finalizadas_general')->with('success','Actividad Registrada Correctamente');
+}
+
 
 }

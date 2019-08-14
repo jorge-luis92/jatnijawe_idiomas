@@ -50,17 +50,17 @@
 
       <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#departamentos" aria-expanded="true" aria-controls="collapseTwo">
-      <i class="fa fa-user" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Departamentos</span>
+      <i class="fa fa-user" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Coordinación Académica</span>
         </a>
         <div id="departamentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-              <a class="collapse-item" href=<?php echo e(route('info_coord_academica1')); ?>>Coordinación Académica</a>
-            <a class="collapse-item" href=<?php echo e(route('info_formacion_integral1')); ?>>Formación Integral</a>
-            <a class="collapse-item" href=<?php echo e(route('info_serviciosocial')); ?>>Servicio Social</a>
-            <a class="collapse-item" href=<?php echo e(route('info_practicasp')); ?>>Prácticas profesionales </a>
-        <!--    <a class="collapse-item" href=<?php echo e(route('info_practicasp')); ?>>Seguimiento a Egresados</a>
--->
+              <a class="collapse-item" href=<?php echo e(route('info_coord_academica1')); ?>>Información General</a>
+            <!--   <a class="collapse-item" href=<?php echo e(route('info_formacion_integral1')); ?>>Formación Integral</a>
+            <a class="collapse-item" href=<?php echo e(route('info_serviciosocial')); ?>>Servicios</a>
+         <a class="collapse-item" href=<?php echo e(route('info_practicasp')); ?>>Prácticas profesionales </a>
+           <a class="collapse-item" href=<?php echo e(route('info_practicasp')); ?>>Seguimiento a Egresados</a>-->
+
           </div>
         </div>
       </li>
@@ -71,7 +71,7 @@
         <div id="reportes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-              <a class="collapse-item" href=<?php echo e(route('reporte_semestral')); ?>>Semestral</a>
+        <!--      <a class="collapse-item" href=<?php echo e(route('reporte_semestral')); ?>>Semestral</a>-->
               <a class="collapse-item" href=<?php echo e(route('reporte911_9')); ?>>911.9</a>
               <a class="collapse-item" href=<?php echo e(route('reporte911_9A_0')); ?>>911.9A</a>
 

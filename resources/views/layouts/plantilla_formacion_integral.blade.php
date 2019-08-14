@@ -47,6 +47,7 @@
         <div id="datos_estudiante" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
+            <a class="collapse-item" href={{ route('registro_actividades')}}>Registrar Actividad</a>
             <a class="collapse-item" href={{ route('busqueda_estudiante_fi')}}>Búsqueda</a>
             <a class="collapse-item" href={{ route('solicitudes')}}>Solicitudes</a>
             <a class="collapse-item" href={{ route('talleres_aprobados')}}>Talleres Aprobados</a>
@@ -54,9 +55,8 @@
             <a class="collapse-item" href={{ route('talleres_cancelados_estudiante')}}>Talleres Cancelados</a>
             <a class="collapse-item" href={{ route('notificaciones_enviadas')}}>Notificaciones Enviadas</a>
             <a class="collapse-item" href={{ route('fecha_solicitud')}}>Registro Fechas de </br>Solicitud de Taller</a>
-            <!--<a class="collapse-item" href={{ route('busqueda_atras')}}>Búsqueda Atrás</a>
-            <a class="collapse-item" href={{ route('registro_horas')}}>Registro de Horas</a>-->
-          </div>
+            <a class="collapse-item" href={{ route('busqueda_atras')}}>Búsqueda Atrás</a>
+              </div>
         </div>
       </li>
 

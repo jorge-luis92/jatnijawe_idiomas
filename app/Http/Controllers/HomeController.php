@@ -61,7 +61,7 @@ use Illuminate\Validation\Rule;
          }
         elseif ($usuario_actual->tipo_usuario=='5'){
            if($usuario_actual->bandera=='1'){
-           return view('personal_administrativo\admin_sistema.home_admin');
+           return view('personal_administrativo/admin_sistema.home_admin');
          }
          else {
             $this->guard()->logout();
@@ -73,7 +73,7 @@ use Illuminate\Validation\Rule;
           }
           elseif ($usuario_actual->tipo_usuario=='1'){
              if($usuario_actual->bandera=='1'){
-             return view('personal_administrativo\formacion_integral.home_formacion');
+             return view('personal_administrativo/formacion_integral.home_formacion');
            }
            else {
               $this->guard()->logout();

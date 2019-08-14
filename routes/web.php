@@ -58,6 +58,7 @@ Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar
   Route::get('mis_actividades', 'Estudiante_Con\EstudianteController@activities')->name('mis_actividades');
   Route::get('perfil_estudiante', 'ConsultasController@datos_nombre')->name('perfil_estudiante');
   Route::get('datos_general', 'ConsultasController@carga_datos_general')->name('datos_general');
+  Route::get('datos_generales', 'ConsultasController@carga_datos_general')->name('datos_generales');
   Route::post('datos_general_actualizar', 'RegistroEstudiantes@actualizacion_estudiante')->name('datos_general_actualizar');
   Route::get('otras_actividades', 'ConsultasController@carga_otras_actividades')->name('otras_actividades');
   Route::post('otras_actividades_actualizar', 'ActualizacionesEstudiante@actualizacion_actividades')->name('otras_actividades_actualizar');
@@ -100,12 +101,13 @@ Route::post('cargar_datos_usuarios', 'UserSystemController@axcel')->name('cargar
   Route::get('antecedentes_laborales', 'SeguimientoEgresadosController@antecedentes_laborales')->name('antecedentes_laborales');
   Route::get('talleres_finalizados_estudiante', 'Actividades\ActvidadesExtra@taller_finalizado_estudiante')->name('talleres_finalizados_estudiante');
   Route::get('descarga_lista_estudiante/{id_taller}','GenerarPdf@descargar_lista_taller');
+  Route::post('enviar_solicitud_practicas', 'Estudiante_Con\EstudianteController@enviar_solicitud_practicas')->name('enviar_solicitud_practicas');
+  Route::post('enviar_solicitud_servicio', 'Estudiante_Con\EstudianteController@enviar_solicitud_servicio')->name('enviar_solicitud_servicio');
 });
 
 Route::get('register_tallerista', 'Auth\RegisterController@getRegister');
 Route::post('register_tallerista', ['as' => 'register_tallerista', 'uses' => 'Auth\RegisterController@postRegister']);
 Route::get('registros_talleristas', 'UserSystemController@index')->name('registros_talleristas');
-
 /*FormacionIntegralController*/
 Route::group(['middleware' => 'auth','formacionmiddleware'], function () {
 Route::get('inicio_formacion', 'FormacionIntegralController@inicio_formacion')->name('inicio_formacion');
@@ -115,6 +117,8 @@ Route::post('agregar_nuevo_taller', 'FormacionIntegralController@agregar_nuevo_t
 Route::get('busqueda_estudiante_fi', 'FormacionIntegralController@busqueda_estudiante_fi')->name('busqueda_estudiante_fi');
 Route::any('busqueda_estudiante_formacion', 'FormacionIntegralController@busqueda_fi')->name('busqueda_estudiante_formacion');
 Route::get('registrar_tutor', 'FormacionIntegralController@registrar_tutor')->name('registrar_tutor');
+Route::get('registro_actividades', 'FormacionIntegralController@registro_actividad')->name('registro_actividades');
+Route::post('registrar_actividad_estudiante', 'FormacionIntegralController@registro_actividad_es')->name('registrar_actividad_estudiante');
 Route::post('registrar_tutor_fi', 'FormacionIntegralController@registrar_tutor_fi')->name('registrar_tutor_fi');
 Route::get('busqueda_tutor', 'FormacionIntegralController@busqueda_tutor')->name('busqueda_tutor');
 Route::get('tutor_activo', 'FormacionIntegralController@tutor_activo')->name('tutor_activo');
@@ -140,7 +144,8 @@ Route::get('actividades_finalizadas_general', 'FormacionIntegralController@activ
 Route::get('solicitudes', 'FormacionIntegralController@solicitudes')->name('solicitudes');
 Route::get('asignar_taller', 'FormacionIntegralController@asignar_taller')->name('asignar_taller');
 Route::get('actividades_asignadas', 'FormacionIntegralController@actividades_asignadas')->name('actividades_asignadas');
-Route::get('registro_horas', 'FormacionIntegralController@anteriores')->name('registro_horas');
+Route::get('registro_horas/{matricula}', 'FormacionIntegralController@anteriores');
+Route::post('horas_estudiante', 'FormacionIntegralController@registro_hora')->name('horas_estudiante');
 Route::get('busqueda_atras', 'BusquedaAnteriorController@vista_atras')->name('busqueda_atras');
 Route::any('busqueda_atras_fi', 'BusquedaAnteriorController@anteriores_busqueda')->name('busqueda_atras_fi');
 Route::get('avance_estudiante_a/{ID}', 'BusquedaAnteriorController@ver_avance');
@@ -188,6 +193,7 @@ Route::group(['middleware' => 'auth', 'adminmiddleware' ], function () {
   Route::get('editar_estudiante/{matricula}', 'AdminController@editar_estudiante');
   Route::get('registro_coordinador', 'AdminController@registro_coordinador')->name('registro_coordinador');
   Route::post('registro_estudiantes', 'RegistroEstudiantes@create_estudiante')->name('registro_estudiantes');
+  Route::post('editar_estudiantes', 'RegistroEstudiantes@editar_estudiante')->name('editar_estudiantes');
   Route::post('registrar_coordinador', 'AdminController@registrar_coordinador')->name('registrar_coordinador');
   Route::get('busqueda_coordinador', 'AdminController@busqueda_coordinador')->name('busqueda_coordinador');
   Route::any('busqueda_coordinadores', 'AdminController@busqueda_coor')->name('busqueda_coordinadores');
@@ -221,25 +227,24 @@ Route::group(['middleware' => 'auth', 'serviciomiddleware' ], function () {
   Route::get('generales_egresado_ver/{matricula}', 'ServiciosController@generales_egresado_ver');
   });
 
-/*RUTAS Planeación*/
 Route::group(['middleware' => 'auth', 'planeacionmiddleware' ], function () {
   Route::get('home_planeacion', 'PlaneacionController@home_planeacion')->name('home_planeacion');
   Route::get('info_coord_academica1', 'PlaneacionController@info_coord_academica1')->name('info_coord_academica1');
   Route::get('info_coord_academica2', 'PlaneacionController@info_coord_academica2')->name('info_coord_academica2');
-  Route::get('info_coord_academica3', 'PlaneacionController@info_coord_academica3')->name('info_coord_academica3');
-  Route::get('info_coord_academica4', 'PlaneacionController@info_coord_academica4')->name('info_coord_academica4');
-  Route::get('info_coord_academica5', 'PlaneacionController@info_coord_academica5')->name('info_coord_academica5');
+  Route::get('info_coord_academica5', 'PlaneacionController@info_coord_academica3')->name('info_coord_academica3');
+  Route::get('info_coord_academica3', 'PlaneacionController@info_coord_academica4')->name('info_coord_academica4');
+  Route::get('info_coord_academica4', 'PlaneacionController@info_coord_academica5')->name('info_coord_academica5');
   Route::get('info_formacion_integral1', 'PlaneacionController@info_formacion_integral1')->name('info_formacion_integral1');
   Route::get('gral_escuela', 'PlaneacionController@gral_escuela')->name('gral_escuela');
   Route::post('agregar_escuela', 'PlaneacionController@crear_escuela')->name('agregar_escuela');
   Route::get('gral_carrera', 'PlaneacionController@gral_carrera')->name('gral_carrera');
   Route::post('agregar_carrera', 'PlaneacionController@crear_carrera')->name('agregar_carrera');
   Route::get('carreras_registradas', 'PlaneacionController@info_carreras')->name('carreras_registradas');
-  /*REPORTE Semestral*/
+
   Route::get('reporte_semestral', 'PlaneacionController@reporte_semestral')->name('reporte_semestral');
-  /*REPORTE 911.9*/
+
   Route::get('reporte911_9', 'PlaneacionController@reporte911_9')->name('reporte911_9');
-  /*REPORTE 911.9A*/
+
   Route::get('reporte911_9A_0', 'PlaneacionController@reporte911_9A_0')->name('reporte911_9A_0');
   Route::get('reporte911_9A_1', 'PlaneacionController@reporte911_9A_1')->name('reporte911_9A_1');
   Route::get('reporte911_9A_2', 'PlaneacionController@reporte911_9A_2')->name('reporte911_9A_2');
@@ -247,12 +252,13 @@ Route::group(['middleware' => 'auth', 'planeacionmiddleware' ], function () {
   Route::get('reporte911_9A_4', 'PlaneacionController@reporte911_9A_4')->name('reporte911_9A_4');
   Route::get('reporte911_9A_5', 'PlaneacionController@reporte911_9A_5')->name('reporte911_9A_5');
   Route::get('reporte911_9A_6', 'PlaneacionController@reporte911_9A_6')->name('reporte911_9A_6');
-  /*Planeación ss y pp*/
+
   Route::get('info_practicasp', 'PlaneacionController@info_practicasp')->name('info_practicasp');
   Route::get('info_serviciosocial', 'PlaneacionController@info_serviciosocial')->name('info_serviciosocial');
-  });
+});
 /*INFO FORMACIÓN INTEGRAL*/ /*Seguimiento a Egresados*/
 Route::get('home_seguimiento_egresados', 'SeguimientoEgresadosController@home_seguimiento_egresados')->name('home_seguimiento_egresados');
 Route::get('registro_externo', 'RegistrosController@ver')->name('registro_externo');
 Route::post('registro_externos', 'RegistrosController@create')->name('registro_externos');
+Route::get('pdfsol','GenerarPdf@probado');
 Auth::routes();

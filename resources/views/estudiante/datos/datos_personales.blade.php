@@ -27,17 +27,9 @@
     </div>
   <div class="form-group col-md-3">
       <label for="cp">* Código Postal</label>
-      <input type="tel" class="form-control" name="cp" id="cp" value="<?php if(empty($d->cp)){ $vacio=null; echo $vacio;} else{ echo $d->cp;} ?>" maxlength="5"  onkeypress="return numeros (event)"  placeholder="Código Postal" onKeyUp="this.value = this.value.toUpperCase();" required>
+      <input type="tel" class="form-control" name="cp" id="cp" value="<?php if(empty($d->cp)){ $vacio=null; echo $vacio;} else{ echo $d->cp;} ?>" maxlength="5"  onkeypress="return numeros (event)"  placeholder="Código Postal"  required>
     </div>
-    <!--  <div class="form-group col-md-3">
-      <label for="cp">{{ __('*Código Postal') }}</label>
-        <select name="cp" id="cp" required onchange="buscar();" class="form-control">
-        <option value="">Seleccione una opción</option>
-        @foreach ($codes_o as $des)
-        <option value="{!! $des->cp !!}">{!! $des->cp !!}</option>
-        @endforeach
-            </select>
-          </div>-->
+
     <div class="form-group col-md-3">
       <label for="localidad" >*Colonia</label>
       <input type="text" autocomplete="localidad" id="localidad" class="form-control @error('localidad') is-invalid @enderror" name="localidad" value="<?php if(empty($d->localidad)){ $vacio=null; echo $vacio;} else{ echo $d->localidad;} ?>" id="localidad" placeholder="Colonia" onKeyUp="this.value = this.value.toUpperCase();" required >
@@ -62,7 +54,7 @@
     <div class="form-group col-md-12">
       <h6 align="left"> Contacto</h6>
         </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
       <label for="tel_local">Teléfono de Casa</label>
         <input type="tel"  class="form-control @error('tel_local') is-invalid @enderror" name="tel_local" id="tel_local" value="<?php if(empty($nl->numero)){ $vacio=null; echo $vacio;} else{ echo $nl->numero;} ?>" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos -- Ejemplo: 9515115090"  pattern="([0-9]{10})">
           @error('tel_local')
@@ -71,7 +63,7 @@
           </span>
           @enderror
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
       <label for="tel_celular">* Teléfono Celular</label>
       <input type="tel"  class="form-control @error('tel_celular') is-invalid @enderror" name="tel_celular" id="tel_celular" value="<?php if(empty($nc->numero)){ $vacio=null; echo $vacio;} else{ echo $nc->numero;} ?>" maxlength="10"  onkeypress="return numeros (event)"  placeholder="Formato a 10 digitos  -- Ejemplo: 9511234567"  pattern="([0-9]{3})([0-9]{7})" required>
         @error('tel_celular')
@@ -80,7 +72,7 @@
         </span>
         @enderror
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
       <label for="email">* Correo Electrónico</label>
       <input type="email"  autocomplete="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ Auth::user()->email }}" placeholder="Correo Electrónico" required>
       @error('email')
@@ -88,6 +80,15 @@
       <strong>{{ $message }}</strong>
       </span>
       @enderror
+    </div>
+    <div class="form-group col-md-3">
+      <label for="facebook">* Facebook</label>
+      <input type="text"  class="form-control @error('facebook') is-invalid @enderror" onKeyUp="this.value = this.value.toUpperCase();" name="facebook" id="facebook" value="<?php if(empty($facebo->facebook)){ $vacio=null; echo $vacio;} else{ echo $facebo->facebook;} ?>" maxlength="60"  required>
+        @error('facebook')
+        <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+        </span>
+        @enderror
     </div>
  </div>
  <div class="form-group">
@@ -103,12 +104,6 @@
 
   @endsection
 
-  <script type="text/javascript">
-      function buscar(){
-          var opcion = document.getElementById('cp').value;
-        //  window.location.href = 'http://localhost:8888/autofillform/index.php?opcion='+opcion;
-      }
-  </script>
   <script>
 function numeros(e){
  key = e.keyCode || e.which;

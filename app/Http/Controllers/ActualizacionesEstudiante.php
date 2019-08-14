@@ -118,6 +118,7 @@ $periodo_semestre = DB::table('periodos')
 $codigo=CodigoPostal::find($data['cp']);
 if(!empty($codigo->cp)){
 if(empty($direccion) or empty($tels)){
+
   $ultima_d = DB::table('direcciones')
      ->sum('direcciones.id_direccion');
      if(empty($ultima_d)){
@@ -127,8 +128,15 @@ if(empty($direccion) or empty($tels)){
        $ultima_d=$ultima_d+1;
      }
 
+ DB::table('users')
+                  ->where('users.id_user', $id)
+                  ->update(
+                    ['email' => $data['email'], 'facebook' => $data['facebook']]);
+
+
+
      $valor_direccion = DB::table('direcciones')->max('id_direccion');
-     $id_direc=$valor_direccion+1;
+     $id_direc=intval($id)*3;
      $codigo_de = DB::table('codigos_postales')->select('codigos_postales.municipio', 'codigos_postales.estado')
                            ->where('codigos_postales.cp', $data['cp'])
                            ->take(1)
@@ -151,16 +159,32 @@ $id_direccion= DB::table('direcciones')
             }
     else {
       DB::table('telefonos')
-          ->updateOrInsert(
+          ->Insert(
               ['numero' => $data['tel_local'], 'tipo' => 'local', 'id_persona' => $id_persona]);
           DB::table('telefonos')
-              ->updateOrInsert(
+              ->Insert(
                   ['numero' => $data['tel_celular'], 'tipo' => 'celular', 'id_persona' => $id_persona]);
     }
 
           return redirect()->route('datos_personal')->with('success','¡Datos actualizados correctamente!');
 }
 else {
+	  $tels_l = DB::table('personas')
+   ->select('telefonos.id_persona')
+   ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+   ->where([['personas.id_persona', $id_persona], ['telefonos.tipo', '=', 'local']])
+   ->first();
+if(empty($tels_l)){
+ DB::table('telefonos')
+            ->Insert(
+                ['numero' => $data['tel_local'], 'tipo' => 'local', 'id_persona' => $id_persona]);
+}
+else{
+ DB::table('telefonos')
+            ->Insert(
+                ['numero' => $data['tel_local'], 'tipo' => 'local', 'id_persona' => $id_persona]);
+}
+
   $direccion = DB::table('personas')
   ->select('personas.id_direccion')
   ->join('direcciones', 'direcciones.id_direccion', '=', 'personas.id_direccion')
@@ -180,9 +204,10 @@ $codigo_de = DB::table('codigos_postales')->select('codigos_postales.municipio',
          'localidad' =>  $data['localidad'],  'municipio' => $codigo_de->municipio,
               'entidad_federativa' =>$codigo_de->estado, 'cp' => $data['cp'], 'updated_at' => $now]);
 
-        $user = auth()->user();
-        $user->email = $data['email'];
-        $user->save();
+        DB::table('users')
+                  ->where('users.id_user', $id)
+                  ->update(
+                    ['email' => $data['email'], 'facebook' => $data['facebook']]);
 
           if($data['tel_local'] == null){
              DB::table('telefonos')
@@ -200,19 +225,20 @@ $codigo_de = DB::table('codigos_postales')->select('codigos_postales.municipio',
              ->update(['numero' => $data['tel_celular']]);
 
        }
-  /*      DB::table('telefonos')
+        DB::table('telefonos')
             ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'local']])
             ->update(
               ['numero' => $data['tel_local']]);
+
               DB::table('telefonos')
                   ->where([['telefonos.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular']])
                   ->update(
-                    ['numero' => $data['tel_celular']]);*/
+                    ['numero' => $data['tel_celular']]);
 
       return redirect()->route('datos_personal')->with('success','¡Datos actualizados correctamente!');
 }}
-//return redirect()->route('datos_personal')->with('error','¡El código postal que ingreso no existe!');
-return redirect()->back()->withInput(Input::all())->with('error','¡El código postasl que ingreso no existe!');
+return redirect()->route('datos_personal')->with('error','¡El código postal que ingreso no existe!');
+//return redirect()->back()->withInput(Input::all())->with('error','¡El código postasl que ingreso no existe!');
   }
 
   public function act_datos_medicos(Request $request)
@@ -366,7 +392,7 @@ return redirect()->back()->withInput(Input::all())->with('error','¡El código p
                    return redirect()->route('datos_medico')->with('success','¡Datos actualizados correctamente!');
                }else {
                           DB::table('discapacidades')
-                    ->where('discapacidades.id_persona',$dis)
+                    ->where('discapacidades.id_persona',$dis->id_persona)
                     ->update(
                       ['tipo' => $data['tipo_discapacidad']]);
     }}

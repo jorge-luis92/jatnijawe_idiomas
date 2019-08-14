@@ -26,24 +26,24 @@
   </tr>
   <tr>
     <th scope="col">Escolar</th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
+    <td bgcolor="white">{{$tipos_actextM_ESC['Escolar']}}</td>
+    <td bgcolor="white">{{$tipos_actextF_ESC['Escolar']}}</td>
+    <td bgcolor="white">{{$tipos_actext_ESC['Escolar']}}</td>
 
   </tr>
 
   <tr>
     <th scope="col">Laboral</th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
+    <td bgcolor="white">{{$tipos_actextM_ESC['Laboral']}}</td>
+    <td bgcolor="white">{{$tipos_actextF_ESC['Laboral']}}</td>
+    <td bgcolor="white">{{$tipos_actext_ESC['Laboral']}}</td>
 
   </tr>
   <tr>
     <th scope="col">Total</th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
+    <td bgcolor="white">{{$tipos_actextM_ESC['TOTAL']}}</td>
+    <td bgcolor="white">{{$tipos_actextF_ESC['TOTAL']}}</td>
+    <td bgcolor="white">{{$tipos_actext_ESC['TOTAL']}}</td>
 
   </tr>
   </table>
@@ -59,29 +59,28 @@
     <th scope="row">Hombres </th>
     <th scope="row">Mujeres</th>
     <th scope="row">Total</th>
-
-
   </tr>
+
   <tr>
     <th scope="col">Escolar</th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
+    <td bgcolor="white">{{$tipos_actextM_SEMI['Escolar']}}</td>
+    <td bgcolor="white">{{$tipos_actextF_SEMI['Escolar']}}</td>
+    <td bgcolor="white">{{$tipos_actext_SEMI['Escolar']}}</td>
 
   </tr>
 
   <tr>
     <th scope="col">Laboral</th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
+    <td bgcolor="white">{{$tipos_actextM_SEMI['Laboral']}}</td>
+    <td bgcolor="white">{{$tipos_actextF_SEMI['Laboral']}}</td>
+    <td bgcolor="white">{{$tipos_actext_SEMI['Laboral']}}</td>
 
   </tr>
   <tr>
     <th scope="col">Total</th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
+    <td bgcolor="white">{{$tipos_actextM_SEMI['TOTAL']}}</td>
+    <td bgcolor="white">{{$tipos_actextF_SEMI['TOTAL']}}</td>
+    <td bgcolor="white">{{$tipos_actext_SEMI['TOTAL']}}</td>
 
   </tr>
   </table>
@@ -100,24 +99,24 @@
 </tr>
 <tr>
   <th scope="col">Escolar</th>
-  <td bgcolor="white"> </td>
-  <td bgcolor="white"> </td>
-  <td bgcolor="white"> </td>
+  <td bgcolor="white">{{$tipos_actextM['Escolar']}}</td>
+  <td bgcolor="white">{{$tipos_actextF['Escolar']}}</td>
+  <td bgcolor="white">{{$tipos_actext['Escolar']}}</td>
 
 </tr>
 
 <tr>
   <th scope="col">Laboral</th>
-  <td bgcolor="white"> </td>
-  <td bgcolor="white"> </td>
-  <td bgcolor="white"> </td>
+  <td bgcolor="white">{{$tipos_actextM['Laboral']}}</td>
+  <td bgcolor="white">{{$tipos_actextF['Laboral']}}</td>
+  <td bgcolor="white">{{$tipos_actext['Laboral']}}</td>
 
 </tr>
 <tr>
   <th scope="col">Total</th>
-  <td bgcolor="white"> </td>
-  <td bgcolor="white"> </td>
-  <td bgcolor="white"> </td>
+  <td bgcolor="white">{{$tipos_actextM['TOTAL']}}</td>
+  <td bgcolor="white">{{$tipos_actextF['TOTAL']}}</td>
+  <td bgcolor="white">{{$tipos_actext['TOTAL']}}</td>
 
 </tr>
   </table>
@@ -128,9 +127,9 @@
 
 <a class="siguiente" href={{ route('info_coord_academica1')}}>1</a>
 <a class="siguiente" href={{ route('info_coord_academica2')}}>2</a>
-<a class="siguiente" href={{ route('info_coord_academica3')}}>3</a>
-<a class="siguiente" href={{ route('info_coord_academica4')}}>4</a>
-<a class="siguiente" href={{ route('info_coord_academica5')}}><strong>5</strong></a>
+<!--<a class="siguiente" href={{ route('info_coord_academica3')}}>3</a>-->
+<a class="siguiente" href={{ route('info_coord_academica4')}}>3</a>
+<a class="siguiente" href={{ route('info_coord_academica5')}}><strong>4</strong></a>
 
 </div>
 

@@ -75,7 +75,7 @@ class RegistroEstudiantes extends Controller
     $estudiante->estatus=$data['estatus'];
     $estudiante->bachillerato_origen=$data['bachillerato_origen'];
     $estudiante->id_persona=$data['matricula'];
-    $estudiante->sede='C.U.';
+    $estudiante->sede='CU';
     $estudiante->periodo=$periodo_semestre;
     $estudiante->save();
     if($estudiante->save()){
@@ -188,8 +188,8 @@ $periodo_semestre= $periodo_semestre->id_periodo;
 DB::table('estudiantes')
 ->where('estudiantes.matricula', $id)
 ->update(
-        ['grupo' => $data['grupo']],
-    );
+        ['semestre' => $data['semestre'], 'grupo' => $data['grupo'], 'estatus' => $data['estatus'],
+         'materias_pendientes' => $data['materias_pendientes'], 'horario_asesorias' => $data['horario_asesorias']]);
 
  $id_persona = DB::table('estudiantes')
 ->select('estudiantes.id_persona')
@@ -198,6 +198,11 @@ DB::table('estudiantes')
 ->take(1)
 ->first();
 $id_persona = $id_persona->id_persona;
+
+DB::table('personas')
+->where('personas.id_persona', $id_persona)
+->update(
+        ['curp' => $data['curp'], 'fecha_nacimiento' => $data['fecha_nacimiento'],  'edad' => $data['edad']]);
 
 $lengua = DB::table('lenguas')
 ->select('lenguas.id_lengua')
@@ -274,6 +279,36 @@ public function desactivar_lengua($id_beca){
           ['bandera' => '0'],
       );
       return redirect()->route('datos_general')->with('success','¡Datos actualizados correctamente!');
+
+}
+
+public function editar_estudiante(Request $request){
+  $data = $request;
+
+  $matricula = DB::table('estudiantes')
+  ->select('estudiantes.id_persona')
+  ->where('estudiantes.matricula',$data['matricula'])
+  ->take(1)
+  ->first();
+$matricula= json_decode( json_encode($matricula), true);
+  DB::table('personas')
+      ->where('personas.id_persona', '=', $matricula)
+      ->update([ 'nombre' => $data['nombre'] ,'apellido_paterno' => $data['apellido_paterno'], 'apellido_materno' => $data['apellido_materno'],
+                'curp' => $data['curp'] , 'fecha_nacimiento' => $data['fecha_nacimiento'], 'lugar_nacimiento' => $data['lugar_nacimiento'],
+                'tipo_sangre' => $data['tipo_sangre'], 'edad' => $data['edad'],'genero' => $data['genero']]);
+
+    DB::table('estudiantes')
+        ->where('estudiantes.matricula', '=' , $data['matricula'])
+        ->update(['modalidad' => $data['modalidad'], 'fecha_ingreso' => $data['fecha_ingreso'], 'semestre' => $data['semestre'], 'grupo' => $data['grupo'],
+                  'estatus' => $data['estatus'], 'bachillerato_origen' => $data['bachillerato_origen']]);
+
+      DB::table('users')
+        ->where('users.id_user',  $data['matricula'])
+        ->update(['email' => $data['email']]);
+
+
+      return redirect()->route('busqueda_estudiante')->with('success','¡Datos actualizados correctamente!');
+
 
 }
 

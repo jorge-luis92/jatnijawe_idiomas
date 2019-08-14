@@ -52,7 +52,7 @@ class EstudianteController extends Controller
         return redirect()->back();
       }
       else{
-        return view('estudiante\datos.datos_generales');
+        return view('estudiante/datos.datos_generales');
           }
   }
 
@@ -62,7 +62,7 @@ class EstudianteController extends Controller
      if($id->tipo_usuario!='estudiante'){
       return redirect()->back();
       }
-  return view('estudiante\datos.datos_laborales');
+  return view('estudiante/datos.datos_laborales');
 }
 
 public function dato_medico(){
@@ -70,7 +70,7 @@ public function dato_medico(){
    if($usuario_actual->tipo_usuario!='estudiante'){
      return redirect()->back();
     }
-return view('estudiante\datos.datos_medicos');
+return view('estudiante/datos.datos_medicos');
 }
 
 public function dato_personal(){
@@ -78,7 +78,7 @@ public function dato_personal(){
    if($usuario_actual->tipo_usuario!='estudiante'){
      return redirect()->back();
     }
-return view('estudiante\datos.datos_personales');
+return view('estudiante/datos.datos_personales');
 }
 
     public function activities(){
@@ -105,7 +105,7 @@ return view('estudiante\datos.datos_personales');
         ->join('personas', 'personas.id_persona', '=', 'tutores.id_persona')
         ->where([['extracurriculares.bandera','=', '1'], ['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Cursando'],  ['detalle_extracurriculares.periodo', $periodo_semestre->id_periodo]])
         ->simplePaginate(10);
-      return  view ('estudiante\mis_actividades.misActividades')->with('dato', $result);
+      return  view ('estudiante/mis_actividades.misactividades')->with('dato', $result);
     }
   }
 
@@ -130,7 +130,7 @@ return view('estudiante\datos.datos_personales');
              ->where([['detalle_extracurriculares.matricula','=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado']])
              ->sum('detalle_extracurriculares.creditos');
 
-          return  view ('estudiante\mis_actividades.avance_horas')->with('dato', $result)->with('av',$avance);
+          return  view ('estudiante/mis_actividades.avance_horas')->with('dato', $result)->with('av',$avance);
         }
 
     public function talleres_activos(){
@@ -167,7 +167,7 @@ return view('estudiante\datos.datos_personales');
         ->orderBy('extracurriculares.created_at', 'asc')
         ->simplePaginate(10);
 
-      return  view ('estudiante\mis_actividades.mis_talleres')->with('dato', $result);
+      return  view ('estudiante/mis_actividades.mis_talleres')->with('dato', $result);
 
     }
     else {
@@ -190,12 +190,12 @@ return view('estudiante\datos.datos_personales');
        if($usuario_actual->tipo_usuario!='estudiante'){
          return redirect()->back();
         }
-    return view('m_usuario\m_estudiante');
+    return view('m_usuario/m_estudiante');
   }
 
   public function verDatos(){
      $usuario_actual=\Auth::user();
-    return view('estudiantes\datos.hoja_datos')-with('s', $prueba);
+    return view('estudiantes/datos.hoja_datos')-with('s', $prueba);
   }
     public function generatePDF()
     {
@@ -203,6 +203,12 @@ return view('estudiante\datos.datos_personales');
        if($usuario_actual->tipo_usuario!='estudiante'){
          return redirect()->back();
         }
+
+		  $periodo_semestre = DB::table('periodos')
+  ->select('periodos.id_periodo', 'periodos.inicio', 'periodos.final')
+  ->where('periodos.estatus', '=', 'actual')
+  ->take(1)
+  ->first();
        $usuario=auth()->user();
         $ids=$usuario->id_user;
         $id_persona = DB::table('estudiantes')
@@ -211,13 +217,13 @@ return view('estudiante\datos.datos_personales');
         ->where('estudiantes.matricula',$ids)
         ->take(1)
         ->first();
-          $id_persona= json_decode( json_encode($id_persona), true);
+          $id_persona= $id_persona->id_persona;
           $users = DB::table('estudiantes')
-             ->select('estudiantes.matricula', 'estudiantes.semestre', 'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo',
-                      'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'personas.fecha_nacimiento',
-                      'personas.curp', 'personas.genero')
+             ->select('estudiantes.matricula', 'estudiantes.materias_pendientes', 'estudiantes.horario_asesorias', 'estudiantes.semestre',
+             'estudiantes.modalidad', 'estudiantes.estatus', 'estudiantes.grupo', 'personas.nombre', 'personas.apellido_paterno',
+             'personas.apellido_materno', 'personas.fecha_nacimiento', 'personas.curp', 'personas.genero', 'users.facebook', 'personas.tipo_sangre')
           ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
-          //->join('direcciones', 'personas.id_persona', '=', 'direcciones.id_persona')
+          ->join('users', 'users.id_persona', '=', 'personas.id_persona')
           ->where('estudiantes.matricula',$ids)
           ->take(1)
           ->first();
@@ -233,21 +239,80 @@ return view('estudiante\datos.datos_personales');
            $num_local = DB::table('personas')
            ->select('telefonos.numero')
            ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-           ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'local'],])
+           ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'local']])
            ->take(1)
            ->first();
 
            $num_cel = DB::table('personas')
            ->select('telefonos.numero')
            ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
-           ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular'],])
+           ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'celular']])
            ->take(1)
            ->first();
+
+           $actividad = DB::table('datos_externos')
+           ->select('datos_externos.nombre_actividadexterna', 'datos_externos.tipo_actividadexterna', 'datos_externos.dias_sem',
+           'datos_externos.hora_entrada', 'datos_externos.hora_salida', 'datos_externos.lugar')
+           ->where([['datos_externos.matricula', $ids], ['datos_externos.bandera', '=', '1']])
+           ->take(1)
+           ->first();
+
+           $lengua = DB::table('lenguas')
+           ->select('lenguas.nombre_lengua')
+           ->where('lenguas.id_persona', $id_persona)
+           ->take(1)
+           ->first();
+
+           $emergencia_dato = DB::table('datos_emergencias')
+           ->select('datos_emergencias.responsable')
+           ->join('estudiantes', 'estudiantes.matricula', '=', 'datos_emergencias.matricula')
+           ->where('estudiantes.matricula', $ids)
+           ->take(1)
+           ->first();
+         //  $emergencia_dato= $emergencia_dato->responsable;
+           $emergencia_dato= json_decode( json_encode($emergencia_dato), true);
+
+           $emergencia_persona = DB::table('personas')
+           ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+           ->where('personas.id_persona', $emergencia_dato)
+           ->take(1)
+           ->first();
+
+           $parentesco = DB::table('datos_emergencias')
+           ->select('datos_emergencias.parentesco')
+           ->where('datos_emergencias.matricula', $ids)
+           ->take(1)
+           ->first();
+
+           $num_emergencia = DB::table('personas')
+           ->select('telefonos.numero')
+           ->join('telefonos', 'telefonos.id_persona', '=', 'personas.id_persona')
+           ->where([['personas.id_persona',$id_persona], ['telefonos.tipo', '=', 'emergencia']])
+           ->take(1)
+           ->first();
+
+           $alergia = DB::table('estudiantes')
+           ->select('enfermedades_alergias.nombre_enfermedadalergia', 'enfermedades_alergias.tipo_enfermedadalergia',
+           'enfermedades_alergias.descripcion', 'enfermedades_alergias.indicaciones')
+           ->join('enfermedades_alergias', 'estudiantes.matricula', '=', 'enfermedades_alergias.matricula')
+           ->where([['estudiantes.matricula',$ids],['enfermedades_alergias.tipo_enfermedadalergia', '=', 'Alergia']])
+           ->take(1)
+           ->first();
+
+           $enfermedad = DB::table('estudiantes')
+           ->select('enfermedades_alergias.nombre_enfermedadalergia', 'enfermedades_alergias.tipo_enfermedadalergia',
+           'enfermedades_alergias.descripcion', 'enfermedades_alergias.indicaciones')
+           ->join('enfermedades_alergias', 'estudiantes.matricula', '=', 'enfermedades_alergias.matricula')
+           ->where([['estudiantes.matricula',$ids],['enfermedades_alergias.tipo_enfermedadalergia', '=', 'Enfermedad']])
+           ->take(1)
+           ->first();
+
            $paper_orientation = 'letter';
            $customPaper = array(2.5,2.5,600,950);
 
-        $pdf = PDF::loadView('estudiante\datos.hoja_datos',  ['data' =>  $users, 'di' => $direccion, 'nu_l' => $num_local
-        , 'nu_ce' => $num_cel])
+        $pdf = PDF::loadView('estudiante/datos.hoja_datos',  ['data' =>  $users, 'di' => $direccion, 'nu_l' => $num_local,
+         'nu_ce' => $num_cel, 'activ' => $actividad, 'emergencia_persona' => $emergencia_persona, 'parentesco' => $parentesco,
+         'num_emergencia' => $num_emergencia, 'alergia' => $alergia, 'enfermedad' => $enfermedad, 'lengua' => $lengua, 'periodo' => $periodo_semestre])
       ->setPaper($customPaper,$paper_orientation);
         return $pdf->stream('hoja_datos_personales.pdf');
 
@@ -277,7 +342,7 @@ return view('estudiante\datos.datos_personales');
       return redirect()->back();
     }
     else{
-      return view('estudiante\datos.editar_externas')->with('e',$externo);
+      return view('estudiante/datos.editar_externas')->with('e',$externo);
         }
 }
 
@@ -358,7 +423,7 @@ return view('estudiante\datos.datos_personales');
             ->where([['solicitud_talleres.matricula',$id], ['solicitud_talleres.bandera', '=', '9']])
             ->take(1)
             ->first();
-            return view('estudiante\mis_actividades.solicitud_taller')
+            return view('estudiante/mis_actividades.solicitud_taller')
             ->with('u',$users)->with('num_c', $num_cel)->with('taller', $detalles)->with('hola', $detalles_de_s);
           }
             if(($detalles_de_s->estado) == 'Pendiente'){
@@ -372,7 +437,7 @@ return view('estudiante\datos.datos_personales');
               ->where([['solicitud_talleres.matricula',$id], ['solicitud_talleres.bandera', '=', '1']])
               ->take(1)
               ->first();
-              return view('estudiante\mis_actividades.solicitud_taller')
+              return view('estudiante/mis_actividades.solicitud_taller')
               ->with('u',$users)->with('num_c', $num_cel)->with('taller', $detalles);
           }
 
@@ -444,7 +509,7 @@ else {
          $valor_direccion = DB::table('direcciones')->max('id_direccion');
 
 
-   return view('estudiante\servicios.solicitud_practicas')
+   return view('estudiante/servicios.solicitud_practicas')
    ->with('u',$users)->with('d', $direccion)->with('cel', $num_cel)->with('valor_d', $valor_direccion);
  }else{
   return redirect()->route('home_estudiante')->with('error','No cumples con los requisitos para realizar Prácticas Profesionales');}
@@ -499,7 +564,7 @@ else {
 
          $valor_direccion = DB::table('direcciones')->max('id_direccion');
 
-   return view('estudiante\servicios.solicitud_servicioSocial')
+   return view('estudiante/servicios.solicitud_serviciosocial')
    ->with('u',$users)->with('d', $direccion)->with('cel', $num_cel)->with('valor_d', $valor_direccion);
  }
    else {
@@ -536,7 +601,172 @@ else {
 
      public function equipamientosalon()
      {
-       return view('estudiante\lineamientos.equipamiento-salon');
+       return view('estudiante/lineamientos.equipamiento-salon');
      }
 
+public function enviar_solicitud_practicas(Request $request){
+     $data= $request;
+     $usuario_actual=auth()->user();
+     $id=$usuario_actual->id_user;
+
+     $periodo_semestre = DB::table('periodos')
+     ->select('periodos.id_periodo')
+     ->where('periodos.estatus', '=', 'actual')
+     ->take(1)
+     ->first();
+
+     $id_persona = DB::table('estudiantes')
+     ->select('estudiantes.id_persona', 'estudiantes.modalidad')
+     ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+     ->where('estudiantes.matricula',$id)
+     ->take(1)
+     ->first();
+     $validar = DB::table('estudiantes')
+        ->select('estudiantes.semestre', 'estudiantes.estatus', 'estudiantes.modalidad')
+        ->where('estudiantes.matricula',$id)
+        ->take(1)
+        ->first();
+
+     $existe_solicitud = DB::table('practicas')
+                         ->select('practicas.matricula')
+                         ->where([['practicas.matricula', $id], ['practicas.tipo', '=','PRACTICAS']])
+                         ->take(1)
+                         ->first();
+     if(empty($existe_solicitud->matricula)){
+        $codigo=CodigoPostal::find($data['codigo_postal']);
+       if(!empty($codigo->cp)){
+       $nombre_carreras = DB::table('carreras')
+       ->select('carreras.clave_carrera')
+       ->where('carreras.modalidad', '=', $validar->modalidad)
+       ->take(1)
+       ->first();
+
+       $codigo_de = DB::table('codigos_postales')->select('codigos_postales.municipio')
+                             ->where('codigos_postales.cp', $data['codigo_postal'])
+                             ->take(1)
+                             ->first();
+
+       $cla_per= $id."120819"."065203";
+       $persona= new Persona;
+       $persona->id_persona=$cla_per;
+       $persona->nombre= $data['nombre_titular'];
+       $persona->apellido_paterno= $data['apellido_paterno_titular'];
+       $persona->apellido_materno=$data['apellido_materno_titular'];
+       $persona->save();
+          $now = new \DateTime();
+      $id_direccion_pr= $id."130819".$nombre_carreras->clave_carrera."065210";
+      $direccion_p = new Direccion;
+      $direccion_p->id_direccion=$id_direccion_pr;
+      $direccion_p->vialidad_principal=$data['calle_p'];
+      $direccion_p->num_exterior=$data['numero_p'];
+      $direccion_p->cp=$data['codigo_postal'];
+      $direccion_p->localidad=$data['colonia_p'];
+      $direccion_p->municipio=$codigo_de->municipio;
+      $direccion_p->save();
+
+
+
+       $practicas = new Practica;
+       $practicas->matricula=$id;
+       $practicas->clave_carrera=$nombre_carreras->clave_carrera;
+       $practicas->id_departamento=3;
+       $practicas->nombre_dependencia= $data['institucion'];
+       $practicas->titular=$cla_per;
+       $practicas->cargo_titular=$data['cargo_responsable'];
+       $practicas->fecha=$now;
+       $practicas->periodo=$periodo_semestre->id_periodo;
+       $practicas->tipo='PRACTICAS';
+       $practicas->save();
+
+       $profesionales = new PracticaProfesional;
+       $profesionales->id_practicas=$practicas->id_practicas;
+       $profesionales->id_direccion=$id_direccion_pr;
+       $profesionales->estatus_practica='Pendiente';
+       $profesionales->periodo_practicas=$data['duracion'];
+       $profesionales->save();
+
+       DB::table('telefonos')
+           ->Insert(
+               ['numero' => $data['telefono'], 'tipo' => 'practicas', 'id_persona' => $id_persona->id_persona]);
+ return redirect()->route('solicitud_practicasP')->with('success','¡Solicitud Enviada Correctamente!');
+
+
+}else {
+  return redirect()->back()->withInput(Input::all())->with('error','¡El código postasl que ingreso no existe!');
+}
+   }
+   else {
+      return redirect()->back()->with('error','¡Ya has enviado una solicitud, una vez aprobado se te notificará por email!');
+   }
+}
+
+
+public function enviar_solicitud_servicio(Request $request){
+     $data= $request;
+     $usuario_actual=auth()->user();
+     $id=$usuario_actual->id_user;
+
+     $periodo_semestre = DB::table('periodos')
+     ->select('periodos.id_periodo')
+     ->where('periodos.estatus', '=', 'actual')
+     ->take(1)
+     ->first();
+
+     $id_persona = DB::table('estudiantes')
+     ->select('estudiantes.id_persona', 'estudiantes.modalidad')
+     ->join('personas', 'estudiantes.id_persona', '=', 'personas.id_persona')
+     ->where('estudiantes.matricula',$id)
+     ->take(1)
+     ->first();
+     $validar = DB::table('estudiantes')
+        ->select('estudiantes.semestre', 'estudiantes.estatus', 'estudiantes.modalidad')
+        ->where('estudiantes.matricula',$id)
+        ->take(1)
+        ->first();
+
+     $existe_solicitud = DB::table('practicas')
+                         ->select('practicas.matricula')
+                         ->where([['practicas.matricula', $id], ['practicas.tipo', '=','SERVICIO']])
+                         ->take(1)
+                         ->first();
+     if(empty($existe_solicitud->matricula)){
+       $nombre_carreras = DB::table('carreras')
+       ->select('carreras.clave_carrera')
+       ->where('carreras.modalidad', '=', $validar->modalidad)
+       ->take(1)
+       ->first();
+
+       $cla_per= $id."120819"."065203".$id;
+       $persona= new Persona;
+       $persona->id_persona=$cla_per;
+       $persona->nombre= $data['nombre_titular'];
+       $persona->apellido_paterno= $data['apellido_paterno_titular'];
+       $persona->apellido_materno=$data['apellido_materno_titular'];
+       $persona->save();
+          $now = new \DateTime();
+
+       $practicas = new Practica;
+       $practicas->matricula=$id;
+       $practicas->clave_carrera=$nombre_carreras->clave_carrera;
+       $practicas->id_departamento=3;
+       $practicas->nombre_dependencia= $data['institucion'];
+       $practicas->titular=$cla_per;
+       $practicas->cargo_titular=$data['cargo_responsable'];
+       $practicas->fecha=$now;
+       $practicas->periodo=$periodo_semestre->id_periodo;
+       $practicas->tipo='SERVICIO';
+       $practicas->save();
+
+       $profesionales = new ServicioSocial;
+       $profesionales->id_practicas=$practicas->id_practicas;
+       $profesionales->estatus_servicio='Cursando';
+       $profesionales->porcentaje_avance=$data['avance'];
+       $profesionales->save();
+
+    return redirect()->back()->with('success','¡Datos cargados Correctamente!');
+   }
+   else {
+      return redirect()->back()->with('error','¡Ya has rellenado tus datos correctamente!');
+   }
+}
 }

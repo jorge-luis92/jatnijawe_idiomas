@@ -14,8 +14,8 @@
 
   <table class="table table-bordered table-info" style="color: #8181F7;" >
 
-  <h4 style="font-size: 1.0em; color: #000000;" align="center"><strong>ALUMNOS BECADOS</strong></h4>
-  <h5 style="font-size: 1.0em; color: #000000;" align="rigt">Número de Alumnos Becados del ciclo escolar actual</h5>
+  <h4 style="font-size: 1.0em; color: #000000;" align="center"><strong>ESTUDIANTES BECADOS</strong></h4>
+  <h5 style="font-size: 1.0em; color: #000000;" align="rigt">Número de Estudiantes Becados del ciclo escolar actual</h5>
 
   <tr>
     <td colspan="6"align="center"><strong>Modalidad Escolarizada</strong></td>
@@ -30,21 +30,60 @@
     </tr>
 
     <tr>
-      <td bgcolor="white" ></td>
-      <td bgcolor="white" ></td>
-      <td bgcolor="white" ></td>
-      <td ></td>
-      <td bgcolor="white" ></td>
-      <td bgcolor="white" ></td>
+      <td bgcolor="white" >Propia Institución</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_M['INSTITUCIONAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_F['INSTITUCIONAL']}}</td>
+      <td >{{$tipos_becas_ESC_G['INSTITUCIONAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_D['INSTITUCIONAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_L['INSTITUCIONAL']}}</td>
+    </tr>
+    <tr>
+      <td bgcolor="white" >Beca Federal</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_M['FEDERAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_F['FEDERAL']}}</td>
+      <td >{{$tipos_becas_ESC_G['FEDERAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_D['FEDERAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_L['FEDERAL']}}</td>
+    </tr>
+    <tr>
+      <td bgcolor="white" >Beca Estatal</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_M['ESTATAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_F['ESTATAL']}}</td>
+      <td >{{$tipos_becas_ESC_G['ESTATAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_D['ESTATAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_L['ESTATAL']}}</td>    </tr>
+    <tr>
+      <td bgcolor="white" >Beca Municipal</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_M['MUNICIPAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_F['MUNICIPAL']}}</td>
+      <td >{{$tipos_becas_ESC_G['MUNICIPAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_D['MUNICIPAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_L['MUNICIPAL']}}</td>
+    </tr>
+    <tr>
+      <td bgcolor="white" >Beca Particular</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_M['PARTICULAR']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_F['PARTICULAR']}}</td>
+      <td >{{$tipos_becas_ESC_G['PARTICULAR']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_D['PARTICULAR']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_L['PARTICULAR']}}</td>
+    </tr>
+    <tr>
+      <td bgcolor="white" >Beca Internacional</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_M['INTERNACIONAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_F['INTERNACIONAL']}}</td>
+      <td >{{$tipos_becas_ESC_G['INTERNACIONAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_D['INTERNACIONAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_L['INTERNACIONAL']}}</td>
     </tr>
 
     <tr>
     <td ><strong>Total</strong></td>
-      <td bgcolor="white" ></td>
-      <td bgcolor="white" ></td>
-      <td ></td>
-      <td bgcolor="white" ></td>
-      <td bgcolor="white" ></td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_M['TOTAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_ESC_F['TOTAL']}}</td>
+      <td >{{$tipos_becas_ESC_G['TOTAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_D['TOTAL']}}</td>
+      <td bgcolor="white" >{{$tipos_becas_esco_L['TOTAL']}}</td>
     </tr>
   </table>
 
@@ -62,21 +101,60 @@
         </tr>
 
         <tr>
-          <td bgcolor="white" ></td>
-          <td bgcolor="white" ></td>
-          <td bgcolor="white" ></td>
-          <td ></td>
-          <td bgcolor="white" ></td>
-          <td bgcolor="white" ></td>
+          <td bgcolor="white" >Propia Institución</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_M['INSTITUCIONAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_F['INSTITUCIONAL']}}</td>
+          <td >{{$tipos_becas_SEMI_G['INSTITUCIONAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_D['INSTITUCIONAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_L['INSTITUCIONAL']}}</td>
+        </tr>
+        <tr>
+          <td bgcolor="white" >Beca Federal</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_M['FEDERAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_F['FEDERAL']}}</td>
+          <td >{{$tipos_becas_SEMI_G['FEDERAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_D['FEDERAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_L['FEDERAL']}}</td>
+        </tr>
+        <tr>
+          <td bgcolor="white" >Beca Estatal</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_M['ESTATAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_F['ESTATAL']}}</td>
+          <td >{{$tipos_becas_SEMI_G['ESTATAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_D['ESTATAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_L['ESTATAL']}}</td>    </tr>
+        <tr>
+          <td bgcolor="white" >Beca Municipal</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_M['MUNICIPAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_F['MUNICIPAL']}}</td>
+          <td >{{$tipos_becas_SEMI_G['MUNICIPAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_D['MUNICIPAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_L['MUNICIPAL']}}</td>
+        </tr>
+        <tr>
+          <td bgcolor="white" >Beca Particular</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_M['PARTICULAR']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_F['PARTICULAR']}}</td>
+          <td >{{$tipos_becas_SEMI_G['PARTICULAR']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_D['PARTICULAR']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_L['PARTICULAR']}}</td>
+        </tr>
+        <tr>
+          <td bgcolor="white" >Beca Internacional</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_M['INTERNACIONAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_F['INTERNACIONAL']}}</td>
+          <td >{{$tipos_becas_SEMI_G['INTERNACIONAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_D['INTERNACIONAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_L['INTERNACIONAL']}}</td>
         </tr>
 
         <tr>
         <td ><strong>Total</strong></td>
-          <td bgcolor="white" ></td>
-          <td bgcolor="white" ></td>
-          <td ></td>
-          <td bgcolor="white" ></td>
-          <td bgcolor="white" ></td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_M['TOTAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_SEMI_F['TOTAL']}}</td>
+          <td >{{$tipos_becas_SEMI_G['TOTAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_D['TOTAL']}}</td>
+          <td bgcolor="white" >{{$tipos_becas_semi_L['TOTAL']}}</td>
         </tr>
     </table>
 

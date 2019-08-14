@@ -46,7 +46,7 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                     </div>
                 </div>
-                <input type="text" name="matricula"  hidden class="form-control" value="<?php echo e($estudiante_matricula); ?>">
+                <input type="text" name="matricula" hidden class="form-control" value="<?php echo e($estudiante_matricula); ?>">
 
                 <div class="form-group row">
                 <label for="asunto" class="col-md-4 col-form-label text-md-right" ><?php echo e(__('Asunto:')); ?></label>

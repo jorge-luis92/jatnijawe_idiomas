@@ -8,14 +8,14 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <link rel="shortcut icon" href="{{asset('./logo.ico')}}">
+  <link rel="shortcut icon" href="{{asset('logo.ico')}}">
   <!-- Custom fonts for this template-->
   <link  rel="stylesheet" href="{{asset('requisitos/fontawesome-free/css/all.min.css')}}" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link  rel="stylesheet" href="{{asset('./css/sb-admin-3.min.css')}}">
-  <link rel="stylesheet"  href="{{asset('./css/nuevo.css')}}">
+  <link  rel="stylesheet" href="{{asset('css/sb-admin-3.min.css')}}">
+  <link rel="stylesheet"  href="{{asset('css/nuevo.css')}}">
 
   <title>Coordinación de Planeación @yield('title')</title>
 
@@ -27,7 +27,7 @@
             <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
         <a class="nav-link" href={{ route('home_planeacion')}}>
-            <img class="img-responsive center-block" src="{{asset('./logo.ico')}}" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
+            <img class="img-responsive center-block" src="{{asset('logo.ico')}}" width="47" height="47" alt=""><span style="font-size: 1.5em"> &nbsp;JAT WEB</span></a></li><!-- Divider -->
       <hr class="sidebar-divider" style=" background-color: #FFFFFF;"><!-- Heading -->
       <div class="sidebar-heading" style="color: #FFFFFF">
         Planeación
@@ -50,17 +50,17 @@
 
       <li class="nav-item" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#departamentos" aria-expanded="true" aria-controls="collapseTwo">
-      <i class="fa fa-user" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Departamentos</span>
+      <i class="fa fa-user" aria-hidden="true"></i></i><span style="font-size: 0.8em;">&nbsp;Coordinación Académica</span>
         </a>
         <div id="departamentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-              <a class="collapse-item" href={{ route('info_coord_academica1')}}>Coordinación Académica</a>
-            <a class="collapse-item" href={{ route('info_formacion_integral1')}}>Formación Integral</a>
-            <a class="collapse-item" href={{ route('info_serviciosocial')}}>Servicio Social</a>
-            <a class="collapse-item" href={{ route('info_practicasp')}}>Prácticas profesionales </a>
-        <!--    <a class="collapse-item" href={{ route('info_practicasp')}}>Seguimiento a Egresados</a>
--->
+              <a class="collapse-item" href={{ route('info_coord_academica1')}}>Información General</a>
+            <!--   <a class="collapse-item" href={{ route('info_formacion_integral1')}}>Formación Integral</a>
+            <a class="collapse-item" href={{ route('info_serviciosocial')}}>Servicios</a>
+         <a class="collapse-item" href={{ route('info_practicasp')}}>Prácticas profesionales </a>
+           <a class="collapse-item" href={{ route('info_practicasp')}}>Seguimiento a Egresados</a>-->
+
           </div>
         </div>
       </li>
@@ -71,7 +71,7 @@
         <div id="reportes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header" style="color: blue">Opciones:</h6>
-              <a class="collapse-item" href={{ route('reporte_semestral')}}>Semestral</a>
+        <!--      <a class="collapse-item" href={{ route('reporte_semestral')}}>Semestral</a>-->
               <a class="collapse-item" href={{ route('reporte911_9')}}>911.9</a>
               <a class="collapse-item" href={{ route('reporte911_9A_0')}}>911.9A</a>
 
@@ -213,14 +213,14 @@
   </div>
 
 
-  <script src="{{asset('./requisitos/jquery/jquery.min.js')}}"></script>
-  <script src="{{asset('./requisitos/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('requisitos/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('requisitos/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="{{asset('./requisitos/jquery-easing/jquery.easing.min.js')}}"></script>
+  <script src="{{asset('requisitos/jquery-easing/jquery.easing.min.js')}}"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="{{asset('./js/sb-admin-2.min.js')}}"></script>
+  <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
 
   <!-- Page level plugins -->

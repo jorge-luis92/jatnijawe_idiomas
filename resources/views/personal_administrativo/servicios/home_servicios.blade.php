@@ -7,7 +7,7 @@
 @section('seccion')
 </br>
 <div class="container" id="font2">
-  <h2 style="font-size: 1.8em; color: #000000;" align="center">Perfil: Coordinación de Servicio Social y Prácticas Pofesionales</h2>
+  <h2 style="font-size: 1.8em; color: #000000;" align="center">Perfil: Coordinación de Servicio Social y Prácticas Profesionales</h2>
    @include('flash-message')
 </br>
 </br>

@@ -12,28 +12,63 @@ use App\Enfermedad_Alergia;
 use App\Datos_emergencia;
 use App\Discapacidad;
 use App\CodigoPostal;
+use App\Practica;
+use App\PracticaProfesional;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 class ServiciosController extends Controller
 {
 public function home_servicios(){
-return view('personal_administrativo\servicios.home_servicios');
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='3'){
+     return redirect()->back();
+    //  return redirect('perfiles')->with('error','Acceso Denegado');
+    }
+return view('personal_administrativo/servicios.home_servicios');
 }
 public function solicitudes_practicas(){
-return view('personal_administrativo\servicios\practicasP.solicitudes_practicas');
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='3'){
+     return redirect()->back();
+    }
+    $usuario_actual=auth()->user();
+    $id=$usuario_actual->id_user;
+  /*  $result = DB::table('practicas_profesionales')
+    ->select('practicas.nombre_dependencia', 'practicas.fecha', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+    ->join('practicas', 'practicas.id_practicas', '=', 'practicas_profesionales.id_practicas')
+    ->join('estudiantes', 'estudiantes.matricula', '=', 'practicas.matricula')
+    ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
+    ->where([['practicas.matricula',$id ] ,  ['practicas_profesionales.estatus_praticas', '=', 'P']])
+     ->orderBy('extracurriculares.created_at', 'desc')
+    ->simplePaginate(10);*/
+
+return view('personal_administrativo/servicios/practicasp.solicitudes_practicas');
 }
 
 public function solicitudes_serviciosocial(){
-return view('personal_administrativo\servicios\servicioS.solicitudes_serviciosocial');
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='3'){
+     return redirect()->back();
+    }
+return view('personal_administrativo/servicios/servicios.solicitudes_serviciosocial');
 }
 
 public function estudiantes_activosPP(){
-return view('personal_administrativo\servicios\practicasP.estudiantes_activosPP');
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='3'){
+     return redirect()->back();
+        }
+return view('personal_administrativo/servicios/practicasp.estudiantes_activospp');
 }
 
 
 public function estudiantes_activosSS(){
-return view('personal_administrativo\servicios\servicioS.estudiantes_activosSS');
+  $usuario_actual=\Auth::user();
+   if($usuario_actual->tipo_usuario!='3'){
+     return redirect()->back();
+    //  return redirect('perfiles')->with('error','Acceso Denegado');
+    }
+return view('personal_administrativo/servicios/servicioS.estudiantes_activosss');
 }
 
 public function egresado_registrado(){
@@ -52,15 +87,15 @@ public function egresado_registrado(){
         ->where([['estudiantes.egresado', '=', '1']])
          ->orderBy('estudiantes.matricula', 'asc')
         ->simplePaginate(4);
-return view('personal_administrativo\servicios\seguimientoE.egresado_registrado')->with('estudiante', $est);
+return view('personal_administrativo/servicios/seguimientoE.egresado_registrado')->with('estudiante', $est);
 }
 
 public function antecedentes_laborales_egresado(){
-return view('personal_administrativo\servicios\seguimientoE.antecedentes_laborales_egresado');
+return view('personal_administrativo/servicios/seguimientoE.antecedentes_laborales_egresado');
 }
 
 public function cuestionario_egresado_ver(){
-return view('personal_administrativo\servicios\seguimientoE.cuestionario_egresado_ver');
+return view('personal_administrativo/servicios/seguimientoE.cuestionario_egresado_ver');
 }
 
 public function generales_egresado_ver($matricula){
@@ -140,7 +175,7 @@ $id_clave = DB::table('escuelas')
 ->take(1)
 ->first();
 
-return view('personal_administrativo\servicios\seguimientoE.generales_egresado_ver')
+return view('personal_administrativo/servicios/seguimientoE.generales_egresado_ver')
 ->with('u', $users)->with('l', $lenguas_r)->with('ea', $enf_ale)->with('nl',$num_local)
 ->with('nc',$num_cel)->with('ne',$num_emergencia)->with('email', $correo)->with('pro', $datos_pro)->with('escuela', $id_clave);
 

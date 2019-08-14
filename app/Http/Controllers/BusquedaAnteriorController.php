@@ -31,7 +31,7 @@ class BusquedaAnteriorController extends Controller
 {
   public function vista_atras()
   {
-  return view('personal_administrativo\formacion_integral.busqueda_atras');
+  return view('personal_administrativo/formacion_integral.busqueda_atras');
   }
 
 
@@ -49,7 +49,7 @@ class BusquedaAnteriorController extends Controller
 
 
     if (count($user) > 0 ) {
-        return view ( 'personal_administrativo\formacion_integral.busqueda_atras' )->withDetails ($user )->withQuery ($q);
+        return view ( 'personal_administrativo/formacion_integral.busqueda_atras' )->withDetails ($user )->withQuery ($q);
   }
   else{
   return redirect()->route('busqueda_atras')->with('error','¡Sin resultados!');
@@ -69,13 +69,13 @@ class BusquedaAnteriorController extends Controller
     ->simplePaginate(10);
 
     $academicas = DB::table('alumcur')
-     ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'ACADEMICA'],])
+     ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', 'LIKE', 'si'], ['alumcur.area', '=', 'ACADEMICA']])
       ->sum('alumcur.creditos');
     $culturales = DB::table('alumcur')
-     ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'CULTURAL'],])
+     ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'CULTURAL']])
      ->sum('alumcur.creditos');
     $deportivas = DB::table('alumcur')
-    ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'DEPORTIVA'],])
+    ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'DEPORTIVA']])
     ->sum('alumcur.creditos');
 
     $sumas = $academicas + $culturales + $deportivas;
@@ -86,7 +86,7 @@ class BusquedaAnteriorController extends Controller
     ->take(1)
     ->first();
 
-  return  view ('personal_administrativo\formacion_integral.avance_pasado')
+  return  view ('personal_administrativo/formacion_integral.avance_pasado')
   ->with('dato', $result)
   ->with('aca',$academicas)
   ->with('cul',$culturales)
@@ -104,24 +104,24 @@ class BusquedaAnteriorController extends Controller
     ->first();
     $academicas = DB::table('alumcur')
      ->select('alumcur.nombre', 'alumcur.id_curso')
-     ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'ACADEMICA'],])
+     ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'ACADEMICA']])
      ->orderBy('alumcur.nombre', 'asc')
       ->get();
     $culturales = DB::table('alumcur')
     ->select('alumcur.nombre')
-    ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'CULTURAL'],])
+    ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'CULTURAL']])
     ->orderBy('alumcur.nombre', 'asc')
      ->get();
     $deportivas = DB::table('alumcur')
     ->select('alumcur.nombre')
-    ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'DEPORTIVA'],])
+    ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'DEPORTIVA']])
     ->orderBy('alumcur.nombre', 'asc')
      ->get();
 
     $paper_orientation = 'letter';
     $customPaper = array(2.5,2.5,600,950);
 
-    $pdf = PDF::loadView('personal_administrativo\formacion_integral\constancias_anteriores.constancia_parcial', ['data' =>  $datos_estudiante,
+    $pdf = PDF::loadView('personal_administrativo/formacion_integral/constancias_anteriores.constancia_parcial', ['data' =>  $datos_estudiante,
     'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas])
     ->setPaper($customPaper,$paper_orientation);
     return $pdf->stream('constancia_parcial.pdf');
@@ -129,9 +129,41 @@ class BusquedaAnteriorController extends Controller
   }
 
   protected function constancia_val($ID){
-  $id=$matricula;
+    $id_usr=$ID;
+    $datos_estudiante = DB::table('alumnos')
+    ->select('alumnos.nombre')
+    ->where('alumnos.ID',$id_usr)
+    ->take(1)
+    ->first();
+    $academicas = DB::table('alumcur')
+     ->select('alumcur.nombre', 'alumcur.id_curso')
+     ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'ACADEMICA']])
+     ->sum('alumcur.creditos');
+
+    $culturales = DB::table('alumcur')
+    ->select('alumcur.nombre')
+    ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'CULTURAL']])
+    ->sum('alumcur.creditos');
+
+    $deportivas = DB::table('alumcur')
+    ->select('alumcur.nombre')
+    ->where([['alumcur.id_usr', '=', $id_usr], ['alumcur.status', '=', 'si'], ['alumcur.area', '=', 'DEPORTIVA']])
+    ->sum('alumcur.creditos');
+    $sumas = $academicas + $culturales + $deportivas;
+    $paper_orientation = 'letter';
+    $customPaper = array(2.5,2.5,600,950);
+
+    $pdf = PDF::loadView('personal_administrativo/formacion_integral/constancias_anteriores.constancia_oficial', ['data' =>  $datos_estudiante,
+    'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas, 'suma' => $sumas])
+    ->setPaper($customPaper,$paper_orientation);
+    return $pdf->stream('constancia_parcial.pdf');
+
+  }
+
+  protected function constancia_valida($ID){
+  $id=$ID;
     $datos_estudiante = DB::table('estudiantes')
-     ->select('personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
+     ->select('estudiantes.modalidad', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno')
     ->join('personas', 'personas.id_persona', '=', 'estudiantes.id_persona')
     ->where('estudiantes.matricula',$id)
     ->take(1)
@@ -139,7 +171,7 @@ class BusquedaAnteriorController extends Controller
 
   $academicas = DB::table('detalle_extracurriculares')
    ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
-   ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'ACADEMICA'],])
+   ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', 'LIKE', 'ACADEMICA'],])
     ->sum('detalle_extracurriculares.creditos');
   $culturales = DB::table('detalle_extracurriculares')
    ->join('extracurriculares', 'extracurriculares.id_extracurricular', '=', 'detalle_extracurriculares.actividad')
@@ -150,19 +182,34 @@ class BusquedaAnteriorController extends Controller
   ->where([['detalle_extracurriculares.matricula', '=', $id], ['detalle_extracurriculares.estado', '=', 'Acreditado'], ['extracurriculares.area', '=', 'DEPORTIVA'],])
   ->sum('detalle_extracurriculares.creditos');
   $sumas = $academicas + $culturales + $deportivas;
+  if(($datos_estudiante->modalidad) == 'ESCOLARIZADA'){
   if($academicas >= 80 && $sumas >= 200){
       $paper_orientation = 'letter';
       $customPaper = array(2.5,2.5,600,950);
 
-   $pdf = PDF::loadView('personal_administrativo\formacion_integral\constancias_anteriores.constancia_oficial', ['data' =>  $datos_estudiante,
+   $pdf = PDF::loadView('personal_administrativo/formacion_integral/constancias_anteriores.constancia_oficial', ['data' =>  $datos_estudiante,
    'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas, 'suma' => $sumas])
   ->setPaper($customPaper,$paper_orientation);
    return $pdf->stream('constancia_oficial.pdf');
-  }
-  else{
-    return redirect()->route('busqueda_estudiante_fi')->with('error','¡El Estudiante no cumple con los requisitos para generar la constancia!');
-  }
-  }
+ }
+ else{
+   return redirect()->route('busqueda_estudiante_fi')->with('error','¡El Estudiante no cumple con los requisitos para generar la constancia!');
+ }
+}else {
+  if(($datos_estudiante->modalidad) == 'SEMI ESCOLARIZADA'){
+  if($academicas >= 80 && $sumas >= 200){
+      $paper_orientation = 'letter';
+      $customPaper = array(2.5,2.5,600,950);
 
-
+   $pdf = PDF::loadView('personal_administrativo/formacion_integral/constancias_anteriores.constancia_oficial', ['data' =>  $datos_estudiante,
+   'aca' => $academicas, 'cul' => $culturales, 'dep' => $deportivas, 'suma' => $sumas])
+  ->setPaper($customPaper,$paper_orientation);
+   return $pdf->stream('constancia_oficial.pdf');
+ }
+ else{
+   return redirect()->route('busqueda_estudiante_fi')->with('error','¡El Estudiante no cumple con los requisitos para generar la constancia!');
+ }
+}
+  }
+}
 }

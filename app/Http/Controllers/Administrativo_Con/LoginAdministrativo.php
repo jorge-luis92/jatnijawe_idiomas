@@ -98,7 +98,8 @@ class LoginAdministrativo extends Controller
 
   public function getLogout(Request $request)
 {
-  $this->guard()->logout();
+  Auth::logout();
+//  $this->guard()->logout();
  $request->session()->invalidate();
 return $this->loggedOut($request) ?:  redirect()->back()->with('success', 'Cierre de sesión correcto!');
 }

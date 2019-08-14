@@ -27,7 +27,7 @@ class AdminController extends Controller
          return redirect()->back();
         //  return redirect('perfiles')->with('error','Acceso Denegado');
         }
-        return view('personal_administrativo\admin_sistema.home_admin');
+        return view('personal_administrativo/admin_sistema.home_admin');
       }
 
       public function registro_estudiante(){
@@ -36,7 +36,7 @@ class AdminController extends Controller
            return redirect()->back();
           //  return redirect()->back()->with('error','Acceso Denegado');
           }
-        return view('personal_administrativo\admin_sistema.registro_estudiante');
+        return view('personal_administrativo/admin_sistema.registro_estudiante');
       }
 
       public function busqueda_estudiante(){
@@ -44,7 +44,7 @@ class AdminController extends Controller
          if($usuario_actual->tipo_usuario!='5'){
            return redirect()->back();
           }
-        return view('personal_administrativo\admin_sistema.busqueda_estudiante');
+        return view('personal_administrativo/admin_sistema.busqueda_estudiante');
       }
 
       public function estudiante_activo(){
@@ -60,7 +60,7 @@ class AdminController extends Controller
          ->orderBy('users.updated_at', 'asc')
         ->simplePaginate(10);
 
-        return view('personal_administrativo\admin_sistema.estudiante_activo')->with('estudiante', $est);
+        return view('personal_administrativo/admin_sistema.estudiante_activo')->with('estudiante', $est);
       }
 
       public function estudiante_inactivo(){
@@ -76,7 +76,7 @@ class AdminController extends Controller
          ->orderBy('estudiantes.semestre', 'asc')
         ->simplePaginate(10);
 
-        return view('personal_administrativo\admin_sistema.estudiante_inactivo')->with('estudiante', $est);
+        return view('personal_administrativo/admin_sistema.estudiante_inactivo')->with('estudiante', $est);
       }
 
       public function registro_coordinador(){
@@ -87,7 +87,7 @@ class AdminController extends Controller
         $dep = DB::table('departamentos')
         ->select('departamentos.id_departamento', 'departamentos.departamento')
         ->get();
-      return view('personal_administrativo\admin_sistema.registro_coordinador')->with('de', $dep);
+      return view('personal_administrativo/admin_sistema.registro_coordinador')->with('de', $dep);
     }
 
       public function registrar_coordinador(Request $request){
@@ -200,7 +200,7 @@ if($data['edad'] >17){
 
 
       if (count ($user) > 0 ) {
-            return view ( 'personal_administrativo\admin_sistema.busqueda_estudiante' )->withDetails ($user )->withQuery ($q);
+            return view ( 'personal_administrativo/admin_sistema.busqueda_estudiante' )->withDetails ($user )->withQuery ($q);
     }
   else{
   return redirect()->route('busqueda_estudiante')->with('error','¡Sin resultados!');
@@ -233,7 +233,7 @@ if($data['edad'] >17){
 
 
     if ((count ($user) > 0 ) && ($est != null )){
-          return view ( 'personal_administrativo\auxiliar_administrativo.busqueda_estudiante_aux' )->withDetails ($user )->withQuery ($q);
+          return view ( 'personal_administrativo/auxiliar_administrativo.busqueda_estudiante_aux' )->withDetails ($user )->withQuery ($q);
   }
   else{
   return redirect()->route('busqueda_estudiante_aux')->with('error','¡Sin resultados!');
@@ -287,7 +287,7 @@ if($data['edad'] >17){
          if($usuario_actual->tipo_usuario!='5'){
            return redirect()->back();
           }
-        return view('personal_administrativo\admin_sistema.busqueda_coordinador');
+        return view('personal_administrativo/admin_sistema.busqueda_coordinador');
       }
 
       public function coordinador_activo(){
@@ -304,7 +304,7 @@ if($data['edad'] >17){
           ->where([['administrativos.puesto','!=', ''], ['users.bandera', '=', '1'] , ['users.id_user', '!=', $id]])
           ->orderBy('personas.nombre', 'asc')
           ->simplePaginate(8);
-        return view('personal_administrativo\admin_sistema.coordinador_activo')->with('coordi', $users);
+        return view('personal_administrativo/admin_sistema.coordinador_activo')->with('coordi', $users);
       }
 
       public function coordinador_inactivo(){
@@ -322,7 +322,7 @@ if($data['edad'] >17){
           ->simplePaginate(8);
 
 
-        return view('personal_administrativo\admin_sistema.coordinador_inactivo')->with('coordi', $users);
+        return view('personal_administrativo/admin_sistema.coordinador_inactivo')->with('coordi', $users);
       }
 
 
@@ -339,7 +339,7 @@ if($data['edad'] >17){
                     ->first();
                   $ema = DB::table('users')
                   ->select('users.email')->where('users.id_user', $ids)->take(1)->first();
-         return view('personal_administrativo\admin_sistema.editar_estudiante')->with('users', $datos)->with('emails', $ema);
+         return view('personal_administrativo/admin_sistema.editar_estudiante')->with('users', $datos)->with('emails', $ema);
           }
 
           protected function activar_cordinador($id_user){
@@ -369,7 +369,7 @@ if($data['edad'] >17){
             ->select('periodos.inicio', 'periodos.final', 'periodos.estatus', 'periodos.created_at')
             ->orderBy('periodos.estatus', 'asc')
             ->simplePaginate(7);
-      return view('personal_administrativo\admin_sistema.nuevo_periodo')->with('guardados', $periodos);
+      return view('personal_administrativo/admin_sistema.nuevo_periodo')->with('guardados', $periodos);
     }
 
 protected function crear_periodo(Request $request){
@@ -455,7 +455,7 @@ else {
      $actualizacion = 'NO';
 }*/
 $actualizacion= 'NO';
-  return view('personal_administrativo\admin_sistema.fecha_actualizacion')->with('fechas', $id_clave)->with('ss', $actualizacion);
+  return view('personal_administrativo/admin_sistema.fecha_actualizacion')->with('fechas', $id_clave)->with('ss', $actualizacion);
 
 }
 

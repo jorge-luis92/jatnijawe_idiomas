@@ -34,7 +34,7 @@ class CoordinadorAcademico extends Controller
        ->orderBy('estudiantes.matricula', 'asc')
       ->simplePaginate(10);
 
-      return view('personal_administrativo\auxiliar_administrativo.futuros_egresados')->with('estudiante', $est);
+      return view('personal_administrativo/auxiliar_administrativo.futuros_egresados')->with('estudiante', $est);
     }
 
     protected function egresados_estudiantes(){
@@ -54,7 +54,7 @@ class CoordinadorAcademico extends Controller
        ->orderBy('estudiantes.matricula', 'asc')
       ->simplePaginate(10);
 
-      return view('personal_administrativo\auxiliar_administrativo.egresados_estudiantes_idiomas')->with('estudiante', $est);
+      return view('personal_administrativo/auxiliar_administrativo.egresados_estudiantes_idiomas')->with('estudiante', $est);
     }
 
 

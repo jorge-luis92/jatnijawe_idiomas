@@ -23,11 +23,11 @@
       <th scope="row">Hablante de Lengua</th>
     </tr>
     <tr>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
+      <td bgcolor="white">{{$total_masculino}}</td>
+      <td bgcolor="white">{{$total_femenino}}</td>
+      <td bgcolor="white">{{$total}}</td>
+      <td bgcolor="white">{{$total_estudiantes_discapacidadESC}}</td>
+      <td bgcolor="white">{{$total_estudiantes_lenguaESCO}}</td>
     </tr>
     </table>
 
@@ -43,11 +43,14 @@
     </tr>
 
     <tr>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
+
+      <td bgcolor="white">{{$total_masculino2}}</td>
+      <td bgcolor="white">{{$total_femenino2}}</td>
+      <td bgcolor="white">{{$total2}}</td>
+      <td bgcolor="white">{{$total_estudiantes_discapacidadSEMI}}</td>
+      <td bgcolor="white">{{$total_estudiantes_lenguaSEMI}}</td>
+
+
     </tr>
     </table>
 
@@ -63,11 +66,11 @@
     </tr>
 
     <tr>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
+      <td bgcolor="white">{{$total_inscritos_masc}}</td>
+      <td bgcolor="white">{{$total_inscritos_fem}}</td>
+      <td bgcolor="white">{{$total_general}}</td>
+      <td bgcolor="white">{{$total_estudiantes_discapacidad}}</td>
+      <td bgcolor="white">{{$total_estudiantes_lengua}}</td>
     </tr>
     </table>
 

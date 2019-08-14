@@ -1,15 +1,10 @@
 <style>
 body{
   margin: 0;
-  font-family: 'Century Gothic';
 }
 #datos {border:2px solid; width:50%; text-align:center}
 #datos tr {border:2px solid;}
 #datos tr td{border:2px solid;}
-#span1{font-size: 14px;  }
-#span2{font-size: 12px;}
-#span3{font-size: 10px;}
- #span4{font-size: 18px;}
 </style>
 <?php
 $arrayMeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
@@ -19,26 +14,21 @@ $arrayDias = array('Domingo', 'Lunes', 'Martes','Miercoles', 'Jueves', 'Viernes'
   <table id="encabezado" >
     <tr class="fila" align="center">
     <td id="col_1" >
-    <img src="./image/logos_idiomas/image1247.jpg">
+    <img src="image/logos_idiomas/image1247.jpg">
     </td>
     <td id="col_2">
-                    <span id="span1">Universidad Aut&oacute;noma &#34;Benito Ju&aacute;rez&#34; de Oaxaca</span>
-                     <br>
-                     <span id="span2">FACULTAD DE IDIOMAS</span>
-                      <br>
-                     <span id="span3">Burgoa s/n, Col Centro, C.P. 68000, Tel. y Fax. 51 4 00 49<br />
-                                    Av. Universidad s/n, Ex. Hacienda de 5 Se&ntilde;ores, C.P. 68120, Tel. y Fax. 57 2 52 16<br />
- 								Correo electrónico: idiomas@uabjo.mx      P&aacute;gina web: www.idiomas.uabjo.mx</span>
-                 </td>
+    <span id="span4" > Universidad Aut&oacute;noma Benito Ju&aacute;rez de Oaxaca <BR />FACULTAD DE IDIOMAS<BR /></span>
+    </td>
+
     <td id="col_4">
-    <img width="90" height="100" src="./image/logos_idiomas/logo_idiomas.jpg">
+    <img width="90" height="100" src="image/logos_idiomas/logo_idiomas.jpg">
     </td>
     </tr>
     <tr>
     <td height="0px"></td>
     </tr>
     <tr>
-    <td colspan="3" align="center"><img src="./image/logos_idiomas/barra.jpg"></td>
+    <td colspan="3" align="center"><img src="image/logos_idiomas/barra.jpg"></td>
     </tr>
   </table>
 
@@ -53,11 +43,18 @@ $arrayDias = array('Domingo', 'Lunes', 'Martes','Miercoles', 'Jueves', 'Viernes'
 </br></br>
   <td>
 	</br>
+</br>
+</br>
 <center><strong> A: {{$data->nombre}}
 </strong></center>
-  <center><strong>Por haber concluido con el total de horas extracurriculares en las siguientes actividades:</center></strong>
+
+    <BR />
+  <center><strong>Por haber concluido con el total de horas extracurriculares en las siguientes actividades:
+  </center></strong>
+    <br />
   </tr>
-  <td style="text-align: justify; align: center;">
+
+   <td style="text-align: justify; align: center;">
      <span > <strong> ACAD&Eacute;MICA</strong></span><br />
     @foreach($aca as $acade)
     »   {{$acade->nombre}} <br />
@@ -88,12 +85,19 @@ $arrayDias = array('Domingo', 'Lunes', 'Martes','Miercoles', 'Jueves', 'Viernes'
     </tr>
       <tr class="fila">
       <td >
-        <img src="./image/logos_idiomas/barra.jpg">
+        <img src="./image/logos_idiomas/barracopia.jpg">
       </td>
       </tr>
       <tr>
       <td style="text-align: left;    width: 50%"></td>
       </tr>
+      <td id="col_2">
+      <span id="span4" >
+      <span style="text-align:center; font-size:12px"><center>Burgoa s/n, Col Centro, C.P. 68000, Tel. y Fax. 51 4 00 49 <BR />
+      Av. Universidad s/n, Ex. Hacienda de 5 Señores, C.P. 68120, Tel. y Fax. 57 2 52 16<BR />
+        Correo electrico: idiomas@uabjo.mx Página web: www.idiomas.uabjo.mx</center></span>
+      </span>
+      </td>
 
 
    </table>

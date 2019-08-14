@@ -17,7 +17,7 @@
   <h4 style="font-size: 1.0em; color: #000000;" align="center"><strong>Estudiantes Con Enfermedades y Alergias del ciclo escolar actual</strong></h4>
   <h5 style="font-size: 1.0em; color: #000000;" align="rigt">Modalidad Escolarizada</h5>
   <tr>
-    <th scope="row">Alergia</th>
+    <th scope="row">Tipo</th>
     <th scope="row">Hombres </th>
     <th scope="row">Mujeres</th>
     <th scope="row">Total</th>
@@ -25,54 +25,34 @@
 
   </tr>
   <tr>
-    <th scope="col"></th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-
+    <th scope="col">Alergia</th>
+    <td bgcolor="white">{{$tipos_eaM_ESC['Alergia']}}</td>
+    <td bgcolor="white">{{$tipos_eaF_ESC['Alergia']}}</td>
+    <td bgcolor="white">{{$tipos_ea_ESC['Alergia']}}</td>
+  </tr>
+  <tr>
+    <th scope="col">Enfermedad</th>
+    <td bgcolor="white">{{$tipos_eaM_ESC['Enfermedad']}}</td>
+    <td bgcolor="white">{{$tipos_eaF_ESC['Enfermedad']}}</td>
+    <td bgcolor="white">{{$tipos_ea_ESC['Enfermedad']}}</td>
   </tr>
 
   <tr>
     <th scope="col">Total</th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
+    <td bgcolor="white">{{$tipos_eaM_ESC['TOTAL']}}</td>
+    <td bgcolor="white">{{$tipos_eaF_ESC['TOTAL']}}</td>
+    <td bgcolor="white">{{$tipos_ea_ESC['TOTAL']}}</td>
 
   </tr>
   </table>
 
-  <table class="table table-bordered table-info" style="color: #8181F7;" >
-  <tr>
-    <th scope="row">Enfermedad</th>
-    <th scope="row">Hombres </th>
-    <th scope="row">Mujeres</th>
-    <th scope="row">Total</th>
-
-
-  </tr>
-  <tr>
-    <th scope="col"></th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-
-  </tr>
-
-  <tr>
-    <th scope="col">Total</th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-
-  </tr>
-  </table>
 
   <table class="table table-bordered table-info" style="color: #8181F7;" >
 <thead>
   <h5 style="font-size: 1.0em; color: #000000;" align="rigt">Modalidad Semiescolarizada</h5>
 
   <tr>
-    <th scope="row">Alergia</th>
+    <th scope="row">Tipo</th>
     <th scope="row">Hombres </th>
     <th scope="row">Mujeres</th>
     <th scope="row">Total</th>
@@ -80,54 +60,35 @@
 
   </tr>
   <tr>
-    <th scope="col"></th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-
+    <th scope="col">Alergia</th>
+    <td bgcolor="white">{{$tipos_eaM_SEMI['Alergia']}}</td>
+    <td bgcolor="white">{{$tipos_eaF_SEMI['Alergia']}}</td>
+    <td bgcolor="white">{{$tipos_eaG_SEMI['Alergia']}}</td>
+  </tr>
+  <tr>
+    <th scope="col">Enfermedad</th>
+    <td bgcolor="white">{{$tipos_eaM_SEMI['Enfermedad']}}</td>
+    <td bgcolor="white">{{$tipos_eaF_SEMI['Enfermedad']}}</td>
+    <td bgcolor="white">{{$tipos_eaG_SEMI['Enfermedad']}}</td>
   </tr>
 
   <tr>
     <th scope="col">Total</th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
+    <td bgcolor="white">{{$tipos_eaM_SEMI['TOTAL']}}</td>
+    <td bgcolor="white">{{$tipos_eaF_SEMI['TOTAL']}}</td>
+    <td bgcolor="white">{{$tipos_eaG_SEMI['TOTAL']}}</td>
 
   </tr>
   </table>
 
-  <table class="table table-bordered table-info" style="color: #8181F7;" >
-  <tr>
-    <th scope="row">Enfermedad</th>
-    <th scope="row">Hombres </th>
-    <th scope="row">Mujeres</th>
-    <th scope="row">Total</th>
 
-
-  </tr>
-  <tr>
-    <th scope="col"></th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-
-  </tr>
-
-  <tr>
-    <th scope="col">Total</th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-
-  </tr>
-  </table>
 
   <table class="table table-bordered table-info" style="color: #8181F7;" >
 <thead>
   <h5 style="font-size: 1.0em; color: #000000;" align="rigt">Total de Estudiantes del ciclo escolar actual con Alergias y Enfermedades</h5>
 
   <tr>
-    <th scope="row">Alergia</th>
+    <th scope="row">Tipo</th>
     <th scope="row">Hombres </th>
     <th scope="row">Mujeres</th>
     <th scope="row">Total</th>
@@ -135,44 +96,23 @@
 
   </tr>
   <tr>
-    <th scope="col"></th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-
+    <th scope="col">Alergia</th>
+    <td bgcolor="white">{{$tipos_eaM_T['Alergia']}}</td>
+    <td bgcolor="white">{{$tipos_eaM_TF['Alergia']}}</td>
+    <td bgcolor="white">{{$tipos_eaM_TG['Alergia']}}</td>
+  </tr>
+  <tr>
+    <th scope="col">Enfermedad</th>
+    <td bgcolor="white">{{$tipos_eaM_T['Enfermedad']}}</td>
+    <td bgcolor="white">{{$tipos_eaM_TF['Enfermedad']}}</td>
+    <td bgcolor="white">{{$tipos_eaM_TG['Enfermedad']}}</td>
   </tr>
 
   <tr>
     <th scope="col">Total</th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-
-  </tr>
-  </table>
-
-  <table class="table table-bordered table-info" style="color: #8181F7;" >
-  <tr>
-    <th scope="row">Enfermedad</th>
-    <th scope="row">Hombres </th>
-    <th scope="row">Mujeres</th>
-    <th scope="row">Total</th>
-
-
-  </tr>
-  <tr>
-    <th scope="col"></th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-
-  </tr>
-
-  <tr>
-    <th scope="col">Total</th>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
-    <td bgcolor="white"> </td>
+    <td bgcolor="white">{{$tipos_eaM_T['TOTAL']}}</td>
+    <td bgcolor="white">{{$tipos_eaM_TF['TOTAL']}}</td>
+    <td bgcolor="white">{{$tipos_eaM_TG['TOTAL']}}</td>
 
   </tr>
   </table>
@@ -184,9 +124,9 @@
 
 <a class="siguiente" href={{ route('info_coord_academica1')}}>1</a>
 <a class="siguiente" href={{ route('info_coord_academica2')}}>2</a>
-<a class="siguiente" href={{ route('info_coord_academica3')}}>3</a>
-<a class="siguiente" href={{ route('info_coord_academica4')}}><strong>4</strong></a>
-<a class="siguiente" href={{ route('info_coord_academica5')}}>5</a>
+<!--<a class="siguiente" href={{ route('info_coord_academica3')}}>3</a>-->
+<a class="siguiente" href={{ route('info_coord_academica4')}}><strong>3</strong></a>
+<a class="siguiente" href={{ route('info_coord_academica5')}}>4</a>
 </div>
 
  @endsection

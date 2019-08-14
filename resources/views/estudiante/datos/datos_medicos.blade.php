@@ -12,13 +12,20 @@
 <form method="POST" action="{{ route('act_datos_medicos') }}">
     @csrf
   <p style="font-size: 1.0em; color: #000000;"> Los Campos con un * son Obligatorios</p>
-  <div class="form-row">
-    <div class="form-group col-md-4">
-      <label for="tipo_sangre">* Tipo de Sangre</label>
-      <input type="text" class="form-control" name="tipo_sangre" value="<?php if(empty($s->tipo_sangre)){ $vacio=null; echo $vacio;} else{ echo $s->tipo_sangre;} ?>" id="tipo_sangre" placeholder="Tipo de Sangre"  onKeyUp="this.value = this.value.toUpperCase();" required>
-    </div>
-  </div>
-
+     <div class="form-group col-md-4">
+                          <label for="tipo_sangre">* Tipo de Sangre</label>
+                            <select name="tipo_sangre" id="tipo_sangre" required class="form-control" autocomplete="tipo_sangre" autofocus>
+                          <option value="">Seleccione una opción</option>
+                          <option value="O RH+">0 +(Positivo) u ORh +(Positivo) </option>
+                          <option value="O RH-">0 -(Negativo) u ORh -(Negativo)</option>
+                          <option value="A RH+">A +(Positivo) ó ARh +(Positivo)</option>
+                          <option value="A RH-">A -(Negativo) ó ARh -(Negativo)</option>
+                          <option value="B RH+">B +(Positivo) ó BRh +(Positivo)</option>
+                          <option value="B RH-">B -(Negativo) u BRh -(Negativo)</option>
+                          <option value="AB RH+">AB +(Positivo) ó ABRh +(Positivo)</option>
+                          <option value="AB RH-">AB -(Negativo) ó ABRh -(Negativo)</option>
+                    </select>
+                        </div>
   <div class="radio col-md-12">
       <label>* ¿Sufres alguna Alergia o Enfermedad?</label>
 

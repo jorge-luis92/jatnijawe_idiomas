@@ -34,7 +34,7 @@
                    <th>Semestre</th>
                    <th>Modalidad</th>
                    <th>Avance</th>
-                   <th colspan="2" style="text-align: center;" >ACCIONES</th>
+                   <th colspan="3" style="text-align: center;" >ACCIONES</th>
                </tr>
            </thead>
            <tbody>
@@ -47,7 +47,8 @@
                    <td><a href="avance_estudiante/{{ $user->matricula }}">Detalles</a></td>
                     <td><a href="constancia_parcial/{{ $user->matricula}}" target="_blank">Generar Comprobante</a></td>
                     <td><a href="constancia_valida/{{ $user->matricula}}" target="_blank">Generar Constancia</a></td>
-                   </tr>
+                    <td><a href="registro_horas/{{ $user->matricula}}">Registro de Horas</a></td>
+                         </tr>
                @endforeach
            </tbody>
        </table>

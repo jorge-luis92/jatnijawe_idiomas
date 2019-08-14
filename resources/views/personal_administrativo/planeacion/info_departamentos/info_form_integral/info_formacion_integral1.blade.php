@@ -28,18 +28,33 @@
       <th scope="row">Area</th>
       <th scope="row">Creditos</th>
       <th scope="row">Hombres </th>
-      <th scope="row">Mujeres</th>
-      <th scope="row">Total</th>
     </tr>
+
     <tr>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td > </td>
-    </tr>
+      @foreach($total_ac_ec as $datos)
+      <td bgcolor="white">{{$datos->nombre_ec}}</td>
+      @endforeach
+      @foreach($total_ac_ec_T as $datos)
+      <td bgcolor="white">{{$datos->tipo}}</td>
+      @endforeach
+      @foreach($total_ac_ec_A as $datos)
+      <td bgcolor="white">{{$datos->area}}</td>
+      @endforeach
+      @foreach($total_ac_ec_C as $datos)
+      <td bgcolor="white">{{$datos->creditos}}</td>
+      @endforeach
+      @foreach($total_ac_ec as $datos)
+      <td bgcolor="white">{{$datos->total}}</td>
+      @endforeach
+      </tr>
+      <tr>
+        <th scope="row">Total</th>
+        <th scope="row"></th>
+        <th scope="row"></th>
+        <th scope="row"></th>
+        <th scope="row"></th>
+      </tr>
+
   </table>
 
 

@@ -13,9 +13,11 @@
   <div class="table-responsive">
     <table class="table table-bordered table-info" style="color: #8181F7;" >
     <thead>
-    <h4 style="font-size: 1.0em; color: #000000;" align="center"><strong>ALUMNOS DE PRIMER INGRESO DEL CICLO ESCOLAR ANTERIOR</strong></h4>
+    <h4 style="font-size: 1.0em; color: #000000;" align="center"><strong>ESTUDIANTES DE PRIMER INGRESO DEL CICLO ESCOLAR ANTERIOR</strong></h4>
 
-    <h5 style="font-size: 1.0em; color: #000000;" align="rigt">Número de alumnos de primer ingreso a la carrera del ciclo escolar anterior</h5>
+    <h5 style="font-size: 1.0em; color: #000000;" align="rigt">Número de estudiantes de primer ingreso a la carrera del ciclo escolar anterior</h5>
+    <h6 style="font-size: 1.0em; color: #000000;" align="left"><strong>MODALIDAD ESCOLARIZADA<strong></h6>
+
     <tr>
       <th scope="row">Hombres </th>
       <th scope="row">Mujeres</th>
@@ -23,21 +25,56 @@
 
     </tr>
     <tr>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
-      <td bgcolor="white"> </td>
+      <td bgcolor="white">{{$total_masculino_primerE}}</td>
+      <td bgcolor="white">{{$total_femenino_primerE}}</td>
+      <td bgcolor="white">{{$total_primerE}}</td>
 
     </tr>
     </table>
 
+    <table class="table table-bordered table-info" style="color: #8181F7;" >
+    <thead>
+    <h6 style="font-size: 1.0em; color: #000000;" align="left"><strong>MODALIDAD SEMIESCOLARIZADA<strong></h6>
+
+    <tr>
+      <th scope="row">Hombres </th>
+      <th scope="row">Mujeres</th>
+      <th scope="row">Total</th>
+
+    </tr>
+    <tr>
+      <td bgcolor="white">{{$total_masculino_primerS}}</td>
+      <td bgcolor="white">{{$total_femenino_primerS}}</td>
+      <td bgcolor="white">{{$total_primerS}}</td>
+
+    </tr>
+    </table>
+  </table>
+
+  <table class="table table-bordered table-info" style="color: #8181F7;" >
+  <thead>
+  <h6 style="font-size: 1.0em; color: #000000;" align="left">
+  <strong>TOTAL DE ESTUDIANTES DE PRIMER INGRESO DEL CICLO ESCOLAR ANTERIOR<strong></h6>
+
+  <tr>
+    <th scope="row">Hombres </th>
+    <th scope="row">Mujeres</th>
+    <th scope="row">Total</th>
+
+  </tr>
+  <tr>
+    <td bgcolor="white">{{$total_masculino_primerG}}</td>
+    <td bgcolor="white">{{$total_femenino_primerG}}</td>
+    <td bgcolor="white">{{$total_primerG}}</td>
+
+  </tr>
+  </table>
+
 <a> Páginas</a>
 <a class="siguiente" href={{ route('reporte911_9A_0')}}><strong>1</strong></a>
 <a class="siguiente" href={{ route('reporte911_9A_1')}}>2</a>
-<a class="siguiente" href={{ route('reporte911_9A_2')}}>3</a>
-<a class="siguiente" href={{ route('reporte911_9A_3')}}>4</a>
-<a class="siguiente" href={{ route('reporte911_9A_4')}}>5</a>
-<a class="siguiente" href={{ route('reporte911_9A_5')}}>6</a>
-<a class="siguiente" href={{ route('reporte911_9A_6')}}>7</a>
+<a class="siguiente" href={{ route('reporte911_9A_3')}}>3</a>
+
 
 
 

@@ -25,21 +25,21 @@
           </tr>
           <tr>
             <td>Física/Motríz</td>
-            <td bgcolor="white"> </td>
-            <td bgcolor="white"> </td>
-            <td> </td>
+            <td bgcolor="white">{{$inscritos_dis_M['fisica']}}</td>
+            <td bgcolor="white">{{$inscritos_dis_F['fisica']}}</td>
+            <td>{{$inscritos_dis_G['fisica']}}</td>
           </tr>
           <tr>
             <td>Intelectual</td>
-            <td bgcolor="white"> </td>
-            <td bgcolor="white"> </td>
-            <td> </td>
+            <td bgcolor="white">{{$inscritos_dis_M['intelectual']}}</td>
+            <td bgcolor="white">{{$inscritos_dis_F['intelectual']}}</td>
+            <td>{{$inscritos_dis_G['intelectual']}}</td>
           </tr>
           <tr>
             <td>Múltiple</td>
-            <td bgcolor="white"> </td>
-            <td bgcolor="white"> </td>
-            <td> </td>
+            <td bgcolor="white">{{$inscritos_dis_M['multiple']}}</td>
+            <td bgcolor="white">{{$inscritos_dis_F['multiple']}}</td>
+            <td>{{$inscritos_dis_G['multiple']}}</td>
           </tr>
 
           <tr>
@@ -47,39 +47,44 @@
           </tr>
             <tr>
               <td >Hipoacusia</td>
-              <td bgcolor="white"> </td>
-              <td bgcolor="white"> </td>
-              <td> </td>
+              <td bgcolor="white">{{$inscritos_dis_M['hipoacusa']}}</td>
+              <td bgcolor="white">{{$inscritos_dis_F['hipoacusa']}}</td>
+              <td>{{$inscritos_dis_G['hipoacusa']}}</td>
             </tr>
             <tr>
               <td >Sordera</td>
-              <td bgcolor="white"> </td>
-              <td bgcolor="white"> </td>
-              <td> </td>
+              <td bgcolor="white">{{$inscritos_dis_M['sordera']}}</td>
+              <td bgcolor="white">{{$inscritos_dis_F['sordera']}}</td>
+              <td>{{$inscritos_dis_G['sordera']}}</td>
             </tr>
             <tr>
               <td colspan="1"align="left"><strong>Visual</strong></td>
             </tr>
               <tr>
                 <td >Baja Visión</td>
-                <td bgcolor="white"> </td>
-                <td bgcolor="white"> </td>
-                <td> </td>
+                <td bgcolor="white">{{$inscritos_dis_M['visual1']}}</td>
+                <td bgcolor="white">{{$inscritos_dis_F['visual1']}}</td>
+                <td>{{$inscritos_dis_G['visual1']}}</td>
               </tr>
               <tr>
                 <td >Ceguera</td>
-                <td bgcolor="white"> </td>
-                <td bgcolor="white"> </td>
-                <td> </td>
+                <td bgcolor="white">{{$inscritos_dis_M['visual2']}}</td>
+                <td bgcolor="white">{{$inscritos_dis_F['visual2']}}</td>
+                <td>{{$inscritos_dis_G['visual2']}}</td>
               </tr>
 
               <tr>
                 <td><strong>Psicosocial</strong></td>
-                <td bgcolor="white"> </td>
-                <td bgcolor="white"> </td>
-                <td> </td>
+                <td bgcolor="white">{{$inscritos_dis_M['psicosocial']}}</td>
+                <td bgcolor="white">{{$inscritos_dis_F['psicosocial']}}</td>
+                <td>{{$inscritos_dis_G['psicosocial']}}</td>
               </tr>
-
+              <tr>
+                <td><strong>Total</strong></td>
+                <td bgcolor="white">{{$inscritos_dis_M['TOTAL']}}</td>
+                <td bgcolor="white">{{$inscritos_dis_F['TOTAL']}}</td>
+                <td>{{$inscritos_dis_G['TOTAL']}}</td>
+              </tr>
           </table>
 
           <table class="table table-bordered table-info" style="color: #8181F7;" >
@@ -94,10 +99,10 @@
               <th scope="row">Con Discapacidad</th>
             </tr>
             <tr>
-              <td bgcolor="white"> </td>
-              <td bgcolor="white"> </td>
-              <td > </td>
-              <td bgcolor="white"> </td>
+              <td bgcolor="white">{{$total_femeninoL}}</td>
+              <td bgcolor="white">{{$total_masculinoL}} </td>
+              <td >{{$totalL}} </td>
+              <td bgcolor="white">{{$total_inscritos_D}}</td>
 
             </tr>
 
@@ -105,11 +110,11 @@
 <a> Páginas</a>
             <a class="siguiente" align="rigth" href={{ route('reporte911_9A_0')}}>1</a>
             <a class="siguiente" align="rigth" href={{ route('reporte911_9A_1')}}>2</a>
-            <a class="siguiente" align="rigth" href={{ route('reporte911_9A_2')}}>3</a>
-            <a class="siguiente" align="rigth" href={{ route('reporte911_9A_3')}}>4</a>
-            <a class="siguiente" align="rigth" href={{ route('reporte911_9A_4')}}>5</a>
-            <a class="siguiente" align="rigth" href={{ route('reporte911_9A_5')}}><strong>6</strong></a>
-            <a class="siguiente" align="rigth" href={{ route('reporte911_9A_6')}}>7</a>
+      <!--  <a class="siguiente" align="rigth" href={{ route('reporte911_9A_2')}}>3</a>-->
+            <a class="siguiente" align="rigth" href={{ route('reporte911_9A_3')}}>3</a>
+            <a class="siguiente" align="rigth" href={{ route('reporte911_9A_4')}}>4</a>
+            <a class="siguiente" align="rigth" href={{ route('reporte911_9A_5')}}><strong>5</strong></a>
+            <a class="siguiente" align="rigth" href={{ route('reporte911_9A_6')}}>6</a>
 
     </div>
   </form>
